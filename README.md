@@ -117,10 +117,49 @@ yarn dev
 <br/>
 
 ## 👥 팀원 및 역할 소개
-|이름|역할|깃허브|
-|:----|:---|:---|
-|**김영수**|테크리더👑, 오늘멍 구현|[youngsoon12](https://github.com/youngsoon12)| 
-|**심여은**|지도 및 장소 검색 필터링 구현|[ongheong](https://github.com/ongheong)|
-|**이지영**|소셜로그인 및 온보딩, 추천 및 마이페이지 구현|[yellowgnuoy](https://github.com/yellowgnuoy)|
-|**이효린**|스크럼마스터, 장소 상세정보 및 키워드 장소 검색 구현|[hyorish03](https://github.com/hyorish03)|
+
+<table>
+  <tr align="center">
+    <td>김영수</td>
+    <td>심여은</td>
+    <td>이지영</td>
+    <td>이효린</td>
+  </tr>
+  <tr>
+     <td align="center">
+        <a href="https://github.com/youngsoon12">
+          <img src="https://avatars.githubusercontent.com/u/105600985?v=4" width="150px" alt="김영수"/><br />
+        </a>
+     </td>
+     <td align="center">
+        <a href="https://github.com/ongheong">
+          <img src="https://avatars.githubusercontent.com/u/87983309?v=4" width="150px" alt="심여은"/><br />
+        </a>
+     </td>
+     <td align="center">
+        <a href="https://github.com/yellowgnuoy">
+          <img src="https://avatars.githubusercontent.com/u/116864621?v=4" width="150px" alt="이지영"/><br />
+        </a>
+     </td>
+     <td align="center">
+        <a href="https://github.com/hyorish03">
+          <img src="https://avatars.githubusercontent.com/u/108210492?v=4" width="150px" alt="이효린"/><br />
+        </a>
+     </td>
+  </tr>
+  <tr>
+     <td align="center">
+        <p> 테크리더 <br /> 오늘멍 구현</p>
+     </td>
+     <td align="center">
+        <p>지도 UI 및 <br /> 장소 검색 필터링 구현</p>
+     </td>
+     <td align="center">
+        <p>소셜로그인 및 온보딩, <br /> 추천 및 마이페이지 구현</p>
+     </td>
+     <td align="center">
+        <p> 장소 상세정보 및 <br /> 키워드 장소 검색 구현</p>
+     </td>
+  </tr>
+</table>
 
