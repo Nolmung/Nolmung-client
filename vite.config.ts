@@ -15,6 +15,13 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: '@', replacement: '/src' },
+      { find: '@assets', replacement: '/src/assets' },
+      { find: '@common', replacement: '/src/common' },
+      { find: '@mocks', replacement: '/src/mocks' },
+      { find: '@pages', replacement: '/src/pages' },
+      { find: '@service', replacement: '/src/service' },
+      { find: '@styles', replacement: '/src/styles' },
+      { find: '@stores', replacement: '/src/stores' },
     ],
   },
   // 로컬 호스트 바깥에서도 접근 가능하도록 설정
