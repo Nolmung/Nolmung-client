@@ -1,3 +1,10 @@
 export { default as GoBackIcon } from './GoBackIcon';
+export { default as TabBarCalenderIcon } from './TabBarCalenderIcon';
+export { default as TabBarCalenderIconActive } from './TabBarCalenderIconActive';
 export { default as TabBarMapIcon } from './TabBarMapIcon';
+export { default as TabBarMapIconActive } from './TabBarMapIconActive';
+export { default as TabBarMyIcon } from './TabBarMyIcon';
+export { default as TabBarMyIconActive } from './TabBarMyIconActive';
+export { default as TabBarRecommendIcon } from './TabBarRecommendIcon';
+export { default as TabBarRecommendIconActive } from './TabBarRecommendIconActive';
 export { default as Vite } from './Vite';

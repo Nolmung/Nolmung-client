@@ -15,6 +15,10 @@ const GlobalStyle = createGlobalStyle`
   button{
     cursor: pointer;
   }
+  a{
+    cursor: pointer;
+    text-decoration: none;
+  }
 `;
 
 export default GlobalStyle;
