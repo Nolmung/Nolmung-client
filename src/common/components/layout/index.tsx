@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Header from '@/common/components/Headeraaa';
-import { Flex as MainLayout } from '@/common/components/Layoutaaa/flex';
+import Header from '@/common/components/header';
+import { Flex as MainLayout } from '@/common/components/layout/flex';
 import {
   LayoutProps,
   HeaderTitleType,
-} from '@/common/components/Layoutaaa/index.type';
+} from '@/common/components/layout/index.type';
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();

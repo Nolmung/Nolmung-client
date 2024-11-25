@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { GoBackIcon } from '@/assets/images/svgs';
-import { HeaderType } from '@/common/components/Headeraaa/index.type';
+import { HeaderType } from '@/common/components/header/index.type';
 
 function Header({ title, showIcon, type }: HeaderType) {
   return (
