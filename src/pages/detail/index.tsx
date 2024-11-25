@@ -76,6 +76,7 @@ function Detail() {
         </S.PlaceBriefReview>
         <S.PlaceRoadAddress>서울 용산구 한강대로 21길 7</S.PlaceRoadAddress>
         <S.PlaceInfoIcons>
+          {/**@Todo 아이콘 컴포넌트화*/}
           <S.InfoIconWrapper>
             <AllKindDogAvailable width={48} height={48} />
             모든 견종
@@ -118,6 +119,7 @@ function Detail() {
           <S.ReviewCount>126</S.ReviewCount>
         </S.ReviewTitle>
         <S.KeywordReviews>
+          {/**@Todo KeywordCount는 키워드 갯수 / 총 리뷰 갯수로 전달 */}
           <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
           <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
           <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
@@ -135,7 +137,7 @@ function Detail() {
 
         {visibleTodayMungCard < TodayMungList.length && (
           <S.ViewMoreButtonWrapper>
-            <S.ViewMoreButton style={{}} onClick={handleViewMoreButtonClick}>
+            <S.ViewMoreButton onClick={handleViewMoreButtonClick}>
               더보기
             </S.ViewMoreButton>
           </S.ViewMoreButtonWrapper>

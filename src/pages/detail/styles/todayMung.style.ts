@@ -59,10 +59,16 @@ export const TodayMungTitleContentImageWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
+
+  @media (max-width: 270px) {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
 `;
 export const TodayMungTitleContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
 `;
 export const Title = styled.div`
   color: #080808;
@@ -71,9 +77,13 @@ export const Title = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 20px; /* 125% */
-  width: 260px;
+  width: 90%;
   padding: 10px 5px;
   box-sizing: border-box;
+
+  @media (max-width: 270px) {
+    width: 100%;
+  }
 `;
 export const Content = styled.div`
   color: #080808;
@@ -83,7 +93,7 @@ export const Content = styled.div`
   font-weight: 500;
   line-height: 20px; /* 166.667% */
 
-  width: 260px;
+  width: 90%;
   height: 60px;
   padding: 5px;
   box-sizing: border-box;
@@ -94,6 +104,10 @@ export const Content = styled.div`
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   word-break: break-all;
+
+  @media (max-width: 270px) {
+    width: 100%;
+  }
 `;
 export const Image = styled.div`
   width: 90px;

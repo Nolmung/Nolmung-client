@@ -36,4 +36,5 @@ export const KeywordReviewStatus = styled.div<{ width: number }>`
 
   padding: 14px 17px;
   box-sizing: border-box;
+  white-space: nowrap;
 `;
