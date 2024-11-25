@@ -10,7 +10,7 @@ function Router() {
     <Suspense fallback={<div></div>}>
       <Routes>
         <Route path={ROUTE.MAIN()} element={<Main />} />
-        <Route path={ROUTE.DETAIL(':/placeId')} element={<Detail />} />
+        <Route path={ROUTE.DETAIL(':placeId')} element={<Detail />} />
       </Routes>
     </Suspense>
   );
