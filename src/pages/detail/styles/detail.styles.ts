@@ -8,6 +8,7 @@ export const Header = styled.header<{ isScrolled: boolean }>`
   box-sizing: border-box;
   position: fixed;
   top: 0;
+  z-index: 2;
   transition: all 0.3s ease-in-out;
 
   border-bottom: ${({ isScrolled }) =>
@@ -39,8 +40,17 @@ export const PlaceImage = styled.img`
   height: 60%;
   max-height: 300px;
   flex-shrink: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   object-fit: cover;
+`;
+
+export const GradientImage = styled.div`
+  width: 100%;
+  height: 50px;
+  z-index: 1;
+  background-color: red;
+  position: absolute;
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 `;
 
 export const PlaceInfo = styled.section``;
