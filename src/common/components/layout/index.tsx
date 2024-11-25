@@ -8,7 +8,7 @@ import {
   LayoutProps,
   HeaderTitleType,
 } from '@/common/components/layout/index.type';
-import TabBar from '@/common/components/TabBara';
+import TabBar from '@/common/components/tabBar';
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
