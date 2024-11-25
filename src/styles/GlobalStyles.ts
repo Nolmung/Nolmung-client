@@ -11,6 +11,8 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     height: 100%;
     width: 100%;
+    background: #E8F8E8;
+
   }
   button{
     cursor: pointer;

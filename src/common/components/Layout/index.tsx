@@ -12,12 +12,18 @@ import styled from 'styled-components';
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
+  // Header가 필요 없는 페이지의 경우 path 추가하기
+  const noHeaderPaths = ['/'];
+  const hideHeader = noHeaderPaths.includes(location.pathname);
+
   const [HeaderTitle, setHeaderTitle] = useState<HeaderTitleType>({
     title: '',
     showIcon: false,
     type: 1,
   });
 
+  //
+  // Type1 : titleLocation:left, Type2:titleLocation : right
   useEffect(() => {
     switch (location.pathname) {
       case '/':
@@ -32,13 +38,13 @@ function Layout({ children }: LayoutProps) {
         break;
 
       default:
-        setHeaderTitle({ title: '', showIcon: false, type: 1 });
+        setHeaderTitle({ title: '', showIcon: true, type: 1 });
     }
   }, [location.pathname]);
 
   return (
     <Wrapper>
-      <Header {...HeaderTitle} />
+      {!hideHeader && <Header {...HeaderTitle} />}
       <MainLayout $direction="column" $justify="flex-start" $align="flex-start">
         {children}
       </MainLayout>

@@ -5,6 +5,18 @@ import { Route, Routes } from 'react-router-dom';
 
 import Layout from './common/components/Layout';
 
+// react-router-dom v7에 관한 Future Flag 경고창 무시
+const originalWarn = console.warn;
+console.warn = (...args) => {
+  if (
+    typeof args[0] === 'string' &&
+    args[0].includes('React Router Future Flag Warning')
+  ) {
+    return;
+  }
+  originalWarn(...args);
+};
+
 function Router() {
   return (
     <Suspense fallback={<div></div>}>

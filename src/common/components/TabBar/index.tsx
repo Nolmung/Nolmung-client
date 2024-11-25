@@ -1,14 +1,14 @@
+import { TabBarType } from '@common/components/TabBar/index.type';
+import tabItems from '@common/constants/tabBarItems';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-
-import tabItems from '@/common/constants/tabBarItems';
 
 function TabBar() {
   const location = useLocation();
 
   return (
     <Wrapper>
-      {tabItems.map((item) => (
+      {tabItems.map((item: TabBarType) => (
         <IconArea to={item.path} key={item.path}>
           {location.pathname === item.path ? (
             <item.activeIcon />
@@ -47,11 +47,9 @@ const IconArea = styled(Link)`
   gap: 5px;
   text-align: center;
   color: #5e5e5e;
-
-  & > div {
-    font-size: 12px;
-    text-align: center;
-  }
 `;
 
-const IconDescription = styled.div``;
+const IconDescription = styled.div`
+  font-size: 12px;
+  text-align: center;
+`;
