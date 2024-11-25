@@ -8,14 +8,14 @@ function Header({ title, showIcon, type }: HeaderType) {
     <>
       {type === 1 && ( //type === 1 : title이 왼쪽에 있는경우
         <HeaderArea>
-          {showIcon && <GoBackIcon />}
+          {showIcon ? <GoBackIcon /> : <DummyIcon />}
           <TitleArea>{title}</TitleArea>
         </HeaderArea>
       )}
 
       {type === 2 && ( //type === 2 : title이 정중앙에 있는 경우
         <HeaderArea2>
-          {showIcon && <GoBackIcon />}
+          {showIcon ? <GoBackIcon /> : <DummyIcon />}
           <TitleArea2>{title}</TitleArea2>
         </HeaderArea2>
       )}
@@ -39,6 +39,12 @@ const HeaderArea = styled.div`
   z-index: 1000;
   padding: 28px 22px;
   gap: 15px;
+`;
+
+const DummyIcon = styled.div`
+  width: 24px;
+  height: 24px;
+  visibility: hidden;
 `;
 
 const TitleArea = styled.div`
