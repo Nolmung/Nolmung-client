@@ -1,30 +1,18 @@
-import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import useScrollTop from './hooks/useScrollTop';
 import * as S from './styles/detail.styles';
 
 import { BackArrowBlack, BackArrowWhite } from '@/assets/images/svgs';
+import { ROUTE } from '@/common/constants/route';
 
 function Detail() {
-  const [scrollTop, setScrollTop] = useState<number>(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const { scrollTop, scrollRef, handleScroll } = useScrollTop();
 
-  const handleScroll = () => {
-    if (scrollRef.current) {
-      setScrollTop(scrollRef.current.scrollTop);
-    }
+  const handleBackArrowClick = () => {
+    navigate(ROUTE.MAIN());
   };
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll);
-    }
-    return () => {
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
 
   return (
     <S.Wrapper
@@ -35,11 +23,11 @@ function Detail() {
       <S.Header isScrolled={scrollTop >= 70}>
         {scrollTop >= 70 ? (
           <>
-            <BackArrowBlack width={24} />
+            <BackArrowBlack onClick={handleBackArrowClick} width={24} />
             어반펫츠
           </>
         ) : (
-          <BackArrowWhite width={24} />
+          <BackArrowWhite onClick={handleBackArrowClick} width={24} />
         )}
       </S.Header>
       <S.PlaceImage
