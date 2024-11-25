@@ -1,13 +1,14 @@
-import Header from '@common/components/Header';
-import { Flex as MainLayout } from '@common/components/Layout/flex';
-import {
-  LayoutProps,
-  HeaderTitleType,
-} from '@common/components/Layout/index.type';
 import TabBar from '@common/components/TabBar';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+
+import Header from '@/common/components/Headeraaa';
+import { Flex as MainLayout } from '@/common/components/Layoutaaa/flex';
+import {
+  LayoutProps,
+  HeaderTitleType,
+} from '@/common/components/Layoutaaa/index.type';
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
