@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import KeywordReview from './components/KeywordReview';
@@ -18,12 +19,29 @@ import {
 } from '@/assets/images/svgs';
 import { ROUTE } from '@/common/constants/route';
 
+const TodayMungList = [
+  <TodayMungCard />,
+  <TodayMungCard />,
+  <TodayMungCard />,
+  <TodayMungCard />,
+  <TodayMungCard />,
+  <TodayMungCard />,
+  <TodayMungCard />,
+  <TodayMungCard />,
+  <TodayMungCard />,
+];
+
 function Detail() {
   const navigate = useNavigate();
   const { scrollTop, scrollRef, handleScroll } = useScrollTop();
+  const [visibleTodayMungCard, setVisibleTodayMungCard] = useState(3);
 
   const handleBackArrowClick = () => {
     navigate(ROUTE.MAIN());
+  };
+
+  const handleViewMoreButtonClick = () => {
+    setVisibleTodayMungCard((prev) => prev + 3);
   };
 
   return (
@@ -111,12 +129,17 @@ function Detail() {
           오늘멍
           <S.ReviewCount>126</S.ReviewCount>
         </S.ReviewTitle>
-        <TodayMungCard />
-        <TodayMungCard />
-        <TodayMungCard />
-        <TodayMungCard />
-        <TodayMungCard />
-        <TodayMungCard />
+        {TodayMungList.slice(0, visibleTodayMungCard).map((card, index) => (
+          <React.Fragment key={index}>{card}</React.Fragment>
+        ))}
+
+        {visibleTodayMungCard < TodayMungList.length && (
+          <S.ViewMoreButtonWrapper>
+            <S.ViewMoreButton style={{}} onClick={handleViewMoreButtonClick}>
+              더보기
+            </S.ViewMoreButton>
+          </S.ViewMoreButtonWrapper>
+        )}
       </S.PlaceDetailWrapper>
     </S.Wrapper>
   );

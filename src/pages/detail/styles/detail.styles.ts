@@ -56,6 +56,7 @@ export const PlaceInfo = styled.div`
   width: 100%;
   border-bottom: 1px solid #f0f0f0;
   padding: 0 20px 16px 20px;
+  box-sizing: border-box;
 `;
 
 export const PlaceName = styled.h1`
@@ -192,4 +193,20 @@ export const KeywordReviews = styled.div`
   flex-direction: column;
   gap: 12px;
   padding-top: 12px;
+`;
+export const ViewMoreButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+export const ViewMoreButton = styled.button`
+  background-color: #f0f0f0;
+  border: none;
+  text-align: center;
+  justify-content: center;
+  margin-top: 16px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 10px;
 `;

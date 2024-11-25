@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const TodayMungWrapper = styled.div`
   display: flex;
-  padding: 10px 0px;
+  padding: 15px 0px;
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
