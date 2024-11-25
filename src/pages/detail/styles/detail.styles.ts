@@ -52,11 +52,7 @@ export const GradientImage = styled.div`
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
 `;
 
-export const PlaceInfo = styled.section``;
-
-export const PlaceDetailInfo = styled.section``;
-
-export const PlaceBasicInfo = styled.div`
+export const PlaceInfo = styled.div`
   width: 100%;
   border-bottom: 1px solid #f0f0f0;
   padding: 0 20px 16px 20px;
@@ -133,4 +129,35 @@ export const InfoIconWrapper = styled.div`
   font-style: normal;
   font-weight: 600;
   line-height: 12px; /* 100% */
+`;
+
+export const PlaceDetailWrapper = styled.div`
+  width: 100%;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 20px;
+  gap: 20px;
+  color: #080808;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 100% */
+  box-sizing: border-box;
+`;
+
+export const PlaceDetail = styled.div`
+  padding: 5px 0;
+  box-sizing: border-box;
+  display: flex;
+  gap: 10px;
+`;
+
+export const PlaceDetailMenu = styled.div`
+  color: #5e5e5e;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 100% */
 `;

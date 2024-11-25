@@ -9,6 +9,9 @@ import {
   BackArrowWhite,
   FilledStar,
   ParkAvailable,
+  Phone,
+  Price,
+  Time,
   UnderTenKilos,
 } from '@/assets/images/svgs';
 import { ROUTE } from '@/common/constants/route';
@@ -44,7 +47,7 @@ function Detail() {
         }
         alt="시설 이미지"
       />
-      <S.PlaceBasicInfo>
+      <S.PlaceInfo>
         <S.PlaceName>어반펫츠</S.PlaceName>
         <S.PlaceBriefReview>
           <FilledStar width={16} />
@@ -66,7 +69,29 @@ function Detail() {
             10kg 이하 가능
           </S.InfoIconWrapper>
         </S.PlaceInfoIcons>
-      </S.PlaceBasicInfo>
+      </S.PlaceInfo>
+      <S.PlaceDetailWrapper>
+        <S.PlaceDetail>
+          <Time width={18} height={18} />
+          <S.PlaceDetailMenu>평일</S.PlaceDetailMenu>
+          12:00 - 13:00
+        </S.PlaceDetail>
+        <S.PlaceDetail style={{ marginBottom: '30px' }}>
+          <Time width={18} height={18} />
+          <S.PlaceDetailMenu> 휴일</S.PlaceDetailMenu>연중무휴
+        </S.PlaceDetail>
+
+        <S.PlaceDetail>
+          <Price width={18} height={18} />
+          <S.PlaceDetailMenu>이용 가격</S.PlaceDetailMenu>
+          15,000원
+        </S.PlaceDetail>
+        <S.PlaceDetail>
+          <Phone width={18} height={18} />
+          <S.PlaceDetailMenu>전화</S.PlaceDetailMenu>
+          02-1234-1234
+        </S.PlaceDetail>
+      </S.PlaceDetailWrapper>
       <div style={{ height: '150%' }}></div>
     </S.Wrapper>
   );
