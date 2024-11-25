@@ -1,4 +1,3 @@
-import TabBar from '@common/components/TabBar';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
@@ -9,6 +8,7 @@ import {
   LayoutProps,
   HeaderTitleType,
 } from '@/common/components/layout/index.type';
+import TabBar from '@/common/components/TabBara';
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();

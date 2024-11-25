@@ -1,8 +1,8 @@
-import TabBar from '@common/components/TabBar';
 import tabItems from '@common/constants/tabBarItems';
 import type { Meta, StoryObj } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
+import TabBar from '@/common/components/TabBara';
 import GlobalStyle from '@/styles/GlobalStyles';
 
 const meta: Meta<typeof TabBar> = {

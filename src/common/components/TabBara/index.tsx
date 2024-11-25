@@ -1,7 +1,8 @@
-import { TabBarType } from '@common/components/TabBar/index.type';
 import tabItems from '@common/constants/tabBarItems';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { TabBarType } from '@/common/components/TabBara/index.type';
 
 function TabBar() {
   const location = useLocation();
