@@ -161,3 +161,35 @@ export const PlaceDetailMenu = styled.div`
   font-weight: 500;
   line-height: 16px; /* 100% */
 `;
+
+export const ReviewTitle = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 10px 2px;
+  color: #080808;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px; /* 100% */
+`;
+
+export const ReviewCount = styled.div`
+  color: #a7a7a7;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 100% */
+`;
+
+export const KeywordReviews = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+`;

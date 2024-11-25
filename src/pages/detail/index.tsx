@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+import KeywordReview from './components/KeywordReview';
+import TodayMungCard from './components/TodayMungCard';
 import useScrollTop from './hooks/useScrollTop';
 import * as S from './styles/detail.styles';
 
@@ -92,7 +94,30 @@ function Detail() {
           02-1234-1234
         </S.PlaceDetail>
       </S.PlaceDetailWrapper>
-      <div style={{ height: '150%' }}></div>
+      <S.PlaceDetailWrapper>
+        <S.ReviewTitle>
+          방문자 리뷰
+          <S.ReviewCount>126</S.ReviewCount>
+        </S.ReviewTitle>
+        <S.KeywordReviews>
+          <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
+          <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
+          <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
+          <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
+        </S.KeywordReviews>
+      </S.PlaceDetailWrapper>
+      <S.PlaceDetailWrapper>
+        <S.ReviewTitle>
+          오늘멍
+          <S.ReviewCount>126</S.ReviewCount>
+        </S.ReviewTitle>
+        <TodayMungCard />
+        <TodayMungCard />
+        <TodayMungCard />
+        <TodayMungCard />
+        <TodayMungCard />
+        <TodayMungCard />
+      </S.PlaceDetailWrapper>
     </S.Wrapper>
   );
 }

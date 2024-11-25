@@ -1,6 +1,7 @@
 export { default as AllKindDogAvailable } from './AllKindDogAvailable';
 export { default as BackArrowBlack } from './BackArrowBlack';
 export { default as BackArrowWhite } from './BackArrowWhite';
+export { default as DogPaw } from './DogPaw';
 export { default as FilledStar } from './FilledStar';
 export { default as ParkAvailable } from './ParkAvailable';
 export { default as Phone } from './Phone';
