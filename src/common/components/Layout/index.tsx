@@ -4,11 +4,10 @@ import {
   LayoutProps,
   HeaderTitleType,
 } from '@common/components/Layout/index.type';
+import TabBar from '@common/components/TabBar';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-
-import TabBar from '../TabBar';
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
@@ -40,7 +39,7 @@ function Layout({ children }: LayoutProps) {
   return (
     <Wrapper>
       <Header {...HeaderTitle} />
-      <MainLayout direction="column" justify="flex-start" align="flex-start">
+      <MainLayout $direction="column" $justify="flex-start" $align="flex-start">
         {children}
       </MainLayout>
       <TabBar />

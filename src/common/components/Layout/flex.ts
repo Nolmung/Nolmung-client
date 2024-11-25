@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const Flex = styled.div<{
-  direction?: 'row' | 'column';
-  justify?:
+  $direction?: 'row' | 'column';
+  $justify?:
     | 'flex-start'
     | 'flex-end'
     | 'center'
     | 'space-between'
     | 'space-around';
-  align?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
+  $align?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
   webGap?: number;
   mobileGap?: number;
   height?: number;
@@ -19,9 +19,9 @@ export const Flex = styled.div<{
   backgroundColor?: string;
 }>`
   display: flex;
-  flex-direction: ${({ direction }) => direction || 'row'};
-  justify-content: ${({ justify }) => justify || 'center'};
-  align-items: ${({ align }) => align || 'center'};
+  flex-direction: ${({ $direction }) => $direction || 'row'};
+  justify-content: ${({ $justify }) => $justify || 'center'};
+  align-items: ${({ $align }) => $align || 'center'};
   gap: ${({ webGap }) => (webGap ? `${webGap}rem` : '0rem')};
   width: 100%;
   min-width: 320px;
