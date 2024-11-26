@@ -45,11 +45,7 @@ function Detail() {
   };
 
   return (
-    <S.Wrapper
-      ref={scrollRef}
-      onScroll={handleScroll}
-      style={{ height: '100vh', overflowY: 'scroll' }}
-    >
+    <S.Wrapper ref={scrollRef} onScroll={handleScroll}>
       <S.Header isScrolled={scrollTop >= 70}>
         {scrollTop >= 70 ? (
           <>

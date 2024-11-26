@@ -2,7 +2,8 @@ import { styled } from 'styled-components';
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow-y: scroll;
 `;
 
 export const Header = styled.header<{ isScrolled: boolean }>`
@@ -16,7 +17,6 @@ export const Header = styled.header<{ isScrolled: boolean }>`
   top: 0;
   z-index: 2;
   transition: all 0.3s ease-in-out;
-
   border-bottom: ${({ isScrolled }) =>
     isScrolled ? ' 1.5px solid #f0f0f0;' : 'none'};
 
@@ -34,6 +34,7 @@ export const Header = styled.header<{ isScrolled: boolean }>`
   line-height: normal;
 
   gap: 15px;
+  max-width: 600px;
 `;
 
 export const PlaceImage = styled.img`
@@ -50,6 +51,7 @@ export const GradientImage = styled.div`
   position: absolute;
   top: 0;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  max-width: 600px;
 `;
 
 export const PlaceInfo = styled.div`
