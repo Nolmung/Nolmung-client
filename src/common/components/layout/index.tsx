@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-
-import Header from '@/common/components/header';
-import { Flex as MainLayout } from '@/common/components/layout/flex';
+import { S } from '@common/components/layout/index.styles';
+import Header from '@common/components/header';
+import { Flex as MainLayout } from '@common/components/layout/flex';
 import {
   LayoutProps,
   HeaderTitleType,
-} from '@/common/components/layout/index.type';
-import TabBar from '@/common/components/tabBar';
+} from '@common/components/layout/index.type';
+import TabBar from '@common/components/tabBar';
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
@@ -44,27 +43,14 @@ function Layout({ children }: LayoutProps) {
   }, [location.pathname]);
 
   return (
-    <Wrapper>
+    <S.Wrapper>
       {!hideHeader && <Header {...HeaderTitle} />}
       <MainLayout $direction="column" $justify="flex-start" $align="flex-start">
         {children}
       </MainLayout>
       <TabBar />
-    </Wrapper>
+    </S.Wrapper>
   );
 }
 
 export default Layout;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 425px;
-  min-width: 320px;
-  margin: 0 auto;
-  background-color: #fff;
-  border: 1px solid rgb(235, 235, 235);
-  min-height: 100vh;
-`;
