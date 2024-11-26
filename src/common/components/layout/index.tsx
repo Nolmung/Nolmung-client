@@ -9,18 +9,30 @@ import TabBar from '@common/components/tabBar';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+type PathRule = string | RegExp;
+type PathRules = {
+  [key: string]: PathRule[];
+};
+
+/**  Header 혹은 tabBar가 필요 없는 페이지의 경우 path 추가하기 */
+const pathRules: PathRules = {
+  hideHeader: ['/', /^\/detail\/\d+$/], // Header를 숨길 경로들
+  hideTabBar: [/^\/detail\/\d+$/], // TabBar를 숨길 경로들
+};
+
+/** 헤더, 텝바를 보여줄 지 정규식 검사하는 함수  */
+const shouldHide = (key: keyof PathRules, pathname: string): boolean => {
+  const rules = pathRules[key] || [];
+  return rules.some((rule) =>
+    typeof rule === 'string' ? rule === pathname : rule.test(pathname),
+  );
+};
+
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
-  // Header가 필요 없는 페이지의 경우 path 추가하기
-  const noHeaderPaths = ['/'];
-
-  /** 동적 라우팅 path, '/detail/:id' 패턴 */
-  const noHeaderDynamicPaths = [/^\/detail\/\d+$/];
-
-  const hideHeader =
-    noHeaderPaths.includes(location.pathname) ||
-    noHeaderDynamicPaths.some((regex) => regex.test(location.pathname));
+  const hideHeader = shouldHide('hideHeader', location.pathname);
+  const hideTabBar = shouldHide('hideTabBar', location.pathname);
 
   const [HeaderTitle, setHeaderTitle] = useState<HeaderTitleType>({
     title: '',
@@ -52,7 +64,7 @@ function Layout({ children }: LayoutProps) {
       <MainLayout $direction="column" $justify="flex-start" $align="flex-start">
         {children}
       </MainLayout>
-      <TabBar />
+      {!hideTabBar && <TabBar />}
     </S.Wrapper>
   );
 }
