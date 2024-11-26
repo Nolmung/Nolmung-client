@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 import KeywordReview from './components/KeywordReview';
@@ -10,7 +11,6 @@ import {
   AllKindDogAvailable,
   BackArrowBlack,
   BackArrowWhite,
-  FilledStar,
   ParkAvailable,
   Phone,
   Price,
@@ -66,7 +66,7 @@ function Detail() {
       <S.PlaceInfo>
         <S.PlaceName>어반펫츠</S.PlaceName>
         <S.PlaceBriefReview>
-          <FilledStar width={16} />
+          <FaStar size="16" color="#F4E600" />
           <S.StarAverage>4.5</S.StarAverage>
           <S.PlaceReviewCount>리뷰 125</S.PlaceReviewCount>
         </S.PlaceBriefReview>
