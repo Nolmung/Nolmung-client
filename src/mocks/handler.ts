@@ -1,3 +1,3 @@
-import { placeDetailApi } from './mockApis/Place';
+import { placeDetailApi } from './mockApis/place';
 
 export const handlers = [placeDetailApi];
