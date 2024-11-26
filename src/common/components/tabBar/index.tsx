@@ -1,7 +1,7 @@
-import tabItems from '@common/constants/tabBarItems';
-import { useLocation } from 'react-router-dom';
 import { S } from '@common/components/tabBar/index.styles';
 import { TabBarType } from '@common/components/tabBar/index.type';
+import tabItems from '@common/constants/tabBarItems';
+import { useLocation } from 'react-router-dom';
 
 function TabBar() {
   const location = useLocation();
