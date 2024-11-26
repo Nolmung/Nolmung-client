@@ -6,13 +6,19 @@ const GlobalStyle = createGlobalStyle`
   *{
     box-sizing: border-box;
   }
+  
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('@assets/fonts/PretendardVariable.woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
 
-  /* 추가 스타일 */
   html, body {
+    font-family: 'Pretendard', sans-serif;
     height: 100%;
     width: 100%;
     background: #E8F8E8;
-
   }
   button{
     cursor: pointer;
