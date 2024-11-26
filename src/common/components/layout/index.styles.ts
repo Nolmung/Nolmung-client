@@ -6,7 +6,7 @@ export const S = {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 425px;
+    max-width: 600px;
     min-width: 320px;
     margin: 0 auto;
     background-color: #fdfdfd;

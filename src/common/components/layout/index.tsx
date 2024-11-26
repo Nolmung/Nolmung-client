@@ -1,20 +1,26 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { S } from '@common/components/layout/index.styles';
 import Header from '@common/components/header';
 import { Flex as MainLayout } from '@common/components/layout/flex';
+import { S } from '@common/components/layout/index.styles';
 import {
   LayoutProps,
   HeaderTitleType,
 } from '@common/components/layout/index.type';
 import TabBar from '@common/components/tabBar';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
   // Header가 필요 없는 페이지의 경우 path 추가하기
   const noHeaderPaths = ['/'];
-  const hideHeader = noHeaderPaths.includes(location.pathname);
+
+  /** 동적 라우팅 path, '/detail/:id' 패턴 */
+  const noHeaderDynamicPaths = [/^\/detail\/\d+$/];
+
+  const hideHeader =
+    noHeaderPaths.includes(location.pathname) ||
+    noHeaderDynamicPaths.some((regex) => regex.test(location.pathname));
 
   const [HeaderTitle, setHeaderTitle] = useState<HeaderTitleType>({
     title: '',

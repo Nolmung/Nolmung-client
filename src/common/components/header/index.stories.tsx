@@ -1,6 +1,5 @@
-import { Meta, StoryObj } from '@storybook/react';
-
 import Header from '@common/components/header';
+import { Meta, StoryObj } from '@storybook/react';
 
 const HeaderStoriesType = ['TitleLeft', 'TitleCenter'] as const;
 
