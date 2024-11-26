@@ -8,6 +8,7 @@ export { default as Phone } from './Phone';
 export { default as Price } from './Price';
 export { default as Time } from './Time';
 export { default as UnderTenKilos } from './UnderTenKilos';
+export { default as CafeMarker } from './CafeMarker';
 export { default as GoBackIcon } from './GoBackIcon';
 export { default as TabBarCalenderIcon } from './TabBarCalenderIcon';
 export { default as TabBarCalenderIconActive } from './TabBarCalenderIconActive';
