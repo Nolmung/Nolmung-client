@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
+import {
+  AllKindDogAvailableInfoIcon,
+  ParkAvailableInfoIcon,
+  UnderTenKilosInfoIcon,
+} from './components/InfoIcons';
 import KeywordReview from './components/KeywordReview';
 import TodayMungCard from './components/TodayMungCard';
 import useScrollTop from './hooks/useScrollTop';
 import * as S from './styles/detail.styles';
 
 import {
-  AllKindDogAvailable,
   BackArrowBlack,
   BackArrowWhite,
-  ParkAvailable,
   Phone,
   Price,
   Time,
-  UnderTenKilos,
 } from '@/assets/images/svgs';
 import { ROUTE } from '@/common/constants/route';
 
@@ -72,19 +74,9 @@ function Detail() {
         </S.PlaceBriefReview>
         <S.PlaceRoadAddress>서울 용산구 한강대로 21길 7</S.PlaceRoadAddress>
         <S.PlaceInfoIcons>
-          {/**@Todo 아이콘 컴포넌트화*/}
-          <S.InfoIconWrapper>
-            <AllKindDogAvailable width={48} height={48} />
-            모든 견종
-          </S.InfoIconWrapper>
-          <S.InfoIconWrapper>
-            <ParkAvailable width={48} height={48} />
-            주차 가능
-          </S.InfoIconWrapper>
-          <S.InfoIconWrapper>
-            <UnderTenKilos width={48} height={48} />
-            10kg 이하 가능
-          </S.InfoIconWrapper>
+          <AllKindDogAvailableInfoIcon />
+          <ParkAvailableInfoIcon />
+          <UnderTenKilosInfoIcon />
         </S.PlaceInfoIcons>
       </S.PlaceInfo>
       <S.PlaceDetailWrapper>
