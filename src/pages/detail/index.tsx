@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   AllKindDogAvailableInfoIcon,
@@ -20,23 +20,16 @@ import {
   Time,
 } from '@/assets/images/svgs';
 import { ROUTE } from '@/common/constants/route';
-
-const TodayMungList = [
-  <TodayMungCard />,
-  <TodayMungCard />,
-  <TodayMungCard />,
-  <TodayMungCard />,
-  <TodayMungCard />,
-  <TodayMungCard />,
-  <TodayMungCard />,
-  <TodayMungCard />,
-  <TodayMungCard />,
-];
+import { useGetPostDetail } from './querys';
+import { PlacePrice } from '@/common/types';
+import findKeywordById from '@/common/utils/findKeywordById';
 
 function Detail() {
   const navigate = useNavigate();
   const { scrollTop, scrollRef, handleScroll } = useScrollTop();
   const [visibleTodayMungCard, setVisibleTodayMungCard] = useState(3);
+  const { placeId } = useParams();
+  const { data, isLoading, isError } = useGetPostDetail(placeId!);
 
   const handleBackArrowClick = () => {
     navigate(ROUTE.MAIN());
@@ -46,33 +39,43 @@ function Detail() {
     setVisibleTodayMungCard((prev) => prev + 3);
   };
 
+  if (isLoading) return <p>Loading...</p>;
+  if (isError || !data) return <p>Error loading post detail</p>;
+
+  const reviewCount = data.labels.reduce((acc, cur) => {
+    return acc + cur.count;
+  }, 0);
+  const openingHour = data.open_hour.split(' ');
+
+  const isPriceAvailable = (price: PlacePrice) => {
+    return price == '변동' || price == '없음';
+  };
+
   return (
     <S.Wrapper ref={scrollRef} onScroll={handleScroll}>
       <S.Header isScrolled={scrollTop >= 70}>
         {scrollTop >= 70 ? (
           <>
             <BackArrowBlack onClick={handleBackArrowClick} width={24} />
-            어반펫츠
+            {data.place_name}
           </>
         ) : (
           <BackArrowWhite onClick={handleBackArrowClick} width={24} />
         )}
       </S.Header>
       <S.GradientImage />
-      <S.PlaceImage
-        src={
-          'https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzAzMjRfNDMg%2FMDAxNjc5NjIwOTQ3NTYy.1B9eCBDT-q7_2gBRC2TStYUdyOKj5iTOqXvooWrybCAg.O4xRVJYud0lWgLWcSG5JZsgm40eLM13ZhWi6Trr-Ui4g.JPEG%2F26F35176-1571-422B-97A5-2DC1164D772B.jpeg%3Ftype%3Dw1500_60_sharpen'
-        }
-        alt="시설 이미지"
-      />
+      <S.PlaceImage src={data.place_img_url} alt="시설 이미지" />
       <S.PlaceInfo>
-        <S.PlaceName>어반펫츠</S.PlaceName>
+        <S.PlaceName> {data.place_name}</S.PlaceName>
         <S.PlaceBriefReview>
           <FaStar size="16" color="#F4E600" />
-          <S.StarAverage>4.5</S.StarAverage>
-          <S.PlaceReviewCount>리뷰 125</S.PlaceReviewCount>
+          <S.StarAverage>{data.star_rating_avg}</S.StarAverage>
+          <S.PlaceReviewCount>
+            리뷰
+            {reviewCount}
+          </S.PlaceReviewCount>
         </S.PlaceBriefReview>
-        <S.PlaceRoadAddress>서울 용산구 한강대로 21길 7</S.PlaceRoadAddress>
+        <S.PlaceRoadAddress>{data.address}</S.PlaceRoadAddress>
         <S.PlaceInfoIcons>
           <AllKindDogAvailableInfoIcon />
           <ParkAvailableInfoIcon />
@@ -82,48 +85,66 @@ function Detail() {
       <S.PlaceDetailWrapper>
         <S.PlaceDetail>
           <Time width={18} height={18} />
-          <S.PlaceDetailMenu>평일</S.PlaceDetailMenu>
-          12:00 - 13:00
+          {openingHour.length == 1 ? (
+            <>{openingHour[0]}</>
+          ) : (
+            <>
+              <S.PlaceDetailMenu>{openingHour[0]}</S.PlaceDetailMenu>
+              {openingHour[1]}
+            </>
+          )}
         </S.PlaceDetail>
         <S.PlaceDetail style={{ marginBottom: '30px' }}>
           <Time width={18} height={18} />
-          <S.PlaceDetailMenu> 휴일</S.PlaceDetailMenu>연중무휴
+          <S.PlaceDetailMenu> 휴일</S.PlaceDetailMenu>
+          {data.holiday}
         </S.PlaceDetail>
-
-        <S.PlaceDetail>
-          <Price width={18} height={18} />
-          <S.PlaceDetailMenu>이용 가격</S.PlaceDetailMenu>
-          15,000원
-        </S.PlaceDetail>
+        {!isPriceAvailable(data.price) && (
+          <S.PlaceDetail>
+            <Price width={18} height={18} />
+            <S.PlaceDetailMenu>이용 가격</S.PlaceDetailMenu>
+            {data.price}
+          </S.PlaceDetail>
+        )}
+        {!isPriceAvailable(data.extra_price) && (
+          <S.PlaceDetail>
+            <Price width={18} height={18} />
+            <S.PlaceDetailMenu>추가 금액</S.PlaceDetailMenu>
+            {data.extra_price}
+          </S.PlaceDetail>
+        )}
         <S.PlaceDetail>
           <Phone width={18} height={18} />
           <S.PlaceDetailMenu>전화</S.PlaceDetailMenu>
-          02-1234-1234
+          {data.phone}
         </S.PlaceDetail>
       </S.PlaceDetailWrapper>
       <S.PlaceDetailWrapper>
         <S.ReviewTitle>
           방문자 리뷰
-          <S.ReviewCount>126</S.ReviewCount>
+          <S.ReviewCount>{reviewCount}</S.ReviewCount>
         </S.ReviewTitle>
         <S.KeywordReviews>
-          {/**@Todo KeywordCount는 키워드 갯수 / 총 리뷰 갯수로 전달 */}
-          <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
-          <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
-          <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
-          <KeywordReview Keyword="매장이 넓어요" KeywordCount={60} />
+          {data.labels.map((item) => (
+            <KeywordReview
+              key={item.label_id}
+              Keyword={findKeywordById(item.label_id)!.content}
+              KeywordCount={item.count}
+              KeywordPercent={(item.count / reviewCount) * 100}
+            />
+          ))}
         </S.KeywordReviews>
       </S.PlaceDetailWrapper>
       <S.PlaceDetailWrapper>
         <S.ReviewTitle>
           오늘멍
-          <S.ReviewCount>126</S.ReviewCount>
+          <S.ReviewCount>{data.diary.length}</S.ReviewCount>
         </S.ReviewTitle>
-        {TodayMungList.slice(0, visibleTodayMungCard).map((card, index) => (
-          <React.Fragment key={index}>{card}</React.Fragment>
+        {data.diary.slice(0, visibleTodayMungCard).map((card) => (
+          <TodayMungCard key={card.diary_id} card={card} />
         ))}
 
-        {visibleTodayMungCard < TodayMungList.length && (
+        {visibleTodayMungCard < data.diary.length && (
           <S.ViewMoreButtonWrapper>
             <S.ViewMoreButton onClick={handleViewMoreButtonClick}>
               더보기

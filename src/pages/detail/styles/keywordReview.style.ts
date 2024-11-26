@@ -19,13 +19,20 @@ export const KeywordReviewWrapper = styled.div`
   align-items: center;
 `;
 
-export const KeywordReviewStatus = styled.div<{ width: number }>`
+export const KeywordReviewStatusBar = styled.div<{ width: number }>`
   display: flex;
   gap: 10px;
-
+  border-radius: 10px;
   width: ${({ width }) => width}%;
   height: 42px;
   background-color: #d3fbd4;
+
+  padding: 14px 17px;
+  box-sizing: border-box;
+  white-space: nowrap;
+`;
+
+export const KeywordContent = styled.div`
   color: #080808;
   font-family: Pretendard;
   font-size: 14px;
@@ -33,8 +40,16 @@ export const KeywordReviewStatus = styled.div<{ width: number }>`
   font-weight: 500;
   line-height: 16px; /* 114.286% */
   border-radius: 10px;
+  position: absolute;
+  left: 10px;
+  justify-content: center;
+  gap: 10px;
+  display: flex;
+`;
 
-  padding: 14px 17px;
-  box-sizing: border-box;
-  white-space: nowrap;
+export const KeywordContentBarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
 `;

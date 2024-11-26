@@ -109,7 +109,7 @@ export const Content = styled.div`
     width: 100%;
   }
 `;
-export const Image = styled.div`
+export const Image = styled.img`
   width: 90px;
   height: 100px;
   border-radius: 10px;
