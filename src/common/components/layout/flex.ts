@@ -25,12 +25,9 @@ export const Flex = styled.div<{
   gap: ${({ webGap }) => (webGap ? `${webGap}rem` : '0rem')};
   width: 100%;
   min-width: 320px;
-  /* max-width: 425px;  */
   height: ${({ height, heightVh }) =>
     height ? `${height}rem` : heightVh ? `${heightVh}vh` : 'auto'};
-  /* margin: 0 auto; */
   padding: ${({ padding }) => (padding ? padding : '0px')};
-  /* box-sizing: border-box; */
   border-radius: ${({ borderRadius }) =>
     borderRadius ? `${borderRadius}px` : '0px'};
   flex: 1;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const S = {
-  HeaderArea: styled.div`
+  LeftHeaderArea: styled.div`
     display: flex;
     width: 100%;
     min-width: 320px;
@@ -23,14 +23,14 @@ export const S = {
     visibility: hidden;
   `,
 
-  TitleArea: styled.div`
+  LeftTitleArea: styled.div`
     text-align: center;
     font-weight: 500;
     font-size: 20px;
     line-height: 1;
   `,
 
-  HeaderArea2: styled.div`
+  CenterHeaderArea: styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,7 +46,7 @@ export const S = {
     padding: 28px 22px;
   `,
 
-  TitleArea2: styled.div`
+  CenterTitleArea: styled.div`
     position: absolute;
     text-align: center;
     left: 50%;

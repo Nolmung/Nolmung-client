@@ -19,26 +19,24 @@ function Layout({ children }: LayoutProps) {
   const [HeaderTitle, setHeaderTitle] = useState<HeaderTitleType>({
     title: '',
     showIcon: false,
-    type: 1,
+    type: 'TitleLeft',
   });
 
-  //
-  // Type1 : titleLocation:left, Type2:titleLocation : right
   useEffect(() => {
     switch (location.pathname) {
       case '/':
-        setHeaderTitle({ title: '메인', showIcon: true, type: 2 });
+        setHeaderTitle({ title: '메인', showIcon: true, type: 'TitleCenter' });
         break;
       case '/todayMung':
         setHeaderTitle({
           title: '오늘멍 모아보기',
           showIcon: false,
-          type: 1,
+          type: 'TitleCenter',
         });
         break;
 
       default:
-        setHeaderTitle({ title: '', showIcon: true, type: 1 });
+        setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }
   }, [location.pathname]);
 

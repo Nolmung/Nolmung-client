@@ -7,5 +7,5 @@ export type LayoutProps = {
 export type HeaderTitleType = {
   title: string;
   showIcon: boolean;
-  type: number;
+  type: string;
 };
