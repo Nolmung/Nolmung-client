@@ -1,56 +1,104 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import {Marker} from './index.type';
-import { CafeMarker } from '@/assets/images/svgs';
+import { MarkerType } from './index.type';
 import { useNavigate } from 'react-router-dom';
+import CustomMarker from './components/CustomMarker';
+import ReactDOMServer from 'react-dom/server';
+import { markerData } from '@/mocks/data/markerData';
 
-const getDataArray = [
-  {
-    "placeId": 1, 
-    "name": "더왈츠",
-    "category": "cafe",
-    "roadAddress": "서울특별시 강남구 역삼로 134",
-    "placeImgUrl": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_247%2F1709283092996Yjmow_JPEG%2FIMG_3922.jpeg",
-    "starRatingAvg": 5,
-    "reviewCount": 0,
-    "latitude": 37.49413412, // 위도
-    "longitude": 127.034306, // 경도
-  }
-]
+interface LatLng {
+  latitude: number;
+  longitude: number;
+}
 
 function Main() {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const [addressX, setAddressX] = useState<number>(37.49413412); 
-  const [addressY, setAddressY] = useState<number>(127.034306);
+  const [addressY, setAddressY] = useState<number>(0);
+  const [addressX, setAddressX] = useState<number>(0);
 
+  // const [latlng, setLatLng] = useState<LatLng>({
+  //   latitude: 37.49413412,
+  //   longitude: 127.034306,
+  // });
   // 지도 이동 시 노출된 부분만 마커를 표시하기 위함 -> map을 state로 관리
   const [newMap, setNewMap] = useState<naver.maps.Map | null>(null);
 
-  const { naver } = window; // 이거 쓰는 이유가 뭐임? 명시 위함임?
-  let map: naver.maps.Map;
+  const { naver } = window;
 
+  let map: naver.maps.Map;
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!mapRef.current || !naver || !addressX || !addressY) return;
+    initMap();
+    if (map) {
+      initMarkers();
+      // 지도 상태 변경 이벤트 리스너 등록
+      // naver.maps.Event.addListener(map, 'idle', getTwoCoordinate);
+      // ㅎget
+    }
+  }, [addressX, addressY]);
+
+  /** @Todo 커스텀 훅으로 빼기!  */
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setAddressY(latitude);
+          setAddressX(longitude);
+        },
+        (error) => {
+          console.error('위치 정보를 불러올 수 없습니다:', error);
+          setAddressY(37.49413412);
+          setAddressX(127.034306);
+        },
+      );
+    } else {
+      setAddressY(37.49413412);
+      setAddressX(127.034306);
+    }
+  }, []);
+
   const initMap = () => {
-    if (!mapRef.current || !naver) return; // null 체크 추가 -> 약간 부가적인듯
-    const center = new naver.maps.LatLng(addressX, addressY); 
+    if (!mapRef.current || !naver || !addressX || !addressY) return; // null 체크 추가 -> 약간 부가적인듯
+    const center = new naver.maps.LatLng(addressY, addressX);
     const mapOptions: naver.maps.MapOptions = {
       //지도의 초기 중심 좌표
       center: center,
       zoom: 17,
       minZoom: 11,
       maxZoom: 18,
+      baseTileOpacity: 0.8,
     };
     // 위 옵션을 바탕으로 지도 생성
     map = new naver.maps.Map(mapRef.current, mapOptions);
     setNewMap(map);
-  }
+  };
 
-  const handleMarkerClick = (id: number) => {
+  /** 
+   * 현 지도에서 검색 버튼 클릭 함수  
+   * @Todo 현 지도에서 검색 버튼 UI 구현 후 연결하기
+  */
+  const getTwoCoordinate = () => {
+    if (newMap) {
+      const bounds = newMap.getBounds();
+      const center = newMap.getCenter();
+      /** @Todo 지도에서 장소 조회 API 호출  */
+      alert(
+        `현재 좌표: [${center.x}, ${center.y}], 지도 최대 좌표: [${bounds.maxY()}, ${bounds.maxX()}]`,
+      );
+    }
+  };
+
+  /** 마커 클릭 함수  
+   * 
+  */
+  const handleMarkerClick = (id: string) => {
     navigate(`/detail/${id}`);
-  }
+  };
 
-  const addMarker = (data: Marker) => {
+  const addMarker = (data: MarkerType) => {
     try {
       let newMarker = new naver.maps.Marker({
         position: new naver.maps.LatLng(data.latitude, data.longitude),
@@ -58,27 +106,28 @@ function Main() {
         title: data.name,
         clickable: true,
         icon: {
-          content: Marker,
-          size: new naver.maps.Size(43, 43),
-        }
+          content: ReactDOMServer.renderToString(
+            <CustomMarker
+              placeId={data.place_id}
+              name={data.name}
+              category={data.category}
+            />,
+          ),
+        },
       });
-      naver.maps.Event.addListener(newMarker, 'click', () => 
-        handleMarkerClick(data.placeId)
+      naver.maps.Event.addListener(newMarker, 'click', () =>
+        handleMarkerClick(data.place_id),
       );
-    } catch (e) {}
-  }
+    } catch (e) {
+      console.error('Error creating marker:', e);
+    }
+  };
 
   const initMarkers = () => {
-    getDataArray.forEach((data) => {
+    markerData.forEach((data) => {
       addMarker(data);
     });
-  }
-
-  useEffect(() => {
-    if (!mapRef.current || !naver) return;
-    initMap();
-    initMarkers();
-  }, [addressX, addressY]);
+  };
 
   return (
     <Wrapper>
