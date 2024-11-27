@@ -16,6 +16,7 @@ function App() {
       window.removeEventListener('resize', setScreenHeight);
     };
   }, []);
+
   return (
     <>
       <GlobalStyle />
