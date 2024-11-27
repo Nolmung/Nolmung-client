@@ -1,5 +1,5 @@
 import { Diary } from '@/common/types';
-import * as S from '../styles/todayMung.style';
+import { S } from '../styles/todayMungCard.style';
 
 interface TodayMungCardProps {
   card: Diary;

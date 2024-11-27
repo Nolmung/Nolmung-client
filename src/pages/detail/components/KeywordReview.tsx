@@ -1,4 +1,4 @@
-import * as S from '../styles/keywordReview.style';
+import { S } from '../styles/keywordReview.style';
 
 import { DogPaw } from '@/assets/images/svgs';
 

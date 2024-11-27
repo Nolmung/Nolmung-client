@@ -10,7 +10,7 @@ import {
 import KeywordReview from './components/KeywordReview';
 import TodayMungCard from './components/TodayMungCard';
 import useScrollTop from './hooks/useScrollTop';
-import * as S from './styles/detail.styles';
+import { S } from './styles/detail.styles';
 
 import {
   BackArrowBlack,
@@ -117,7 +117,7 @@ function Detail() {
           <Phone width={18} height={18} />
           <S.PlaceDetailMenu>전화</S.PlaceDetailMenu>
           <S.PhoneNumberLink href={`tel:${data.phone}`}>
-          {data.phone}
+            {data.phone}
           </S.PhoneNumberLink>
         </S.PlaceDetail>
       </S.PlaceDetailWrapper>
