@@ -14,7 +14,7 @@ import App from './App.tsx';
 //   return worker.start();
 // }
 
-// const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
 // enableMocking().then(() => {
 createRoot(document.getElementById('root')!).render(
