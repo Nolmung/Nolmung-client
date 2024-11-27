@@ -34,7 +34,7 @@ export const S = {
     line-height: normal;
 
     gap: 15px;
-    max-width: 600px;
+    max-width: 425px;
   `,
 
   PlaceImage: styled.img`
@@ -55,7 +55,7 @@ export const S = {
       rgba(0, 0, 0, 0.5),
       rgba(0, 0, 0, 0)
     );
-    max-width: 600px;
+    max-width: 425px;
   `,
 
   PlaceInfo: styled.div`
