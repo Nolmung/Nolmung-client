@@ -24,7 +24,7 @@ export const Flex = styled.div<{
   align-items: ${({ $align }) => $align || 'center'};
   gap: ${({ webGap }) => (webGap ? `${webGap}rem` : '0rem')};
   width: 100%;
-  max-width: 600px;
+  max-width: 425px;
   min-width: 320px;
   height: ${({ height, heightVh }) =>
     height ? `${height}rem` : heightVh ? `${heightVh}vh` : 'auto'};

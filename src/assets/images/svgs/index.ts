@@ -14,6 +14,8 @@ export { default as CafeMarker } from './CafeMarker';
 export { default as DefaultMarker } from './DefaultMarker';
 export { default as FoodMarker } from './FoodMarker';
 export { default as GalleryMarker } from './GalleryMarker';
+export { default as Under15Kilos } from './Under15Kilos';
+export { default as Under25Kilos } from './Under25Kilos';
 export { default as GoBackIcon } from './GoBackIcon';
 export { default as HotelMarker } from './HotelMarker';
 export { default as MuseumMarker } from './MuseumMarker';
