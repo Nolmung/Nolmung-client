@@ -1,10 +1,15 @@
-import SearchInput from '@/common/components/searchInput';
+import { S } from './styles/index.style';
 
+import { GoBackIcon } from '@/assets/images/svgs';
+import SearchInput from '@/common/components/searchInput';
 function Search() {
   return (
-    <div>
+    <S.Header>
+      <S.IconWrapper>
+        <GoBackIcon />
+      </S.IconWrapper>
       <SearchInput />
-    </div>
+    </S.Header>
   );
 }
 

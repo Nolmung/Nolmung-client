@@ -10,7 +10,7 @@ interface SearchInputProps {
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
-  size?: 'small' | 'medium' | 'large';
+  width?: number;
 }
 
 function SearchInput({
