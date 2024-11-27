@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Pretendard', sans-serif;
     height: 100%;
     width: 100%;
-    background: #E8F8E8;
+    background: #FDFDFD;
   }
   button{
     cursor: pointer;

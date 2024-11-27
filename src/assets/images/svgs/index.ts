@@ -3,6 +3,8 @@ export { default as BackArrowBlack } from './BackArrowBlack';
 export { default as BackArrowWhite } from './BackArrowWhite';
 export { default as DogPaw } from './DogPaw';
 export { default as FilledStar } from './FilledStar';
+export { default as LoginBackgroundimg } from './LoginBackgroundimg';
+export { default as NolmungLogo } from './NolmungLogo';
 export { default as ParkAvailable } from './ParkAvailable';
 export { default as Phone } from './Phone';
 export { default as Price } from './Price';
