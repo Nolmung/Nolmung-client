@@ -1,4 +1,4 @@
-import * as S from '../styles/detail.styles';
+import { S } from '../styles/detail.styles';
 
 import { AllKindDogAvailable, UnderTenKilos } from '@/assets/images/svgs';
 
