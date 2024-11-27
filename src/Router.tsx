@@ -1,5 +1,6 @@
 import { ROUTE } from '@common/constants/route';
 import Main from '@pages/main';
+import TodayMung from '@pages/todaymung';
 import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -23,6 +24,7 @@ function Router() {
       <Layout>
         <Routes>
           <Route path={ROUTE.MAIN()} element={<Main />} />
+          <Route path={ROUTE.TODAYMUNG()} element={<TodayMung />} />
         </Routes>
       </Layout>
     </Suspense>

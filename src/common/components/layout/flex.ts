@@ -25,6 +25,7 @@ export const Flex = styled.div<{
   gap: ${({ webGap }) => (webGap ? `${webGap}rem` : '0rem')};
   width: 100%;
   min-width: 320px;
+  max-width: 600px;
   height: ${({ height, heightVh }) =>
     height ? `${height}rem` : heightVh ? `${heightVh}vh` : 'auto'};
   padding: ${({ padding }) => (padding ? padding : '0px')};

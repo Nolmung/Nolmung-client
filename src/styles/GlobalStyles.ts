@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
   
   @font-face {
     font-family: 'Pretendard';
-    src: url('@assets/fonts/PretendardVariable.woff2');
+    src: url('/assets/fonts/PretendardVariable.woff2');
     font-weight: 100 900;
     font-style: normal;
   }
