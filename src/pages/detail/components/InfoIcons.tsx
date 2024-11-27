@@ -1,6 +1,11 @@
 import { S } from '../styles/detail.styles';
 
-import { AllKindDogAvailable, UnderTenKilos } from '@/assets/images/svgs';
+import {
+  AllKindDogAvailable,
+  ParkAvailable,
+  Under15Kilos,
+  Under25Kilos,
+} from '@/assets/images/svgs';
 
 export const AllKindDogAvailableInfoIcon = () => {
   return (
@@ -14,17 +19,26 @@ export const AllKindDogAvailableInfoIcon = () => {
 export const ParkAvailableInfoIcon = () => {
   return (
     <S.InfoIconWrapper>
-      <AllKindDogAvailable width={48} height={48} />
-      모든 견종
+      <ParkAvailable width={48} height={48} />
+      주차 가능
     </S.InfoIconWrapper>
   );
 };
 
-export const UnderTenKilosInfoIcon = () => {
+export const Under15KgInfoIcon = () => {
   return (
     <S.InfoIconWrapper>
-      <UnderTenKilos width={48} height={48} />
-      10kg 이하 가능
+      <Under15Kilos width={48} height={48} />
+      15kg 이하 가능
+    </S.InfoIconWrapper>
+  );
+};
+
+export const Under25KgInfoIcon = () => {
+  return (
+    <S.InfoIconWrapper>
+      <Under25Kilos width={48} height={48} />
+      25kg 이하 가능
     </S.InfoIconWrapper>
   );
 };

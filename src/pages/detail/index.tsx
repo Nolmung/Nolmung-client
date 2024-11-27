@@ -5,7 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   AllKindDogAvailableInfoIcon,
   ParkAvailableInfoIcon,
-  UnderTenKilosInfoIcon,
+  Under15KgInfoIcon,
+  Under25KgInfoIcon,
 } from './components/InfoIcons';
 import KeywordReview from './components/KeywordReview';
 import TodayMungCard from './components/TodayMungCard';
@@ -77,9 +78,11 @@ function Detail() {
         </S.PlaceBriefReview>
         <S.PlaceRoadAddress>{data.address}</S.PlaceRoadAddress>
         <S.PlaceInfoIcons>
+          {/**@Todo API 부착 후 응답 값에 따라 분기 처리 */}
           <AllKindDogAvailableInfoIcon />
           <ParkAvailableInfoIcon />
-          <UnderTenKilosInfoIcon />
+          <Under15KgInfoIcon />
+          <Under25KgInfoIcon />
         </S.PlaceInfoIcons>
       </S.PlaceInfo>
       <S.PlaceDetailWrapper>

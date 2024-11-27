@@ -10,7 +10,7 @@ function TodayMungCard({ card }: TodayMungCardProps) {
       <S.TodayMungInfo>
         <S.ProfileWrapper>
           {/** @Todo response 값 수정 필요 */}
-          <S.ProfileImage />
+          <S.ProfileImage alt="오늘멍 유저 프로필" />
           <S.WriterName>{card.diary_writer}</S.WriterName>
         </S.ProfileWrapper>
         <S.CreatedAt>{card.created_at}</S.CreatedAt>
