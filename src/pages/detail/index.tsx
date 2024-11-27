@@ -116,7 +116,9 @@ function Detail() {
         <S.PlaceDetail>
           <Phone width={18} height={18} />
           <S.PlaceDetailMenu>전화</S.PlaceDetailMenu>
+          <S.PhoneNumberLink href={`tel:${data.phone}`}>
           {data.phone}
+          </S.PhoneNumberLink>
         </S.PlaceDetail>
       </S.PlaceDetailWrapper>
       <S.PlaceDetailWrapper>
