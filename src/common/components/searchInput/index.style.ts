@@ -14,7 +14,7 @@ export const S = {
     gap: 15px;
     padding: 0 17px 0 23px;
   `,
-  Wrapper: styled.input`
+  Input: styled.input`
     flex: 9;
     border: none;
     height: 100%;

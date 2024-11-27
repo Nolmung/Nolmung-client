@@ -1,28 +1,42 @@
 /* eslint-disable no-unused-vars */
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 
 import { S } from './index.style';
 
-import { Search } from '@/assets/images/svgs';
+import { SearchIcon } from '@/assets/images/svgs';
 
 interface SearchInputProps {
-  placeholder?: string;
   value?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  disabled?: boolean;
   width?: number;
+  disabled?: boolean;
+  onClick?: () => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
 }
 
 function SearchInput({
-  placeholder = '장소를 검색해주세요',
   value,
-  onChange,
   width,
+  onClick,
+  onChange,
+  placeholder = '장소를 검색해주세요',
 }: SearchInputProps) {
+  const handleEnterKeyOn = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && onClick && !e.nativeEvent.isComposing) {
+      onClick();
+    }
+    console.log('hi');
+  };
   return (
     <S.InputWrapper width={width ? width : 100}>
-      <S.Wrapper placeholder={placeholder} value={value} onChange={onChange} />
-      <Search width={22} height={22} />
+      <S.Input
+        autoFocus
+        placeholder={placeholder}
+        value={value}
+        onKeyDown={handleEnterKeyOn}
+        onChange={onChange}
+      />
+      <SearchIcon onClick={onClick} width={22} height={22} />
     </S.InputWrapper>
   );
 }
