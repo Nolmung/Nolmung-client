@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const S = {
-  InputWrapper: styled.div`
-    width: 100vw;
+  InputWrapper: styled.div<{ width: number }>`
+    width: ${({ width }) => width}%;
     height: 52px;
     flex-shrink: 0;
     border-radius: 10px;

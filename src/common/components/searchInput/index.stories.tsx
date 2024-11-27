@@ -10,11 +10,6 @@ const meta: Meta<typeof SearchInput> = {
     value: { control: 'text', description: 'Controlled value of the input' },
     onChange: { action: 'changed', description: 'Input change event handler' },
     disabled: { control: 'boolean', description: 'Disable the input field' },
-    size: {
-      control: 'radio',
-      options: ['small', 'medium', 'large'],
-      description: 'Size of the input field',
-    },
   },
 };
 
@@ -27,7 +22,6 @@ export const Default: Story = {
     placeholder: 'Search here...',
     value: '',
     disabled: false,
-    size: 'medium',
   },
 };
 
@@ -36,7 +30,6 @@ export const WithValue: Story = {
     placeholder: 'Search here...',
     value: 'Pre-filled value',
     disabled: false,
-    size: 'medium',
   },
 };
 
@@ -45,7 +38,6 @@ export const Disabled: Story = {
     placeholder: 'Search here...',
     value: '',
     disabled: true,
-    size: 'medium',
   },
 };
 
@@ -54,7 +46,6 @@ export const SmallSize: Story = {
     placeholder: 'Small size input',
     value: '',
     disabled: false,
-    size: 'small',
   },
 };
 
@@ -63,6 +54,5 @@ export const LargeSize: Story = {
     placeholder: 'Large size input',
     value: '',
     disabled: false,
-    size: 'large',
   },
 };

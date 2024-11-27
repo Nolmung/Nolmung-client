@@ -17,9 +17,10 @@ function SearchInput({
   placeholder = '장소를 검색해주세요',
   value,
   onChange,
+  width,
 }: SearchInputProps) {
   return (
-    <S.InputWrapper>
+    <S.InputWrapper width={width ? width : 100}>
       <S.Wrapper placeholder={placeholder} value={value} onChange={onChange} />
       <Search width={22} height={22} />
     </S.InputWrapper>
