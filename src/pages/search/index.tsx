@@ -8,7 +8,7 @@ function Search() {
       <S.IconWrapper>
         <GoBackIcon />
       </S.IconWrapper>
-      <SearchInput />
+      <SearchInput width={90} />
     </S.Header>
   );
 }
