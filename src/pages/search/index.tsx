@@ -8,6 +8,9 @@ import NoSearchHistory from './components/NoSearchHistory';
 import SearchHistoryList from './components/SearchHistoryList';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+import Modal from '@/common/components/modal';
+import useModal from '@/common/hooks/useModal';
+import Button from '@/common/components/button/Button';
 
 export interface SearchHistoryItem {
   id: number;
@@ -17,6 +20,7 @@ export interface SearchHistoryItem {
 
 function Search() {
   const navigate = useNavigate();
+  const { isOpen, openModal, closeModal } = useModal();
 
   const [searchHistory, setSearchHistory] = useState<SearchHistoryItem[]>(
     () => {
@@ -57,10 +61,10 @@ function Search() {
     navigate(ROUTE.MAIN() + '?search=' + searchInputValue);
   };
 
-  const handleClearAll = () => {
-    window.confirm('삭제하시겠습니까?');
+  const handleModalYesButtonClick = () => {
     setSearchHistory([]);
     localStorage.removeItem('searchHistory');
+    closeModal();
   };
 
   const handleDeleteKeyword = (id: number) => {
@@ -75,12 +79,29 @@ function Search() {
   };
 
   return (
-    <div
-      style={{
-        height: 'calc(100dvh - 90px)',
-        width: '100%',
-      }}
-    >
+    <S.Wrapper>
+      {isOpen && (
+        <Modal isOpen={isOpen} closeModal={closeModal}>
+          <S.ModalContent>
+            모두 지우시겠습니까?
+            <S.ModalButtonWrapper>
+              <Button
+                fontSize="18px"
+                fontWeight="500"
+                label="아니오"
+                onClick={() => closeModal()}
+              />
+              <Button
+                fontSize="18px"
+                fontWeight="700"
+                backgroundColor="#D3FBD4"
+                label="예"
+                onClick={handleModalYesButtonClick}
+              />
+            </S.ModalButtonWrapper>
+          </S.ModalContent>
+        </Modal>
+      )}
       <S.Header>
         <S.IconWrapper onClick={handleGoBackIconClick}>
           <GoBackIcon />
@@ -94,7 +115,7 @@ function Search() {
       </S.Header>
       <S.Menu>
         최근 검색어
-        <S.ClearAllButton onClick={handleClearAll}>전체삭제</S.ClearAllButton>
+        <S.ClearAllButton onClick={openModal}>전체삭제</S.ClearAllButton>
       </S.Menu>
       <S.SearchHistoryList>
         {searchHistory.length > 0 ? (
@@ -106,7 +127,7 @@ function Search() {
           <NoSearchHistory />
         )}
       </S.SearchHistoryList>
-    </div>
+    </S.Wrapper>
   );
 }
 
