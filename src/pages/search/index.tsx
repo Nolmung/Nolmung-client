@@ -11,6 +11,13 @@ import { ROUTE } from '@/common/constants/route';
 import Modal from '@/common/components/modal';
 import useModal from '@/common/hooks/useModal';
 import Button from '@/common/components/button/Button';
+import {
+  clearSearchHistory,
+  deleteSearchKeyword,
+  formatDate,
+  handleInputChange,
+  updateSearchHistory,
+} from './utils/searchUtils';
 
 export interface SearchHistoryItem {
   id: number;
@@ -30,47 +37,29 @@ function Search() {
   );
   const [searchInputValue, setSearchInputValue] = useState<string>('');
 
-  const handleSearchInputValueChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setSearchInputValue(e.target.value);
-  };
+  const handleSearchInputValueChange = handleInputChange(setSearchInputValue);
 
   const handleSearchIconClick = () => {
     if (!searchInputValue.trim()) return;
 
-    const now = new Date();
-
-    /** MM-DD 형식 */
-    const formattedDate = `${String(now.getMonth() + 1).padStart(2, '0')}.${String(
-      now.getDate(),
-    ).padStart(2, '0')}`;
-
     const newSearchItem: SearchHistoryItem = {
-      id: Date.now(), //
+      id: Date.now(),
       keyword: searchInputValue.trim(),
-      createdAt: formattedDate,
+      createdAt: formatDate(new Date()),
     };
 
-    const updatedHistory = [...searchHistory, newSearchItem];
-    setSearchHistory(updatedHistory);
-
-    localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
-
+    setSearchHistory(updateSearchHistory(searchHistory, newSearchItem));
     setSearchInputValue('');
     navigate(ROUTE.MAIN() + '?search=' + searchInputValue);
   };
 
   const handleModalYesButtonClick = () => {
-    setSearchHistory([]);
-    localStorage.removeItem('searchHistory');
+    setSearchHistory(clearSearchHistory());
     closeModal();
   };
 
   const handleDeleteKeyword = (id: number) => {
-    const updatedHistory = searchHistory.filter((item) => item.id !== id);
-    setSearchHistory(updatedHistory);
-    localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
+    setSearchHistory(deleteSearchKeyword(searchHistory, id));
   };
 
   const handleGoBackIconClick = () => {
