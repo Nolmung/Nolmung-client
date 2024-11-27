@@ -58,6 +58,7 @@ function Search() {
   };
 
   const handleClearAll = () => {
+    window.confirm('삭제하시겠습니까?');
     setSearchHistory([]);
     localStorage.removeItem('searchHistory');
   };
@@ -68,6 +69,11 @@ function Search() {
     localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
   };
 
+  const handleGoBackIconClick = () => {
+    /** @Todo 추후 맥락 보고 수정 */
+    navigate(-1);
+  };
+
   return (
     <div
       style={{
@@ -76,7 +82,7 @@ function Search() {
       }}
     >
       <S.Header>
-        <S.IconWrapper>
+        <S.IconWrapper onClick={handleGoBackIconClick}>
           <GoBackIcon />
         </S.IconWrapper>
         <SearchInput
