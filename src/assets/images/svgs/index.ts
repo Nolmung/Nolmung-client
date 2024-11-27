@@ -9,6 +9,7 @@ export { default as Price } from './Price';
 export { default as Time } from './Time';
 export { default as UnderTenKilos } from './UnderTenKilos';
 export { default as GoBackIcon } from './GoBackIcon';
+export { default as Search } from './Search';
 export { default as TabBarCalenderIcon } from './TabBarCalenderIcon';
 export { default as TabBarCalenderIconActive } from './TabBarCalenderIconActive';
 export { default as TabBarMapIcon } from './TabBarMapIcon';
