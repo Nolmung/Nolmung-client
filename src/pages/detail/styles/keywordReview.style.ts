@@ -8,7 +8,7 @@ export const S = {
     background: #f0f0f0;
 
     color: #a7a7a7;
-    font-family: Pretendard;
+     
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -33,7 +33,7 @@ export const S = {
   `,
   KeywordContent: styled.div`
     color: #080808;
-    font-family: Pretendard;
+     
     font-size: 14px;
     font-style: normal;
     font-weight: 500;

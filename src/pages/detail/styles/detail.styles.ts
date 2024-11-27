@@ -27,7 +27,7 @@ export const S = {
       isScrolled ? '0px 4px 10px rgba(0, 0, 0, 0.1)' : 'none'};
 
     color: #080808;
-    font-family: Pretendard;
+
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
@@ -68,7 +68,7 @@ export const S = {
   PlaceName: styled.h1`
     color: #080808;
     text-align: center;
-    font-family: Pretendard;
+
     font-size: 22px;
     font-style: normal;
     font-weight: 600;
@@ -92,7 +92,7 @@ export const S = {
   StarAverage: styled.div`
     color: #080808;
     text-align: center;
-    font-family: Pretendard;
+
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -101,7 +101,7 @@ export const S = {
   PlaceReviewCount: styled.div`
     color: #5e5e5e;
     text-align: center;
-    font-family: Pretendard;
+
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -110,7 +110,7 @@ export const S = {
   `,
   PlaceRoadAddress: styled.div`
     color: #5e5e5e;
-    font-family: Pretendard;
+
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -131,7 +131,7 @@ export const S = {
     align-items: center;
     color: #5e5e5e;
     text-align: center;
-    font-family: Pretendard;
+
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
@@ -144,7 +144,7 @@ export const S = {
     padding: 20px;
     gap: 20px;
     color: #080808;
-    font-family: Pretendard;
+
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -162,7 +162,7 @@ export const S = {
   PlaceDetailMenu: styled.div`
     color: #5e5e5e;
     text-align: center;
-    font-family: Pretendard;
+
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -173,7 +173,7 @@ export const S = {
     text-decoration: none;
     color: #080808;
     text-align: center;
-    font-family: Pretendard;
+
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -188,7 +188,7 @@ export const S = {
     padding: 10px 2px;
     color: #080808;
     text-align: center;
-    font-family: Pretendard;
+
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -198,7 +198,7 @@ export const S = {
   ReviewCount: styled.div`
     color: #a7a7a7;
     text-align: center;
-    font-family: Pretendard;
+
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

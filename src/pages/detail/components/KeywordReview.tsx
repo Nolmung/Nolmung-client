@@ -12,7 +12,6 @@ function KeywordReview({
   KeywordCount,
   KeywordPercent,
 }: KeywordReviewProps) {
-  console.log(KeywordPercent);
   return (
     <S.KeywordReviewWrapper>
       <S.KeywordContentBarWrapper>
