@@ -28,6 +28,7 @@ export const KaKaoButton = styled.button`
   width: 90%;
   height: 60px;
   font-size: 16px;
+  font-weight: 500;
   text-align: center;
   background-color: #fae100;
   border-radius: 50px;
