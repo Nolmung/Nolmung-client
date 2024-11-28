@@ -15,3 +15,9 @@ export interface Diary {
 }
 
 export type PlacePrice = '변동' | '없음' | string;
+
+/** 좌표 타입 정의 (위도, 경도) */
+export interface LatLng {
+  latitude: number;
+  longitude: number;
+}
