@@ -1,108 +1,105 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { MarkerType } from './index.type';
-import { useNavigate } from 'react-router-dom';
 import CustomMarker from './components/CustomMarker';
 import ReactDOMServer from 'react-dom/server';
 import { markerData } from '@/mocks/data/markerData';
-
-interface LatLng {
-  latitude: number;
-  longitude: number;
-}
+import { LatLng } from '@/common/types';
+import { DEFAULT_LATLNG } from '@/common/constants/defaultLatLng';
+import { Refresh } from '@/assets/images/svgs';
 
 function Main() {
-  const mapRef = useRef<HTMLDivElement | null>(null);
-  const [addressY, setAddressY] = useState<number>(0);
-  const [addressX, setAddressX] = useState<number>(0);
-
-  // const [latlng, setLatLng] = useState<LatLng>({
-  //   latitude: 37.49413412,
-  //   longitude: 127.034306,
-  // });
-  // 지도 이동 시 노출된 부분만 마커를 표시하기 위함 -> map을 state로 관리
-  const [newMap, setNewMap] = useState<naver.maps.Map | null>(null);
-
   const { naver } = window;
 
-  let map: naver.maps.Map;
-  const navigate = useNavigate();
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<naver.maps.Map | null>(null);
+  const [mapCenter, setMapCenter] = useState<LatLng>(DEFAULT_LATLNG);
+  const [isCurrentButtonActive, setIsCurrentButtonActive] =
+    useState<boolean>(false);
 
-  useEffect(() => {
-    if (!mapRef.current || !naver || !addressX || !addressY) return;
-    initMap();
-    if (map) {
-      initMarkers();
-      // 지도 상태 변경 이벤트 리스너 등록
-      // naver.maps.Event.addListener(map, 'idle', getTwoCoordinate);
-      // ㅎget
-    }
-  }, [addressX, addressY]);
-
-  /** @Todo 커스텀 훅으로 빼기!  */
+  /**
+   * 마운트 시 사용자의 현재 위치 받아옴 -> mapCenter 업데이트
+   * @Todo 커스텀 훅으로 빼기!
+   * */
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setAddressY(latitude);
-          setAddressX(longitude);
+          setMapCenter({ latitude: latitude, longitude: longitude });
         },
         (error) => {
           console.error('위치 정보를 불러올 수 없습니다:', error);
-          setAddressY(37.49413412);
-          setAddressX(127.034306);
         },
       );
     } else {
-      setAddressY(37.49413412);
-      setAddressX(127.034306);
+      console.log(
+        '위치 정보 확인에 동의하지 않았습니다. 위치가 기본값으로 설정됩니다.',
+      );
     }
   }, []);
 
-  const initMap = () => {
-    if (!mapRef.current || !naver || !addressX || !addressY) return; // null 체크 추가 -> 약간 부가적인듯
-    const center = new naver.maps.LatLng(addressY, addressX);
-    const mapOptions: naver.maps.MapOptions = {
-      //지도의 초기 중심 좌표
-      center: center,
-      zoom: 17,
-      minZoom: 11,
-      maxZoom: 18,
-      baseTileOpacity: 0.8,
-    };
-    // 위 옵션을 바탕으로 지도 생성
-    map = new naver.maps.Map(mapRef.current, mapOptions);
-    setNewMap(map);
+  useEffect(() => {
+    if (!mapContainerRef.current || !naver || !mapCenter) return;
+
+    if (!mapRef.current) {
+      const center = new naver.maps.LatLng(
+        mapCenter.latitude,
+        mapCenter.longitude,
+      );
+      const mapOptions: naver.maps.MapOptions = {
+        center: center,
+        zoom: 17,
+        minZoom: 11,
+        maxZoom: 18,
+        baseTileOpacity: 0.8, // 지도 투명도 조절
+      };
+      mapRef.current = new naver.maps.Map(mapContainerRef.current, mapOptions);
+
+      naver.maps.Event.addListener(mapRef.current, 'idle', () => {
+        if (mapRef.current) {
+          setIsCurrentButtonActive(true);
+        }
+      });
+      initMarkers();
+    } else {
+      const newCenter = new naver.maps.LatLng(
+        mapCenter.latitude,
+        mapCenter.longitude,
+      );
+      mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
+    }
+  }, [mapCenter]);
+
+  const handleSearchCurrentButtonClick = () => {
+    getTwoCoordinate();
+    const newCenter = mapRef.current!.getCenter();
+    setMapCenter({ latitude: newCenter.y, longitude: newCenter.x });
+    setIsCurrentButtonActive(false);
   };
 
-  /** 
-   * 현 지도에서 검색 버튼 클릭 함수  
+  /**
+   * 현 지도에서 검색 버튼 클릭 함수
    * @Todo 현 지도에서 검색 버튼 UI 구현 후 연결하기
-  */
+   */
   const getTwoCoordinate = () => {
-    if (newMap) {
-      const bounds = newMap.getBounds();
-      const center = newMap.getCenter();
+    if (mapRef.current) {
+      const bounds = mapRef.current.getBounds();
+      const center = mapRef.current.getCenter();
       /** @Todo 지도에서 장소 조회 API 호출  */
       alert(
-        `현재 좌표: [${center.x}, ${center.y}], 지도 최대 좌표: [${bounds.maxY()}, ${bounds.maxX()}]`,
+        `현재 좌표는 (${center.x}, ${center.y}), \n지도 최대 좌표는 (${bounds.maxY()}, ${bounds.maxX()})입니다. \n해당 좌표를 중심으로 장소를 다시 조회합니다.`,
       );
+      setMapCenter({ latitude: center.x, longitude: center.y });
+      initMarkers();
     }
-  };
-
-  /** 마커 클릭 함수  
-   * 
-  */
-  const handleMarkerClick = (id: string) => {
-    navigate(`/detail/${id}`);
   };
 
   const addMarker = (data: MarkerType) => {
     try {
       let newMarker = new naver.maps.Marker({
         position: new naver.maps.LatLng(data.latitude, data.longitude),
-        map,
+        map: mapRef.current!,
         title: data.name,
         clickable: true,
         icon: {
@@ -116,13 +113,28 @@ function Main() {
         },
       });
       naver.maps.Event.addListener(newMarker, 'click', () =>
-        handleMarkerClick(data.place_id),
+        handleMarkerClick(newMarker),
       );
     } catch (e) {
       console.error('Error creating marker:', e);
     }
   };
 
+  /**
+   * 마커 클릭 함수
+   * @Todo 마커 클릭 시 바텀시트 호출하게 로직 변경
+   */
+  const handleMarkerClick = (marker: naver.maps.Marker) => {
+    alert(`${marker.getTitle()}로 이동합니다.`);
+    const position = marker.getPosition();
+    setMapCenter({ latitude: position.y, longitude: position.x });
+    mapRef.current!.setZoom(30);
+  };
+
+  /**
+   * 마커 초기화 함수
+   * @Todo 마커 mock data를 서버 API로 받아오게 변경
+   */
   const initMarkers = () => {
     markerData.forEach((data) => {
       addMarker(data);
@@ -131,26 +143,49 @@ function Main() {
 
   return (
     <Wrapper>
-      <MapWrapper id="map" ref={mapRef}></MapWrapper>
+      <MapWrapper id="map" ref={mapContainerRef}></MapWrapper>
+      {isCurrentButtonActive && (
+        <SearchCurrentButton onClick={handleSearchCurrentButtonClick}>
+          <Refresh width={12} height={12} />
+          <SearchCurrentButtonText>현 지도에서 검색</SearchCurrentButtonText>
+        </SearchCurrentButton>
+      )}
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
-  margin: 0 auto;
-  background-color: #fff;
-  border: 1px solid rgb(235, 235, 235);
-  overflow: none;
 `;
 
 const MapWrapper = styled.div`
   width: 100%;
   height: calc(100vh - 92px);
+`;
+
+const SearchCurrentButton = styled.button`
+  display: flex;
+  height: 36px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 50px;
+  border: 1px solid #080808;
+  background: rgba(8, 8, 8, 0.65);
+  z-index: 100;
+
+  position: sticky;
+  bottom: calc(12px + 92px);
+  margin: 0 auto;
+`;
+
+const SearchCurrentButtonText = styled.span`
+  line-height: 10px;
+  letter-spacing: -0.12px;
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
 `;
 
 export default Main;
