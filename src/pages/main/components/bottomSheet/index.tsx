@@ -5,7 +5,7 @@ import { S } from '../../styles/BottomSheet.style';
 import Filter from './Filter';
 
 function BottomSheet() {
-  const { sheet, content } = useBottomSheet({
+  const { sheet, content, filter } = useBottomSheet({
     setIsBottomSheetOpen: () => {},
   });
 
@@ -13,7 +13,7 @@ function BottomSheet() {
     <S.Wrapper ref={sheet}>
       <S.BottomSheetBody>
         <BottomSheetHandle />
-        <Filter />
+        <Filter ref={filter} />
         <S.BottomSheetContentWrapper ref={content} refheight={REF_HEIGHT}>
           <S.BottomSheetContentCard />
           <S.BottomSheetContentCard />

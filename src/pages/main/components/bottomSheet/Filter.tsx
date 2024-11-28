@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import S from '../../styles/Filter.style';
 import { FilterState, FilterType, FilterValue } from '../../types/filter';
 import { FILTER_OPTIONS, FILTER_TYPES } from '../../constants/filter';
@@ -29,7 +29,7 @@ function FilterButtonGroup({
   );
 }
 
-function Filter() {
+const Filter = forwardRef<HTMLDivElement, {}>((_, ref) => {
   const [selectedFilter, setSelectedFilter] = useState<FilterState>({
     weight: null,
     rating: null,
@@ -43,7 +43,7 @@ function Filter() {
   };
 
   return (
-    <S.FilterWrapper>
+    <S.FilterWrapper ref={ref}>
       {Object.entries(FILTER_OPTIONS).map(([type, options]) => (
         <S.FilterMenu key={type}>
           <S.FilterText>
@@ -59,6 +59,6 @@ function Filter() {
       ))}
     </S.FilterWrapper>
   );
-}
+});
 
 export default Filter;

@@ -10,10 +10,12 @@ interface BottomSheetMetrics {
   touchStart: {
     sheetY: number;
     touchY: number;
+    touchX: number;
   };
   touchMove: {
     prevTouchY?: number;
-    movingDirection: 'none' | 'down' | 'up';
+    prevTouchX?: number;
+    movingDirection: 'none' | 'down' | 'up' | 'row';
   };
   isContentAreaTouched: boolean;
 }
@@ -29,13 +31,16 @@ export default function useBottomSheet({
 
   const sheet = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
+  const filter = useRef<HTMLDivElement>(null);
   const metrics = useRef<BottomSheetMetrics>({
     touchStart: {
       sheetY: 0,
       touchY: 0,
+      touchX: 0,
     },
     touchMove: {
       prevTouchY: 0,
+      prevTouchX: 0,
       movingDirection: 'none',
     },
     isContentAreaTouched: false,
@@ -74,11 +79,14 @@ export default function useBottomSheet({
       const { touchStart } = metrics.current;
       touchStart.sheetY = sheet.current!.getBoundingClientRect().y;
       touchStart.touchY = e.touches[0].clientY;
+      touchStart.touchX = e.touches[0].clientX;
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       const { touchStart, touchMove } = metrics.current;
       const currentTouch = e.touches[0];
+      const Ydiff = currentTouch.clientY - touchStart.touchY;
+      const Xdiff = currentTouch.clientX - touchStart.touchX;
 
       if (touchMove.prevTouchY === undefined) {
         touchMove.prevTouchY = touchStart.touchY;
@@ -88,12 +96,15 @@ export default function useBottomSheet({
         touchMove.prevTouchY = touchStart.touchY;
       }
 
-      if (touchMove.prevTouchY < currentTouch.clientY) {
+      if (Ydiff > 0 && (Math.abs(Ydiff / Xdiff) > 1 || Xdiff === 0)) {
         touchMove.movingDirection = 'down';
       }
-
-      if (touchMove.prevTouchY > currentTouch.clientY) {
+      if (Ydiff < 0 && (Math.abs(Ydiff / Xdiff) > 1 || Xdiff === 0)) {
         touchMove.movingDirection = 'up';
+      }
+
+      if (Ydiff == 0 || Xdiff / Ydiff > 1) {
+        touchMove.movingDirection = 'row';
       }
 
       // 내부 컨텐츠가 스크롤되지 않도록 기본 동작 차단
@@ -105,6 +116,10 @@ export default function useBottomSheet({
         isScrollingUp
       ) {
         e.preventDefault(); // 내부 컨텐츠 스크롤 방지
+      }
+
+      if (touchMove.movingDirection === 'row') {
+        return;
       }
 
       // 바텀시트 움직임 조건 확인
@@ -156,6 +171,7 @@ export default function useBottomSheet({
         touchStart: {
           sheetY: 0,
           touchY: 0,
+          touchX: 0,
         },
         touchMove: {
           prevTouchY: 0,
@@ -192,6 +208,7 @@ export default function useBottomSheet({
       touchStart: {
         sheetY: 0,
         touchY: 0,
+        touchX: 0,
       },
       touchMove: {
         prevTouchY: 0,
@@ -209,6 +226,7 @@ export default function useBottomSheet({
       touchStart: {
         sheetY: 0,
         touchY: 0,
+        touchX: 0,
       },
       touchMove: {
         prevTouchY: 0,
@@ -231,5 +249,5 @@ export default function useBottomSheet({
     };
   }, []);
 
-  return { sheet, content, handleUp, handleDown };
+  return { sheet, content, filter, handleUp, handleDown };
 }
