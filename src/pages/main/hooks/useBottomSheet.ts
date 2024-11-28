@@ -97,11 +97,8 @@ export default function useBottomSheet({
       }
 
       // 내부 컨텐츠가 스크롤되지 않도록 기본 동작 차단
-      const scrollTop = content.current!.scrollTop;
-
       const sheetTop = sheet.current!.getBoundingClientRect().top;
       const isScrollingUp = touchMove.movingDirection === 'up';
-      console.log(sheetTop);
       if (
         sheetTop < REF_HEIGHT &&
         sheetTop > -BOTTOM_SHEET_HIDE_HEIGHT &&
