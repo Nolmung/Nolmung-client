@@ -5,7 +5,10 @@ export const FILTER_TYPES = {
 
 export const FILTER_OPTIONS = {
   weight: [
-    { value: 'S', label: '10kg 이하' },
+    {
+      value: 'S',
+      label: ' 10kg 이하',
+    },
     { value: 'M', label: '10kg ~ 20kg' },
     { value: 'L', label: '20kg 이상' },
   ],

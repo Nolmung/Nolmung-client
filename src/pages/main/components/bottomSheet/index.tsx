@@ -13,9 +13,7 @@ function BottomSheet() {
     <S.Wrapper ref={sheet}>
       <S.BottomSheetBody>
         <BottomSheetHandle />
-        <div style={{ height: '100px', position: 'sticky' }}>
-          <Filter />
-        </div>
+        <Filter />
         <S.BottomSheetContentWrapper ref={content} refheight={REF_HEIGHT}>
           <S.BottomSheetContentCard />
           <S.BottomSheetContentCard />

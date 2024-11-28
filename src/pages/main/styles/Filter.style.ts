@@ -6,18 +6,20 @@ const S = {
     flex-direction: column;
     gap: 7px;
     width: 100%;
-    height: 100%;
+    overflow-x: auto;
+    height: 100px;
+    position: sticky;
     justify-content: center;
-    padding: 0 22px;
+    padding: 3px 22px;
   `,
   FilterMenu: styled.div`
     display: flex;
+    gap: 10px;
     align-items: center;
-    gap: 13px;
   `,
   ButtonWrapper: styled.div`
     display: flex;
-    gap: 6px;
+    margin-right: 70px;
   `,
   StyledButton: styled.button<{ isActive: boolean }>`
     height: 28px;
@@ -26,7 +28,9 @@ const S = {
     font-weight: 500;
     line-height: normal;
     border-radius: 50px;
+    white-space: nowrap;
     padding: 0 11px;
+    margin-right: 6px;
     color: ${({ isActive }) => (isActive ? '#080808' : '#a7a7a7')};
     border: ${({ isActive }) =>
       isActive ? '1px solid #a7a7a7' : '1px solid #D9D9D9'};
@@ -34,6 +38,7 @@ const S = {
   `,
   FilterText: styled.div`
     width: 70px;
+    flex-shrink: 0;
     color: #5e5e5e;
     font-size: 12px;
     font-style: normal;
