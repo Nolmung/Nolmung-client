@@ -20,9 +20,22 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     background: #E8F8E8;
   }
+
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   button{
     cursor: pointer;
+    border: none;
   }
+
+  button:active{
+    transform: scale(0.97);
+  }
+
   a{
     cursor: pointer;
     text-decoration: none;
