@@ -1,4 +1,9 @@
-import { BOTTOM_SHEET_MIN_Y, BOTTOM_SHEET_MAX_Y } from '@/common/constants/ui';
+import {
+  BOTTOM_SHEET_MIN_Y,
+  BOTTOM_SHEET_MAX_Y,
+  REF_HEIGHT,
+  BOTTOM_SHEET_HIDE_HEIGHT,
+} from '@/common/constants/ui';
 import { useRef, useEffect } from 'react';
 
 interface BottomSheetMetrics {
@@ -40,24 +45,23 @@ export default function useBottomSheet({
     const canUserMoveBottomSheet = () => {
       const { touchMove, isContentAreaTouched } = metrics.current;
       const scrollTop = content.current!.scrollTop;
-
       if (isContentAreaTouched) {
-        if (scrollTop === 0 && touchMove.movingDirection === 'down') {
-          return true;
-        }
-        if (scrollTop === 0 && touchMove.movingDirection === 'up') {
-          return true;
+        if (scrollTop > 0) {
+          return false;
         }
 
-        return false;
+        // 아래로 스크롤 중일 때, scrollTop이 0이어야만 바텀시트 이동 허용
+        if (touchMove.movingDirection === 'down' && scrollTop === 0) {
+          return true;
+        }
       }
 
-      // 바텀시트가 최소 위치보다 위에 있으면 이동 허용
+      // 바텀시트가 최소 위치보다 위에 있을 때는 기본적으로 이동 허용
       if (sheet.current!.getBoundingClientRect().y > MIN_Y) {
         return true;
       }
 
-      // 위로 스크롤 중인 경우
+      // 위로 스크롤 중일 때 컨텐츠가 맨 위에 있어야 바텀시트 이동 허용
       if (touchMove.movingDirection === 'up') {
         return scrollTop <= 0;
       }
@@ -73,10 +77,9 @@ export default function useBottomSheet({
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      e.stopPropagation();
-
       const { touchStart, touchMove } = metrics.current;
       const currentTouch = e.touches[0];
+
       if (touchMove.prevTouchY === undefined) {
         touchMove.prevTouchY = touchStart.touchY;
       }
@@ -93,7 +96,21 @@ export default function useBottomSheet({
         touchMove.movingDirection = 'up';
       }
 
-      // 위로 스크롤 중 컨텐츠 영역이 스크롤 되지 않을 때만 바텀시트가 올라가도록
+      // 내부 컨텐츠가 스크롤되지 않도록 기본 동작 차단
+      const scrollTop = content.current!.scrollTop;
+
+      const sheetTop = sheet.current!.getBoundingClientRect().top;
+      const isScrollingUp = touchMove.movingDirection === 'up';
+      console.log(sheetTop);
+      if (
+        sheetTop < REF_HEIGHT &&
+        sheetTop > -BOTTOM_SHEET_HIDE_HEIGHT &&
+        isScrollingUp
+      ) {
+        e.preventDefault(); // 내부 컨텐츠 스크롤 방지
+      }
+
+      // 바텀시트 움직임 조건 확인
       if (canUserMoveBottomSheet()) {
         const touchOffset = currentTouch.clientY - touchStart.touchY;
         let nextSheetY = touchStart.sheetY + touchOffset;

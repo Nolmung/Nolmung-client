@@ -1,12 +1,12 @@
 import BottomSheet from './components/bottomSheet';
-
+import { S } from './styles/index.style';
 function Main() {
   return (
     <div style={{ height: '100dvh', width: '100%', backgroundColor: 'pink' }}>
       메인
-      <div style={{ position: 'absolute', bottom: '300px', width: '100%' }}>
+      <S.Bottom>
         <BottomSheet />
-      </div>
+      </S.Bottom>
     </div>
   );
 }

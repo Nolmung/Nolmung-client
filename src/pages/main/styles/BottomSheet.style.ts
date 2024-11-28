@@ -42,8 +42,11 @@ export const S = {
   `,
   BottomSheetContentRef: styled.div`
     width: 100%;
-    height: 100%;
+    height: fit-content;
     background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   `,
   OpenButtonText: styled.p`
     padding-top: 3px;
@@ -54,5 +57,12 @@ export const S = {
     background-color: white;
     border-radius: 26px 26px 0 0;
     margin-top: 10px;
+  `,
+  BottomSheetContentCard: styled.div`
+    width: 100%;
+    height: 300px;
+
+    background-color: aqua;
+    border: 1px solid black;
   `,
 };

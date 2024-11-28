@@ -1,5 +1,7 @@
-export const BOTTOM_SHEET_MIN_Y = 300 - 10 - 36 - 40;
-export const BOTTOM_SHEET_MAX_Y = window.innerHeight; // 바텀시트가 최대로 올라갔을 떄의 y 값
 export const WINDOW_HEIGHT = window.innerHeight;
-export const HEADER_HEIGHT = 0;
+export const BOTTOM_HEIGHT = WINDOW_HEIGHT / 2;
+export const BOTTOM_SHEET_HIDE_HEIGHT = 86; // 바텀시트가 올라갔을 때 숨겨져야 할 높이
+export const BOTTOM_SHEET_MIN_Y = BOTTOM_HEIGHT - BOTTOM_SHEET_HIDE_HEIGHT;
+export const BOTTOM_SHEET_MAX_Y = WINDOW_HEIGHT; // 바텀시트가 최대로 올라갔을 떄의 y 값
 export const BOTTOM_NAV_HEIGHT = 90;
+export const REF_HEIGHT = WINDOW_HEIGHT - BOTTOM_NAV_HEIGHT;

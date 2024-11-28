@@ -1,14 +1,14 @@
 import BottomSheetHandle from './Handle';
 import useBottomSheet from '../../hooks/useBottomSheet';
 import { FaList } from 'react-icons/fa';
-import { BOTTOM_NAV_HEIGHT, WINDOW_HEIGHT } from '@/common/constants/ui';
+import { REF_HEIGHT } from '@/common/constants/ui';
 import { S } from '../../styles/BottomSheet.style';
 
 function BottomSheet() {
   const { sheet, handleUp, content } = useBottomSheet({
     setIsBottomSheetOpen: () => {},
   });
-  const refheight = WINDOW_HEIGHT - BOTTOM_NAV_HEIGHT;
+
   return (
     <S.Wrapper ref={sheet}>
       <S.OpenButton onClick={handleUp}>
@@ -17,8 +17,22 @@ function BottomSheet() {
       </S.OpenButton>
       <S.BottomSheetBody>
         <BottomSheetHandle />
-        <S.BottomSheetContentWrapper refheight={refheight}>
-          <S.BottomSheetContentRef ref={content}></S.BottomSheetContentRef>
+        <div style={{ height: '100px', position: 'sticky' }}>메뉴</div>
+        <S.BottomSheetContentWrapper ref={content} refheight={REF_HEIGHT}>
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
+          <S.BottomSheetContentCard />
         </S.BottomSheetContentWrapper>
       </S.BottomSheetBody>
     </S.Wrapper>
