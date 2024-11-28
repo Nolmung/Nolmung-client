@@ -4,8 +4,6 @@ export const S = {
   Wrapper: styled.div`
     width: 100%;
     min-height: calc(100vh - 162px);
-    background-position: center center;
-    background-repeat: no-repeat;
   `,
   ProfileArea: styled.div`
     display: flex;
