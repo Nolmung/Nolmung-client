@@ -4,7 +4,7 @@ export const S = {
   Wrapper: styled.div`
     width: 100%;
     height: 152px;
-    padding: 16px 32px;
+    padding: 16px 16px;
     background-color: #fff;
     border-bottom: 1.5px solid #f0f0f0;
     display: flex;
@@ -45,10 +45,7 @@ export const S = {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    width: 70%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 80%;
   `,
   PlaceStarAvgerage: styled.p`
     color: #080808;
