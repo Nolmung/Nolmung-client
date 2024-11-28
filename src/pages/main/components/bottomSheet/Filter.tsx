@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import { useState, forwardRef } from 'react';
 import S from '../../styles/Filter.style';
 import { FilterState, FilterType, FilterValue } from '../../types/filter';
 import { FILTER_OPTIONS, FILTER_TYPES } from '../../constants/filter';
