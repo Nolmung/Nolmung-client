@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { markerData } from '@/mocks/data/markerData';
 import { Refresh } from '@/assets/images/svgs';
-import S from './styles/index.styles';
+import S from './styles/index.style';
 import { useMapCenter } from './hooks/useMapCenter';
 import { initMarkers } from './utils/markerUtils';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
+// import BottomSheet from './components/bottomSheet';
 
-import BottomSheet from './components/bottomSheet';
-import { S } from './styles/index.style';
 function Main() {
   const { naver } = window;
 
@@ -90,15 +89,12 @@ function Main() {
           </S.SearchCurrentButtonText>
         </S.SearchCurrentButton>
       )}
+      {/* <div style={{ height: '100dvh', width: '100%', backgroundColor: 'pink'}}>
+        <S.Bottom>
+          <BottomSheet />
+        </S.Bottom>
+      </div> */}
     </S.Wrapper>
-  );
-  return (
-    <div style={{ height: '100dvh', width: '100%', backgroundColor: 'pink' }}>
-      메인
-      <S.Bottom>
-        <BottomSheet />
-      </S.Bottom>
-    </div>
   );
 }
 
