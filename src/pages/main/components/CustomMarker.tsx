@@ -32,7 +32,7 @@ function CustomMarker({ placeId, name, category }: CustomMarkerProps) {
     .otherwise(() => DefaultMarker);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper key={placeId}>
       <S.Name>{name}</S.Name>
       <S.IconWrapper>
         <IconComponent width={24} />
