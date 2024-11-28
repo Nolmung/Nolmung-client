@@ -6,6 +6,8 @@ import { useMapCenter } from './hooks/useMapCenter';
 import { initMarkers } from './utils/markerUtils';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
 
+import BottomSheet from './components/bottomSheet';
+import { S } from './styles/index.style';
 function Main() {
   const { naver } = window;
 
@@ -89,6 +91,14 @@ function Main() {
         </S.SearchCurrentButton>
       )}
     </S.Wrapper>
+  );
+  return (
+    <div style={{ height: '100dvh', width: '100%', backgroundColor: 'pink' }}>
+      메인
+      <S.Bottom>
+        <BottomSheet />
+      </S.Bottom>
+    </div>
   );
 }
 
