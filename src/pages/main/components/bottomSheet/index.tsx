@@ -9,7 +9,6 @@ import { useRef } from 'react';
 function BottomSheet() {
   const device = checkUserDevice();
 
-  console.log(device);
   let bottomSheetRef = useRef<HTMLDivElement>(null);
   let contentRef = useRef<HTMLDivElement>(null);
   if (device == 'Mobile') {

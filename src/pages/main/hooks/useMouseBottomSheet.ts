@@ -120,20 +120,9 @@ export default function useMouseBottomSheet({
       // 내부 컨텐츠가 스크롤되지 않도록 기본 동작 차단
       const sheetTop = sheet.current!.getBoundingClientRect().top;
       const isScrollingUp = mouseMove.movingDirection === 'up';
-      console.log(
-        'sheetTop',
-        sheetTop,
-        'ref',
-        REF_HEIGHT,
-        'BOTTOM_SHEET_HIDE_HEIGHT',
-        BOTTOM_SHEET_HIDE_HEIGHT,
-        'isScrollingUp',
-        isScrollingUp,
-      );
+
       if (sheetTop < -BOTTOM_SHEET_HIDE_HEIGHT && isScrollingUp) {
         e.preventDefault(); // 내부 컨텐츠 스크롤 방지
-      } else {
-        console.log('canscroll');
       }
 
       // 바텀시트 움직임 조건 확인
