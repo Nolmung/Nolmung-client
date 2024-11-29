@@ -2,6 +2,9 @@ import BottomSheetHandle from './Handle';
 import useBottomSheet from '../../hooks/useBottomSheet';
 import { REF_HEIGHT } from '@/common/constants/ui';
 import { S } from '../../styles/BottomSheet.style';
+import Content from './Content';
+import { placeMap } from '@/mocks/data/placeMap';
+
 import Filter from './Filter';
 import checkUserDevice from '../../utils/checkUserDevice';
 import useMouseBottomSheet from '../../hooks/useMouseBottomSheet';
@@ -32,20 +35,9 @@ function BottomSheet() {
         <BottomSheetHandle />
         <Filter ref={filterRef} />
         <S.BottomSheetContentWrapper ref={contentRef} refheight={REF_HEIGHT}>
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
-          <S.BottomSheetContentCard />
+          {placeMap.map((place) => (
+            <Content key={place.place_id} place={place} />
+          ))}
         </S.BottomSheetContentWrapper>
       </S.BottomSheetBody>
     </S.Wrapper>

@@ -24,3 +24,15 @@ export interface PlaceDetailResponse {
   labels: ReviewKeyword[]; // 라벨 배열
   diary: Diary[]; // 다이어리 배열
 }
+
+export interface MapPlace {
+  place_id: number;
+  place_name: string;
+  category: string;
+  road_address: string;
+  place_img_url: string;
+  star_rating_avg: string;
+  review_count: number;
+  latitude: string;
+  longitude: string;
+}
