@@ -22,9 +22,9 @@ function Content({ place }: ContentProps) {
     navigate(ROUTE.DETAIL(place.place_id));
   };
   return (
-    <S.Wrapper>
+    <S.Wrapper onClick={naviagteToDetail}>
       <S.PlaceInfoWrapper>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+        <S.InfoTextWrapper>
           <S.PlaceNameCategoryWrapper>
             <S.PlaceName>{place.place_name}</S.PlaceName>
             <S.PlaceCategory>{place.category}</S.PlaceCategory>
@@ -35,8 +35,8 @@ function Content({ place }: ContentProps) {
             {place.star_rating_avg}
             <S.PlaceReviewCount>리뷰 {place.review_count}개</S.PlaceReviewCount>
           </S.PlaceReviewWrapper>
-        </div>
-        <div>
+        </S.InfoTextWrapper>
+        <S.Like>
           {isLiked ? (
             <S.IconWrapper onClick={handleLikeClick}>
               <IoHeartSharp size={24} color="#FF4E3E" />
@@ -46,7 +46,7 @@ function Content({ place }: ContentProps) {
               <IoHeartOutline size={24} color="#FF4E3E" />
             </S.IconWrapper>
           )}
-        </div>
+        </S.Like>
       </S.PlaceInfoWrapper>
       <S.PlaceImage
         src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210721_132%2F1626855796685XVdK4_JPEG%2FW0db6n6s7HHCHrwhXAk9WPua.jpeg.jpg"

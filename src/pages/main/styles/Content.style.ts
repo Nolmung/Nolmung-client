@@ -63,6 +63,12 @@ export const S = {
     line-height: normal;
   `,
   IconWrapper: styled.div``,
+  Like: styled.div``,
+  InfoTextWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  `,
   PlaceImage: styled.img`
     width: 120px;
     height: 120px;
