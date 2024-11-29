@@ -4,15 +4,22 @@ import { IoHeartSharp } from 'react-icons/io5';
 import { IoHeartOutline } from 'react-icons/io5';
 import { useState } from 'react';
 import { MapPlace } from '@/service/apis/place/index.type';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@/common/constants/route';
 
 interface ContentProps {
   place: MapPlace;
 }
 
 function Content({ place }: ContentProps) {
+  const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState<Boolean>(false);
   const handleLikeClick = () => {
     setIsLiked(!isLiked);
+  };
+
+  const naviagteToDetail = () => {
+    navigate(ROUTE.DETAIL(place.place_id));
   };
   return (
     <S.Wrapper>
