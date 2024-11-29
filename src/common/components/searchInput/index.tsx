@@ -25,7 +25,6 @@ function SearchInput({
     if (e.key === 'Enter' && onClick && !e.nativeEvent.isComposing) {
       onClick();
     }
-    console.log('hi');
   };
   return (
     <S.InputWrapper width={width ? width : 100}>
