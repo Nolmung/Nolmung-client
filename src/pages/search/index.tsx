@@ -77,16 +77,14 @@ function Search() {
               <Button
                 fontSize="18px"
                 fontWeight="500"
-                label="아니오"
                 onClick={() => closeModal()}
-              />
+              >아니오</Button>
               <Button
                 fontSize="18px"
                 fontWeight="700"
                 backgroundColor="#D3FBD4"
-                label="예"
                 onClick={handleModalYesButtonClick}
-              />
+              >예</Button>
             </S.ModalButtonWrapper>
           </S.ModalContent>
         </Modal>

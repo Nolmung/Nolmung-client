@@ -28,6 +28,9 @@ const S = {
     bottom: ${BOTTOM_HEIGHT}px;
     left: 50%;
     transform: translateX(-50%);
+    :active {
+    transform: none;
+    }
   `,
 
   SearchCurrentButtonText: styled.span`

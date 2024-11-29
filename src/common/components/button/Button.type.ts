@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface ButtonStyleProps {
   width?: string;
   height?: string;
@@ -9,6 +11,6 @@ export interface ButtonStyleProps {
 }
 
 export interface ButtonProps extends ButtonStyleProps {
-  label: string;
+  children?: ReactNode;
   onClick: () => void;
 }
