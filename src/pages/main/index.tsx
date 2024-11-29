@@ -6,6 +6,7 @@ import { useMapCenter } from './hooks/useMapCenter';
 import { initMarkers } from './utils/markerUtils';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
 import BottomSheet from './components/bottomSheet';
+import { BOTTOM_HEIGHT, DEFAULT_BOTTOM_HEIGHT } from '@/common/constants/ui';
 
 function Main() {
   const { naver } = window;
@@ -78,20 +79,32 @@ function Main() {
     mapRef.current!.setZoom(30);
   };
 
+  const category = new URLSearchParams(window.location.search).get('category');
+  let bottomHeight = DEFAULT_BOTTOM_HEIGHT;
+  let buttonGap = 20;
+  if (category) {
+    bottomHeight = BOTTOM_HEIGHT;
+    buttonGap = 0;
+  }
+
   return (
     <S.Wrapper>
       <S.MapWrapper id="map" ref={mapContainerRef}>
         <S.Wrapper>
           <S.BottomSheetWrapper>
             {isCurrentButtonActive && (
-              <S.SearchCurrentButton onClick={handleSearchCurrentButtonClick}>
+              <S.SearchCurrentButton
+                bottomHeight={bottomHeight}
+                buttonGap={buttonGap}
+                onClick={handleSearchCurrentButtonClick}
+              >
                 <Refresh width={12} height={12} />
                 <S.SearchCurrentButtonText>
                   현 지도에서 검색
                 </S.SearchCurrentButtonText>
               </S.SearchCurrentButton>
             )}
-            <S.Bottom>
+            <S.Bottom buttonGap={buttonGap} bottomHeight={bottomHeight}>
               <BottomSheet />
             </S.Bottom>
           </S.BottomSheetWrapper>

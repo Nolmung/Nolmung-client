@@ -63,7 +63,9 @@ export const S = {
     line-height: normal;
   `,
   IconWrapper: styled.div``,
-  Like: styled.div``,
+  Like: styled.div`
+    width: fit-content;
+  `,
   InfoTextWrapper: styled.div`
     display: flex;
     flex-direction: column;
