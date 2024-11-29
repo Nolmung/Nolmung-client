@@ -1,4 +1,3 @@
-import { BOTTOM_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 
 const S = {
@@ -12,7 +11,10 @@ const S = {
     flex: 1;
   `,
 
-  SearchCurrentButton: styled.div`
+  SearchCurrentButton: styled.div<{
+    bottomHeight: number;
+    buttonGap: number;
+  }>`
     display: flex;
     height: 36px;
     padding: 12px 16px;
@@ -25,7 +27,7 @@ const S = {
     z-index: 1;
     position: absolute;
     // 조건부 스타일링으로 바꾸기
-    bottom: ${BOTTOM_HEIGHT}px;
+    bottom: ${({ bottomHeight, buttonGap }) => bottomHeight + buttonGap}px;
     left: 50%;
     transform: translateX(-50%);
     :active {
@@ -41,9 +43,9 @@ const S = {
     font-weight: 500;
   `,
 
-  Bottom: styled.div`
+  Bottom: styled.div<{ bottomHeight: number; buttonGap: number }>`
     position: absolute;
-    bottom: ${BOTTOM_HEIGHT}px;
+    bottom: ${({ bottomHeight }) => bottomHeight}px;
     background-color: white;
   `,
 
