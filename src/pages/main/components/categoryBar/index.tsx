@@ -3,12 +3,14 @@ import SearchInput from '@/common/components/searchInput';
 import { useState } from 'react';
 import S from '../../styles/CategoryBar.style';
 import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
+import { useNavigate } from 'react-router-dom';
 
 function CategoryBar() {
   const [selectedValue, setSelectedValue] = useState<string>('');
+  const naivgate = useNavigate();
 
   const handleCategoryClick = (value: string) => {
-    setSelectedValue(value);
+    naivgate(`/?category=${value}`);
   };
 
   return (

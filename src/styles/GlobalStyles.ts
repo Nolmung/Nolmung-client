@@ -38,9 +38,9 @@ const GlobalStyle = createGlobalStyle`
     border: none;
   }
 
-  /* button:active{
+  button:active{
     transform: scale(0.97);
-  } */
+  }
 
   a{
     cursor: pointer;
