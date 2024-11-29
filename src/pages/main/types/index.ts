@@ -1,19 +1,19 @@
 import {
-  FoodMarker,
   CafeMarker,
   PlaygroundMarker,
-  AmusementparkMarker,
   HotelMarker,
   TravelMarker,
   MuseumMarker,
   GalleryMarker,
+  FoodMarker,
+  AmusementparkMarker,
 } from '@/assets/images/svgs';
-import { Category, SVGComponent } from '@/common/types';
+import { PlaceCategory, SVGComponent } from '@/common/types';
 
 export interface MarkerType {
   place_id: string;
   name: string;
-  category: Category;
+  category: PlaceCategory;
   road_address: string;
   place_img_url: string;
   star_rating_avg: number;
@@ -22,12 +22,12 @@ export interface MarkerType {
   longitude: number;
 }
 
-export const MarkerIconMapping: Record<Category, SVGComponent> = {
-  FOOD: FoodMarker,
+export const MarkerIconMapping: Record<PlaceCategory, SVGComponent> = {
+  RESTAURANT: FoodMarker,
   CAFE: CafeMarker,
   PLAYGROUND: PlaygroundMarker,
-  AMUSEMENTPARK: AmusementparkMarker,
-  HOTEL: HotelMarker,
+  PARK: AmusementparkMarker,
+  ACCOMMODATION: HotelMarker,
   TRAVEL: TravelMarker,
   MUSEUM: MuseumMarker,
   GALLERY: GalleryMarker,

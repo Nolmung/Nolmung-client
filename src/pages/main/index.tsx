@@ -6,6 +6,7 @@ import { useMapCenter } from './hooks/useMapCenter';
 import { initMarkers } from './utils/markerUtils';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
 import BottomSheet from './components/bottomSheet';
+import CategoryBar from './components/categoryBar';
 
 function Main() {
   const { naver } = window;
@@ -74,13 +75,15 @@ function Main() {
   const handleMarkerClick = (marker: naver.maps.Marker) => {
     alert(`${marker.getTitle()}로 이동합니다.`);
     const position = marker.getPosition();
-    setMapCenter({ latitude: position.y, longitude: position.x });
+    setMapCenter({ latitude: position.y - 0.0005, longitude: position.x });
     mapRef.current!.setZoom(30);
   };
 
   return (
     <S.Wrapper>
+      
       <S.MapWrapper id="map" ref={mapContainerRef}>
+      <CategoryBar />
         <S.Wrapper>
           <S.BottomSheetWrapper>
             {isCurrentButtonActive && (

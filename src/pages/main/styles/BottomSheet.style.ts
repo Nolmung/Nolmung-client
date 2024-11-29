@@ -5,7 +5,7 @@ export const S = {
     display: flex;
     flex-direction: column;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     width: 100%;
     height: 100%;
     transition: transform 400ms ease-out;
