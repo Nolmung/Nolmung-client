@@ -29,7 +29,7 @@ function FilterButtonGroup({
   );
 }
 
-const Filter = forwardRef<HTMLDivElement, {}>((_, ref) => {
+const Filter = forwardRef<HTMLDivElement>(function (_, ref) {
   const [selectedFilter, setSelectedFilter] = useState<FilterState>({
     weight: null,
     rating: null,
