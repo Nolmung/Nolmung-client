@@ -35,7 +35,7 @@ export const S = {
   BottomSheetContentWrapper: styled.div<{ refheight: number }>`
     width: 100%;
     height: ${(props) => props.refheight}px;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: white;
     z-index: 1;
     padding-bottom: 40px;
