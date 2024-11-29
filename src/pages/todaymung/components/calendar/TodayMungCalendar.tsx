@@ -47,14 +47,23 @@ function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
 export default function TodayMungCalendar() {
   return (
     <S.Wrap>
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ko">
-        <StyledDateCalendar
-          slots={{
-            calendarHeader: CustomCalendarHeader,
-            day: CustomPickersDay,
-          }}
-        />
-      </LocalizationProvider>
+      <S.CalendarArea>
+        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ko">
+          <StyledDateCalendar
+            slots={{
+              calendarHeader: CustomCalendarHeader,
+              day: CustomPickersDay,
+            }}
+            sx={{
+              height: '100%',
+              '& .MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition > *':
+                {
+                  position: 'static !important', // absolute 대신 static 설정
+                },
+            }}
+          />
+        </LocalizationProvider>
+      </S.CalendarArea>
       <S.TodaymungInsertButton>
         <PlusIcon /> <S.ButtonText>오늘멍 작성하기</S.ButtonText>
       </S.TodaymungInsertButton>
@@ -68,14 +77,19 @@ const S = {
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    @media (min-height: 800px) {
-      height: 57vh;
-    }
-
+    height: calc(1);
+    gap: 20px;
     box-sizing: border-box;
-    padding: 0px 22px;
+    padding: 0px 30px;
     color: #080808;
   `,
+  CalendarArea: styled.div`
+    height: 100%;
+    height: auto;
+    box-sizing: border-box;
+    margin-top: 10px;
+  `,
+
   TodaymungInsertButton: styled.button`
     display: flex;
     align-items: center;
@@ -83,12 +97,11 @@ const S = {
     width: 100%;
     font-size: 16px;
     @media (min-height: 800px) {
-      margin-top: 20px;
+      font-size: 16px;
     }
     gap: 6px;
-
     font-weight: 500;
-    padding: 15px 0px;
+    padding: 14px 0px;
     border: 1px solid #17aa1a;
     border-radius: 10px;
     background-color: #d3fbd4;

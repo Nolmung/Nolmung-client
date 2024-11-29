@@ -5,7 +5,6 @@ import { TodayMungProfileImage } from '@/assets/images/svgs';
 export const S = {
   Wrap: styled.div`
     width: 100%;
-    justify-content: center;
     padding: 22px;
     border-bottom: 1.5px solid #f0f0f0;
   `,
@@ -35,6 +34,7 @@ export const S = {
     color: #a7a7a7;
   `,
   ContentArea: styled.div`
+    width: 100%;
     display: flex;
     gap: 10px;
   `,

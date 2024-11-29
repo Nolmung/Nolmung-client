@@ -1,9 +1,10 @@
+import { S } from './TodayMungList.style';
 import TodayMungListCard from '../listCard/TodayMungListCard';
 
 interface CardDataType {
   name: string;
   title: string;
-  img: string;
+  img?: string;
   date: string;
   content: string;
 }
@@ -25,15 +26,39 @@ const mockData = [
     content:
       '오늘은 진짜 날씨가 좋았다. 했님이랑 산책 나온김에 동네 탐방을 시작한 하루! 카페 가서 멍푸치노 시켜줬는데 잘 안먹더라.. 나만 아인슈페너 잘 마셨다.',
   },
+  {
+    name: '효링디링',
+    title: '햇살 좋은 날 햇님이랑 여기저기 돌아다닌 하루',
+    img: '/svgs/vite.svg',
+    date: '24.4.27',
+    content:
+      '오늘은 진짜 날씨가 좋았다. 했님이랑 산책 나온김에 동네 탐방을 시작한 하루! 카페 가서 멍푸치노 시켜줬는데 잘 안먹더라.. 나만 아인슈페너 잘 마셨다.',
+  },
+  {
+    name: '효링디링',
+    title: '햇살 좋은 날 햇님이랑 여기저기 돌아다닌 하루',
+    img: '/svgs/vite.svg',
+    date: '24.4.27',
+    content:
+      '오늘은 진짜 날씨가 좋았다. 했님이랑 산책 나온김에 동네 탐방을 시작한 하루! 카페 가서 멍푸치노 시켜줬는데 잘 안먹더라.. 나만 아인슈페너 잘 마셨다.',
+  },
+  {
+    name: '효링디링',
+    title: '햇살 좋은 날 햇님이랑 여기저기 돌아다닌 하루',
+    img: '/svgs/vite.svg',
+    date: '24.4.27',
+    content:
+      '오늘은 진짜 날씨가 좋았다. 했님이랑 산책 나온김에 동네 탐방을 시작한 하루! 카페 가서 멍푸치노 시켜줬는데 잘 안먹더라.. 나만 아인슈페너 잘 마셨다.',
+  },
 ];
 
 const TodayMungList = () => {
   return (
-    <>
+    <S.Wrapper>
       {mockData.map((data: CardDataType, idx: number) => {
         return <TodayMungListCard key={idx} data={data} />;
       })}
-    </>
+    </S.Wrapper>
   );
 };
 

@@ -1,4 +1,5 @@
 import { S } from './UserInfo.style';
+
 import { TodayMungProfileImage } from '@/assets/images/svgs';
 
 const UserInfo = () => {

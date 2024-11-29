@@ -5,7 +5,8 @@ export const S = {
   ConvertArea: styled.div`
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 100% auto;
+
     text-align: center;
   `,
   ViewModeArea: styled.div`
@@ -15,7 +16,10 @@ export const S = {
     align-items: center;
     width: 100%;
     height: 100%;
-    margin-top: 20px;
+    margin-top: 5px;
+    @media (min-height: 800px) {
+      margin-top: 10px;
+    }
   `,
 
   CalendarMode: styled.div<{ mode: string }>`

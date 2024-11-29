@@ -43,11 +43,9 @@ function Layout({ children }: LayoutProps) {
   return (
     <S.Wrapper>
       {!hideHeader && <Header {...HeaderTitle} />}
-      {/* <S.Container> */}
       <MainLayout $direction="column" $justify="flex-start" $align="flex-start">
         {children}
       </MainLayout>
-      {/* </S.Container> */}
       <TabBar />
     </S.Wrapper>
   );

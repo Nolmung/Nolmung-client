@@ -1,7 +1,7 @@
-import { match } from 'ts-pattern';
-import { S } from '@common/components/header/index.styles';
 import { GoBackIcon } from '@assets/images/svgs';
+import { S } from '@common/components/header/index.styles';
 import { HeaderType } from '@common/components/header/index.type';
+import { match } from 'ts-pattern';
 
 function Header({ title, showIcon, type }: HeaderType) {
   return (

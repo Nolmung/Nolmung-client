@@ -4,7 +4,7 @@ interface CardDataType {
   data: {
     name: string;
     title: string;
-    img: string;
+    img?: string;
     date: string;
     content: string;
   };
@@ -25,9 +25,11 @@ const TodayMungListCard = ({ data }: CardDataType) => {
           <S.ContentTitle>{data.title}</S.ContentTitle>
           <S.ContentDescription>{data.content}</S.ContentDescription>
         </S.ContentTextArea>
-        <S.ContentImgArea>
-          <S.ContentImg src={data.img}></S.ContentImg>
-        </S.ContentImgArea>
+        {data.img && (
+          <S.ContentImgArea>
+            <S.ContentImg src={data.img} />
+          </S.ContentImgArea>
+        )}
       </S.ContentArea>
     </S.Wrap>
   );
