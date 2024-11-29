@@ -1,4 +1,4 @@
-import * as S from '../styles/login.styles';
+import { S } from '../styles/login.styles';
 
 function KakaoLoginButton() {
   const handleKakaoLogin = () => {

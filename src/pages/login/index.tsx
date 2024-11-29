@@ -1,8 +1,14 @@
-// import React, { useState } from 'react';
-import * as S from './styles/login.styles';
+import { S } from './styles/login.styles';
+import { useNavigate } from 'react-router-dom';
 import KakaoLoginButton from './components/KakaoLoginButton';
 
 function Login() {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1); // 이전 페이지로 이동
+  };
+
   return (
     <>
       <S.BackgroundImg>
@@ -14,7 +20,7 @@ function Login() {
           </S.NolmungText>
           <S.StyledLogo />
           <KakaoLoginButton />
-          <S.LoginText>나중에 가입할래요</S.LoginText>
+          <S.LoginText onClick={handleBack}>나중에 가입할래요</S.LoginText>
         </S.ObjectContainer>
       </S.BackgroundImg>
     </>
