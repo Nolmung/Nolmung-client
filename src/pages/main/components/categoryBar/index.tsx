@@ -1,15 +1,19 @@
 import Button from '@/common/components/button/Button';
 import SearchInput from '@/common/components/searchInput';
-import { useState } from 'react';
 import S from '../../styles/CategoryBar.style';
 import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 import { useNavigate } from 'react-router-dom';
 
-function CategoryBar() {
-  const [selectedValue, setSelectedValue] = useState<string>('');
+interface CategoryBarProps {
+  category: string | null;
+  setCategory: (value: string) => void;
+}
+
+function CategoryBar({ category, setCategory }: CategoryBarProps) {
   const naivgate = useNavigate();
 
   const handleCategoryClick = (value: string) => {
+    setCategory(value);
     naivgate(`/?category=${value}`);
   };
 
@@ -18,7 +22,7 @@ function CategoryBar() {
       <SearchInput width={90} />
       <S.CategoryWrapper>
         {CATEGORY_OPTIONS.map(({ value, label, icon: Icon }) => (
-          <S.StyledButtonWrapper key={value} isActive={selectedValue === value}>
+          <S.StyledButtonWrapper key={value} isActive={category === value}>
             <Button
               onClick={() => handleCategoryClick(value)}
               width="fit-content"

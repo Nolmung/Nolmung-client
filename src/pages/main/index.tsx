@@ -80,19 +80,23 @@ function Main() {
     mapRef.current!.setZoom(30);
   };
 
-  const category = new URLSearchParams(window.location.search).get('category');
-  let bottomHeight = DEFAULT_BOTTOM_HEIGHT;
-  let buttonGap = 20;
-  if (category) {
-    bottomHeight = BOTTOM_HEIGHT;
-    buttonGap = 0;
-  }
-
+  const [bottomHeight, setBottomHeight] = useState<number>(
+    DEFAULT_BOTTOM_HEIGHT,
+  );
+  const [buttonGap, setButtonGap] = useState<number>(20);
+  const [category, setCategory] = useState<string | null>(null);
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    if (category || query.get('category')) {
+      console.log('category', category);
+      setBottomHeight(BOTTOM_HEIGHT);
+      setButtonGap(0);
+    }
+  }, [category]);
   return (
     <S.Wrapper>
-      
       <S.MapWrapper id="map" ref={mapContainerRef}>
-      <CategoryBar />
+        <CategoryBar category={category} setCategory={setCategory} />
         <S.Wrapper>
           <S.BottomSheetWrapper>
             {isCurrentButtonActive && (
