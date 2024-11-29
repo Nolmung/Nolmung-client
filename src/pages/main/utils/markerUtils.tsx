@@ -1,4 +1,4 @@
-import { MarkerType } from '../index.type';
+import { MarkerType } from '../types';
 import CustomMarker from '../components/CustomMarker';
 import ReactDOMServer from 'react-dom/server';
 

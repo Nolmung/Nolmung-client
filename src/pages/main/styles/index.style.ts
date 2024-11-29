@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { BOTTOM_HEIGHT } from '@/common/constants/ui';
+import styled from 'styled-components';
 
 const S = {
   Wrapper: styled.div`
@@ -22,11 +22,12 @@ const S = {
     border-radius: 50px;
     border: 1px solid #080808;
     background: rgba(8, 8, 8, 0.65);
-    z-index: 100;
-
-    position: sticky;
-    bottom: calc(12px + 92px);
-    margin: 0 auto;
+    z-index: 1;
+    position: absolute;
+    // 조건부 스타일링으로 바꾸기
+    bottom: ${BOTTOM_HEIGHT}px;
+    left: 50%;
+    transform: translateX(-50%);
   `,
 
   SearchCurrentButtonText: styled.span`
@@ -41,6 +42,12 @@ const S = {
     position: absolute;
     bottom: ${BOTTOM_HEIGHT}px;
     background-color: white;
+  `,
+
+  BottomSheetWrapper: styled.div`
+    height: 100dvh;
+    width: 100%;
+    position: relative;
   `,
 };
 

@@ -1,3 +1,4 @@
+import Categories from '../constants/categories';
 /** Label 타입 정의 */
 export interface ReviewKeyword {
   label_id: number; // 라벨 ID
@@ -21,3 +22,7 @@ export interface LatLng {
   latitude: number;
   longitude: number;
 }
+
+export type Category = typeof Categories[number];
+
+export type SVGComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;

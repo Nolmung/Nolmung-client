@@ -1,34 +1,19 @@
-// import { CafeMarker } from '@/assets/images/svgs';
 import S from '@/pages/main/styles/CustomMarker.styles';
 import { match } from 'ts-pattern';
-import {
-  FoodMarker,
-  CafeMarker,
-  PlaygroundMarker,
-  AmusementparkMarker,
-  HotelMarker,
-  TravelMarker,
-  MuseumMarker,
-  GalleryMarker,
-  DefaultMarker,
-} from '@/assets/images/svgs';
+import { Category } from '@/common/types';
+import Categories from '@/common/constants/categories';
+import { MarkerIconMapping } from '../types';
+import { DefaultMarker } from '@/assets/images/svgs';
 
 interface CustomMarkerProps {
   placeId: string;
   name: string;
-  category: string;
+  category: Category;
 }
 
 function CustomMarker({ placeId, name, category }: CustomMarkerProps) {
   const IconComponent = match(category)
-    .with('food', () => FoodMarker)
-    .with('cafe', () => CafeMarker)
-    .with('playground', () => PlaygroundMarker)
-    .with('amusementpark', () => AmusementparkMarker)
-    .with('hotel', () => HotelMarker)
-    .with('travel', () => TravelMarker)
-    .with('museum', () => MuseumMarker)
-    .with('gallery', () => GalleryMarker)
+    .with(...Categories, (category) => MarkerIconMapping[category])
     .otherwise(() => DefaultMarker);
 
   return (

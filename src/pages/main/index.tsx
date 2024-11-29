@@ -5,7 +5,7 @@ import S from './styles/index.style';
 import { useMapCenter } from './hooks/useMapCenter';
 import { initMarkers } from './utils/markerUtils';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
-// import BottomSheet from './components/bottomSheet';
+import BottomSheet from './components/bottomSheet';
 
 function Main() {
   const { naver } = window;
@@ -80,20 +80,23 @@ function Main() {
 
   return (
     <S.Wrapper>
-      <S.MapWrapper id="map" ref={mapContainerRef}></S.MapWrapper>
-      {isCurrentButtonActive && (
-        <S.SearchCurrentButton onClick={handleSearchCurrentButtonClick}>
-          <Refresh width={12} height={12} />
-          <S.SearchCurrentButtonText>
-            현 지도에서 검색
-          </S.SearchCurrentButtonText>
-        </S.SearchCurrentButton>
-      )}
-      {/* <div style={{ height: '100dvh', width: '100%', backgroundColor: 'pink'}}>
-        <S.Bottom>
-          <BottomSheet />
-        </S.Bottom>
-      </div> */}
+      <S.MapWrapper id="map" ref={mapContainerRef}>
+        <S.Wrapper>
+          <S.BottomSheetWrapper>
+            {isCurrentButtonActive && (
+              <S.SearchCurrentButton onClick={handleSearchCurrentButtonClick}>
+                <Refresh width={12} height={12} />
+                <S.SearchCurrentButtonText>
+                  현 지도에서 검색
+                </S.SearchCurrentButtonText>
+              </S.SearchCurrentButton>
+            )}
+            <S.Bottom>
+              <BottomSheet />
+            </S.Bottom>
+          </S.BottomSheetWrapper>
+        </S.Wrapper>
+      </S.MapWrapper>
     </S.Wrapper>
   );
 }
