@@ -1,9 +1,4 @@
-import {
-  BOTTOM_SHEET_MIN_Y,
-  BOTTOM_SHEET_MAX_Y,
-  REF_HEIGHT,
-  BOTTOM_SHEET_HIDE_HEIGHT,
-} from '@/common/constants/ui';
+import { BOTTOM_SHEET_MIN_Y, BOTTOM_SHEET_MAX_Y } from '@/common/constants/ui';
 import { useRef, useEffect } from 'react';
 
 interface BottomSheetMetrics {

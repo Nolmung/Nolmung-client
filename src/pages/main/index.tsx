@@ -7,7 +7,6 @@ import { initMarkers } from './utils/markerUtils';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
 import BottomSheet from './components/bottomSheet';
 import { BOTTOM_HEIGHT, DEFAULT_BOTTOM_HEIGHT } from '@/common/constants/ui';
-import { useNavigate } from 'react-router-dom';
 
 function Main() {
   const { naver } = window;
@@ -87,8 +86,6 @@ function Main() {
     bottomHeight = BOTTOM_HEIGHT;
     buttonGap = 0;
   }
-
-  const navigate = useNavigate();
 
   return (
     <S.Wrapper>
