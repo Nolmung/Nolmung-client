@@ -1,3 +1,3 @@
-const Categories = ['FOOD', 'CAFE', 'PLAYGROUND', 'AMUSEMENTPARK', 'HOTEL', 'TRAVEL', 'MUSEUM', 'GALLERY'] as const;
+const Categories = ['RESTAURANT', 'CAFE', 'PLAYGROUND', 'PARK', 'TRAVEL', 'ACCOMMODATION', 'MUSEUM', 'GALLERY'] as const;
 
 export default Categories;

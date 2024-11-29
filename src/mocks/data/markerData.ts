@@ -1,4 +1,4 @@
-import { MarkerType } from "@/pages/main/types";
+import { MarkerType } from '@/pages/main/types';
 
 export const markerData: MarkerType[] = [
   {
@@ -16,7 +16,7 @@ export const markerData: MarkerType[] = [
   {
     place_id: '2',
     name: '강남 푸드 코트',
-    category: 'FOOD',
+    category: 'RESTAURANT',
     road_address: '서울특별시 강남구 테헤란로 120',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240201_247%2F1709283092996Yjmow_JPEG%2FIMG_1234.jpeg',
@@ -40,7 +40,7 @@ export const markerData: MarkerType[] = [
   {
     place_id: '4',
     name: '롯데월드 어드벤처',
-    category: 'AMUSEMENTPARK',
+    category: 'PARK',
     road_address: '서울특별시 송파구 올림픽로 240',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_247%2F1709283092996Yjmow_JPEG%2FIMG_4567.jpeg',
@@ -52,7 +52,7 @@ export const markerData: MarkerType[] = [
   {
     place_id: '5',
     name: '서울 호텔',
-    category: 'HOTEL',
+    category: 'CAFE',
     road_address: '서울특별시 중구 명동길 15',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_247%2F1709283092996Yjmow_JPEG%2FIMG_6789.jpeg',
@@ -113,7 +113,7 @@ export const markerData: MarkerType[] = [
   {
     place_id: '10',
     name: '강남 애슐리',
-    category: 'FOOD',
+    category: 'RESTAURANT',
     road_address: '서울특별시 강남구 강남대로 310',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_1%2Fsample10.jpeg',
@@ -137,7 +137,7 @@ export const markerData: MarkerType[] = [
   {
     place_id: '12',
     name: '강남 한식당',
-    category: 'FOOD',
+    category: 'RESTAURANT',
     road_address: '서울특별시 강남구 역삼로 123',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_1%2Fsample12.jpeg',
@@ -149,7 +149,7 @@ export const markerData: MarkerType[] = [
   {
     place_id: '13',
     name: '강남 명동칼국수',
-    category: 'FOOD',
+    category: 'RESTAURANT',
     road_address: '서울특별시 강남구 강남대로 390',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_1%2Fsample13.jpeg',

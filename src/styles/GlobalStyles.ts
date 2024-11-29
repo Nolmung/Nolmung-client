@@ -5,6 +5,12 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
   *{
     box-sizing: border-box;
+    scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
+    -ms-overflow-style: none; /* Internet Explorer에서 스크롤바 숨기기 */
+
+    ::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Edge에서 스크롤바 숨기기 */
+    }
   }
   
   @font-face {

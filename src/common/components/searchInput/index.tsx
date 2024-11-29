@@ -3,7 +3,7 @@ import React, { ChangeEvent } from 'react';
 
 import { S } from './index.style';
 
-import { SearchIcon } from '@/assets/images/svgs';
+import { Search } from '@/assets/images/svgs';
 
 interface SearchInputProps {
   value?: string;
@@ -35,7 +35,7 @@ function SearchInput({
         onKeyDown={handleEnterKeyOn}
         onChange={onChange}
       />
-      <SearchIcon onClick={onClick} width={22} height={22} />
+      <Search onClick={onClick} width={22} height={22} />
     </S.InputWrapper>
   );
 }
