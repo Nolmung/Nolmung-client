@@ -1,6 +1,6 @@
 import S from '@/pages/main/styles/CustomMarker.styles';
 import { match } from 'ts-pattern';
-import { Category } from '@/common/types';
+import { PlaceCategory } from '@/common/types';
 import Categories from '@/common/constants/categories';
 import { MarkerIconMapping } from '../types';
 import { DefaultMarker } from '@/assets/images/svgs';
@@ -8,7 +8,7 @@ import { DefaultMarker } from '@/assets/images/svgs';
 interface CustomMarkerProps {
   placeId: string;
   name: string;
-  category: Category;
+  category: PlaceCategory;
 }
 
 function CustomMarker({ placeId, name, category }: CustomMarkerProps) {

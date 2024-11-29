@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export interface ButtonStyleProps {
+  label?: string;
   width?: string;
   height?: string;
   backgroundColor?: string;

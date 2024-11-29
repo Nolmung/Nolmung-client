@@ -1,4 +1,4 @@
-import { MarkerType } from "@/pages/main/types";
+import { MarkerType } from '@/pages/main/types';
 
 export const markerData: MarkerType[] = [
   {
@@ -52,7 +52,7 @@ export const markerData: MarkerType[] = [
   {
     place_id: '5',
     name: '서울 호텔',
-    category: 'HOTEL',
+    category: 'CAFE',
     road_address: '서울특별시 중구 명동길 15',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_247%2F1709283092996Yjmow_JPEG%2FIMG_6789.jpeg',
