@@ -1,9 +1,4 @@
-import {
-  BOTTOM_SHEET_MIN_Y,
-  BOTTOM_SHEET_MAX_Y,
-  REF_HEIGHT,
-  BOTTOM_SHEET_HIDE_HEIGHT,
-} from '@/common/constants/ui';
+import { BOTTOM_SHEET_MIN_Y, BOTTOM_SHEET_MAX_Y } from '@/common/constants/ui';
 import { useRef, useEffect } from 'react';
 
 interface BottomSheetMetrics {
@@ -51,6 +46,7 @@ export default function useBottomSheet({
       const { touchMove, isContentAreaTouched } = metrics.current;
       const scrollTop = content.current!.scrollTop;
       if (isContentAreaTouched) {
+        console.log(sheet.current!.getBoundingClientRect().y);
         if (scrollTop > 0) {
           return false;
         }
@@ -62,7 +58,10 @@ export default function useBottomSheet({
       }
 
       // 바텀시트가 최소 위치보다 위에 있을 때는 기본적으로 이동 허용
-      if (sheet.current!.getBoundingClientRect().y > MIN_Y) {
+      if (
+        sheet.current!.getBoundingClientRect().y > MIN_Y ||
+        sheet.current!.getBoundingClientRect().y === -39
+      ) {
         return true;
       }
 
@@ -110,11 +109,8 @@ export default function useBottomSheet({
       // 내부 컨텐츠가 스크롤되지 않도록 기본 동작 차단
       const sheetTop = sheet.current!.getBoundingClientRect().top;
       const isScrollingUp = touchMove.movingDirection === 'up';
-      if (
-        sheetTop < REF_HEIGHT &&
-        sheetTop > -BOTTOM_SHEET_HIDE_HEIGHT &&
-        isScrollingUp
-      ) {
+
+      if (sheetTop > 0 && isScrollingUp) {
         e.preventDefault(); // 내부 컨텐츠 스크롤 방지
       }
 

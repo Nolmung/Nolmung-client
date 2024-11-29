@@ -1,3 +1,4 @@
+import { BOTTOM_NAV_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 
 export const S = {
@@ -38,7 +39,7 @@ export const S = {
     overflow-y: auto;
     background-color: white;
     z-index: 1;
-    padding-bottom: 40px;
+    padding-bottom: calc(${BOTTOM_NAV_HEIGHT}px + 30px);
   `,
   BottomSheetContentRef: styled.div`
     width: 100%;

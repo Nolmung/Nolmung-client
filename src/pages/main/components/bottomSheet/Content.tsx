@@ -14,15 +14,19 @@ interface ContentProps {
 function Content({ place }: ContentProps) {
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState<Boolean>(false);
-  const handleLikeClick = () => {
+
+  const handleLikeClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.stopPropagation();
     setIsLiked(!isLiked);
   };
 
-  const naviagteToDetail = () => {
+  const navigateToDetail = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.stopPropagation();
     navigate(ROUTE.DETAIL(place.place_id));
   };
+
   return (
-    <S.Wrapper onClick={naviagteToDetail}>
+    <S.Wrapper onClick={navigateToDetail}>
       <S.PlaceInfoWrapper>
         <S.InfoTextWrapper>
           <S.PlaceNameCategoryWrapper>
