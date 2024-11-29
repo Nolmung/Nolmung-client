@@ -16,7 +16,7 @@ type PathRules = {
 
 /**  Header 혹은 tabBar가 필요 없는 페이지의 경우 path 추가하기 */
 const pathRules: PathRules = {
-  hideHeader: ['/', /^\/detail\/\d+$/, '/search','/login'], // Header를 숨길 경로들
+  hideHeader: ['/', /^\/detail\/\d+$/, '/search', '/login'], // Header를 숨길 경로들
   hideTabBar: [/^\/detail\/\d+$/, '/login'], // TabBar를 숨길 경로들
 };
 
@@ -39,16 +39,34 @@ function Layout({ children }: LayoutProps) {
     showIcon: false,
     type: 'TitleLeft',
   });
-
   useEffect(() => {
     switch (location.pathname) {
       case '/':
         setHeaderTitle({ title: '메인', showIcon: true, type: 'TitleCenter' });
         break;
+
       case '/todayMung':
+        {
+          setHeaderTitle({
+            title: '오늘멍 모아보기',
+            showIcon: false,
+            type: 'TitleCenter',
+          });
+        }
+        break;
+
+      case '/todaymung/write':
         setHeaderTitle({
-          title: '오늘멍 모아보기',
+          title: '오늘멍 작성하기',
           showIcon: false,
+          type: 'TitleCenter',
+        });
+        break;
+
+      case '/todaymung/placeRegister':
+        setHeaderTitle({
+          title: '오늘멍 장소 등록',
+          showIcon: true,
           type: 'TitleCenter',
         });
         break;
