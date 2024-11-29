@@ -12,7 +12,7 @@ const S = {
     flex: 1;
   `,
 
-  SearchCurrentButton: styled.button`
+  SearchCurrentButton: styled.div`
     display: flex;
     height: 36px;
     padding: 12px 16px;
@@ -28,6 +28,9 @@ const S = {
     bottom: ${BOTTOM_HEIGHT}px;
     left: 50%;
     transform: translateX(-50%);
+    :active {
+      transform: none;
+    }
   `,
 
   SearchCurrentButtonText: styled.span`
