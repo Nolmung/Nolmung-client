@@ -18,10 +18,12 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       import: eslintPluginImport,
+      '@tanstack/query': tanstackQuery,
     },
     rules: {
       'no-unused-vars': 'warn',
       ...reactHooks.configs.recommended.rules,
+      ...tanstackQuery.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },

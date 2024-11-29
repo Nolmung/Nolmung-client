@@ -16,7 +16,7 @@ type PathRules = {
 
 /**  Header 혹은 tabBar가 필요 없는 페이지의 경우 path 추가하기 */
 const pathRules: PathRules = {
-  hideHeader: ['/', /^\/detail\/\d+$/, '/login'], // Header를 숨길 경로들
+  hideHeader: ['/', /^\/detail\/\d+$/, '/search','/login'], // Header를 숨길 경로들
   hideTabBar: [/^\/detail\/\d+$/, '/login'], // TabBar를 숨길 경로들
 };
 
