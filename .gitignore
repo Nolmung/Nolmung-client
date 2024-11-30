@@ -25,8 +25,4 @@ dist-ssr
 
 #env
 env
-.env
 *storybook.log
-
-#env 추가
-.env
