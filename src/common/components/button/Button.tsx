@@ -1,12 +1,32 @@
 import React from 'react';
+import { S } from './Button.style';
+import { ButtonProps } from './Button.type';
 
-type ButtonProps = {
-  label: string;
-  onClick: () => void;
-};
-
-const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
-  return <button onClick={onClick}>{label}</button>;
+const Button: React.FC<ButtonProps> = ({
+  onClick,
+  width,
+  height,
+  backgroundColor,
+  color,
+  fontSize,
+  fontWeight,
+  borderRadius,
+  children,
+}) => {
+  return (
+    <S.Wrapper
+      onClick={onClick}
+      width={width}
+      height={height}
+      backgroundColor={backgroundColor}
+      color={color}
+      fontWeight={fontWeight}
+      fontSize={fontSize}
+      borderRadius={borderRadius}
+    >
+      {children}
+    </S.Wrapper>
+  );
 };
 
 export default Button;

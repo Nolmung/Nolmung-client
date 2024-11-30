@@ -2,4 +2,8 @@
 export const ROUTE = {
   MAIN: () => '/',
   TODAYMUNG: () => '/todaymung',
+  DETAIL: (placeId: string | number) => `/detail/${placeId}`,
+  LOGIN: () => '/login',
+  SIGNUP: () => `/signUp`,
+  SEARCH: () => '/search',
 } as const;

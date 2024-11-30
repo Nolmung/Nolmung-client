@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const S = {
   Wrapper: styled.div`
@@ -10,7 +10,7 @@ export const S = {
     bottom: 0;
     left: 0;
     background-color: #fff;
-    z-index: 1000;
+    z-index: 1004;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -20,10 +20,10 @@ export const S = {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 5px;
     text-align: center;
     color: #5e5e5e;
+    margin-bottom: 20px;
   `,
   IconDescription: styled.div`
     font-size: 12px;
