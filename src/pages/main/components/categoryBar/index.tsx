@@ -17,9 +17,13 @@ function CategoryBar({ category, setCategory }: CategoryBarProps) {
     naivgate(`/?category=${value}`);
   };
 
+  const navigateToSearchPage = () => {
+    naivgate('/search');
+  };
+
   return (
     <S.Wrapper>
-      <SearchInput width={90} />
+      <SearchInput onClick={navigateToSearchPage} width={90} />
       <S.CategoryWrapper>
         {CATEGORY_OPTIONS.map(({ value, label, icon: Icon }) => (
           <S.StyledButtonWrapper key={value} isActive={category === value}>
