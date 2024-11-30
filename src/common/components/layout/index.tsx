@@ -16,8 +16,8 @@ type PathRules = {
 
 /**  Header 혹은 tabBar가 필요 없는 페이지의 경우 path 추가하기 */
 const pathRules: PathRules = {
-  hideHeader: ['/', /^\/detail\/\d+$/, '/search','/login'], // Header를 숨길 경로들
-  hideTabBar: [/^\/detail\/\d+$/, '/login'], // TabBar를 숨길 경로들
+  hideHeader: ['/', /^\/detail\/\d+$/, '/search', '/login', /\?category(=|$)/], // Header를 숨길 경로들
+  hideTabBar: [/^\/detail\/\d+$/, '/login', /\?category(=|$)/], // TabBar를 숨길 경로들
 };
 
 /** 헤더, 텝바를 보여줄 지 정규식 검사하는 함수  */
@@ -30,10 +30,15 @@ const shouldHide = (key: keyof PathRules, pathname: string): boolean => {
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
-
-  const hideHeader = shouldHide('hideHeader', location.pathname);
-  const hideTabBar = shouldHide('hideTabBar', location.pathname);
-
+  const hideHeader = shouldHide(
+    'hideHeader',
+    location.pathname + location.search,
+  );
+  const hideTabBar = shouldHide(
+    'hideTabBar',
+    location.pathname + location.search,
+  );
+  console.log('hideTabBar', hideTabBar);
   const [HeaderTitle, setHeaderTitle] = useState<HeaderTitleType>({
     title: '',
     showIcon: false,
