@@ -2,6 +2,7 @@ import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import ChevronRight from '@mui/icons-material/ChevronRight';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { PickersDayProps } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { PickersCalendarHeaderProps } from '@mui/x-date-pickers/PickersCalendarHeader';
@@ -19,6 +20,55 @@ import 'dayjs/locale/ko';
 
 dayjs.locale('ko');
 
+const markedDates: Record<string, string> = {
+  '2024-11-29': '/svgs/todayMungProfileImage.svg', // 예시 날짜와 이미지 URL
+  '2024-11-24': '/svgs/vite.svg',
+};
+
+function renderDayWithMarker(props: PickersDayProps<Dayjs>) {
+  const { day, selected } = props; // 필요한 값 가져오기
+  const dateKey = day.format('YYYY-MM-DD');
+  const markerUrl = markedDates[dateKey];
+
+  return (
+    <CustomPickersDay
+      {...props}
+      style={{
+        position: 'relative', // 날짜와 마커 위치 조정을 위한 상대 위치
+      }}
+    >
+      {/* 날짜 텍스트 표시 */}
+      <span
+        style={{
+          fontFamily: 'Pretendard',
+          position: 'relative', // 텍스트가 이미지 위에 표시
+          zIndex: 1,
+          fontSize: '16px',
+          color: markerUrl ? '#ffffff' : selected ? '#ffffff' : '#0f0e0e',
+        }}
+      >
+        {day.date()}
+      </span>
+
+      {markerUrl && (
+        <img
+          src={markerUrl}
+          alt="Marker"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)', // 중앙 정렬
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+          }}
+        />
+      )}
+    </CustomPickersDay>
+  );
+}
+
 function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
   const { currentMonth, onMonthChange } = props;
 
@@ -33,7 +83,10 @@ function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
       <IconButton onClick={selectPreviousMonth} title="Previous month">
         <ChevronLeft />
       </IconButton>
-      <Typography variant="body1" sx={{ fontSize: '18px', fontWeight: '600' }}>
+      <Typography
+        variant="body1"
+        sx={{ fontSize: '18px', fontWeight: '600', fontFamily: 'Pretendard' }}
+      >
         {currentMonth.format('YYYY. MMMM')}
       </Typography>
       <IconButton onClick={selectNextMonth} title="Next month">
@@ -52,7 +105,8 @@ export default function TodayMungCalendar() {
           <StyledDateCalendar
             slots={{
               calendarHeader: CustomCalendarHeader,
-              day: CustomPickersDay,
+              day: renderDayWithMarker,
+              // day: CustomPickersDay,
             }}
             sx={{
               height: '100%',
@@ -77,8 +131,8 @@ const S = {
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    height: calc(1);
     gap: 20px;
+    height: fit-content;
     box-sizing: border-box;
     padding: 0px 30px;
     color: #080808;

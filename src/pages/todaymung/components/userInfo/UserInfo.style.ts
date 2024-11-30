@@ -7,7 +7,10 @@ export const S = {
   `,
   ProfileArea: styled.div`
     display: flex;
-    padding: 35px 22px;
+    @media (min-height: 800px) {
+      padding: 35px 22px;
+    }
+    padding: 30px 22px;
     width: 100%;
     gap: 22px;
     @media (min-height: 800px) {
