@@ -1,5 +1,5 @@
 import { PlusIcon } from '@/assets/images/svgs';
-import VisitedPlaceCard from './components/visitedPlaceCard';
+import VisitedPlaceCard from './components/VisitedPlaceCard';
 import S from './styles/index.style';
 import DogCard from './components/DogCard';
 
@@ -91,6 +91,7 @@ function TodayMungWrite() {
           </S.PlaceCardWrapper>
         </S.PlaceWrapper>
       </div>
+      <div></div>
     </S.Wrapper>
   );
 }
