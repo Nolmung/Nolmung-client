@@ -2,6 +2,20 @@ import { BOTTOM_NAV_HEIGHT, HEADER_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 
 const S = {
+  BannerWrapper: styled.div`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 72px;
+    background-color: #9ef99f;
+  `,
+  BannerImage: styled.img`
+    width: 85%;
+    object-fit: cover;
+    position: absolute;
+    top: 12px;
+  `,
   Wrapper: styled.div`
     width: 100%;
     padding: 0 22px;
