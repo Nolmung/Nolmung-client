@@ -6,7 +6,7 @@ import { MarkerIconMapping } from '../types';
 import { DefaultMarker } from '@/assets/images/svgs';
 
 interface CustomMarkerProps {
-  placeId: string;
+  placeId: number;
   name: string;
   category: PlaceCategory;
 }

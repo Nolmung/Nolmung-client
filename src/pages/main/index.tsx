@@ -3,11 +3,18 @@ import { markerData } from '@/mocks/data/markerData';
 import { Refresh } from '@/assets/images/svgs';
 import S from './styles/index.style';
 import { useMapCenter } from './hooks/useMapCenter';
-import { initMarkers } from './utils/markerUtils';
+import { CustomMarker, initMarkers } from './utils/markerUtils';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
 import BottomSheet from './components/bottomSheet';
 import CategoryBar from './components/categoryBar';
 import { BOTTOM_HEIGHT, DEFAULT_BOTTOM_HEIGHT } from '@/common/constants/ui';
+import Content from './components/bottomSheet/Content';
+import { MapPlace } from '@/service/apis/place/index.type';
+
+export interface MarkerClickType {
+  marker: CustomMarker;
+  e: naver.maps.PointerEvent;
+}
 
 function Main() {
   const { naver } = window;
@@ -54,6 +61,7 @@ function Main() {
    * 현 지도에서 검색 버튼 클릭 이벤트 함수
    * @Todo alert -> 지도에서 장소 조회 API 호출 로직으로 변경
    */
+
   const handleSearchCurrentButtonClick = () => {
     const { currentCenter, maxBounds } = getCurrentAndMaxCoordinate(
       mapRef.current!,
@@ -73,8 +81,18 @@ function Main() {
    * 마커 클릭 이벤트 함수
    * @Todo 마커 클릭 시 바텀시트 호출하게 로직 변경
    */
-  const handleMarkerClick = (marker: naver.maps.Marker) => {
-    alert(`${marker.getTitle()}로 이동합니다.`);
+
+  const [bottomCardVisible, setBottomCardVisible] = useState<boolean>(false);
+  const [bottomSheetVisible, setBottomSheetVisible] = useState<boolean>(true);
+  const [markerInfo, setMarkerInfo] = useState<MapPlace | null>(null);
+
+  const handleMarkerClick = ({ marker, e }: MarkerClickType) => {
+    console.log('marker', marker);
+    console.log('e', e);
+    e.pointerEvent.BUBBLING_PHASE;
+    setBottomSheetVisible(false);
+    setBottomCardVisible(true);
+    setMarkerInfo(marker.data);
     const position = marker.getPosition();
     setMapCenter({ latitude: position.y - 0.0005, longitude: position.x });
     mapRef.current!.setZoom(30);
@@ -93,9 +111,21 @@ function Main() {
       setButtonGap(0);
     }
   }, [category]);
+
+  useEffect(() => {
+    console.log('bottomCard', bottomCardVisible);
+    console.log('bottomSheet', bottomSheetVisible);
+  }, [bottomCardVisible, bottomSheetVisible]);
+
+  const handleClick = () => {
+    setBottomSheetVisible(true);
+    setBottomCardVisible(false);
+    setBottomHeight(BOTTOM_HEIGHT);
+    setButtonGap(20);
+  };
   return (
     <S.Wrapper>
-      <S.MapWrapper id="map" ref={mapContainerRef}>
+      <S.MapWrapper onClick={handleClick} id="map" ref={mapContainerRef}>
         <CategoryBar category={category} setCategory={setCategory} />
         <S.Wrapper>
           <S.BottomSheetWrapper>
@@ -111,9 +141,26 @@ function Main() {
                 </S.SearchCurrentButtonText>
               </S.SearchCurrentButton>
             )}
-            <S.Bottom buttonGap={buttonGap} bottomHeight={bottomHeight}>
-              <BottomSheet />
-            </S.Bottom>
+            <S.BottomCardWrapper>
+              {bottomCardVisible && (
+                <S.Bottom
+                  bottomVisible={bottomCardVisible}
+                  buttonGap={buttonGap}
+                  bottomHeight={90} /** card height constants에 추가하기 */
+                >
+                  <Content place={markerInfo} />
+                </S.Bottom>
+              )}
+            </S.BottomCardWrapper>
+            {bottomSheetVisible && (
+              <S.Bottom
+                bottomVisible={bottomSheetVisible}
+                buttonGap={buttonGap}
+                bottomHeight={bottomHeight}
+              >
+                <BottomSheet />
+              </S.Bottom>
+            )}
           </S.BottomSheetWrapper>
         </S.Wrapper>
       </S.MapWrapper>
