@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 
 interface ContentProps {
-  place: MapPlace;
+  place: MapPlace | null;
 }
 
 function Content({ place }: ContentProps) {
@@ -22,7 +22,7 @@ function Content({ place }: ContentProps) {
 
   const navigateToDetail = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
-    navigate(ROUTE.DETAIL(place.place_id));
+    navigate(ROUTE.DETAIL(place!.place_id));
   };
 
   return (
@@ -30,14 +30,16 @@ function Content({ place }: ContentProps) {
       <S.PlaceInfoWrapper>
         <S.InfoTextWrapper>
           <S.PlaceNameCategoryWrapper>
-            <S.PlaceName>{place.place_name}</S.PlaceName>
-            <S.PlaceCategory>{place.category}</S.PlaceCategory>
+            <S.PlaceName>{place!.place_name}</S.PlaceName>
+            <S.PlaceCategory>{place!.category}</S.PlaceCategory>
           </S.PlaceNameCategoryWrapper>
-          <S.PlaceAddress>{place.road_address}</S.PlaceAddress>
+          <S.PlaceAddress>{place!.road_address}</S.PlaceAddress>
           <S.PlaceReviewWrapper>
             <FaStar style={{ color: '#FFD700' }} />
-            {place.star_rating_avg}
-            <S.PlaceReviewCount>리뷰 {place.review_count}개</S.PlaceReviewCount>
+            {place!.star_rating_avg}
+            <S.PlaceReviewCount>
+              리뷰 {place!.review_count}개
+            </S.PlaceReviewCount>
           </S.PlaceReviewWrapper>
         </S.InfoTextWrapper>
         <S.Like>

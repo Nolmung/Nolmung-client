@@ -46,10 +46,26 @@ const S = {
     letter-spacing: -0.12px;
   `,
 
-  Bottom: styled.div<{ bottomHeight: number; buttonGap: number }>`
+  BottomCardWrapper: styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    z-index: 1003;
+  `,
+
+  Bottom: styled.div<{
+    bottomHeight: number;
+    buttonGap: number;
+    bottomVisible: boolean;
+  }>`
+    visibility: ${({ bottomVisible }) =>
+      bottomVisible ? 'visible' : 'hidden'};
     position: absolute;
     bottom: ${({ bottomHeight }) => bottomHeight}px;
     background-color: white;
+    z-index: 1;
+    width: 100%;
   `,
 
   BottomSheetWrapper: styled.div`
