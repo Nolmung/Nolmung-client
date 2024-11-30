@@ -27,9 +27,8 @@ function SearchInput({
     }
   };
   return (
-    <S.InputWrapper width={width ? width : 100}>
+    <S.InputWrapper onClick={onClick} width={width ? width : 100}>
       <S.Input
-        autoFocus
         placeholder={placeholder}
         value={value}
         onKeyDown={handleEnterKeyOn}

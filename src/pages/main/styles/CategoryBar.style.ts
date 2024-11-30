@@ -6,7 +6,7 @@ const S = {
     width: 100%;
     height: fit-content;
     position: absolute;
-    top: 10px;
+    top: 29px;
     left: 5%;
   `,
 
