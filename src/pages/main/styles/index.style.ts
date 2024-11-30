@@ -31,7 +31,7 @@ const S = {
     left: 50%;
     transform: translateX(-50%);
     :active {
-      transform: none;
+    transform: none;
     }
   `,
 

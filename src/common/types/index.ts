@@ -23,6 +23,8 @@ export interface LatLng {
   longitude: number;
 }
 
-export type Category = typeof Categories[number];
+export type PlaceCategory = typeof Categories[number];
+
+export type AllCategory = PlaceCategory | 'bookmarks' | 'visited';
 
 export type SVGComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;
