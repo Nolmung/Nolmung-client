@@ -23,30 +23,28 @@ const Convert = () => {
   };
   return (
     <>
-      <S.Wrapper>
-        <S.ConvertArea>
-          <S.CalendarMode
-            mode={viewMode}
-            onClick={() => handleViewChange('calendar')}
-          >
-            {match(viewMode)
-              .with('calendar', () => <TodayMungCalendarIconActive />)
-              .otherwise(() => (
-                <TodayMungCalendarIcon />
-              ))}
-          </S.CalendarMode>
-          <S.ListMode mode={viewMode} onClick={() => handleViewChange('list')}>
-            {match(viewMode)
-              .with('list', () => <TodayMungListIconActive />)
-              .otherwise(() => (
-                <TodayMungListIcon />
-              ))}
-          </S.ListMode>
-        </S.ConvertArea>
-        <S.ViewModeArea>
-          {viewMode === 'calendar' ? <TodayMungCalendar /> : <TodayMungList />}
-        </S.ViewModeArea>
-      </S.Wrapper>
+      <S.ConvertArea>
+        <S.CalendarMode
+          mode={viewMode}
+          onClick={() => handleViewChange('calendar')}
+        >
+          {match(viewMode)
+            .with('calendar', () => <TodayMungCalendarIconActive />)
+            .otherwise(() => (
+              <TodayMungCalendarIcon />
+            ))}
+        </S.CalendarMode>
+        <S.ListMode mode={viewMode} onClick={() => handleViewChange('list')}>
+          {match(viewMode)
+            .with('list', () => <TodayMungListIconActive />)
+            .otherwise(() => (
+              <TodayMungListIcon />
+            ))}
+        </S.ListMode>
+      </S.ConvertArea>
+      <S.ViewModeArea>
+        {viewMode === 'calendar' ? <TodayMungCalendar /> : <TodayMungList />}
+      </S.ViewModeArea>
     </>
   );
 };

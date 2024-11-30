@@ -21,6 +21,17 @@ export const StyledDateCalendar = styled(DateCalendar)`
   margin: 0 auto;
   height: fit-content;
   max-height: none !important;
+
+  .hover-enabled:hover {
+    transform: scale(1.1);
+  }
+
+  .MuiPickersDay-today {
+    border: 1px solid #a7a7a7;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+  }
+
   .MuiDayCalendarHeader-root {
     display: flex;
     justify-content: space-between;
@@ -66,7 +77,6 @@ export const StyledDateCalendar = styled(DateCalendar)`
 ` as typeof DateCalendar<Dayjs>;
 
 export const CustomPickersDay = styled(PickersDay)<PickersDayProps<Dayjs>>(() => ({
-  // flex: '1 0 12%',
   boxSizing: 'border-box',
   margin: '2px',
   fontSize: '16px',

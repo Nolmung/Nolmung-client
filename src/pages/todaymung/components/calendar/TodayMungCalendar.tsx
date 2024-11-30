@@ -9,6 +9,7 @@ import { PickersCalendarHeaderProps } from '@mui/x-date-pickers/PickersCalendarH
 import dayjs, { Dayjs } from 'dayjs';
 import styled from 'styled-components';
 
+import { markeDates } from './markDates';
 import {
   CustomCalendarHeaderRoot,
   StyledDateCalendar,
@@ -20,28 +21,27 @@ import 'dayjs/locale/ko';
 
 dayjs.locale('ko');
 
-const markedDates: Record<string, string> = {
-  '2024-11-29': '/svgs/todayMungProfileImage.svg', // 예시 날짜와 이미지 URL
-  '2024-11-24': '/svgs/vite.svg',
-};
-
 function renderDayWithMarker(props: PickersDayProps<Dayjs>) {
-  const { day, selected } = props; // 필요한 값 가져오기
+  const { day, selected } = props;
   const dateKey = day.format('YYYY-MM-DD');
-  const markerUrl = markedDates[dateKey];
+  const markerUrl = markeDates[dateKey];
 
   return (
     <CustomPickersDay
       {...props}
+      day={day}
       style={{
-        position: 'relative', // 날짜와 마커 위치 조정을 위한 상대 위치
+        position: 'relative',
+        backgroundColor: markerUrl ? 'transparent' : selected ? '#17AA1A' : '',
+        pointerEvents: markerUrl ? 'auto' : 'none',
+        transition: 'transform 0.2s, background-color 0.2s',
       }}
+      className={markerUrl ? 'hover-enabled' : ''}
     >
-      {/* 날짜 텍스트 표시 */}
       <span
         style={{
           fontFamily: 'Pretendard',
-          position: 'relative', // 텍스트가 이미지 위에 표시
+          position: 'relative',
           zIndex: 1,
           fontSize: '16px',
           color: markerUrl ? '#ffffff' : selected ? '#ffffff' : '#0f0e0e',
@@ -58,7 +58,7 @@ function renderDayWithMarker(props: PickersDayProps<Dayjs>) {
             position: 'absolute',
             top: '50%',
             left: '50%',
-            transform: 'translate(-50%, -50%)', // 중앙 정렬
+            transform: 'translate(-50%, -50%)',
             borderRadius: '50%',
             width: '40px',
             height: '40px',
@@ -96,7 +96,7 @@ function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
   );
 }
 
-// 메인 컴포넌트 정의
+// 메인 컴포넌트
 export default function TodayMungCalendar() {
   return (
     <S.Wrap>
@@ -106,13 +106,12 @@ export default function TodayMungCalendar() {
             slots={{
               calendarHeader: CustomCalendarHeader,
               day: renderDayWithMarker,
-              // day: CustomPickersDay,
             }}
             sx={{
               height: '100%',
               '& .MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition > *':
                 {
-                  position: 'static !important', // absolute 대신 static 설정
+                  position: 'static !important',
                 },
             }}
           />

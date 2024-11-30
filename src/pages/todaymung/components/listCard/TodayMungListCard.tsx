@@ -1,14 +1,5 @@
 import { S } from './TodayMungListCard.style';
-
-interface CardDataType {
-  data: {
-    name: string;
-    title: string;
-    img?: string;
-    date: string;
-    content: string;
-  };
-}
+import { CardDataType } from './TodayMungListCard.type';
 
 const TodayMungListCard = ({ data }: CardDataType) => {
   return (
