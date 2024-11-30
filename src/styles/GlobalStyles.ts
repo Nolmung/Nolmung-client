@@ -40,6 +40,9 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     text-decoration: none;
   }
+  input{
+    all: unset;
+  }
 `;
 
 export default GlobalStyle;
