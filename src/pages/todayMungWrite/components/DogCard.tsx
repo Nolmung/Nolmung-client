@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import S from '../styles/index.style';
+import S from '../styles/DogCard.style';
 
 interface DogCardProps {
   dogName: string;
