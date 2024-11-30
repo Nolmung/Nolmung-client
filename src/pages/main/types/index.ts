@@ -10,8 +10,9 @@ import {
 } from '@/assets/images/svgs';
 import { PlaceCategory, SVGComponent } from '@/common/types';
 
+/** @Todo MarkerType 과 MapPlace 타입 둘 중 하나만 사용 @ongheong */
 export interface MarkerType {
-  place_id: string;
+  place_id: number;
   name: string;
   category: PlaceCategory;
   road_address: string;
