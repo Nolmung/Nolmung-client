@@ -59,9 +59,46 @@ const mocks = [
 
 function TodayMungWrite() {
   return (
+    <>
       <S.BannerWrapper>
         <S.BannerImage src="/pngs/TodayMungLogo.png" alt="오늘멍 배너" />
       </S.BannerWrapper>
+      <S.Wrapper>
+        <div style={{ marginTop: '23px' }}>
+          <S.Title>장소</S.Title>
+          <S.PlaceWrapper>
+            <S.PlaceCardWrapper>
+              {mocks.map((mock, index) => (
+                <VisitedPlaceCard
+                  key={index}
+                  place_name={mock.place_name}
+                  road_address={mock.road_address}
+                  my_rate={mock.my_rate}
+                />
+              ))}
+            </S.PlaceCardWrapper>
+            <S.PlaceAddButton>
+              <PlusIcon width={20} height={20} />
+            </S.PlaceAddButton>
+          </S.PlaceWrapper>
+        </div>
+        <div>
+          <S.Title>오늘을 함꼐한 반려견</S.Title>
+          <S.PlaceWrapper>
+            <S.PlaceCardWrapper>
+              {dogs.map((mock, index) => (
+                <DogCard
+                  key={index}
+                  dogName={mock.dogName}
+                  profileUrl={mock.profileUrl}
+                />
+              ))}
+            </S.PlaceCardWrapper>
+          </S.PlaceWrapper>
+          <Editor />
+        </div>
+      </S.Wrapper>
+    </>
   );
 }
 
