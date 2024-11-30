@@ -11,7 +11,6 @@ const S = {
     justify-content: center;
     padding: 14px;
     gap: 9px;
-    min-width: 120px;
   `,
   PlaceTitleRateWrapper: styled.div`
     display: flex;
@@ -31,6 +30,7 @@ const S = {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    white-space: nowrap;
   `,
   PlaceAverageRate: styled.div`
     color: #080808;

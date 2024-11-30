@@ -5,7 +5,8 @@ const S = {
   Wrapper: styled.div`
     width: 100%;
     padding: 0 22px;
-    height: calc(100vh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
+    height: calc(100% - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -36,7 +37,7 @@ const S = {
     overflow-x: auto;
     align-items: center;
   `,
-  
+
   PlaceAddButton: styled.button`
     border-radius: 10px;
     border: 1px solid #17aa1a;
@@ -76,27 +77,6 @@ const S = {
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: normal;
-  `,
-
-  TodayMungTitleInput: styled.input`
-    height: 48px;
-    color: #a7a7a7;
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    background: #f0f0f0;
-  `,
-  TodayMungContentInput: styled.textarea`
-    height: 237px;
-  `,
-  TodayMungTextCount: styled.div`
-    color: #a7a7a7;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
     line-height: normal;
   `,
 };
