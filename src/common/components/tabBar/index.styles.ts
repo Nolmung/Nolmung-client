@@ -10,7 +10,7 @@ export const S = {
     bottom: 0;
     left: 0;
     background-color: #fff;
-    z-index: 1000;
+    z-index: 1004;
     display: flex;
     justify-content: space-around;
     align-items: center;

@@ -24,6 +24,7 @@ const S = {
     border-radius: 50px;
     border: 1px solid #080808;
     background: rgba(8, 8, 8, 0.65);
+
     z-index: 1;
     position: absolute;
     // 조건부 스타일링으로 바꾸기
@@ -31,16 +32,18 @@ const S = {
     left: 50%;
     transform: translateX(-50%);
     :active {
-    transform: none;
+      transform: none;
     }
   `,
 
   SearchCurrentButtonText: styled.span`
-    line-height: 10px;
-    letter-spacing: -0.12px;
     color: #fff;
     text-align: center;
-    font-weight: 500;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 350;
+    line-height: 10px; /* 83.333% */
+    letter-spacing: -0.12px;
   `,
 
   Bottom: styled.div<{ bottomHeight: number; buttonGap: number }>`
