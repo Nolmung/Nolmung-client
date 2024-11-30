@@ -3,6 +3,7 @@ import VisitedPlaceCard from './components/VisitedPlaceCard';
 import S from './styles/index.style';
 import DogCard from './components/DogCard';
 import Editor from './components/Editor';
+import MediaGroup from './components/MediaGroup';
 
 const dogs = [
   {
@@ -96,6 +97,7 @@ function TodayMungWrite() {
             </S.PlaceCardWrapper>
           </S.PlaceWrapper>
           <Editor />
+          <MediaGroup />
         </div>
       </S.Wrapper>
     </>
