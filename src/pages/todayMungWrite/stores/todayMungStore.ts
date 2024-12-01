@@ -10,8 +10,7 @@ interface TodayMungStore extends PostDiaryRequest {
   setPublicYn: (publicYn: boolean) => void;
 }
 
-export const useTodayMungStore = create<TodayMungStore>((set, get) => ({
-  userId: 0,
+export const useTodayMungStore = create<TodayMungStore>((set) => ({
   title: null,
   content: null,
   places: [],
