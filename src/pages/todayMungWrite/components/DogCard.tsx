@@ -1,7 +1,6 @@
 import S from '../styles/DogCard.style';
 import { useTodayMungStore } from '../stores/todayMungStore';
-import { DogType } from '..';
-import { useEffect } from 'react';
+import { DogType } from '@/service/apis/user/index.types';
 
 interface DogCardProps {
   data: DogType;
@@ -18,9 +17,6 @@ function DogCard({ data }: DogCardProps) {
     }
   };
 
-  useEffect(() => {
-    console.log(dogIds);
-  }, [dogIds]);
   return (
     <S.PetButton onClick={handlePetButtonClick} selected={isDogSelected}>
       <S.PetImage src={data.profileUrl} />

@@ -38,7 +38,6 @@ function Layout({ children }: LayoutProps) {
     'hideTabBar',
     location.pathname + location.search,
   );
-  console.log('hideTabBar', hideTabBar);
   const [HeaderTitle, setHeaderTitle] = useState<HeaderTitleType>({
     title: '',
     showIcon: false,

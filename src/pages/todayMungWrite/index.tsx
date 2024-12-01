@@ -10,17 +10,7 @@ import Editor from './components/Editor';
 import MediaGroup from './components/MediaGroup';
 import Button from '@/common/components/button/Button';
 import { useState } from 'react';
-
-export interface DogType {
-  dogId: number;
-  dogName: string;
-  dogType: string;
-  birth: string;
-  profileUrl: string;
-  gender: 'MALE' | 'FEMALE';
-  size: 'S' | 'M' | 'L';
-  neuterYn: boolean;
-}
+import { DogType } from '@/service/apis/user/index.types';
 
 const dogs: DogType[] = [
   {
