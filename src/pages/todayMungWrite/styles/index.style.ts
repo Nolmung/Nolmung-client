@@ -51,7 +51,17 @@ const S = {
     overflow-x: auto;
     align-items: center;
   `,
-
+  InformPublic: styled.div`
+    color: #5e5e5e;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: end;
+  `,
   PlaceAddButton: styled.button`
     border-radius: 10px;
     border: 1px solid #17aa1a;

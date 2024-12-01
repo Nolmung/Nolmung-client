@@ -1,9 +1,15 @@
-import { PlusIcon } from '@/assets/images/svgs';
+import {
+  CheckEmptyGreen,
+  CheckFiiledDark,
+  PlusIcon,
+} from '@/assets/images/svgs';
 import VisitedPlaceCard from './components/VisitedPlaceCard';
 import S from './styles/index.style';
 import DogCard from './components/DogCard';
 import Editor from './components/Editor';
 import MediaGroup from './components/MediaGroup';
+import Button from '@/common/components/button/Button';
+import { useState } from 'react';
 
 const dogs = [
   {
@@ -59,6 +65,12 @@ const mocks = [
 ];
 
 function TodayMungWrite() {
+  /** @Todo POST API 호출 */
+  const [isPublicChecked, setIsPublicChecked] = useState<boolean>(true);
+  const handleCheckBoxClick = () => {
+    setIsPublicChecked((prev) => !prev);
+  };
+  const handleCompleteButtonClick = () => {};
   return (
     <>
       <S.BannerWrapper>
@@ -83,7 +95,7 @@ function TodayMungWrite() {
             </S.PlaceAddButton>
           </S.PlaceWrapper>
         </div>
-        <div>
+        <div style={{ position: 'relative' }}>
           <S.Title>오늘을 함꼐한 반려견</S.Title>
           <S.PlaceWrapper>
             <S.PlaceCardWrapper>
@@ -96,10 +108,32 @@ function TodayMungWrite() {
               ))}
             </S.PlaceCardWrapper>
           </S.PlaceWrapper>
+          <S.InformPublic>
+            오늘멍을 공개할래요
+            {isPublicChecked ? (
+              <CheckFiiledDark onClick={handleCheckBoxClick} width={18} />
+            ) : (
+              <CheckEmptyGreen onClick={handleCheckBoxClick} width={18} />
+            )}
+          </S.InformPublic>
           <Editor />
           <MediaGroup />
         </div>
       </S.Wrapper>
+      <S.ButtonWrapper>
+        <Button
+          width="110px"
+          height="44px"
+          backgroundColor="#080808"
+          color="#fff"
+          borderRadius="30px"
+          fontSize="16px"
+          fontWeight="500"
+          onClick={handleCompleteButtonClick}
+        >
+          작성완료
+        </Button>
+      </S.ButtonWrapper>
     </>
   );
 }
