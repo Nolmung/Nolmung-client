@@ -21,7 +21,7 @@ export const useTodayMungStore = create(
       places: [],
       dogIds: [],
       medias: [],
-      publicYn: false,
+      publicYn: true,
       setTitle: (title: string) => set({ title }),
       setContent: (content: string) => set({ content }),
       addPlaces: (placeId: number) =>

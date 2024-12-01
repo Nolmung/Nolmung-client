@@ -9,8 +9,8 @@ import DogCard from './components/DogCard';
 import Editor from './components/Editor';
 import MediaGroup from './components/MediaGroup';
 import Button from '@/common/components/button/Button';
-import { useState } from 'react';
 import { DogType } from '@/service/apis/user/index.types';
+import { useTodayMungStore } from './stores/todayMungStore';
 
 const dogs: DogType[] = [
   {
@@ -67,10 +67,12 @@ const mocks = [
 
 function TodayMungWrite() {
   /** @Todo POST API 호출 */
-  const [isPublicChecked, setIsPublicChecked] = useState<boolean>(true);
+  const { publicYn, setPublicYn } = useTodayMungStore();
   const handleCheckBoxClick = () => {
-    setIsPublicChecked((prev) => !prev);
+    setPublicYn(!publicYn);
   };
+
+  console.log(publicYn);
   const handleCompleteButtonClick = () => {};
   return (
     <>
@@ -107,7 +109,7 @@ function TodayMungWrite() {
           </S.PlaceWrapper>
           <S.InformPublic>
             오늘멍을 공개할래요
-            {isPublicChecked ? (
+            {publicYn ? (
               <CheckFiiledDark onClick={handleCheckBoxClick} width={18} />
             ) : (
               <CheckEmptyGreen onClick={handleCheckBoxClick} width={18} />
