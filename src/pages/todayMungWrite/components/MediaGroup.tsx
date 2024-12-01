@@ -1,8 +1,12 @@
-import { CameraIcon } from '@/assets/images/svgs';
+import { CameraIcon, CancelIcon } from '@/assets/images/svgs';
 import S from '../styles/MediaGroup.style';
+import { useTodayMungStore } from '../stores/todayMungStore';
+import { Media, MideaType } from '@/service/apis/diary/index.type';
 
 function MediaGroup() {
-  const handleCliick = () => {
+  const { medias, addMedias, deleteImages } = useTodayMungStore();
+
+  const handleAddMediaButtonCliick = () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
@@ -17,21 +21,45 @@ function MediaGroup() {
           const reader = new FileReader();
           reader.readAsDataURL(file);
           reader.onload = (e) => {
-            console.log((e.target as FileReader).result);
+            const mediaUrl = (e.target as FileReader).result;
+            if (!mediaUrl) alert('사진 등록에 실패하였습니다.');
+            else {
+              const media: Media = {
+                mediaId: new Date().getMilliseconds(),
+                mediaType: MideaType.IMAGE,
+                mediaUrl: mediaUrl.toString(),
+              };
+              addMedias(media);
+            }
           };
         });
       }
     };
   };
 
+  const handleRemoveMediaButtonClick = (mediaId: number) => {
+    if (!mediaId) {
+      alert('삭제에 실패하였습니다.');
+    } else {
+      deleteImages(mediaId);
+    }
+  };
+
   return (
     <S.Wrapper>
-      <S.AddMediaButton onClick={handleCliick}>
+      <S.AddMediaButton onClick={handleAddMediaButtonCliick}>
         <CameraIcon width={24} height={24} />
       </S.AddMediaButton>
-      <S.Media src="https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/28/111500268.2.jpg" />
-      <S.Media src="https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/28/111500268.2.jpg" />
-      <S.Media src="https://dimg.donga.com/wps/NEWS/IMAGE/2022/01/28/111500268.2.jpg" />
+      {medias?.map((media) => (
+        <S.MediaWrapper>
+          <S.Media src={media.mediaUrl!} />
+          <S.IconWrapper
+            onClick={() => handleRemoveMediaButtonClick(media.mediaId!)}
+          >
+            <CancelIcon width={10} />
+          </S.IconWrapper>
+        </S.MediaWrapper>
+      ))}
     </S.Wrapper>
   );
 }

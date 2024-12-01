@@ -1,6 +1,11 @@
+export enum MideaType {
+  IMAGE = 'IMAGE',
+  VIDEO = 'VIDEO',
+}
+
 export interface Media {
   mediaId: number | null;
-  mediaType: string | null;
+  mediaType: MideaType | null;
   mediaUrl: string | null;
 }
 export interface PostDiaryRequest {
