@@ -12,7 +12,7 @@ const S = {
   `,
   TodayMungTitleInput: styled.input`
     width: 100%;
-    height: 48px;
+    height: 30px;
     color: #080808;
     font-size: 16px;
     font-style: normal;
@@ -20,7 +20,7 @@ const S = {
     line-height: normal;
     border: none;
     border-bottom: 1.5px solid #d9d9d9;
-
+    margin-top: 16px;
     &::placeholder {
       color: #a7a7a7;
       font-family: Pretendard;
@@ -46,6 +46,7 @@ const S = {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    resize: none;
 
     &::placeholder {
       color: #a7a7a7;
