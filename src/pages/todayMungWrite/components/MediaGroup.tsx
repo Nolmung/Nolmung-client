@@ -59,9 +59,7 @@ function MediaGroup() {
 
       if (failedFiles.length > 0) {
         alert(
-          `${failedFiles.length}개의 파일 등록에 실패했습니다. (${failedFiles.join(
-            ', ',
-          )})`,
+          `localstorage 용량 초과로 ${failedFiles.length}개의 파일 등록에 실패했습니다.`,
         );
       }
     };

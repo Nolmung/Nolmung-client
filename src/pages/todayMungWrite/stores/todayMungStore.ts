@@ -28,7 +28,9 @@ export const useTodayMungStore = create(
         set((store) => ({ places: [...(store.places || []), placeId] })),
       addMedias: (media: Media) =>
         set((store) => ({
-          medias: [...(store.medias || []), media],
+          medias: [...(store.medias || []), media].sort(
+            (a, b) => b.mediaId - a.mediaId,
+          ),
         })),
       deleteImages: (mediaId: number) =>
         set((store) => ({
