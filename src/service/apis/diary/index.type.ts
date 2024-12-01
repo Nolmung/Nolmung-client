@@ -4,7 +4,6 @@ export interface Media {
   mediaUrl: string | null;
 }
 export interface PostDiaryRequest {
-  userId: number | null;
   title: string | null;
   content: string | null;
   places: number[] | null;
