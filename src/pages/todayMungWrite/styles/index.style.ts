@@ -18,7 +18,7 @@ const S = {
   `,
   Wrapper: styled.div`
     width: 100%;
-    padding: 0 22px;
+    padding: 0 22px 22px 22px;
     height: calc(100% - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
     overflow-y: auto;
     display: flex;
@@ -92,6 +92,15 @@ const S = {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+  `,
+  ButtonWrapper: styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    bottom: 100px;
+    z-index: 1000;
   `,
 };
 
