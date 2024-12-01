@@ -11,7 +11,18 @@ import MediaGroup from './components/MediaGroup';
 import Button from '@/common/components/button/Button';
 import { useState } from 'react';
 
-const dogs = [
+export interface DogType {
+  dogId: number;
+  dogName: string;
+  dogType: string;
+  birth: string;
+  profileUrl: string;
+  gender: 'MALE' | 'FEMALE';
+  size: 'S' | 'M' | 'L';
+  neuterYn: boolean;
+}
+
+const dogs: DogType[] = [
   {
     dogId: 1,
     dogName: '뽀삐',
@@ -100,11 +111,7 @@ function TodayMungWrite() {
           <S.PlaceWrapper>
             <S.PlaceCardWrapper>
               {dogs.map((mock, index) => (
-                <DogCard
-                  key={index}
-                  dogName={mock.dogName}
-                  profileUrl={mock.profileUrl}
-                />
+                <DogCard key={index} data={mock} />
               ))}
             </S.PlaceCardWrapper>
           </S.PlaceWrapper>

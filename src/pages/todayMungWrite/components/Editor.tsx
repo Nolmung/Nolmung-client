@@ -1,19 +1,27 @@
-import { useState } from 'react';
 import S from '../styles/Editor.style';
+import { useTodayMungStore } from '../stores/todayMungStore';
 function Editor() {
-  const [currentTextCount, setCurrentTextCount] = useState(0);
+  const { content, setContent, title, setTitle } = useTodayMungStore();
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCurrentTextCount(e.target.value.length);
+    setContent(e.target.value);
+  };
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
   };
   return (
     <S.Wrapper>
-      <S.TodayMungTitleInput placeholder="제목" />
+      <S.TodayMungTitleInput
+        value={title}
+        onChange={handleTitleChange}
+        placeholder="제목"
+      />
       <S.TodayMungContentInput
+        value={content}
         maxLength={500}
         onChange={handleContentChange}
         placeholder={`오늘멍을 작성해주세요 \n오늘멍을 공개로 설정하면 리뷰에 등록됩니다`}
       />
-      <S.TodayMungTextCount>{currentTextCount}/500</S.TodayMungTextCount>
+      <S.TodayMungTextCount>{content.length}/500</S.TodayMungTextCount>
     </S.Wrapper>
   );
 }

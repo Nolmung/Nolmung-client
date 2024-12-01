@@ -4,15 +4,15 @@ export enum MideaType {
 }
 
 export interface Media {
-  mediaId: number | null;
-  mediaType: MideaType | null;
-  mediaUrl: string | null;
+  mediaId: number;
+  mediaType: MideaType;
+  mediaUrl: string;
 }
 export interface PostDiaryRequest {
-  title: string | null;
-  content: string | null;
-  places: number[] | null;
-  medias: Media[] | null;
-  dogs: number[] | null;
-  publicYn: boolean | null;
+  title: string;
+  content: string;
+  places: number[];
+  medias: Media[];
+  dogIds: number[];
+  publicYn: boolean;
 }
