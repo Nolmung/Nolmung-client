@@ -18,6 +18,7 @@ const S = {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    border-radius: 0%;
     border: none;
     border-bottom: 1.5px solid #d9d9d9;
     margin-top: 16px;
