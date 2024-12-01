@@ -6,6 +6,7 @@ const S = {
     gap: 8px;
     width: 100%;
     margin-top: 8px;
+    overflow: auto;
   `,
   AddMediaButton: styled.button`
     width: 86px;
