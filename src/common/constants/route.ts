@@ -5,4 +5,5 @@ export const ROUTE = {
   LOGIN: () => '/login',
   SIGNUP: () => `/signUp`,
   SEARCH: () => '/search',
+  DOGS: () => '/dogs',
 } as const;

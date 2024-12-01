@@ -1,6 +1,34 @@
 import { S } from './styles/signUp.styles';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
+  const navigate = useNavigate();
+  const [nickname, setNickname] = useState('');
+  const [addressProvince, setAddressProvince] = useState('');
+  const [selectedAge, setSelectedAge] = useState<number | null>(null);
+
+  const handleCircleClick = (age: number) => {
+    setSelectedAge((prev) => (prev === age ? null : age)); // 같은 값 클릭 시 선택 해제
+  };
+  const handleNext = () => {
+    if (!nickname || !addressProvince || !selectedAge) {
+      alert('모든 정보를 입력해주세요!');
+      return;
+    }
+    navigate('/dogs', {
+      state: { nickname, addressProvince, selectedAge },
+    });
+  };
+
+  // const data = {
+  //   nickname,
+  //   addressProvince,
+  //   addressDistrict: '', // 상세 주소는 비워둔 상태
+  //   age: selectedAge,
+  //   gender: 'MALE', // 기본값 설정, 사용자 입력으로 교체 가능
+  // };
+
   return (
     <>
       <S.ContainerWrapper>
@@ -13,35 +41,70 @@ function SignUp() {
           개인정보는 견주님과 반려견을 위한 장소 추천 서비스에 활용됩니다
         </S.DescriptionText>
         <S.ContentTitleText>닉네임</S.ContentTitleText>
-        <S.UserInfoInput></S.UserInfoInput>
+        <S.UserInfoInput
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+          placeholder="닉네임을 입력해주세요"
+        ></S.UserInfoInput>
         <S.ContentTitleText>주소</S.ContentTitleText>
-        <S.UserInfoInput></S.UserInfoInput>
+        <S.UserInfoInput
+          value={addressProvince}
+          onChange={(e) => setAddressProvince(e.target.value)}
+          placeholder="주소를 시 단위로 입력해주세요 ex)서울시"
+        ></S.UserInfoInput>
         <S.ContentTitleText>연령</S.ContentTitleText>
         <S.AgeChoiceContainer>
           <S.AgeFlex>
-            <S.AgeChoice>10</S.AgeChoice>
+            <S.AgeChoice
+              isSelected={selectedAge === 10}
+              onClick={() => handleCircleClick(10)}
+            >
+              10
+            </S.AgeChoice>
             <S.AgeChoiceText>10대</S.AgeChoiceText>
           </S.AgeFlex>
           <S.AgeFlex>
-            <S.AgeChoice>20</S.AgeChoice>
+            <S.AgeChoice
+              isSelected={selectedAge === 20}
+              onClick={() => handleCircleClick(20)}
+            >
+              20
+            </S.AgeChoice>
             <S.AgeChoiceText>20대</S.AgeChoiceText>
           </S.AgeFlex>
           <S.AgeFlex>
-            <S.AgeChoice>30</S.AgeChoice>
+            <S.AgeChoice
+              isSelected={selectedAge === 30}
+              onClick={() => handleCircleClick(30)}
+            >
+              30
+            </S.AgeChoice>
             <S.AgeChoiceText>30대</S.AgeChoiceText>
           </S.AgeFlex>
         </S.AgeChoiceContainer>
         <S.AgeChoiceContainer>
           <S.AgeFlex>
-            <S.AgeChoice>40</S.AgeChoice>
+            <S.AgeChoice
+              isSelected={selectedAge === 40}
+              onClick={() => handleCircleClick(40)}
+            >
+              40
+            </S.AgeChoice>
             <S.AgeChoiceText>40대</S.AgeChoiceText>
           </S.AgeFlex>
           <S.AgeFlex>
-            <S.AgeChoice>50</S.AgeChoice>
+            <S.AgeChoice
+              isSelected={selectedAge === 50}
+              onClick={() => handleCircleClick(50)}
+            >
+              50
+            </S.AgeChoice>
             <S.AgeChoiceText>50대 이상</S.AgeChoiceText>
           </S.AgeFlex>
         </S.AgeChoiceContainer>
-        <S.NextButton>반려견 등록으로 넘어가기</S.NextButton>
+        <S.NextButton onClick={handleNext}>
+          반려견 등록으로 넘어가기
+        </S.NextButton>
       </S.ContainerWrapper>
     </>
   );

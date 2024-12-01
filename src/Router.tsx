@@ -8,7 +8,7 @@ import Detail from './pages/detail';
 import Login from './pages/login';
 import SignUp from './pages/signUp';
 import Search from './pages/search';
-
+import Dogs from './pages/dogs';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -32,6 +32,7 @@ function Router() {
           <Route path={ROUTE.LOGIN()} element={<Login />} />
           <Route path={ROUTE.SIGNUP()} element={<SignUp />} />
           <Route path={ROUTE.SEARCH()} element={<Search />} />
+          <Route path={ROUTE.DOGS()} element={<Dogs />} />
         </Routes>
       </Layout>
     </Suspense>
