@@ -4,6 +4,8 @@ export { default as BackArrowWhite } from './BackArrowWhite';
 export { default as BookmarksTag } from './BookmarksTag';
 export { default as CameraIcon } from './CameraIcon';
 export { default as CancelIcon } from './CancelIcon';
+export { default as CheckEmptyGreen } from './CheckEmptyGreen';
+export { default as CheckFiiledDark } from './CheckFiiledDark';
 export { default as DogPaw } from './DogPaw';
 export { default as FilledStar } from './FilledStar';
 export { default as LoginBackgroundimg } from './LoginBackgroundimg';
