@@ -1,8 +1,4 @@
-import {
-  CheckEmptyGreen,
-  CheckFiiledDark,
-  PlusIcon,
-} from '@/assets/images/svgs';
+import { PlusIcon } from '@/assets/images/svgs';
 import VisitedPlaceCard from './components/VisitedPlaceCard';
 import S from './styles/index.style';
 import DogCard from './components/DogCard';
@@ -10,7 +6,6 @@ import Editor from './components/Editor';
 import MediaGroup from './components/MediaGroup';
 import Button from '@/common/components/button/Button';
 import { DogType } from '@/service/apis/user/index.types';
-import { useTodayMungStore } from './stores/todayMungStore';
 
 const dogs: DogType[] = [
   {
