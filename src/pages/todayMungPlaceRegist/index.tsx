@@ -2,7 +2,7 @@ import SearchInput from '@/common/components/searchInput';
 import S from './styles/index.style';
 import { useRef } from 'react';
 import { placeMap } from '@/mocks/data/placeMap';
-import SearchResultCard from './components/searchResultCard';
+import SearchResultCard from './components/SearchResultCard';
 
 function TodayMungPlaceRegist() {
   const inputRef = useRef<HTMLInputElement>(null);

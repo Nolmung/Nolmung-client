@@ -1,5 +1,5 @@
 import type { SVGProps } from 'react';
-const SvgFilledStar = (props: SVGProps<SVGSVGElement>) => (
+const SvgEmptyStar = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -7,8 +7,8 @@ const SvgFilledStar = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="#F4E600"
-      stroke="#FFB702"
+      fill="#F0F0F0"
+      stroke="#A7A7A7"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
@@ -16,4 +16,4 @@ const SvgFilledStar = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-export default SvgFilledStar;
+export default SvgEmptyStar;
