@@ -9,7 +9,7 @@ import Login from './pages/login';
 import SignUp from './pages/signUp';
 import Search from './pages/search';
 import TodayMungWrite from './pages/todayMungWrite';
-import TodayMungPlaceRegister from './pages/todayMungPlaceRegist';
+import TodayMungPlaceRegist from './pages/todayMungPlaceRegist';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -35,8 +35,8 @@ function Router() {
           <Route path={ROUTE.SEARCH()} element={<Search />} />
           <Route path={ROUTE.TODAYMUNG_WIRTE()} element={<TodayMungWrite />} />
           <Route
-            path={ROUTE.TODAYMUNG_PLACE_REGISTER()}
-            element={<TodayMungPlaceRegister />}
+            path={ROUTE.TODAYMUNG_PLACE_REGIST()}
+            element={<TodayMungPlaceRegist />}
           />
         </Routes>
       </Layout>

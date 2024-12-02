@@ -1,5 +1,5 @@
-function TodayMungPlaceRegister() {
+function TodayMungPlaceRegist() {
   return <div></div>;
 }
 
-export default TodayMungPlaceRegister;
+export default TodayMungPlaceRegist;
