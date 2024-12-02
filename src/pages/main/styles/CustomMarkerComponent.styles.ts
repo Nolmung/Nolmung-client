@@ -18,6 +18,11 @@ const S = {
     padding: 7px;
     width: 40px;
   `,
+  
+  ClickIconWrapper: styled.div`
+    width: fit-content;
+    height: fit-content;
+  `,
 
   Name: styled.span`
     text-align: center;
@@ -31,7 +36,7 @@ const S = {
       rgb(255, 255, 255) 0px 1px,
       rgb(255, 255, 255) 1px 0px,
       rgb(255, 255, 255) 0px -1px;
-    white-space: pre-wrap;
+    white-space: nowrap;
   `,
 };
 
