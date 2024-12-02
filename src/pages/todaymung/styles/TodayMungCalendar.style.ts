@@ -23,10 +23,12 @@ export const StyledDateCalendar = styled(DateCalendar)`
   max-height: none !important;
 
   .hover-enabled:hover {
-    transform: scale(1.1);
+    opacity: 1;
   }
 
   .MuiPickersDay-today {
+    width: 40px;
+    height: 40px;
     background-color: #d9d9d9;
     border-radius: 30%;
     border: none !important;
@@ -76,25 +78,37 @@ export const StyledDateCalendar = styled(DateCalendar)`
   }
 ` as typeof DateCalendar<Dayjs>;
 
-export const CustomPickersDay = styled(PickersDay)<PickersDayProps<Dayjs>>(() => ({
-  boxSizing: 'border-box',
-  margin: '2px',
-  fontSize: '16px',
-  width: '40px',
-  height: '40px',
-  borderRadius: '50%',
-  '@media (min-height: 800px)': {
-    width: '51px',
-    height: '50px',
-  },
-  '&.Mui-selected': {
-    backgroundColor: '#17AA1A',
-    color: '#ffffff',
-  },
-  '&.Mui-selected:hover': {
-    backgroundColor: '#14a117',
-  },
-  '&.Mui-selected:focus': {
-    backgroundColor: '#17AA1A',
-  },
-}));
+export const CustomPickersDay = styled(PickersDay)<PickersDayProps<Dayjs>>(
+  () => ({
+    boxSizing: 'border-box',
+    margin: '2px',
+    fontSize: '16px',
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    position: 'relative',
+    '@media (min-height: 800px)': {
+      width: '51px',
+      height: '50px',
+    },
+    '&.Mui-selected': {
+      backgroundColor: '#d9d9d9 !important',
+      color: '#ffffff',
+    },
+    '&.Mui-selected:hover': {
+      backgroundColor: '#d9d9d9 !important',
+    },
+    '&.Mui-selected:focus': {
+      backgroundColor: '#d9d9d9 !important',
+    },
+    '&.hover-enabled:hover': {
+      opacity: '1',
+    },
+    '&.hover-enabled': {
+      pointerEvents: 'auto',
+    },
+    '&:not(.hover-enabled)': {
+      pointerEvents: 'none',
+    },
+  }),
+);

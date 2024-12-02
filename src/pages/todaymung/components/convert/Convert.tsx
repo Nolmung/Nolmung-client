@@ -1,24 +1,21 @@
-// Convert.tsx
-
 import { useState } from 'react';
 import { match } from 'ts-pattern';
 
-import { S } from './Convert.style';
-import { viewModeType } from './Convert.type';
+import { S } from '../../styles/Convert.style';
+import { ViewMode } from '../../types/Convert.type';
 import TodayMungCalendar from '../calendar/TodayMungCalendar';
 import TodayMungList from '../list/TodayMungList';
-
 import {
   TodayMungCalendarIcon,
   TodayMungCalendarIconActive,
   TodayMungListIcon,
   TodayMungListIconActive,
 } from '@/assets/images/svgs';
+import { ListDataProps } from '../../types/TodayMungList.type';
 
-const Convert = () => {
-  const [viewMode, setViewMode] = useState<viewModeType>('calendar');
-
-  const handleViewChange = (mode: 'calendar' | 'list') => {
+const Convert = ({ listData }: ListDataProps) => {
+  const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Calendar);
+  const handleViewChange = (mode: ViewMode) => {
     setViewMode(mode);
   };
   return (
@@ -26,24 +23,31 @@ const Convert = () => {
       <S.ConvertArea>
         <S.CalendarMode
           mode={viewMode}
-          onClick={() => handleViewChange('calendar')}
+          onClick={() => handleViewChange(ViewMode.Calendar)}
         >
           {match(viewMode)
-            .with('calendar', () => <TodayMungCalendarIconActive />)
+            .with(ViewMode.Calendar, () => <TodayMungCalendarIconActive />)
             .otherwise(() => (
               <TodayMungCalendarIcon />
             ))}
         </S.CalendarMode>
-        <S.ListMode mode={viewMode} onClick={() => handleViewChange('list')}>
+        <S.ListMode
+          mode={viewMode}
+          onClick={() => handleViewChange(ViewMode.List)}
+        >
           {match(viewMode)
-            .with('list', () => <TodayMungListIconActive />)
+            .with(ViewMode.List, () => <TodayMungListIconActive />)
             .otherwise(() => (
               <TodayMungListIcon />
             ))}
         </S.ListMode>
       </S.ConvertArea>
       <S.ViewModeArea>
-        {viewMode === 'calendar' ? <TodayMungCalendar /> : <TodayMungList />}
+        {viewMode === ViewMode.Calendar ? (
+          <TodayMungCalendar listData={listData} />
+        ) : (
+          <TodayMungList listData={listData} />
+        )}
       </S.ViewModeArea>
     </>
   );

@@ -1,13 +1,17 @@
-import { S } from './TodayMungList.style';
-import { CardDataType } from './TodayMungList.type';
+import { S } from '../../styles/TodayMungList.style';
+import { ListDataProps } from '../../types/TodayMungList.type';
 import TodayMungListCard from '../listCard/TodayMungListCard';
-import { todaymungData } from '../../constants/todaymungData';
-
-const TodayMungList = () => {
+const TodayMungList = ({ listData }: ListDataProps) => {
   return (
     <S.Wrapper>
-      {todaymungData.map((data: CardDataType, idx: number) => {
-        return <TodayMungListCard key={idx} data={data} />;
+      {listData.diaries.map((data) => {
+        return (
+          <TodayMungListCard
+            key={data.diaryId}
+            data={data}
+            listData={listData}
+          />
+        );
       })}
     </S.Wrapper>
   );

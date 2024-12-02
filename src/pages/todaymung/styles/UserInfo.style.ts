@@ -14,7 +14,11 @@ export const S = {
       padding: 45px 22px;
     }
   `,
-  ProfileImg: styled.img``,
+  ProfileImg: styled.img`
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  `,
   ProfileDescription: styled.div`
     display: flex;
     flex-direction: column;

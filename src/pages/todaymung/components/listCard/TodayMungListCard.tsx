@@ -1,14 +1,15 @@
-import { S } from './TodayMungListCard.style';
-import { CardDataType } from './TodayMungListCard.type';
+import { S } from '../../styles/TodayMungListCard.style';
+import { ListCardProps } from '../../types/TodayMungList.type';
 
-const TodayMungListCard = ({ data }: CardDataType) => {
+const TodayMungListCard = ({ listData, data }: ListCardProps) => {
+  const { user } = listData;
   return (
     <S.Wrap>
       <S.UserInfoArea>
         <S.ProfileImg />
         <S.UserInfoTextArea>
-          <S.UserName>{data.name}</S.UserName>
-          <S.PostDate>{data.date}</S.PostDate>
+          <S.UserName>{user.nickname}</S.UserName>
+          <S.PostDate>{data.createdAt}</S.PostDate>
         </S.UserInfoTextArea>
       </S.UserInfoArea>
       <S.ContentArea>
@@ -16,9 +17,9 @@ const TodayMungListCard = ({ data }: CardDataType) => {
           <S.ContentTitle>{data.title}</S.ContentTitle>
           <S.ContentDescription>{data.content}</S.ContentDescription>
         </S.ContentTextArea>
-        {data.img && (
+        {data.mediaUrl && (
           <S.ContentImgArea>
-            <S.ContentImg src={data.img} />
+            <S.ContentImg src={data.mediaUrl} />
           </S.ContentImgArea>
         )}
       </S.ContentArea>

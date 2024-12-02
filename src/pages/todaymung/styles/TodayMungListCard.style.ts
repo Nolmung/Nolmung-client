@@ -36,24 +36,30 @@ export const S = {
   ContentArea: styled.div`
     width: 100%;
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 20px;
   `,
   ContentTextArea: styled.div`
     display: flex;
     flex-direction: column;
   `,
   ContentTitle: styled.div`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     color: #080808;
     line-height: 20px;
     padding: 10px 2px;
   `,
   ContentDescription: styled.div`
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     color: #080808;
     line-height: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
   ContentImgArea: styled.div`
     display: flex;
