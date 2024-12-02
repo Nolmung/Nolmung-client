@@ -36,7 +36,6 @@ export { default as MuseumTag } from './MuseumTag';
 export { default as ParkTag } from './ParkTag';
 export { default as PlaygroundMarker } from './PlaygroundMarker';
 export { default as PlaygroundTag } from './PlaygroundTag';
-export { default as PlusIcon } from './PlusIcon';
 export { default as Refresh } from './Refresh';
 export { default as Search } from './Search';
 export { default as TabBarCalenderIcon } from './TabBarCalenderIcon';
