@@ -22,6 +22,7 @@ export { default as ArtgalleryTag } from './ArtgalleryTag';
 export { default as CafeIcon } from './CafeIcon';
 export { default as CafeMarker } from './CafeMarker';
 export { default as CafeTag } from './CafeTag';
+export { default as ClickMarker } from './ClickMarker';
 export { default as DefaultMarker } from './DefaultMarker';
 export { default as FoodMarker } from './FoodMarker';
 export { default as GalleryMarker } from './GalleryMarker';
