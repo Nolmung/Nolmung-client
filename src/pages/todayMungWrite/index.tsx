@@ -67,12 +67,6 @@ const mocks = [
 
 function TodayMungWrite() {
   /** @Todo POST API 호출 */
-  const { publicYn, setPublicYn } = useTodayMungStore();
-  const handleCheckBoxClick = () => {
-    setPublicYn(!publicYn);
-  };
-
-  console.log(publicYn);
   const handleCompleteButtonClick = () => {};
   return (
     <>
@@ -107,32 +101,25 @@ function TodayMungWrite() {
               ))}
             </S.PlaceCardWrapper>
           </S.PlaceWrapper>
-          <S.InformPublic>
-            오늘멍을 공개할래요
-            {publicYn ? (
-              <CheckFiiledDark onClick={handleCheckBoxClick} width={18} />
-            ) : (
-              <CheckEmptyGreen onClick={handleCheckBoxClick} width={18} />
-            )}
-          </S.InformPublic>
+
           <Editor />
           <MediaGroup />
+          <S.ButtonWrapper>
+            <Button
+              width="110px"
+              height="44px"
+              backgroundColor="#080808"
+              color="#fff"
+              borderRadius="30px"
+              fontSize="16px"
+              fontWeight="500"
+              onClick={handleCompleteButtonClick}
+            >
+              작성완료
+            </Button>
+          </S.ButtonWrapper>
         </div>
       </S.Wrapper>
-      <S.ButtonWrapper>
-        <Button
-          width="110px"
-          height="44px"
-          backgroundColor="#080808"
-          color="#fff"
-          borderRadius="30px"
-          fontSize="16px"
-          fontWeight="500"
-          onClick={handleCompleteButtonClick}
-        >
-          작성완료
-        </Button>
-      </S.ButtonWrapper>
     </>
   );
 }

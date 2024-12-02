@@ -12,13 +12,19 @@ const S = {
   `,
   BannerImage: styled.img`
     width: 85%;
-    object-fit: cover;
+    height: 84px;
+    flex-shrink: 0;
     position: absolute;
-    top: 12px;
+    top: 5px;
+    object-fit: scale-down;
+
+    @media screen and (max-width: 425px) {
+      top: 12%;
+    }
   `,
   Wrapper: styled.div`
     width: 100%;
-    padding: 0 22px 22px 22px;
+    padding: 0 22px 0px 22px;
     height: calc(100% - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
     overflow-y: auto;
     display: flex;
@@ -108,9 +114,7 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: sticky;
-    bottom: 100px;
-    z-index: 1000;
+    margin-top: 6px;
   `,
 };
 

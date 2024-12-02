@@ -18,13 +18,14 @@ const S = {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+
     border-radius: 0%;
     border: none;
     border-bottom: 1.5px solid #d9d9d9;
     margin-top: 16px;
+
     &::placeholder {
       color: #a7a7a7;
-      font-family: Pretendard;
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
@@ -43,19 +44,20 @@ const S = {
     padding-top: 15px;
 
     color: #080808;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     resize: none;
+    word-spacing: -5px;
 
     &::placeholder {
-      color: #a7a7a7;
-      font-family: Pretendard;
-      font-size: 16px;
+      color: rgba(167, 167, 167, 0.5);
+      font-size: 14px;
       font-style: normal;
-      font-weight: 400;
+      font-weight: 500;
       line-height: normal;
+      word-spacing: -5px;
     }
     &:focus {
       outline: none;
@@ -68,7 +70,30 @@ const S = {
     font-weight: 500;
     line-height: normal;
     text-align: right;
-    padding-bottom: 20px;
+  `,
+
+  InformPublic: styled.div`
+    color: #5e5e5e;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    gap: 5px;
+    justify-content: end;
+    align-items: center;
+  `,
+  InFormPublicCheckBoxWrapper: styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+  `,
+  IconWrapper: styled.div`
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
   `,
 };
 
