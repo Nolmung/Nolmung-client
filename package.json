@@ -13,9 +13,15 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.5",
+    "@emotion/styled": "^11.13.5",
+    "@mui/icons-material": "^6.1.8",
+    "@mui/material": "^6.1.8",
+    "@mui/x-date-pickers": "^7.22.3",
     "@tanstack/react-query": "^5.61.3",
     "@tanstack/react-query-devtools": "^5.61.3",
     "axios": "^1.7.8",
+    "dayjs": "^1.11.13",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
@@ -38,6 +44,7 @@
     "@storybook/test": "^8.4.5",
     "@tanstack/eslint-plugin-query": "^5.61.3",
     "@types/navermaps": "^3.7.8",
+    "@types/node": "^22.10.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/styled-components": "^5.1.34",
