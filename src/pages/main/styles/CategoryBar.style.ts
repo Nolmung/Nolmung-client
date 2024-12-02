@@ -21,7 +21,7 @@ const S = {
     overflow-x: auto;
   `,
 
-  StyledButtonWrapper: styled.div<{ isActive: boolean }>`
+  StyledButtonWrapper: styled.div<{ isActive?: boolean }>`
     button {
       background-color: ${({ isActive }) => (isActive ? '#D3FBD4' : '#fff')};
       border: ${({ isActive }) => (isActive ? '1px solid #17AA1A' : 'none')};
@@ -43,6 +43,8 @@ const S = {
     justify-content: center;
     align-items: center;
     gap: 4px;
+    white-space: nowrap;
+    width: fit-content;
   `,
 };
 

@@ -1,6 +1,7 @@
 import { LatLng } from '@/common/types';
 import { DEFAULT_LATLNG } from '@/common/constants/defaultLatLng';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * 마운트 시 사용자의 현재 위치 받아옴 -> mapCenter 업데이트
@@ -10,8 +11,10 @@ export const useMapCenter = (): [
   React.Dispatch<React.SetStateAction<LatLng>>,
 ] => {
   const [mapCenter, setMapCenter] = useState<LatLng>(DEFAULT_LATLNG);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    navigate('/');
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {

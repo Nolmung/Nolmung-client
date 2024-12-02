@@ -7,26 +7,47 @@ import { useNavigate } from 'react-router-dom';
 interface CategoryBarProps {
   category: string | null;
   setCategory: (value: string) => void;
+  setBottomSheetVisible: (
+    value: boolean | ((prev: boolean) => boolean),
+  ) => void;
+  setBottomCardVisible: (value: boolean | ((prev: boolean) => boolean)) => void;
 }
 
-function CategoryBar({ category, setCategory }: CategoryBarProps) {
-  const naivgate = useNavigate();
+function CategoryBar({
+  category,
+  setCategory,
+  setBottomSheetVisible,
+  setBottomCardVisible,
+}: CategoryBarProps) {
+  const navigate = useNavigate();
 
   const handleCategoryClick = (value: string) => {
-    setCategory(value);
-    naivgate(`/?category=${value}`);
+    setBottomCardVisible(false);
+    if (category === value) {
+      setCategory('');
+      setBottomSheetVisible(false);
+      navigate('/');
+    } else {
+      setCategory(value); 
+      setBottomSheetVisible(true);
+      navigate(`/?category=${value}`);
+    }
+    setCategory('');
   };
 
   const navigateToSearchPage = () => {
-    naivgate('/search');
+    setBottomSheetVisible(false);
+    navigate('/search');
   };
 
   return (
-    <S.Wrapper>
+    <S.Wrapper onClick={(e) => e.stopPropagation()}>
       <SearchInput onClick={navigateToSearchPage} width={90} />
       <S.CategoryWrapper>
         {CATEGORY_OPTIONS.map(({ value, label, icon: Icon }) => (
-          <S.StyledButtonWrapper key={value} isActive={category === value}>
+          <S.StyledButtonWrapper
+            key={value}
+          >
             <Button
               onClick={() => handleCategoryClick(value)}
               width="fit-content"
