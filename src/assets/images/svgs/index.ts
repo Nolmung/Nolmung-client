@@ -5,6 +5,7 @@ export { default as BookmarksTag } from './BookmarksTag';
 export { default as CancelIcon } from './CancelIcon';
 export { default as DogPaw } from './DogPaw';
 export { default as FilledStar } from './FilledStar';
+export { default as LocationButtonIcon } from './LocationButtonIcon';
 export { default as LoginBackgroundimg } from './LoginBackgroundimg';
 export { default as NolmungLogo } from './NolmungLogo';
 export { default as ParkAvailable } from './ParkAvailable';
