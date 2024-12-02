@@ -10,12 +10,14 @@ interface Review {
   placeId: number;
   category: PlaceCategory;
   labels: Labels[];
+  placeName: string;
 }
 
 interface ReviewStore {
   reviewlist: Review[];
   singleReview: Review | null;
   addReviewList: (reviews: Review) => void;
+  deleteReview: (labelId: number, placeId: number) => void;
 }
 
 export const useReviewStore = create<ReviewStore>((set) => ({
@@ -25,5 +27,13 @@ export const useReviewStore = create<ReviewStore>((set) => ({
   addReviewList: (reviews: Review) =>
     set((store) => ({
       reviewlist: [...store.reviewlist, reviews],
+    })),
+  deleteReview: (labelId: number, placeId: number) =>
+    set((store) => ({
+      reviewlist: store.reviewlist.filter(
+        (review) =>
+          review.placeId !== placeId &&
+          review.labels.filter((label) => label.labelId !== labelId),
+      ),
     })),
 }));

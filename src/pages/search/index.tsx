@@ -15,7 +15,6 @@ import {
   clearSearchHistory,
   deleteSearchKeyword,
   formatDate,
-  handleInputChange,
   updateSearchHistory,
 } from './utils/searchUtils';
 
