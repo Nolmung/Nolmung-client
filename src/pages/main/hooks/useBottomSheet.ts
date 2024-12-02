@@ -46,7 +46,6 @@ export default function useBottomSheet({
       const { touchMove, isContentAreaTouched } = metrics.current;
       const scrollTop = content.current!.scrollTop;
       if (isContentAreaTouched) {
-        console.log(sheet.current!.getBoundingClientRect().y);
         if (scrollTop > 0) {
           return false;
         }

@@ -38,22 +38,39 @@ function Layout({ children }: LayoutProps) {
     'hideTabBar',
     location.pathname + location.search,
   );
-  console.log('hideTabBar', hideTabBar);
   const [HeaderTitle, setHeaderTitle] = useState<HeaderTitleType>({
     title: '',
     showIcon: false,
     type: 'TitleLeft',
   });
-
   useEffect(() => {
     switch (location.pathname) {
       case '/':
         setHeaderTitle({ title: '메인', showIcon: true, type: 'TitleCenter' });
         break;
-      case '/todaymung':
+
+      case '/todayMung':
+        {
+          setHeaderTitle({
+            title: '오늘멍 모아보기',
+            showIcon: false,
+            type: 'TitleCenter',
+          });
+        }
+        break;
+
+      case '/todaymung/write':
         setHeaderTitle({
-          title: '오늘멍 모아보기',
+          title: '오늘멍 작성하기',
           showIcon: false,
+          type: 'TitleCenter',
+        });
+        break;
+
+      case '/todaymung/placeRegister':
+        setHeaderTitle({
+          title: '오늘멍 장소 등록',
+          showIcon: true,
           type: 'TitleCenter',
         });
         break;
