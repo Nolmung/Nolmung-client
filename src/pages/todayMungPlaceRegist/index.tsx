@@ -1,19 +1,32 @@
 import SearchInput from '@/common/components/searchInput';
 import S from './styles/index.style';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { placeMap } from '@/mocks/data/placeMap';
 import SearchResultCard from './components/SearchResultCard';
 import { useReviewStore } from './stores/reviewStore';
+import VisitedPlaceCard from '../todayMungWrite/components/VisitedPlaceCard';
+import { CancelIcon } from '@/assets/images/svgs';
 
 function TodayMungPlaceRegist() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [keywordReviewVisibleId, setKeywordReviewVisibleId] = useState<
+    number | null
+  >(null);
+
   const handleSearch = () => {
     console.log('REF', inputRef?.current?.value);
   };
-  const { reviewlist } = useReviewStore();
-
+  const { reviewlist, deleteReview } = useReviewStore();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const handleDeleteButtonClick = (placeId: number) => {
+    deleteReview(placeId);
+  };
   return (
-    <S.Wrapper>
+    <S.Wrapper
+      addPadding={reviewlist.length > 0}
+      ref={scrollRef}
+      className="scroll-container"
+    >
       <S.SearchInputWrapper>
         <SearchInput
           inputRef={inputRef}
@@ -23,6 +36,9 @@ function TodayMungPlaceRegist() {
       </S.SearchInputWrapper>
       {placeMap.map((place) => (
         <SearchResultCard
+          scrollRef={scrollRef}
+          keywordReviewVisibleId={keywordReviewVisibleId}
+          setKeywordReviewVisibleId={setKeywordReviewVisibleId}
           key={place.place_id}
           place_category={place.category}
           place_id={place.place_id}
@@ -30,24 +46,23 @@ function TodayMungPlaceRegist() {
           road_address={place.road_address}
         />
       ))}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '100px',
-          height: '100px',
-          backgroundColor: 'white',
-          display: 'flex',
-          flexDirection: 'row',
-        }}
-      >
+      <S.VisitedPlaceCard>
         {reviewlist.map((review) => (
-          <div key={review.placeId}>
-            <div>{review.placeName}</div>
-            <div>{review.rating}</div>
-            <div>{review.category}</div>
-          </div>
+          <S.CardWrapper>
+            <S.IconWrapper
+              onClick={() => handleDeleteButtonClick(review.placeId)}
+            >
+              <CancelIcon width={10} />
+            </S.IconWrapper>
+            <VisitedPlaceCard
+              key={review.placeId}
+              place_name={review.placeName}
+              road_address={review.roadAddress}
+              my_rate={review.rating}
+            />
+          </S.CardWrapper>
         ))}
-      </div>
+      </S.VisitedPlaceCard>
     </S.Wrapper>
   );
 }

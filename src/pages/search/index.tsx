@@ -37,7 +37,6 @@ function Search() {
 
   const handleSearchIconClick = () => {
     const searchInputValue = inputRef?.current?.value;
-    console.log(inputRef?.current?.value);
     if (!searchInputValue || !searchInputValue.trim()) return;
 
     const newSearchItem: SearchHistoryItem = {

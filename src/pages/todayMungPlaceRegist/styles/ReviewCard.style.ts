@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 const St = {
-  Wrapper: styled.div`
+  Wrapper: styled.div.attrs(() => ({
+    className: 'scroll-menu',
+  }))`
     width: 346px;
     flex-shrink: 0;
     border-radius: 15px;
@@ -20,7 +22,7 @@ const St = {
     height: 38px;
     border-radius: 10px;
     background-color: ${({ isActive }) => (isActive ? '#D3FBD4' : '#f0f0f0')};
-    border: ${({ isActive }) => (isActive ? '#1px solid #17AA1A' : 'none')};
+    border: ${({ isActive }) => (isActive ? '1px solid #17AA1A' : 'none')};
     padding: 0 14px;
     display: flex;
     align-items: center;

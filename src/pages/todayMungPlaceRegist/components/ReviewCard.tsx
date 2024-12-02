@@ -5,11 +5,13 @@ import KEYWORDS from '@/common/constants/reviewLabels';
 import { useState } from 'react';
 import Button from '@/common/components/button/Button';
 import { useReviewStore } from '../stores/reviewStore';
+
 interface ReviewCardProps {
   category: PlaceCategory;
   placeId: number;
   placeName: string;
-  setKeywordReviewVisible: (visible: boolean) => void;
+  roadAddress: string;
+  setKeywordReviewVisibleId: (id: number | null) => void;
 }
 
 interface Labels {
@@ -18,10 +20,11 @@ interface Labels {
 }
 
 function ReviewCard({
-  setKeywordReviewVisible,
+  setKeywordReviewVisibleId,
   category,
   placeId,
   placeName,
+  roadAddress,
 }: ReviewCardProps) {
   const { reviewlist, addReviewList } = useReviewStore();
   const review = reviewlist.find((review) => review.placeId === placeId);
@@ -40,11 +43,17 @@ function ReviewCard({
       category,
       labels: selectedLabels,
       placeName,
+      roadAddress,
     });
-    setKeywordReviewVisible(false);
+    setKeywordReviewVisibleId(null);
   };
 
-  const handleReviewKeywordClick = (labelId: number, labelName: string) => {
+  const handleReviewKeywordClick = (
+    labelId: number,
+    labelName: string,
+    e: React.MouseEvent<HTMLDivElement>,
+  ) => {
+    e.stopPropagation();
     const labelExists = selectedLabels.some(
       (label) => label.labelId === labelId,
     );
@@ -97,8 +106,8 @@ function ReviewCard({
       <S.KeywordWrapper>
         {KEYWORDS.COMMON.map((keyword) => (
           <S.ReviewButton
-            onClick={() =>
-              handleReviewKeywordClick(keyword.labelId, keyword.labelName)
+            onClick={(e) =>
+              handleReviewKeywordClick(keyword.labelId, keyword.labelName, e)
             }
             isActive={selectedLabels.some(
               (label) => label.labelId === keyword.labelId,
@@ -110,8 +119,8 @@ function ReviewCard({
         ))}
         {KEYWORDS[category].map((keyword) => (
           <S.ReviewButton
-            onClick={() =>
-              handleReviewKeywordClick(keyword.labelId, keyword.labelName)
+            onClick={(e) =>
+              handleReviewKeywordClick(keyword.labelId, keyword.labelName, e)
             }
             isActive={selectedLabels.some(
               (label) => label.labelId === keyword.labelId,

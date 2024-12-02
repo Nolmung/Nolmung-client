@@ -36,27 +36,27 @@ const mocks = [
   {
     place_name: '마포구청',
     road_address: '서울 마포구 월드컵로 212',
-    my_rate: '4.5',
-  },
-  {
-    place_name: '마포구청',
-    road_address: '서울 용산구 구대로 2층',
-    my_rate: '4.5',
-  },
-  {
-    place_name: '마포구청',
-    road_address: '서울 노원구 한글비석로 8길 41',
-    my_rate: '4.5',
+    my_rate: 4.5,
   },
   {
     place_name: '마포구청',
     road_address: '서울 마포구 월드컵로 212',
-    my_rate: '4.5',
+    my_rate: 4.5,
   },
   {
     place_name: '마포구청',
     road_address: '서울 마포구 월드컵로 212',
-    my_rate: '4.5',
+    my_rate: 4.5,
+  },
+  {
+    place_name: '마포구청',
+    road_address: '서울 마포구 월드컵로 212',
+    my_rate: 4.5,
+  },
+  {
+    place_name: '마포구청',
+    road_address: '서울 마포구 월드컵로 212',
+    my_rate: 4.5,
   },
 ];
 
