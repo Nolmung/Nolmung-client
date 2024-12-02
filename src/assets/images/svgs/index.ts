@@ -7,6 +7,7 @@ export { default as CancelIcon } from './CancelIcon';
 export { default as CheckEmptyGreen } from './CheckEmptyGreen';
 export { default as CheckFiiledDark } from './CheckFiiledDark';
 export { default as DogPaw } from './DogPaw';
+export { default as EmptyStar } from './EmptyStar';
 export { default as FilledStar } from './FilledStar';
 export { default as LoginBackgroundimg } from './LoginBackgroundimg';
 export { default as NolmungLogo } from './NolmungLogo';

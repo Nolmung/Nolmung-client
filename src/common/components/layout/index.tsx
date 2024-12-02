@@ -67,9 +67,9 @@ function Layout({ children }: LayoutProps) {
         });
         break;
 
-      case '/todaymung/placeRegister':
+      case '/todaymung/placeregist':
         setHeaderTitle({
-          title: '오늘멍 장소 등록',
+          title: '오늘멍 장소등록',
           showIcon: true,
           type: 'TitleCenter',
         });

@@ -12,6 +12,8 @@ interface SearchInputProps {
   onClick?: () => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  autofocus?: boolean;
+  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 function SearchInput({
@@ -20,15 +22,20 @@ function SearchInput({
   onClick,
   onChange,
   placeholder = '장소를 검색해주세요',
+  autofocus,
+  inputRef,
 }: SearchInputProps) {
   const handleEnterKeyOn = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && onClick && !e.nativeEvent.isComposing) {
       onClick();
     }
   };
+
   return (
     <S.InputWrapper onClick={onClick} width={width ? width : 100}>
       <S.Input
+        ref={inputRef}
+        autoFocus={autofocus}
         placeholder={placeholder}
         value={value}
         onKeyDown={handleEnterKeyOn}

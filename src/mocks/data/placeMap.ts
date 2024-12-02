@@ -4,7 +4,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 1,
     place_name: '38도씨식당',
-    category: '카페',
+    category: 'CAFE',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210721_132%2F1626855796685XVdK4_JPEG%2FW0db6n6s7HHCHrwhXAk9WPua.jpeg.jpg',
     road_address: '서울특별시 마포구 와우산로17길 19-17 2층',
@@ -16,7 +16,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 2,
     place_name: '가든블루',
-    category: '숙소',
+    category: 'ACCOMMODATION',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fnaverbooking-phinf.pstatic.net%2F20230621_230%2F1687347746536jrY8r_JPEG%2F9_HEK06485.jpg',
     road_address: '경기도 포천시 이동면 화동로 2236-34',
@@ -28,7 +28,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 3,
     place_name: '가천박물관',
-    category: '박물관',
+    category: 'MUSEUM',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20150901_188%2F1441038940399JMBis_JPEG%2F11784831_0.jpg',
     road_address: '인천광역시 연수구 청량로102번길 40-9',
@@ -40,7 +40,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 4,
     place_name: '가평힐링타임펜션',
-    category: '숙소',
+    category: 'ACCOMMODATION',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzEwMjdfMTAy%2FMDAxNjk4MzM3MDIwNzQz.DikZBl81JDnpo2K2a3vxTWU43nufOAF83uCoKy7cIFkg.qr2EkUgwTQUFmX2-0tfkGu4lGetp7vtAe6D-zdrEt4Ig.JPEG%2Fimage.jpg%3Ftype%3Dw1500_60_sharpen',
     road_address: '경기도 가평군 상면 수목원로 181-26',
@@ -52,7 +52,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 5,
     place_name: '갈매구릉산자락길',
-    category: '여행지',
+    category: 'TRAVEL',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200414_231%2F1586839022050QBAqJ_JPEG%2FlFL36hkQq8qVlbZoRcpXETlc.jpg',
     road_address: '경기도 구리시 갈매동 392-20',
@@ -64,7 +64,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 6,
     place_name: '감악산 출렁다리',
-    category: '여행지',
+    category: 'TRAVEL',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180504_143%2F1525421227702xE4AR_JPEG%2FOP9FhMSrn52w8ZPLn2Fz54tL.jpg',
     road_address: '경기도 파주시 적성면 설마천로 238',
@@ -76,7 +76,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 7,
     place_name: '강서 한강공원',
-    category: '공원',
+    category: 'PARK',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20150901_170%2F1441033988895bFru3_JPEG%2F13416990_0.jpg',
     road_address: '서울특별시 강서구 양천로27길 279-23',
@@ -88,7 +88,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 8,
     place_name: '강아지대학로',
-    category: '카페',
+    category: 'CAFE',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200909_265%2F1599645032344hTixf_JPEG%2F8wPFUq8in6zEDUjrr4U9NsbB.jpg',
     road_address: '서울특별시 종로구 대학로12길 92 지하 1층',
@@ -100,7 +100,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 9,
     place_name: '강아지정류장',
-    category: '놀이터',
+    category: 'PLAYGROUND',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20190903_209%2F1567512387982vTeVs_JPEG%2Fc-bBI-ssfOqBYYzgliSJERyW.jpeg.jpg',
     road_address: '서울특별시 강서구 양천로 709 2층',
@@ -112,7 +112,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 10,
     place_name: '강화 로만티카애견리조트',
-    category: '숙소',
+    category: 'ACCOMMODATION',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230925_258%2F16956182709545zcWL_JPEG%2F6.jpg',
     road_address: '인천광역시 강화군 화도면 해안남로 1986',

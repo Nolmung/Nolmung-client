@@ -4,7 +4,7 @@ import KEYWORDS from '../constants/reviewLabels';
 const findKeywordById = (labelId: number) => {
   return Object.values(KEYWORDS)
     .flat()
-    .find((keyword) => keyword.id === labelId);
+    .find((keyword) => keyword.labelId === labelId);
 };
 
 export default findKeywordById;

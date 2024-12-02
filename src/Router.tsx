@@ -1,6 +1,6 @@
 import { ROUTE } from '@common/constants/route';
 import Main from '@pages/main';
-import TodayMung from '@pages/todaymung';
+import TodayMung from '@/pages/todaymung';
 import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -9,8 +9,8 @@ import Detail from './pages/detail';
 import Login from './pages/login';
 import SignUp from './pages/signUp';
 import Search from './pages/search';
-import TodayMungWrite from './pages/todayMungWrite';
-import TodayMungPlaceRegister from './pages/todayMungPlaceRegist';
+import TodayMungWrite from './pages/todaymungWrite';
+import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -37,8 +37,8 @@ function Router() {
           <Route path={ROUTE.SEARCH()} element={<Search />} />
           <Route path={ROUTE.TODAYMUNG_WIRTE()} element={<TodayMungWrite />} />
           <Route
-            path={ROUTE.TODAYMUNG_PLACE_REGISTER()}
-            element={<TodayMungPlaceRegister />}
+            path={ROUTE.TODAYMUNG_PLACE_REGIST()}
+            element={<TodayMungPlaceRegist />}
           />
         </Routes>
       </Layout>

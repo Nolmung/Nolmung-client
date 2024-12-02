@@ -133,7 +133,7 @@ function Detail() {
           {data.labels.map((item) => (
             <KeywordReview
               key={item.label_id}
-              Keyword={findKeywordById(item.label_id)!.content}
+              Keyword={findKeywordById(item.label_id)!.labelName}
               KeywordCount={item.count}
               KeywordPercent={(item.count / reviewCount) * 100}
             />

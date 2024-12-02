@@ -88,7 +88,6 @@ function Main() {
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (category || query.get('category')) {
-      console.log('category', category);
       setBottomHeight(BOTTOM_HEIGHT);
       setButtonGap(0);
     }
