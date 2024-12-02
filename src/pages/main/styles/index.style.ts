@@ -7,13 +7,11 @@ const S = {
 
   MapWrapper: styled.div`
     width: 100%;
-    height: calc(100vh - 92px);
     flex: 1;
   `,
 
   SearchCurrentButton: styled.div<{
     bottomHeight: number;
-    buttonGap: number;
   }>`
     display: flex;
     height: 36px;
@@ -28,7 +26,7 @@ const S = {
     z-index: 1;
     position: absolute;
     // 조건부 스타일링으로 바꾸기
-    bottom: ${({ bottomHeight, buttonGap }) => bottomHeight + buttonGap}px;
+    bottom: ${({ bottomHeight }) => bottomHeight}px;
     left: 50%;
     transform: translateX(-50%);
     :active {
@@ -56,7 +54,6 @@ const S = {
 
   Bottom: styled.div<{
     bottomHeight: number;
-    buttonGap: number;
     bottomVisible: boolean;
   }>`
     visibility: ${({ bottomVisible }) =>
@@ -66,6 +63,8 @@ const S = {
     background-color: white;
     z-index: 1;
     width: 100%;
+    margin-top: 10px;
+    /* margin-bottom: 70px; */
   `,
 
   BottomSheetWrapper: styled.div`
