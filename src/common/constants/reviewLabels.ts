@@ -1,4 +1,9 @@
-const KEYWORDS = {
+import { PlaceCategory } from '../types';
+
+const KEYWORDS: Record<
+  PlaceCategory | 'COMMON',
+  { readonly id: number; readonly content: string }[]
+> = {
   COMMON: [
     { id: 1, content: '분위기가 좋아요' },
     { id: 2, content: '주차하기 편해요' },
@@ -20,7 +25,17 @@ const KEYWORDS = {
     { id: 12, content: '설명이 잘 되어있어요' },
     { id: 13, content: '전시 테마가 재미있어요' },
   ],
+  GALLERY: [
+    { id: 11, content: '유익해요' },
+    { id: 12, content: '설명이 잘 되어있어요' },
+    { id: 13, content: '전시 테마가 재미있어요' },
+  ],
   PARK: [
+    { id: 14, content: '공간이 넓어요' },
+    { id: 15, content: '놀 거리가 많아요' },
+    { id: 16, content: '깨끗해요' },
+  ],
+  PLAYGROUND: [
     { id: 14, content: '공간이 넓어요' },
     { id: 15, content: '놀 거리가 많아요' },
     { id: 16, content: '깨끗해요' },
@@ -30,11 +45,11 @@ const KEYWORDS = {
     { id: 18, content: '뷰가 좋아요' },
     { id: 19, content: '산책하기 좋아요' },
   ],
-  ACCOMODATION: [
+  ACCOMMODATION: [
     { id: 20, content: '깨끗해요' },
     { id: 21, content: '물놀이하기 좋아요' },
     { id: 22, content: '방음이 잘돼요' },
   ],
-} as const;
+};
 
 export default KEYWORDS;
