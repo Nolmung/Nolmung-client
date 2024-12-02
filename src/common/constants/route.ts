@@ -8,4 +8,5 @@ export const ROUTE = {
   SEARCH: () => '/search',
   TODAYMUNG_WIRTE: () => '/todayMung/write',
   TODAYMUNG_PLACE_REGISTER: () => '/todayMung/placeRegister',
+  TODAYMUNG_DETAIL: (diaryId: string | number) => `todaymung/detail/${diaryId}`,
 } as const;
