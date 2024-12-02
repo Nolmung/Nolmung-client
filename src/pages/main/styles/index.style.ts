@@ -10,6 +10,13 @@ const S = {
     flex: 1;
   `,
 
+  LocationButtonWrapper: styled.div<{ bottomHeight: number }>`
+    position: absolute;
+    bottom: ${({ bottomHeight }) => bottomHeight}px;
+    right: 24px;
+    z-index: 1001;
+  `,
+
   SearchCurrentButton: styled.div<{
     bottomHeight: number;
   }>`

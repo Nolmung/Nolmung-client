@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { markerData } from '@/mocks/data/markerData';
-import { Refresh } from '@/assets/images/svgs';
+import { LocationButtonIcon, Refresh } from '@/assets/images/svgs';
 import S from './styles/index.style';
 import { useMapCenter } from './hooks/useMapCenter';
 import { CustomMarker, initMarkers } from './utils/markerUtils';
@@ -18,6 +18,7 @@ import Content from './components/bottomSheet/Content';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
 import CustomMarkerComponent from './components/CustomMarkerComponent';
+import { getUserLocation } from './utils/userLocationUtils';
 
 function Main() {
   const { naver } = window;
@@ -186,6 +187,14 @@ function Main() {
     });
   };
 
+  const handleLocationButtonClick = () => {
+    getUserLocation((coords) => {
+      setMapCenter(coords);
+      mapRef.current!.setZoom(17);
+    });
+    navigate('/');
+  }
+
   return (
     <S.Wrapper>
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
@@ -199,6 +208,9 @@ function Main() {
         )}
         <S.Wrapper onClick={(e) => e.stopPropagation()}>
           <S.BottomSheetWrapper onClick={(e) => e.stopPropagation()}>
+            <S.LocationButtonWrapper bottomHeight={currentButtonHeight} onClick={handleLocationButtonClick}>
+              <LocationButtonIcon width={38} height={38} />
+            </S.LocationButtonWrapper>
             {isCurrentButtonActive && (
               <S.SearchCurrentButton
                 bottomHeight={currentButtonHeight}
