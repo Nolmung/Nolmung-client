@@ -1,7 +1,7 @@
 import { S } from './TodayMungList.style';
 import { CardDataType } from './TodayMungList.type';
-import { todaymungData } from '../../constants/TodaymungData';
 import TodayMungListCard from '../listCard/TodayMungListCard';
+import { todaymungData } from '../../constants/todaymungData';
 
 const TodayMungList = () => {
   return (

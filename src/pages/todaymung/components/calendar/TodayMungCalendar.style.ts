@@ -27,9 +27,9 @@ export const StyledDateCalendar = styled(DateCalendar)`
   }
 
   .MuiPickersDay-today {
-    border: 1px solid #a7a7a7;
-    background-color: #f0f0f0;
-    border-radius: 8px;
+    background-color: #d9d9d9;
+    border-radius: 30%;
+    border: none !important;
   }
 
   .MuiDayCalendarHeader-root {
@@ -80,10 +80,11 @@ export const CustomPickersDay = styled(PickersDay)<PickersDayProps<Dayjs>>(() =>
   boxSizing: 'border-box',
   margin: '2px',
   fontSize: '16px',
-  width: '41px',
+  width: '40px',
   height: '40px',
   borderRadius: '50%',
   '@media (min-height: 800px)': {
+    width: '51px',
     height: '50px',
   },
   '&.Mui-selected': {

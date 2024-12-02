@@ -149,6 +149,7 @@ const S = {
     justify-content: center;
     width: 100%;
     font-size: 16px;
+    color: #080808;
     @media (min-height: 800px) {
       font-size: 16px;
     }
