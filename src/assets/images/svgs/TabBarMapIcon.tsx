@@ -4,8 +4,8 @@ const SvgTabBarMapIcon = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 30 30"
-    width={props.width || 25}
-    height={props.height || 25}
+    width={props.width || 28}
+    height={props.height || 28}
     {...props}
   >
     <path
