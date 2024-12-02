@@ -9,8 +9,8 @@ import Detail from './pages/detail';
 import Login from './pages/login';
 import SignUp from './pages/signUp';
 import Search from './pages/search';
-import TodayMungWrite from './pages/todayMungWrite';
-import TodayMungPlaceRegist from './pages/todayMungPlaceRegist';
+import TodayMungWrite from './pages/todaymungWrite';
+import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
