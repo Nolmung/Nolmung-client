@@ -1,8 +1,8 @@
 import { MarkerType } from '../types';
-import CustomMarker from '../components/CustomMarker';
 import ReactDOMServer from 'react-dom/server';
-import { MarkerClickType } from '..';
 import { MapPlace } from '@/service/apis/place/index.type';
+import CustomMarkerComponent from '../components/CustomMarkerComponent';
+import { PlaceCategory } from '@/common/types';
 
 /**
  * 마커 생성 함수
@@ -12,10 +12,11 @@ import { MapPlace } from '@/service/apis/place/index.type';
 export interface CustomMarker extends naver.maps.Marker {
   data: MapPlace;
 }
+
 export const addMarker = (
   map: naver.maps.Map,
   data: MarkerType,
-  handleMarkerClick: ({ e, marker }: MarkerClickType) => void,
+  handleMarkerClick: (marker: CustomMarker) => void,
 ) => {
   try {
     let newMarker = new naver.maps.Marker({
@@ -25,7 +26,7 @@ export const addMarker = (
       clickable: true,
       icon: {
         content: ReactDOMServer.renderToString(
-          <CustomMarker
+          <CustomMarkerComponent
             placeId={data.place_id}
             name={data.name}
             category={data.category}
@@ -37,7 +38,7 @@ export const addMarker = (
     (newMarker.data = {
       place_id: data.place_id,
       place_name: data.name,
-      category: data.category,
+      category: data.category as PlaceCategory,
       road_address: data.road_address,
       place_img_url: data.place_img_url,
       star_rating_avg: data.star_rating_avg,
@@ -49,7 +50,7 @@ export const addMarker = (
         if (e.domEvent) {
           e.domEvent.stopPropagation();
         }
-        handleMarkerClick({ e, marker: newMarker });
+        handleMarkerClick(newMarker);
       });
   } catch (e) {
     console.error('Error creating marker:', e);
@@ -63,7 +64,7 @@ export const addMarker = (
 export const initMarkers = (
   map: naver.maps.Map,
   markerData: MarkerType[],
-  handleMarkerClick: ({ e, marker }: MarkerClickType) => void,
+  handleMarkerClick: (marker: CustomMarker) => void,
 ) => {
   markerData.forEach((data) => {
     console.log('marker', data);
