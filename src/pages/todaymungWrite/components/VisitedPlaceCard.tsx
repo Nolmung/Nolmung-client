@@ -4,7 +4,7 @@ import S from '../styles/VisitedPlaceCard.style';
 interface VisitedPlaceCardProps {
   place_name: string;
   road_address: string;
-  my_rate: string;
+  my_rate: number;
 }
 
 function VisitedPlaceCard({
@@ -16,7 +16,6 @@ function VisitedPlaceCard({
     <S.PlaceCard>
       <S.PlaceTitleRateWrapper>
         <S.PlaceTitle>{place_name}</S.PlaceTitle>
-
         <S.PlaceAverageRate>
           <FaStar size="16" color="#F4E600" /> {my_rate}
         </S.PlaceAverageRate>
