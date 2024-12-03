@@ -8,7 +8,7 @@ export const BOTTOM_SHEET_HIDE_HEIGHT = 30; // 바텀시트가 올라갔을 때 
 export const BOTTOM_SHEET_MIN_Y = BOTTOM_HEIGHT - BOTTOM_SHEET_HIDE_HEIGHT;
 export const BOTTOM_SHEET_MAX_Y = WINDOW_HEIGHT; // 바텀시트가 최대로 올라갔을 떄의 y 값
 
-export const REF_HEIGHT = WINDOW_HEIGHT;
+export const REF_HEIGHT = WINDOW_HEIGHT - BOTTOM_SHEET_HIDE_HEIGHT;
 
 export const BOTTOM_CARD_HEIGHT = 152;
 
