@@ -6,7 +6,7 @@ const TodayMungListCard = ({ listData, data }: ListCardProps) => {
   return (
     <S.Wrap>
       <S.UserInfoArea>
-        <S.ProfileImg />
+        <S.ProfileImg src="/public/pngs/TodayMungLogo.png" />
         <S.UserInfoTextArea>
           <S.UserName>{user.nickname}</S.UserName>
           <S.PostDate>{data.createdAt}</S.PostDate>

@@ -54,7 +54,6 @@ export { default as TodayMungCalendarIconActive } from './TodayMungCalendarIconA
 export { default as TodayMungDefaultImage } from './TodayMungDefaultImage';
 export { default as TodayMungListIcon } from './TodayMungListIcon';
 export { default as TodayMungListIconActive } from './TodayMungListIconActive';
-export { default as TodayMungProfileImage } from './TodayMungProfileImage';
 export { default as TravelMarker } from './TravelMarker';
 export { default as VisitedTag } from './VisitedTag';
 export { default as Vite } from './Vite';

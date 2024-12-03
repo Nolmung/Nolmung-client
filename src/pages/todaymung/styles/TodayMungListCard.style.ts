@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { TodayMungProfileImage } from '@/assets/images/svgs';
-
 export const S = {
   Wrap: styled.div`
     width: 100%;
@@ -21,7 +19,7 @@ export const S = {
     padding: 0px 10px;
     justify-content: space-between;
   `,
-  ProfileImg: styled(TodayMungProfileImage)`
+  ProfileImg: styled.img`
     width: 30px;
     height: 30px;
   `,
