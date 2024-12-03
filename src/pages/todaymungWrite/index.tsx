@@ -64,11 +64,11 @@ function TodayMungWrite() {
   /** @Todo POST API 호출 */
   const handleCompleteButtonClick = () => {};
   return (
-    <>
+    <S.Wrapper>
       <S.BannerWrapper>
         <S.BannerImage src="/pngs/TodayMungLogo.png" alt="오늘멍 배너" />
       </S.BannerWrapper>
-      <S.Wrapper>
+      <S.ContentWrapper>
         <div style={{ marginTop: '23px' }}>
           <S.Title>장소</S.Title>
           <S.PlaceWrapper>
@@ -114,8 +114,8 @@ function TodayMungWrite() {
             </Button>
           </S.ButtonWrapper>
         </div>
-      </S.Wrapper>
-    </>
+      </S.ContentWrapper>
+    </S.Wrapper>
   );
 }
 
