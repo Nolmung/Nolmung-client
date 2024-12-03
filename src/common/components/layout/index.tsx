@@ -44,40 +44,58 @@ function Layout({ children }: LayoutProps) {
     type: 'TitleLeft',
   });
   useEffect(() => {
-    switch (location.pathname) {
-      case '/':
-        setHeaderTitle({ title: '메인', showIcon: true, type: 'TitleCenter' });
-        break;
+     if (location.pathname.startsWith('/todaymung/detail')) {
+       setHeaderTitle({
+         title: '오늘멍 상세보기',
+         showIcon: true,
+         type: 'TitleCenter',
+       });
+       return;
+     }
+     switch (location.pathname) {
+       case '/':
+         setHeaderTitle({ title: '메인', showIcon: true, type: 'TitleCenter' });
+         break;
 
-      case '/todayMung':
-        {
-          setHeaderTitle({
-            title: '오늘멍 모아보기',
-            showIcon: false,
-            type: 'TitleCenter',
-          });
-        }
-        break;
+       case '/todaymung':
+         {
+           setHeaderTitle({
+             title: '오늘멍 모아보기',
+             showIcon: false,
+             type: 'TitleCenter',
+           });
+         }
+         break;
 
-      case '/todaymung/write':
-        setHeaderTitle({
-          title: '오늘멍 작성하기',
-          showIcon: false,
-          type: 'TitleCenter',
-        });
-        break;
+       case '/todaymung/write':
+         setHeaderTitle({
+           title: '오늘멍 작성하기',
+           showIcon: false,
+           type: 'TitleCenter',
+         });
+         break;
 
-      case '/todaymung/placeRegister':
-        setHeaderTitle({
-          title: '오늘멍 장소 등록',
-          showIcon: true,
-          type: 'TitleCenter',
-        });
-        break;
+       case '/todaymung/placeRegister':
+         setHeaderTitle({
+           title: '오늘멍 장소 등록',
+           showIcon: true,
+           type: 'TitleCenter',
+         });
+         break;
 
-      default:
-        setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
-    }
+       case '/^/todaymung/detail/d+$/':
+         {
+           setHeaderTitle({
+             title: '오늘멍 모아보기',
+             showIcon: true,
+             type: 'TitleLeft',
+           });
+         }
+         break;
+
+       default:
+         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
+     }
   }, [location.pathname]);
 
   return (

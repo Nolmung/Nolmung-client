@@ -20,7 +20,6 @@ import 'dayjs/locale/ko';
 import {
   CalendarDataProps,
   ListDataProps,
-  DetailProps,
 } from '../../types/TodayMungList.type';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +28,7 @@ dayjs.locale('ko');
 function renderDayWithMarker(
   props: PickersDayProps<Dayjs>,
   listData: CalendarDataProps,
-  handleDayClick: (diary: DetailProps) => void,
+  handleDayClick: (diaryId: number) => void,
 ) {
   const { day, selected } = props;
   const { diaries } = listData;
@@ -46,7 +45,7 @@ function renderDayWithMarker(
       className={`${isTruthy || isToday ? 'hover-enabled' : ''} ${
         selected ? 'Mui-selected' : ''
       }`}
-      onClick={() => diary && handleDayClick(diary)}
+      onClick={() => diary && handleDayClick(diary.diaryId)}
     >
       <S.DayText $hasMarker={!!isTruthy}>{day.date()}</S.DayText>
       {diary && (
@@ -93,8 +92,8 @@ function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
 // 메인 컴포넌트
 export default function TodayMungCalendar({ listData }: ListDataProps) {
   const navigate = useNavigate();
-  const handleDayClick = (diary: DetailProps) => {
-    navigate(`/todaymung/detail/${diary.diaryId}`, { state: diary });
+  const handleDayClick = (diaryId: number) => {
+    navigate(`/todaymung/detail/${diaryId}`);
   };
   return (
     <S.Wrap>
