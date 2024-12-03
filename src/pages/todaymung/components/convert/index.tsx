@@ -3,8 +3,8 @@ import { match } from 'ts-pattern';
 
 import { S } from '../../styles/Convert.style';
 import { ViewMode } from '../../types/Convert.type';
-import TodayMungCalendar from '../calendar/TodayMungCalendar';
-import TodayMungList from '../list/TodayMungList';
+import TodayMungCalendar from '../todayMungCalendar';
+import TodayMungList from '../todayMungList';
 import {
   TodayMungCalendarIcon,
   TodayMungCalendarIconActive,

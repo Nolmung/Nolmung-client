@@ -1,6 +1,6 @@
-import Convert from './components/convert/Convert';
-import UserInfo from './components/userInfo/UserInfo';
-import { S } from './index.style';
+import Convert from './components/convert';
+import UserInfo from './components/userInfo';
+import { S } from './styles/index.style';
 import { todaymungData } from '@/mocks/data/todaymungData';
 
 function index() {
