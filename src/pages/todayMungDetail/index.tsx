@@ -15,9 +15,6 @@ const TodayMungDetail = () => {
   const handleToggleClick = () => {
     setEditToggle(!editToggle);
   };
-  /**
-   * 아래에 map 해놓은 부분은 DiaryData.dogs에 강아지 이름이 없어서 따로 추가해주신다고하셔서 map안돌리고 따로 주석 쳐놓았습니다.
-   */
   return (
     <S.Wrapper>
       <S.Container>
@@ -42,9 +39,6 @@ const TodayMungDetail = () => {
         {diaryData.dogs && (
           <S.DogsArea>
             <S.DogsAreaTitle>오늘을 함께한 반려견</S.DogsAreaTitle>
-            {/* {diaryData.dogs.map((data) => {
-              return <DogTagCard key={data.dogId} data={data} />;
-            })} */}
             <DogTagCard data={diaryData.dogs[0]} />
           </S.DogsArea>
         )}
