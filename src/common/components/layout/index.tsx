@@ -83,16 +83,6 @@ function Layout({ children }: LayoutProps) {
          });
          break;
 
-       case '/^/todaymung/detail/d+$/':
-         {
-           setHeaderTitle({
-             title: '오늘멍 모아보기',
-             showIcon: true,
-             type: 'TitleLeft',
-           });
-         }
-         break;
-
        default:
          setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
      }

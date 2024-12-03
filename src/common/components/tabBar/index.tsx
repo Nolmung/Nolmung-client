@@ -2,6 +2,7 @@ import { S } from '@common/components/tabBar/index.styles';
 import { TabBarType } from '@common/components/tabBar/index.type';
 import tabItems from '@common/constants/tabBarItems';
 import { useLocation } from 'react-router-dom';
+import { isTabActive } from './utils/tabUtils';
 
 function TabBar() {
   const location = useLocation();
@@ -10,7 +11,7 @@ function TabBar() {
     <S.Wrapper>
       {tabItems.map((item: TabBarType) => (
         <S.IconArea to={item.path} key={item.path}>
-          {location.pathname === item.path ? (
+          {isTabActive(item.path, location.pathname) ? (
             <item.activeIcon />
           ) : (
             <item.icon />
