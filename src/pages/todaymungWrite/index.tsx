@@ -6,6 +6,8 @@ import Editor from './components/Editor';
 import MediaGroup from './components/MediaGroup';
 import Button from '@/common/components/button/Button';
 import { DogType } from '@/service/apis/user/index.types';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@/common/constants/route';
 
 const dogs: DogType[] = [
   {
@@ -61,14 +63,20 @@ const mocks = [
 ];
 
 function TodayMungWrite() {
+  const navigate = useNavigate();
+
   /** @Todo POST API 호출 */
   const handleCompleteButtonClick = () => {};
+
+  const navigateToTodaymungPlaceRegist = () => {
+    navigate(ROUTE.TODAYMUNG_PLACE_REGIST());
+  };
   return (
-    <>
+    <S.Wrapper>
       <S.BannerWrapper>
         <S.BannerImage src="/pngs/TodayMungLogo.png" alt="오늘멍 배너" />
       </S.BannerWrapper>
-      <S.Wrapper>
+      <S.ContentWrapper>
         <div style={{ marginTop: '23px' }}>
           <S.Title>장소</S.Title>
           <S.PlaceWrapper>
@@ -82,7 +90,7 @@ function TodayMungWrite() {
                 />
               ))}
             </S.PlaceCardWrapper>
-            <S.PlaceAddButton>
+            <S.PlaceAddButton onClick={navigateToTodaymungPlaceRegist}>
               <PlusIcon width={20} height={20} />
             </S.PlaceAddButton>
           </S.PlaceWrapper>
@@ -114,8 +122,8 @@ function TodayMungWrite() {
             </Button>
           </S.ButtonWrapper>
         </div>
-      </S.Wrapper>
-    </>
+      </S.ContentWrapper>
+    </S.Wrapper>
   );
 }
 

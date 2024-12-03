@@ -2,6 +2,11 @@ import { BOTTOM_NAV_HEIGHT, HEADER_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 
 const S = {
+  Wrapper: styled.div`
+    width: 100%;
+    height: calc(100vh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
+    overflow: auto;
+  `,
   BannerWrapper: styled.div`
     position: relative;
     display: flex;
@@ -22,14 +27,15 @@ const S = {
       top: 12%;
     }
   `,
-  Wrapper: styled.div`
+  ContentWrapper: styled.div`
     width: 100%;
     padding: 0 22px 0px 22px;
-    height: calc(100% - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
-    overflow-y: auto;
+    height: 100%;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding-bottom: 16px;
   `,
 
   MenuWrapper: styled.div`

@@ -36,8 +36,8 @@ export interface MapPlace {
   category: PlaceCategory;
   road_address: string;
   place_img_url: string;
-  star_rating_avg: string;
+  star_rating_avg: number;
   review_count: number;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
 }
