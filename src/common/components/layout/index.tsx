@@ -75,7 +75,7 @@ function Layout({ children }: LayoutProps) {
         });
         break;
 
-      case pathName === '/todayMung':
+      case pathName === '/todaymung':
         {
           setHeaderTitle({
             title: '오늘멍 모아보기',
@@ -88,7 +88,7 @@ function Layout({ children }: LayoutProps) {
       case pathName == '/todaymung/write':
         setHeaderTitle({
           title: '오늘멍 작성하기',
-          showIcon: false,
+          showIcon: true,
           type: 'TitleCenter',
         });
         break;

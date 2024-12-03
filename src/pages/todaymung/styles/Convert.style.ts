@@ -15,7 +15,10 @@ export const S = {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100%;
+    padding-top: 146px;
+    height: calc(100vh - 350px);
+    overflow: auto;
+
     margin-top: 5px;
     @media (min-height: 800px) {
       margin-top: 10px;

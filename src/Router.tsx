@@ -35,7 +35,7 @@ function Router() {
           <Route path={ROUTE.LOGIN()} element={<Login />} />
           <Route path={ROUTE.SIGNUP()} element={<SignUp />} />
           <Route path={ROUTE.SEARCH()} element={<Search />} />
-          <Route path={ROUTE.TODAYMUNG_WIRTE()} element={<TodayMungWrite />} />
+          <Route path={ROUTE.TODAYMUNG_WRITE()} element={<TodayMungWrite />} />
           <Route
             path={ROUTE.TODAYMUNG_PLACE_REGIST()}
             element={<TodayMungPlaceRegist />}

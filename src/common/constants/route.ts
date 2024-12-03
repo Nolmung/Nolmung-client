@@ -6,6 +6,6 @@ export const ROUTE = {
   LOGIN: () => '/login',
   SIGNUP: () => `/signUp`,
   SEARCH: () => '/search',
-  TODAYMUNG_WIRTE: () => '/todaymung/write',
+  TODAYMUNG_WRITE: () => '/todaymung/write',
   TODAYMUNG_PLACE_REGIST: () => '/todaymung/placeregist',
 } as const;

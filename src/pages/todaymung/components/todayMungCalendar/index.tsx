@@ -21,6 +21,8 @@ import {
   CalendarDataProps,
   ListDataProps,
 } from '../../types/TodayMungList.type';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@/common/constants/route';
 
 dayjs.locale('ko');
 
@@ -88,6 +90,12 @@ function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
 
 // 메인 컴포넌트
 export default function TodayMungCalendar({ listData }: ListDataProps) {
+  const navigate = useNavigate();
+
+  const navigateToTodaymungWrite = () => {
+    navigate(ROUTE.TODAYMUNG_WRITE());
+  };
+
   return (
     <S.Wrap>
       <S.CalendarArea>
@@ -107,10 +115,9 @@ export default function TodayMungCalendar({ listData }: ListDataProps) {
           />
         </LocalizationProvider>
       </S.CalendarArea>
-      <S.TodaymungInsertButton>
+      <S.TodaymungInsertButton onClick={navigateToTodaymungWrite}>
         <PlusIcon /> <S.ButtonText>오늘멍 작성하기</S.ButtonText>
       </S.TodaymungInsertButton>
     </S.Wrap>
   );
 }
-
