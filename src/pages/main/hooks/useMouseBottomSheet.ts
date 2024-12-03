@@ -25,9 +25,6 @@ interface BottomSheetProps {
 export default function useMouseBottomSheet({
   setIsBottomSheetOpen,
 }: BottomSheetProps) {
-  let MIN_Y = BOTTOM_SHEET_MIN_Y,
-    MAX_Y = BOTTOM_SHEET_MAX_Y;
-
   const sheet = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
 
@@ -58,7 +55,7 @@ export default function useMouseBottomSheet({
       }
     }
 
-    if (sheet.current!.getBoundingClientRect().y > MIN_Y) {
+    if (sheet.current!.getBoundingClientRect().y > BOTTOM_SHEET_MAX_Y) {
       return true;
     }
 
@@ -129,16 +126,16 @@ export default function useMouseBottomSheet({
         const touchOffset = currentTouchY - mouseClickStart.clickY;
         let nextSheetY = currentTouchY + touchOffset;
 
-        if (nextSheetY <= MIN_Y) {
-          nextSheetY = MIN_Y;
+        if (nextSheetY <= BOTTOM_SHEET_MAX_Y) {
+          nextSheetY = BOTTOM_SHEET_MAX_Y;
         }
 
-        if (nextSheetY >= MAX_Y) {
-          nextSheetY = MAX_Y;
+        if (nextSheetY >= BOTTOM_SHEET_MIN_Y) {
+          nextSheetY = BOTTOM_SHEET_MIN_Y;
         }
         sheet.current!.style.setProperty(
           'transform',
-          `translateY(${nextSheetY - MAX_Y}px)`,
+          `translateY(${nextSheetY - BOTTOM_SHEET_MIN_Y}px)`,
         );
       } else {
         document.body.style.overflowY = 'scroll';
@@ -151,7 +148,7 @@ export default function useMouseBottomSheet({
 
       const currentSheetY = sheet.current!.getBoundingClientRect().y;
 
-      if (currentSheetY !== MIN_Y) {
+      if (currentSheetY !== BOTTOM_SHEET_MAX_Y) {
         if (
           mouseMove.movingDirection === 'down' &&
           content.current!.scrollTop <= 0
@@ -163,7 +160,7 @@ export default function useMouseBottomSheet({
         if (mouseMove.movingDirection === 'up') {
           sheet.current!.style.setProperty(
             'transform',
-            `translateY(${MIN_Y - MAX_Y}px)`,
+            `translateY(${BOTTOM_SHEET_MAX_Y - BOTTOM_SHEET_MIN_Y}px)`,
           );
         }
       }
@@ -189,14 +186,17 @@ export default function useMouseBottomSheet({
     if (sheet.current === null) return;
     sheet.current!.style.setProperty(
       'transform',
-      `translateY(${MIN_Y - MAX_Y}px)`,
+      `translateY(${BOTTOM_SHEET_MAX_Y - BOTTOM_SHEET_MIN_Y}px)`,
     );
 
     resetMetrics();
   };
 
   const handleDown = () => {
-    sheet.current!.style.setProperty('transform', `translateY(${MAX_Y}px)`);
+    sheet.current!.style.setProperty(
+      'transform',
+      `translateY(${BOTTOM_SHEET_MIN_Y}px)`,
+    );
     if (setIsBottomSheetOpen) setIsBottomSheetOpen(false);
     resetMetrics();
   };

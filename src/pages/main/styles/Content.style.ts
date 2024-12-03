@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
 export const S = {
-  Wrapper: styled.div`
+  Wrapper: styled.div<{ isCard: boolean }>`
     width: 100%;
-    height: 152px;
-    padding: 16px 16px;
+    height: ${({ isCard }) => (isCard ? '180px' : '152px')};
+
+    padding: ${({ isCard }) => (isCard ? '0 16px' : '16px 16px')};
     background-color: #fff;
-    border-bottom: 1.5px solid #f0f0f0;
+    border-radius: ${({ isCard }) => (isCard ? '20px 20px 0 0' : '0')};
+    align-items: center;
+    border-bottom: ${({ isCard }) => (isCard ? 'none' : '1.5px solid #f0f0f0')};
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
   `,

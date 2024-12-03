@@ -6,7 +6,6 @@ import { isTabActive } from './utils/tabUtils';
 
 function TabBar() {
   const location = useLocation();
-
   return (
     <S.Wrapper>
       {tabItems.map((item: TabBarType) => (

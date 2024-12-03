@@ -17,6 +17,12 @@ export const S = {
     gap: 15px;
   `,
 
+  IconWrapper: styled.div`
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+  `,
+
   DummyIcon: styled.div`
     width: 24px;
     height: 24px;

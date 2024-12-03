@@ -3,11 +3,11 @@ import styled from 'styled-components';
 export const S = {
   HeaderWrapper: styled.div`
     width: 100%;
-    height: 40px;
+    height: 30px;
     border-radius: 26px 26px 0 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
   `,
 
   Handle: styled.div`
@@ -18,6 +18,6 @@ export const S = {
     border-radius: 26px;
     background-color: #ededed;
     width: 50px;
-    height: 7px;
+    height: 4px;
   `,
 };

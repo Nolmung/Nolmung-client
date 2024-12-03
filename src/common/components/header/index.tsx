@@ -5,36 +5,25 @@ import { match } from 'ts-pattern';
 import { useNavigate } from 'react-router-dom';
 
 function Header({ title, showIcon, type }: HeaderType) {
-  const navigate = useNavigate();
-  const handleGoBack = () => {
-    navigate(-1);
+  const handleBackButtonClick = () => {
+    window.history.back();
   };
   return (
     <>
       {match(type)
         .with('TitleLeft', () => (
           <S.LeftHeaderArea>
-            {showIcon ? (
-              <GoBackIcon
-                onClick={handleGoBack}
-                style={{ cursor: 'pointer' }}
-              />
-            ) : (
-              <S.DummyIcon />
-            )}
+            <S.IconWrapper onClick={handleBackButtonClick}>
+              {showIcon ? <GoBackIcon /> : <S.DummyIcon />}
+            </S.IconWrapper>
             <S.LeftTitleArea>{title}</S.LeftTitleArea>
           </S.LeftHeaderArea>
         ))
         .with('TitleCenter', () => (
           <S.CenterHeaderArea>
-            {showIcon ? (
-              <GoBackIcon
-                onClick={handleGoBack}
-                style={{ cursor: 'pointer' }}
-              />
-            ) : (
-              <S.DummyIcon />
-            )}
+            <S.IconWrapper onClick={handleBackButtonClick}>
+              {showIcon ? <GoBackIcon /> : <S.DummyIcon />}
+            </S.IconWrapper>
             <S.CenterTitleArea>{title}</S.CenterTitleArea>
           </S.CenterHeaderArea>
         ))
