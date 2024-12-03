@@ -1,8 +1,8 @@
 import { MarkerType } from '../types';
 import ReactDOMServer from 'react-dom/server';
 import { MapPlace } from '@/service/apis/place/index.type';
-import CustomMarkerComponent from '../components/CustomMarkerComponent';
 import { PlaceCategory } from '@/common/types';
+import CustomMarkerComponent from '../components/customMarker';
 
 /**
  * 마커 생성 함수
@@ -67,7 +67,6 @@ export const initMarkers = (
   handleMarkerClick: (marker: CustomMarker) => void,
 ) => {
   markerData.forEach((data) => {
-    console.log('marker', data);
     addMarker(map, data, handleMarkerClick);
   });
 };

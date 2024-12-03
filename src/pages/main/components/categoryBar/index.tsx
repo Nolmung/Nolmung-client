@@ -14,7 +14,6 @@ interface CategoryBarProps {
 }
 
 function CategoryBar({
-  category,
   setCategory,
   setBottomSheetVisible,
   setBottomCardVisible,
@@ -23,16 +22,10 @@ function CategoryBar({
 
   const handleCategoryClick = (value: string) => {
     setBottomCardVisible(false);
-    if (category === value) {
-      setCategory('');
-      setBottomSheetVisible(false);
-      navigate('/');
-    } else {
-      setCategory(value); 
-      setBottomSheetVisible(true);
-      navigate(`/?category=${value}`);
-    }
-    setCategory('');
+
+    setCategory(value);
+    setBottomSheetVisible(true);
+    navigate(`/?category=${value}`);
   };
 
   const navigateToSearchPage = () => {
@@ -45,9 +38,7 @@ function CategoryBar({
       <SearchInput onClick={navigateToSearchPage} width={90} />
       <S.CategoryWrapper>
         {CATEGORY_OPTIONS.map(({ value, label, icon: Icon }) => (
-          <S.StyledButtonWrapper
-            key={value}
-          >
+          <S.StyledButtonWrapper key={value}>
             <Button
               onClick={() => handleCategoryClick(value)}
               width="fit-content"

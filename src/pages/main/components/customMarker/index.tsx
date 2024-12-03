@@ -12,7 +12,7 @@ interface CustomMarkerComponentProps {
   isActive?: boolean;
 }
 
-function CustomMarker({
+function CustomMarkerComponent({
   placeId,
   name,
   category,
@@ -38,4 +38,4 @@ function CustomMarker({
   );
 }
 
-export default CustomMarker;
+export default CustomMarkerComponent;

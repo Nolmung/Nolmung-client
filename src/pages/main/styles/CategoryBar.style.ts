@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 const S = {
   Wrapper: styled.div`
-    z-index: 1000;
+    z-index: 1;
     width: 100%;
     height: fit-content;
     position: absolute;

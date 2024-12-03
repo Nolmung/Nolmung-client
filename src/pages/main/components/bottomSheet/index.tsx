@@ -36,7 +36,7 @@ function BottomSheet() {
         <Filter ref={filterRef} />
         <S.BottomSheetContentWrapper ref={contentRef} refheight={REF_HEIGHT}>
           {placeMap.map((place) => (
-            <Content key={place.place_id} place={place} />
+            <Content isCard={false} key={place.place_id} place={place} />
           ))}
         </S.BottomSheetContentWrapper>
       </S.BottomSheetBody>

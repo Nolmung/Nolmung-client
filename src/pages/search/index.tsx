@@ -2,8 +2,8 @@ import { S } from './styles/index.style';
 
 import { GoBackIcon } from '@/assets/images/svgs';
 import SearchInput from '@/common/components/searchInput';
-
 import { useState } from 'react';
+
 import NoSearchHistory from './components/NoSearchHistory';
 import SearchHistoryList from './components/SearchHistoryList';
 import { useNavigate } from 'react-router-dom';
@@ -78,13 +78,17 @@ function Search() {
                 fontSize="18px"
                 fontWeight="500"
                 onClick={() => closeModal()}
-              >아니오</Button>
+              >
+                아니오
+              </Button>
               <Button
                 fontSize="18px"
                 fontWeight="700"
                 backgroundColor="#D3FBD4"
                 onClick={handleModalYesButtonClick}
-              >예</Button>
+              >
+                예
+              </Button>
             </S.ModalButtonWrapper>
           </S.ModalContent>
         </Modal>

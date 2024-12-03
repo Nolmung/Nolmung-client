@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { markerData } from '@/mocks/data/markerData';
 import { LocationButtonIcon, Refresh } from '@/assets/images/svgs';
-import S from './styles/index.style';
 import { useMapCenter } from './hooks/useMapCenter';
-import { CustomMarker, initMarkers } from './utils/markerUtils';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
+import { CustomMarker, initMarkers } from './utils/markerUtils';
 import BottomSheet from './components/bottomSheet';
+import S from './styles/index.style';
 import CategoryBar from './components/categoryBar';
 import {
   BOTTOM_CARD_HEIGHT,
@@ -17,27 +17,36 @@ import {
 import Content from './components/bottomSheet/Content';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
-import CustomMarkerComponent from './components/customMarker';
 import { getUserLocation } from './utils/userLocationUtils';
+import CustomMarkerComponent from './components/customMarker';
 
 /**
- * bottomSheet의 maxHeight 수정
+ * bottomSheet의 maxHeight 수정 (해결)
+ * 카테고리 선택 이후 뒤로가기시 BottomSHeet 사라지지 않는 문제 (해결)
  * 카테고리 선택 후 새로고침 시 bottomSheet 유지 -> useState에서 InitalHeigh로 초기화되는 문제, params에 따라 초기 값 설정 수정 필요
- * 단일 시설 선택시 카드 높이 수정
+ * 단일 시설 선택시 카드 높이 수정 (해결))
+ * 헤더가 늦게 사라지는 문제 (해결 ? API 호출 이후 리팩토링 필요)
+ * 카드 선택시 카테고리바 보이는 문제
  */
 function Main() {
   const { naver } = window;
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<naver.maps.Map | null>(null);
+  const selectedMarkerRef = useRef<CustomMarker | null>(null);
+
   const [mapCenter, setMapCenter] = useMapCenter();
+
   const [isCurrentButtonActive, setIsCurrentButtonActive] =
     useState<boolean>(false);
 
   const [bottomCardVisible, setBottomCardVisible] = useState<boolean>(false);
-  const [bottomSheetVisible, setBottomSheetVisible] = useState<boolean>(false);
-  const selectedMarkerRef = useRef<CustomMarker | null>(null);
-
+  const [bottomSheetVisible, setBottomSheetVisible] = useState<boolean>(
+    location.search ? true : false,
+  );
   const [bottomHeight, setBottomHeight] = useState<number>(
     DEFAULT_BOTTOM_HEIGHT,
   );
@@ -45,9 +54,6 @@ function Main() {
     CURRENT_BUTTON_HEIGHT,
   );
   const [category, setCategory] = useState<string | null>(null);
-  const [isSearched, setIsSearched] = useState<boolean>(false);
-  const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!mapContainerRef.current || !naver || !mapCenter) return;
@@ -84,6 +90,7 @@ function Main() {
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (category || query.get('category')) {
+      setCategory(category || query.get('category'));
       setBottomHeight(BOTTOM_HEIGHT);
     }
   }, [category]);
@@ -93,8 +100,8 @@ function Main() {
       setBottomHeight(BOTTOM_HEIGHT);
       setCurrentButtonHeight(BOTTOM_HEIGHT + CURRENT_BUTTON_HEIGHT);
     } else if (bottomCardVisible && !bottomSheetVisible) {
-      setBottomHeight(0);
-      setCurrentButtonHeight(BOTTOM_CARD_HEIGHT + CURRENT_BUTTON_HEIGHT);
+      setCurrentButtonHeight(BOTTOM_CARD_HEIGHT + CURRENT_BUTTON_HEIGHT + 100);
+      setBottomHeight(70);
     } else if (!bottomCardVisible && !bottomSheetVisible) {
       // 바텀시트, 바텀카드 둘 다 안보이면 기본 높이로 설정
       setBottomHeight(DEFAULT_BOTTOM_HEIGHT);
@@ -103,7 +110,9 @@ function Main() {
 
   useEffect(() => {
     if (location.pathname === '/' && !location.search) {
-      setIsSearched(true);
+      setCategory(null);
+      setBottomSheetVisible(false);
+      setBottomCardVisible(false);
       setCurrentButtonHeight(CURRENT_BUTTON_HEIGHT + BOTTOM_NAV_HEIGHT);
       if (selectedMarkerRef.current) {
         selectedMarkerRef.current.setIcon({
@@ -118,12 +127,8 @@ function Main() {
         });
       }
       selectedMarkerRef.current = null;
-    } else {
-      setTimeout(() => {
-        setIsSearched(false);
-      }, 100);
     }
-  }, [location.pathname, location.search]);
+  }, [location, location.pathname, location.search]);
 
   /**
    * 현 지도에서 검색 버튼 클릭 이벤트 함수
@@ -205,7 +210,7 @@ function Main() {
   return (
     <S.Wrapper>
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
-        {isSearched && (
+        {!(category || location.search) && (
           <CategoryBar
             category={category}
             setCategory={setCategory}
@@ -238,18 +243,19 @@ function Main() {
                   bottomVisible={bottomCardVisible}
                   bottomHeight={bottomHeight}
                 >
-                  <Content place={selectedMarkerRef.current.data} />
+                  <Content
+                    isCard={true}
+                    place={selectedMarkerRef.current.data}
+                  />
                 </S.Bottom>
               )}
             </S.BottomCardWrapper>
-            {bottomSheetVisible && (
-              <S.Bottom
-                bottomVisible={bottomSheetVisible}
-                bottomHeight={bottomHeight}
-              >
-                <BottomSheet />
-              </S.Bottom>
-            )}
+            <S.Bottom
+              bottomVisible={bottomSheetVisible}
+              bottomHeight={bottomHeight}
+            >
+              <BottomSheet />
+            </S.Bottom>
           </S.BottomSheetWrapper>
         </S.Wrapper>
       </S.MapWrapper>

@@ -44,7 +44,6 @@ function Layout({ children }: LayoutProps) {
     'hideTabBar',
     location.pathname + location.search,
   );
-  console.log('hideTabBar', hideTabBar);
   const [HeaderTitle, setHeaderTitle] = useState<HeaderTitleType>({
     title: '',
     showIcon: false,
@@ -54,7 +53,9 @@ function Layout({ children }: LayoutProps) {
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
-    const categoryLabel = category? CATEGORY_OPTIONS.find((options) => options.value === category)?.label : null;
+    const categoryLabel = category
+      ? CATEGORY_OPTIONS.find((options) => options.value === category)?.label
+      : null;
 
     const search = searchParams.get('search');
     const pathName = location.pathname;
@@ -74,9 +75,9 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         break;
-      case pathName === '/':
-        setHeaderTitle({ title: '메인', showIcon: true, type: 'TitleCenter' });
-        break;
+      // case pathName === '/':
+      //   setHeaderTitle({ title: '메인', showIcon: true, type: 'TitleCenter' });
+      //   break;
       case pathName === '/todayMung':
         setHeaderTitle({
           title: '오늘멍 모아보기',

@@ -9,9 +9,10 @@ import { ROUTE } from '@/common/constants/route';
 
 interface ContentProps {
   place: MapPlace | null;
+  isCard: boolean;
 }
 
-function Content({ place }: ContentProps) {
+function Content({ place, isCard }: ContentProps) {
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState<Boolean>(false);
 
@@ -26,7 +27,7 @@ function Content({ place }: ContentProps) {
   };
 
   return (
-    <S.Wrapper onClick={navigateToDetail}>
+    <S.Wrapper isCard={isCard} onClick={navigateToDetail}>
       <S.PlaceInfoWrapper>
         <S.InfoTextWrapper>
           <S.PlaceNameCategoryWrapper>

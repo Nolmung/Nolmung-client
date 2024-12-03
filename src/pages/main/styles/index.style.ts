@@ -67,7 +67,6 @@ const S = {
       bottomVisible ? 'visible' : 'hidden'};
     position: absolute;
     bottom: ${({ bottomHeight }) => bottomHeight}px;
-    background-color: white;
     z-index: 1;
     width: 100%;
     margin-top: 10px;
