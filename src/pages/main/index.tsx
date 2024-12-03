@@ -17,9 +17,14 @@ import {
 import Content from './components/bottomSheet/Content';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
-import CustomMarkerComponent from './components/CustomMarkerComponent';
+import CustomMarkerComponent from './components/customMarker';
 import { getUserLocation } from './utils/userLocationUtils';
 
+/**
+ * bottomSheet의 maxHeight 수정
+ * 카테고리 선택 후 새로고침 시 bottomSheet 유지 -> useState에서 InitalHeigh로 초기화되는 문제, params에 따라 초기 값 설정 수정 필요
+ * 단일 시설 선택시 카드 높이 수정
+ */
 function Main() {
   const { naver } = window;
 
@@ -114,7 +119,9 @@ function Main() {
       }
       selectedMarkerRef.current = null;
     } else {
-      setIsSearched(false);
+      setTimeout(() => {
+        setIsSearched(false);
+      }, 100);
     }
   }, [location.pathname, location.search]);
 
@@ -193,7 +200,7 @@ function Main() {
       mapRef.current!.setZoom(17);
     });
     navigate('/');
-  }
+  };
 
   return (
     <S.Wrapper>
@@ -208,7 +215,10 @@ function Main() {
         )}
         <S.Wrapper onClick={(e) => e.stopPropagation()}>
           <S.BottomSheetWrapper onClick={(e) => e.stopPropagation()}>
-            <S.LocationButtonWrapper bottomHeight={currentButtonHeight} onClick={handleLocationButtonClick}>
+            <S.LocationButtonWrapper
+              bottomHeight={currentButtonHeight}
+              onClick={handleLocationButtonClick}
+            >
               <LocationButtonIcon width={38} height={38} />
             </S.LocationButtonWrapper>
             {isCurrentButtonActive && (

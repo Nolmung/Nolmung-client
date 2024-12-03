@@ -2,7 +2,7 @@ import S from '@/pages/main/styles/CustomMarkerComponent.styles';
 import { match } from 'ts-pattern';
 import { PlaceCategory } from '@/common/types';
 import Categories from '@/common/constants/categories';
-import { MarkerIconMapping } from '../types';
+import { MarkerIconMapping } from '../../types';
 import { ClickMarker, DefaultMarker } from '@/assets/images/svgs';
 
 interface CustomMarkerComponentProps {
@@ -12,7 +12,7 @@ interface CustomMarkerComponentProps {
   isActive?: boolean;
 }
 
-function CustomMarkerComponent({
+function CustomMarker({
   placeId,
   name,
   category,
@@ -27,7 +27,7 @@ function CustomMarkerComponent({
       <S.Name>{name}</S.Name>
       {isActive ? (
         <S.ClickIconWrapper>
-          <ClickMarker width={56} height={70}/>
+          <ClickMarker width={56} height={70} />
         </S.ClickIconWrapper>
       ) : (
         <S.IconWrapper>
@@ -38,4 +38,4 @@ function CustomMarkerComponent({
   );
 }
 
-export default CustomMarkerComponent;
+export default CustomMarker;
