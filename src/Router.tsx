@@ -11,7 +11,7 @@ import SignUp from './pages/signUp';
 import Search from './pages/search';
 import TodayMungWrite from './pages/todaymungWrite';
 import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
-import PlaceRecommend from './pages/placeRecommend';
+import PlaceRecommend from './pages/recommend';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
