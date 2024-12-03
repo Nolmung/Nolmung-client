@@ -13,7 +13,7 @@ function BottomCard({ markerInfo }: { markerInfo: MapPlace }) {
         height: '100px',
       }}
     >
-      <Content place={markerInfo} />
+      <Content isCard={true} place={markerInfo} />
     </div>
   );
 }

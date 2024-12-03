@@ -1,7 +1,6 @@
 import { LatLng } from '@/common/types';
 import { DEFAULT_LATLNG } from '@/common/constants/defaultLatLng';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { getUserLocation } from '../utils/userLocationUtils';
 
 /**
