@@ -14,7 +14,7 @@ const S = {
     position: absolute;
     bottom: ${({ bottomHeight }) => bottomHeight}px;
     right: 24px;
-    z-index: 1001;
+    z-index: 1;
   `,
 
   SearchCurrentButton: styled.div<{
@@ -71,7 +71,6 @@ const S = {
     z-index: 1;
     width: 100%;
     margin-top: 10px;
-    /* margin-bottom: 70px; */
   `,
 
   BottomSheetWrapper: styled.div`
