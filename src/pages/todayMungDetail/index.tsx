@@ -6,16 +6,28 @@ import PlaceTagCard from './components/placeTag';
 import DogTagCard from './components/dogTag';
 import TextContent from './components/textContent';
 import ImageCard from './components/imageCard';
+import EditButton from './components/editButton';
+import { useState } from 'react';
 
 const TodayMungDetail = () => {
+  const [editToggle, setEditToggle] = useState(false);
   const diaryData: DiaryType = todaymungDetailData.data;
-  console.log(diaryData);
+  const handleToggleClick = () => {
+    setEditToggle(!editToggle);
+  };
+  /**
+   * 아래에 map 해놓은 부분은 DiaryData.dogs에 강아지 이름이 없어서 따로 추가해주신다고하셔서 map안돌리고 따로 주석 쳐놓았습니다.
+   */
   return (
     <S.Wrapper>
       <S.Container>
         <S.DateArea>
           <S.DiaryCreatedAt>{diaryData.createdAt}</S.DiaryCreatedAt>
-          <DotdotdotIcon />
+          {editToggle && <EditButton />}
+          <DotdotdotIcon
+            onClick={handleToggleClick}
+            fill={editToggle ? '#d9d9d9' : '#080808'}
+          />
         </S.DateArea>
         {diaryData.places && (
           <S.PlaceArea>
@@ -24,8 +36,6 @@ const TodayMungDetail = () => {
               {diaryData.places.map((data) => {
                 return <PlaceTagCard key={data.placeId} data={data} />;
               })}
-              <PlaceTagCard data={diaryData.places[0]} />
-              <PlaceTagCard data={diaryData.places[0]} />
             </S.PlaceTagCardArea>
           </S.PlaceArea>
         )}

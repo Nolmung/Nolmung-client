@@ -14,6 +14,7 @@ export const S = {
     padding: 0px 22px;
   `,
   DateArea: styled.div`
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
