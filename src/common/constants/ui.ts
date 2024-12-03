@@ -1,6 +1,7 @@
 export const WINDOW_HEIGHT = window.innerHeight;
 
 export const BOTTOM_NAV_HEIGHT = 90;
+export const HEADER_HEIGHT = 70;
 
 export const DEFAULT_BOTTOM_HEIGHT = BOTTOM_NAV_HEIGHT;
 export const BOTTOM_HEIGHT = WINDOW_HEIGHT / 2 - 60;

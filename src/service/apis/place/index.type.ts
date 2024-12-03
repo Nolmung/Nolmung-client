@@ -1,4 +1,9 @@
-import { Diary, PlaceCategory, PlacePrice, ReviewKeyword } from '@/common/types';
+import {
+  Diary,
+  PlaceCategory,
+  PlacePrice,
+  ReviewKeyword,
+} from '@/common/types';
 
 export interface PlaceDetailResponse {
   place_name: string; // 장소 이름

@@ -7,7 +7,7 @@ import {
   TabBarRecommendIconActive,
   TabBarCalenderIconActive,
   TabBarMyIconActive,
-} from '@/assets/images/svgs';
+} from '@assets/images/svgs';
 
 
 export const tabItems = [

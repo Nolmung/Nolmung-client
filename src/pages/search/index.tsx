@@ -2,8 +2,8 @@ import { S } from './styles/index.style';
 
 import { GoBackIcon } from '@/assets/images/svgs';
 import SearchInput from '@/common/components/searchInput';
-import { useState } from 'react';
 
+import { useRef, useState } from 'react';
 import NoSearchHistory from './components/NoSearchHistory';
 import SearchHistoryList from './components/SearchHistoryList';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,6 @@ import {
   clearSearchHistory,
   deleteSearchKeyword,
   formatDate,
-  handleInputChange,
   updateSearchHistory,
 } from './utils/searchUtils';
 
@@ -28,19 +27,17 @@ export interface SearchHistoryItem {
 function Search() {
   const navigate = useNavigate();
   const { isOpen, openModal, closeModal } = useModal();
-
+  const inputRef = useRef<HTMLInputElement>(null);
   const [searchHistory, setSearchHistory] = useState<SearchHistoryItem[]>(
     () => {
       const storedHistory = localStorage.getItem('searchHistory');
       return storedHistory ? JSON.parse(storedHistory) : [];
     },
   );
-  const [searchInputValue, setSearchInputValue] = useState<string>('');
-
-  const handleSearchInputValueChange = handleInputChange(setSearchInputValue);
 
   const handleSearchIconClick = () => {
-    if (!searchInputValue.trim()) return;
+    const searchInputValue = inputRef?.current?.value;
+    if (!searchInputValue || !searchInputValue.trim()) return;
 
     const newSearchItem: SearchHistoryItem = {
       id: Date.now(),
@@ -49,7 +46,6 @@ function Search() {
     };
 
     setSearchHistory(updateSearchHistory(searchHistory, newSearchItem));
-    setSearchInputValue('');
     navigate(ROUTE.MAIN() + '?search=' + searchInputValue);
   };
 
@@ -98,8 +94,8 @@ function Search() {
           <GoBackIcon />
         </S.IconWrapper>
         <SearchInput
-          value={searchInputValue}
-          onChange={handleSearchInputValueChange}
+          autofocus={true}
+          inputRef={inputRef}
           onClick={handleSearchIconClick}
           width={90}
         />

@@ -49,7 +49,6 @@ function Layout({ children }: LayoutProps) {
     showIcon: false,
     type: 'TitleLeft',
   });
-
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
@@ -75,16 +74,33 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         break;
-      // case pathName === '/':
-      //   setHeaderTitle({ title: '메인', showIcon: true, type: 'TitleCenter' });
-      //   break;
+
       case pathName === '/todayMung':
+        {
+          setHeaderTitle({
+            title: '오늘멍 모아보기',
+            showIcon: false,
+            type: 'TitleCenter',
+          });
+        }
+        break;
+
+      case pathName == '/todaymung/write':
         setHeaderTitle({
-          title: '오늘멍 모아보기',
+          title: '오늘멍 작성하기',
           showIcon: false,
           type: 'TitleCenter',
         });
         break;
+
+      case pathName == '/todaymung/placeregist':
+        setHeaderTitle({
+          title: '오늘멍 장소등록',
+          showIcon: true,
+          type: 'TitleCenter',
+        });
+        break;
+
       default:
         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }
