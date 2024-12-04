@@ -18,7 +18,7 @@ function MyReview() {
         {isOpen && (
           <Modal isOpen={isOpen} closeModal={closeModal}>
             <S.ModalContent>
-              모두 지우시겠습니까?
+              리뷰를 삭제하시겠습니까?
               <S.ModalButtonWrapper>
                 <Button
                   fontSize="18px"
