@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const S = {
-  Wrapper: styled.button<{isActive: boolean}>`
+  Wrapper: styled.button`
     width: 100%;
     border-radius: 16px;
     display: flex;
@@ -10,9 +10,13 @@ const S = {
     padding: 20px;
     flex: 1;
     min-width: 276px;
-    border: ${({ isActive }) =>
-      isActive ? '1.5px solid #17AA1A' : '1.5px solid rgba(217, 217, 217, 0.63)'};
-    background-color: ${({ isActive }) => (isActive ? '#D3FBD4' : '#FDFDFD')};
+    border: 1.5px solid rgba(217, 217, 217, 0.63);
+    background-color: #fdfdfd;
+
+    &:active {
+      border: 1.5px solid #17aa1a;
+      background-color: #d3fbd4;
+    }
   `,
   Container: styled.div`
     width: 100%;
