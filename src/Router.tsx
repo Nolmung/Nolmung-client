@@ -11,7 +11,7 @@ import SignUp from './pages/signUp';
 import Search from './pages/search';
 import TodayMungWrite from './pages/todaymungWrite';
 import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
-// import MyFavorite from './pages/myFavorite';
+import MyFavorite from './pages/myFavorite';
 import PlaceRecommend from './pages/recommend';
 import TodayMungDetail from './pages/todayMungDetail';
 import Mypage from './pages/my';
@@ -46,7 +46,7 @@ function Router() {
             element={<TodayMungPlaceRegist />}
           />
           <Route path={ROUTE.MY()} element={<Mypage/>} />
-          {/* <Route path={ROUTE.MYFAVORITE()} element={<MyFavorite/>} /> */}
+          <Route path={ROUTE.MYFAVORITE()} element={<MyFavorite/>} />
           <Route
             path={ROUTE.TODAYMUNG_DETAIL(':diaryId')}
             element={<TodayMungDetail />}
