@@ -1,30 +1,9 @@
+import dogBreeds from '@/common/constants/dogBreeds';
 import { S } from './styles/dogs.styles';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
-const dogBreeds = [
-  '포메라니안',
-  '말티즈',
-  '푸들',
-  '시추',
-  '비숑 프리제',
-  '요크셔테리어',
-  '닥스훈트',
-  '치와와',
-  '골든 리트리버',
-  '래브라도 리트리버',
-  '불독',
-  '코카스패니얼',
-  '웰시코기',
-  '사모예드',
-  '시베리안 허스키',
-  '슈나우저',
-  '비글',
-  '페키니즈',
-  '잭 러셀 테리어',
-  '시바 이누',
-];
+import { ROUTE } from '@/common/constants/route';
 
 function Dogs() {
   const { state } = useLocation();
@@ -47,6 +26,30 @@ function Dogs() {
     size: '',
     neuterYn: false,
   });
+
+  const [NextButtonActive, setNextButtonActive] = useState(false);
+
+  useEffect(() => {
+    if (
+      nickname &&
+      form.dog_name &&
+      form.dog_type &&
+      form.birth &&
+      size &&
+      neutered &&
+      gender
+    ) {
+      setNextButtonActive(true);
+    }
+  }, [
+    gender,
+    nickname,
+    form.dog_name,
+    form.dog_type,
+    form.birth,
+    size,
+    neutered,
+  ]);
 
   const handlePictureClick = () => {
     if (fileInputRef.current) {
@@ -106,14 +109,11 @@ function Dogs() {
 
   const handleSubmit = () => {
     if (!nickname || !form.dog_name || !form.dog_type || !form.birth || !size) {
-      alert('모든 정보를 입력해주세요!');
       return;
     }
-
-    console.log(form); // 최종 데이터 확인
-
-    navigate('/', {
+    navigate(ROUTE.MAIN(), {
       state: { nickname, form },
+      replace: true,
     });
     // API 요청 추가 가능
   };
@@ -260,7 +260,9 @@ function Dogs() {
           </S.GenderWrapper>
         </div>
       </S.GenderContainer>
-      <S.NextButton onClick={handleSubmit}>놀멍 시작하기</S.NextButton>
+      <S.NextButton isActive={NextButtonActive} onClick={handleSubmit}>
+        놀멍 시작하기
+      </S.NextButton>
     </S.ContainerWrapper>
   );
 }

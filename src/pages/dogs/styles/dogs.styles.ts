@@ -81,6 +81,7 @@ export const S = {
     }
   `,
   InputWrapper: styled.div`
+    width: 100%;
     display: flex;
     align-items: center; /* 세로 중앙 정렬 */
     gap: 14px; /* 요소 간 간격 */
@@ -94,10 +95,11 @@ export const S = {
   `,
 
   AgeChoiceContainer: styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3개의 동일한 열 */
-    justify-items: center; /* 가로 중앙 정렬 */
-    align-items: center; /* 세로 중앙 정렬 */
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
   `,
   AgeChoice: styled.div<{ isSelected: boolean }>`
     margin-top: 10px;
@@ -109,23 +111,25 @@ export const S = {
       ${({ isSelected }) => (isSelected ? '#17aa1a' : '#d9d9d9')};
     border-radius: 50%;
     color: ${({ isSelected }) => (isSelected ? '#17aa1a' : '#a7a7a7')};
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    &:hover {
+
+    &:active {
       transition: 0.5s ease;
       background-color: #d3fbd4;
       border: 1px solid #17aa1a;
       color: #17aa1a; // 호버 시 색상 변경
     }
   `,
+
   AgeChoiceText: styled.h4`
     color: #a7a7a7;
     line-height: 1.2;
     font-size: 13px;
     margin-top: 8px;
+    white-space: nowrap;
   `,
   AgeFlex: styled.div`
     display: flex;
@@ -168,19 +172,16 @@ export const S = {
     display: flex;
     gap: 24px; /* 요소 간 간격 */
   `,
-  NextButton: styled.button`
+  NextButton: styled.button<{ isActive: boolean }>`
     margin-top: 50px;
     width: 100%;
     height: 60px;
     border: 1px solid #a7a7a7;
-    background-color: #f0f0f0;
+    background-color: ${({ isActive }) => (isActive ? '#080808' : '#f0f0f0')};
+    color: ${({ isActive }) => (isActive ? '#ffffff' : '#a7a7a7')};
     border-radius: 50px;
     font-size: 16px;
-    &:hover {
-      transition: 0.5s ease;
-      background-color: #080808;
-      color: #ffffff; // 호버 시 색상 변경
-    }
+    transition: 0.5s ease;
   `,
   Dropdown: styled.ul`
     box-sizing: border-box;
