@@ -1,4 +1,4 @@
-import { PlaceCategory } from '@common/types';
+import { PlaceCategory } from '@/common/types';
 import S from '@pages/todaymungPlaceRegist/styles/ReviewCard.style';
 import { DogPaw, FilledStar, EmptyStar } from '@assets/images/svgs';
 import KEYWORDS from '@common/constants/reviewLabels';
