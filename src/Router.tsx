@@ -11,6 +11,8 @@ import SignUp from './pages/signUp';
 import Search from './pages/search';
 import TodayMungWrite from './pages/todaymungWrite';
 import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
+import MyFavorite from './pages/myReview';
+import MyReview from './pages/myReview';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -35,6 +37,7 @@ function Router() {
           <Route path={ROUTE.LOGIN()} element={<Login />} />
           <Route path={ROUTE.SIGNUP()} element={<SignUp />} />
           <Route path={ROUTE.SEARCH()} element={<Search />} />
+          <Route path={ROUTE.MY_REVIEW()} element={<MyReview />} />
           <Route path={ROUTE.TODAYMUNG_WRITE()} element={<TodayMungWrite />} />
           <Route
             path={ROUTE.TODAYMUNG_PLACE_REGIST()}

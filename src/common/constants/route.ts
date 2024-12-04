@@ -6,6 +6,7 @@ export const ROUTE = {
   LOGIN: () => '/login',
   SIGNUP: () => `/signUp`,
   SEARCH: () => '/search',
+  MY_REVIEW: () => '/my/review',
   TODAYMUNG_WRITE: () => '/todaymung/write',
   TODAYMUNG_PLACE_REGIST: () => '/todaymung/placeregist',
 } as const;

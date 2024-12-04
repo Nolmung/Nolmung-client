@@ -23,6 +23,7 @@ const pathRules: PathRules = {
     '/login',
     /\?category(=|$)/,
     /\/\?search(=|$)/,
+    '/my/review',
   ], // TabBar를 숨길 경로들
 };
 
@@ -98,6 +99,14 @@ function Layout({ children }: LayoutProps) {
           title: '오늘멍 장소등록',
           showIcon: true,
           type: 'TitleCenter',
+        });
+        break;
+
+      case pathName == '/my/review':
+        setHeaderTitle({
+          title: '내가 쓴 리뷰',
+          showIcon: true,
+          type: 'TitleLeft',
         });
         break;
 
