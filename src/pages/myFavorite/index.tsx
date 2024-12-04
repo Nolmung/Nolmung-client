@@ -1,10 +1,10 @@
 import { PlaceCategory } from '@/common/types';
-import S from './index.styles';
+import S from './styles/index.styles';
 import { useState } from 'react';
 import { placeMap } from '@/mocks/data/placeMap';
 import { IoHeartSharp } from 'react-icons/io5';
 import { IoHeartOutline } from 'react-icons/io5';
-import { StarIcon } from '@/assets/images/svgs';
+import { FilledStar } from '@/assets/images/svgs';
 import { PlaceCategoryMapping } from './constants/placeCategoryMapping';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
@@ -75,7 +75,7 @@ function MyFavorite() {
               </S.PlaceLocation>
               <S.PlaceName>{place.place_name}</S.PlaceName>
               <S.ReviewWrapper>
-                <StarIcon width={14} height={14} />
+                <FilledStar width={14} height={14} />
                 <S.StarRating>{place.star_rating_avg}</S.StarRating>
                 <S.ReviewCount>리뷰 {place.review_count}</S.ReviewCount>
               </S.ReviewWrapper>
