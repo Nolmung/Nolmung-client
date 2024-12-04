@@ -21,7 +21,7 @@ function ReviewCard({ data, openModal }: ReviewCardProps) {
           <S.PlaceNameAddressWrapper>
             <S.PlaceName>{placeName}</S.PlaceName>
             <S.StarIconRateWrapper>
-              <FilledStar width={12} />
+              <FilledStar width={13} />
               <S.Rate>{rating}</S.Rate>
             </S.StarIconRateWrapper>
           </S.PlaceNameAddressWrapper>

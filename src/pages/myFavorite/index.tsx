@@ -1,5 +1,5 @@
 import { PlaceCategory } from '@/common/types';
-import S from './index.styles';
+import S from './styles/index.styles';
 import { useState } from 'react';
 import { placeMap } from '@/mocks/data/placeMap';
 import { IoHeartSharp } from 'react-icons/io5';

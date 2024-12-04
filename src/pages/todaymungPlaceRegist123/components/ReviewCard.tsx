@@ -1,10 +1,10 @@
 import { PlaceCategory } from '@/common/types';
-import S from '../styles/ReviewCard.style';
-import { DogPaw, FilledStar, EmptyStar } from '@/assets/images/svgs';
-import KEYWORDS from '@/common/constants/reviewLabels';
+import S from '@pages/todaymungPlaceRegist/styles/ReviewCard.style';
+import { DogPaw, FilledStar, EmptyStar } from '@assets/images/svgs';
+import KEYWORDS from '@common/constants/reviewLabels';
 import { useState } from 'react';
-import Button from '@/common/components/button/Button';
-import { useReviewStore } from '../stores/reviewStore';
+import Button from '@common/components/button/Button';
+import { useReviewStore } from '@pages/todaymungPlaceRegist/stores/reviewStore';
 
 interface ReviewCardProps {
   category: PlaceCategory;
