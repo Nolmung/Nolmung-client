@@ -8,7 +8,7 @@ import { IoHeartOutline } from 'react-icons/io5';
 import { PlaceCategoryMapping } from './constants/placeCategoryMapping';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
-import FilledStar from '@/assets/images/svgs/StarIcon';
+import { FilledStar } from '@/assets/images/svgs';
 
 function MyFavorite() {
   const [currentCategory, setCurrentCategory] =
