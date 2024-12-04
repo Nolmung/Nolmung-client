@@ -13,3 +13,19 @@ export interface DogType {
 export interface DogsResponse {
   data: DogType[];
 }
+
+export interface ReviewLabel {
+  id: number;
+  label: string;
+}
+export interface Review {
+  id: number;
+  placeName: string;
+  address: string;
+  rating: number;
+  reviewLabels: ReviewLabel[];
+}
+
+export interface ReviewsResponse {
+  data: Review[];
+}
