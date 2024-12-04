@@ -14,19 +14,34 @@ export interface DogsResponse {
   data: DogType[];
 }
 
+export interface ReviewLabel {
+  id: number;
+  label: string;
+}
+export interface Review {
+  id: number;
+  placeName: string;
+  address: string;
+  rating: number;
+  reviewLabels: ReviewLabel[];
+}
+
+export interface ReviewsResponse {
+  data: Review[];
+}
 export interface UserType {
-  userId: number,
-  userName: string,
-  userNickname: string,
-  userAddressProvince: string,
-  userAge: Age,
-  userGender: Gender,
-  userProfileImage: string,
-  userEmail: string,
+  userId: number;
+  userName: string;
+  userNickname: string;
+  userAddressProvince: string;
+  userAge: Age;
+  userGender: Gender;
+  userProfileImage: string;
+  userEmail: string;
 }
 
 export type DogSize = 'S' | 'M' | 'L';
 
 export type Age = 10 | 20 | 30 | 40 | 50;
 
-export type Gender = "FEMALE" | "MALE";
+export type Gender = 'FEMALE' | 'MALE';

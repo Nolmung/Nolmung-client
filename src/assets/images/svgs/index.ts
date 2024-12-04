@@ -18,6 +18,7 @@ export { default as Price } from './Price';
 export { default as RestaurantTag } from './RestaurantTag';
 export { default as Time } from './Time';
 export { default as TimeRecord } from './TimeRecord';
+export { default as TrashcanIcon } from './TrashcanIcon';
 export { default as TravelTag } from './TravelTag';
 export { default as Under15Kilos } from './Under15Kilos';
 export { default as Under25Kilos } from './Under25Kilos';

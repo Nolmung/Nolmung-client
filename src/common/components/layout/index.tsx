@@ -23,6 +23,7 @@ const pathRules: PathRules = {
     '/login',
     /\?category(=|$)/,
     /\/\?search(=|$)/,
+    '/my/review',
   ], // TabBar를 숨길 경로들
 };
 
@@ -50,15 +51,15 @@ function Layout({ children }: LayoutProps) {
     type: 'TitleLeft',
   });
   useEffect(() => {
-     if (location.pathname.startsWith('/todaymung/detail')) {
-       setHeaderTitle({
-         title: '오늘멍 상세보기',
-         showIcon: true,
-         type: 'TitleCenter',
-       });
-       return;
-     }
-     const searchParams = new URLSearchParams(location.search);
+    if (location.pathname.startsWith('/todaymung/detail')) {
+      setHeaderTitle({
+        title: '오늘멍 상세보기',
+        showIcon: true,
+        type: 'TitleCenter',
+      });
+      return;
+    }
+    const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
     const categoryLabel = category
       ? CATEGORY_OPTIONS.find((options) => options.value === category)?.label
@@ -68,8 +69,8 @@ function Layout({ children }: LayoutProps) {
     const pathName = location.pathname;
 
     switch (true) {
-       case pathName === '/' && !!category:
-         setHeaderTitle({
+      case pathName === '/' && !!category:
+        setHeaderTitle({
           title: `${categoryLabel}`,
           showIcon: true,
           type: 'TitleCenter',
@@ -81,7 +82,7 @@ function Layout({ children }: LayoutProps) {
           showIcon: true,
           type: 'TitleCenter',
         });
-         break;
+        break;
 
       case pathName === '/todaymung':
         {
@@ -108,23 +109,31 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         break;
-      
+
+      case pathName == '/my/review':
+        setHeaderTitle({
+          title: '내가 쓴 리뷰',
+          showIcon: true,
+          type: 'TitleLeft',
+        });
+        break;
+
       case pathName == '/my':
         setHeaderTitle({
           title: '마이페이지',
           showIcon: true,
-          type: 'TitleLeft'
-        })
+          type: 'TitleLeft',
+        });
         break;
-        
-        case pathName == '/my/favorite':
-          setHeaderTitle({
-            title: '즐겨찾기',
-            showIcon: true,
-            type: 'TitleLeft'
-          })
-          break;
-          
+
+      case pathName == '/my/favorite':
+        setHeaderTitle({
+          title: '즐겨찾기',
+          showIcon: true,
+          type: 'TitleLeft',
+        });
+        break;
+
       default:
         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }

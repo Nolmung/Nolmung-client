@@ -11,6 +11,7 @@ import SignUp from './pages/signUp';
 import Search from './pages/search';
 import TodayMungWrite from './pages/todaymungWrite';
 import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
+import MyReview from './pages/myReview';
 import MyFavorite from './pages/myFavorite';
 import PlaceRecommend from './pages/recommend';
 import TodayMungDetail from './pages/todayMungDetail';
@@ -39,14 +40,15 @@ function Router() {
           <Route path={ROUTE.LOGIN()} element={<Login />} />
           <Route path={ROUTE.SIGNUP()} element={<SignUp />} />
           <Route path={ROUTE.SEARCH()} element={<Search />} />
+          <Route path={ROUTE.MY_REVIEW()} element={<MyReview />} />
           <Route path={ROUTE.PLACE_RECOMMEND()} element={<PlaceRecommend />} />
           <Route path={ROUTE.TODAYMUNG_WRITE()} element={<TodayMungWrite />} />
           <Route
             path={ROUTE.TODAYMUNG_PLACE_REGIST()}
             element={<TodayMungPlaceRegist />}
           />
-          <Route path={ROUTE.MY()} element={<Mypage/>} />
-          <Route path={ROUTE.MYFAVORITE()} element={<MyFavorite/>} />
+          <Route path={ROUTE.MY()} element={<Mypage />} />
+          <Route path={ROUTE.MYFAVORITE()} element={<MyFavorite />} />
           <Route
             path={ROUTE.TODAYMUNG_DETAIL(':diaryId')}
             element={<TodayMungDetail />}
