@@ -4,14 +4,14 @@ export const S = {
   ContainerWrapper: styled.div`
     padding-left: 30px;
     padding-right: 30px;
+    padding-bottom: 40px;
     width: 100%;
-    height: 100vh;
   `,
   UserTitle: styled.h1`
     font-size: 18px;
     font-weight: 600;
     line-height: 1.2;
-    margin-top: 70px;
+    margin-top: 50px;
   `,
   DescriptionText: styled.h2`
     color: #a7a7a7;

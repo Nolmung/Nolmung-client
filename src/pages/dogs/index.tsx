@@ -29,6 +29,8 @@ const dogBreeds = [
 function Dogs() {
   const { state } = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [preview, setPreview] = useState<string | null>(null);
   const { nickname } = state || {};
   const [size, setSize] = useState<number | null>(null);
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
@@ -43,6 +45,23 @@ function Dogs() {
     size: '',
     neuterYn: false,
   });
+
+  const handlePictureClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click(); // 숨겨진 파일 입력 요소 클릭
+    }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result as string); // 미리보기 이미지 설정
+      };
+      reader.readAsDataURL(file); // 파일 읽기
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -91,7 +110,7 @@ function Dogs() {
 
     console.log(form); // 최종 데이터 확인
 
-    navigate('/main', {
+    navigate('/', {
       state: { nickname, form },
     });
     // API 요청 추가 가능
@@ -118,8 +137,18 @@ function Dogs() {
         <br />
         {nickname}님의 반려견을 등록해주세요
       </S.UserTitle>
-      <S.DogPicture>
-        <S.StyledCameraIcon />
+      <S.DogPicture onClick={handlePictureClick}>
+        {preview ? (
+          <S.PreviewImage src={preview} alt="Dog Profile Preview" />
+        ) : (
+          <S.StyledCameraIcon /> // 기본 아이콘
+        )}
+        <S.HiddenInput
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+        />
       </S.DogPicture>
       <S.ContentTitleText>이름</S.ContentTitleText>
       <S.UserInfoInput
@@ -130,13 +159,16 @@ function Dogs() {
         placeholder="반려견 이름을 입력해주세요"
       />
       <S.ContentTitleText>나이</S.ContentTitleText>
-      <S.UserInfoInput
-        type="number"
-        name="birth"
-        value={form.birth}
-        onChange={handleChange}
-        placeholder="나이를 입력해주세요"
-      />
+      <S.InputWrapper>
+        <S.UserInfoInput
+          type="text"
+          name="birth"
+          value={form.birth}
+          onChange={handleChange}
+          placeholder="나이를 입력해주세요"
+        />
+        <S.BirthText>살</S.BirthText>
+      </S.InputWrapper>
       <S.ContentTitleText>몸무게</S.ContentTitleText>
       <S.AgeChoiceContainer>
         <S.AgeFlex>
@@ -190,9 +222,7 @@ function Dogs() {
           </S.Dropdown>
         </div>
       )}
-      <S.NextButton onClick={handleSubmit}>
-        반려견 등록으로 넘어가기
-      </S.NextButton>
+      <S.NextButton onClick={handleSubmit}>놀멍 시작하기</S.NextButton>
     </S.ContainerWrapper>
   );
 }

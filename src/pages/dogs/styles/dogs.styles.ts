@@ -5,8 +5,8 @@ export const S = {
   ContainerWrapper: styled.div`
     padding-left: 30px;
     padding-right: 30px;
+    padding-bottom: 40px;
     width: 100%;
-    height: 100vh;
   `,
   StyledCameraIcon: styled(CameraIcon)`
     width: 24px;
@@ -16,7 +16,7 @@ export const S = {
     font-size: 18px;
     font-weight: 600;
     line-height: 1.2;
-    margin-top: 70px;
+    margin-top: 50px;
   `,
   DescriptionText: styled.h2`
     color: #a7a7a7;
@@ -25,8 +25,12 @@ export const S = {
     margin-top: 16px;
     margin-bottom: 50px;
   `,
-  
+
   DogPicture: styled.div`
+    position: relative; /* 필요한 경우 absolute로 변경 가능 */
+    left: 50%; /* 부모의 왼쪽 기준으로 50% 이동 */
+    transform: translateX(-50%); /* 자신의 너비의 절반만큼 왼쪽으로 이동 */
+    cursor: pointer;
     margin-top: 50px;
     width: 86px;
     height: 86px;
@@ -35,6 +39,20 @@ export const S = {
     display: flex;
     justify-content: center;
     align-items: center;
+    &:hover {
+      transition: 0.5s ease;
+      background-color: #d9d9d9;
+    }
+  `,
+  HiddenInput: styled.input`
+    display: none;
+  `,
+
+  PreviewImage: styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
   `,
   ContentTitleText: styled.h3`
     color: #080808;
@@ -54,10 +72,24 @@ export const S = {
     font-size: 16px;
     border-radius: ${({ isDropdownVisible }) =>
       isDropdownVisible ? '10px 10px 0 0' : '10px'};
+    width: ${({ name }) => (name === 'birth' ? '47%' : '100%')};
     &::placeholder {
       color: #a7a7a7;
     }
   `,
+  InputWrapper: styled.div`
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 14px; /* 요소 간 간격 */
+  `,
+
+  BirthText: styled.h5`
+    color: #080808;
+    line-height: 1.2;
+    font-size: 16px;
+    margin-top: 8px;
+  `,
+
   AgeChoiceContainer: styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3개의 동일한 열 */
