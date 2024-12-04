@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CameraIcon } from '@/assets/images/svgs';
+import { HEADER_HEIGHT } from '@/common/constants/ui';
 
 export const S = {
   ContainerWrapper: styled.div`
@@ -7,6 +8,8 @@ export const S = {
     padding-right: 30px;
     padding-bottom: 40px;
     width: 100%;
+    height: calc(100vh - ${HEADER_HEIGHT}px);
+    overflow-y: auto;
   `,
   StyledCameraIcon: styled(CameraIcon)`
     width: 24px;

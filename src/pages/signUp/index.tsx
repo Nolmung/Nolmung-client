@@ -26,7 +26,7 @@ function SignUp() {
   const navigate = useNavigate();
   const [nickname, setNickname] = useState('');
   const [addressProvince, setAddressProvince] = useState('');
-  const [selectedAge, setSelectedAge] = useState<number | null>(null);
+  const [selectedAge, setSelectedAge] = useState<number | null>(20);
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isAddressValid, setAddressValid] = useState(true);
