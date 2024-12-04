@@ -7,7 +7,7 @@ export interface DogType {
   birth: string;
   profileUrl: string;
   gender: 'MALE' | 'FEMALE';
-  size: 'S' | 'M' | 'L';
+  size: DogSize;
   neuterYn: boolean;
 }
 export interface DogsResponse {
@@ -29,3 +29,19 @@ export interface Review {
 export interface ReviewsResponse {
   data: Review[];
 }
+export interface UserType {
+  userId: number;
+  userName: string;
+  userNickname: string;
+  userAddressProvince: string;
+  userAge: Age;
+  userGender: Gender;
+  userProfileImage: string;
+  userEmail: string;
+}
+
+export type DogSize = 'S' | 'M' | 'L';
+
+export type Age = 10 | 20 | 30 | 40 | 50;
+
+export type Gender = 'FEMALE' | 'MALE';
