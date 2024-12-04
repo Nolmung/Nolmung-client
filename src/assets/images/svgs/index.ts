@@ -50,7 +50,6 @@ export { default as PlusIcon } from './PlusIcon';
 export { default as Refresh } from './Refresh';
 export { default as ReviewListIcon } from './ReviewListIcon';
 export { default as Search } from './Search';
-export { default as StarIcon } from './StarIcon';
 export { default as TabBarCalenderIcon } from './TabBarCalenderIcon';
 export { default as TabBarCalenderIconActive } from './TabBarCalenderIconActive';
 export { default as TabBarMapIcon } from './TabBarMapIcon';

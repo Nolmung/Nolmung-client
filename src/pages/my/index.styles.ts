@@ -1,3 +1,4 @@
+import { BOTTOM_NAV_HEIGHT, HEADER_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 
 const S = {
@@ -7,8 +8,8 @@ const S = {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 100%;
-    flex: 1;
+    /* height: 100px; */
+    height: calc(100vh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
     box-sizing: border-box;
     overflow-y: auto;
   `,
@@ -80,8 +81,8 @@ const S = {
     flex-direction: column;
     width: 100%;
     height: auto;
-    
-    background: #fdfdfd;
+
+    /* background: #fdfdfd; */
     padding: 22px 0px;
   `,
   ListContainer: styled.div`
