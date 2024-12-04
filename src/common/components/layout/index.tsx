@@ -101,7 +101,7 @@ function Layout({ children }: LayoutProps) {
         });
         break;
       
-      case '/mypage':
+      case pathName == '/mypage':
         setHeaderTitle({
           title: '마이페이지',
           showIcon: true,
