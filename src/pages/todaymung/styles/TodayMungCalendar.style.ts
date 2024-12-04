@@ -9,8 +9,8 @@ export const CustomCalendarHeaderRoot = styled('div')({
   fontSize: '18px',
   fontWeight: '800',
   alignItems: 'center',
-  '@media (min-height: 800px)': {
-    padding: '18px 16px',
+  '@media (min-height: 850px)': {
+    padding: '0px 16px 18px 16px',
   },
 });
 
@@ -63,17 +63,21 @@ export const StyledDateCalendar = styled(DateCalendar)`
   }
 
   .MuiDayCalendar-monthContainer {
+    overflow-y: auto; /* 세로 스크롤 활성화 */
   }
 
   .MuiPickersSlideTransition-root {
-    height: fit-content;
-    min-height: 274px;
-    overflow: visible;
+    /* height: calc(100dvh - 520px); */
+    overflow: scroll;
+    @media (max-height: 750px) {
+      height: calc(100dvh - 520px);
+    }
   }
 
   .MuiDayCalendar-slideTransition {
-    @media (min-height: 800px) {
-      min-height: 335px;
+    @media (min-height: 850px) {
+      min-height: 282px;
+      height: 282px;
     }
   }
 ` as typeof DateCalendar<Dayjs>;
@@ -87,7 +91,7 @@ export const CustomPickersDay = styled(PickersDay)<PickersDayProps<Dayjs>>(
     height: '40px',
     borderRadius: '50%',
     position: 'relative',
-    '@media (min-height: 800px)': {
+    '@media (min-height: 850px)': {
       width: '51px',
       height: '50px',
     },

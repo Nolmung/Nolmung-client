@@ -7,26 +7,29 @@ export const S = {
     justify-content: center;
     width: 100%;
     gap: 20px;
-    height: fit-content;
     box-sizing: border-box;
     padding: 0px 30px;
     color: #080808;
+    overflow-y: scroll;
   `,
+
   CalendarArea: styled.div`
     height: 100%;
-    height: auto;
+    height: 100%;
+    overflow: auto;
     box-sizing: border-box;
     margin-top: 10px;
   `,
 
   TodaymungInsertButton: styled.button`
     display: flex;
+    bottom: 0;
     align-items: center;
     justify-content: center;
     width: 100%;
     font-size: 16px;
     color: #080808;
-    @media (min-height: 800px) {
+    @media (min-height: 850px) {
       font-size: 16px;
     }
     gap: 6px;
@@ -35,6 +38,7 @@ export const S = {
     border: 1px solid #17aa1a;
     border-radius: 10px;
     background-color: #d3fbd4;
+    margin-top: auto;
   `,
   ButtonText: styled.span`
     line-height: 19.09px;
@@ -69,7 +73,7 @@ export const S = {
     &:hover img {
       opacity: 1;
     }
-    @media (min-height: 800px) {
+    @media (min-height: 850px) {
       width: 51px;
       height: 50px;
     }

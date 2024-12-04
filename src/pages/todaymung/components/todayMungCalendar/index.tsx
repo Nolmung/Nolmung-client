@@ -107,6 +107,7 @@ export default function TodayMungCalendar({ listData }: ListDataProps) {
             }}
             sx={{
               height: '100%',
+              overflow: 'scroll',
               '& .MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition > *':
                 {
                   position: 'static !important',
