@@ -11,10 +11,11 @@ import {
   UserEditIcon,
 } from '@/assets/images/svgs';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Mypage() {
   const [editId, setEditId] = useState<number>(0);
-
+  const navigate = useNavigate();
   return (
     <S.Wrapper>
       <S.ProfileWrapper>
@@ -55,7 +56,7 @@ function Mypage() {
         </S.PetProfileWrapper>
       </S.ProfileWrapper>
       <S.ListWrapper>
-        <S.ListContainer>
+        <S.ListContainer onClick={() => navigate('/my/favorite')}>
           <HeartIcon width={19} height={19} />
           즐겨찾기 목록
         </S.ListContainer>
