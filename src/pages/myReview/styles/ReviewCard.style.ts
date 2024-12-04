@@ -4,11 +4,12 @@ const S = {
   Wrapper: styled.div`
     display: flex;
     width: 100%;
-    height: 130px;
-    padding: 15px 0px 25px 0px;
-    border-bottom: 1px solid #d9d9d9;
+    height: 140px;
     display: flex;
+    justify-content: center;
     flex-direction: column;
+
+    border-bottom: 1px solid #d9d9d9;
     gap: 20px;
   `,
   PlaceInfoWrapper: styled.div`
