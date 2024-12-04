@@ -25,7 +25,6 @@ const S = {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding-right: 22px;
   `,
   StarIconRateWrapper: styled.div`
     display: flex;
