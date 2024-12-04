@@ -1,6 +1,7 @@
 export { default as AllKindDogAvailable } from './AllKindDogAvailable';
 export { default as BackArrowBlack } from './BackArrowBlack';
 export { default as BackArrowWhite } from './BackArrowWhite';
+export { default as CameraIcon } from './CameraIcon';
 export { default as CancelIcon } from './CancelIcon';
 export { default as DogPaw } from './DogPaw';
 export { default as FilledStar } from './FilledStar';
@@ -14,7 +15,7 @@ export { default as TimeRecord } from './TimeRecord';
 export { default as Under15Kilos } from './Under15Kilos';
 export { default as Under25Kilos } from './Under25Kilos';
 export { default as GoBackIcon } from './GoBackIcon';
-export { default as SearchIcon } from './Search';
+export { default as Search } from './Search';
 export { default as TabBarCalenderIcon } from './TabBarCalenderIcon';
 export { default as TabBarCalenderIconActive } from './TabBarCalenderIconActive';
 export { default as TabBarMapIcon } from './TabBarMapIcon';

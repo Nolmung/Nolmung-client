@@ -2,15 +2,39 @@ import { S } from './styles/signUp.styles';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const locations = [
+  '서울특별시',
+  '부산시',
+  '대구시',
+  '인천광역시',
+  '광주시',
+  '대전시',
+  '울산시',
+  '세종시',
+  '경기도',
+  '충청북도',
+  '충청남도',
+  '전라남도',
+  '경상북도',
+  '경상남도',
+  '강원특별자치도',
+  '전북특별자치도',
+  '제주특별자치도',
+];
+
 function SignUp() {
   const navigate = useNavigate();
   const [nickname, setNickname] = useState('');
   const [addressProvince, setAddressProvince] = useState('');
   const [selectedAge, setSelectedAge] = useState<number | null>(null);
+  const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [isAddressValid, setAddressValid] = useState(true);
 
   const handleCircleClick = (age: number) => {
     setSelectedAge((prev) => (prev === age ? null : age)); // 같은 값 클릭 시 선택 해제
   };
+
   const handleNext = () => {
     if (!nickname || !addressProvince || !selectedAge) {
       alert('모든 정보를 입력해주세요!');
@@ -21,13 +45,28 @@ function SignUp() {
     });
   };
 
-  // const data = {
-  //   nickname,
-  //   addressProvince,
-  //   addressDistrict: '', // 상세 주소는 비워둔 상태
-  //   age: selectedAge,
-  //   gender: 'MALE', // 기본값 설정, 사용자 입력으로 교체 가능
-  // };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setAddressProvince(value);
+
+    if (value) {
+      const filtered = locations.filter((location) => location.includes(value));
+      setFilteredLocations(filtered);
+      setDropdownVisible(filtered.length > 0); // 드롭다운 보이기 조건
+    } else {
+      setFilteredLocations([]);
+      setDropdownVisible(false);
+    }
+
+    setAddressValid(locations.some((location) => location.includes(value)));
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setAddressProvince(suggestion); // 선택한 값으로 입력 필드 업데이트
+    setFilteredLocations([]);
+    setDropdownVisible(false); // 드롭다운 숨기기
+    setAddressValid(true);
+  };
 
   return (
     <>
@@ -46,12 +85,31 @@ function SignUp() {
           onChange={(e) => setNickname(e.target.value)}
           placeholder="닉네임을 입력해주세요"
         ></S.UserInfoInput>
-        <S.ContentTitleText>주소</S.ContentTitleText>
+        <S.ContentTitleText>
+          주소
+          {!isAddressValid && (
+            <S.ErrorMessage>*유효한 주소를 입력해주세요</S.ErrorMessage>
+          )}
+        </S.ContentTitleText>
         <S.UserInfoInput
           value={addressProvince}
-          onChange={(e) => setAddressProvince(e.target.value)}
-          placeholder="주소를 시 단위로 입력해주세요 ex)서울시"
-        ></S.UserInfoInput>
+          onChange={handleInputChange}
+          placeholder="주소를 시,도 단위로 입력해주세요 ex)서울특별시"
+          isDropdownVisible={isDropdownVisible}
+        />
+
+        {isDropdownVisible && filteredLocations.length > 0 && (
+          <S.Dropdown>
+            {filteredLocations.map((location) => (
+              <S.Suggestion
+                key={location}
+                onClick={() => handleSuggestionClick(location)}
+              >
+                {location}
+              </S.Suggestion>
+            ))}
+          </S.Dropdown>
+        )}
         <S.ContentTitleText>연령</S.ContentTitleText>
         <S.AgeChoiceContainer>
           <S.AgeFlex>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { CameraIcon } from '@/assets/images/svgs';
 
 export const S = {
   ContainerWrapper: styled.div`
@@ -6,6 +7,10 @@ export const S = {
     padding-right: 30px;
     width: 100%;
     height: 100vh;
+  `,
+  StyledCameraIcon: styled(CameraIcon)`
+    width: 24px;
+    height: 24px;
   `,
   UserTitle: styled.h1`
     font-size: 18px;
@@ -20,6 +25,17 @@ export const S = {
     margin-top: 16px;
     margin-bottom: 50px;
   `,
+  
+  DogPicture: styled.div`
+    margin-top: 50px;
+    width: 86px;
+    height: 86px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `,
   ContentTitleText: styled.h3`
     color: #080808;
     font-weight: 600;
@@ -27,16 +43,17 @@ export const S = {
     font-size: 14px;
     margin-top: 30px;
   `,
-  UserInfoInput: styled.input`
+  UserInfoInput: styled.input<{ isDropdownVisible?: boolean }>`
+    box-sizing: border-box;
     margin-top: 8px;
     color: #080808;
     width: 100%;
     height: 50px;
     border: 1px solid #d9d9d9;
     padding-left: 18px;
-    border-radius: 10px;
     font-size: 16px;
-    padding-left: 18px;
+    border-radius: ${({ isDropdownVisible }) =>
+      isDropdownVisible ? '10px 10px 0 0' : '10px'};
     &::placeholder {
       color: #a7a7a7;
     }
@@ -61,7 +78,7 @@ export const S = {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
+    font-size: 24px;
     &:hover {
       transition: 0.5s ease;
       background-color: #d3fbd4;
@@ -93,6 +110,27 @@ export const S = {
       transition: 0.5s ease;
       background-color: #080808;
       color: #ffffff; // 호버 시 색상 변경
+    }
+  `,
+  Dropdown: styled.ul`
+    box-sizing: border-box;
+    width: 100%;
+    height: auto; /* 높이를 자동으로 조절하여 모든 항목이 보이도록 설정 */
+    max-height: none; /* 최대 높이 제한 제거 */
+    border: 1px solid #d9d9d9;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #fff;
+    list-style-type: none;
+    color: #080808;
+    font-size: 16px;
+  `,
+  Suggestion: styled.li`
+    width: 100%;
+    padding: 18px;
+    cursor: pointer;
+    &:hover {
+      background-color: #f0f0f0;
     }
   `,
 };
