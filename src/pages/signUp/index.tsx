@@ -1,5 +1,5 @@
 import { S } from './styles/signUp.styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const locations = [
@@ -31,9 +31,21 @@ function SignUp() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isAddressValid, setAddressValid] = useState(true);
 
+  const [NextButtonActive, setNextButtonActive] = useState(false);
+
   const handleCircleClick = (age: number) => {
     setSelectedAge((prev) => (prev === age ? null : age)); // 같은 값 클릭 시 선택 해제
   };
+
+  useEffect(() => {
+    document.title = '회원가입';
+  }, []);
+
+  useEffect(() => {
+    if (nickname && addressProvince && selectedAge) {
+      setNextButtonActive(true);
+    }
+  }, [nickname, addressProvince, selectedAge]);
 
   const handleNext = () => {
     if (!nickname || !addressProvince || !selectedAge) {
@@ -160,7 +172,11 @@ function SignUp() {
             <S.AgeChoiceText>50대 이상</S.AgeChoiceText>
           </S.AgeFlex>
         </S.AgeChoiceContainer>
-        <S.NextButton onClick={handleNext}>
+        <S.NextButton
+          disabled={!NextButtonActive}
+          isActive={NextButtonActive}
+          onClick={handleNext}
+        >
           반려견 등록으로 넘어가기
         </S.NextButton>
       </S.ContainerWrapper>

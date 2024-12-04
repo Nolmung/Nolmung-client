@@ -89,19 +89,16 @@ export const S = {
     align-items: center;
     justify-content: center;
   `,
-  NextButton: styled.button`
+  NextButton: styled.button<{ isActive: boolean }>`
     margin-top: 50px;
     width: 100%;
     height: 60px;
     border: 1px solid #a7a7a7;
-    background-color: #f0f0f0;
+    background-color: ${({ isActive }) => (isActive ? '#080808' : '#f0f0f0')};
+    color: ${({ isActive }) => (isActive ? '#ffffff' : '#a7a7a7')};
     border-radius: 50px;
     font-size: 16px;
-    &:hover {
-      transition: 0.5s ease;
-      background-color: #080808;
-      color: #ffffff; // 호버 시 색상 변경
-    }
+    transition: 0.5s ease;
   `,
   Dropdown: styled.ul`
     box-sizing: border-box;
