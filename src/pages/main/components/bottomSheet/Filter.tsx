@@ -36,6 +36,13 @@ const Filter = forwardRef<HTMLDivElement>(function (_, ref) {
   });
 
   const handleFilterClick = (type: FilterType, value: string) => {
+    if (selectedFilter[type] === value) {
+      setSelectedFilter({
+        ...selectedFilter,
+        [type]: null,
+      });
+      return;
+    }
     setSelectedFilter({
       ...selectedFilter,
       [type]: value,

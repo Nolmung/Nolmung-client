@@ -1,3 +1,4 @@
+import { CATEGORY_OPTIONS } from '@/pages/main/constants/categoryBar';
 import Header from '@common/components/header';
 import { Flex as MainLayout } from '@common/components/layout/flex';
 import { S } from '@common/components/layout/index.styles';
@@ -16,8 +17,13 @@ type PathRules = {
 
 /**  Header 혹은 tabBar가 필요 없는 페이지의 경우 path 추가하기 */
 const pathRules: PathRules = {
-  hideHeader: ['/', /^\/detail\/\d+$/, '/search', '/login', /\?category(=|$)/], // Header를 숨길 경로들
-  hideTabBar: [/^\/detail\/\d+$/, '/login', /\?category(=|$)/], // TabBar를 숨길 경로들
+  hideHeader: ['/', /^\/detail\/\d+$/, '/search', '/login'], // Header를 숨길 경로들
+  hideTabBar: [
+    /^\/detail\/\d+$/,
+    '/login',
+    /\?category(=|$)/,
+    /\/\?search(=|$)/,
+  ], // TabBar를 숨길 경로들
 };
 
 /** 헤더, 텝바를 보여줄 지 정규식 검사하는 함수  */
@@ -44,12 +50,32 @@ function Layout({ children }: LayoutProps) {
     type: 'TitleLeft',
   });
   useEffect(() => {
-    switch (location.pathname) {
-      case '/':
-        setHeaderTitle({ title: '메인', showIcon: true, type: 'TitleCenter' });
+    const searchParams = new URLSearchParams(location.search);
+    const category = searchParams.get('category');
+    const categoryLabel = category
+      ? CATEGORY_OPTIONS.find((options) => options.value === category)?.label
+      : null;
+
+    const search = searchParams.get('search');
+    const pathName = location.pathname;
+
+    switch (true) {
+      case pathName === '/' && !!category:
+        setHeaderTitle({
+          title: `${categoryLabel}`,
+          showIcon: true,
+          type: 'TitleCenter',
+        });
+        break;
+      case pathName === '/' && !!search:
+        setHeaderTitle({
+          title: `${search}`,
+          showIcon: true,
+          type: 'TitleCenter',
+        });
         break;
 
-      case '/todayMung':
+      case pathName === '/todaymung':
         {
           setHeaderTitle({
             title: '오늘멍 모아보기',
@@ -59,17 +85,17 @@ function Layout({ children }: LayoutProps) {
         }
         break;
 
-      case '/todaymung/write':
+      case pathName == '/todaymung/write':
         setHeaderTitle({
           title: '오늘멍 작성하기',
-          showIcon: false,
+          showIcon: true,
           type: 'TitleCenter',
         });
         break;
 
-      case '/todaymung/placeRegister':
+      case pathName == '/todaymung/placeregist':
         setHeaderTitle({
-          title: '오늘멍 장소 등록',
+          title: '오늘멍 장소등록',
           showIcon: true,
           type: 'TitleCenter',
         });
@@ -86,7 +112,7 @@ function Layout({ children }: LayoutProps) {
       default:
         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
 
   return (
     <S.Wrapper>

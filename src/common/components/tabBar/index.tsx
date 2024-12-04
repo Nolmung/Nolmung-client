@@ -5,19 +5,20 @@ import { useLocation } from 'react-router-dom';
 
 function TabBar() {
   const location = useLocation();
-
   return (
     <S.Wrapper>
-      {tabItems.map((item: TabBarType) => (
-        <S.IconArea to={item.path} key={item.path}>
-          {location.pathname === item.path ? (
-            <item.activeIcon />
-          ) : (
-            <item.icon />
-          )}
-          <S.IconDescription>{item.label}</S.IconDescription>
-        </S.IconArea>
-      ))}
+      {tabItems.map((item: TabBarType) => {
+        const isActive =
+          location.pathname === item.path ||
+          location.pathname.startsWith(`${item.path}/`);
+
+        return (
+          <S.IconArea to={item.path} key={item.path}>
+            {isActive ? <item.activeIcon /> : <item.icon />}
+            <S.IconDescription>{item.label}</S.IconDescription>
+          </S.IconArea>
+        );
+      })}
     </S.Wrapper>
   );
 }

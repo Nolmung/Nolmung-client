@@ -57,7 +57,6 @@ export const S = {
     height: 100%;
     background-color: white;
     border-radius: 26px 26px 0 0;
-    margin-top: 10px;
   `,
   BottomSheetContentCard: styled.div`
     width: 100%;

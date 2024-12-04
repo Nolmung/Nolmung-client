@@ -2,7 +2,7 @@ import { MarkerType } from '@/pages/main/types';
 
 export const markerData: MarkerType[] = [
   {
-    place_id: '1',
+    place_id: 1,
     name: '더왈츠 카페',
     category: 'CAFE',
     road_address: '서울특별시 강남구 역삼로 134',
@@ -14,7 +14,7 @@ export const markerData: MarkerType[] = [
     longitude: 127.034306,
   },
   {
-    place_id: '2',
+    place_id: 2,
     name: '강남 푸드 코트',
     category: 'RESTAURANT',
     road_address: '서울특별시 강남구 테헤란로 120',
@@ -26,7 +26,7 @@ export const markerData: MarkerType[] = [
     longitude: 127.030123,
   },
   {
-    place_id: '3',
+    place_id: 3,
     name: '한강 어린이 놀이터',
     category: 'PLAYGROUND',
     road_address: '서울특별시 마포구 상암동 123-45',
@@ -38,7 +38,7 @@ export const markerData: MarkerType[] = [
     longitude: 126.900456,
   },
   {
-    place_id: '4',
+    place_id: 4,
     name: '롯데월드 어드벤처',
     category: 'PARK',
     road_address: '서울특별시 송파구 올림픽로 240',
@@ -50,7 +50,7 @@ export const markerData: MarkerType[] = [
     longitude: 127.100567,
   },
   {
-    place_id: '5',
+    place_id: 5,
     name: '서울 호텔',
     category: 'CAFE',
     road_address: '서울특별시 중구 명동길 15',
@@ -62,7 +62,7 @@ export const markerData: MarkerType[] = [
     longitude: 126.987456,
   },
   {
-    place_id: '6',
+    place_id: 6,
     name: '제주도 여행지',
     category: 'TRAVEL',
     road_address: '제주특별자치도 제주시 애월읍 고내리',
@@ -74,7 +74,7 @@ export const markerData: MarkerType[] = [
     longitude: 126.563123,
   },
   {
-    place_id: '7',
+    place_id: 7,
     name: '국립 중앙 박물관',
     category: 'MUSEUM',
     road_address: '서울특별시 용산구 서빙고로 137',
@@ -86,7 +86,7 @@ export const markerData: MarkerType[] = [
     longitude: 126.978912,
   },
   {
-    place_id: '8',
+    place_id: 8,
     name: '갤러리 현대',
     category: 'GALLERY',
     road_address: '서울특별시 종로구 삼청로 60',
@@ -99,7 +99,7 @@ export const markerData: MarkerType[] = [
   },
 
   {
-    place_id: '9',
+    place_id: 9,
     name: '강남 커피빈',
     category: 'CAFE',
     road_address: '서울특별시 강남구 강남대로 396',
@@ -111,7 +111,7 @@ export const markerData: MarkerType[] = [
     longitude: 127.027619,
   },
   {
-    place_id: '10',
+    place_id: 10,
     name: '강남 애슐리',
     category: 'RESTAURANT',
     road_address: '서울특별시 강남구 강남대로 310',
@@ -123,7 +123,7 @@ export const markerData: MarkerType[] = [
     longitude: 127.028568,
   },
   {
-    place_id: '11',
+    place_id: 11,
     name: '강남역 스타벅스',
     category: 'CAFE',
     road_address: '서울특별시 강남구 강남대로 396',
@@ -135,7 +135,7 @@ export const markerData: MarkerType[] = [
     longitude: 127.02773,
   },
   {
-    place_id: '12',
+    place_id: 12,
     name: '강남 한식당',
     category: 'RESTAURANT',
     road_address: '서울특별시 강남구 역삼로 123',
@@ -147,7 +147,7 @@ export const markerData: MarkerType[] = [
     longitude: 127.029662,
   },
   {
-    place_id: '13',
+    place_id: 13,
     name: '강남 명동칼국수',
     category: 'RESTAURANT',
     road_address: '서울특별시 강남구 강남대로 390',
@@ -159,7 +159,7 @@ export const markerData: MarkerType[] = [
     longitude: 127.028101,
   },
   {
-    place_id: '14',
+    place_id: 14,
     name: '강남 아트 갤러리',
     category: 'GALLERY',
     road_address: '서울특별시 강남구 역삼로 111',
@@ -171,7 +171,7 @@ export const markerData: MarkerType[] = [
     longitude: 127.028495,
   },
   {
-    place_id: '15',
+    place_id: 15,
     name: '강남 네일샵',
     category: 'CAFE',
     road_address: '서울특별시 강남구 테헤란로 129',

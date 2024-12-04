@@ -7,7 +7,7 @@ const S = {
     gap: 7px;
     width: 100%;
     overflow-x: auto;
-    height: 100px;
+    height: 80px;
     position: sticky;
     justify-content: center;
     padding: 3px 22px;

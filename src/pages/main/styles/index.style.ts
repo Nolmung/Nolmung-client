@@ -7,13 +7,18 @@ const S = {
 
   MapWrapper: styled.div`
     width: 100%;
-    height: calc(100vh - 92px);
     flex: 1;
+  `,
+
+  LocationButtonWrapper: styled.div<{ bottomHeight: number }>`
+    position: absolute;
+    bottom: ${({ bottomHeight }) => bottomHeight}px;
+    right: 24px;
+    z-index: 1;
   `,
 
   SearchCurrentButton: styled.div<{
     bottomHeight: number;
-    buttonGap: number;
   }>`
     display: flex;
     height: 36px;
@@ -28,7 +33,7 @@ const S = {
     z-index: 1;
     position: absolute;
     // 조건부 스타일링으로 바꾸기
-    bottom: ${({ bottomHeight, buttonGap }) => bottomHeight + buttonGap}px;
+    bottom: ${({ bottomHeight }) => bottomHeight}px;
     left: 50%;
     transform: translateX(-50%);
     :active {
@@ -46,10 +51,25 @@ const S = {
     letter-spacing: -0.12px;
   `,
 
-  Bottom: styled.div<{ bottomHeight: number; buttonGap: number }>`
+  BottomCardWrapper: styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    z-index: 1003;
+  `,
+
+  Bottom: styled.div<{
+    bottomHeight: number;
+    bottomVisible: boolean;
+  }>`
+    visibility: ${({ bottomVisible }) =>
+      bottomVisible ? 'visible' : 'hidden'};
     position: absolute;
     bottom: ${({ bottomHeight }) => bottomHeight}px;
-    background-color: white;
+    z-index: 1;
+    width: 100%;
+    margin-top: 10px;
   `,
 
   BottomSheetWrapper: styled.div`
