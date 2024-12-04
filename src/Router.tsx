@@ -1,6 +1,6 @@
 import { ROUTE } from '@common/constants/route';
 import Main from '@pages/main';
-import TodayMung from '@/pages/todaymung';
+import TodayMung from '@pages/todaymung';
 import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -12,7 +12,9 @@ import Search from './pages/search';
 import TodayMungWrite from './pages/todaymungWrite';
 import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
 import Mypage from './pages/mypage';
-import MyFavorite from './pages/myFavorite';
+// import MyFavorite from './pages/myFavorite';
+import PlaceRecommend from './pages/recommend';
+import TodayMungDetail from './pages/todayMungDetail';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -37,13 +39,18 @@ function Router() {
           <Route path={ROUTE.LOGIN()} element={<Login />} />
           <Route path={ROUTE.SIGNUP()} element={<SignUp />} />
           <Route path={ROUTE.SEARCH()} element={<Search />} />
+          <Route path={ROUTE.PLACE_RECOMMEND()} element={<PlaceRecommend />} />
           <Route path={ROUTE.TODAYMUNG_WRITE()} element={<TodayMungWrite />} />
           <Route
             path={ROUTE.TODAYMUNG_PLACE_REGIST()}
             element={<TodayMungPlaceRegist />}
           />
           <Route path={ROUTE.MY()} element={<Mypage/>} />
-          <Route path={ROUTE.MYFAVORITE()} element={<MyFavorite/>} />
+          {/* <Route path={ROUTE.MYFAVORITE()} element={<MyFavorite/>} /> */}
+          <Route
+            path={ROUTE.TODAYMUNG_DETAIL(':diaryId')}
+            element={<TodayMungDetail />}
+          />
         </Routes>
       </Layout>
     </Suspense>

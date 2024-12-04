@@ -46,3 +46,12 @@ export interface ListCardProps {
     };
   };
 }
+
+export interface DetailProps {
+  diaryId: number;
+  title: string;
+  content: string;
+  publicYn: boolean;
+  createdAt: string;
+  mediaUrl: string;
+}
