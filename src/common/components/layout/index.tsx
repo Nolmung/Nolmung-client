@@ -109,6 +109,14 @@ function Layout({ children }: LayoutProps) {
         })
         break;
         
+        case pathName == '/my/favorite':
+          setHeaderTitle({
+            title: '즐겨찾기',
+            showIcon: true,
+            type: 'TitleLeft'
+          })
+          break;
+          
       default:
         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }

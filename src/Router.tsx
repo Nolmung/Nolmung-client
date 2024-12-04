@@ -12,6 +12,7 @@ import Search from './pages/search';
 import TodayMungWrite from './pages/todaymungWrite';
 import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
 import Mypage from './pages/mypage';
+import MyFavorite from './pages/myFavorite';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -42,7 +43,7 @@ function Router() {
             element={<TodayMungPlaceRegist />}
           />
           <Route path={ROUTE.MY()} element={<Mypage/>} />
-          {/* <Route path={ROUTE.MYFAVORITE()} element={<MyFavorite/>} /> */}
+          <Route path={ROUTE.MYFAVORITE()} element={<MyFavorite/>} />
         </Routes>
       </Layout>
     </Suspense>
