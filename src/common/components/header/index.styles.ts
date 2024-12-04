@@ -9,12 +9,18 @@ export const S = {
     max-height: 70px;
     align-items: center;
     position: sticky;
-    background-color: #fff;
+    background-color: #fdfdfd;
     top: 0;
     left: 0;
     z-index: 1000;
     padding: 28px 22px;
     gap: 15px;
+  `,
+
+  IconWrapper: styled.div`
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
   `,
 
   DummyIcon: styled.div`
@@ -39,11 +45,12 @@ export const S = {
     min-width: 320px;
     height: 100%;
     max-height: 70px;
-    background-color: #fff;
+    background-color: #fdfdfd;
     top: 0;
     left: 0;
     z-index: 1000;
     padding: 28px 22px;
+    border-bottom: 1px solid #f0f0f0;
   `,
 
   CenterTitleArea: styled.div`

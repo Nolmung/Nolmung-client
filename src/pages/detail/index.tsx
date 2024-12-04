@@ -23,7 +23,7 @@ import {
 import { ROUTE } from '@/common/constants/route';
 import { useGetPostDetail } from './querys';
 import { PlacePrice } from '@/common/types';
-import findKeywordById from '@/common/utils/findKeywordById';
+import findLabelNameById from '@/common/utils/findLabelNameById';
 
 function Detail() {
   const navigate = useNavigate();
@@ -133,7 +133,7 @@ function Detail() {
           {data.labels.map((item) => (
             <KeywordReview
               key={item.label_id}
-              Keyword={findKeywordById(item.label_id)!.content}
+              Keyword={findLabelNameById(item.label_id)}
               KeywordCount={item.count}
               KeywordPercent={(item.count / reviewCount) * 100}
             />

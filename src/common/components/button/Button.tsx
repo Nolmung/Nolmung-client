@@ -3,7 +3,6 @@ import { S } from './Button.style';
 import { ButtonProps } from './Button.type';
 
 const Button: React.FC<ButtonProps> = ({
-  label,
   onClick,
   width,
   height,
@@ -12,6 +11,7 @@ const Button: React.FC<ButtonProps> = ({
   fontSize,
   fontWeight,
   borderRadius,
+  children,
 }) => {
   return (
     <S.Wrapper
@@ -24,7 +24,7 @@ const Button: React.FC<ButtonProps> = ({
       fontSize={fontSize}
       borderRadius={borderRadius}
     >
-      {label}
+      {children}
     </S.Wrapper>
   );
 };

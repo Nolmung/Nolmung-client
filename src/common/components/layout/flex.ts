@@ -26,6 +26,7 @@ export const Flex = styled.div<{
   width: 100%;
   max-width: 425px;
   min-width: 320px;
+  max-width: 600px;
   height: ${({ height, heightVh }) =>
     height ? `${height}rem` : heightVh ? `${heightVh}vh` : 'auto'};
   padding: ${({ padding }) => (padding ? padding : '0px')};

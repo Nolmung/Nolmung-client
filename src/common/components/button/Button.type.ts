@@ -1,4 +1,7 @@
+import { ReactNode } from 'react';
+
 export interface ButtonStyleProps {
+  label?: string;
   width?: string;
   height?: string;
   backgroundColor?: string;
@@ -9,6 +12,6 @@ export interface ButtonStyleProps {
 }
 
 export interface ButtonProps extends ButtonStyleProps {
-  label: string;
+  children?: ReactNode;
   onClick: () => void;
 }

@@ -1,4 +1,9 @@
-import { Diary, PlacePrice, ReviewKeyword } from '@/common/types';
+import {
+  Diary,
+  PlaceCategory,
+  PlacePrice,
+  ReviewKeyword,
+} from '@/common/types';
 
 export interface PlaceDetailResponse {
   place_name: string; // 장소 이름
@@ -28,11 +33,11 @@ export interface PlaceDetailResponse {
 export interface MapPlace {
   place_id: number;
   place_name: string;
-  category: string;
+  category: PlaceCategory;
   road_address: string;
   place_img_url: string;
-  star_rating_avg: string;
+  star_rating_avg: number;
   review_count: number;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
 }
