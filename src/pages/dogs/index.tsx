@@ -35,6 +35,8 @@ function Dogs() {
   const [size, setSize] = useState<number | null>(null);
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [gender, setGender] = useState<string | null>(null); // 성별 상태
+  const [neutered, setNeutered] = useState<string | null>(null); // 중성화 여부 상태
 
   const [form, setForm] = useState({
     dog_name: '',
@@ -222,6 +224,42 @@ function Dogs() {
           </S.Dropdown>
         </div>
       )}
+      <S.GenderContainer>
+        <div>
+          <S.ContentTitleText>성별</S.ContentTitleText>
+          <S.GenderWrapper>
+            <S.GenderSelect
+              isSelected={gender === '수컷'}
+              onClick={() => setGender('수컷')}
+            >
+              수컷
+            </S.GenderSelect>
+            <S.GenderSelect
+              isSelected={gender === '암컷'}
+              onClick={() => setGender('암컷')}
+            >
+              암컷
+            </S.GenderSelect>
+          </S.GenderWrapper>
+        </div>
+        <div>
+          <S.ContentTitleText>중성화 여부</S.ContentTitleText>
+          <S.GenderWrapper>
+            <S.GenderSelect
+              isSelected={neutered === '예'}
+              onClick={() => setNeutered('예')}
+            >
+              예
+            </S.GenderSelect>
+            <S.GenderSelect
+              isSelected={neutered === '아니오'}
+              onClick={() => setNeutered('아니오')}
+            >
+              아니오
+            </S.GenderSelect>
+          </S.GenderWrapper>
+        </div>
+      </S.GenderContainer>
       <S.NextButton onClick={handleSubmit}>놀멍 시작하기</S.NextButton>
     </S.ContainerWrapper>
   );

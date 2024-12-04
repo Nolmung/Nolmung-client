@@ -130,6 +130,41 @@ export const S = {
     align-items: center;
     justify-content: center;
   `,
+  GenderSelect: styled.div<{ isSelected: boolean }>`
+    margin-top: 8px;
+    width: 80px;
+    height: 46px;
+    background-color: ${({ isSelected }) =>
+      isSelected ? '#d3fbd4' : '#f0f0f0'};
+    border: 1px solid
+      ${({ isSelected }) => (isSelected ? '#17aa1a' : 'transparent')};
+    color: ${({ isSelected }) => (isSelected ? '#17aa1a' : '#000')};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      border 0.3s ease,
+      color 0.3s ease;
+
+    &:hover {
+      background-color: #d3fbd4;
+      border: 1px solid #17aa1a;
+      color: #17aa1a; // 호버 시 색상 변경
+    }
+  `,
+
+  GenderWrapper: styled.div`
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 8px; /* 요소 간 간격 */
+  `,
+  GenderContainer: styled.div`
+    display: flex;
+    gap: 24px; /* 요소 간 간격 */
+  `,
   NextButton: styled.button`
     margin-top: 50px;
     width: 100%;
