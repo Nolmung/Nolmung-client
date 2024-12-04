@@ -5,8 +5,9 @@ import { FilledStar, TrashcanIcon } from '@/assets/images/svgs';
 
 interface ReviewCardProps {
   data: Review;
+  openModal: () => void;
 }
-function ReviewCard({ data }: ReviewCardProps) {
+function ReviewCard({ data, openModal }: ReviewCardProps) {
   const { placeName, address, rating, reviewLabels } = data;
   return (
     <S.Wrapper>
@@ -19,7 +20,7 @@ function ReviewCard({ data }: ReviewCardProps) {
               <S.Rate>{rating}</S.Rate>
             </S.StarIconRateWrapper>
           </S.PlaceNameAddressWrapper>
-          <TrashcanIcon width={15} />
+          <TrashcanIcon onClick={openModal} width={15} />
         </S.PlaceNameAddressTrashCanWrapper>
         <S.Address>{address}</S.Address>
       </S.PlaceInfoWrapper>
