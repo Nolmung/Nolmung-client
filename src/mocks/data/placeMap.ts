@@ -4,7 +4,7 @@ export const placeMap: MapPlace[] = [
   {
     place_id: 1,
     place_name: '38도씨식당',
-    category: 'CAFE',
+    category: 'RESTAURANT',
     place_img_url:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210721_132%2F1626855796685XVdK4_JPEG%2FW0db6n6s7HHCHrwhXAk9WPua.jpeg.jpg',
     road_address: '서울특별시 마포구 와우산로17길 19-17 2층',

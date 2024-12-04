@@ -4,13 +4,15 @@ import { useState } from 'react';
 import { placeMap } from '@/mocks/data/placeMap';
 import { IoHeartSharp } from 'react-icons/io5';
 import { IoHeartOutline } from 'react-icons/io5';
-import { FilledStar } from '@/assets/images/svgs';
+
 import { PlaceCategoryMapping } from './constants/placeCategoryMapping';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+import { FilledStar } from '@/assets/images/svgs';
 
 function MyFavorite() {
-  const [value, setValue] = useState<PlaceCategory>('RESTAURANT');
+  const [currentCategory, setCurrentCategory] =
+    useState<PlaceCategory>('RESTAURANT');
   const [isLikedId, setIsLikedId] = useState<number>(0);
 
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ function MyFavorite() {
     return parsed;
   };
   const handleCategoryClick = (value: PlaceCategory) => {
-    setValue(value);
+    setCurrentCategory(value);
   };
 
   {
@@ -44,7 +46,7 @@ function MyFavorite() {
         {PlaceCategoryMapping.map((category) => (
           <S.CategoryContainer
             key={category.value}
-            isActive={value === category.value}
+            isActive={currentCategory === category.value}
             onClick={() => handleCategoryClick(category.value)}
           >
             {category.label}
@@ -52,36 +54,41 @@ function MyFavorite() {
         ))}
       </S.CategoryWrapper>
       <S.PlaceWrapper>
-        {placeMap.map((place) => (
-          <S.PlaceCard
-            onClick={() => navigateToDetail(place.place_id)}
-            key={place.place_id}
-          >
-            <S.ImageWrapper>
-              <S.PlaceImage src={place.place_img_url} alt={place.place_name} />
-              {place.place_id === isLikedId ? (
-                <S.Like onClick={() => handleLikeClick(place.place_id)}>
-                  <IoHeartSharp size={24} color="#FF4E3E" />
-                </S.Like>
-              ) : (
-                <S.Like onClick={() => handleLikeClick(place.place_id)}>
-                  <IoHeartOutline size={24} color="#FF4E3E" />
-                </S.Like>
-              )}
-            </S.ImageWrapper>
-            <S.PlaceInfo>
-              <S.PlaceLocation>
-                {parsedAddress(place.road_address)}
-              </S.PlaceLocation>
-              <S.PlaceName>{place.place_name}</S.PlaceName>
-              <S.ReviewWrapper>
-                <FilledStar width={14} height={14} />
-                <S.StarRating>{place.star_rating_avg}</S.StarRating>
-                <S.ReviewCount>리뷰 {place.review_count}</S.ReviewCount>
-              </S.ReviewWrapper>
-            </S.PlaceInfo>
-          </S.PlaceCard>
-        ))}
+        {placeMap
+          .filter((place) => currentCategory === place.category) // 조건에 맞는 항목 필터링
+          .map((place) => (
+            <S.PlaceCard
+              onClick={() => navigateToDetail(place.place_id)}
+              key={place.place_id}
+            >
+              <S.ImageWrapper>
+                <S.PlaceImage
+                  src={place.place_img_url}
+                  alt={place.place_name}
+                />
+                {place.place_id === isLikedId ? (
+                  <S.Like onClick={() => handleLikeClick(place.place_id)}>
+                    <IoHeartSharp size={24} color="#FF4E3E" />
+                  </S.Like>
+                ) : (
+                  <S.Like onClick={() => handleLikeClick(place.place_id)}>
+                    <IoHeartOutline size={24} color="#FF4E3E" />
+                  </S.Like>
+                )}
+              </S.ImageWrapper>
+              <S.PlaceInfo>
+                <S.PlaceLocation>
+                  {parsedAddress(place.road_address)}
+                </S.PlaceLocation>
+                <S.PlaceName>{place.place_name}</S.PlaceName>
+                <S.ReviewWrapper>
+                  <FilledStar width={14} height={14} />
+                  <S.StarRating>{place.star_rating_avg}</S.StarRating>
+                  <S.ReviewCount>리뷰 {place.review_count}</S.ReviewCount>
+                </S.ReviewWrapper>
+              </S.PlaceInfo>
+            </S.PlaceCard>
+          ))}
       </S.PlaceWrapper>
     </S.Wrapper>
   );

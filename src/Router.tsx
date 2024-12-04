@@ -9,11 +9,12 @@ import Detail from './pages/detail';
 import Login from './pages/login';
 import SignUp from './pages/signUp';
 import Search from './pages/search';
+import Dogs from './pages/dogs';
+import Recommend from './pages/recommend';
 import TodayMungWrite from './pages/todaymungWrite';
 import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
 import MyReview from './pages/myReview';
 import MyFavorite from './pages/myFavorite';
-import PlaceRecommend from './pages/recommend';
 import TodayMungDetail from './pages/todayMungDetail';
 import Mypage from './pages/my';
 
@@ -40,8 +41,9 @@ function Router() {
           <Route path={ROUTE.LOGIN()} element={<Login />} />
           <Route path={ROUTE.SIGNUP()} element={<SignUp />} />
           <Route path={ROUTE.SEARCH()} element={<Search />} />
+          <Route path={ROUTE.DOGS()} element={<Dogs />} />
           <Route path={ROUTE.MY_REVIEW()} element={<MyReview />} />
-          <Route path={ROUTE.PLACE_RECOMMEND()} element={<PlaceRecommend />} />
+          <Route path={ROUTE.PLACE_RECOMMEND()} element={<Recommend />} />
           <Route path={ROUTE.TODAYMUNG_WRITE()} element={<TodayMungWrite />} />
           <Route
             path={ROUTE.TODAYMUNG_PLACE_REGIST()}

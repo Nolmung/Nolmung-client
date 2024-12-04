@@ -12,10 +12,14 @@ import {
 } from '@/assets/images/svgs';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@/common/constants/route';
 
 function Mypage() {
   const [editId, setEditId] = useState<number>(0);
   const navigate = useNavigate();
+  const navigateToMyReview = () => {
+    navigate(ROUTE.MY_REVIEW());
+  };
   return (
     <S.Wrapper>
       <S.ProfileWrapper>
@@ -39,19 +43,10 @@ function Mypage() {
         <S.PetProfileWrapper>
           {dogData.length > 0 ? (
             dogData.map((data) => (
-              <PetProfile
-                isActive={data.dogId === editId}
-                data={data}
-                editId={editId}
-                setEditId={setEditId}
-              />
+              <PetProfile data={data} editId={editId} setEditId={setEditId} />
             ))
           ) : (
-            <PetProfile
-              isActive={false}
-              editId={editId}
-              setEditId={setEditId}
-            />
+            <PetProfile editId={editId} setEditId={setEditId} />
           )}
         </S.PetProfileWrapper>
       </S.ProfileWrapper>
@@ -64,7 +59,7 @@ function Mypage() {
           <NoticeIcon width={22} height={22} />
           공지사항
         </S.ListContainer>
-        <S.ListContainer>
+        <S.ListContainer onClick={navigateToMyReview}>
           <ReviewListIcon width={19} height={19} />내 리뷰 모아보기
         </S.ListContainer>
         <S.ListContainer>
