@@ -6,12 +6,11 @@ import { calculateAge } from '../../utils/calculateAge';
 
 interface PetProfileProps {
   data?: DogType;
-  isActive: boolean;
   editId: number;
   setEditId: (dogId: number) => void;
 }
 
-function PetProfileCard({ data, isActive, editId, setEditId }: PetProfileProps) {
+function PetProfileCard({ data, editId, setEditId }: PetProfileProps) {
   const dogSize = DogSizeMapping[data!.size as DogSize];
   const age = calculateAge(data!.birth);
 
@@ -26,7 +25,7 @@ function PetProfileCard({ data, isActive, editId, setEditId }: PetProfileProps) 
   return (
     <>
       {data ? (
-        <S.Wrapper isActive={isActive} onClick={() => handleCardClick(data.dogId)}>
+        <S.Wrapper onClick={() => handleCardClick(data.dogId)}>
           <S.Container>
             <S.ProfileWrapper>
               {/** @Todo api 붙일 때 Default -> data. profileUrl로 변경하기*/}
@@ -47,7 +46,7 @@ function PetProfileCard({ data, isActive, editId, setEditId }: PetProfileProps) 
           </S.Container>
         </S.Wrapper>
       ) : (
-        <S.Wrapper isActive={isActive}>
+        <S.Wrapper>
           <S.NoDataText>반려견을 등록해보세요!</S.NoDataText>
         </S.Wrapper>
       )}

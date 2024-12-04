@@ -8,7 +8,6 @@ function Login() {
   const handleBack = () => {
     navigate(-1); // 이전 페이지로 이동
   };
-
   return (
     <>
       <S.BackgroundImg>

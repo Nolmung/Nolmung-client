@@ -24,6 +24,8 @@ const pathRules: PathRules = {
     /\?category(=|$)/,
     /\/\?search(=|$)/,
     '/my/review',
+    '/signUp',
+    '/dogs',
   ], // TabBar를 숨길 경로들
 };
 
