@@ -41,7 +41,8 @@ function Router() {
             path={ROUTE.TODAYMUNG_PLACE_REGIST()}
             element={<TodayMungPlaceRegist />}
           />
-          <Route path={ROUTE.MYPAGE()} element={<Mypage/>} />
+          <Route path={ROUTE.MY()} element={<Mypage/>} />
+          {/* <Route path={ROUTE.MYFAVORITE()} element={<MyFavorite/>} /> */}
         </Routes>
       </Layout>
     </Suspense>

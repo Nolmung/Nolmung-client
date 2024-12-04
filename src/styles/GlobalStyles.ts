@@ -47,6 +47,10 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     text-decoration: none;
   }
+
+  #root {
+    height: 100%;
+  }
 `;
 
 export default GlobalStyle;

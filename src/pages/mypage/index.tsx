@@ -3,7 +3,13 @@ import { userData } from '@/mocks/data/userData';
 import { dogData } from '@/mocks/data/dogData';
 import kakaoIcon from '@/assets/images/pngs/kakao_icon_image.png';
 import PetProfile from './components/profile';
-import { HeartIcon, LogoutIcon, NoticeIcon, ReviewListIcon, UserEditIcon } from '@/assets/images/svgs';
+import {
+  HeartIcon,
+  LogoutIcon,
+  NoticeIcon,
+  ReviewListIcon,
+  UserEditIcon,
+} from '@/assets/images/svgs';
 import { useState } from 'react';
 
 function Mypage() {
@@ -30,7 +36,7 @@ function Mypage() {
           </S.ProfileTextWrapper>
         </S.MyProfileCard>
         <S.PetProfileWrapper>
-          {dogData.length &&
+          {dogData.length > 0 ? (
             dogData.map((data) => (
               <PetProfile
                 isActive={data.dogId === editId}
@@ -38,7 +44,14 @@ function Mypage() {
                 editId={editId}
                 setEditId={setEditId}
               />
-            ))}
+            ))
+          ) : (
+            <PetProfile
+              isActive={false}
+              editId={editId}
+              setEditId={setEditId}
+            />
+          )}
         </S.PetProfileWrapper>
       </S.ProfileWrapper>
       <S.ListWrapper>
@@ -51,8 +64,7 @@ function Mypage() {
           공지사항
         </S.ListContainer>
         <S.ListContainer>
-          <ReviewListIcon width={19} height={19} />
-          내 리뷰 모아보기
+          <ReviewListIcon width={19} height={19} />내 리뷰 모아보기
         </S.ListContainer>
         <S.ListContainer>
           <LogoutIcon width={19} height={19} />

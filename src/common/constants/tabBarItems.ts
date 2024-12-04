@@ -30,7 +30,7 @@ export const tabItems = [
     label: '오늘멍',
   },
   {
-    path: '/mypage',
+    path: '/my',
     icon: TabBarMyIcon,
     activeIcon: TabBarMyIconActive,
     label: '마이',

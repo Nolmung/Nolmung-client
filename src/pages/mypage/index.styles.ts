@@ -9,8 +9,8 @@ const S = {
     width: 100%;
     height: 100%;
     flex: 1;
-    overflow-y: scroll;
-    min-height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
   `,
   ProfileWrapper: styled.div`
     display: flex;
@@ -19,7 +19,6 @@ const S = {
     padding: 0px 22px;
     height: auto;
     width: 100%;
-    flex: 1;
   `,
   MyProfileCard: styled.div`
     margin: 26px 0px;
@@ -84,7 +83,6 @@ const S = {
     
     background: #fdfdfd;
     padding: 22px 0px;
-    flex: 1;
   `,
   ListContainer: styled.div`
     display: flex;

@@ -12,7 +12,7 @@ interface PetProfileProps {
 }
 
 function PetProfileCard({ data, isActive, editId, setEditId }: PetProfileProps) {
-  const dogSize = data?.size ? DogSizeMapping[data.size as DogSize] : 'X';
+  const dogSize = DogSizeMapping[data!.size as DogSize];
   const age = calculateAge(data!.birth);
 
   const handleCardClick = (dogId: number) => {
@@ -47,7 +47,7 @@ function PetProfileCard({ data, isActive, editId, setEditId }: PetProfileProps) 
           </S.Container>
         </S.Wrapper>
       ) : (
-        <S.Wrapper isActive={false}>
+        <S.Wrapper isActive={isActive}>
           <S.NoDataText>반려견을 등록해보세요!</S.NoDataText>
         </S.Wrapper>
       )}

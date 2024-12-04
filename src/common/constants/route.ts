@@ -8,5 +8,6 @@ export const ROUTE = {
   SEARCH: () => '/search',
   TODAYMUNG_WRITE: () => '/todaymung/write',
   TODAYMUNG_PLACE_REGIST: () => '/todaymung/placeregist',
-  MYPAGE: () => '/mypage',
+  MY: () => '/my',
+  MYFAVORITE: () => '/my/favorite',
 } as const;
