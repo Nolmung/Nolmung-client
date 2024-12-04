@@ -9,8 +9,13 @@ interface ReviewCardProps {
 }
 function ReviewCard({ data, openModal }: ReviewCardProps) {
   const { placeName, address, rating, reviewLabels } = data;
+  const navigateToPlaceDetail = () => {
+    /**@Todo 현재 data에 placeId가 나와있지 않음, API 연동시 백엔드에게 요청하기 
+    navigate(ROUTE.DETAIL(data.placeId));
+    */
+  };
   return (
-    <S.Wrapper>
+    <S.Wrapper onClick={navigateToPlaceDetail}>
       <S.PlaceInfoWrapper>
         <S.PlaceNameAddressTrashCanWrapper>
           <S.PlaceNameAddressWrapper>
