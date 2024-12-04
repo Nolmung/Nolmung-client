@@ -15,7 +15,7 @@ import TodayMungWrite from './pages/todaymungWrite';
 import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
 import MyReview from './pages/myReview';
 import MyFavorite from './pages/myFavorite';
-import TodayMungDetail from './pages/todayMungDetail';
+import TodayMungDetail from './pages/todaymungDetail';
 import Mypage from './pages/my';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
