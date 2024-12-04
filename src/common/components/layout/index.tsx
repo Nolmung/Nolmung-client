@@ -108,7 +108,23 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         break;
-
+      
+      case pathName == '/my':
+        setHeaderTitle({
+          title: '마이페이지',
+          showIcon: true,
+          type: 'TitleLeft'
+        })
+        break;
+        
+        case pathName == '/my/favorite':
+          setHeaderTitle({
+            title: '즐겨찾기',
+            showIcon: true,
+            type: 'TitleLeft'
+          })
+          break;
+          
       default:
         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }
