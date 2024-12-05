@@ -18,7 +18,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
 import { getUserLocation } from './utils/userLocationUtils';
 import CustomMarkerComponent from './components/customMarker';
-import { getPlacesMap } from '@/service/apis/place';
+import { getPlacesFilter, getPlacesMap } from '@/service/apis/place';
+import { PlaceCategory } from '@/common/types';
 
 function Main() {
   const { naver } = window;
@@ -100,11 +101,29 @@ function Main() {
   };
 
   useEffect(() => {
+    const fetchDataAndInitializeMarkers = async () => {
     const query = new URLSearchParams(window.location.search);
     if (category || query.get('category')) {
       setCategory(category || query.get('category'));
       setBottomHeight(BOTTOM_HEIGHT);
     }
+    if (!mapRef.current) return;
+    const coordinate = getCurrentAndMaxCoordinate(mapRef.current);
+    try {
+      const requestBody = {
+        latitude: coordinate.latitude,
+        longitude: coordinate.longitude,
+        maxLatitude: coordinate.maxLatitude,
+        maxLongitude: coordinate.maxLongitude,
+        category: category as PlaceCategory,
+      }
+      const markerData = await getPlacesFilter(requestBody);
+      initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
+    } catch (error) {
+      console.error('Error Get Filtering Data:', error);
+    }
+  };
+  fetchDataAndInitializeMarkers();
   }, [category]);
 
   useEffect(() => {
