@@ -1,6 +1,11 @@
 import { S } from './styles/signUp.styles';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Box, TextField } from '@mui/material';
+import dayjs, { Dayjs } from 'dayjs';
 
 const locations = [
   '서울특별시',
@@ -25,16 +30,15 @@ const locations = [
 function SignUp() {
   const navigate = useNavigate();
   const [nickname, setNickname] = useState('');
+  const [birth, setBirth] = useState('');
   const [addressProvince, setAddressProvince] = useState('');
-  const [selectedAge, setSelectedAge] = useState<number | null>(20);
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isAddressValid, setAddressValid] = useState(true);
-
   const [NextButtonActive, setNextButtonActive] = useState(false);
-
-  const handleCircleClick = (age: number) => {
-    setSelectedAge((prev) => (prev === age ? null : age)); // 같은 값 클릭 시 선택 해제
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+  const handleDateChange = (newValue: Dayjs | null) => {
+    setSelectedDate(newValue);
   };
 
   useEffect(() => {
@@ -42,19 +46,23 @@ function SignUp() {
   }, []);
 
   useEffect(() => {
-    if (nickname && addressProvince && selectedAge) {
+    if (nickname && addressProvince && birth) {
       setNextButtonActive(true);
     }
-  }, [nickname, addressProvince, selectedAge]);
+  }, [nickname, addressProvince, birth]);
 
   const handleNext = () => {
-    if (!nickname || !addressProvince || !selectedAge) {
+    if (!nickname || !addressProvince || !birth) {
       alert('모든 정보를 입력해주세요!');
       return;
     }
     navigate('/dogs', {
-      state: { nickname, addressProvince, selectedAge },
+      state: { nickname, addressProvince, birth },
     });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBirth(e.target.value);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,56 +130,27 @@ function SignUp() {
             ))}
           </S.Dropdown>
         )}
-        <S.ContentTitleText>연령</S.ContentTitleText>
-        <S.AgeChoiceContainer>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={selectedAge === 10}
-              onClick={() => handleCircleClick(10)}
-            >
-              10
-            </S.AgeChoice>
-            <S.AgeChoiceText>10대</S.AgeChoiceText>
-          </S.AgeFlex>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={selectedAge === 20}
-              onClick={() => handleCircleClick(20)}
-            >
-              20
-            </S.AgeChoice>
-            <S.AgeChoiceText>20대</S.AgeChoiceText>
-          </S.AgeFlex>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={selectedAge === 30}
-              onClick={() => handleCircleClick(30)}
-            >
-              30
-            </S.AgeChoice>
-            <S.AgeChoiceText>30대</S.AgeChoiceText>
-          </S.AgeFlex>
-        </S.AgeChoiceContainer>
-        <S.AgeChoiceContainer>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={selectedAge === 40}
-              onClick={() => handleCircleClick(40)}
-            >
-              40
-            </S.AgeChoice>
-            <S.AgeChoiceText>40대</S.AgeChoiceText>
-          </S.AgeFlex>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={selectedAge === 50}
-              onClick={() => handleCircleClick(50)}
-            >
-              50
-            </S.AgeChoice>
-            <S.AgeChoiceText>50대 이상</S.AgeChoiceText>
-          </S.AgeFlex>
-        </S.AgeChoiceContainer>
+        <S.ContentTitleText>생년월일</S.ContentTitleText>
+
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 2,
+              alignItems: 'center',
+            }}
+          >
+            <DatePicker
+              value={selectedDate}
+              onChange={handleDateChange}
+              views={['year', 'month', 'day']}
+              openTo="year" // 연도 선택부터 시작
+              format="YYYY-MM-DD" // 날짜 포맷 지정
+            />
+          </Box>
+        </LocalizationProvider>
+
         <S.NextButton
           disabled={!NextButtonActive}
           isActive={NextButtonActive}

@@ -47,48 +47,28 @@ export const S = {
       font-size: 14px;
     }
   `,
-
-  AgeChoiceContainer: styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-    align-items: center;
+  AgeLabel: styled.label`
+    font-size: 14px;
+    font-weight: bold;
+    color: #080808;
   `,
-  AgeChoice: styled.div<{ isSelected: boolean }>`
-    cursor: pointer;
-    margin-top: 10px;
-    width: 93px;
-    height: 93px;
-    background-color: ${({ isSelected }) =>
-      isSelected ? '#d3fbd4' : '#fdfdfd'};
-    border: 1px solid
-      ${({ isSelected }) => (isSelected ? '#17aa1a' : '#d9d9d9')};
-    border-radius: 50%;
-    color: ${({ isSelected }) => (isSelected ? '#17aa1a' : '#a7a7a7')};
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    &:hover {
-      transition: 0.5s ease;
-      background-color: #d3fbd4;
-      border: 1px solid #17aa1a;
-      color: #17aa1a; // 호버 시 색상 변경
+
+  AgeInput: styled.input`
+    width: 100%;
+    height: 46px;
+    padding: 8px 12px;
+    font-size: 16px;
+    color: #080808;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: #17aa1a;
+      outline: none;
     }
   `,
-  AgeChoiceText: styled.h4`
-    color: #a7a7a7;
-    line-height: 1.2;
-    font-size: 13px;
-    margin-top: 8px;
-  `,
-  AgeFlex: styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  `,
+
   NextButton: styled.button<{ isActive: boolean }>`
     margin-top: 50px;
     width: 100%;
