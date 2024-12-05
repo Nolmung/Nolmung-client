@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { markerData } from '@/mocks/data/markerData';
 import { LocationButtonIcon, Refresh } from '@/assets/images/svgs';
 import { useMapCenter } from './hooks/useMapCenter';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
@@ -19,6 +18,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
 import { getUserLocation } from './utils/userLocationUtils';
 import CustomMarkerComponent from './components/customMarker';
+import { getPlacesMap } from '@/service/apis/place';
 
 function Main() {
   const { naver } = window;
@@ -29,6 +29,7 @@ function Main() {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<naver.maps.Map | null>(null);
   const selectedMarkerRef = useRef<CustomMarker | null>(null);
+  const markersRef = useRef<CustomMarker[]>([]);
 
   const [mapCenter, setMapCenter] = useMapCenter();
 
@@ -48,36 +49,55 @@ function Main() {
   const [category, setCategory] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!mapContainerRef.current || !naver || !mapCenter) return;
+    const initializeMap = async () => {
+      if (!mapContainerRef.current || !naver || !mapCenter) return;
 
-    if (!mapRef.current) {
-      const center = new naver.maps.LatLng(
-        mapCenter.latitude,
-        mapCenter.longitude,
-      );
-      const mapOptions: naver.maps.MapOptions = {
-        center: center,
-        zoom: 17,
-        minZoom: 11,
-        maxZoom: 18,
-        baseTileOpacity: 0.8, //지도 투명도 조절
-      };
-      mapRef.current = new naver.maps.Map(mapContainerRef.current, mapOptions);
+      if (!mapRef.current) {
+        const center = new naver.maps.LatLng(
+          mapCenter.latitude,
+          mapCenter.longitude,
+        );
+        const mapOptions: naver.maps.MapOptions = {
+          center: center,
+          zoom: 15,
+          minZoom: 10,
+          maxZoom: 18,
+          baseTileOpacity: 0.8, //지도 투명도 조절
+        };
+        mapRef.current = new naver.maps.Map(
+          mapContainerRef.current,
+          mapOptions,
+        );
 
-      naver.maps.Event.addListener(mapRef.current, 'idle', () => {
-        if (mapRef.current) {
-          setIsCurrentButtonActive(true);
+        naver.maps.Event.addListener(mapRef.current, 'idle', () => {
+          if (mapRef.current) {
+            setIsCurrentButtonActive(true);
+          }
+        });
+        // 지도에서 장소 검색 GET API 호출
+        try {
+          await fetchAndInitMarkers();
+        } catch (error) {
+          console.error('Error during fetch and init markers', error);
         }
-      });
-      initMarkers(mapRef.current, markerData, handleMarkerClick);
-    } else {
-      const newCenter = new naver.maps.LatLng(
-        mapCenter.latitude,
-        mapCenter.longitude,
-      );
-      mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
-    }
+      } else {
+        const newCenter = new naver.maps.LatLng(
+          mapCenter.latitude,
+          mapCenter.longitude,
+        );
+        mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
+      }
+    };
+    // 지도 초기화 함수 호출
+    initializeMap();
   }, [mapCenter]);
+
+  const fetchAndInitMarkers = async () => {
+    if (!mapRef.current) return;
+    const requestBody = getCurrentAndMaxCoordinate(mapRef.current);
+    const markerData = await getPlacesMap(requestBody);
+    initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
+  };
 
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
@@ -124,26 +144,26 @@ function Main() {
 
   /**
    * 현 지도에서 검색 버튼 클릭 이벤트 함수
-   * @Todo alert -> 지도에서 장소 조회 API 호출 로직으로 변경
    */
-  const handleSearchCurrentButtonClick = () => {
-    const { currentCenter, maxBounds } = getCurrentAndMaxCoordinate(
-      mapRef.current!,
-    );
+  const handleSearchCurrentButtonClick = async () => {
+    const requestBody = getCurrentAndMaxCoordinate(mapRef.current!);
 
     alert(
-      `현재 좌표는 (${currentCenter.latitude}, ${currentCenter.longitude}), \n지도 최대 좌표는 (${maxBounds.latitude}, ${maxBounds.longitude})입니다. \n해당 좌표를 중심으로 장소를 다시 조회합니다.`,
+      `현재 좌표는 (${requestBody.latitude}, ${requestBody.longitude}), \n지도 최대 좌표는 (${requestBody.latitude}, ${requestBody.longitude})입니다. \n해당 좌표를 중심으로 장소를 다시 조회합니다.`,
     );
 
     const newCenter = mapRef.current!.getCenter();
     setMapCenter({ latitude: newCenter.y, longitude: newCenter.x });
-    initMarkers(mapRef.current!, markerData, handleMarkerClick);
+    try {
+      await fetchAndInitMarkers();
+    } catch (error) {
+      console.error('Error during fetch and init markers', error);
+    }
     setIsCurrentButtonActive(false);
   };
 
   /**
    * 마커 클릭 이벤트 함수
-   * @Todo 마커 클릭 시 바텀시트 호출하게 로직 변경
    */
   const handleMarkerClick = (marker: CustomMarker) => {
     setBottomSheetVisible(false);
