@@ -5,6 +5,7 @@ import KEYWORDS from '@common/constants/reviewLabels';
 import { useState } from 'react';
 import Button from '@common/components/button/Button';
 import { useReviewStore } from '@pages/todaymungPlaceRegist/stores/reviewStore';
+import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
 
 interface ReviewCardProps {
   category: PlaceCategory;
@@ -27,6 +28,7 @@ function ReviewCard({
   roadAddress,
 }: ReviewCardProps) {
   const { reviewlist, addReviewList } = useReviewStore();
+  const { addPlaces } = useTodayMungStore();
   const review = reviewlist.find((review) => review.placeId === placeId);
   const [starRate, setStarRate] = useState<number>(review?.rating || 5);
   const [selectedLabels, setSelectedLabels] = useState<Labels[]>(
@@ -45,6 +47,7 @@ function ReviewCard({
       placeName,
       roadAddress,
     });
+    addPlaces(placeId);
     setKeywordReviewVisibleId(null);
   };
 
