@@ -1,4 +1,3 @@
-import { PlaceDetailResponse } from './index.type';
 import { instance } from '..';
 
 export const getPostDetail = async (placeId: string | number) => {

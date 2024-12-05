@@ -22,15 +22,14 @@ export interface PlaceDetailResponse {
   extraPrice: string; // 추가 비용
   acceptSize: DogSize; // 수용 가능 크기
   rule: string; // 제한 사항
-  inpossibleYn: 'Y' | 'N'; // 실내 동반 가능 여부
-  outpossibleYn: 'Y' | 'N'; // 실외 동반 가능 여부
-  extra_price: string; // 추가 비용
-  star_rating_avg: string; // 평균 별점
-  review_count: number; // 리뷰 수
+  inPossibleYn: 'Y' | 'N'; // 실내 동반 가능 여부
+  outPossibleYn: 'Y' | 'N'; // 실외 동반 가능 여부
+  reviewCount: number; // 리뷰 수
   latitude: string; // 위도
   longitude: string; // 경도
   labels: ReviewKeyword[]; // 라벨 배열
   diaries: Diary[]; // 다이어리 배열
+  starRatingAvg: number; // 별점 평균
 }
 
 export interface MapPlace {

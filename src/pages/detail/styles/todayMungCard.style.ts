@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const S = {
   TodayMungWrapper: styled.div`
     display: flex;
+    width: 100%;
     padding: 15px 0px;
     flex-direction: column;
     align-items: flex-start;
@@ -59,10 +60,10 @@ export const S = {
       gap: 20px;
     }
   `,
-  TodayMungTitleContentWrapper: styled.div`
+  TodayMungTitleContentWrapper: styled.div<{ isImageUrlNotNull: boolean }>`
     display: flex;
     flex-direction: column;
-    flex: 1;
+    width: ${({ isImageUrlNotNull }) => (isImageUrlNotNull ? '70%' : '100%')};
   `,
   Title: styled.div`
     color: #080808;
@@ -71,22 +72,23 @@ export const S = {
     font-style: normal;
     font-weight: 600;
     line-height: 20px; /* 125% */
-    width: 90%;
+    width: 100%;
     padding: 10px 5px;
     box-sizing: border-box;
 
+    overflow: hidden;
+    text-overflow: ellipsis;
     @media (max-width: 270px) {
       width: 100%;
     }
   `,
   Content: styled.div`
     color: #080808;
-
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: 20px; /* 166.667% */
-    width: 90%;
+    width: 100%;
     height: 60px;
     padding: 5px;
     box-sizing: border-box;
@@ -106,6 +108,6 @@ export const S = {
     width: 90px;
     height: 100px;
     border-radius: 10px;
-    background-color: yellow;
+    flex-shrink: 0;
   `,
 };

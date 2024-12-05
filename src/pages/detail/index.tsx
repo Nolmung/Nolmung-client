@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   AllKindDogAvailableInfoIcon,
+  InsideInfoIcon,
+  OutsideInfoIcon,
   ParkAvailableInfoIcon,
   Under15KgInfoIcon,
   Under25KgInfoIcon,
@@ -24,7 +26,6 @@ import { ROUTE } from '@/common/constants/route';
 import { useGetPostDetail } from './querys';
 import { PlacePrice } from '@/common/types';
 import findLabelNameById from '@/common/utils/findLabelNameById';
-import { DogSizeMapping } from '../my/constants/DogSizeMapping';
 import { match } from 'ts-pattern';
 
 function Detail() {
@@ -33,7 +34,6 @@ function Detail() {
   const [visibleTodayMungCard, setVisibleTodayMungCard] = useState(3);
   const { placeId } = useParams();
   const { data, isLoading, isError } = useGetPostDetail(placeId!);
-  console.log('Data', data);
 
   const handleBackArrowClick = () => {
     navigate(ROUTE.MAIN());
@@ -56,6 +56,10 @@ function Detail() {
     return price == '변동' || price == '없음';
   };
 
+  useEffect(() => {
+    document.title = `${data.placeName}`;
+  }, []);
+
   return (
     <S.Wrapper ref={scrollRef} onScroll={handleScroll}>
       <S.Header isScrolled={scrollTop >= 70}>
@@ -74,7 +78,7 @@ function Detail() {
         <S.PlaceName> {data.placeName}</S.PlaceName>
         <S.PlaceBriefReview>
           <FaStar size="16" color="#F4E600" />
-          <S.StarAverage>{data.star_rating_avg}</S.StarAverage>
+          <S.StarAverage>{data.starRatingAvg}</S.StarAverage>
           <S.PlaceReviewCount>
             리뷰
             {reviewCount}
@@ -88,6 +92,8 @@ function Detail() {
             .with('L', () => <AllKindDogAvailableInfoIcon />)
             .exhaustive()}
           {data.parkingYn && <ParkAvailableInfoIcon />}
+          {data.outPossibleYn && <OutsideInfoIcon />}
+          {data.inPossibleYn && <InsideInfoIcon />}
         </S.PlaceInfoIcons>
       </S.PlaceInfo>
       <S.PlaceDetailWrapper>
@@ -114,7 +120,7 @@ function Detail() {
             {data.price}
           </S.PlaceDetail>
         )}
-        {!isPriceAvailable(data.extra_price) && (
+        {!isPriceAvailable(data.extraPrice) && (
           <S.PlaceDetail>
             <Price width={18} height={18} />
             <S.PlaceDetailMenu>추가 금액</S.PlaceDetailMenu>
