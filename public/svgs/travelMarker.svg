@@ -1,7 +1,7 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="24" height="24" rx="12" fill="#5E5E5E"/>
-<path d="M5.33398 14.5001C5.33398 14.5001 6.53088 14 8.66732 14C12.0007 14 14.6673 16 18.6673 16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M5.33398 18H18.6673" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12.3967 6.15174C10.4996 6.69579 9.26646 8.56816 9.33685 10.5834C9.35147 11.0019 9.35878 11.2112 9.53763 11.3037C9.71647 11.3963 9.90211 11.2651 10.2734 11.0028L11.1011 10.4179C11.2254 10.33 11.373 10.2877 11.5217 10.2972L13.4658 10.4221L15.0911 9.27361C15.2154 9.18577 15.363 9.14345 15.5117 9.153L16.5259 9.21815C16.9611 9.24611 17.1787 9.26009 17.2867 9.09255C17.3948 8.92502 17.3069 8.74389 17.1313 8.38162C16.2577 6.57993 14.3042 5.60471 12.3967 6.15174Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M13.6667 10.333L15 15.333M12.1905 5.99967L12 5.33301" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.33203 14.5001C5.33203 14.5001 6.52892 14 8.66536 14C11.9987 14 14.6654 16 18.6654 16" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.33203 18H18.6654" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.3947 6.15174C10.4976 6.69579 9.2645 8.56816 9.33489 10.5834C9.34952 11.0019 9.35683 11.2112 9.53567 11.3037C9.71452 11.3963 9.90015 11.2651 10.2714 11.0028L11.0991 10.4179C11.2234 10.33 11.371 10.2877 11.5197 10.2972L13.4638 10.4221L15.0892 9.27361C15.2135 9.18577 15.3611 9.14345 15.5098 9.153L16.524 9.21815C16.9592 9.24611 17.1767 9.26009 17.2848 9.09255C17.3928 8.92502 17.305 8.74389 17.1293 8.38162C16.2557 6.57993 14.3022 5.60471 12.3947 6.15174Z" fill="white" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.6667 10.3333L15 15.3333M12.1905 5.99998L12 5.33331" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
