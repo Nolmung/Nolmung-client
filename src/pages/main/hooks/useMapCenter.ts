@@ -8,9 +8,9 @@ import { getUserLocation } from '../utils/userLocationUtils';
  * */
 export const useMapCenter = (): [
   LatLng,
-  React.Dispatch<React.SetStateAction<LatLng>>,
+  React.Dispatch<React.SetStateAction<LatLng | null>>,
 ] => {
-  const [mapCenter, setMapCenter] = useState<LatLng>(DEFAULT_LATLNG);
+  const [mapCenter, setMapCenter] = useState<LatLng | null>(null);
 
   useEffect(() => {
     getUserLocation(
@@ -22,9 +22,10 @@ export const useMapCenter = (): [
       },
       (error) => {
         console.error('사용자 위치를 가져오는 중 오류가 발생했습니다:', error);
+        setMapCenter(DEFAULT_LATLNG);
       },
     );
   }, []);
 
-  return [mapCenter, setMapCenter];
+  return [mapCenter!, setMapCenter];
 };

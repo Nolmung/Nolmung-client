@@ -31,8 +31,6 @@ function Main() {
   const selectedMarkerRef = useRef<CustomMarker | null>(null);
   const markersRef = useRef<CustomMarker[]>([]);
 
-  const [mapCenter, setMapCenter] = useMapCenter();
-
   const [isCurrentButtonActive, setIsCurrentButtonActive] =
     useState<boolean>(false);
 
@@ -48,6 +46,8 @@ function Main() {
   );
   const [category, setCategory] = useState<string | null>(null);
 
+  const [mapCenter, setMapCenter] = useMapCenter();
+
   useEffect(() => {
     const initializeMap = async () => {
       if (!mapContainerRef.current || !naver || !mapCenter) return;
@@ -59,7 +59,7 @@ function Main() {
         );
         const mapOptions: naver.maps.MapOptions = {
           center: center,
-          zoom: 15,
+          zoom: 14,
           minZoom: 10,
           maxZoom: 18,
           baseTileOpacity: 0.8, //지도 투명도 조절
