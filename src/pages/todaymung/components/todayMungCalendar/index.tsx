@@ -23,6 +23,7 @@ import {
 } from '../../types/TodayMungList.type';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+import { todaymungData } from '@/mocks/data/todaymungData';
 
 dayjs.locale('ko');
 
@@ -31,13 +32,23 @@ function renderDayWithMarker(
   listData: CalendarDataProps,
 ) {
   const { day, selected } = props;
-  const { diaries } = listData;
+
+  // const { diaries } = listData; //server Data
+  const { diaries } = todaymungData.data; // mockData
+
   const dateKey = day.format('YYYY.MM.DD');
   const diary = diaries.find((entry) => entry.createdAt === dateKey);
   const markerUrl = diary?.mediaUrl;
   const isTruthy = markerUrl !== undefined && markerUrl !== null;
-
   const isToday = day.isSame(dayjs(), 'day');
+  const navigate = useNavigate();
+
+  const handleTodayClick = () => {
+    if (isToday && !isTruthy) {
+      navigate(ROUTE.TODAYMUNG_WRITE());
+    }
+  };
+
   return (
     <CustomPickersDay
       {...props}
@@ -45,6 +56,7 @@ function renderDayWithMarker(
       className={`${isTruthy || isToday ? 'hover-enabled' : ''} ${
         selected ? 'Mui-selected' : ''
       }`}
+      onClick={handleTodayClick}
     >
       <S.DayText $hasMarker={!!isTruthy}>{day.date()}</S.DayText>
       {diary && (
@@ -91,7 +103,6 @@ function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
 // 메인 컴포넌트
 export default function TodayMungCalendar({ listData }: ListDataProps) {
   const navigate = useNavigate();
-
   const navigateToTodaymungWrite = () => {
     navigate(ROUTE.TODAYMUNG_WRITE());
   };

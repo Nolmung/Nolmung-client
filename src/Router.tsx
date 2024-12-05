@@ -27,7 +27,7 @@ console.warn = (...args) => {
   ) {
     return;
   }
-  originalWarn(...args);
+  // originalWarn(...args);
 };
 
 function Router() {
