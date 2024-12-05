@@ -8,8 +8,8 @@ interface TodayMungStore extends PostDiaryRequest {
   addPlaces: (placeId: number) => void;
   addDogIds: (dogId: number) => void;
   deleteDogIds: (dogId: number) => void;
-  addMedias: (media: Media) => void;
-  deleteImages: (mediaId: number) => void;
+  addMedia: (media: Media) => void;
+  deleteMedia: (mediaId: number) => void;
   setPublicYn: (publicYn: boolean) => void;
 }
 
@@ -26,13 +26,13 @@ export const useTodayMungStore = create(
       setContent: (content: string) => set({ content }),
       addPlaces: (placeId: number) =>
         set((store) => ({ places: [...(store.places || []), placeId] })),
-      addMedias: (media: Media) =>
+      addMedia: (media: Media) =>
         set((store) => ({
           medias: [...(store.medias || []), media].sort(
             (a, b) => b.mediaId - a.mediaId,
           ),
         })),
-      deleteImages: (mediaId: number) =>
+      deleteMedia: (mediaId: number) =>
         set((store) => ({
           medias: (store.medias || []).filter(
             (media) => media.mediaId !== mediaId,
