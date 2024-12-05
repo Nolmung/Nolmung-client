@@ -15,7 +15,6 @@ import {
   CustomPickersDay,
 } from '../../styles/TodayMungCalendar.style';
 
-import { PlusIcon } from '@/assets/images/svgs';
 import 'dayjs/locale/ko';
 import {
   CalendarDataProps,
@@ -23,6 +22,7 @@ import {
 } from '../../types/TodayMungList.type';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+import RegistButton from '../registButton';
 
 dayjs.locale('ko');
 
@@ -31,13 +31,22 @@ function renderDayWithMarker(
   listData: CalendarDataProps,
 ) {
   const { day, selected } = props;
-  const { diaries } = listData;
+
+  const { diaries } = listData; //server Data
+
   const dateKey = day.format('YYYY.MM.DD');
   const diary = diaries.find((entry) => entry.createdAt === dateKey);
   const markerUrl = diary?.mediaUrl;
   const isTruthy = markerUrl !== undefined && markerUrl !== null;
-
   const isToday = day.isSame(dayjs(), 'day');
+  const navigate = useNavigate();
+
+  const handleTodayClick = () => {
+    if (isToday && !isTruthy) {
+      navigate(ROUTE.TODAYMUNG_WRITE());
+    }
+  };
+
   return (
     <CustomPickersDay
       {...props}
@@ -45,6 +54,7 @@ function renderDayWithMarker(
       className={`${isTruthy || isToday ? 'hover-enabled' : ''} ${
         selected ? 'Mui-selected' : ''
       }`}
+      onClick={handleTodayClick}
     >
       <S.DayText $hasMarker={!!isTruthy}>{day.date()}</S.DayText>
       {diary && (
@@ -90,12 +100,6 @@ function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
 
 // 메인 컴포넌트
 export default function TodayMungCalendar({ listData }: ListDataProps) {
-  const navigate = useNavigate();
-
-  const navigateToTodaymungWrite = () => {
-    navigate(ROUTE.TODAYMUNG_WRITE());
-  };
-
   return (
     <S.Wrap>
       <S.CalendarArea>
@@ -107,6 +111,7 @@ export default function TodayMungCalendar({ listData }: ListDataProps) {
             }}
             sx={{
               height: '100%',
+              overflow: 'scroll',
               '& .MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition > *':
                 {
                   position: 'static !important',
@@ -115,9 +120,7 @@ export default function TodayMungCalendar({ listData }: ListDataProps) {
           />
         </LocalizationProvider>
       </S.CalendarArea>
-      <S.TodaymungInsertButton onClick={navigateToTodaymungWrite}>
-        <PlusIcon /> <S.ButtonText>오늘멍 작성하기</S.ButtonText>
-      </S.TodaymungInsertButton>
+      <RegistButton />
     </S.Wrap>
   );
 }
