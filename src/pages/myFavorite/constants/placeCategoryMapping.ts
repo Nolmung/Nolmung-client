@@ -30,7 +30,7 @@ export const PlaceCategoryMapping: PlaceCategoryMappingType = [
     label: '박물관',
   },
   {
-    value: 'GALLERY',
+    value: 'ARTGALLERY',
     label: '미술관',
   },
 ];
