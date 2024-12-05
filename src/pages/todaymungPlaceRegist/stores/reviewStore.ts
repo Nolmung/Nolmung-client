@@ -1,5 +1,6 @@
 import { PlaceCategory } from '@/common/types';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface Labels {
   labelId: number;
@@ -21,18 +22,25 @@ interface ReviewStore {
   deleteReview: (placeId: number) => void;
 }
 
-export const useReviewStore = create<ReviewStore>((set) => ({
-  reviewlist: [],
-  singleReview: null,
-  setSingleReview: () => set({}),
-  addReviewList: (reviews: Review) =>
-    set((store) => ({
-      reviewlist: [...store.reviewlist, reviews],
-    })),
-  deleteReview: (placeId: number) =>
-    set((store) => ({
-      reviewlist: store.reviewlist.filter(
-        (review) => review.placeId !== placeId,
-      ),
-    })),
-}));
+export const useReviewStore = create(
+  persist<ReviewStore>(
+    (set) => ({
+      reviewlist: [],
+      singleReview: null,
+      setSingleReview: () => set({}),
+      addReviewList: (reviews: Review) =>
+        set((store) => ({
+          reviewlist: [...store.reviewlist, reviews],
+        })),
+      deleteReview: (placeId: number) =>
+        set((store) => ({
+          reviewlist: store.reviewlist.filter(
+            (review) => review.placeId !== placeId,
+          ),
+        })),
+    }),
+    {
+      name: 'review',
+    },
+  ),
+);
