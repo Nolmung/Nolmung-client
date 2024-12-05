@@ -1,6 +1,6 @@
 import {
   AccommodationTag,
-  ArtgalleryTag,
+  GalleryTag,
   CafeTag,
   BookmarksTag,
   VisitedTag,
@@ -61,6 +61,6 @@ export const CATEGORY_OPTIONS: CategoryOptionType = [
   {
     value: 'GALLERY',
     label: '미술관',
-    icon: ArtgalleryTag,
+    icon: GalleryTag,
   },
 ];

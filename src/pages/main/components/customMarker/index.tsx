@@ -3,7 +3,7 @@ import { match } from 'ts-pattern';
 import { PlaceCategory } from '@/common/types';
 import Categories from '@/common/constants/categories';
 import { MarkerIconMapping } from '../../types';
-import { ClickMarker, DefaultMarker } from '@/assets/images/svgs';
+import { DefaultMarker } from '@/assets/images/svgs';
 
 interface CustomMarkerComponentProps {
   placeId: number;
@@ -19,7 +19,10 @@ function CustomMarkerComponent({
   isActive = false,
 }: CustomMarkerComponentProps) {
   const IconComponent = match(category)
-    .with(...Categories, (category) => MarkerIconMapping[category])
+    .with(...Categories, (category) => {
+      const iconSet = MarkerIconMapping[category];
+      return isActive ? iconSet.active : iconSet.default;
+    })
     .otherwise(() => DefaultMarker);
 
   return (
@@ -27,7 +30,7 @@ function CustomMarkerComponent({
       <S.Name>{name}</S.Name>
       {isActive ? (
         <S.ClickIconWrapper>
-          <ClickMarker width={56} height={70} />
+          <IconComponent width={56} height={70} />
         </S.ClickIconWrapper>
       ) : (
         <S.IconWrapper>

@@ -1,12 +1,20 @@
 import {
   CafeMarker,
   PlaygroundMarker,
-  HotelMarker,
   TravelMarker,
   MuseumMarker,
   GalleryMarker,
   FoodMarker,
-  AmusementparkMarker,
+  AccommodationMarker,
+  ParkMarker,
+  RestaurantClickMarker,
+  CafeClickMarker,
+  PlaygroundClickMarker,
+  ParkClickMarker,
+  AccommodationClickMarker,
+  TravelClickMarker,
+  MuseumClickMarker,
+  GalleryClickMarker,
 } from '@/assets/images/svgs';
 import { PlaceCategory, SVGComponent } from '@/common/types';
 
@@ -23,13 +31,19 @@ export interface MarkerType {
   longitude: number;
 }
 
-export const MarkerIconMapping: Record<PlaceCategory, SVGComponent> = {
-  RESTAURANT: FoodMarker,
-  CAFE: CafeMarker,
-  PLAYGROUND: PlaygroundMarker,
-  PARK: AmusementparkMarker,
-  ACCOMMODATION: HotelMarker,
-  TRAVEL: TravelMarker,
-  MUSEUM: MuseumMarker,
-  GALLERY: GalleryMarker,
+export const MarkerIconMapping: Record<
+  PlaceCategory,
+  { default: SVGComponent; active: SVGComponent }
+> = {
+  RESTAURANT: { default: FoodMarker, active: RestaurantClickMarker },
+  CAFE: { default: CafeMarker, active: CafeClickMarker },
+  PLAYGROUND: { default: PlaygroundMarker, active: PlaygroundClickMarker },
+  PARK: { default: ParkMarker, active: ParkClickMarker },
+  ACCOMMODATION: {
+    default: AccommodationMarker,
+    active: AccommodationClickMarker,
+  },
+  TRAVEL: { default: TravelMarker, active: TravelClickMarker },
+  MUSEUM: { default: MuseumMarker, active: MuseumClickMarker },
+  GALLERY: { default: GalleryMarker, active: GalleryClickMarker },
 };

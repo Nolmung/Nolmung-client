@@ -22,6 +22,8 @@ const GlobalStyle = createGlobalStyle`
 
   html, body {
     font-family: 'Pretendard', sans-serif;
+    color: #000;
+    
     height: 100%;
     width: 100%;
     background: #FDFDFD;

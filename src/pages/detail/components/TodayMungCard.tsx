@@ -30,7 +30,12 @@ function TodayMungCard({ card }: TodayMungCardProps) {
           isImageUrlNotNull={card.imageUrl?.length > 0}
         >
           <S.Title>{card.diaryName}</S.Title>
-          <S.Content>{card.diaryContent}</S.Content>
+          <S.Content>
+            오늘은 장미랑 같이 모각코를 했어요 근데 장미 이자식이 자기 물은 안
+            마시고 꼭 제 물만 뺏어먹어서 너무 어이없었어요 그리고 어제 산책을
+            했는데 자기 밥은 먹다 남겨놓고 길고양이 밥을 뺐어먹으려 해서
+            어이없었어요{' '}
+          </S.Content>
         </S.TodayMungTitleContentWrapper>
         {card.imageUrl && <S.Image src={card.imageUrl} alt="오늘멍 프리뷰" />}
       </S.TodayMungTitleContentImageWrapper>
