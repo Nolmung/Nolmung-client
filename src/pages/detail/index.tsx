@@ -27,6 +27,7 @@ import { useGetPostDetail } from './querys';
 import { PlacePrice } from '@/common/types';
 import findLabelNameById from '@/common/utils/findLabelNameById';
 import { match } from 'ts-pattern';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 function Detail() {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ function Detail() {
   const [visibleTodayMungCard, setVisibleTodayMungCard] = useState(3);
   const { placeId } = useParams();
   const { data, isLoading, isError } = useGetPostDetail(placeId!);
+  useSetDocumentTitle(data?.placeName || '');
 
   const handleBackArrowClick = () => {
     navigate(ROUTE.MAIN());
@@ -55,10 +57,6 @@ function Detail() {
   const isPriceAvailable = (price: PlacePrice) => {
     return price == '변동' || price == '없음';
   };
-
-  useEffect(() => {
-    document.title = `${data.placeName}`;
-  }, []);
 
   return (
     <S.Wrapper ref={scrollRef} onScroll={handleScroll}>
