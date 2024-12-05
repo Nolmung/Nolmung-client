@@ -11,34 +11,6 @@ import DogCard from './components/DogCard';
 import { useReviewStore } from '../todaymungPlaceRegist/stores/reviewStore';
 import { useTodayMungStore } from './stores/todayMungStore';
 
-const mocks = [
-  {
-    place_name: '마포구청',
-    road_address: '서울 마포구 월드컵로 212',
-    my_rate: 4.5,
-  },
-  {
-    place_name: '마포구청',
-    road_address: '서울 마포구 월드컵로 212',
-    my_rate: 4.5,
-  },
-  {
-    place_name: '마포구청',
-    road_address: '서울 마포구 월드컵로 212',
-    my_rate: 4.5,
-  },
-  {
-    place_name: '마포구청',
-    road_address: '서울 마포구 월드컵로 212',
-    my_rate: 4.5,
-  },
-  {
-    place_name: '마포구청',
-    road_address: '서울 마포구 월드컵로 212',
-    my_rate: 4.5,
-  },
-];
-
 function TodayMungWrite() {
   const navigate = useNavigate();
   const { data: dogsData } = useGetDogs();
@@ -54,6 +26,7 @@ function TodayMungWrite() {
   const navigateToTodaymungPlaceRegist = () => {
     navigate(ROUTE.TODAYMUNG_PLACE_REGIST());
   };
+
   return (
     <S.Wrapper>
       <S.BannerWrapper>
