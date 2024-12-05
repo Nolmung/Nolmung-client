@@ -121,6 +121,8 @@ export const S = {
     display: flex;
     padding: 10px 2px;
     gap: 26px;
+    width: 100%;
+    overflow-x: auto;
   `,
 
   InfoIconWrapper: styled.div`
