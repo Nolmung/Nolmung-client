@@ -88,7 +88,7 @@ export const markerData: MarkerType[] = [
   {
     placeId: 8,
     placeName: '갤러리 현대',
-    category: 'GALLERY',
+    category: 'ARTGALLERY',
     roadAddress: '서울특별시 종로구 삼청로 60',
     placeImgUrl:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_247%2F1709283092996Yjmow_JPEG%2FIMG_7777.jpeg',
@@ -161,7 +161,7 @@ export const markerData: MarkerType[] = [
   {
     placeId: 14,
     placeName: '강남 아트 갤러리',
-    category: 'GALLERY',
+    category: 'ARTGALLERY',
     roadAddress: '서울특별시 강남구 역삼로 111',
     placeImgUrl:
       'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_1%2Fsample14.jpeg',

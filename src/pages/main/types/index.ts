@@ -45,5 +45,5 @@ export const MarkerIconMapping: Record<
   },
   TRAVEL: { default: TravelMarker, active: TravelClickMarker },
   MUSEUM: { default: MuseumMarker, active: MuseumClickMarker },
-  GALLERY: { default: GalleryMarker, active: GalleryClickMarker },
+  ARTGALLERY: { default: GalleryMarker, active: GalleryClickMarker },
 };
