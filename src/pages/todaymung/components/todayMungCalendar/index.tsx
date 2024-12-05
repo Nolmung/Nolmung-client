@@ -15,7 +15,6 @@ import {
   CustomPickersDay,
 } from '../../styles/TodayMungCalendar.style';
 
-import { PlusIcon } from '@/assets/images/svgs';
 import 'dayjs/locale/ko';
 import {
   CalendarDataProps,
@@ -23,7 +22,7 @@ import {
 } from '../../types/TodayMungList.type';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
-import { todaymungData } from '@/mocks/data/todaymungData';
+import RegistButton from '../registButton';
 
 dayjs.locale('ko');
 
@@ -33,8 +32,7 @@ function renderDayWithMarker(
 ) {
   const { day, selected } = props;
 
-  // const { diaries } = listData; //server Data
-  const { diaries } = todaymungData.data; // mockData
+  const { diaries } = listData; //server Data
 
   const dateKey = day.format('YYYY.MM.DD');
   const diary = diaries.find((entry) => entry.createdAt === dateKey);
@@ -102,11 +100,6 @@ function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
 
 // 메인 컴포넌트
 export default function TodayMungCalendar({ listData }: ListDataProps) {
-  const navigate = useNavigate();
-  const navigateToTodaymungWrite = () => {
-    navigate(ROUTE.TODAYMUNG_WRITE());
-  };
-
   return (
     <S.Wrap>
       <S.CalendarArea>
@@ -127,9 +120,7 @@ export default function TodayMungCalendar({ listData }: ListDataProps) {
           />
         </LocalizationProvider>
       </S.CalendarArea>
-      <S.TodaymungInsertButton onClick={navigateToTodaymungWrite}>
-        <PlusIcon /> <S.ButtonText>오늘멍 작성하기</S.ButtonText>
-      </S.TodaymungInsertButton>
+      <RegistButton />
     </S.Wrap>
   );
 }

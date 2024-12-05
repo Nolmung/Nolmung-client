@@ -11,14 +11,15 @@ export const S = {
   ViewModeArea: styled.div`
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: calc(100dvh - 350px);
     overflow: scroll;
     margin-top: 5px;
     @media (min-height: 850px) {
-      margin-top: 10px;
+      /* justify-content: center; */
+      margin-top: -30px;
     }
   `,
 

@@ -67,7 +67,6 @@ export const StyledDateCalendar = styled(DateCalendar)`
   }
 
   .MuiPickersSlideTransition-root {
-    /* height: calc(100dvh - 520px); */
     overflow: scroll;
     @media (max-height: 750px) {
       height: calc(100dvh - 520px);
@@ -77,7 +76,7 @@ export const StyledDateCalendar = styled(DateCalendar)`
   .MuiDayCalendar-slideTransition {
     @media (min-height: 850px) {
       min-height: 282px;
-      height: 282px;
+      height: calc(100dvh - 700px);
     }
   }
 ` as typeof DateCalendar<Dayjs>;
