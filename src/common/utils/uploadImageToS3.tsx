@@ -20,7 +20,6 @@ export const uploadFileToS3 = async (
 ) => {
   try {
     for (const file of files) {
-      console.log('index', file);
       const command = new PutObjectCommand({
         Bucket: bucketName,
         Key: file.name,
@@ -28,8 +27,9 @@ export const uploadFileToS3 = async (
         ContentType: file.type,
         ACL: 'public-read', // 객체를 공개적으로 설정
       });
-      console.log(file.type);
+
       await s3.send(command);
+
       const encodedFileName = encodeURI(file.name);
       const url = `https://${bucketName}.s3.${region}.amazonaws.com/${encodedFileName}`;
 
@@ -38,6 +38,7 @@ export const uploadFileToS3 = async (
         mediaType: file.type,
         mediaUrl: url,
       };
+
       addMedia(media);
     }
   } catch (error) {
@@ -51,14 +52,16 @@ export const deleteFileFromS3 = async (
   deleteMedia: (media: any) => void,
 ) => {
   const key = fileUrl.split('/').slice(3).join('/');
+
   try {
     const command = new DeleteObjectCommand({
       Bucket: bucketName,
       Key: key,
     });
-    const response = await s3.send(command);
+
+    await s3.send(command);
+
     deleteMedia(mediaId);
-    console.log('File deleted successfully:', response);
   } catch (error) {
     console.error('Error deleting file:', error);
   }

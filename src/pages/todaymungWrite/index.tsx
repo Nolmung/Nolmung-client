@@ -19,7 +19,6 @@ function TodayMungWrite() {
     useTodayMungStore();
   /** @Todo POST API 호출 */
   const handleCompleteButtonClick = () => {
-    console.log(reviewlist);
     console.log(title, content, medias, publicYn, places, dogIds);
   };
 

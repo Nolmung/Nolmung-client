@@ -28,7 +28,6 @@ function MediaGroup() {
         alert(`최대 ${MAX_MEDIA_COUNT}개의 이미지만 등록할 수 있습니다.`);
         return;
       }
-      console.log('fileArray', fileArray);
       uploadFileToS3(fileArray, addMedia);
     };
   };
