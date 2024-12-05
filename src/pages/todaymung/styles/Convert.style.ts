@@ -6,7 +6,6 @@ export const S = {
     display: flex;
     width: 100%;
     height: 100% auto;
-
     text-align: center;
   `,
   ViewModeArea: styled.div`
@@ -15,13 +14,12 @@ export const S = {
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding-top: 146px;
-    height: calc(100vh - 350px);
-    overflow: auto;
-
+    height: calc(100dvh - 350px);
+    overflow: scroll;
     margin-top: 5px;
-    @media (min-height: 800px) {
-      margin-top: 10px;
+    @media (min-height: 850px) {
+      /* justify-content: center; */
+      margin-top: -30px;
     }
   `,
 
