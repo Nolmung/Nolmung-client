@@ -43,3 +43,10 @@ export interface MapPlace {
   latitude: number;
   longitude: number;
 }
+
+export interface PlaceRequestBody {
+  latitude: number;
+  longitude: number;
+  maxLatitude: number;
+  maxLongitude: number;
+}
