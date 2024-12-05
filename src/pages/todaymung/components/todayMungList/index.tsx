@@ -3,7 +3,6 @@ import { ListDataProps } from '../../types/TodayMungList.type';
 import TodayMungListCard from '../todayMungListCard';
 import NoDiaryList from '../noDiaryList';
 const TodayMungList = ({ listData }: ListDataProps) => {
-  console.log(listData.diaries);
   const { diaries } = listData;
   if (diaries.length === 0) {
     return <NoDiaryList />;
