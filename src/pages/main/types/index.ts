@@ -20,13 +20,13 @@ import { PlaceCategory, SVGComponent } from '@/common/types';
 
 /** @Todo MarkerType 과 MapPlace 타입 둘 중 하나만 사용 @ongheong */
 export interface MarkerType {
-  place_id: number;
-  name: string;
+  placeId: number;
+  placeName: string;
   category: PlaceCategory;
-  road_address: string;
-  place_img_url: string;
-  star_rating_avg: number;
-  review_count: number;
+  roadAddress: string;
+  placeImgUrl: string;
+  starRatingAvg: number;
+  reviewCount: number;
   latitude: number;
   longitude: number;
 }

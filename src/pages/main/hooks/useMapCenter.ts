@@ -1,7 +1,7 @@
 import { LatLng } from '@/common/types';
 import { DEFAULT_LATLNG } from '@/common/constants/defaultLatLng';
 import { useEffect, useState } from 'react';
- import { getUserLocation } from '../utils/userLocationUtils';
+import { getUserLocation } from '../utils/userLocationUtils';
 
 /**
  * 마운트 시 사용자의 현재 위치 받아옴 -> mapCenter 업데이트
