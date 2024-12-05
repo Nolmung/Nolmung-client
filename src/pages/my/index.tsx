@@ -56,7 +56,7 @@ function Mypage() {
           즐겨찾기 목록
         </S.ListContainer>
         <S.ListContainer>
-          <NoticeIcon width={22} height={22} />
+          <NoticeIcon width={20} height={20} />
           공지사항
         </S.ListContainer>
         <S.ListContainer onClick={navigateToMyReview}>
