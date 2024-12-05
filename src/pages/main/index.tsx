@@ -20,14 +20,6 @@ import ReactDOMServer from 'react-dom/server';
 import { getUserLocation } from './utils/userLocationUtils';
 import CustomMarkerComponent from './components/customMarker';
 
-/**
- * bottomSheet의 maxHeight 수정 (해결)
- * 카테고리 선택 이후 뒤로가기시 BottomSHeet 사라지지 않는 문제 (해결)
- * 카테고리 선택 후 새로고침 시 bottomSheet 유지 -> useState에서 InitalHeigh로 초기화되는 문제, params에 따라 초기 값 설정 수정 필요
- * 단일 시설 선택시 카드 높이 수정 (해결))
- * 헤더가 늦게 사라지는 문제 (해결 ? API 호출 이후 리팩토링 필요)
- * 카드 선택시 카테고리바 보이는 문제
- */
 function Main() {
   const { naver } = window;
 

@@ -6,16 +6,17 @@ const SvgPlaygroundMarker = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 24 24"
     {...props}
   >
-    <circle cx={12} cy={12} r={12} fill="#5E5E5E" />
+    <rect width={24} height={24} fill="#5E5E5E" rx={12} />
     <path
+      fill="#fff"
       stroke="#fff"
       strokeWidth={1.5}
-      d="M18.833 12.167a6.667 6.667 0 1 1-13.333 0 6.667 6.667 0 0 1 13.333 0Z"
+      d="M17.984 12a6 6 0 1 1-12 0 6 6 0 0 1 12 0Z"
     />
     <path
-      stroke="#fff"
+      stroke="#5E5E5E"
       strokeWidth={1.5}
-      d="M7.5 7.5c2.66 2.347 2.673 6.975 0 9.333M16.834 16.833c-2.673-2.358-2.66-6.986 0-9.333"
+      d="M7.785 7.8c2.394 2.112 2.406 6.277 0 8.4M16.187 16.2c-2.406-2.123-2.394-6.288 0-8.4"
     />
   </svg>
 );
