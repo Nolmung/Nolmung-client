@@ -30,7 +30,7 @@ export const S = {
   WriterName: styled.div`
     color: #080808;
     text-align: center;
-     
+
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -41,7 +41,7 @@ export const S = {
   CreatedAt: styled.div`
     color: #a7a7a7;
     text-align: center;
-     
+
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -66,7 +66,7 @@ export const S = {
   `,
   Title: styled.div`
     color: #080808;
-     
+
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -81,7 +81,7 @@ export const S = {
   `,
   Content: styled.div`
     color: #080808;
-     
+
     font-size: 12px;
     font-style: normal;
     font-weight: 500;

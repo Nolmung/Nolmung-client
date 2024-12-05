@@ -2,7 +2,7 @@ import { MapPlace } from '@/service/apis/place/index.type';
 
 export const placeMap: MapPlace[] = [
   {
-    place_id: 1,
+    place_id: 86,
     place_name: '38도씨식당',
     category: 'RESTAURANT',
     place_img_url:

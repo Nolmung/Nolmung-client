@@ -1,18 +1,19 @@
 import Categories from '../constants/categories';
 /** Label 타입 정의 */
 export interface ReviewKeyword {
-  label_id: number; // 라벨 ID
-  count: number; // 라벨 사용 횟수
+  labelId: number; // 라벨 ID
+  labelCount: number; // 라벨 사용 횟수
 }
 
 /** 오늘멍 타입 정의 */
 export interface Diary {
-  diary_id: number; // 오늘멍 ID
-  diary_name: string; // 오늘멍 제목
-  diary_writer: string; // 작성자
-  created_at: string; // 작성 날짜
-  image_url: string; // 이미지 URL
-  rating: string; // 별점
+  diaryId: number; // 오늘멍 ID
+  diaryName: string; // 오늘멍 제목
+  diaryContent: string; // 오늘멍 내용
+  diaryWriter: string; // 작성자
+  createdAt: string; // 작성 날짜
+  imageUrl: string; // 이미지 URL
+  writerUrlImage: string; // 작성자 프로필 이미지 URL
 }
 
 export type PlacePrice = '변동' | '없음' | string;

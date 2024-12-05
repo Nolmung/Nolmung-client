@@ -24,6 +24,8 @@ import { ROUTE } from '@/common/constants/route';
 import { useGetPostDetail } from './querys';
 import { PlacePrice } from '@/common/types';
 import findLabelNameById from '@/common/utils/findLabelNameById';
+import { DogSizeMapping } from '../my/constants/DogSizeMapping';
+import { match } from 'ts-pattern';
 
 function Detail() {
   const navigate = useNavigate();
@@ -31,6 +33,7 @@ function Detail() {
   const [visibleTodayMungCard, setVisibleTodayMungCard] = useState(3);
   const { placeId } = useParams();
   const { data, isLoading, isError } = useGetPostDetail(placeId!);
+  console.log('Data', data);
 
   const handleBackArrowClick = () => {
     navigate(ROUTE.MAIN());
@@ -43,10 +46,11 @@ function Detail() {
   if (isLoading) return <p>Loading...</p>;
   if (isError || !data) return <p>Error loading post detail</p>;
 
-  const reviewCount = data.labels.reduce((acc, cur) => {
-    return acc + cur.count;
+  const reviewCount = data.labels?.reduce((acc, cur) => {
+    return acc + cur.labelCount;
   }, 0);
-  const openingHour = data.open_hour.split(' ');
+
+  const openingHour = data.openHour?.split(' ');
 
   const isPriceAvailable = (price: PlacePrice) => {
     return price == '변동' || price == '없음';
@@ -58,16 +62,16 @@ function Detail() {
         {scrollTop >= 70 ? (
           <>
             <BackArrowBlack onClick={handleBackArrowClick} width={24} />
-            {data.place_name}
+            {data.placeName}
           </>
         ) : (
           <BackArrowWhite onClick={handleBackArrowClick} width={24} />
         )}
       </S.Header>
       <S.GradientImage />
-      <S.PlaceImage src={data.place_img_url} alt="시설 이미지" />
+      <S.PlaceImage src={data.placeImgUrl} alt="시설 이미지" />
       <S.PlaceInfo>
-        <S.PlaceName> {data.place_name}</S.PlaceName>
+        <S.PlaceName> {data.placeName}</S.PlaceName>
         <S.PlaceBriefReview>
           <FaStar size="16" color="#F4E600" />
           <S.StarAverage>{data.star_rating_avg}</S.StarAverage>
@@ -78,17 +82,18 @@ function Detail() {
         </S.PlaceBriefReview>
         <S.PlaceRoadAddress>{data.address}</S.PlaceRoadAddress>
         <S.PlaceInfoIcons>
-          {/**@Todo API 부착 후 응답 값에 따라 분기 처리 */}
-          <AllKindDogAvailableInfoIcon />
-          <ParkAvailableInfoIcon />
-          <Under15KgInfoIcon />
-          <Under25KgInfoIcon />
+          {match(data.acceptSize)
+            .with('S', () => <Under15KgInfoIcon />)
+            .with('M', () => <Under25KgInfoIcon />)
+            .with('L', () => <AllKindDogAvailableInfoIcon />)
+            .exhaustive()}
+          {data.parkingYn && <ParkAvailableInfoIcon />}
         </S.PlaceInfoIcons>
       </S.PlaceInfo>
       <S.PlaceDetailWrapper>
         <S.PlaceDetail>
           <Time width={18} height={18} />
-          {openingHour.length == 1 ? (
+          {openingHour?.length == 1 ? (
             <>{openingHour[0]}</>
           ) : (
             <>
@@ -113,7 +118,7 @@ function Detail() {
           <S.PlaceDetail>
             <Price width={18} height={18} />
             <S.PlaceDetailMenu>추가 금액</S.PlaceDetailMenu>
-            {data.extra_price}
+            {data.extraPrice}
           </S.PlaceDetail>
         )}
         <S.PlaceDetail>
@@ -130,12 +135,12 @@ function Detail() {
           <S.ReviewCount>{reviewCount}</S.ReviewCount>
         </S.ReviewTitle>
         <S.KeywordReviews>
-          {data.labels.map((item) => (
+          {data.labels?.map((item) => (
             <KeywordReview
-              key={item.label_id}
-              Keyword={findLabelNameById(item.label_id)}
-              KeywordCount={item.count}
-              KeywordPercent={(item.count / reviewCount) * 100}
+              key={item.labelId}
+              Keyword={findLabelNameById(item.labelId)}
+              KeywordCount={item.labelCount}
+              KeywordPercent={(item.labelCount / reviewCount) * 100}
             />
           ))}
         </S.KeywordReviews>
@@ -143,13 +148,13 @@ function Detail() {
       <S.PlaceDetailWrapper>
         <S.ReviewTitle>
           오늘멍
-          <S.ReviewCount>{data.diary.length}</S.ReviewCount>
+          <S.ReviewCount>{data.diaries?.length}</S.ReviewCount>
         </S.ReviewTitle>
-        {data.diary.slice(0, visibleTodayMungCard).map((card) => (
-          <TodayMungCard key={card.diary_id} card={card} />
-        ))}
+        {data.diaries
+          ?.slice(0, visibleTodayMungCard)
+          .map((card) => <TodayMungCard key={card.diaryId} card={card} />)}
 
-        {visibleTodayMungCard < data.diary.length && (
+        {visibleTodayMungCard < data.diaries?.length && (
           <S.ViewMoreButtonWrapper>
             <S.ViewMoreButton onClick={handleViewMoreButtonClick}>
               더보기
