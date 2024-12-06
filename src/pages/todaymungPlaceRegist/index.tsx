@@ -1,31 +1,45 @@
 import SearchInput from '@/common/components/searchInput';
 import S from './styles/index.style';
 import { useRef, useState } from 'react';
-import SearchResultCard from './components/SearchResultCard';
 import { useReviewStore } from './stores/reviewStore';
 import VisitedPlaceCard from '../todaymungWrite/components/VisitedPlaceCard';
 import { CancelIcon } from '@/assets/images/svgs';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from './queries';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { ROUTE } from '@/common/constants/route';
+import SearchList from './components/SearchList';
 
 function TodayMungPlaceRegist() {
+  useSetDocumentTitle('오늘멍 장소 등록');
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const searchParams = new URLSearchParams(location.search).get('search') || ''; // URL에서 search 파라미터 읽기
+
+  const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
   const [keywordReviewVisibleId, setKeywordReviewVisibleId] = useState<
     number | null
   >(null);
+  const [searchKeyword, setSearchKeyword] = useState<string>(searchParams);
 
-  useSetDocumentTitle('오늘멍 장소 등록');
-
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const { data, isLoading, error } = useGetPlaceSearch(searchKeyword);
+  const { data, isLoading, error } = useGetPlaceSearch(searchParams);
+  const { reviewlist, deleteReview } = useReviewStore();
 
   const handleSearch = () => {
-    const keyword = inputRef?.current?.value;
-    setSearchKeyword(keyword || '');
+    if (!inputRef?.current?.value.trim()) return;
+
+    setSearchKeyword(inputRef?.current?.value.trim());
+    navigate(
+      ROUTE.TODAYMUNG_PLACE_REGIST() +
+        '?search=' +
+        inputRef?.current?.value.trim(),
+    );
   };
 
-  const { reviewlist, deleteReview } = useReviewStore();
-  const scrollRef = useRef<HTMLDivElement>(null);
   const handleDeleteButtonClick = (placeId: number) => {
     deleteReview(placeId);
   };
@@ -41,23 +55,20 @@ function TodayMungPlaceRegist() {
     >
       <S.SearchInputWrapper>
         <SearchInput
+          value={searchKeyword}
+          onChange={(e) => setSearchKeyword(e.target.value)}
           inputRef={inputRef}
           autofocus={true}
           onClick={handleSearch}
         />
       </S.SearchInputWrapper>
-      {data?.map((place) => (
-        <SearchResultCard
-          scrollRef={scrollRef}
-          keywordReviewVisibleId={keywordReviewVisibleId}
-          setKeywordReviewVisibleId={setKeywordReviewVisibleId}
-          key={place.placeId}
-          placeCategory={place.category}
-          placeId={place.placeId}
-          placeName={place.placeName}
-          roadAddress={place.roadAddress}
-        />
-      ))}
+      <SearchList
+      searchParams={searchParams}
+        data={data || []}
+        scrollRef={scrollRef}
+        keywordReviewVisibleId={keywordReviewVisibleId}
+        setKeywordReviewVisibleId={setKeywordReviewVisibleId}
+      />
       <S.VisitedPlaceCard>
         {reviewlist.map((review) => (
           <S.CardWrapper>

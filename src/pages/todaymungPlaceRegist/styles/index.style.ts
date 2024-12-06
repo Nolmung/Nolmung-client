@@ -10,6 +10,9 @@ const S = {
     padding: 22px 0 100px 0;
     padding: ${({ addPadding }) => (addPadding ? '22px 0 100px 0' : '22px 0')};
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   `,
   SearchInputWrapper: styled.div`
     width: 100%;
