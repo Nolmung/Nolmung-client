@@ -31,7 +31,7 @@ function TodayMungWrite() {
       dogs,
     };
 
-    if (diaryRequest.title && diaryRequest.content) {
+    if (diaryRequest.title && diaryRequest.content && diaryRequest.dogs) {
       diaryMutate(diaryRequest);
     }
 
@@ -86,7 +86,7 @@ function TodayMungWrite() {
           </S.PlaceWrapper>
         </div>
         <div style={{ position: 'relative' }}>
-          <S.Title>오늘을 함꼐한 반려견</S.Title>
+          <S.Title>오늘을 함께한 반려견</S.Title>
           <S.PlaceWrapper>
             <S.PlaceCardWrapper>
               {dogsData?.data?.map((dog) => (

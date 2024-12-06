@@ -27,6 +27,7 @@ export const usePostReviews = () => {
     mutationFn: (review) => postReviews(review),
     onSuccess: () => {
       alert('리뷰가 등록되었습니다.');
+      deleteReviewAll();
     },
     onError: () => {
       alert('리뷰 등록에 실패했습니다.');
@@ -41,7 +42,6 @@ export const usePostReviews = () => {
         console.error('리뷰 등록 실패:', review, error);
       }
     }
-    deleteReviewAll();
   };
 
   return { postReviewsSequentially, mutation };
