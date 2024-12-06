@@ -42,11 +42,11 @@ function TodayMungPlaceRegist() {
           scrollRef={scrollRef}
           keywordReviewVisibleId={keywordReviewVisibleId}
           setKeywordReviewVisibleId={setKeywordReviewVisibleId}
-          key={place.place_id}
-          place_category={place.category}
-          place_id={place.place_id}
-          place_name={place.place_name}
-          road_address={place.road_address}
+          key={place.placeId}
+          category={place.category}
+          placeId={place.placeId}
+          placeName={place.placeName}
+          roadAddress={place.roadAddress}
         />
       ))}
       <S.VisitedPlaceCard>

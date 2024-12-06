@@ -20,7 +20,7 @@ export const CATEGORY_OPTIONS: CategoryOptionType = [
   },
   {
     value: 'visited',
-    label: '오늘멍 장소',
+    label: '방문한 장소',
     icon: VisitedTag,
   },
   {

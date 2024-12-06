@@ -22,7 +22,6 @@ function CategoryBar({
 
   const handleCategoryClick = (value: string) => {
     setBottomCardVisible(false);
-
     setCategory(value);
     setBottomSheetVisible(true);
     navigate(`/?category=${value}`);

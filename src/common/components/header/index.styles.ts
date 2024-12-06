@@ -62,5 +62,6 @@ export const S = {
     font-size: 20px;
     line-height: 1.2;
     text-align: center;
+    white-space: nowrap;
   `,
 };
