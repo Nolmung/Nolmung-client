@@ -22,11 +22,11 @@ function RecommendCard({ data, title, explanation }: RecommendCardProps) {
       <S.TitleExplanation>{explanation}</S.TitleExplanation>
       <S.PlaceList>
         {data.map((mock) => (
-          <S.PlaceWrapper onClick={() => navigateToDetail(mock.place_id)}>
-            <S.PlaceImage src={mock.place_img_url} alt="장소 이미지" />
+          <S.PlaceWrapper onClick={() => navigateToDetail(mock.placeId)}>
+            <S.PlaceImage src={mock.placeImgUrl} alt="장소 이미지" />
             <S.NameAddressWrapper>
-              <S.PlaceName>{mock.place_name}</S.PlaceName>
-              <S.PlaceAddress>{mock.road_address.split(' ')[1]}</S.PlaceAddress>
+              <S.PlaceName>{mock.placeName}</S.PlaceName>
+              <S.PlaceAddress>{mock.roadAddress.split(' ')[1]}</S.PlaceAddress>
             </S.NameAddressWrapper>
             <S.PlaceExplanation>
               MZ 강아지만 출입 가능한 애견 카페

@@ -55,11 +55,11 @@ function SearchResultCard({
       >
         <S.IconWrapper>
           {CATEGORY_OPTIONS?.find(
-            (category) => category.value === place_category,
+            (option) => option.value === category,
           )?.icon &&
             React.createElement(
               CATEGORY_OPTIONS.find(
-                (category) => category.value === place_category,
+                (option) => option.value === category,
               )!.icon,
             )}
         </S.IconWrapper>

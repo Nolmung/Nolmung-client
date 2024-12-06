@@ -20,7 +20,7 @@ function CategoryBar({
 }: CategoryBarProps) {
   const navigate = useNavigate();
 
-  const handleCategoryClick = async (value: string) => {
+  const handleCategoryClick = (value: string) => {
     setBottomCardVisible(false);
     setCategory(value);
     setBottomSheetVisible(true);
