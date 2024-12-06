@@ -7,10 +7,12 @@ import {
 } from '@/common/utils/uploadImageToS3';
 
 function MediaGroup() {
-  const MAX_MEDIA_COUNT = 5; // 최대 이미지 개수
+  const MAX_IMAGE_COUNT = 5; // 최대 이미지 개수
+  const MAX_VIDEO_COUNT = 1;
+
   const { medias, addMedia, deleteMedia } = useTodayMungStore();
 
-  const handleAddMediaButtonCliick = async () => {
+  const handleAddMediaButtonClick = async () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*, video/*';
@@ -22,13 +24,33 @@ function MediaGroup() {
       if (!files) return;
 
       const fileArray = Array.from(files);
-      const remainingSlots = MAX_MEDIA_COUNT - medias.length;
 
-      if (fileArray.length > remainingSlots) {
-        alert(`최대 ${MAX_MEDIA_COUNT}개의 이미지만 등록할 수 있습니다.`);
+      const currentImages = medias.filter(
+        (media) => media.mediaType === 'IMAGE',
+      ).length;
+      const currentVideos = medias.filter(
+        (media) => media.mediaType === 'VIDEO',
+      ).length;
+
+      const newImages = fileArray.filter((file) =>
+        file.type.startsWith('image/'),
+      );
+      const newVideos = fileArray.filter((file) =>
+        file.type.startsWith('video/'),
+      );
+
+      if (currentImages + newImages.length > MAX_IMAGE_COUNT) {
+        alert(`최대 ${MAX_IMAGE_COUNT}개의 이미지만 등록할 수 있습니다.`);
         return;
       }
-      uploadFileToS3(fileArray, addMedia);
+
+      if (currentVideos + newVideos.length > MAX_VIDEO_COUNT) {
+        alert(`최대 ${MAX_VIDEO_COUNT}개의 비디오만 등록할 수 있습니다.`);
+        return;
+      }
+
+      const validFiles = [...newImages, ...newVideos];
+      uploadFileToS3(validFiles, addMedia);
     };
   };
 
@@ -42,7 +64,7 @@ function MediaGroup() {
 
   return (
     <S.Wrapper>
-      <S.AddMediaButton onClick={handleAddMediaButtonCliick}>
+      <S.AddMediaButton onClick={handleAddMediaButtonClick}>
         <CameraIcon width={24} height={24} />
       </S.AddMediaButton>
       {medias?.map((media) => (

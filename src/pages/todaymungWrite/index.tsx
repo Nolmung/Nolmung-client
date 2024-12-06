@@ -17,7 +17,7 @@ function TodayMungWrite() {
   const { data: dogsData } = useGetDogs();
   const { reviewlist } = useReviewStore();
   const { mutate: diaryMutate } = usePostDiary();
-  const { postReviewsSequentially } = usePostReviews(); // usePostReviews 훅에서 mutate 가져오기
+  const { postReviewsSequentially } = usePostReviews();
   const { title, content, places, medias, publicYn, dogs } =
     useTodayMungStore();
 
