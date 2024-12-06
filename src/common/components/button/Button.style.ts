@@ -13,5 +13,6 @@ export const S = {
     text-align: center;
     border-radius: ${({ borderRadius }) =>
       borderRadius ? borderRadius : '12px'};
+    border: ${({ border }) => (border ? border : 'none')};
   `,
 };

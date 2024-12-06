@@ -9,6 +9,8 @@ export interface ButtonStyleProps {
   fontSize?: string;
   fontWeight?: string;
   borderRadius?: string;
+  disabled?: boolean;
+  border?: string;
 }
 
 export interface ButtonProps extends ButtonStyleProps {
