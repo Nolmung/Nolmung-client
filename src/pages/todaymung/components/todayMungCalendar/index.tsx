@@ -37,12 +37,14 @@ function renderDayWithMarker(
   const dateKey = day.format('YYYY.MM.DD');
   const diary = diaries.find((entry) => entry.createdAt === dateKey);
   const markerUrl = diary?.mediaUrl;
-  const isTruthy = markerUrl !== undefined && markerUrl !== null;
+  const isTruthy = markerUrl !== undefined || markerUrl === null;
   const isToday = day.isSame(dayjs(), 'day');
   const navigate = useNavigate();
 
-  const handleTodayClick = () => {
-    if (isToday && !isTruthy) {
+  const handleDayClick = () => {
+    if (isTruthy) {
+      navigate(`/todaymung/detail/${diary?.diaryId}`); // `diaryId`를 사용한 라우팅
+    } else if (isToday) {
       navigate(ROUTE.TODAYMUNG_WRITE());
     }
   };
@@ -54,14 +56,21 @@ function renderDayWithMarker(
       className={`${isTruthy || isToday ? 'hover-enabled' : ''} ${
         selected ? 'Mui-selected' : ''
       }`}
-      onClick={handleTodayClick}
+      onClick={handleDayClick}
     >
       <S.DayText $hasMarker={!!isTruthy}>{day.date()}</S.DayText>
       {diary && (
         <S.MarkerWrapper>
           <S.MarkerOverlay />
           {markerUrl ? (
-            <S.MarkerImage src={markerUrl} alt="Marker" />
+            <S.MarkerImage
+              src={markerUrl}
+              alt="Marker"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src =
+                  '/svgs/todayMungDefaultImage.svg';
+              }}
+            />
           ) : (
             <S.MarkerImage src="/svgs/todayMungDefaultImage.svg" />
           )}
