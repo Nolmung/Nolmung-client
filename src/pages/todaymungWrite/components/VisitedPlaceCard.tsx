@@ -2,25 +2,25 @@ import { FaStar } from 'react-icons/fa';
 import S from '../styles/VisitedPlaceCard.style';
 
 interface VisitedPlaceCardProps {
-  place_name: string;
-  road_address: string;
-  my_rate: number;
+  placeName: string;
+  roadAddress: string;
+  rating: number;
 }
 
 function VisitedPlaceCard({
-  place_name,
-  road_address,
-  my_rate,
+  placeName,
+  roadAddress,
+  rating,
 }: VisitedPlaceCardProps) {
   return (
     <S.PlaceCard>
       <S.PlaceTitleRateWrapper>
-        <S.PlaceTitle>{place_name}</S.PlaceTitle>
+        <S.PlaceTitle>{placeName}</S.PlaceTitle>
         <S.PlaceAverageRate>
-          <FaStar size="16" color="#F4E600" /> {my_rate}
+          <FaStar size="16" color="#F4E600" /> {rating}
         </S.PlaceAverageRate>
       </S.PlaceTitleRateWrapper>
-      <S.PlaceAddress>{road_address} </S.PlaceAddress>
+      <S.PlaceAddress>{roadAddress} </S.PlaceAddress>
     </S.PlaceCard>
   );
 }

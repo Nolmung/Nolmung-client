@@ -86,9 +86,9 @@ function TodayMungWrite() {
                 reviewlist.map((mock, index) => (
                   <VisitedPlaceCard
                     key={index}
-                    place_name={mock.placeName}
-                    road_address={mock.roadAddress}
-                    my_rate={mock.rating}
+                    placeName={mock.placeName}
+                    roadAddress={mock.roadAddress}
+                    rating={mock.rating}
                   />
                 ))}
               <S.PlaceAddButton onClick={navigateToTodaymungPlaceRegist}>

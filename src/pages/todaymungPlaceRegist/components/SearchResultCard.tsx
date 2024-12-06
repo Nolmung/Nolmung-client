@@ -5,10 +5,10 @@ import { PlaceCategory } from '@/common/types';
 import React from 'react';
 
 interface SearchResultCardProps {
-  place_name: string;
-  road_address: string;
-  place_id: number;
-  place_category: PlaceCategory;
+  placeName: string;
+  roadAddress: string;
+  placeId: number;
+  placeCategory: PlaceCategory;
   keywordReviewVisibleId: number | null;
   setKeywordReviewVisibleId: React.Dispatch<
     React.SetStateAction<number | null>
@@ -17,20 +17,20 @@ interface SearchResultCardProps {
 }
 
 function SearchResultCard({
-  place_name,
-  road_address,
-  place_id,
-  place_category,
+  placeName,
+  roadAddress,
+  placeId,
+  placeCategory,
   keywordReviewVisibleId,
   setKeywordReviewVisibleId,
 }: SearchResultCardProps) {
   const handleClick = () => {
-    if (keywordReviewVisibleId === place_id) {
+    if (keywordReviewVisibleId === placeId) {
       setKeywordReviewVisibleId(null);
       return;
     }
 
-    setKeywordReviewVisibleId(place_id);
+    setKeywordReviewVisibleId(placeId);
 
     /** @Todo 클릭시 해당 메뉴가 최상단으로 오도록 구현 
     const container = scrollRef.current;
@@ -48,33 +48,33 @@ function SearchResultCard({
   };
 
   return (
-    <S.Wrapper id={`item-${place_id}`}>
+    <S.Wrapper id={`item-${placeId}`}>
       <S.ResultWrapper
-        kewordReviewVisible={keywordReviewVisibleId === place_id}
+        kewordReviewVisible={keywordReviewVisibleId === placeId}
         onClick={handleClick}
       >
         <S.IconWrapper>
           {CATEGORY_OPTIONS?.find(
-            (category) => category.value === place_category,
+            (category) => category.value === placeCategory,
           )?.icon &&
             React.createElement(
               CATEGORY_OPTIONS.find(
-                (category) => category.value === place_category,
+                (category) => category.value === placeCategory,
               )!.icon,
             )}
         </S.IconWrapper>
         <S.ResultText>
-          <S.PlaceName>{place_name}</S.PlaceName>
-          <S.Address>{road_address}</S.Address>
+          <S.PlaceName>{placeName}</S.PlaceName>
+          <S.Address>{roadAddress}</S.Address>
         </S.ResultText>
       </S.ResultWrapper>
-      {keywordReviewVisibleId === place_id && (
+      {keywordReviewVisibleId === placeId && (
         <ReviewCard
-          roadAddress={road_address}
-          placeName={place_name}
+          roadAddress={roadAddress}
+          placeName={placeName}
           setKeywordReviewVisibleId={setKeywordReviewVisibleId}
-          placeId={place_id}
-          category={place_category}
+          placeId={placeId}
+          category={placeCategory}
         />
       )}
     </S.Wrapper>
