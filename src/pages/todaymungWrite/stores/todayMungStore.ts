@@ -6,11 +6,12 @@ interface TodayMungStore extends PostDiaryRequest {
   setTitle: (title: string) => void;
   setContent: (content: string) => void;
   addPlaces: (placeId: number) => void;
-  addDogIds: (dogId: number) => void;
-  deleteDogIds: (dogId: number) => void;
-  addMedias: (media: Media) => void;
-  deleteImages: (mediaId: number) => void;
+  addDogs: (dogId: number) => void;
+  deleteDogs: (dogId: number) => void;
+  addMedia: (media: Media) => void;
+  deleteMedia: (mediaId: number) => void;
   setPublicYn: (publicYn: boolean) => void;
+  deleteTodaymungAll: () => void;
 }
 
 export const useTodayMungStore = create(
@@ -19,32 +20,42 @@ export const useTodayMungStore = create(
       title: '',
       content: '',
       places: [],
-      dogIds: [],
+      dogs: [],
       medias: [],
       publicYn: true,
       setTitle: (title: string) => set({ title }),
       setContent: (content: string) => set({ content }),
       addPlaces: (placeId: number) =>
         set((store) => ({ places: [...(store.places || []), placeId] })),
-      addMedias: (media: Media) =>
+      addMedia: (media: Media) =>
         set((store) => ({
           medias: [...(store.medias || []), media].sort(
             (a, b) => b.mediaId - a.mediaId,
           ),
         })),
-      deleteImages: (mediaId: number) =>
+      deleteMedia: (mediaId: number) =>
         set((store) => ({
           medias: (store.medias || []).filter(
             (media) => media.mediaId !== mediaId,
           ),
         })),
-      addDogIds: (dogId: number) =>
-        set((store) => ({ dogIds: [...(store.dogIds || []), dogId] })),
-      deleteDogIds: (dogId: number) =>
+      addDogs: (dogId: number) =>
+        set((store) => ({ dogs: [...(store.dogs || []), dogId] })),
+      deleteDogs: (dogId: number) =>
         set((store) => ({
-          dogIds: store.dogIds?.filter((id) => id !== dogId),
+          dogs: store.dogs?.filter((id) => id !== dogId),
         })),
       setPublicYn: (publicYn: boolean) => set({ publicYn }),
+      deleteTodaymungAll: () =>
+        set({
+          title: '',
+          content: '',
+          places: [],
+          dogs: [],
+          medias: [],
+          publicYn: true,
+        }),
+        
     }),
     {
       name: 'todayMung',

@@ -65,7 +65,7 @@ export const S = {
     border-radius: 50%;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.5);
-
+    flex-shrink: 0;
     &:hover {
       background-color: rgba(0, 0, 0, 0);
     }

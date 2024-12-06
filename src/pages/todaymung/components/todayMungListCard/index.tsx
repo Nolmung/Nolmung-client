@@ -3,6 +3,7 @@ import { ListCardProps } from '../../types/TodayMungList.type';
 
 const TodayMungListCard = ({ listData, data }: ListCardProps) => {
   const { user } = listData;
+
   return (
     <S.Wrap>
       <S.UserInfoArea>

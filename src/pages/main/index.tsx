@@ -21,8 +21,10 @@ import CustomMarkerComponent from './components/customMarker';
 import { getPlacesFilter, getPlacesMap } from '@/service/apis/place';
 import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 function Main() {
+  useSetDocumentTitle('놀멍');
   const { naver } = window;
 
   const location = useLocation();
