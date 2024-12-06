@@ -80,7 +80,6 @@ function Main() {
             setIsCurrentButtonActive(true);
           }
         });
-        console.log('지도 초기화 완료');
 
         const query = new URLSearchParams(window.location.search);
         const categoryFromUrl = query.get('category');
@@ -88,13 +87,10 @@ function Main() {
 
         try {
           if (categoryFromUrl) {
-            console.log(`카테고리 필터링 API 호출: ${categoryFromUrl}`);
             await getCategoryMarkers(categoryFromUrl);
           } else if (searchFromUrl) {
-            console.log(`검색어로 장소 검색 API 호출: ${searchFromUrl}`);
             /** @Todo search api 호출 함수 넣기 */
           } else {
-            console.log('지도에서 장소 검색 API 호출');
             await getAndInitMarkers();
           }
         } catch (error) {
@@ -106,7 +102,6 @@ function Main() {
           mapCenter.longitude,
         );
         mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
-        console.log('지도 중심 좌표 업데이트');
       }
     };
     // 지도 초기화 함수 호출
@@ -121,7 +116,6 @@ function Main() {
     if (categoryFromUrl) {
       getCategoryMarkers(categoryFromUrl);
     } else if (searchFromUrl) {
-      console.log(`검색어로 장소 검색 API 호출: ${searchFromUrl}`);
       /** @Todo search api 호출 함수 넣기 */
     }
   }, [location.search]);
@@ -216,10 +210,8 @@ function Main() {
 
     try {
       if (categoryFromUrl) {
-        console.log(`카테고리 필터링 API 호출: ${categoryFromUrl}`);
         await getCategoryMarkers(categoryFromUrl);
       } else {
-        console.log('지도에서 장소 검색 API 호출');
         await getAndInitMarkers();
       }
     } catch (error) {

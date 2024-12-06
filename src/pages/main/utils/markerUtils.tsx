@@ -82,5 +82,4 @@ export const initMarkers = (
       console.error('Error creating marker:', data);
     }
   });
-  console.log('markersRef.current:', markersRef.current);
 };
