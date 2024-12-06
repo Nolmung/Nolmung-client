@@ -9,7 +9,10 @@ import TextContent from './components/textContent';
 import ImageCard from './components/imageCard';
 import EditButton from './components/editButton';
 import { useState } from 'react';
+
 import { useTodaymungDetailData } from './queries';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
+
 
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
@@ -31,6 +34,8 @@ const TodayMungDetail = () => {
   const handleToggleClick = () => {
     setEditToggle(!editToggle);
   };
+
+  useSetDocumentTitle(`오늘멍 상세보기 - ${diaryData.title}`);
   return (
     <S.Wrapper>
       <S.Container>

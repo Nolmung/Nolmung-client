@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 const TodayMungListCard = ({ listData, data }: ListCardProps) => {
   const { user } = listData;
+
   const navigate = useNavigate();
 
   const handleListClick = () => {
     navigate(`/todaymung/detail/${data.diaryId}`);
   };
+
   return (
     <S.Wrap onClick={handleListClick}>
       <S.UserInfoArea>

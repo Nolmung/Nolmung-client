@@ -1,3 +1,5 @@
+import { MediaType } from '@/service/apis/diary/index.type';
+
 export const todaymungDetailData = {
   status: 'SUCCESS',
   message: '일기 상세조회에 성공하였습니다.',
@@ -40,12 +42,12 @@ export const todaymungDetailData = {
     medias: [
       {
         mediaId: 1,
-        mediaType: 'IMAGE',
+        mediaType: MediaType.IMAGE,
         mediaUrl: 'https://s3.amazonaws.com/mybucket/image1.jpg',
       },
       {
         mediaId: 2,
-        mediaType: 'VIDEO',
+        mediaType: MediaType.VIDEO,
         mediaUrl: 'https://s3.amazonaws.com/mybucket/video1.mp4',
       },
     ],

@@ -2,7 +2,7 @@ import Categories from '../constants/categories';
 /** Label 타입 정의 */
 export interface ReviewKeyword {
   labelId: number; // 라벨 ID
-  labelCount: number; // 라벨 사용 횟수
+  labelName: string;
 }
 
 /** 오늘멍 타입 정의 */

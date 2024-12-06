@@ -1,6 +1,7 @@
 import { MarkerType } from '@/pages/main/types';
 import { instance } from '..';
 import { PlaceRequestBody } from './index.type';
+import { PlaceCategory } from '@/common/types';
 
 export const getPostDetail = async (placeId: string | number) => {
   const response = await instance.get(`/places/details/${placeId}`);
@@ -18,6 +19,35 @@ export const getPlacesMap = async (
       maxLongitude: body.maxLongitude,
     },
   });
-  console.log(response.data);
+  return response.data.data;
+};
+
+export interface PlaceFilterRequestBody {
+  latitude: number;
+  longitude: number;
+  maxLatitude: number;
+  maxLongitude: number;
+
+  category?: PlaceCategory;
+  isVisited?: boolean;
+  isBookmarked?: boolean;
+}
+
+export const getPlacesFilter = async (
+  params: PlaceFilterRequestBody,
+): Promise<MarkerType[]> => {
+  const { latitude, longitude, maxLatitude, maxLongitude, category, isVisited, isBookmarked} = params;
+  const response = await instance.get('/places/filter', {
+    params: {
+      latitude,
+      longitude,
+      maxLatitude,
+      maxLongitude,
+      //undefined일 경우 제외
+      ...(category && { category }),
+      ...(isVisited != undefined && { isVisited }),
+      ...(isBookmarked != undefined && { isBookmarked }),
+    },
+  });
   return response.data.data;
 };

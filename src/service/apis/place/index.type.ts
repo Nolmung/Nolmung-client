@@ -1,11 +1,10 @@
-import {
-  Diary,
-  PlaceCategory,
-  PlacePrice,
-  ReviewKeyword,
-} from '@/common/types';
+import { Diary, PlaceCategory, PlacePrice } from '@/common/types';
 import { DogSize } from '../user/index.types';
 
+export interface PlaceResponseLabel {
+  labelId: number;
+  labelCount: number;
+}
 export interface PlaceDetailResponse {
   placeId: number; // 장소 ID
   placeName: string; // 장소 이름
@@ -27,19 +26,19 @@ export interface PlaceDetailResponse {
   reviewCount: number; // 리뷰 수
   latitude: string; // 위도
   longitude: string; // 경도
-  labels: ReviewKeyword[]; // 라벨 배열
+  labels: PlaceResponseLabel[]; // 라벨 배열
   diaries: Diary[]; // 다이어리 배열
   starRatingAvg: number; // 별점 평균
 }
 
 export interface MapPlace {
-  place_id: number;
-  place_name: string;
+  placeId: number;
+  placeName: string;
   category: PlaceCategory;
-  road_address: string;
-  place_img_url: string;
-  star_rating_avg: number;
-  review_count: number;
+  roadAddress: string;
+  placeImgUrl: string;
+  starRatingAvg: number;
+  reviewCount: number;
   latitude: number;
   longitude: number;
 }

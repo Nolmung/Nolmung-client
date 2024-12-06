@@ -17,6 +17,7 @@ import {
   formatDate,
   updateSearchHistory,
 } from './utils/searchUtils';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 export interface SearchHistoryItem {
   id: number;
@@ -25,6 +26,7 @@ export interface SearchHistoryItem {
 }
 
 function Search() {
+  useSetDocumentTitle('놀멍');
   const navigate = useNavigate();
   const { isOpen, openModal, closeModal } = useModal();
   const inputRef = useRef<HTMLInputElement>(null);

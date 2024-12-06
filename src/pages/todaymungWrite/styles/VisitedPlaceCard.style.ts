@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const S = {
   PlaceCard: styled.div`
     border-radius: 10px;
-    border: 1px solid #a7a7a7;
-    background: #f0f0f0;
+    border: 1px solid #17aa1a;
+    background: #d3fbd4;
     height: 64px;
     display: flex;
     flex-direction: column;

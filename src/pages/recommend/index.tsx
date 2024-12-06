@@ -1,8 +1,10 @@
 import { placeMap } from '@/mocks/data/placeMap';
 import RecommendCard from './components/RecommendCard';
 import S from './styles/index.style';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 function Recommend() {
+  useSetDocumentTitle('추천');
   return (
     <S.Wrapper>
       <RecommendCard

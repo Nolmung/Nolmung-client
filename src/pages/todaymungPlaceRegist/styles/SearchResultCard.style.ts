@@ -40,9 +40,8 @@ const S = {
     align-items: center;
   `,
   IconWrapper: styled.div`
-    width: 14px;
-    height: 14px;
-    background-color: black;
+    width: 15px;
+    height: 15px;
   `,
   ResultText: styled.div`
     width: 100%;
