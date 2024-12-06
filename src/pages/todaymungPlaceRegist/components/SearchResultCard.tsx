@@ -1,6 +1,8 @@
+import { CATEGORY_OPTIONS } from '@/pages/main/constants/categoryBar';
 import S from '../styles/SearchResultCard.style';
 import ReviewCard from './ReviewCard';
 import { PlaceCategory } from '@/common/types';
+import React from 'react';
 
 interface SearchResultCardProps {
   place_name: string;
@@ -22,6 +24,7 @@ function SearchResultCard({
   keywordReviewVisibleId,
   setKeywordReviewVisibleId,
 }: SearchResultCardProps) {
+  console.log(place_category);
   const handleClick = () => {
     if (keywordReviewVisibleId === place_id) {
       setKeywordReviewVisibleId(null);
@@ -51,7 +54,16 @@ function SearchResultCard({
         kewordReviewVisible={keywordReviewVisibleId === place_id}
         onClick={handleClick}
       >
-        <S.IconWrapper />
+        <S.IconWrapper>
+          {CATEGORY_OPTIONS?.find(
+            (category) => category.value === place_category,
+          )?.icon &&
+            React.createElement(
+              CATEGORY_OPTIONS.find(
+                (category) => category.value === place_category,
+              )!.icon,
+            )}
+        </S.IconWrapper>
         <S.ResultText>
           <S.PlaceName>{place_name}</S.PlaceName>
           <S.Address>{road_address}</S.Address>
