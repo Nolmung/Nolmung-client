@@ -45,7 +45,7 @@ function SearchList({
       ) : (
         <S.NoResultWrapper>
           <LiedownDog width={240} />
-          <S.NoResultSubText>검색을 해라 멍!</S.NoResultSubText>
+          <S.NoResultSubText>최근 검색 기록이 없다 멍!</S.NoResultSubText>
         </S.NoResultWrapper>
       )}
     </>
