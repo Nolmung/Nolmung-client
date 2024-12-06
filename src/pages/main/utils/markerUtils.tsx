@@ -36,13 +36,13 @@ export const addMarker = (
     }) as CustomMarker;
 
     (newMarker.data = {
-      place_id: data.placeId,
-      place_name: data.placeName,
+      placeId: data.placeId,
+      placeName: data.placeName,
       category: data.category as PlaceCategory,
-      road_address: data.roadAddress,
-      place_img_url: data.placeImgUrl,
-      star_rating_avg: data.starRatingAvg,
-      review_count: data.reviewCount,
+      roadAddress: data.roadAddress,
+      placeImgUrl: data.placeImgUrl,
+      starRatingAvg: data.starRatingAvg,
+      reviewCount: data.reviewCount,
       latitude: data.latitude,
       longitude: data.longitude,
     }),
@@ -82,4 +82,5 @@ export const initMarkers = (
       console.error('Error creating marker:', data);
     }
   });
+  console.log('markersRef.current:', markersRef.current);
 };

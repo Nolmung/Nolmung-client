@@ -6,7 +6,7 @@ export const placeDetailApi = http.get(
   `/place-details/:placeId`,
   async ({ params }) => {
     const detail = postDetail.find(
-      (item) => item.place_id === Number(params.placeId),
+      (item) => item.placeId === Number(params.placeId),
     );
 
     if (detail) {

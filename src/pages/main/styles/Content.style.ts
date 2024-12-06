@@ -5,12 +5,18 @@ export const S = {
     width: 100%;
     height: ${({ isCard }) => (isCard ? '180px' : '152px')};
 
-    padding: ${({ isCard }) => (isCard ? '0 16px' : '16px 16px')};
+    padding: ${({ isCard }) => (isCard ? '0 28px' : '16px 28px')};
     background-color: #fff;
     border-radius: ${({ isCard }) => (isCard ? '20px 20px 0 0' : '0')};
     align-items: center;
     border-bottom: ${({ isCard }) => (isCard ? 'none' : '1.5px solid #f0f0f0')};
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+  `,
+  Container: styled.div`
+    width: 100%;
+    height: fit-content;
     display: flex;
     justify-content: space-between;
   `,
@@ -23,11 +29,22 @@ export const S = {
     display: flex;
     gap: 8px;
     align-items: center;
+    flex-wrap: wrap;
   `,
   PlaceReviewWrapper: styled.div`
     display: flex;
     gap: 6px;
     align-items: center;
+  `,
+  TextWrapper: styled.div`
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    color: #080808;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px; /* 133.333% */
+    letter-spacing: -0.6px;
   `,
   PlaceName: styled.p`
     color: #080808;
@@ -51,14 +68,6 @@ export const S = {
     line-height: normal;
     width: 80%;
   `,
-  PlaceStarAvgerage: styled.p`
-    color: #080808;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 16px; /* 133.333% */
-    letter-spacing: -0.6px;
-  `,
   PlaceReviewCount: styled.p`
     color: #5e5e5e;
     font-size: 12px;
@@ -68,18 +77,28 @@ export const S = {
   `,
   IconWrapper: styled.div``,
   Like: styled.div`
-    width: fit-content;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    cursor: pointer;
   `,
   InfoTextWrapper: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 7px;
   `,
   PlaceImage: styled.img`
     width: 120px;
     height: 120px;
     flex-shrink: 0;
     border-radius: 10px;
-    object-fit: contain;
+    object-fit: cover;
+  `,
+  ImageWrapper: styled.div`
+    position: relative;
+    height: 100%;
+    border-radius: 5px;
+    box-sizing: border-box;
   `,
 };
