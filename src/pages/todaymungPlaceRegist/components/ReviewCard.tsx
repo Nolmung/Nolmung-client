@@ -22,7 +22,7 @@ function ReviewCard({
   placeName,
   roadAddress,
 }: ReviewCardProps) {
-  const { reviewlist, addReviewList } = useReviewStore();
+  const { reviewlist, addReviewList, deleteReview } = useReviewStore();
   const { addPlaces } = useTodayMungStore();
   const review = reviewlist.find((review) => review.placeId === placeId);
   const [starRate, setStarRate] = useState<number>(review?.rating || 5);
@@ -36,6 +36,11 @@ function ReviewCard({
     setStarRate(rate);
   };
   const handleAddPlaceButtonClick = () => {
+    if (reviewlist.find((review) => review.placeId === placeId)) {
+      deleteReview(placeId);
+    } else if (!reviewlist.find((review) => review.placeId === placeId)) {
+      addPlaces(placeId);
+    }
     addReviewList({
       rating: starRate,
       placeId,
@@ -44,7 +49,6 @@ function ReviewCard({
       placeName,
       roadAddress,
     });
-    addPlaces(placeId);
     setKeywordReviewVisibleId(null);
   };
 
