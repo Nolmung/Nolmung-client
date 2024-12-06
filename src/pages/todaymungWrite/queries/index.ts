@@ -4,7 +4,6 @@ import { postReviews } from '@/service/apis/review';
 import { PostReviewRequest } from '@/service/apis/review/index.type';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { postTodaymung } from '@/service/apis/diary';
-import { PostDiaryRequest } from '@/service/apis/diary/index.type';
 import { ROUTE } from '@/common/constants/route';
 import { useNavigate } from 'react-router-dom';
 import { useTodayMungStore } from '../stores/todayMungStore';

@@ -21,7 +21,15 @@ function TodayMungWrite() {
   const { title, content, dogs } = useTodayMungStore();
 
   const handleCompleteButtonClick = () => {
-    if (title && content && dogs) {
+    const missingFields = [];
+
+    if (!title) missingFields.push('제목');
+    if (!content) missingFields.push('내용');
+    if (!dogs) missingFields.push('반려견');
+
+    if (missingFields.length > 0) {
+      alert(`${missingFields.join(', ')}을 작성해주세요.`);
+    } else {
       diaryMutate();
     }
 
