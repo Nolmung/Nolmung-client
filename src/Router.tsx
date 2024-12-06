@@ -3,6 +3,7 @@ import Main from '@pages/main';
 import TodayMung from '@pages/todaymung';
 import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import KakaoCallbackHandler from './pages/login/components/KakaoCallbackHandler';
 
 import Layout from './common/components/layout';
 import Detail from './pages/detail';
@@ -39,6 +40,10 @@ function Router() {
           <Route path={ROUTE.TODAYMUNG()} element={<TodayMung />} />
           <Route path={ROUTE.DETAIL(':placeId')} element={<Detail />} />
           <Route path={ROUTE.LOGIN()} element={<Login />} />
+          <Route
+            path={ROUTE.KAKAOCALLBACKHANDLER()}
+            element={<KakaoCallbackHandler />}
+          />
           <Route path={ROUTE.SIGNUP()} element={<SignUp />} />
           <Route path={ROUTE.SEARCH()} element={<Search />} />
           <Route path={ROUTE.DOGS()} element={<Dogs />} />
@@ -55,7 +60,6 @@ function Router() {
             path={ROUTE.TODAYMUNG_DETAIL(':diaryId')}
             element={<TodayMungDetail />}
           />
-          <Route path={ROUTE.A()} element={<TodayMung />} />
         </Routes>
       </Layout>
     </Suspense>

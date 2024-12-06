@@ -4,6 +4,7 @@ export const ROUTE = {
   TODAYMUNG: () => '/todaymung',
   DETAIL: (placeId: string | number) => `/detail/${placeId}`,
   LOGIN: () => '/login',
+  KAKAOCALLBACKHANDLER: () => '/oauth/kakao/callback',
   SIGNUP: () => `/signUp`,
   SEARCH: () => '/search',
   DOGS: () => '/dogs',

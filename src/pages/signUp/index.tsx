@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from './DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
+import { useLocation } from 'react-router-dom';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
 const locations = [
