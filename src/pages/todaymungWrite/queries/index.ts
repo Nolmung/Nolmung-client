@@ -9,6 +9,7 @@ import { ROUTE } from '@/common/constants/route';
 import { useNavigate } from 'react-router-dom';
 import { useTodayMungStore } from '../stores/todayMungStore';
 import { useReviewStore } from '@/pages/todaymungPlaceRegist/stores/reviewStore';
+import { deleteFileFromS3 } from '@/common/utils/uploadImageToS3';
 
 export const useGetDogs = () => {
   return useQuery<DogsResponse>({
@@ -50,10 +51,20 @@ export const usePostReviews = () => {
 export const usePostDiary = () => {
   const { deleteTodaymungAll } = useTodayMungStore();
   const navigate = useNavigate();
+  const { title, content, places, medias, publicYn, dogs, deleteMedia } =
+    useTodayMungStore();
 
-  return useMutation<number, Error, PostDiaryRequest>({
-    mutationFn: (postTodayMungData) => {
-      return postTodaymung(postTodayMungData);
+  const diaryRequest = {
+    title,
+    content,
+    places,
+    medias,
+    publicYn,
+    dogs,
+  };
+  return useMutation<number, Error>({
+    mutationFn: () => {
+      return postTodaymung(diaryRequest);
     },
     onSuccess: () => {
       alert('오늘멍 등록이 완료되었습니다.');
@@ -62,6 +73,9 @@ export const usePostDiary = () => {
     },
     onError: () => {
       alert('오늘멍 등록에 실패했습니다.');
+      for (let file of diaryRequest.medias) {
+        deleteFileFromS3(file.mediaUrl, file.mediaId, deleteMedia);
+      }
     },
   });
 };

@@ -55,6 +55,7 @@ export const useTodayMungStore = create(
           medias: [],
           publicYn: true,
         }),
+        
     }),
     {
       name: 'todayMung',

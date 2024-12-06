@@ -18,21 +18,11 @@ function TodayMungWrite() {
   const { reviewlist } = useReviewStore();
   const { mutate: diaryMutate } = usePostDiary();
   const { postReviewsSequentially } = usePostReviews();
-  const { title, content, places, medias, publicYn, dogs } =
-    useTodayMungStore();
+  const { title, content, dogs } = useTodayMungStore();
 
   const handleCompleteButtonClick = () => {
-    const diaryRequest = {
-      title,
-      content,
-      places,
-      medias,
-      publicYn,
-      dogs,
-    };
-
-    if (diaryRequest.title && diaryRequest.content && diaryRequest.dogs) {
-      diaryMutate(diaryRequest);
+    if (title && content && dogs) {
+      diaryMutate();
     }
 
     const reviewRequestList: PostReviewRequest[] = [];
