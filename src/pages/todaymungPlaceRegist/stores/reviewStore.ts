@@ -1,17 +1,13 @@
-import { PlaceCategory } from '@/common/types';
+import { PlaceCategory, ReviewKeyword } from '@/common/types';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface Labels {
-  labelId: number;
-  labelName: string;
-}
 interface Review {
-  roadAddress: string;
-  rating: number;
   placeId: number;
+  rating: number;
+  roadAddress: string;
   category: PlaceCategory;
-  labels: Labels[];
+  labels: ReviewKeyword[];
   placeName: string;
 }
 
@@ -20,6 +16,7 @@ interface ReviewStore {
   singleReview: Review | null;
   addReviewList: (reviews: Review) => void;
   deleteReview: (placeId: number) => void;
+  deleteReviewAll: () => void;
 }
 
 export const useReviewStore = create(
@@ -38,6 +35,7 @@ export const useReviewStore = create(
             (review) => review.placeId !== placeId,
           ),
         })),
+      deleteReviewAll: () => set({ reviewlist: [] }),
     }),
     {
       name: 'review',

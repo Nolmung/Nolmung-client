@@ -6,20 +6,54 @@ import MediaGroup from './components/MediaGroup';
 import Button from '@/common/components/button/Button';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
-import { useGetDogs } from './queries';
+import { useGetDogs, usePostDiary, usePostReviews } from './queries';
 import DogCard from './components/DogCard';
 import { useReviewStore } from '../todaymungPlaceRegist/stores/reviewStore';
 import { useTodayMungStore } from './stores/todayMungStore';
+import { PostReviewRequest } from '@/service/apis/review/index.type';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
   const { data: dogsData } = useGetDogs();
   const { reviewlist } = useReviewStore();
-  const { title, content, places, medias, publicYn, dogIds } =
+  const { mutate: diaryMutate } = usePostDiary();
+  const { postReviewsSequentially } = usePostReviews(); // usePostReviews 훅에서 mutate 가져오기
+  const { title, content, places, medias, publicYn, dogs } =
     useTodayMungStore();
-  /** @Todo POST API 호출 */
+
   const handleCompleteButtonClick = () => {
-    console.log(title, content, medias, publicYn, places, dogIds);
+    const diaryRequest = {
+      title,
+      content,
+      places,
+      medias,
+      publicYn,
+      dogs,
+    };
+
+    if (diaryRequest.title && diaryRequest.content) {
+      diaryMutate(diaryRequest);
+    }
+
+    const reviewRequestList: PostReviewRequest[] = [];
+
+    if (reviewlist.length === 0) {
+      return;
+    }
+
+    for (let review of reviewlist) {
+      const reviewRequest = {
+        placeId: review.placeId,
+        rating: review.rating,
+        category: review.category,
+        labels: review.labels.map((label) => ({
+          labelId: label.labelId,
+          labelName: label.labelName,
+        })),
+      };
+      reviewRequestList.push(reviewRequest);
+    }
+    postReviewsSequentially(reviewRequestList);
   };
 
   const navigateToTodaymungPlaceRegist = () => {

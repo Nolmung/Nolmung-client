@@ -25,20 +25,19 @@ export const uploadFileToS3 = async (
         Key: file.name,
         Body: file,
         ContentType: file.type,
-        ACL: 'public-read', // 객체를 공개적으로 설정
+        ACL: 'public-read',
       });
 
       await s3.send(command);
 
       const encodedFileName = encodeURI(file.name);
       const url = `https://${bucketName}.s3.${region}.amazonaws.com/${encodedFileName}`;
-
+      const fileType = file.type.split('/')[0].toUpperCase();
       const media = {
-        mediaId: Date.now() + Math.random(),
-        mediaType: file.type,
+        mediaType: fileType,
         mediaUrl: url,
       };
-
+      console.log(media);
       addMedia(media);
     }
   } catch (error) {

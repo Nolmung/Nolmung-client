@@ -1,4 +1,4 @@
-import { PlaceCategory } from '@/common/types';
+import { PlaceCategory, ReviewKeyword } from '@/common/types';
 import S from '@pages/todaymungPlaceRegist/styles/ReviewCard.style';
 import { DogPaw, FilledStar, EmptyStar } from '@assets/images/svgs';
 import KEYWORDS from '@common/constants/reviewLabels';
@@ -15,11 +15,6 @@ interface ReviewCardProps {
   setKeywordReviewVisibleId: (id: number | null) => void;
 }
 
-interface Labels {
-  labelId: number;
-  labelName: string;
-}
-
 function ReviewCard({
   setKeywordReviewVisibleId,
   category,
@@ -31,7 +26,7 @@ function ReviewCard({
   const { addPlaces } = useTodayMungStore();
   const review = reviewlist.find((review) => review.placeId === placeId);
   const [starRate, setStarRate] = useState<number>(review?.rating || 5);
-  const [selectedLabels, setSelectedLabels] = useState<Labels[]>(
+  const [selectedLabels, setSelectedLabels] = useState<ReviewKeyword[]>(
     review?.labels || [],
   );
 

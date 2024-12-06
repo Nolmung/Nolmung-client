@@ -5,7 +5,7 @@ export enum MideaType {
 
 export interface Media {
   mediaId: number;
-  mediaType: string;
+  mediaType: MideaType;
   mediaUrl: string;
 }
 export interface PostDiaryRequest {
@@ -13,6 +13,6 @@ export interface PostDiaryRequest {
   content: string;
   places: number[];
   medias: Media[];
-  dogIds: number[];
+  dogs: number[];
   publicYn: boolean;
 }
