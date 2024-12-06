@@ -14,9 +14,15 @@ const Button: React.FC<ButtonProps> = ({
   children,
   disabled,
   border,
+  display,
+  justifyContent,
+  alignItems,
 }) => {
   return (
     <S.Wrapper
+      display={display}
+      justifyContent={justifyContent}
+      alignItems={alignItems}
       disabled={disabled}
       onClick={onClick}
       width={width}

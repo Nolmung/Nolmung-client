@@ -1,6 +1,6 @@
 import { PlaceCategory, ReviewKeyword } from '@/common/types';
 import S from '@pages/todaymungPlaceRegist/styles/ReviewCard.style';
-import { DogPaw, FilledStar, EmptyStar } from '@assets/images/svgs';
+import { DogPaw, FilledStar, EmptyStar, PlusIcon } from '@assets/images/svgs';
 import KEYWORDS from '@common/constants/reviewLabels';
 import { useEffect, useState } from 'react';
 import Button from '@common/components/button/Button';
@@ -99,17 +99,26 @@ function ReviewCard({
           <S.Rate>{starRate}</S.Rate>
         </S.RateWrapper>
         <Button
-          disabled={isAddPlaceButtonDisabled}
-          width="76px"
-          height="34px"
-          borderRadius="50px"
-          backgroundColor={isAddPlaceButtonDisabled ? '#F0F0F0' : '#080808'}
-          color={isAddPlaceButtonDisabled ? '#080808' : '#ffffff'}
-          border={isAddPlaceButtonDisabled ? '1px solid #A7A7A7' : 'none'}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          width="90px"
+          height="36px"
+          borderRadius="10px"
+          backgroundColor="#fff"
+          color={isAddPlaceButtonDisabled ? '#5E5E5E' : '#080808'}
+          border={
+            isAddPlaceButtonDisabled ? '1px solid #5E5E5E' : '1px solid #17AA1A'
+          }
           fontSize="13px"
           fontWeight={isAddPlaceButtonDisabled ? '400' : '600'}
           onClick={handleAddPlaceButtonClick}
+          disabled={isAddPlaceButtonDisabled}
         >
+          <PlusIcon
+            width={14}
+            strokeColor={isAddPlaceButtonDisabled ? '#5E5E5E' : '#17AA1A'}
+          />
           장소 추가
         </Button>
       </S.RateAddPlaceButtonWrapper>

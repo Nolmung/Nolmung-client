@@ -11,6 +11,9 @@ export interface ButtonStyleProps {
   borderRadius?: string;
   disabled?: boolean;
   border?: string;
+  display?: string;
+  justifyContent?: string;
+  alignItems?: string;
 }
 
 export interface ButtonProps extends ButtonStyleProps {
