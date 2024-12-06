@@ -1,5 +1,3 @@
-import { MediasType } from '@/pages/todaymungDetail/types/DiaryType';
-import { Media } from '@/service/apis/diary/index.type';
 import { DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 

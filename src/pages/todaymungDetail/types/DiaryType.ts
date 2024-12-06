@@ -1,4 +1,4 @@
-import { Media } from '@/service/apis/diary/index.type';
+import { MediaType } from '@/service/apis/diary/index.type';
 
 export interface DogsType {
   dogId: number;
@@ -6,8 +6,8 @@ export interface DogsType {
 }
 
 export interface MediasType {
-  mediaId: number;
-  mediaType: Media;
+  mediaId?: number;
+  mediaType: MediaType;
   mediaUrl: string;
 }
 
