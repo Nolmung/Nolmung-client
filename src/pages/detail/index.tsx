@@ -88,6 +88,7 @@ function Detail() {
             .with('S', () => <Under15KgInfoIcon />)
             .with('M', () => <Under25KgInfoIcon />)
             .with('L', () => <AllKindDogAvailableInfoIcon />)
+            .with('ALL', () => <AllKindDogAvailableInfoIcon />)
             .exhaustive()}
           {data.parkingYn && <ParkAvailableInfoIcon />}
           {data.outPossibleYn && <OutsideInfoIcon />}
