@@ -55,6 +55,7 @@ function Router() {
             path={ROUTE.TODAYMUNG_DETAIL(':diaryId')}
             element={<TodayMungDetail />}
           />
+          <Route path={ROUTE.A()} element={<TodayMung />} />
         </Routes>
       </Layout>
     </Suspense>

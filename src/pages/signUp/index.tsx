@@ -1,12 +1,10 @@
 import { S } from './styles/signUp.styles';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { Box, TextField } from '@mui/material';
+import DatePicker from './DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
-
+import 'dayjs/locale/ko';
+dayjs.locale('ko');
 const locations = [
   '서울특별시',
   '부산시',
@@ -131,26 +129,7 @@ function SignUp() {
           </S.Dropdown>
         )}
         <S.ContentTitleText>생년월일</S.ContentTitleText>
-
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 2,
-              alignItems: 'center',
-            }}
-          >
-            <DatePicker
-              value={selectedDate}
-              onChange={handleDateChange}
-              views={['year', 'month', 'day']}
-              openTo="year" // 연도 선택부터 시작
-              format="YYYY-MM-DD" // 날짜 포맷 지정
-            />
-          </Box>
-        </LocalizationProvider>
-
+        <DatePicker />
         <S.NextButton
           disabled={!NextButtonActive}
           isActive={NextButtonActive}

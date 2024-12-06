@@ -1,5 +1,6 @@
 import { HEADER_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
+import { DatepickerCalendar } from '@/assets/images/svgs';
 
 export const S = {
   ContainerWrapper: styled.div`
@@ -9,6 +10,11 @@ export const S = {
     width: 100%;
     height: calc(100vh - ${HEADER_HEIGHT}px);
     overflow-y: auto;
+  `,
+  DatepickerCalendarIcon: styled(DatepickerCalendar)`
+    width: 24px;
+    height: 24px;
+    padding: 1px;
   `,
   UserTitle: styled.h1`
     font-size: 18px;

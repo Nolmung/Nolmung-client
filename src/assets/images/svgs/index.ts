@@ -6,6 +6,7 @@ export { default as CameraIcon } from './CameraIcon';
 export { default as CancelIcon } from './CancelIcon';
 export { default as CheckEmptyGreen } from './CheckEmptyGreen';
 export { default as CheckFiiledDark } from './CheckFiiledDark';
+export { default as DatepickerCalendar } from './DatepickerCalendar';
 export { default as DogPaw } from './DogPaw';
 export { default as EmptyStar } from './EmptyStar';
 export { default as FilledStar } from './FilledStar';
