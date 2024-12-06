@@ -40,7 +40,7 @@ export interface UserType {
   userEmail: string;
 }
 
-export type DogSize = 'S' | 'M' | 'L';
+export type DogSize = 'S' | 'M' | 'L' | 'ALL';
 
 export type Age = 10 | 20 | 30 | 40 | 50;
 
