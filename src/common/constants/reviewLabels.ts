@@ -25,7 +25,7 @@ const KEYWORDS: Record<
     { labelId: 12, labelName: '설명이 잘 되어있어요' },
     { labelId: 13, labelName: '전시 테마가 재미있어요' },
   ],
-  GALLERY: [
+  ARTGALLERY: [
     { labelId: 11, labelName: '유익해요' },
     { labelId: 12, labelName: '설명이 잘 되어있어요' },
     { labelId: 13, labelName: '전시 테마가 재미있어요' },

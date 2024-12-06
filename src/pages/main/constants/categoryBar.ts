@@ -59,7 +59,7 @@ export const CATEGORY_OPTIONS: CategoryOptionType = [
     icon: MuseumTag,
   },
   {
-    value: 'GALLERY',
+    value: 'ARTGALLERY',
     label: '미술관',
     icon: GalleryTag,
   },
