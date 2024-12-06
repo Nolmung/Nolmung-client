@@ -23,7 +23,7 @@ function TodayMungWrite() {
   const { postReviewsSequentially } = usePostReviews();
 
   const handleCompleteButtonClick = () => {
-    if (title || content || dogs || medias) {
+    if (title || content || dogs.length > 0 || medias.length > 0) {
       const missingFields = [];
 
       if (!title) missingFields.push('제목');
