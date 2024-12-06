@@ -58,10 +58,9 @@ function TodayMungPlaceRegist() {
     }
   }, [location]);
 
-  const handleSearch = () => {
-    const searchValue = inputRef?.current?.value.trim();
+  const handleSearch = (searchKeyword?: string) => {
+    const searchValue = searchKeyword || inputRef?.current?.value.trim();
     if (!searchValue) return;
-    console.log(true);
     const newSearchItem: SearchHistoryItem = {
       id: Date.now(),
       keyword: searchValue,
@@ -143,7 +142,9 @@ function TodayMungPlaceRegist() {
                 {searchHistory.map((item) => (
                   <S.SearchHistory key={item.id}>
                     <TimeRecord width={20} height={20} />
-                    <S.TimeIconTextWrapper>
+                    <S.TimeIconTextWrapper
+                      onClick={() => handleSearch(item.keyword)}
+                    >
                       {item.keyword}
                     </S.TimeIconTextWrapper>
                     <S.CancelIconDateWrapper>
