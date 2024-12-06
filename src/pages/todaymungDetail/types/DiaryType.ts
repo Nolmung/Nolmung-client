@@ -1,5 +1,6 @@
 export interface DogsType {
   dogId: number;
+  dogName: string;
   dogProfileImageUrl: string;
 }
 
