@@ -13,6 +13,6 @@ export interface PostDiaryRequest {
   content: string;
   places: number[];
   medias: Media[];
-  dogIds: number[];
+  dogs: number[];
   publicYn: boolean;
 }

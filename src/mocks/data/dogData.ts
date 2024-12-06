@@ -1,4 +1,4 @@
-import { DogType } from "@/service/apis/user/index.types";
+import { DogType } from '@/service/apis/dog/index.type';
 
 export const dogData: DogType[] = [
   {

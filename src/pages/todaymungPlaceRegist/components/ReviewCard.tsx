@@ -1,10 +1,11 @@
-import { PlaceCategory } from '@/common/types';
+import { PlaceCategory, ReviewKeyword } from '@/common/types';
 import S from '@pages/todaymungPlaceRegist/styles/ReviewCard.style';
 import { DogPaw, FilledStar, EmptyStar } from '@assets/images/svgs';
 import KEYWORDS from '@common/constants/reviewLabels';
 import { useState } from 'react';
 import Button from '@common/components/button/Button';
 import { useReviewStore } from '@pages/todaymungPlaceRegist/stores/reviewStore';
+import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
 
 interface ReviewCardProps {
   category: PlaceCategory;
@@ -12,11 +13,6 @@ interface ReviewCardProps {
   placeName: string;
   roadAddress: string;
   setKeywordReviewVisibleId: (id: number | null) => void;
-}
-
-interface Labels {
-  labelId: number;
-  labelName: string;
 }
 
 function ReviewCard({
@@ -27,9 +23,10 @@ function ReviewCard({
   roadAddress,
 }: ReviewCardProps) {
   const { reviewlist, addReviewList } = useReviewStore();
+  const { addPlaces } = useTodayMungStore();
   const review = reviewlist.find((review) => review.placeId === placeId);
   const [starRate, setStarRate] = useState<number>(review?.rating || 5);
-  const [selectedLabels, setSelectedLabels] = useState<Labels[]>(
+  const [selectedLabels, setSelectedLabels] = useState<ReviewKeyword[]>(
     review?.labels || [],
   );
 
@@ -45,6 +42,7 @@ function ReviewCard({
       placeName,
       roadAddress,
     });
+    addPlaces(placeId);
     setKeywordReviewVisibleId(null);
   };
 

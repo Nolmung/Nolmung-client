@@ -1,8 +1,9 @@
-import { DogSize, DogType } from '@/service/apis/user/index.types';
+import { DogSize } from '@/service/apis/user/index.types';
 import S from '../../styles/profile.styles';
 import DefaultDogImg1 from '@/assets/images/pngs/default_dog_image_1.png';
 import { DogSizeMapping } from '../../constants/DogSizeMapping';
 import { calculateAge } from '../../utils/calculateAge';
+import { DogType } from '@/service/apis/dog/index.type';
 
 interface PetProfileProps {
   data?: DogType;
