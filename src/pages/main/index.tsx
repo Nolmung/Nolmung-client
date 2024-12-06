@@ -19,8 +19,10 @@ import ReactDOMServer from 'react-dom/server';
 import { getUserLocation } from './utils/userLocationUtils';
 import CustomMarkerComponent from './components/customMarker';
 import { getPlacesMap } from '@/service/apis/place';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 function Main() {
+  useSetDocumentTitle('놀멍');
   const { naver } = window;
 
   const location = useLocation();

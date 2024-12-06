@@ -11,6 +11,7 @@ import DogCard from './components/DogCard';
 import { useReviewStore } from '../todaymungPlaceRegist/stores/reviewStore';
 import { useTodayMungStore } from './stores/todayMungStore';
 import { PostReviewRequest } from '@/service/apis/review/index.type';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ function TodayMungWrite() {
   const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary();
   const { postReviewsSequentially } = usePostReviews();
+
+  useSetDocumentTitle('오늘멍 작성하기');
 
   const handleCompleteButtonClick = () => {
     if (title || content || dogs.length > 0 || medias.length > 0) {
