@@ -24,7 +24,6 @@ function SearchResultCard({
   keywordReviewVisibleId,
   setKeywordReviewVisibleId,
 }: SearchResultCardProps) {
-  console.log(place_category);
   const handleClick = () => {
     if (keywordReviewVisibleId === place_id) {
       setKeywordReviewVisibleId(null);
