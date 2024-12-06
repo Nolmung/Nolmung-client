@@ -11,28 +11,42 @@ import DogCard from './components/DogCard';
 import { useReviewStore } from '../todaymungPlaceRegist/stores/reviewStore';
 import { useTodayMungStore } from './stores/todayMungStore';
 import { PostReviewRequest } from '@/service/apis/review/index.type';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
-  const { data: dogsData } = useGetDogs();
+
   const { reviewlist } = useReviewStore();
+  const { title, content, dogs, medias } = useTodayMungStore();
+
+  const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary();
   const { postReviewsSequentially } = usePostReviews();
-  const { title, content, dogs } = useTodayMungStore();
+
+  useSetDocumentTitle('오늘멍 작성하기');
 
   const handleCompleteButtonClick = () => {
-    const missingFields = [];
+    if (title || content || dogs.length > 0 || medias.length > 0) {
+      const missingFields = [];
 
-    if (!title) missingFields.push('제목');
-    if (!content) missingFields.push('내용');
-    if (!dogs) missingFields.push('반려견');
+      if (!title) missingFields.push('제목');
+      if (!content) missingFields.push('내용');
+      if (dogs.length === 0) missingFields.push('반려견');
 
-    if (missingFields.length > 0) {
-      alert(`${missingFields.join(', ')}을 작성해주세요.`);
-    } else {
-      diaryMutate();
+      if (missingFields.length > 0) {
+        const alertMessage = `${missingFields.slice(0, -1).join('과 ')}${
+          missingFields.length > 1 ? '과 ' : ''
+        }${missingFields.slice(-1)}${
+          missingFields.includes('반려견')
+            ? '을 선택해주세요.'
+            : '을 작성해주세요.'
+        }`;
+
+        alert(alertMessage);
+      } else {
+        diaryMutate();
+      }
     }
-
     const reviewRequestList: PostReviewRequest[] = [];
 
     if (reviewlist.length === 0) {

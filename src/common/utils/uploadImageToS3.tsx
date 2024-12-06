@@ -14,10 +14,9 @@ const s3 = new S3Client({
   },
 });
 
-export const uploadFileToS3 = async (
-  files: File[],
-  addMedia: (media: any) => void,
-) => {
+/** input에서 받은 file을 그대로 넣으면 S3 url과 fileType을 리턴합니다 */
+export const uploadFileToS3 = async (files: File[]) => {
+  const uploadedFiles = [];
   try {
     for (const file of files) {
       const command = new PutObjectCommand({
@@ -31,25 +30,21 @@ export const uploadFileToS3 = async (
       await s3.send(command);
 
       const encodedFileName = encodeURI(file.name);
-      const url = `https://${bucketName}.s3.${region}.amazonaws.com/${encodedFileName}`;
+      const s3Url = `https://${bucketName}.s3.${region}.amazonaws.com/${encodedFileName}`;
+
       const fileType = file.type.split('/')[0].toUpperCase();
-      const media = {
-        mediaType: fileType,
-        mediaUrl: url,
-      };
-      console.log(media);
-      addMedia(media);
+
+      uploadedFiles.push({ s3Url, fileType });
     }
+
+    return uploadedFiles;
   } catch (error) {
-    console.error(error);
+    alert('이미지 업로드에 실패했습니다.');
   }
 };
 
-export const deleteFileFromS3 = async (
-  fileUrl: string,
-  mediaId: number,
-  deleteMedia: (media: any) => void,
-) => {
+/** 백엔드로 보내는 수정 or 삭제 API 성공시 실행, 삭제할 fileUrl을 넣으면 삭제가 실행되고, 성공시 true를 반환합니다. */
+export const deleteFileFromS3 = async (fileUrl: string) => {
   const key = fileUrl.split('/').slice(3).join('/');
 
   try {
@@ -59,9 +54,8 @@ export const deleteFileFromS3 = async (
     });
 
     await s3.send(command);
-
-    deleteMedia(mediaId);
+    return true;
   } catch (error) {
-    console.error('Error deleting file:', error);
+    alert('이미지 삭제에 실패했습니다.');
   }
 };

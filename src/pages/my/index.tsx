@@ -13,8 +13,11 @@ import {
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 function Mypage() {
+  useSetDocumentTitle('마이페이지');
+
   const [editId, setEditId] = useState<number>(0);
   const navigate = useNavigate();
   const navigateToMyReview = () => {

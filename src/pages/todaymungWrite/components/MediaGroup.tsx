@@ -5,6 +5,7 @@ import {
   deleteFileFromS3,
   uploadFileToS3,
 } from '@/common/utils/uploadImageToS3';
+import { Media } from '@/service/apis/diary/index.type';
 
 function MediaGroup() {
   const MAX_IMAGE_COUNT = 5; // 최대 이미지 개수
@@ -50,16 +51,27 @@ function MediaGroup() {
       }
 
       const validFiles = [...newImages, ...newVideos];
-      uploadFileToS3(validFiles, addMedia);
+
+      const result = await uploadFileToS3(validFiles);
+
+      result?.forEach((item) => {
+        const media: Media = {
+          mediaId: Math.floor(new Date().getTime() + Math.random() * 10000),
+          mediaType: item.fileType as unknown as Media['mediaType'],
+          mediaUrl: item.s3Url,
+        };
+        addMedia(media);
+      });
     };
   };
 
-  const handleRemoveMediaButtonClick = (mediaId: number) => {
-    deleteFileFromS3(
+  const handleRemoveMediaButtonClick = async (mediaId: number) => {
+    const result = await deleteFileFromS3(
       medias.find((media) => media.mediaId === mediaId)!.mediaUrl!,
-      mediaId,
-      deleteMedia,
     );
+    if (result) {
+      deleteMedia(mediaId);
+    }
   };
 
   return (

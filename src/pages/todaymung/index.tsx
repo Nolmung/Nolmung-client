@@ -1,3 +1,4 @@
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import Convert from './components/convert';
 import UserInfo from './components/userInfo';
 import { S } from './styles/index.style';
@@ -37,6 +38,9 @@ function Todaymung() {
     queryKey: ['todaymungData'],
     queryFn: getTodaymungList,
   });
+
+  useSetDocumentTitle('오늘멍 모아보기');
+
   if (isLoading) {
     return <div>로딩중</div>;
   }

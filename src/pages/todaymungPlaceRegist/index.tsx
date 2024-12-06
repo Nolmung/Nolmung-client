@@ -6,12 +6,15 @@ import SearchResultCard from './components/SearchResultCard';
 import { useReviewStore } from './stores/reviewStore';
 import VisitedPlaceCard from '../todaymungWrite/components/VisitedPlaceCard';
 import { CancelIcon } from '@/assets/images/svgs';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 function TodayMungPlaceRegist() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [keywordReviewVisibleId, setKeywordReviewVisibleId] = useState<
     number | null
   >(null);
+
+  useSetDocumentTitle('오늘멍 장소 등록');
 
   const handleSearch = () => {
     console.log('REF', inputRef?.current?.value);

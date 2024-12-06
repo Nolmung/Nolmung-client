@@ -1,11 +1,13 @@
+import { MediaType } from '@/service/apis/diary/index.type';
+
 export interface DogsType {
   dogId: number;
   dogProfileImageUrl: string;
 }
 
 export interface MediasType {
-  mediaId: number;
-  mediaType: string;
+  mediaId?: number;
+  mediaType: MediaType;
   mediaUrl: string;
 }
 
