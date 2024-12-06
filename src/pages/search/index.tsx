@@ -37,8 +37,8 @@ function Search() {
     },
   );
 
-  const handleSearchIconClick = () => {
-    const searchInputValue = inputRef?.current?.value;
+  const handleSearchIconClick = (keyword?: string) => {
+    const searchInputValue = inputRef?.current?.value || keyword;
     if (!searchInputValue || !searchInputValue.trim()) return;
 
     const newSearchItem: SearchHistoryItem = {
@@ -109,6 +109,7 @@ function Search() {
       <S.SearchHistoryList>
         {searchHistory.length > 0 ? (
           <SearchHistoryList
+          handleSearchIconClick={handleSearchIconClick}
             searchHistory={searchHistory}
             handleDeleteKeyword={handleDeleteKeyword}
           />
