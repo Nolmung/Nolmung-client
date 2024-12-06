@@ -1,12 +1,12 @@
 import SearchInput from '@/common/components/searchInput';
 import S from './styles/index.style';
 import { useRef, useState } from 'react';
-import { placeMap } from '@/mocks/data/placeMap';
 import SearchResultCard from './components/SearchResultCard';
 import { useReviewStore } from './stores/reviewStore';
 import VisitedPlaceCard from '../todaymungWrite/components/VisitedPlaceCard';
 import { CancelIcon } from '@/assets/images/svgs';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
+import { useGetPlaceSearch } from './queries';
 
 function TodayMungPlaceRegist() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -16,14 +16,23 @@ function TodayMungPlaceRegist() {
 
   useSetDocumentTitle('오늘멍 장소 등록');
 
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const { data, isLoading, error } = useGetPlaceSearch(searchKeyword);
+
   const handleSearch = () => {
-    console.log('REF', inputRef?.current?.value);
+    const keyword = inputRef?.current?.value;
+    setSearchKeyword(keyword || '');
   };
+
   const { reviewlist, deleteReview } = useReviewStore();
   const scrollRef = useRef<HTMLDivElement>(null);
   const handleDeleteButtonClick = (placeId: number) => {
     deleteReview(placeId);
   };
+
+  if (isLoading) return <div>로딩중...</div>;
+  if (error) return <div>에러 발생</div>;
+
   return (
     <S.Wrapper
       addPadding={reviewlist.length > 0}
@@ -37,16 +46,16 @@ function TodayMungPlaceRegist() {
           onClick={handleSearch}
         />
       </S.SearchInputWrapper>
-      {placeMap.map((place) => (
+      {data?.map((place) => (
         <SearchResultCard
           scrollRef={scrollRef}
           keywordReviewVisibleId={keywordReviewVisibleId}
           setKeywordReviewVisibleId={setKeywordReviewVisibleId}
-          key={place.place_id}
-          place_category={place.category}
-          place_id={place.place_id}
-          place_name={place.place_name}
-          road_address={place.road_address}
+          key={place.placeId}
+          placeCategory={place.category}
+          placeId={place.placeId}
+          placeName={place.placeName}
+          roadAddress={place.roadAddress}
         />
       ))}
       <S.VisitedPlaceCard>
@@ -59,9 +68,9 @@ function TodayMungPlaceRegist() {
             </S.IconWrapper>
             <VisitedPlaceCard
               key={review.placeId}
-              place_name={review.placeName}
-              road_address={review.roadAddress}
-              my_rate={review.rating}
+              placeName={review.placeName}
+              roadAddress={review.roadAddress}
+              rating={review.rating}
             />
           </S.CardWrapper>
         ))}

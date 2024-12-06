@@ -2,7 +2,7 @@ import { PlaceCategory, ReviewKeyword } from '@/common/types';
 import S from '@pages/todaymungPlaceRegist/styles/ReviewCard.style';
 import { DogPaw, FilledStar, EmptyStar } from '@assets/images/svgs';
 import KEYWORDS from '@common/constants/reviewLabels';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@common/components/button/Button';
 import { useReviewStore } from '@pages/todaymungPlaceRegist/stores/reviewStore';
 import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
@@ -29,6 +29,8 @@ function ReviewCard({
   const [selectedLabels, setSelectedLabels] = useState<ReviewKeyword[]>(
     review?.labels || [],
   );
+  const [isAddPlaceButtonDisabled, setIsAddPlaceButtonDisabled] =
+    useState(false);
 
   const handleStarClick = (rate: number) => {
     setStarRate(rate);
@@ -65,6 +67,10 @@ function ReviewCard({
     }
   };
 
+  useEffect(() => {
+    setIsAddPlaceButtonDisabled(selectedLabels.length === 0);
+  }, [selectedLabels]);
+
   return (
     <S.Wrapper>
       <S.RateAddPlaceButtonWrapper>
@@ -89,13 +95,15 @@ function ReviewCard({
           <S.Rate>{starRate}</S.Rate>
         </S.RateWrapper>
         <Button
+          disabled={isAddPlaceButtonDisabled}
           width="76px"
           height="34px"
           borderRadius="50px"
-          backgroundColor="#080808"
-          color="#ffffff"
+          backgroundColor={isAddPlaceButtonDisabled ? '#F0F0F0' : '#080808'}
+          color={isAddPlaceButtonDisabled ? '#080808' : '#ffffff'}
+          border={isAddPlaceButtonDisabled ? '1px solid #A7A7A7' : 'none'}
           fontSize="13px"
-          fontWeight="600"
+          fontWeight={isAddPlaceButtonDisabled ? '400' : '600'}
           onClick={handleAddPlaceButtonClick}
         >
           장소 추가
