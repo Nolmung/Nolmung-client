@@ -5,6 +5,7 @@ export const S = {
     width: 100%;
     padding: 22px;
     border-bottom: 1.5px solid #f0f0f0;
+    cursor: pointer;
   `,
   UserInfoArea: styled.div`
     display: flex;
