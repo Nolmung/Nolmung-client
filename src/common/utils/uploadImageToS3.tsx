@@ -16,6 +16,7 @@ const s3 = new S3Client({
   },
 });
 
+/** input에서 받은 file을 그대로 넣으면 S3 url과 fileType을 리턴합니다 */
 export const uploadFileToS3 = async (files: File[]) => {
   const uploadedFiles = [];
   try {
@@ -44,6 +45,7 @@ export const uploadFileToS3 = async (files: File[]) => {
   }
 };
 
+/** 백엔드로 보내는 수정 or 삭제 API 성공시 실행, 삭제할 fileUrl을 넣으면 삭제가 실행되고, 성공시 true를 반환합니다. */
 export const deleteFileFromS3 = async (fileUrl: string) => {
   const key = fileUrl.split('/').slice(3).join('/');
 
