@@ -1,9 +1,7 @@
-import { DateCalendar } from '@mui/x-date-pickers';
 import { MarkerType } from '@/pages/main/types';
 import { instance } from '..';
 import { PlaceRequestBody } from './index.type';
 import { PlaceCategory } from '@/common/types';
-import { DogSize } from '../user/index.types';
 
 export const getPostDetail = async (placeId: string | number) => {
   const response = await instance.get(`/places/details/${placeId}`);
@@ -32,21 +30,24 @@ export interface PlaceFilterRequestBody {
   maxLongitude: number;
 
   category?: PlaceCategory;
-  acceptSize?: DogSize;
-  ratingAvg?: number;
+  isVisited?: boolean;
   isBookmarked?: boolean;
 }
 
 export const getPlacesFilter = async (
   params: PlaceFilterRequestBody,
 ): Promise<MarkerType[]> => {
+  const { latitude, longitude, maxLatitude, maxLongitude, category, isVisited, isBookmarked} = params;
   const response = await instance.get('/places/filter', {
     params: {
-      latitude: params.latitude,
-      longitude: params.longitude,
-      maxLatitude: params.maxLatitude,
-      maxLongitude: params.maxLongitude,
-      category: params.category,
+      latitude,
+      longitude,
+      maxLatitude,
+      maxLongitude,
+      //undefined일 경우 제외
+      ...(category && { category }),
+      ...(isVisited != undefined && { isVisited }),
+      ...(isBookmarked != undefined && { isBookmarked }),
     },
   });
   return response.data.data;
