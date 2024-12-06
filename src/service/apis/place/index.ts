@@ -18,6 +18,5 @@ export const getPlacesMap = async (
       maxLongitude: body.maxLongitude,
     },
   });
-  console.log(response.data);
   return response.data.data;
 };
