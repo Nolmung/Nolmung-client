@@ -56,6 +56,7 @@ function Main() {
   const [markerData, setMarkerData] = useState<MarkerType[]>([]);
 
   const [searchKeyword, setSearchKeyword] = useState<string>('');
+
   const {
     data: searchResponseData,
     isLoading,

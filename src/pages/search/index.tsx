@@ -51,7 +51,7 @@ function Search() {
 
   const handleSearchIconClick = (keyword?: string) => {
     const searchInputValue = inputRef?.current?.value || keyword;
-    if (!searchInputValue || !searchInputValue.trim()) return;
+    if (!searchInputValue || !searchInputValue?.trim()) return;
 
     const newSearchItem: SearchHistoryItem = {
       id: Date.now(),
@@ -66,15 +66,24 @@ function Search() {
 
   useEffect(() => {
     if (searchResponseData && searchResponseData.length > 0) {
-      navigate(
-        ROUTE.MAIN() +
-          '?search=' +
-          searchKeyword +
-          '&lat=' +
-          searchResponseData[0].latitude.toString() +
-          '&lng=' +
-          searchResponseData[0].longitude.toString(),
-      );
+      if (searchResponseData.length === 1) {
+        navigate(
+          ROUTE.MAIN() +
+            '?search=' +
+            searchKeyword +
+            '&lat=' +
+            searchResponseData[0].latitude.toString() +
+            '&lng=' +
+            searchResponseData[0].longitude.toString(),
+          {
+            state: { searchResponseData },
+          },
+        );
+      } else {
+        navigate(ROUTE.MAIN() + '?search=' + searchKeyword, {
+          state: { searchResponseData },
+        });
+      }
     }
   }, [searchResponseData]);
 
