@@ -2,17 +2,19 @@ import { Review } from '@/service/apis/user/index.types';
 import S from '../styles/ReviewCard.style';
 import LabelCard from './LabelCard';
 import { FilledStar, TrashcanIcon } from '@/assets/images/svgs';
+import { GetReviewResponse } from '@/service/apis/review/index.type';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@/common/constants/route';
 
 interface ReviewCardProps {
-  data: Review;
+  data: GetReviewResponse;
   openModal: () => void;
 }
 function ReviewCard({ data, openModal }: ReviewCardProps) {
-  const { placeName, address, rating, reviewLabels } = data;
+  const { placeId, placeName, address, rating, Labels } = data;
+  const navigate = useNavigate();
   const navigateToPlaceDetail = () => {
-    /**@Todo 현재 data에 placeId가 나와있지 않음, API 연동시 백엔드에게 요청하기 
-    navigate(ROUTE.DETAIL(data.placeId));
-    */
+    navigate(ROUTE.DETAIL(placeId));
   };
   return (
     <S.Wrapper onClick={navigateToPlaceDetail}>
@@ -30,9 +32,7 @@ function ReviewCard({ data, openModal }: ReviewCardProps) {
         <S.Address>{address}</S.Address>
       </S.PlaceInfoWrapper>
       <S.LabelList>
-        {reviewLabels.map((label) => (
-          <LabelCard id={label.id} />
-        ))}
+        {Labels?.map((label) => <LabelCard id={label.labelId} />)}
       </S.LabelList>
     </S.Wrapper>
   );

@@ -1,16 +1,22 @@
-import { userReview } from '@/mocks/data/userReview';
 import ReviewCard from './components/ReviewCard';
 import S from './styles/index.style';
 import useModal from '@/common/hooks/useModal';
 import Modal from '@/common/components/modal';
 import Button from '@/common/components/button/Button';
+import { useGetReviews } from './queries';
 function MyReview() {
   const { openModal, isOpen, closeModal } = useModal();
+  const { data, isLoading, isError } = useGetReviews();
   const handleModalYesButtonClick = () => {
     /**@Todo 리뷰 삭제 API 호출 */
     alert('리뷰 삭제 API 호출');
     closeModal();
   };
+
+  console.log('data', data);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError || !data) return <p>Error loading reviews</p>;
 
   return (
     <>
@@ -39,7 +45,7 @@ function MyReview() {
             </S.ModalContent>
           </Modal>
         )}
-        {userReview.map((review) => (
+        {data.map((review) => (
           <ReviewCard openModal={openModal} data={review} />
         ))}
       </S.Wrapper>
