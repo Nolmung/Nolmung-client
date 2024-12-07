@@ -1,4 +1,4 @@
-import { LiedownDog, TodayMungNoListIcon } from '@/assets/images/svgs';
+import { TodayMungNoListIcon } from '@/assets/images/svgs';
 import SearchResultCard from './SearchResultCard';
 import { PlaceSearchResponse } from '@/service/apis/place/index.type';
 import S from '../styles/SearchList.style';
