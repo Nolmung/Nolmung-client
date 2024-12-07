@@ -3,7 +3,7 @@ import { S } from './styles/index.style';
 import { GoBackIcon } from '@/assets/images/svgs';
 import SearchInput from '@/common/components/searchInput';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import NoSearchHistory from './components/NoSearchHistory';
 import SearchHistoryList from './components/SearchHistoryList';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +18,8 @@ import {
   updateSearchHistory,
 } from './utils/searchUtils';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
+import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
+import NoSearchResponse from './components/NoSearchResponse';
 
 export interface SearchHistoryItem {
   id: number;
@@ -37,9 +39,17 @@ function Search() {
     },
   );
 
+  const [searchKeyword, setSearchKeyword] = useState<string>();
+
+  const {
+    data: searchResponseData,
+    isLoading,
+    isError,
+  } = useGetPlaceSearch(searchKeyword || '');
+
   const handleSearchIconClick = (keyword?: string) => {
     const searchInputValue = inputRef?.current?.value || keyword;
-    if (!searchInputValue || !searchInputValue.trim()) return;
+    if (!searchInputValue || !searchInputValue?.trim()) return;
 
     const newSearchItem: SearchHistoryItem = {
       id: Date.now(),
@@ -48,8 +58,32 @@ function Search() {
     };
 
     setSearchHistory(updateSearchHistory(searchHistory, newSearchItem));
-    navigate(ROUTE.MAIN() + '?search=' + searchInputValue);
+
+    setSearchKeyword(searchInputValue);
   };
+
+  useEffect(() => {
+    if (searchResponseData && searchResponseData.length > 0) {
+      if (searchResponseData.length === 1) {
+        navigate(
+          ROUTE.MAIN() +
+            '?search=' +
+            searchKeyword +
+            '&lat=' +
+            searchResponseData[0].latitude.toString() +
+            '&lng=' +
+            searchResponseData[0].longitude.toString(),
+          {
+            state: { searchResponseData },
+          },
+        );
+      } else {
+        navigate(ROUTE.MAIN() + '?search=' + searchKeyword, {
+          state: { searchResponseData },
+        });
+      }
+    }
+  }, [searchResponseData]);
 
   const handleModalYesButtonClick = () => {
     setSearchHistory(clearSearchHistory());
@@ -64,6 +98,10 @@ function Search() {
     /** @Todo 추후 맥락 보고 수정 */
     navigate(-1);
   };
+
+  if (isError) {
+    return <div>에러가 발생했습니다.</div>;
+  }
 
   return (
     <S.Wrapper>
@@ -102,21 +140,28 @@ function Search() {
           width={90}
         />
       </S.Header>
-      <S.Menu>
-        최근 검색어
-        <S.ClearAllButton onClick={openModal}>전체삭제</S.ClearAllButton>
-      </S.Menu>
-      <S.SearchHistoryList>
-        {searchHistory.length > 0 ? (
-          <SearchHistoryList
-          handleSearchIconClick={handleSearchIconClick}
-            searchHistory={searchHistory}
-            handleDeleteKeyword={handleDeleteKeyword}
-          />
-        ) : (
-          <NoSearchHistory />
-        )}
-      </S.SearchHistoryList>
+      {isLoading && <div>로딩중...</div>}
+      {searchResponseData?.length === 0 || isError || isLoading ? (
+        <NoSearchResponse />
+      ) : (
+        <>
+          <S.Menu>
+            최근 검색어
+            <S.ClearAllButton onClick={openModal}>전체삭제</S.ClearAllButton>
+          </S.Menu>
+          <S.SearchHistoryList>
+            {searchHistory.length > 0 ? (
+              <SearchHistoryList
+                handleSearchIconClick={handleSearchIconClick}
+                searchHistory={searchHistory}
+                handleDeleteKeyword={handleDeleteKeyword}
+              />
+            ) : (
+              <NoSearchHistory />
+            )}
+          </S.SearchHistoryList>
+        </>
+      )}
     </S.Wrapper>
   );
 }
