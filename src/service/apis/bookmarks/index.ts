@@ -1,4 +1,4 @@
-import { Bookmark, BookmarkCategory, PlaceCategory } from "@/common/types";
+import { Bookmark, BookmarkCategory } from "@/common/types";
 import { instance } from "..";
 import { DeleteBookmarksResponse, GetBookmarksResponse, PostBookmarksResponse } from "./index.type";
 
