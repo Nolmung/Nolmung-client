@@ -3,14 +3,15 @@ import styled from 'styled-components';
 export const S = {
   Wrapper: styled.div`
     width: 100%;
-    height: 100%;
+    height: calc(100dvh - 160px);
     color: #080808;
+    overflow: scroll;
   `,
   Container: styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: fit-content;
     padding: 0px 22px;
   `,
   DateArea: styled.div`
@@ -65,5 +66,15 @@ export const S = {
     @media (min-height: 800px) {
       margin-top: 20px;
     }
+  `,
+  DummyImage: styled.div`
+    width: 130px;
+    height: 130px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    background-color: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   `,
 };

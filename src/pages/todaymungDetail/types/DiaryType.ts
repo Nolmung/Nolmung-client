@@ -2,6 +2,7 @@ import { MediaType } from '@/service/apis/diary/index.type';
 
 export interface DogsType {
   dogId: number;
+  dogName: string;
   dogProfileImageUrl: string;
 }
 
