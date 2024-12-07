@@ -14,7 +14,7 @@ import { CategoryOptionType } from '../types/category';
 
 export const CATEGORY_OPTIONS: CategoryOptionType = [
   {
-    value: 'bookmarks',
+    value: 'bookmarked',
     label: '찜한 장소',
     icon: BookmarksTag,
   },

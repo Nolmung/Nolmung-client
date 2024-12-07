@@ -180,9 +180,9 @@ function Main() {
         longitude: coordinate.longitude,
         maxLatitude: coordinate.maxLatitude,
         maxLongitude: coordinate.maxLongitude,
-        ...(categoryFromUrl === 'bookmarks' && { isBookmarked: true }),
+        ...(categoryFromUrl === 'bookmarked' && { isBookmarked: true }),
         ...(categoryFromUrl === 'visited' && { isVisited: true }),
-        ...(categoryFromUrl !== 'bookmarks' &&
+        ...(categoryFromUrl !== 'bookmarked' &&
           categoryFromUrl !== 'visited' && {
             category: categoryFromUrl as PlaceCategory,
           }),
@@ -197,12 +197,7 @@ function Main() {
 
   /** 현 지도에서 검색 버튼 클릭 이벤트 함수 */
   const handleSearchCurrentButtonClick = async () => {
-    const requestBody = getCurrentAndMaxCoordinate(mapRef.current!);
-
-    alert(
-      `현재 좌표는 (${requestBody.latitude}, ${requestBody.longitude}), \n지도 최대 좌표는 (${requestBody.latitude}, ${requestBody.longitude})입니다. \n해당 좌표를 중심으로 장소를 다시 조회합니다.`,
-    );
-
+    getCurrentAndMaxCoordinate(mapRef.current!);
     const newCenter = mapRef.current!.getCenter();
     setMapCenter({ latitude: newCenter.y, longitude: newCenter.x });
     const query = new URLSearchParams(window.location.search);
