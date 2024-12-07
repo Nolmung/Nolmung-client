@@ -2,7 +2,6 @@ import { postBookmarks } from "@/service/apis/bookmarks";
 import { PostBookmarksResponse } from "@/service/apis/bookmarks/index.type";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { toast } from "react-toastify";
 
 /**@Todo 장소 정보에 즐겨찾기 여부 들어가면 해당 부분 수정 필요*/
 export const usePostBookmarks = () => {
