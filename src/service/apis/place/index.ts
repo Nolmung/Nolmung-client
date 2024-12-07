@@ -1,6 +1,6 @@
 import { MarkerType } from '@/pages/main/types';
 import { instance } from '..';
-import { PlaceRequestBody } from './index.type';
+import { PlaceRequestBody, PlaceSearchResponse } from './index.type';
 import { PlaceCategory } from '@/common/types';
 
 export const getPostDetail = async (placeId: string | number) => {
@@ -33,10 +33,29 @@ export interface PlaceFilterRequestBody {
   isBookmarked?: boolean;
 }
 
+export const getPlacesSearch = async (
+  keyword: string,
+): Promise<PlaceSearchResponse[]> => {
+  const response = await instance.get('/places/search', {
+    params: {
+      keyword,
+    },
+  });
+  return response.data.data;
+};
+
 export const getPlacesFilter = async (
   params: PlaceFilterRequestBody,
 ): Promise<MarkerType[]> => {
-  const { latitude, longitude, maxLatitude, maxLongitude, category, isVisited, isBookmarked} = params;
+  const {
+    latitude,
+    longitude,
+    maxLatitude,
+    maxLongitude,
+    category,
+    isVisited,
+    isBookmarked,
+  } = params;
   const response = await instance.get('/places/filter', {
     params: {
       latitude,

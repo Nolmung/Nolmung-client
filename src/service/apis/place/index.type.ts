@@ -49,3 +49,15 @@ export interface PlaceRequestBody {
   maxLatitude: number;
   maxLongitude: number;
 }
+
+export interface PlaceSearchResponse {
+  placeId: number;
+  placeName: string;
+  category: PlaceCategory;
+  roadAddress: string;
+  placeImgUrl: string;
+  starRatingAvg: number;
+  reviewCount: number;
+  latitude: number;
+  longitude: number;
+}

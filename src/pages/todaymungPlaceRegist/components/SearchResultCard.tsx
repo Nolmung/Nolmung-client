@@ -8,7 +8,7 @@ interface SearchResultCardProps {
   placeName: string;
   roadAddress: string;
   placeId: number;
-  category: PlaceCategory;
+  placeCategory: PlaceCategory;
   keywordReviewVisibleId: number | null;
   setKeywordReviewVisibleId: React.Dispatch<
     React.SetStateAction<number | null>
@@ -20,7 +20,7 @@ function SearchResultCard({
   placeName,
   roadAddress,
   placeId,
-  category,
+  placeCategory,
   keywordReviewVisibleId,
   setKeywordReviewVisibleId,
 }: SearchResultCardProps) {
@@ -55,11 +55,11 @@ function SearchResultCard({
       >
         <S.IconWrapper>
           {CATEGORY_OPTIONS?.find(
-            (option) => option.value === category,
+            (category) => category.value === placeCategory,
           )?.icon &&
             React.createElement(
               CATEGORY_OPTIONS.find(
-                (option) => option.value === category,
+                (category) => category.value === placeCategory,
               )!.icon,
             )}
         </S.IconWrapper>
@@ -74,7 +74,7 @@ function SearchResultCard({
           placeName={placeName}
           setKeywordReviewVisibleId={setKeywordReviewVisibleId}
           placeId={placeId}
-          category={category}
+          category={placeCategory}
         />
       )}
     </S.Wrapper>
