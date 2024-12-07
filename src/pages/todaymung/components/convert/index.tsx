@@ -42,7 +42,7 @@ const Convert = ({ listData }: ListDataProps) => {
             ))}
         </S.ListMode>
       </S.ConvertArea>
-      <S.ViewModeArea>
+      <S.ViewModeArea CalendarView={viewMode === ViewMode.Calendar}>
         {viewMode === ViewMode.Calendar ? (
           <TodayMungCalendar listData={listData} />
         ) : (

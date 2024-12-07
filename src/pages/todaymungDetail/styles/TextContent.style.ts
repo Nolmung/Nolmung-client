@@ -8,8 +8,8 @@ export const S = {
     height: 225px;
     margin-top: 30px;
     padding: 16px 20px;
-    @media (min-height: 800px) {
-      height: 390px;
+    @media (min-height: 850px) {
+      height: calc(100dvh - 570px);
     }
   `,
   Title: styled.div`
@@ -27,8 +27,8 @@ export const S = {
     color: #5e5e5e;
     line-height: 22px;
     overflow: scroll;
-    @media (min-height: 800px) {
-      height: 290px;
+    @media (min-height: 850px) {
+      height: calc(100dvh - 670px);
     }
   `,
   ContentLength: styled.div`
@@ -40,3 +40,7 @@ export const S = {
     margin-top: 10px;
   `,
 };
+
+// 90+70+60.29+60.38+60.39
+
+400;
