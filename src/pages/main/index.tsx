@@ -22,6 +22,7 @@ import { getPlacesFilter, getPlacesMap } from '@/service/apis/place';
 import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
+import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -53,6 +54,14 @@ function Main() {
   const [mapCenter, setMapCenter] = useMapCenter();
 
   const [markerData, setMarkerData] = useState<MarkerType[]>([]);
+
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const {
+    data: searchResponseData,
+    isLoading,
+    isError,
+  } = useGetPlaceSearch(searchKeyword || '');
+  console.log('searchResponseData:', searchResponseData);
 
   useEffect(() => {
     const initializeMap = async () => {
@@ -89,7 +98,18 @@ function Main() {
           if (categoryFromUrl) {
             await getCategoryMarkers(categoryFromUrl);
           } else if (searchFromUrl) {
-            /** @Todo search api 호출 함수 넣기 */
+            setSearchKeyword(searchFromUrl);
+            if (isLoading) return;
+            if (searchResponseData?.length == 1) {
+              setBottomCardVisible(true);
+              setBottomSheetVisible(false);
+              setMarkerData(searchResponseData);
+
+              setMapCenter({
+                latitude: searchResponseData[0].latitude - 0.0005,
+                longitude: searchResponseData[0].longitude,
+              });
+            }
           } else {
             await getAndInitMarkers();
           }
@@ -98,7 +118,7 @@ function Main() {
         }
       } else {
         const newCenter = new naver.maps.LatLng(
-          mapCenter.latitude,
+          mapCenter.latitude - 0.0005,
           mapCenter.longitude,
         );
         mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
@@ -108,7 +128,20 @@ function Main() {
     initializeMap();
   }, [mapCenter]);
 
-  /** 지도 초기화 이후 카테고리 필터링 또는 검색어로 장소 검색 */ 
+  /** 센터 이동 필요시 */
+  useEffect(() => {
+    const lat = new URLSearchParams(location.search).get('lat');
+    const lng = new URLSearchParams(location.search).get('lng');
+    if (mapCenter) {
+      const newCenter = new naver.maps.LatLng(
+        (mapCenter.latitude = lat ? parseFloat(lat) : mapCenter.latitude),
+        (mapCenter.longitude = lng ? parseFloat(lng) : mapCenter.longitude),
+      );
+      mapRef.current?.setCenter(newCenter);
+    }
+  }, [location.search, mapCenter]);
+
+  /** 지도 초기화 이후 카테고리 필터링 또는 검색어로 장소 검색 */
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     const categoryFromUrl = query.get('category');
@@ -116,12 +149,32 @@ function Main() {
     if (categoryFromUrl) {
       getCategoryMarkers(categoryFromUrl);
     } else if (searchFromUrl) {
-      /** @Todo search api 호출 함수 넣기 */
+      setSearchKeyword(searchFromUrl);
+      if (searchResponseData) setMarkerData(searchResponseData);
+      if (searchResponseData) {
+        initMarkers(
+          mapRef?.current as naver.maps.Map,
+          searchResponseData,
+          markersRef,
+          handleMarkerClick,
+        );
+        if (searchResponseData.length === 1) {
+          setBottomCardVisible(true);
+          setBottomSheetVisible(false);
+
+          const newCenter = searchResponseData[0];
+          setMapCenter({
+            latitude: newCenter.latitude,
+            longitude: newCenter.longitude,
+          });
+        }
+      }
     }
-  }, [location.search]);
+  }, [location.search, searchResponseData]);
 
   /** 바텀시트, 바텀카드 높이 조절 */
   useEffect(() => {
+    console.log('bottomSheetVisible:', bottomSheetVisible, bottomCardVisible);
     if (bottomSheetVisible && !bottomCardVisible) {
       setBottomHeight(BOTTOM_HEIGHT);
       setCurrentButtonHeight(BOTTOM_HEIGHT + CURRENT_BUTTON_HEIGHT);
@@ -302,17 +355,22 @@ function Main() {
               </S.SearchCurrentButton>
             )}
             <S.BottomCardWrapper>
-              {bottomCardVisible && selectedMarkerRef.current && (
-                <S.Bottom
-                  bottomVisible={bottomCardVisible}
-                  bottomHeight={bottomHeight}
-                >
-                  <Content
-                    isCard={true}
-                    place={selectedMarkerRef.current.data}
-                  />
-                </S.Bottom>
-              )}
+              {bottomCardVisible &&
+                (selectedMarkerRef.current || markerData) && (
+                  <S.Bottom
+                    bottomVisible={bottomCardVisible}
+                    bottomHeight={bottomHeight}
+                  >
+                    <Content
+                      isCard={true}
+                      place={
+                        selectedMarkerRef.current
+                          ? selectedMarkerRef.current.data
+                          : markerData[0]
+                      }
+                    />
+                  </S.Bottom>
+                )}
             </S.BottomCardWrapper>
             <S.Bottom
               bottomVisible={bottomSheetVisible}
