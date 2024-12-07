@@ -3,13 +3,18 @@ import useBottomSheet from '../../hooks/useBottomSheet';
 import { REF_HEIGHT } from '@/common/constants/ui';
 import { S } from '../../styles/BottomSheet.style';
 import Content from './Content';
-import { placeMap } from '@/mocks/data/placeMap';
 
 import Filter from './Filter';
 import checkUserDevice from '../../utils/checkUserDevice';
 import useMouseBottomSheet from '../../hooks/useMouseBottomSheet';
 import { useRef } from 'react';
-function BottomSheet() {
+import { MarkerType } from '../../types';
+
+type BottomSheetProps = {
+  placeMap: MarkerType[];
+};
+
+function BottomSheet({placeMap}: BottomSheetProps) {
   const device = checkUserDevice();
 
   let bottomSheetRef = useRef<HTMLDivElement>(null);
@@ -36,7 +41,7 @@ function BottomSheet() {
         <Filter ref={filterRef} />
         <S.BottomSheetContentWrapper ref={contentRef} refheight={REF_HEIGHT}>
           {placeMap.map((place) => (
-            <Content isCard={false} key={place.place_id} place={place} />
+            <Content isCard={false} key={place.placeId} place={place} />
           ))}
         </S.BottomSheetContentWrapper>
       </S.BottomSheetBody>

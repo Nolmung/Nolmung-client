@@ -1,18 +1,26 @@
-import { Review } from '@/service/apis/user/index.types';
 import S from '../styles/ReviewCard.style';
 import LabelCard from './LabelCard';
 import { FilledStar, TrashcanIcon } from '@/assets/images/svgs';
+import { GetReviewResponse } from '@/service/apis/review/index.type';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@/common/constants/route';
 
 interface ReviewCardProps {
-  data: Review;
+  data: GetReviewResponse;
   openModal: () => void;
+  setDeleteReviewId: (id: number) => void;
 }
-function ReviewCard({ data, openModal }: ReviewCardProps) {
-  const { placeName, address, rating, reviewLabels } = data;
+function ReviewCard({ data, openModal, setDeleteReviewId }: ReviewCardProps) {
+  const { placeId, placeName, address, rating, Labels } = data;
+  const navigate = useNavigate();
   const navigateToPlaceDetail = () => {
-    /**@Todo 현재 data에 placeId가 나와있지 않음, API 연동시 백엔드에게 요청하기 
-    navigate(ROUTE.DETAIL(data.placeId));
-    */
+    navigate(ROUTE.DETAIL(placeId));
+  };
+
+  const handleTrashcanIconClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDeleteReviewId(data.reviewId);
+    openModal();
   };
   return (
     <S.Wrapper onClick={navigateToPlaceDetail}>
@@ -21,18 +29,16 @@ function ReviewCard({ data, openModal }: ReviewCardProps) {
           <S.PlaceNameAddressWrapper>
             <S.PlaceName>{placeName}</S.PlaceName>
             <S.StarIconRateWrapper>
-              <FilledStar width={12} />
+              <FilledStar width={13} />
               <S.Rate>{rating}</S.Rate>
             </S.StarIconRateWrapper>
           </S.PlaceNameAddressWrapper>
-          <TrashcanIcon onClick={openModal} width={15} />
+          <TrashcanIcon onClick={handleTrashcanIconClick} width={15} />
         </S.PlaceNameAddressTrashCanWrapper>
         <S.Address>{address}</S.Address>
       </S.PlaceInfoWrapper>
       <S.LabelList>
-        {reviewLabels.map((label) => (
-          <LabelCard id={label.id} />
-        ))}
+        {Labels?.map((label) => <LabelCard id={label.labelId} />)}
       </S.LabelList>
     </S.Wrapper>
   );

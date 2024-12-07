@@ -22,13 +22,13 @@ export const addMarker = (
     let newMarker = new naver.maps.Marker({
       position: new naver.maps.LatLng(data.latitude, data.longitude),
       map,
-      title: data.name,
+      title: data.placeName,
       clickable: true,
       icon: {
         content: ReactDOMServer.renderToString(
           <CustomMarkerComponent
-            placeId={data.place_id}
-            name={data.name}
+            placeId={data.placeId}
+            name={data.placeName}
             category={data.category}
           />,
         ),
@@ -36,13 +36,13 @@ export const addMarker = (
     }) as CustomMarker;
 
     (newMarker.data = {
-      place_id: data.place_id,
-      place_name: data.name,
+      placeId: data.placeId,
+      placeName: data.placeName,
       category: data.category as PlaceCategory,
-      road_address: data.road_address,
-      place_img_url: data.place_img_url,
-      star_rating_avg: data.star_rating_avg,
-      review_count: data.review_count,
+      roadAddress: data.roadAddress,
+      placeImgUrl: data.placeImgUrl,
+      starRatingAvg: data.starRatingAvg,
+      reviewCount: data.reviewCount,
       latitude: data.latitude,
       longitude: data.longitude,
     }),
@@ -52,8 +52,10 @@ export const addMarker = (
         }
         handleMarkerClick(newMarker);
       });
+      return newMarker;
   } catch (e) {
     console.error('Error creating marker:', e);
+    return null;
   }
 };
 
@@ -64,9 +66,20 @@ export const addMarker = (
 export const initMarkers = (
   map: naver.maps.Map,
   markerData: MarkerType[],
+  markersRef: React.MutableRefObject<CustomMarker[]>,
   handleMarkerClick: (marker: CustomMarker) => void,
 ) => {
+  // 기존 마커 삭제
+  markersRef.current.forEach((marker) => marker.setMap(null));
+  markersRef.current = [];
+
+  // 새로운 마커 생성
   markerData.forEach((data) => {
-    addMarker(map, data, handleMarkerClick);
+    const newMarker = addMarker(map, data, handleMarkerClick);
+    if (newMarker) {
+      markersRef.current.push(newMarker);
+    } else {
+      console.error('Error creating marker:', data);
+    }
   });
 };

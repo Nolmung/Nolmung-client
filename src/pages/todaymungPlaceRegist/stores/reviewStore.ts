@@ -1,16 +1,13 @@
-import { PlaceCategory } from '@/common/types';
+import { PlaceCategory, ReviewKeyword } from '@/common/types';
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-interface Labels {
-  labelId: number;
-  labelName: string;
-}
 interface Review {
-  roadAddress: string;
-  rating: number;
   placeId: number;
+  rating: number;
+  roadAddress: string;
   category: PlaceCategory;
-  labels: Labels[];
+  labels: ReviewKeyword[];
   placeName: string;
 }
 
@@ -19,20 +16,29 @@ interface ReviewStore {
   singleReview: Review | null;
   addReviewList: (reviews: Review) => void;
   deleteReview: (placeId: number) => void;
+  deleteReviewAll: () => void;
 }
 
-export const useReviewStore = create<ReviewStore>((set) => ({
-  reviewlist: [],
-  singleReview: null,
-  setSingleReview: () => set({}),
-  addReviewList: (reviews: Review) =>
-    set((store) => ({
-      reviewlist: [...store.reviewlist, reviews],
-    })),
-  deleteReview: (placeId: number) =>
-    set((store) => ({
-      reviewlist: store.reviewlist.filter(
-        (review) => review.placeId !== placeId,
-      ),
-    })),
-}));
+export const useReviewStore = create(
+  persist<ReviewStore>(
+    (set) => ({
+      reviewlist: [],
+      singleReview: null,
+      setSingleReview: () => set({}),
+      addReviewList: (reviews: Review) =>
+        set((store) => ({
+          reviewlist: [...store.reviewlist, reviews],
+        })),
+      deleteReview: (placeId: number) =>
+        set((store) => ({
+          reviewlist: store.reviewlist.filter(
+            (review) => review.placeId !== placeId,
+          ),
+        })),
+      deleteReviewAll: () => set({ reviewlist: [] }),
+    }),
+    {
+      name: 'review',
+    },
+  ),
+);

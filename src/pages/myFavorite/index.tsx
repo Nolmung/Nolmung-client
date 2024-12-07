@@ -1,10 +1,8 @@
 import { PlaceCategory } from '@/common/types';
-import S from './index.styles';
+import S from './styles/index.styles';
 import { useState } from 'react';
 import { placeMap } from '@/mocks/data/placeMap';
 import { IoHeartSharp } from 'react-icons/io5';
-import { IoHeartOutline } from 'react-icons/io5';
-
 import { PlaceCategoryMapping } from './constants/placeCategoryMapping';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
@@ -58,33 +56,30 @@ function MyFavorite() {
           .filter((place) => currentCategory === place.category) // 조건에 맞는 항목 필터링
           .map((place) => (
             <S.PlaceCard
-              onClick={() => navigateToDetail(place.place_id)}
-              key={place.place_id}
+              onClick={() => navigateToDetail(place.placeId)}
+              key={place.placeId}
             >
               <S.ImageWrapper>
-                <S.PlaceImage
-                  src={place.place_img_url}
-                  alt={place.place_name}
-                />
-                {place.place_id === isLikedId ? (
-                  <S.Like onClick={() => handleLikeClick(place.place_id)}>
+                <S.PlaceImage src={place.placeImgUrl} alt={place.placeName} />
+                {place.placeId === isLikedId ? (
+                  <S.Like onClick={() => handleLikeClick(place.placeId)}>
                     <IoHeartSharp size={24} color="#FF4E3E" />
                   </S.Like>
                 ) : (
-                  <S.Like onClick={() => handleLikeClick(place.place_id)}>
-                    <IoHeartOutline size={24} color="#FF4E3E" />
+                  <S.Like onClick={() => handleLikeClick(place.placeId)}>
+                    <IoHeartSharp size={24} color="#FFFFFF" />
                   </S.Like>
                 )}
               </S.ImageWrapper>
               <S.PlaceInfo>
                 <S.PlaceLocation>
-                  {parsedAddress(place.road_address)}
+                  {parsedAddress(place.roadAddress)}
                 </S.PlaceLocation>
-                <S.PlaceName>{place.place_name}</S.PlaceName>
+                <S.PlaceName>{place.placeName}</S.PlaceName>
                 <S.ReviewWrapper>
                   <FilledStar width={14} height={14} />
-                  <S.StarRating>{place.star_rating_avg}</S.StarRating>
-                  <S.ReviewCount>리뷰 {place.review_count}</S.ReviewCount>
+                  <S.StarRating>{place.starRatingAvg}</S.StarRating>
+                  <S.ReviewCount>리뷰 {place.reviewCount}</S.ReviewCount>
                 </S.ReviewWrapper>
               </S.PlaceInfo>
             </S.PlaceCard>

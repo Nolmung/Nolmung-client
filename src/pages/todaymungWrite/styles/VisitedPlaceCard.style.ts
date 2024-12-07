@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const S = {
   PlaceCard: styled.div`
     border-radius: 10px;
-    border: 1px solid #a7a7a7;
-    background: #f0f0f0;
+    border: 1px solid #17aa1a;
+    background: #d3fbd4;
     height: 64px;
     display: flex;
     flex-direction: column;
@@ -15,14 +15,15 @@ const S = {
   PlaceTitleRateWrapper: styled.div`
     display: flex;
     justify-content: space-between;
+    white-space: nowrap;
   `,
   PlaceTitle: styled.div`
     color: #080808;
-    font-family: Pretendard;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    white-space: nowrap;
   `,
   PlaceAddress: styled.div`
     color: #5e5e5e;
@@ -41,6 +42,13 @@ const S = {
     letter-spacing: -0.6px;
     display: flex;
     gap: 4px;
+  `,
+  PlaceIconWrapper: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
   `,
 };
 

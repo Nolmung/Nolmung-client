@@ -22,7 +22,6 @@ function CategoryBar({
 
   const handleCategoryClick = (value: string) => {
     setBottomCardVisible(false);
-
     setCategory(value);
     setBottomSheetVisible(true);
     navigate(`/?category=${value}`);
@@ -43,8 +42,8 @@ function CategoryBar({
               onClick={() => handleCategoryClick(value)}
               width="fit-content"
               height="fit-content"
-              backgroundColor="#fff" // 기본값 유지
-              color="#000" // 기본값 유지
+              backgroundColor="#fff" 
+              color="#000"
               fontWeight="500"
               fontSize="14px"
               borderRadius="20px"

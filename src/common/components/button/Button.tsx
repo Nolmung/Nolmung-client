@@ -12,9 +12,18 @@ const Button: React.FC<ButtonProps> = ({
   fontWeight,
   borderRadius,
   children,
+  disabled,
+  border,
+  display,
+  justifyContent,
+  alignItems,
 }) => {
   return (
     <S.Wrapper
+      display={display}
+      justifyContent={justifyContent}
+      alignItems={alignItems}
+      disabled={disabled}
       onClick={onClick}
       width={width}
       height={height}
@@ -23,6 +32,7 @@ const Button: React.FC<ButtonProps> = ({
       fontWeight={fontWeight}
       fontSize={fontSize}
       borderRadius={borderRadius}
+      border={border}
     >
       {children}
     </S.Wrapper>

@@ -1,26 +1,39 @@
-import { FaStar } from 'react-icons/fa';
 import S from '../styles/VisitedPlaceCard.style';
+import { CATEGORY_OPTIONS } from '@/pages/main/constants/categoryBar';
+import { AllCategory } from '@/common/types';
+import React from 'react';
+import { FilledStar } from '@/assets/images/svgs';
 
 interface VisitedPlaceCardProps {
-  place_name: string;
-  road_address: string;
-  my_rate: number;
+  placeName: string;
+  roadAddress: string;
+  rating: number;
+  category: AllCategory;
 }
 
 function VisitedPlaceCard({
-  place_name,
-  road_address,
-  my_rate,
+  placeName,
+  roadAddress,
+  rating,
+  category,
 }: VisitedPlaceCardProps) {
   return (
     <S.PlaceCard>
       <S.PlaceTitleRateWrapper>
-        <S.PlaceTitle>{place_name}</S.PlaceTitle>
+        <S.PlaceIconWrapper>
+          {CATEGORY_OPTIONS?.find((option) => option.value == category)?.icon &&
+            React.createElement(
+              CATEGORY_OPTIONS.find((option) => option.value === category)!
+                .icon,
+            )}
+        </S.PlaceIconWrapper>
+        <S.PlaceTitle>{placeName}</S.PlaceTitle>
         <S.PlaceAverageRate>
-          <FaStar size="16" color="#F4E600" /> {my_rate}
+          <FilledStar width={16} />
+          {rating}
         </S.PlaceAverageRate>
       </S.PlaceTitleRateWrapper>
-      <S.PlaceAddress>{road_address} </S.PlaceAddress>
+      <S.PlaceAddress>{roadAddress} </S.PlaceAddress>
     </S.PlaceCard>
   );
 }

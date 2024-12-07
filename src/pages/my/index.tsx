@@ -13,8 +13,11 @@ import {
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 function Mypage() {
+  useSetDocumentTitle('마이페이지');
+
   const [editId, setEditId] = useState<number>(0);
   const navigate = useNavigate();
   const navigateToMyReview = () => {
@@ -56,7 +59,7 @@ function Mypage() {
           즐겨찾기 목록
         </S.ListContainer>
         <S.ListContainer>
-          <NoticeIcon width={22} height={22} />
+          <NoticeIcon width={20} height={20} />
           공지사항
         </S.ListContainer>
         <S.ListContainer onClick={navigateToMyReview}>

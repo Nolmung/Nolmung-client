@@ -1,17 +1,19 @@
-import { LatLng } from '@/common/types';
+import { PlaceRequestBody } from "@/service/apis/place/index.type";
 
 /**
- * 현 지도에서 검색 버튼 클릭 함수
- * @Todo 현 지도에서 검색 버튼 UI 구현 후 연결하기
+ * 현재 지도의 중심 좌표와 최대 좌표를 반환하는 함수
  */
+
 export const getCurrentAndMaxCoordinate = (
   map: naver.maps.Map,
-): { currentCenter: LatLng; maxBounds: LatLng } => {
+): PlaceRequestBody => {
   const bounds = map.getBounds();
   const center = map.getCenter();
 
   return {
-    currentCenter: { latitude: center.y, longitude: center.x },
-    maxBounds: { latitude: bounds.maxY(), longitude: bounds.maxX() },
+    latitude: center.y,
+    longitude: center.x,
+    maxLatitude: bounds.maxY(),
+    maxLongitude: bounds.maxX(),
   };
 };

@@ -17,6 +17,7 @@ import {
   formatDate,
   updateSearchHistory,
 } from './utils/searchUtils';
+import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
 export interface SearchHistoryItem {
   id: number;
@@ -25,6 +26,7 @@ export interface SearchHistoryItem {
 }
 
 function Search() {
+  useSetDocumentTitle('놀멍');
   const navigate = useNavigate();
   const { isOpen, openModal, closeModal } = useModal();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -35,8 +37,8 @@ function Search() {
     },
   );
 
-  const handleSearchIconClick = () => {
-    const searchInputValue = inputRef?.current?.value;
+  const handleSearchIconClick = (keyword?: string) => {
+    const searchInputValue = inputRef?.current?.value || keyword;
     if (!searchInputValue || !searchInputValue.trim()) return;
 
     const newSearchItem: SearchHistoryItem = {
@@ -107,6 +109,7 @@ function Search() {
       <S.SearchHistoryList>
         {searchHistory.length > 0 ? (
           <SearchHistoryList
+          handleSearchIconClick={handleSearchIconClick}
             searchHistory={searchHistory}
             handleDeleteKeyword={handleDeleteKeyword}
           />

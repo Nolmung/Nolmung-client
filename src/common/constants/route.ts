@@ -9,7 +9,8 @@ export const ROUTE = {
   SEARCH: () => '/search',
   DOGS: () => '/dogs',
   MY_REVIEW: () => '/my/review',
-  TODAYMUNG_DETAIL: (diaryId: string | number) => `todaymung/detail/${diaryId}`,
+  TODAYMUNG_DETAIL: (diaryId: string | number) =>
+    `/todaymung/detail/${diaryId}`,
   TODAYMUNG_WRITE: () => '/todaymung/write',
   TODAYMUNG_PLACE_REGIST: () => '/todaymung/placeregist',
   MY: () => '/my',

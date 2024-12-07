@@ -1,4 +1,5 @@
 export interface ListDataType {
+
   user: {
     userId: number;
     profileImageUrl: string;
