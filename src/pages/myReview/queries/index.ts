@@ -1,14 +1,19 @@
-import { deleteReview, getReviews } from '@/service/apis/review';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getReviews, deleteReview } from '@/service/apis/review';
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 export const useGetReviews = () => {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ['reviews'],
-    queryFn: () => {
-      return getReviews();
+    initialPageParam: 1,
+    queryFn: ({ pageParam = 1 }) => getReviews({ page: pageParam, size: 10 }),
+    getNextPageParam: (lastPage) => {
+      return lastPage.hasNext ? lastPage.page + 1 : undefined;
     },
     staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
     retry: 2,
   });
 };

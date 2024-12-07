@@ -16,3 +16,8 @@ export interface GetReviewResponse {
   rating: number;
   Labels: ReviewKeyword[];
 }
+
+export interface GetReviewsParams {
+  page: number;
+  size: number;
+}
