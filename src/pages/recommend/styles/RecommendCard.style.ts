@@ -31,6 +31,7 @@ const S = {
     width: 100%;
     overflow: auto;
     margin-top: 25px;
+    padding-bottom: 40px;
   `,
   PlaceWrapper: styled.div`
     display: flex;

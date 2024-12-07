@@ -21,18 +21,24 @@ function RecommendCard({ data, title, explanation }: RecommendCardProps) {
       <S.Title>{title}</S.Title>
       <S.TitleExplanation>{explanation}</S.TitleExplanation>
       <S.PlaceList>
-        {data.map((mock) => (
-          <S.PlaceWrapper onClick={() => navigateToDetail(mock.placeId)}>
-            <S.PlaceImage src={mock.placeImgUrl} alt="장소 이미지" />
-            <S.NameAddressWrapper>
-              <S.PlaceName>{mock.placeName}</S.PlaceName>
-              <S.PlaceAddress>{mock.roadAddress.split(' ')[1]}</S.PlaceAddress>
-            </S.NameAddressWrapper>
-            <S.PlaceExplanation>
-              MZ 강아지만 출입 가능한 애견 카페
-            </S.PlaceExplanation>
-          </S.PlaceWrapper>
-        ))}
+        {data.map((mock) => {
+          return (
+            <S.PlaceWrapper onClick={() => navigateToDetail(mock.placeId)}>
+              <S.PlaceImage src={mock.placeImageUrl} alt="장소 이미지" />
+              <S.NameAddressWrapper>
+                <S.PlaceName>{mock.placeName}</S.PlaceName>
+                <S.PlaceAddress>
+                  {mock.Address?.split(' ')[0] +
+                    ' ' +
+                    mock.Address?.split(' ')[1]}
+                </S.PlaceAddress>
+              </S.NameAddressWrapper>
+              <S.PlaceExplanation>
+                MZ 강아지만 출입 가능한 애견 카페
+              </S.PlaceExplanation>
+            </S.PlaceWrapper>
+          );
+        })}
       </S.PlaceList>
     </S.Wrapper>
   );
