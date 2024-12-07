@@ -15,14 +15,15 @@ const S = {
   PlaceTitleRateWrapper: styled.div`
     display: flex;
     justify-content: space-between;
+    white-space: nowrap;
   `,
   PlaceTitle: styled.div`
     color: #080808;
-    font-family: Pretendard;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    white-space: nowrap;
   `,
   PlaceAddress: styled.div`
     color: #5e5e5e;
