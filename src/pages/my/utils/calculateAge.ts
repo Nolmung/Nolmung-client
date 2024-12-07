@@ -1,4 +1,5 @@
-export const calculateAge = (birthdayString: string) => {
+export const calculateAge = (birthdayString?: string) => {
+  if (!birthdayString) return 0;
   const birthday = new Date(birthdayString);
   const today = new Date();
 
