@@ -5,6 +5,7 @@ import { MapPlace } from '@/service/apis/place/index.type';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import { FilledStar } from '@/assets/images/svgs';
+import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 
 interface ContentProps {
   place: MapPlace | null;
@@ -32,7 +33,13 @@ function Content({ place, isCard }: ContentProps) {
           <S.InfoTextWrapper>
             <S.PlaceNameCategoryWrapper>
               <S.PlaceName>{place!.placeName}</S.PlaceName>
-              <S.PlaceCategory>{place!.category}</S.PlaceCategory>
+              <S.PlaceCategory>
+                {
+                  CATEGORY_OPTIONS?.find((option) =>
+                    option.value === place?.category ? place?.category : 'ETC',
+                  )?.label
+                }
+              </S.PlaceCategory>
             </S.PlaceNameCategoryWrapper>
             <S.PlaceAddress>{place!.roadAddress}</S.PlaceAddress>
             <S.PlaceReviewWrapper>
@@ -54,9 +61,7 @@ function Content({ place, isCard }: ContentProps) {
                 <IoHeartSharp size={24} color="#FF4E3E" />
               </S.IconWrapper>
             ) : (
-              <S.IconWrapper
-                onClick={handleLikeClick}
-              >
+              <S.IconWrapper onClick={handleLikeClick}>
                 <IoHeartSharp size={24} color="#a0a0a0c6" />
               </S.IconWrapper>
             )}
