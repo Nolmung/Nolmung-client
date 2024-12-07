@@ -1,5 +1,5 @@
 import { deleteReview, getReviews } from '@/service/apis/review';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useGetReviews = () => {
   return useQuery({
@@ -14,6 +14,8 @@ export const useGetReviews = () => {
 };
 
 export const useDeleteReviews = () => {
+  const queryClient = useQueryClient();
+
   return useMutation<number, Error, number>({
     mutationFn: async (reviewId) => {
       const response = await deleteReview(reviewId);
@@ -21,6 +23,7 @@ export const useDeleteReviews = () => {
     },
     onSuccess: () => {
       alert('리뷰 삭제가 완료되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['reviews'] });
     },
     onError: () => {
       alert('리뷰 삭제에 실패했습니다.');

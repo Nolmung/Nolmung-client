@@ -1,4 +1,3 @@
-import { Review } from '@/service/apis/user/index.types';
 import S from '../styles/ReviewCard.style';
 import LabelCard from './LabelCard';
 import { FilledStar, TrashcanIcon } from '@/assets/images/svgs';
@@ -9,12 +8,19 @@ import { ROUTE } from '@/common/constants/route';
 interface ReviewCardProps {
   data: GetReviewResponse;
   openModal: () => void;
+  setDeleteReviewId: (id: number) => void;
 }
-function ReviewCard({ data, openModal }: ReviewCardProps) {
+function ReviewCard({ data, openModal, setDeleteReviewId }: ReviewCardProps) {
   const { placeId, placeName, address, rating, Labels } = data;
   const navigate = useNavigate();
   const navigateToPlaceDetail = () => {
     navigate(ROUTE.DETAIL(placeId));
+  };
+
+  const handleTrashcanIconClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDeleteReviewId(data.reviewId);
+    openModal();
   };
   return (
     <S.Wrapper onClick={navigateToPlaceDetail}>
@@ -27,7 +33,7 @@ function ReviewCard({ data, openModal }: ReviewCardProps) {
               <S.Rate>{rating}</S.Rate>
             </S.StarIconRateWrapper>
           </S.PlaceNameAddressWrapper>
-          <TrashcanIcon onClick={openModal} width={15} />
+          <TrashcanIcon onClick={handleTrashcanIconClick} width={15} />
         </S.PlaceNameAddressTrashCanWrapper>
         <S.Address>{address}</S.Address>
       </S.PlaceInfoWrapper>

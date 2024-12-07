@@ -3,17 +3,19 @@ import S from './styles/index.style';
 import useModal from '@/common/hooks/useModal';
 import Modal from '@/common/components/modal';
 import Button from '@/common/components/button/Button';
-import { useGetReviews } from './queries';
+import { useDeleteReviews, useGetReviews } from './queries';
+import { useState } from 'react';
 function MyReview() {
   const { openModal, isOpen, closeModal } = useModal();
   const { data, isLoading, isError } = useGetReviews();
+  const [deleteReviewId, setDeleteReviewId] = useState<number | null>(null);
+
+  const { mutate: deleteMutation } = useDeleteReviews();
   const handleModalYesButtonClick = () => {
-    /**@Todo 리뷰 삭제 API 호출 */
-    alert('리뷰 삭제 API 호출');
+    if (!deleteReviewId) return;
+    deleteMutation(deleteReviewId);
     closeModal();
   };
-
-  console.log('data', data);
 
   if (isLoading) return <p>Loading...</p>;
   if (isError || !data) return <p>Error loading reviews</p>;
@@ -46,7 +48,11 @@ function MyReview() {
           </Modal>
         )}
         {data.map((review) => (
-          <ReviewCard openModal={openModal} data={review} />
+          <ReviewCard
+            setDeleteReviewId={setDeleteReviewId}
+            openModal={openModal}
+            data={review}
+          />
         ))}
       </S.Wrapper>
     </>
