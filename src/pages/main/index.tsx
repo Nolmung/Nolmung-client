@@ -57,12 +57,9 @@ function Main() {
 
   const [searchKeyword, setSearchKeyword] = useState<string>('');
 
-  const {
-    data: searchResponseData,
-    isLoading,
-    isError,
-  } = useGetPlaceSearch(searchKeyword || '');
-  console.log('searchResponseData:', searchResponseData);
+  const { data: searchResponseData, isLoading } = useGetPlaceSearch(
+    searchKeyword || '',
+  );
 
   useEffect(() => {
     const initializeMap = async () => {

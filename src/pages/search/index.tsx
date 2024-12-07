@@ -47,8 +47,6 @@ function Search() {
     isError,
   } = useGetPlaceSearch(searchKeyword || '');
 
-  console.log(searchResponseData);
-
   const handleSearchIconClick = (keyword?: string) => {
     const searchInputValue = inputRef?.current?.value || keyword;
     if (!searchInputValue || !searchInputValue?.trim()) return;
