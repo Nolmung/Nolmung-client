@@ -74,7 +74,6 @@ export const usePostDiary = () => {
       alert('오늘멍 등록이 완료되었습니다.');
       deleteTodaymungAll();
       deleteReviewAll();
-
       navigate(ROUTE.TODAYMUNG());
     },
     onError: () => {
@@ -82,6 +81,7 @@ export const usePostDiary = () => {
       for (let file of diaryRequest.medias) {
         deleteFileFromS3(file.mediaUrl);
       }
+      deleteTodaymungAll();
       deleteReviewAll();
     },
   });
