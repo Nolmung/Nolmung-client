@@ -1,11 +1,12 @@
 import { S } from './styles/signUp.styles';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import DatePicker from './DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
-import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
+
 const locations = [
   '서울특별시',
   '부산시',
@@ -27,41 +28,92 @@ const locations = [
 ];
 
 function SignUp() {
-  const navigate = useNavigate();
   const [nickname, setNickname] = useState('');
-  const [birth, setBirth] = useState('');
   const [addressProvince, setAddressProvince] = useState('');
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isAddressValid, setAddressValid] = useState(true);
   const [NextButtonActive, setNextButtonActive] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
-  const handleDateChange = (newValue: Dayjs | null) => {
-    setSelectedDate(newValue);
-  };
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // 카카오 로그인 데이터 가져오기
+  const loginStatus = location.state?.loginStatus || '';
+  const email = location.state?.email || '';
+  const role = location.state?.role || '';
+  const userId = location.state?.userId || '';
 
   useEffect(() => {
     document.title = '회원가입';
   }, []);
 
   useEffect(() => {
-    if (nickname && addressProvince && birth) {
+    // 버튼 활성화 조건: 닉네임, 주소, 생년월일 모두 입력
+    if (nickname && addressProvince && selectedDate) {
       setNextButtonActive(true);
+    } else {
+      setNextButtonActive(false);
     }
-  }, [nickname, addressProvince, birth]);
+  }, [nickname, addressProvince, selectedDate]);
 
-  const handleNext = () => {
-    if (!nickname || !addressProvince || !birth) {
+  const handleDateChange = (newValue: Dayjs | null) => {
+    setSelectedDate(newValue);
+  };
+
+  const handleNext = async () => {
+    if (!nickname || !addressProvince || !selectedDate) {
       alert('모든 정보를 입력해주세요!');
       return;
     }
-    navigate('/dogs', {
-      state: { nickname, addressProvince, birth },
-    });
-  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBirth(e.target.value);
+    const userBirth = selectedDate.format('YYYY-MM-DD');
+
+    if (!userId) {
+      alert('유효하지 않은 사용자 ID입니다.');
+      return;
+    }
+
+    const requestBody = {
+      userNickname: nickname,
+      userAddressProvince: addressProvince,
+      userLat: 0, // Swagger에서 정의된 필드 (현재는 하드코딩)
+      userLong: 0, // Swagger에서 정의된 필드 (현재는 하드코딩)
+      userBirth: userBirth,
+      userGender: 'FEMALE', // 'MALE' 또는 'FEMALE'로 설정
+    };
+
+    console.log('Request body:', requestBody);
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_SERVER_URL}/v1/users/signup/${userId}`,
+        requestBody,
+      );
+      if (response.status === 200 || response.status === 201) {
+        navigate('/v1/dogs', {
+          state: { nickname, addressProvince, userBirth },
+        });
+      }
+    } catch (error: any) {
+      if (error.response) {
+        console.error(
+          '회원가입 중 오류:',
+          error.response.status,
+          error.response.data,
+        );
+        alert(
+          `회원가입 실패: ${error.response.data.message || '알 수 없는 오류'}`,
+        );
+      } else if (error.request) {
+        console.error('요청이 서버에 도달하지 못했습니다:', error.request);
+        alert('요청이 서버에 도달하지 못했습니다.');
+      } else {
+        console.error('예기치 못한 오류 발생:', error.message);
+        alert('예기치 못한 오류 발생.');
+      }
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +143,7 @@ function SignUp() {
     <>
       <S.ContainerWrapper>
         <S.UserTitle>
-          안녕하세요,
+          안녕하세요, 로그인 상태: {loginStatus}, 이메일: {email}, 역할: {role}
           <br />
           견주님에 대해 알려주세요
         </S.UserTitle>
@@ -103,7 +155,7 @@ function SignUp() {
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           placeholder="닉네임을 입력해주세요"
-        ></S.UserInfoInput>
+        />
         <S.ContentTitleText>
           주소
           {!isAddressValid && (
@@ -114,9 +166,7 @@ function SignUp() {
           value={addressProvince}
           onChange={handleInputChange}
           placeholder="주소를 시,도 단위로 입력해주세요 ex)서울특별시"
-          isDropdownVisible={isDropdownVisible}
         />
-
         {isDropdownVisible && filteredLocations.length > 0 && (
           <S.Dropdown>
             {filteredLocations.map((location) => (
@@ -130,7 +180,7 @@ function SignUp() {
           </S.Dropdown>
         )}
         <S.ContentTitleText>생년월일</S.ContentTitleText>
-        <DatePicker />
+        <DatePicker value={selectedDate} onChange={handleDateChange} />
         <S.NextButton
           disabled={!NextButtonActive}
           isActive={NextButtonActive}

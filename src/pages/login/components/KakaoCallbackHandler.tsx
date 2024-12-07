@@ -27,15 +27,14 @@ function KakaoCallbackHandler() {
             },
           },
         );
-
         // 서버 응답 데이터
-        const { loginStatus, email, role } = response.data.data;
+        const { loginStatus, id: userId, email, role } = response.data.data;
 
         // 상태에 따라 이동
         if (loginStatus === 'LOGIN_SUCCESS' && role === 'USER') {
           navigate('/');
         } else if (loginStatus === 'SIGN_UP_REQUIRED' && role === 'GUEST') {
-          navigate('/signUp', { state: { email } });
+          navigate('/signUp', { state: { userId, email, loginStatus, role } });
         } else {
           alert('알 수 없는 상태입니다.');
           navigate('/login');
