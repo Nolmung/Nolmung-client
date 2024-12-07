@@ -29,6 +29,7 @@ export const usePostReviews = () => {
     },
     onError: () => {
       alert('리뷰 등록에 실패했습니다.');
+      deleteReviewAll();
     },
   });
 
@@ -51,6 +52,8 @@ export const usePostReviews = () => {
 
 export const usePostDiary = () => {
   const { deleteTodaymungAll } = useTodayMungStore();
+  const { deleteReviewAll } = useReviewStore();
+
   const navigate = useNavigate();
   const { title, content, places, medias, publicYn, dogs } =
     useTodayMungStore();
@@ -69,14 +72,17 @@ export const usePostDiary = () => {
     },
     onSuccess: () => {
       alert('오늘멍 등록이 완료되었습니다.');
-      navigate(ROUTE.TODAYMUNG());
       deleteTodaymungAll();
+      deleteReviewAll();
+
+      navigate(ROUTE.TODAYMUNG());
     },
     onError: () => {
       alert('오늘멍 등록에 실패했습니다.');
       for (let file of diaryRequest.medias) {
         deleteFileFromS3(file.mediaUrl);
       }
+      deleteReviewAll();
     },
   });
 };
