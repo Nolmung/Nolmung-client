@@ -86,6 +86,7 @@ function TodayMungWrite() {
                 reviewlist.map((mock, index) => (
                   <VisitedPlaceCard
                     key={index}
+                    category={mock.category}
                     placeName={mock.placeName}
                     roadAddress={mock.roadAddress}
                     rating={mock.rating}

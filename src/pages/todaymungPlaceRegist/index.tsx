@@ -185,6 +185,7 @@ function TodayMungPlaceRegist() {
               <CancelIcon width={10} />
             </S.IconWrapper>
             <VisitedPlaceCard
+              category={review.category}
               placeName={review.placeName}
               roadAddress={review.roadAddress}
               rating={review.rating}

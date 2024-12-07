@@ -42,6 +42,13 @@ const S = {
     display: flex;
     gap: 4px;
   `,
+  PlaceIconWrapper: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+  `,
 };
 
 export default S;
