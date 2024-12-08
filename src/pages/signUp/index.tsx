@@ -1,7 +1,7 @@
 import { S } from './styles/signUp.styles';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import convertAddressToLatlng from './utils/convertAddressToLatlng';
+// import convertAddressToLatlng from './utils/convertAddressToLatlng';
 
 const locations = [
   '서울특별시',
