@@ -1,6 +1,7 @@
 import { S } from './styles/signUp.styles';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import convertAddressToLatlng from './utils/convertAddressToLatlng';
 
 const locations = [
   '서울특별시',
@@ -80,6 +81,12 @@ function SignUp() {
     setAddressValid(true);
   };
 
+  /** 주소를 위도, 경도로 변환하는 함수 
+  const getLatlng = async (address: string) => {
+    const res = await convertAddressToLatlng(address);
+    console.log('위도: ', res.latitude, '경도: ', res.longitude);
+  };
+   */
   return (
     <>
       <S.ContainerWrapper>
