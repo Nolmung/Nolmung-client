@@ -16,3 +16,11 @@ export interface PostDiaryRequest {
   dogs: number[];
   publicYn: boolean;
 }
+
+export interface EditDiaryRequest {
+  title: string;
+  content: string;
+  medias: Media[];
+  dogs: number[];
+  publicYn: boolean;
+}

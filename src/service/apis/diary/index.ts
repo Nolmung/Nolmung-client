@@ -1,5 +1,5 @@
 import { instance } from '@service/apis';
-import { PostDiaryRequest } from './index.type';
+import { EditDiaryRequest, PostDiaryRequest } from './index.type';
 
 export const getTodaymungList = async () => {
   const response = await instance.get('/diary');
@@ -10,3 +10,13 @@ export const postTodaymung = async (todaymung: PostDiaryRequest) => {
   const response = await instance.post('/diary', todaymung);
   return response.status;
 };
+
+export const patchTodaymung = async (
+  diaryId: number,
+  todaymung: EditDiaryRequest,
+) => {
+  const response = await instance.patch(`/diary/${diaryId}`, todaymung);
+  return response.status;
+};
+
+

@@ -1,5 +1,4 @@
 import { S } from './styles/index.style';
-// import { todaymungDetailData } from '@/mocks/data/todaymungDetailData';
 import { useParams } from 'react-router-dom';
 import { DiaryType } from './types/DiaryType';
 import { DotdotdotIcon } from '@/assets/images/svgs';
@@ -9,10 +8,8 @@ import TextContent from './components/textContent';
 import ImageCard from './components/imageCard';
 import EditButton from './components/editButton';
 import { useState } from 'react';
-
 import { useTodaymungDetailData } from './queries';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
-
 
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
@@ -23,6 +20,11 @@ const TodayMungDetail = () => {
     isError,
   } = useTodaymungDetailData(numericDiaryId);
 
+  useSetDocumentTitle(
+    todaymungDetailData?.data?.title
+      ? `오늘멍 상세보기 - ${todaymungDetailData.data.title}`
+      : '오늘멍 상세보기',
+  );
   const [editToggle, setEditToggle] = useState(false);
   if (isLoading) {
     return <div>로딩중</div>;
@@ -35,13 +37,14 @@ const TodayMungDetail = () => {
     setEditToggle(!editToggle);
   };
 
-  useSetDocumentTitle(`오늘멍 상세보기 - ${diaryData.title}`);
   return (
     <S.Wrapper>
       <S.Container>
         <S.DateArea>
           <S.DiaryCreatedAt>{diaryData.createdAt}</S.DiaryCreatedAt>
-          {editToggle && <EditButton />}
+          {editToggle && (
+            <EditButton diaryId={diaryData.diaryId} medias={diaryData.medias} />
+          )}
           <DotdotdotIcon
             onClick={handleToggleClick}
             fill={editToggle ? '#d9d9d9' : '#080808'}
