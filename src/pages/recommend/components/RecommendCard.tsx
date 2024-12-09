@@ -7,9 +7,15 @@ interface RecommendCardProps {
   title: string;
   explanation: string;
   data: MapPlace[];
+  isBlurred?: boolean;
 }
 
-function RecommendCard({ data, title, explanation }: RecommendCardProps) {
+function RecommendCard({
+  data,
+  title,
+  explanation,
+  isBlurred,
+}: RecommendCardProps) {
   const navigate = useNavigate();
 
   const navigateToDetail = (placeId: number) => {
@@ -23,7 +29,10 @@ function RecommendCard({ data, title, explanation }: RecommendCardProps) {
       <S.PlaceList>
         {data.map((mock) => {
           return (
-            <S.PlaceWrapper onClick={() => navigateToDetail(mock.placeId)}>
+            <S.PlaceWrapper
+              isBlurred={isBlurred ?? false}
+              onClick={() => navigateToDetail(mock.placeId)}
+            >
               <S.PlaceImage src={mock.placeImageUrl} alt="장소 이미지" />
               <S.NameAddressWrapper>
                 <S.PlaceName>{mock.placeName}</S.PlaceName>
