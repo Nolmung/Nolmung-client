@@ -33,18 +33,17 @@ const S = {
 
     top: 50%;
     z-index: 100;
-    width: 300px;
-    height: 150px;
+    width: 330px;
+    height: 170px;
     margin: 0 auto;
     background-color: #fff;
-    padding-top: 20px;
+    padding: 20px 16px 15px 16px;
     border-radius: 15px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 10px;
     justify-content: space-around;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   `,
