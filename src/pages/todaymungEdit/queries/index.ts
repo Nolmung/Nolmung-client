@@ -2,8 +2,6 @@ import { getDogs } from '@/service/apis/dog';
 import { DogsResponse } from '@/service/apis/dog/index.type';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { patchTodaymung } from '@/service/apis/diary';
-import { useTodayMungStore } from '../stores/todayMungStore';
-import { deleteFileFromS3 } from '@/common/utils/uploadImageToS3';
 
 export const useGetDogs = () => {
   return useQuery<DogsResponse>({
@@ -15,30 +13,23 @@ export const useGetDogs = () => {
   });
 };
 
-export const useEditDiary = (diaryId: number) => {
-  const { title, content, medias, publicYn, dogs, deleteTodaymungAll } =
-    useTodayMungStore();
-
-  const diaryRequest = {
-    title,
-    content,
-    dogs,
-    publicYn,
-    medias,
-  };
-
+export const useEditDiary = () => {
   return useMutation({
-    mutationFn: () => patchTodaymung(diaryId, diaryRequest),
+    mutationFn: ({
+      diaryRequest,
+      diaryId,
+    }: {
+      diaryRequest: any;
+      diaryId: number;
+    }) => patchTodaymung(diaryRequest, diaryId),
+
     onSuccess: () => {
       alert('오늘멍 수정이 완료되었습니다.');
-      deleteTodaymungAll();
+      window.location.href = '/todaymung';
     },
     onError: (error) => {
-      console.log(error);
+      console.error(error);
       alert('오늘멍 수정에 실패했습니다.');
-      for (let file of diaryRequest.medias) {
-        deleteFileFromS3(file.mediaUrl);
-      }
     },
   });
 };

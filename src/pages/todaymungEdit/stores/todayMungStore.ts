@@ -1,8 +1,8 @@
-import { Media, PostDiaryRequest } from '@/service/apis/diary/index.type';
+import { Media, EditDiaryRequest } from '@/service/apis/diary/index.type';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface TodayMungStore extends PostDiaryRequest {
+interface TodayMungStore extends EditDiaryRequest {
   setTitle: (title: string) => void;
   setContent: (content: string) => void;
   addDogs: (dogId: number) => void;
@@ -18,14 +18,11 @@ export const useTodayMungStore = create(
     (set) => ({
       title: '',
       content: '',
-      places: [],
       dogs: [],
       medias: [],
       publicYn: true,
       setTitle: (title: string) => set({ title }),
       setContent: (content: string) => set({ content }),
-      addPlaces: (placeId: number) =>
-        set((store) => ({ places: [...(store.places || []), placeId] })),
       addMedia: (media: Media) =>
         set((store) => ({
           medias: [...(store.medias || []), media].sort(
@@ -49,7 +46,6 @@ export const useTodayMungStore = create(
         set({
           title: '',
           content: '',
-          places: [],
           dogs: [],
           medias: [],
           publicYn: true,

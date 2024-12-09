@@ -5,7 +5,7 @@ export enum MediaType {
 
 export interface Media {
   mediaId: number;
-  mediaType: MediaType;
+  mediaType: string;
   mediaUrl: string;
 }
 export interface PostDiaryRequest {

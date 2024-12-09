@@ -9,6 +9,7 @@ import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useTodaymungDetailData } from '@pages/todaymungDetail/queries';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { patchTodaymung } from '@/service/apis/diary';
 
 function TodayMungEdit() {
   useSetDocumentTitle('오늘멍 작성하기');
@@ -18,17 +19,18 @@ function TodayMungEdit() {
     content,
     setContent,
     dogs,
-    addDogs,
     medias,
     addMedia,
+    publicYn,
     setPublicYn,
     deleteTodaymungAll,
   } = useTodayMungStore();
+
   const { diaryId } = useParams<{ diaryId: string }>();
   const numericDiaryId = Number(diaryId);
 
   const { data: dogsData } = useGetDogs();
-  const { mutate: diaryMutate } = useEditDiary(numericDiaryId);
+  const { mutate: diaryMutate } = useEditDiary();
   const {
     data: todaymungEditData,
     isLoading,
@@ -38,11 +40,10 @@ function TodayMungEdit() {
   useEffect(() => {
     if (todaymungEditData) {
       deleteTodaymungAll();
-      const { title, content, dogs, medias, publicYn } = todaymungEditData.data;
+      const { title, content, medias, publicYn } = todaymungEditData.data;
 
       setTitle(title);
       setContent(content);
-      dogs.forEach((dog: any) => addDogs(dog));
       medias.forEach((media: any) => addMedia(media));
       setPublicYn(publicYn);
     }
@@ -56,6 +57,13 @@ function TodayMungEdit() {
   }
 
   const handleCompleteButtonClick = () => {
+    const diaryRequest = {
+      title,
+      content,
+      dogs,
+      publicYn,
+      medias,
+    };
     if (title || content || dogs.length > 0 || medias.length > 0) {
       const missingFields = [];
 
@@ -74,8 +82,29 @@ function TodayMungEdit() {
 
         alert(alertMessage);
       } else {
-        diaryMutate();
+        diaryMutate({ diaryRequest, diaryId: numericDiaryId });
       }
+    }
+  };
+  const testClick = async () => {
+    const diaryRequest = {
+      title: 'string',
+      content: 'string',
+      dogs: [1],
+      publicYn: true,
+      medias: [
+        {
+          mediaType: 'IMAGE',
+          mediaUrl: 'string',
+        },
+      ],
+    };
+    console.log(diaryRequest);
+    try {
+      const responseStatus = await patchTodaymung(diaryRequest, numericDiaryId);
+      console.log('Patch 성공! 응답 상태:', responseStatus);
+    } catch (error) {
+      console.error('Patch 요청 실패:', error);
     }
   };
 
@@ -107,7 +136,8 @@ function TodayMungEdit() {
               borderRadius="30px"
               fontSize="16px"
               fontWeight="500"
-              onClick={handleCompleteButtonClick}
+              // onClick={handleCompleteButtonClick}
+              onClick={testClick}
             >
               수정완료
             </Button>

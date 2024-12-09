@@ -3,7 +3,6 @@ import { S } from '../../styles/EditButton.style';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import { useTodaymungDelete } from '../../queries';
-import { useQueryClient } from '@tanstack/react-query';
 import { deleteFileFromS3 } from '@/common/utils/uploadImageToS3';
 
 type Media = {

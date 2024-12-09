@@ -11,12 +11,21 @@ export const postTodaymung = async (todaymung: PostDiaryRequest) => {
   return response.status;
 };
 
+
 export const patchTodaymung = async (
-  diaryId: number,
   todaymung: EditDiaryRequest,
+  diaryId: number,
 ) => {
-  const response = await instance.patch(`/diary/${diaryId}`, todaymung);
-  return response.status;
+  try {
+    const response = await instance.patch(`/diary/${diaryId}`, todaymung);
+    console.log('성공');
+    return response.status;
+  } catch (error) {
+    console.log(diaryId);
+    console.log(todaymung);
+    console.log(error);
+    throw error;
+  }
 };
 
 
