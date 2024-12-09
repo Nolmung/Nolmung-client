@@ -1,13 +1,13 @@
-import RecommendCard from './components/RecommendCard';
-import S from './styles/index.style';
+import RecommendCard from './RecommendCard';
+import S from '../styles/index.style';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import {
   useRecommendBookmarks,
   useRecommendNearby,
   useRecommendSimilarBookmarks,
   useRecommendWeight,
-} from './queries';
-import { useGetUser } from '../my/hooks';
+} from '../queries';
+import { useGetUser } from '../../my/hooks';
 
 function UserRecommend() {
   useSetDocumentTitle('추천');
