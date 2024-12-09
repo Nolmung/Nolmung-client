@@ -11,7 +11,7 @@ import Login from './pages/login';
 import SignUp from './pages/signUp';
 import Search from './pages/search';
 import Dogs from './pages/dogs';
-import Recommend from './pages/recommend';
+import Recommend from './pages/recommend/index';
 import TodayMungWrite from './pages/todaymungWrite';
 import TodayMungPlaceRegist from './pages/todaymungPlaceRegist';
 import MyReview from './pages/myReview';

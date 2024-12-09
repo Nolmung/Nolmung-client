@@ -41,6 +41,8 @@ export interface MapPlace {
   reviewCount: number;
   latitude: number;
   longitude: number;
+  placeImageUrl?: string;
+  Address?: string;
 }
 
 export interface PlaceRequestBody {

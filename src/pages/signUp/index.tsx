@@ -127,6 +127,12 @@ function SignUp() {
     setAddressValid(true);
   };
 
+  /** 주소를 위도, 경도로 변환하는 함수 
+  const getLatlng = async (address: string) => {
+    const res = await convertAddressToLatlng(address);
+    console.log('위도: ', res.latitude, '경도: ', res.longitude);
+  };
+   */
   return (
     <>
       <S.ContainerWrapper>

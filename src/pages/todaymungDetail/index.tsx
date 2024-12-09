@@ -13,7 +13,6 @@ import { useState } from 'react';
 import { useTodaymungDetailData } from './queries';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 
-
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
   const numericDiaryId = Number(diaryId);
@@ -24,6 +23,7 @@ const TodayMungDetail = () => {
   } = useTodaymungDetailData(numericDiaryId);
 
   const [editToggle, setEditToggle] = useState(false);
+  useSetDocumentTitle(`오늘멍 상세보기 - ${todaymungDetailData?.data.title}`);
   if (isLoading) {
     return <div>로딩중</div>;
   }
@@ -35,7 +35,6 @@ const TodayMungDetail = () => {
     setEditToggle(!editToggle);
   };
 
-  useSetDocumentTitle(`오늘멍 상세보기 - ${diaryData.title}`);
   return (
     <S.Wrapper>
       <S.Container>
