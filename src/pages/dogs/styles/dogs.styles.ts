@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { CameraIcon } from '@/assets/images/svgs';
 import { HEADER_HEIGHT } from '@/common/constants/ui';
-
+import { SmallDog } from '@assets/images/svgs';
+import { MeduimDog } from '@assets/images/svgs';
+import { LargeDog } from '@/assets/images/svgs';
 export const S = {
   ContainerWrapper: styled.div`
     padding-left: 30px;
@@ -14,6 +16,30 @@ export const S = {
   StyledCameraIcon: styled(CameraIcon)`
     width: 24px;
     height: 24px;
+  `,
+  SmallDogIcon: styled(SmallDog)<{ isSelected: boolean }>`
+    width: 58px;
+    height: 32px;
+    & path {
+      fill: ${({ isSelected }) =>
+        isSelected ? '#17aa1a' : '#A7A7A7'} !important;
+    }
+  `,
+  MeduimDogIcon: styled(MeduimDog)<{ isSelected: boolean }>`
+    width: 50px;
+    height: 41px;
+    & path {
+      fill: ${({ isSelected }) =>
+        isSelected ? '#17aa1a' : '#A7A7A7'} !important;
+    }
+  `,
+  LargeDogIcon: styled(LargeDog)<{ isSelected: boolean }>`
+    width: 57px;
+    height: 54px;
+    & path {
+      fill: ${({ isSelected }) =>
+        isSelected ? '#17aa1a' : '#A7A7A7'} !important;
+    }
   `,
   UserTitle: styled.h1`
     font-size: 18px;
@@ -34,7 +60,7 @@ export const S = {
     left: 50%; /* 부모의 왼쪽 기준으로 50% 이동 */
     transform: translateX(-50%); /* 자신의 너비의 절반만큼 왼쪽으로 이동 */
     cursor: pointer;
-    margin-top: 50px;
+    margin-top: 60px;
     width: 86px;
     height: 86px;
     background-color: #f0f0f0;
@@ -62,7 +88,7 @@ export const S = {
     font-weight: 600;
     line-height: 1.2;
     font-size: 14px;
-    margin-top: 30px;
+    margin-top: 50px;
   `,
   UserInfoInput: styled.input<{ isDropdownVisible?: boolean }>`
     box-sizing: border-box;
@@ -103,13 +129,13 @@ export const S = {
   `,
   AgeChoice: styled.div<{ isSelected: boolean }>`
     margin-top: 10px;
-    width: 93px;
-    height: 93px;
+    width: 106px;
+    height: 106px;
     background-color: ${({ isSelected }) =>
       isSelected ? '#d3fbd4' : '#fdfdfd'};
     border: 1px solid
       ${({ isSelected }) => (isSelected ? '#17aa1a' : '#d9d9d9')};
-    border-radius: 50%;
+    border-radius: 15px;
     color: ${({ isSelected }) => (isSelected ? '#17aa1a' : '#a7a7a7')};
     display: flex;
     align-items: center;

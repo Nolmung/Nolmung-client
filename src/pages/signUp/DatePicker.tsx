@@ -1,11 +1,12 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker as MUIDatePicker } from '@mui/x-date-pickers/DatePicker'; // 별칭 사용
+import { DesktopDatePicker as MUIDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { S } from './styles/signUp.styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
+import { koKR } from '@mui/x-date-pickers/locales';
 
 // Props 타입 정의
 interface DatePickerProps {
@@ -23,7 +24,13 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <LocalizationProvider
+          adapterLocale="ko"
+          dateAdapter={AdapterDayjs}
+          localeText={
+            koKR.components.MuiLocalizationProvider.defaultProps.localeText
+          }
+        >
           <MUIDatePicker
             value={value}
             onChange={onChange}
@@ -67,32 +74,32 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
                   '& .MuiPickersDay-root': {
                     fontWeight: 'bold', // 날짜 텍스트 강조
                     '&:hover': {
-                      backgroundColor: '#d3fbd4', // 날짜 호버 시 배경색
+                      backgroundColor: '#d3fbd4 !important', // 날짜 호버 시 배경색
                     },
                     '&.Mui-selected': {
-                      backgroundColor: '#17aa1a', // 선택된 날짜 배경색
-                      color: '#ffffff', // 선택된 날짜 텍스트 색상
+                      backgroundColor: '#17aa1a !important', // 선택된 날짜 배경색
+                      color: '#ffffff !important', // 선택된 날짜 텍스트 색상
                     },
                   },
                   '& .MuiPickersYear-root': {
                     borderRadius: '30px', // 둥근 모서리 크기 수정
-                    '&.Mui-selected': {
+                    '& .Mui-selected': {
                       backgroundColor: '#17aa1a !important', // 선택된 연도 배경색
-                      color: '#ffffff', // 선택된 연도 텍스트 색상
+                      color: '#ffffff !important',
                     },
-                    '&.Mui-selected:hover': {
+                    '&:hover': {
                       backgroundColor: '#17aa1a !important', // 선택된 연도에 호버 시 배경색
                     },
                   },
                   '& .MuiPickersMonth-root': {
                     fontWeight: 'bold',
                     borderRadius: '30px', // 둥근 모서리 크기 수정
-                    '&.Mui-selected': {
-                      backgroundColor: '#17aa1a', // 선택된 연도 배경색
-                      color: '#ffffff', // 선택된 연도 텍스트 색상
+                    '& .Mui-selected': {
+                      backgroundColor: '#17aa1a !important',
+                      color: '#ffffff !important',
                     },
-                    '&.Mui-selected:hover': {
-                      backgroundColor: '#17aa1a', // 선택된 연도에 호버 시 배경색
+                    '&:hover': {
+                      backgroundColor: '#17aa1a !important', // 선택된 연도에 호버 시 배경색
                     },
                   },
                 },

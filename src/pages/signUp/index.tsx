@@ -35,14 +35,15 @@ function SignUp() {
   const [isAddressValid, setAddressValid] = useState(true);
   const [NextButtonActive, setNextButtonActive] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+  const [gender, setGender] = useState<string | null>(null); // 성별 상태
 
   const location = useLocation();
   const navigate = useNavigate();
 
   // 카카오 로그인 데이터 가져오기
-  const loginStatus = location.state?.loginStatus || '';
-  const email = location.state?.email || '';
-  const role = location.state?.role || '';
+  // const loginStatus = location.state?.loginStatus || '';
+  // const email = location.state?.email || '';
+  // const role = location.state?.role || '';
   const userId = location.state?.userId || '';
 
   useEffect(() => {
@@ -84,34 +85,21 @@ function SignUp() {
       userGender: 'FEMALE', // 'MALE' 또는 'FEMALE'로 설정
     };
 
-    console.log('Request body:', requestBody);
-
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_SERVER_URL}/v1/users/signup/${userId}`,
+        `${import.meta.env.VITE_API_SERVER_URL}/users/signup/${userId}`,
         requestBody,
       );
       if (response.status === 200 || response.status === 201) {
-        navigate('/v1/dogs', {
+        navigate('/dogs', {
           state: { nickname, addressProvince, userBirth },
         });
       }
     } catch (error: any) {
       if (error.response) {
-        console.error(
-          '회원가입 중 오류:',
-          error.response.status,
-          error.response.data,
-        );
-        alert(
-          `회원가입 실패: ${error.response.data.message || '알 수 없는 오류'}`,
-        );
       } else if (error.request) {
         console.error('요청이 서버에 도달하지 못했습니다:', error.request);
         alert('요청이 서버에 도달하지 못했습니다.');
-      } else {
-        console.error('예기치 못한 오류 발생:', error.message);
-        alert('예기치 못한 오류 발생.');
       }
     }
   };
@@ -143,7 +131,8 @@ function SignUp() {
     <>
       <S.ContainerWrapper>
         <S.UserTitle>
-          안녕하세요, 로그인 상태: {loginStatus}, 이메일: {email}, 역할: {role}
+          안녕하세요,
+          {/* 로그인 상태: {loginStatus}, 이메일: {email}, 역할: {role} */}
           <br />
           견주님에 대해 알려주세요
         </S.UserTitle>
@@ -181,6 +170,25 @@ function SignUp() {
         )}
         <S.ContentTitleText>생년월일</S.ContentTitleText>
         <DatePicker value={selectedDate} onChange={handleDateChange} />
+        <S.GenderContainer>
+          <div>
+            <S.ContentTitleText>성별</S.ContentTitleText>
+            <S.GenderWrapper>
+              <S.GenderSelect
+                isSelected={gender === '수컷'}
+                onClick={() => setGender('수컷')}
+              >
+                남성
+              </S.GenderSelect>
+              <S.GenderSelect
+                isSelected={gender === '암컷'}
+                onClick={() => setGender('암컷')}
+              >
+                여성
+              </S.GenderSelect>
+            </S.GenderWrapper>
+          </div>
+        </S.GenderContainer>
         <S.NextButton
           disabled={!NextButtonActive}
           isActive={NextButtonActive}

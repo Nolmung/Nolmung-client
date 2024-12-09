@@ -4,6 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+import DatePicker from '../signUp/DatePicker';
+import dayjs, { Dayjs } from 'dayjs';
+import 'dayjs/locale/ko';
+dayjs.locale('ko');
 
 function Dogs() {
   const { state } = useLocation();
@@ -16,7 +20,10 @@ function Dogs() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [gender, setGender] = useState<string | null>(null); // 성별 상태
   const [neutered, setNeutered] = useState<string | null>(null); // 중성화 여부 상태
-
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+  const handleDateChange = (newValue: Dayjs | null) => {
+    setSelectedDate(newValue);
+  };
   const [form, setForm] = useState({
     dog_name: '',
     dog_type: '',
@@ -160,17 +167,8 @@ function Dogs() {
         onChange={handleChange}
         placeholder="반려견 이름을 입력해주세요"
       />
-      <S.ContentTitleText>나이</S.ContentTitleText>
-      <S.InputWrapper>
-        <S.UserInfoInput
-          type="text"
-          name="birth"
-          value={form.birth}
-          onChange={handleChange}
-          placeholder="나이를 입력해주세요"
-        />
-        <S.BirthText>살</S.BirthText>
-      </S.InputWrapper>
+      <S.ContentTitleText>생년월일</S.ContentTitleText>
+      <DatePicker value={selectedDate} onChange={handleDateChange} />
       <S.ContentTitleText>몸무게</S.ContentTitleText>
       <S.AgeChoiceContainer>
         <S.AgeFlex>
@@ -178,7 +176,7 @@ function Dogs() {
             isSelected={size === 1}
             onClick={() => handleCircleClick(1)}
           >
-            소형
+            <S.SmallDogIcon isSelected={size === 1} />
           </S.AgeChoice>
           <S.AgeChoiceText>10kg 미만</S.AgeChoiceText>
         </S.AgeFlex>
@@ -187,7 +185,7 @@ function Dogs() {
             isSelected={size === 2}
             onClick={() => handleCircleClick(2)}
           >
-            중형
+            <S.MeduimDogIcon isSelected={size === 2} />
           </S.AgeChoice>
           <S.AgeChoiceText>10kg - 25kg 미만</S.AgeChoiceText>
         </S.AgeFlex>
@@ -196,7 +194,7 @@ function Dogs() {
             isSelected={size === 3}
             onClick={() => handleCircleClick(3)}
           >
-            대형
+            <S.LargeDogIcon isSelected={size === 3} />
           </S.AgeChoice>
           <S.AgeChoiceText>25kg 이상</S.AgeChoiceText>
         </S.AgeFlex>

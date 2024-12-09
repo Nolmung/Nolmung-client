@@ -10,23 +10,23 @@ export const S = {
   `,
 
   StyledLogo: styled(NolmungLogo)`
-    width: 104px;
-    height: 74px;
+    width: 90px;
+    height: 64px;
     align-items: center;
-    margin-top: 24px;
+    margin-top: 20px;
   `,
 
   NolmungText: styled.h1`
     text-align: center;
     margin: auto;
     font-size: 14px;
-    margin-top: 265px;
+    margin-top: 260px;
     line-height: 1.3;
   `,
 
   KaKaoButton: styled.button`
     all: unset;
-    margin-top: 267px;
+    margin-top: 296px;
     width: 90%;
     height: 60px;
     font-size: 16px;
