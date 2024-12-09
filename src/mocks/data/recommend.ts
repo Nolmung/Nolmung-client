@@ -1,11 +1,11 @@
 export const DogSizeRecommend = [
   {
     placeId: 1,
-    placeName: '더왈츠 카페',
+    placeName: '멍멍으르렁컹컹',
     category: 'CAFE',
     Address: '서울특별시 강남구 역삼로 134',
     placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_247%2F1709283092996Yjmow_JPEG%2FIMG_3922.jpeg',
+      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210830_199%2F1630300435322zfW5D_JPEG%2F1QKiuUkvA4J1-L9ZDGCxHRvN.jpg',
     starRatingAvg: 4.5,
     reviewCount: 10,
     latitude: 37.49413412,
@@ -13,11 +13,11 @@ export const DogSizeRecommend = [
   },
   {
     placeId: 2,
-    placeName: '강남 푸드 코트',
+    placeName: '벨르앙쥬',
     category: 'RESTAURANT',
     Address: '서울특별시 강남구 테헤란로 120',
     placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180504_143%2F1525421227702xE4AR_JPEG%2FOP9FhMSrn52w8ZPLn2Fz54tL.jpg',
+      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231102_29%2F1698903371561EBXqC_JPEG%2F1.jpg',
     starRatingAvg: 4.2,
     reviewCount: 20,
     latitude: 37.49823412,
@@ -25,11 +25,11 @@ export const DogSizeRecommend = [
   },
   {
     placeId: 3,
-    placeName: '한강 어린이 놀이터',
+    placeName: '브루다 양주점',
     category: 'PLAYGROUND',
     Address: '서울특별시 마포구 상암동 123-45',
     placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20180504_143%2F1525421227702xE4AR_JPEG%2FOP9FhMSrn52w8ZPLn2Fz54tL.jpg',
+      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220930_177%2F1664535946025fdtSV_JPEG%2FKakaoTalk_Photo_2022-09-28-12-01-47.jpeg',
     starRatingAvg: 4.8,
     reviewCount: 5,
     latitude: 37.5661234,
@@ -37,11 +37,11 @@ export const DogSizeRecommend = [
   },
   {
     placeId: 4,
-    placeName: '롯데월드 어드벤처',
+    placeName: '삼성화재교통박물관',
     category: 'PARK',
     Address: '서울특별시 송파구 올림픽로 240',
     placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_247%2F1709283092996Yjmow_JPEG%2FIMG_4567.jpeg',
+      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231114_246%2F1699924122658Brmdi_JPEG%2Fvisual_01.jpg',
     starRatingAvg: 4.7,
     reviewCount: 50,
     latitude: 37.51023412,
@@ -49,11 +49,11 @@ export const DogSizeRecommend = [
   },
   {
     placeId: 5,
-    placeName: '서울 호텔',
+    placeName: '상동호수공원',
     category: 'CAFE',
     Address: '서울특별시 중구 명동길 15',
     placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_247%2F1709283092996Yjmow_JPEG%2FIMG_6789.jpeg',
+      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20150831_35%2F1441026060049OF7St_JPEG%2F116360406353869_0.jpg',
     starRatingAvg: 5.0,
     reviewCount: 30,
     latitude: 37.56034512,
@@ -151,11 +151,11 @@ export const PersonalRecommend = [
   },
   {
     placeId: 8,
-    placeName: '갤러리 현대',
+    placeName: '너와함개냥',
     category: 'ARTGALLERY',
-    Address: '서울특별시 종로구 삼청로 60',
+    Address: '경기 포천시 군내면 포천로 1070-2 1층 제1호',
     placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_247%2F1709283092996Yjmow_JPEG%2FIMG_7777.jpeg',
+      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200802_71%2F1596359952607aAB94_JPEG%2F_pxyIkunUgdzkvSEUcnpdJi6.jpg',
     starRatingAvg: 4.8,
     reviewCount: 15,
     latitude: 37.58012345,
@@ -164,11 +164,11 @@ export const PersonalRecommend = [
 
   {
     placeId: 9,
-    placeName: '강남 커피빈',
+    placeName: '놀멍애견펜션',
     category: 'CAFE',
-    Address: '서울특별시 강남구 강남대로 396',
+    Address: '경기도 포천시 화현면 봉화로 173-23',
     placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_247%2F1709283092996Yjmow_JPEG%2FIMG_7777.jpeg',
+      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220915_251%2F1663228024649MhITl_JPEG%2F1.jpg',
     starRatingAvg: 4.3,
     reviewCount: 45,
     latitude: 37.497909,
@@ -176,74 +176,14 @@ export const PersonalRecommend = [
   },
   {
     placeId: 10,
-    placeName: '강남 애슐리',
+    placeName: '딜라이트',
     category: 'RESTAURANT',
     Address: '서울특별시 강남구 강남대로 310',
     placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_1%2Fsample10.jpeg',
+      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221219_33%2F16714143177904cIbN_PNG%2F3.PNG',
     starRatingAvg: 4.5,
     reviewCount: 70,
     latitude: 37.498087,
     longitude: 127.028568,
-  },
-  {
-    placeId: 11,
-    placeName: '강남역 스타벅스',
-    category: 'CAFE',
-    Address: '서울특별시 강남구 강남대로 396',
-    placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_1%2Fsample11.jpeg',
-    starRatingAvg: 4.1,
-    reviewCount: 60,
-    latitude: 37.498315,
-    longitude: 127.02773,
-  },
-  {
-    placeId: 12,
-    placeName: '강남 한식당',
-    category: 'RESTAURANT',
-    Address: '서울특별시 강남구 역삼로 123',
-    placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_1%2Fsample12.jpeg',
-    starRatingAvg: 4.8,
-    reviewCount: 35,
-    latitude: 37.497524,
-    longitude: 127.029662,
-  },
-  {
-    placeId: 13,
-    placeName: '강남 명동칼국수',
-    category: 'RESTAURANT',
-    Address: '서울특별시 강남구 강남대로 390',
-    placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_1%2Fsample13.jpeg',
-    starRatingAvg: 4.6,
-    reviewCount: 80,
-    latitude: 37.4972,
-    longitude: 127.028101,
-  },
-  {
-    placeId: 14,
-    placeName: '강남 아트 갤러리',
-    category: 'ARTGALLERY',
-    Address: '서울특별시 강남구 역삼로 111',
-    placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_1%2Fsample14.jpeg',
-    starRatingAvg: 4.9,
-    reviewCount: 20,
-    latitude: 37.496958,
-    longitude: 127.028495,
-  },
-  {
-    placeId: 15,
-    placeName: '강남 네일샵',
-    category: 'CAFE',
-    Address: '서울특별시 강남구 테헤란로 129',
-    placeImageUrl:
-      'https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240301_1%2Fsample15.jpeg',
-    starRatingAvg: 4.7,
-    reviewCount: 25,
-    latitude: 37.497412,
-    longitude: 127.029123,
   },
 ];
