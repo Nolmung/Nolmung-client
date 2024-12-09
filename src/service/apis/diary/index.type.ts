@@ -4,7 +4,7 @@ export enum MediaType {
 }
 
 export interface Media {
-  mediaId: number;
+  mediaId?: number;
   mediaType: string;
   mediaUrl: string;
 }
