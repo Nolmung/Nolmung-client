@@ -16,7 +16,6 @@ interface EditButtonProps {
 }
 
 const EditButton = ({ diaryId, medias }: EditButtonProps) => {
-  console.log(medias[0]);
   const navigate = useNavigate();
   const { mutate: deleteDiary } = useTodaymungDelete(diaryId);
   const handleEditClick = () => {

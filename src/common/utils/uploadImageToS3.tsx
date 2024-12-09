@@ -58,7 +58,6 @@ export const deleteFileFromS3 = async (fileUrl: string) => {
    return true;
  } catch (error) {
    console.error('S3 삭제 요청 실패:', error);
-   alert('이미지 삭제에 실패했습니다.');
    return false;
  }
 };

@@ -26,7 +26,7 @@ export const useTodayMungStore = create(
       addMedia: (media: Media) =>
         set((store) => ({
           medias: [...(store.medias || []), media].sort(
-            (a, b) => b.mediaId - a.mediaId,
+            (a, b) => b.mediaId! - a.mediaId!,
           ),
         })),
       deleteMedia: (mediaId: number) =>

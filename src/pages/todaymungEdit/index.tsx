@@ -9,7 +9,6 @@ import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useTodaymungDetailData } from '@pages/todaymungDetail/queries';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { patchTodaymung } from '@/service/apis/diary';
 
 function TodayMungEdit() {
   useSetDocumentTitle('오늘멍 작성하기');
@@ -41,7 +40,6 @@ function TodayMungEdit() {
     if (todaymungEditData) {
       deleteTodaymungAll();
       const { title, content, medias, publicYn } = todaymungEditData.data;
-
       setTitle(title);
       setContent(content);
       medias.forEach((media: any) => addMedia(media));
@@ -86,27 +84,6 @@ function TodayMungEdit() {
       }
     }
   };
-  const testClick = async () => {
-    const diaryRequest = {
-      title: 'string',
-      content: 'string',
-      dogs: [1],
-      publicYn: true,
-      medias: [
-        {
-          mediaType: 'IMAGE',
-          mediaUrl: 'string',
-        },
-      ],
-    };
-    console.log(diaryRequest);
-    try {
-      const responseStatus = await patchTodaymung(diaryRequest, numericDiaryId);
-      console.log('Patch 성공! 응답 상태:', responseStatus);
-    } catch (error) {
-      console.error('Patch 요청 실패:', error);
-    }
-  };
 
   return (
     <S.Wrapper>
@@ -136,8 +113,7 @@ function TodayMungEdit() {
               borderRadius="30px"
               fontSize="16px"
               fontWeight="500"
-              // onClick={handleCompleteButtonClick}
-              onClick={testClick}
+              onClick={handleCompleteButtonClick}
             >
               수정완료
             </Button>
