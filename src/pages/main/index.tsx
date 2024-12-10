@@ -23,7 +23,6 @@ import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
-import LoginPromptModal from '@/common/components/loginPromptModal';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -366,7 +365,6 @@ function Main() {
 
   return (
     <S.Wrapper>
-      <LoginPromptModal />
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
         {!(category || location.search) && (
           <CategoryBar

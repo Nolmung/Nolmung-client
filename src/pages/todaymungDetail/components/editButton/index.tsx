@@ -29,7 +29,6 @@ const EditButton = ({ diaryId, medias }: EditButtonProps) => {
           try {
             await Promise.all(
               medias.map(async (media) => {
-                console.log(`Deleting: ${media.mediaUrl}`);
                 await deleteFileFromS3(media.mediaUrl);
               }),
             );

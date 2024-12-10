@@ -63,6 +63,7 @@ function Detail() {
     return price == '변동' || price == '없음';
   };
 
+
   return (
     <S.Wrapper ref={scrollRef} onScroll={handleScroll}>
       <S.Header isScrolled={scrollTop >= 70}>
