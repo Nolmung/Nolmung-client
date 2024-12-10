@@ -6,6 +6,9 @@ import { useLocation } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import DatePicker from '../signUp/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
+import { uploadFileToS3 } from '@/common/utils/uploadImageToS3';
+import { usePostDogs } from './queries';
+import { DogInfoType } from '@/service/apis/dog/index.type';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
 
@@ -18,18 +21,26 @@ function Dogs() {
   const [size, setSize] = useState<number | null>(null);
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-  const [gender, setGender] = useState<string | null>(null); // 성별 상태
-  const [neutered, setNeutered] = useState<string | null>(null); // 중성화 여부 상태
+  const [gender, setGender] = useState<string | null>(null);
+  const [neutered, setNeutered] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+  const { mutate: postDogMutate } = usePostDogs();
+
   const handleDateChange = (newValue: Dayjs | null) => {
     setSelectedDate(newValue);
+    if (newValue) {
+      setDogData((prevData) => ({
+        ...prevData,
+        birth: newValue.format('YYYY-MM-DD'), // 선택된 날짜를 YYYY-MM-DD 형식으로 저장
+      }));
+    }
   };
-  const [form, setForm] = useState({
-    dog_name: '',
-    dog_type: '',
+  const [dogData, setDogData] = useState<DogInfoType>({
+    dogName: '',
+    dogType: '',
     birth: '',
-    profile_url: '',
-    gender: '',
+    profileUrl: '',
+    gender: 'MALE',
     size: '',
     neuterYn: false,
   });
@@ -38,10 +49,9 @@ function Dogs() {
 
   useEffect(() => {
     if (
-      nickname &&
-      form.dog_name &&
-      form.dog_type &&
-      form.birth &&
+      dogData.dogName &&
+      dogData.dogType &&
+      dogData.birth &&
       size &&
       neutered &&
       gender
@@ -51,27 +61,45 @@ function Dogs() {
   }, [
     gender,
     nickname,
-    form.dog_name,
-    form.dog_type,
-    form.birth,
+    dogData.dogName,
+    dogData.dogType,
+    dogData.birth,
     size,
     neutered,
   ]);
 
   const handlePictureClick = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click(); // 숨겨진 파일 입력 요소 클릭
+      fileInputRef.current.click();
     }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result as string); // 미리보기 이미지 설정
-      };
-      reader.readAsDataURL(file); // 파일 읽기
+      try {
+        // S3 업로드
+        const uploadedFiles = await uploadFileToS3([file]);
+
+        // undefined 체크 및 URL 업데이트
+        if (uploadedFiles && uploadedFiles.length > 0) {
+          const s3Url = uploadedFiles[0].s3Url;
+
+          // dogData 객체에 profileUrl 업데이트
+          setDogData((prevData) => ({
+            ...prevData,
+            profileUrl: s3Url,
+          }));
+          setPreview(s3Url);
+          console.log('프로필 URL이 업데이트되었습니다:', s3Url);
+        } else {
+          console.error('업로드된 파일이 없습니다.');
+        }
+      } catch (error) {
+        console.error('파일 업로드 중 에러 발생:', error);
+      }
     }
   };
 
@@ -82,13 +110,12 @@ function Dogs() {
   ) => {
     const { name, value } = e.target;
 
-    setForm((prev) => ({
+    setDogData((prev) => ({
       ...prev,
       [name]: value,
     }));
 
-    if (name === 'dog_type') {
-      // 견종 추천 필터링
+    if (name === 'dogType') {
       const filtered = dogBreeds.filter((breed) => breed.includes(value));
       setFilteredLocations(filtered);
       setDropdownVisible(filtered.length > 0);
@@ -99,37 +126,45 @@ function Dogs() {
 
   const handleCircleClick = (size: number) => {
     setSize((prev) => (prev === size ? null : size));
-    setForm((prev) => ({
+    setDogData((prev) => ({
       ...prev,
-      size: size === 1 ? '소형' : size === 2 ? '중형' : '대형',
+      size: size === 1 ? 'S' : size === 2 ? 'M' : 'L',
     }));
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    setForm((prev) => ({
+    setDogData((prev) => ({
       ...prev,
-      dog_type: suggestion,
+      dogType: suggestion,
     }));
     setFilteredLocations([]);
     setDropdownVisible(false);
   };
 
-  const handleSubmit = () => {
-    if (!nickname || !form.dog_name || !form.dog_type || !form.birth || !size) {
-      return;
-    }
-    navigate(ROUTE.MAIN(), {
-      state: { nickname, form },
-      replace: true,
-    });
-    // API 요청 추가 가능
+  const handleSubmitClick = () => {
+    if (
+      !nickname ||
+      !dogData.dogName ||
+      !dogData.dogType ||
+      !dogData.birth ||
+      !size
+    )
+      postDogMutate(dogData, {
+        onSuccess: () => {
+          navigate(ROUTE.MAIN(), {
+            state: { nickname, dogData },
+            replace: true,
+          });
+        },
+      });
   };
+
   const handleClickOutside = (event: MouseEvent) => {
     if (
       dropdownRef.current &&
       !dropdownRef.current.contains(event.target as Node)
     ) {
-      setDropdownVisible(false); // 드롭다운 닫기
+      setDropdownVisible(false);
     }
   };
   useEffect(() => {
@@ -139,6 +174,7 @@ function Dogs() {
     };
   }, []);
 
+  console.log(dogData);
   return (
     <S.ContainerWrapper>
       <S.UserTitle>
@@ -150,7 +186,7 @@ function Dogs() {
         {preview ? (
           <S.PreviewImage src={preview} alt="Dog Profile Preview" />
         ) : (
-          <S.StyledCameraIcon /> // 기본 아이콘
+          <S.StyledCameraIcon />
         )}
         <S.HiddenInput
           type="file"
@@ -162,8 +198,8 @@ function Dogs() {
       <S.ContentTitleText>이름</S.ContentTitleText>
       <S.UserInfoInput
         type="text"
-        name="dog_name"
-        value={form.dog_name}
+        name="dogName"
+        value={dogData.dogName}
         onChange={handleChange}
         placeholder="반려견 이름을 입력해주세요"
       />
@@ -202,8 +238,8 @@ function Dogs() {
       <S.ContentTitleText>견종</S.ContentTitleText>
       <S.UserInfoInput
         type="text"
-        name="dog_type"
-        value={form.dog_type}
+        name="dogType"
+        value={dogData.dogType}
         onChange={handleChange}
         placeholder="견종을 입력해주세요"
         isDropdownVisible={isDropdownVisible}
@@ -228,13 +264,19 @@ function Dogs() {
           <S.GenderWrapper>
             <S.GenderSelect
               isSelected={gender === '수컷'}
-              onClick={() => setGender('수컷')}
+              onClick={() => {
+                setGender('수컷');
+                setDogData((prev) => ({ ...prev, gender: 'MALE' }));
+              }}
             >
               수컷
             </S.GenderSelect>
             <S.GenderSelect
               isSelected={gender === '암컷'}
-              onClick={() => setGender('암컷')}
+              onClick={() => {
+                setGender('암컷');
+                setDogData((prev) => ({ ...prev, gender: 'FEMALE' }));
+              }}
             >
               암컷
             </S.GenderSelect>
@@ -245,20 +287,26 @@ function Dogs() {
           <S.GenderWrapper>
             <S.GenderSelect
               isSelected={neutered === '예'}
-              onClick={() => setNeutered('예')}
+              onClick={() => {
+                setNeutered('예');
+                setDogData((prev) => ({ ...prev, neuterYn: true }));
+              }}
             >
               예
             </S.GenderSelect>
             <S.GenderSelect
               isSelected={neutered === '아니오'}
-              onClick={() => setNeutered('아니오')}
+              onClick={() => {
+                setNeutered('아니오');
+                setDogData((prev) => ({ ...prev, neuterYn: false }));
+              }}
             >
               아니오
             </S.GenderSelect>
           </S.GenderWrapper>
         </div>
       </S.GenderContainer>
-      <S.NextButton isActive={NextButtonActive} onClick={handleSubmit}>
+      <S.NextButton isActive={NextButtonActive} onClick={handleSubmitClick}>
         놀멍 시작하기
       </S.NextButton>
     </S.ContainerWrapper>

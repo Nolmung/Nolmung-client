@@ -13,3 +13,13 @@ export interface DogType {
 export interface DogsResponse {
   data: DogType[];
 }
+
+export interface DogInfoType {
+  dogName: string;
+  dogType: string;
+  birth: string;
+  profileUrl: string;
+  gender: 'MALE' | 'FEMALE';
+  size: string;
+  neuterYn: boolean;
+}
