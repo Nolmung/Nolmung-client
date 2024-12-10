@@ -20,6 +20,7 @@ import TodayMungDetail from './pages/todaymungDetail';
 import Mypage from './pages/my';
 import TodayMungEdit from './pages/todaymungEdit';
 import DogsEdit from './pages/dogEdit';
+import MyDogs from './pages/my/components/myDogs';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -67,6 +68,7 @@ function Router() {
             element={<TodayMungEdit />}
           />
           <Route path={ROUTE.DOGSEDIT(':dogId')} element={<DogsEdit />} />
+          <Route path={ROUTE.MY_DOGS()} element={<MyDogs />} />
         </Routes>
       </Layout>
     </Suspense>

@@ -6,7 +6,11 @@ const Modal = ({ width, height, isOpen, closeModal, children }: ModalProps) => {
 
   return (
     <S.ModalWrapper>
-      <S.ModalBackground onClick={closeModal} />
+      <S.ModalBackground
+        onClick={() => {
+          closeModal();
+        }}
+      />
       <S.ModalContent width={width} height={height}>
         {children}
       </S.ModalContent>

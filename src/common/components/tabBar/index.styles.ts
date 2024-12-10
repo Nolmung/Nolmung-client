@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const S = {
@@ -15,7 +14,7 @@ export const S = {
     justify-content: space-around;
     align-items: center;
   `,
-  IconArea: styled(Link)`
+  IconArea: styled.div`
     width: 25%;
     display: flex;
     flex-direction: column;

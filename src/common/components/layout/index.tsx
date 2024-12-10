@@ -11,6 +11,8 @@ import {
 import TabBar from '@common/components/tabBar';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import LoginPromptModal from '../loginPromptModal';
+import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 
 type PathRule = string | RegExp;
 type PathRules = {
@@ -115,7 +117,6 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          console.log('hi');
           window.history.back();
         });
 
@@ -148,6 +149,19 @@ function Layout({ children }: LayoutProps) {
           setHeaderTitle({
             title: '오늘멍 모아보기',
             showIcon: false,
+            type: 'TitleCenter',
+          });
+          setHandleBackButtonClick(() => () => {
+            window.history.back();
+          });
+        }
+        break;
+      
+      case pathName === '/dogs':
+        {
+          setHeaderTitle({
+            title: '반려견 등록',
+            showIcon:true,
             type: 'TitleCenter',
           });
           setHandleBackButtonClick(() => () => {
@@ -245,8 +259,11 @@ function Layout({ children }: LayoutProps) {
     }
   }, [location.pathname, location.search]);
 
+  const { isOpen, close } = useLoginPromptModalStore();
+
   return (
     <S.Wrapper>
+      {isOpen && <LoginPromptModal closeModal={close} />}
       {!hideHeader && (
         <Header
           handleBackButtonClick={handleBackButtonClick}
