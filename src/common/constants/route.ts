@@ -18,4 +18,5 @@ export const ROUTE = {
   MYFAVORITE: () => '/my/favorite',
   PLACE_RECOMMEND: () => '/recommend',
   TODAYMUNG_EDIT: (diaryId: string | number) => `/todaymung/edit/${diaryId}`,
+  MY_DOGS: () => '/my/dogs',
 } as const;
