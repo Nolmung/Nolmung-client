@@ -317,7 +317,10 @@ function Main() {
     });
 
     setBottomCardVisible(true);
-    mapRef.current!.setZoom(30);
+    if (mapRef.current){
+      mapRef.current!.setZoom(30);
+    }
+    
   };
 
   /** 마커 클릭 이벤트 함수 */
