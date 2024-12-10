@@ -4,17 +4,19 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+import { useParams } from 'react-router-dom';
 import DatePicker from '../signUp/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { uploadFileToS3 } from '@/common/utils/uploadImageToS3';
-import { usePostDogs } from './queries';
+import { usePatchDogs, useDeleteDogs } from './queries';
 import { DogInfoType } from '@/service/apis/dog/index.type';
 import 'dayjs/locale/ko';
-import { postDogs } from '@/service/apis/dog';
 dayjs.locale('ko');
 
 function DogsEdit() {
   const { state } = useLocation();
+  const { dogId } = useParams<{ dogId: string }>();
+  const numDogId = Number(dogId);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -25,8 +27,8 @@ function DogsEdit() {
   const [gender, setGender] = useState<string | null>(null);
   const [neutered, setNeutered] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
-  const { mutate: postDogMutate } = usePostDogs();
-
+  const { mutate: patchDogMutate } = usePatchDogs();
+  const { mutate: deleteDogMutate } = useDeleteDogs();
   const handleDateChange = (newValue: Dayjs | null) => {
     setSelectedDate(newValue);
     if (newValue) {
@@ -92,7 +94,6 @@ function DogsEdit() {
             profileUrl: s3Url,
           }));
           setPreview(s3Url);
-          console.log('프로필 URL이 업데이트되었습니다:', s3Url);
         } else {
           console.error('업로드된 파일이 없습니다.');
         }
@@ -139,33 +140,25 @@ function DogsEdit() {
     setFilteredLocations([]);
     setDropdownVisible(false);
   };
-  const a: DogInfoType = {
-    dogName: '김영수',
-    dogType: '달마시안',
-    birth: '2022-02-12',
-    profileUrl:
-      'https://nolmung.s3.ap-northeast-2.amazonaws.com/%E1%84%91%E1%85%A6%E1%86%BA%E1%84%8B%E1%85%B5%E1%84%83%E1%85%A9%E1%86%BC%E1%84%80%E1%85%A1%E1%84%87%E1%85%A1%E1%86%BC(%E1%84%89%E1%85%B3%E1%84%86%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%8B%E1%85%B1%20%E1%84%85%E1%85%A5%E1%84%87%E1%85%B3:%E1%84%8B%E1%85%B1%E1%84%80%E1%85%B3%E1%86%AF%E1%84%87%E1%85%A6%E1%84%8B%E1%85%A5).jpg',
-    gender: 'MALE',
-    neuterYn: true,
-    size: 'M',
-  };
 
-  const handleSubmitClick = async () => {
-    // postDogMutate(dogData, {
-    //   onSuccess: () => {
-    //     navigate(ROUTE.MAIN(), {
-    //       state: { nickname, dogData },
-    //       replace: true,
-    //     });
-    //   },
-    // });
-    try {
-      const response = await postDogs(a); // 비동기 호출
-      console.log('등록 성공:', response);
-    } catch (error) {
-      console.log('등록 실패:', error);
-    }
-  };
+
+  const handleEditClick = async () => {
+    patchDogMutate({ dogId:numDogId, dogInfo: dogData }, {
+      onSuccess: () => {
+        navigate(ROUTE.MY());
+        },
+      onError: (error) => console.error('수정 실패:', error),
+    })
+  }
+
+  const handleDeleteClick = async () => {
+     deleteDogMutate(numDogId, {
+       onSuccess: () => {
+         navigate(ROUTE.MY());
+        },
+      onError: (error) => console.error('삭제 실패:', error),
+    })
+  }
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -181,6 +174,7 @@ function DogsEdit() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
 
   return (
     <S.ContainerWrapper>
@@ -314,12 +308,12 @@ function DogsEdit() {
         </div>
       </S.GenderContainer>
       <S.ButtonArea>
-        <S.NextButton isActive={NextButtonActive} onClick={handleSubmitClick}>
+        <S.EditButton isActive={NextButtonActive} onClick={handleEditClick}>
           수정하기
-        </S.NextButton>
-        <S.NextButton isActive={NextButtonActive} onClick={handleSubmitClick}>
+        </S.EditButton>
+        <S.DeleteButton onClick={handleDeleteClick}>
           삭제하기
-        </S.NextButton>
+        </S.DeleteButton>
       </S.ButtonArea>
     </S.ContainerWrapper>
   );

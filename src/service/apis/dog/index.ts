@@ -7,13 +7,12 @@ export const getDogs = async (): Promise<DogsResponse> => {
 };
 
 export const postDogs = async (dogInfo: DogInfoType): Promise<number> => {
-  console.log(dogInfo);
   const response = await instance.post('/dogs', dogInfo);
   return response.status;
 };
 
-export const patchDogs = async (dogId: number): Promise<number> => {
-  const response = await instance.patch(`/dogs?dogId=${dogId}`);
+export const putDogs = async (dogId: number,dogInfo: DogInfoType): Promise<number> => {
+  const response = await instance.put(`/dogs?dogId=${dogId}`,dogInfo);
   return response.status;
 };
 

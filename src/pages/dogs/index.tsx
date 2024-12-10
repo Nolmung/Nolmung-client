@@ -93,7 +93,6 @@ function Dogs() {
             profileUrl: s3Url,
           }));
           setPreview(s3Url);
-          console.log('프로필 URL이 업데이트되었습니다:', s3Url);
         } else {
           console.error('업로드된 파일이 없습니다.');
         }
@@ -167,7 +166,6 @@ function Dogs() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-  console.log(dogData);
 
   return (
     <S.ContainerWrapper>

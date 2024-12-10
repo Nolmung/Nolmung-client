@@ -199,12 +199,22 @@ export const S = {
     display: flex;
     gap: 24px; /* 요소 간 간격 */
   `,
-  NextButton: styled.button<{ isActive: boolean }>`
+  EditButton: styled.button<{ isActive: boolean }>`
     width: 100%;
     height: 60px;
     border: 1px solid #a7a7a7;
     background-color: ${({ isActive }) => (isActive ? '#080808' : '#f0f0f0')};
     color: ${({ isActive }) => (isActive ? '#ffffff' : '#a7a7a7')};
+    border-radius: 50px;
+    font-size: 16px;
+    transition: 0.5s ease;
+  `,
+  DeleteButton: styled.button`
+    width: 100%;
+    height: 60px;
+    border: 1px solid #a7a7a7;
+    background-color: #080808;
+    color: #ffffff ;
     border-radius: 50px;
     font-size: 16px;
     transition: 0.5s ease;
