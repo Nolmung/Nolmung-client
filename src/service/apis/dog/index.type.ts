@@ -19,7 +19,7 @@ export interface DogInfoType {
   dogType: string;
   birth: string;
   profileUrl: string;
-  gender: 'MALE' | 'FEMALE';
+  gender: string;
   size: string;
   neuterYn: boolean;
 }

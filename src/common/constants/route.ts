@@ -8,6 +8,7 @@ export const ROUTE = {
   SIGNUP: () => `/signUp`,
   SEARCH: () => '/search',
   DOGS: () => '/dogs',
+  DOGSEDIT: (dogId: string | number) => `/dogs/edit/${dogId}`,
   MY_REVIEW: () => '/my/review',
   TODAYMUNG_DETAIL: (diaryId: string | number) =>
     `/todaymung/detail/${diaryId}`,

@@ -3,6 +3,8 @@ import S from '../../styles/profile.styles';
 import { DogSizeMapping } from '../../constants/DogSizeMapping';
 import { calculateAge } from '../../utils/calculateAge';
 import { DogType } from '@/service/apis/dog/index.type';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@common/constants/route';
 
 interface PetProfileProps {
   data?: DogType;
@@ -11,6 +13,7 @@ interface PetProfileProps {
 }
 
 function PetProfileCard({ data, editId, setEditId }: PetProfileProps) {
+  const navigate = useNavigate();
   /** @Todo 반려견 정보 등록 후에 타입 수정하기 */
   const dogSize = data ? DogSizeMapping[data.size as DogSize] : '';
 
@@ -19,6 +22,7 @@ function PetProfileCard({ data, editId, setEditId }: PetProfileProps) {
   const handleCardClick = (dogId: number) => {
     if (editId === dogId) {
       setEditId(0);
+      navigate(ROUTE.DOGSEDIT(dogId));
     } else {
       setEditId(dogId);
     }

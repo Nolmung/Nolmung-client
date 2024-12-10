@@ -1,5 +1,5 @@
 import dogBreeds from '@/common/constants/dogBreeds';
-import { S } from './styles/dogs.styles';
+import { S } from './styles/dogsEdit.styles';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -10,9 +10,10 @@ import { uploadFileToS3 } from '@/common/utils/uploadImageToS3';
 import { usePostDogs } from './queries';
 import { DogInfoType } from '@/service/apis/dog/index.type';
 import 'dayjs/locale/ko';
+import { postDogs } from '@/service/apis/dog';
 dayjs.locale('ko');
 
-function Dogs() {
+function DogsEdit() {
   const { state } = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -80,10 +81,8 @@ function Dogs() {
     const file = event.target.files?.[0];
     if (file) {
       try {
-        // S3 업로드
         const uploadedFiles = await uploadFileToS3([file]);
 
-        // undefined 체크 및 URL 업데이트
         if (uploadedFiles && uploadedFiles.length > 0) {
           const s3Url = uploadedFiles[0].s3Url;
 
@@ -140,17 +139,32 @@ function Dogs() {
     setFilteredLocations([]);
     setDropdownVisible(false);
   };
-  
+  const a: DogInfoType = {
+    dogName: '김영수',
+    dogType: '달마시안',
+    birth: '2022-02-12',
+    profileUrl:
+      'https://nolmung.s3.ap-northeast-2.amazonaws.com/%E1%84%91%E1%85%A6%E1%86%BA%E1%84%8B%E1%85%B5%E1%84%83%E1%85%A9%E1%86%BC%E1%84%80%E1%85%A1%E1%84%87%E1%85%A1%E1%86%BC(%E1%84%89%E1%85%B3%E1%84%86%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%8B%E1%85%B1%20%E1%84%85%E1%85%A5%E1%84%87%E1%85%B3:%E1%84%8B%E1%85%B1%E1%84%80%E1%85%B3%E1%86%AF%E1%84%87%E1%85%A6%E1%84%8B%E1%85%A5).jpg',
+    gender: 'MALE',
+    neuterYn: true,
+    size: 'M',
+  };
 
   const handleSubmitClick = async () => {
-    postDogMutate(dogData, {
-      onSuccess: () => {
-        navigate(ROUTE.MAIN(), {
-          state: { nickname, dogData },
-          replace: true,
-        });
-      },
-    });
+    // postDogMutate(dogData, {
+    //   onSuccess: () => {
+    //     navigate(ROUTE.MAIN(), {
+    //       state: { nickname, dogData },
+    //       replace: true,
+    //     });
+    //   },
+    // });
+    try {
+      const response = await postDogs(a); // 비동기 호출
+      console.log('등록 성공:', response);
+    } catch (error) {
+      console.log('등록 실패:', error);
+    }
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -167,7 +181,6 @@ function Dogs() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-  console.log(dogData);
 
   return (
     <S.ContainerWrapper>
@@ -300,11 +313,16 @@ function Dogs() {
           </S.GenderWrapper>
         </div>
       </S.GenderContainer>
-      <S.NextButton isActive={NextButtonActive} onClick={handleSubmitClick}>
-        놀멍 시작하기
-      </S.NextButton>
+      <S.ButtonArea>
+        <S.NextButton isActive={NextButtonActive} onClick={handleSubmitClick}>
+          수정하기
+        </S.NextButton>
+        <S.NextButton isActive={NextButtonActive} onClick={handleSubmitClick}>
+          삭제하기
+        </S.NextButton>
+      </S.ButtonArea>
     </S.ContainerWrapper>
   );
 }
 
-export default Dogs;
+export default DogsEdit;
