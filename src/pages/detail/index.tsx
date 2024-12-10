@@ -36,6 +36,8 @@ import {
 import { IoHeartSharp } from 'react-icons/io5';
 import { useDeleteBookmarks } from '../myFavorite/hooks';
 import { usePostBookmarks } from '../main/queries';
+import getIsLogin from '@/common/utils/getIsLogin';
+import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 
 function Detail() {
   const navigate = useNavigate();
@@ -46,7 +48,7 @@ function Detail() {
   useSetDocumentTitle(data?.placeName || '');
 
   const { mutate: deleteBookmarks } = useDeleteBookmarks();
-
+  const { open } = useLoginPromptModalStore();
   const [isBookmarked, setIsBookmarked] = useState<boolean>(
     data?.isBookmarked ?? false,
   );
@@ -80,9 +82,14 @@ function Detail() {
     return price == '변동' || price == '없음';
   };
 
+  const isLoggedIn = getIsLogin();
+
   const handleLikeClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
-
+    if (!isLoggedIn) {
+      open();
+      return;
+    }
     if (isBookmarked) {
       deleteBookmarks(data!.placeId, {
         onSuccess: (data) => {
