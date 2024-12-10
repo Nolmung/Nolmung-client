@@ -21,6 +21,7 @@ import Mypage from '../pages/my';
 import TodayMungEdit from '../pages/todaymungEdit';
 import DogsEdit from '../pages/dogEdit';
 import PrivateRoute from './PrivateRoute';
+import NotFound from '@/pages/404';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -90,6 +91,7 @@ function Router() {
             path={ROUTE.MYFAVORITE()}
             element={<PrivateRoute outlet={<MyFavorite />} />}
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </Suspense>
