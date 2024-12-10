@@ -7,7 +7,6 @@ import { FilledStar } from '@/assets/images/svgs';
 import { usePostBookmarks } from '../../queries';
 import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 import { useDeleteBookmarks } from '@/pages/myFavorite/hooks';
-// import { LoadingSkeletonLottie } from '@/common/components/lottie';
 import { useEffect, useState } from 'react';
 import { ContentSkeletonUI } from '@/common/skeleton';
 
@@ -23,8 +22,7 @@ function Content({ place, isCard }: ContentProps) {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(
     place!.isBookmarked ?? false,
   );
-
-  // place 변경 시 isBookmarked 상태 동기화
+  
   useEffect(() => {
     if (place) {
       setIsBookmarked(place!.isBookmarked!);
@@ -64,7 +62,7 @@ function Content({ place, isCard }: ContentProps) {
     navigate(ROUTE.DETAIL(place!.placeId));
   };
 
-  if (!place) {
+  if (!place?.isBookmarked||!place) {
     return <ContentSkeletonUI />;
   }
 
