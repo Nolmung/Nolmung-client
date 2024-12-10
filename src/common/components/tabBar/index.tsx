@@ -25,7 +25,8 @@ function TabBar() {
     if (!isLoggedIn) {
       if (path === '/todaymung' || path === '/my') {
         open();
-        return;
+      } else {
+        navigate(path);
       }
     } else {
       if (location.pathname === '/todaymung/write') {
@@ -33,9 +34,11 @@ function TabBar() {
           window.confirm('작성중인 글이 있습니다. 이동하시겠습니까?');
           deleteReviewAll();
           deleteTodaymungAll();
+          navigate(path);
         }
+      } else {
+        navigate(path);
       }
-      navigate(path);
     }
   };
 

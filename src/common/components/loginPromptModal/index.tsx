@@ -26,21 +26,12 @@ function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
     navigate(ROUTE.LOGIN());
   };
 
-  useEffect(() => {
-    console.log('---', isOpen, closeModal);
-  }, [closeModal]);
-
   return (
     <Modal
       height={modalContentHeight + 'px'}
       width={modalContentWidth + 'px'}
       isOpen={isOpen}
-      closeModal={
-        closeModal ||
-        (() => {
-          console.log('true');
-        })
-      }
+      closeModal={closeModal || (() => {})}
     >
       <S.Wrapper>
         <S.Title>

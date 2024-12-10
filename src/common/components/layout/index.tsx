@@ -248,7 +248,6 @@ function Layout({ children }: LayoutProps) {
 
   const { isOpen, close } = useLoginPromptModalStore();
 
-  console.log('close', close);
   return (
     <S.Wrapper>
       {isOpen && <LoginPromptModal closeModal={close} />}

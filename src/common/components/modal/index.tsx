@@ -8,7 +8,6 @@ const Modal = ({ width, height, isOpen, closeModal, children }: ModalProps) => {
     <S.ModalWrapper>
       <S.ModalBackground
         onClick={() => {
-          console.log('closeModal', closeModal);
           closeModal();
         }}
       />
