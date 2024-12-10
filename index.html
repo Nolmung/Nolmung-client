@@ -5,13 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/svgs/NolmungLogo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>놀멍</title>
-  </head>
-  <body>
-    <div id="root"></div>
     <script
       type="text/javascript"
       src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=<%= naverClientId %>"
+      defers
     ></script>
+  </head>
+  <body>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
