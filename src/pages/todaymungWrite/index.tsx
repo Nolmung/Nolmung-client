@@ -21,7 +21,7 @@ function TodayMungWrite() {
 
   const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary();
-  const { postReviewsSequentially } = usePostReviews();
+  const { mutate: reviewMutate } = usePostReviews();
 
   useSetDocumentTitle('오늘멍 작성하기');
 
@@ -65,7 +65,7 @@ function TodayMungWrite() {
       };
       reviewRequestList.push(reviewRequest);
     }
-    postReviewsSequentially(reviewRequestList);
+    reviewMutate(reviewRequestList);
   };
 
   const navigateToTodaymungPlaceRegist = () => {

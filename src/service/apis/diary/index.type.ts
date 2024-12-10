@@ -4,14 +4,22 @@ export enum MediaType {
 }
 
 export interface Media {
-  mediaId: number;
-  mediaType: MediaType;
+  mediaId?: number;
+  mediaType: string;
   mediaUrl: string;
 }
 export interface PostDiaryRequest {
   title: string;
   content: string;
   places: number[];
+  medias: Media[];
+  dogs: number[];
+  publicYn: boolean;
+}
+
+export interface EditDiaryRequest {
+  title: string;
+  content: string;
   medias: Media[];
   dogs: number[];
   publicYn: boolean;
