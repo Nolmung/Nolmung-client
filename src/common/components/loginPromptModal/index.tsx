@@ -4,7 +4,6 @@ import { S } from './index.style';
 import { useNavigate } from 'react-router-dom';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import { ROUTE } from '@/common/constants/route';
-import { useEffect } from 'react';
 
 interface LoginPromptModalProps {
   closeModal: () => void;
