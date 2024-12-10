@@ -1,19 +1,22 @@
 import dogBreeds from '@/common/constants/dogBreeds';
-import { S } from './styles/dogs.styles';
+import { S } from './styles/dogsEdit.styles';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+import { useParams } from 'react-router-dom';
 import DatePicker from '../signUp/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { uploadFileToS3 } from '@/common/utils/uploadImageToS3';
-import { usePostDogs } from './queries';
+import { usePatchDogs, useDeleteDogs } from './queries';
 import { DogInfoType } from '@/service/apis/dog/index.type';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
 
-function Dogs() {
+function DogsEdit() {
   const { state } = useLocation();
+  const { dogId } = useParams<{ dogId: string }>();
+  const numDogId = Number(dogId);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -24,8 +27,8 @@ function Dogs() {
   const [gender, setGender] = useState<string | null>(null);
   const [neutered, setNeutered] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
-  const { mutate: postDogMutate } = usePostDogs();
-
+  const { mutate: patchDogMutate } = usePatchDogs();
+  const { mutate: deleteDogMutate } = useDeleteDogs();
   const handleDateChange = (newValue: Dayjs | null) => {
     setSelectedDate(newValue);
     if (newValue) {
@@ -80,10 +83,8 @@ function Dogs() {
     const file = event.target.files?.[0];
     if (file) {
       try {
-        // S3 업로드
         const uploadedFiles = await uploadFileToS3([file]);
 
-        // undefined 체크 및 URL 업데이트
         if (uploadedFiles && uploadedFiles.length > 0) {
           const s3Url = uploadedFiles[0].s3Url;
 
@@ -139,18 +140,25 @@ function Dogs() {
     setFilteredLocations([]);
     setDropdownVisible(false);
   };
-  
 
-  const handleSubmitClick = async () => {
-    postDogMutate(dogData, {
+
+  const handleEditClick = async () => {
+    patchDogMutate({ dogId:numDogId, dogInfo: dogData }, {
       onSuccess: () => {
-        navigate(ROUTE.MAIN(), {
-          state: { nickname, dogData },
-          replace: true,
-        });
-      },
-    });
-  };
+        navigate(ROUTE.MY());
+        },
+      onError: (error) => console.error('수정 실패:', error),
+    })
+  }
+
+  const handleDeleteClick = async () => {
+     deleteDogMutate(numDogId, {
+       onSuccess: () => {
+         navigate(ROUTE.MY());
+        },
+      onError: (error) => console.error('삭제 실패:', error),
+    })
+  }
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -166,6 +174,7 @@ function Dogs() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
 
   return (
     <S.ContainerWrapper>
@@ -298,11 +307,16 @@ function Dogs() {
           </S.GenderWrapper>
         </div>
       </S.GenderContainer>
-      <S.NextButton isActive={NextButtonActive} onClick={handleSubmitClick}>
-        놀멍 시작하기
-      </S.NextButton>
+      <S.ButtonArea>
+        <S.EditButton isActive={NextButtonActive} onClick={handleEditClick}>
+          수정하기
+        </S.EditButton>
+        <S.DeleteButton onClick={handleDeleteClick}>
+          삭제하기
+        </S.DeleteButton>
+      </S.ButtonArea>
     </S.ContainerWrapper>
   );
 }
 
-export default Dogs;
+export default DogsEdit;

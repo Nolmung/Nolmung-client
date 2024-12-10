@@ -3,6 +3,7 @@ import Main from '@pages/main';
 import TodayMung from '@pages/todaymung';
 import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import KakaoCallbackHandler from './pages/login/components/KakaoCallbackHandler';
 
 import Layout from './common/components/layout';
 import Detail from './pages/detail';
@@ -18,6 +19,7 @@ import MyFavorite from './pages/myFavorite';
 import TodayMungDetail from './pages/todaymungDetail';
 import Mypage from './pages/my';
 import TodayMungEdit from './pages/todaymungEdit';
+import DogsEdit from './pages/dogEdit';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -40,6 +42,10 @@ function Router() {
           <Route path={ROUTE.TODAYMUNG()} element={<TodayMung />} />
           <Route path={ROUTE.DETAIL(':placeId')} element={<Detail />} />
           <Route path={ROUTE.LOGIN()} element={<Login />} />
+          <Route
+            path={ROUTE.KAKAOCALLBACKHANDLER()}
+            element={<KakaoCallbackHandler />}
+          />
           <Route path={ROUTE.SIGNUP()} element={<SignUp />} />
           <Route path={ROUTE.SEARCH()} element={<Search />} />
           <Route path={ROUTE.DOGS()} element={<Dogs />} />
@@ -60,6 +66,7 @@ function Router() {
             path={ROUTE.TODAYMUNG_EDIT(':diaryId')}
             element={<TodayMungEdit />}
           />
+          <Route path={ROUTE.DOGSEDIT(':dogId')} element={<DogsEdit />} />
         </Routes>
       </Layout>
     </Suspense>

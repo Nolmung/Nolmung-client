@@ -104,12 +104,19 @@ function Main() {
             if (searchResponseData?.length == 1) {
               setBottomCardVisible(true);
               setBottomSheetVisible(false);
-              setMarkerData(searchResponseData);
+
               setMapCenter({
                 latitude: searchResponseData[0].latitude + moveLatLng.lat,
                 longitude: searchResponseData[0].longitude + moveLatLng.lng,
               });
             }
+            setMarkerData(searchResponseData as MarkerType[]);
+            initMarkers(
+              mapRef.current as naver.maps.Map,
+              searchResponseData as MarkerType[],
+              markersRef,
+              handleMarkerClick,
+            );
           } else {
             await getAndInitMarkers();
           }
@@ -310,7 +317,9 @@ function Main() {
     });
 
     setBottomCardVisible(true);
-    mapRef.current!.setZoom(30);
+    if (mapRef.current) {
+      mapRef.current!.setZoom(30);
+    }
   };
 
   /** 마커 클릭 이벤트 함수 */

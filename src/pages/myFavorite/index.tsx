@@ -66,12 +66,12 @@ function MyFavorite() {
         {placeMap &&
           placeMap.map((place: Bookmark) => (
             <S.PlaceCard
-              onClick={() => navigateToDetail(place.bookmarkId)}
+              onClick={() => navigateToDetail(place.placeId)}
               key={place.bookmarkId}
             >
               <S.ImageWrapper>
                 <S.PlaceImage src={place.placeImageUrl} alt={place.name} />
-                <S.Like onClick={(e) => handleLikeClick(e, place.bookmarkId)}>
+                <S.Like onClick={(e) => handleLikeClick(e, place.placeId)}>
                   <IoHeartSharp size={24} color="#FF4E3E" />
                 </S.Like>
               </S.ImageWrapper>

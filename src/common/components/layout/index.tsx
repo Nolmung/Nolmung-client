@@ -35,6 +35,7 @@ const pathRules: PathRules = {
     '/my/review',
     '/signUp',
     '/dogs',
+    /^\/dogs\/edit\/\d+$/,
   ], // TabBar를 숨길 경로들
 };
 
@@ -88,6 +89,15 @@ function Layout({ children }: LayoutProps) {
       });
       return;
     }
+    if (location.pathname.startsWith('/dogs/edit')) {
+      setHeaderTitle({
+        title: '수정',
+        showIcon: true,
+        type: 'TitleLeft',
+      });
+      return;
+    }
+
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
     const categoryLabel = category

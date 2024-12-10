@@ -2,7 +2,7 @@ import { S } from '../styles/login.styles';
 
 function KakaoLoginButton() {
   const handleKakaoLogin = () => {
-    window.location.href = 'https://nolmung.org/oauth2/authorization/kakao';
+    window.location.href = 'https://dev.nolmung.org/oauth2/authorization/kakao';
   };
   return (
     <>

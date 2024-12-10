@@ -1,7 +1,7 @@
 /** @Todo axios 인스턴스 만들기, interceptor 설정 */
 
-import { ROUTE } from '@/common/constants/route';
 import axios from 'axios';
+import { ROUTE } from '@common/constants/route';
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_API_SERVER_URL,
