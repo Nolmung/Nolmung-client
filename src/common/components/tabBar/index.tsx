@@ -8,6 +8,7 @@ import useIsReviewEmpty from '@/common/utils/useIsReviewEmpty';
 import useIsTodaymungEmpty from '@/common/utils/useIsTodaymungEmpty';
 import { useReviewStore } from '@/pages/todaymungPlaceRegist/stores/reviewStore';
 import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
+import getIsLogin from '@/common/utils/getIsLogin';
 
 function TabBar() {
   const location = useLocation();
@@ -19,13 +20,12 @@ function TabBar() {
   const { deleteReviewAll } = useReviewStore();
   const { deleteTodaymungAll } = useTodayMungStore();
 
-  const isLoggedIn = localStorage.getItem('accessToken');
-
   const handleTabIconClick = (path: string) => {
-    if (!isLoggedIn) {
+    if (!getIsLogin()) {
       if (path === '/todaymung' || path === '/my') {
         open();
       } else {
+        console.log('path', path);
         navigate(path);
       }
     } else {
@@ -37,6 +37,7 @@ function TabBar() {
           navigate(path);
         }
       } else {
+        console.log('path', path);
         navigate(path);
       }
     }
