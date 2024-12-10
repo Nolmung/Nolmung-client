@@ -37,7 +37,6 @@ function TabBar() {
           navigate(path);
         }
       } else {
-        console.log('path', path);
         navigate(path);
       }
     }
