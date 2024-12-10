@@ -3,17 +3,26 @@ import Modal from '../modal';
 import { S } from './index.style';
 import { useNavigate } from 'react-router-dom';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
+import { ROUTE } from '@/common/constants/route';
 
-function LoginPromptModal() {
+interface LoginPromptModalProps {
+  closeModal: () => void;
+}
+
+function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
   const navigate = useNavigate();
+
   const { isOpen, close } = useLoginPromptModalStore();
+
   const modalContentHeight =
     window.innerHeight * 0.4 < 400 ? 400 : window.innerHeight * 0.4;
+
   const modalContentWidth =
     window.innerWidth * 0.7 > 400 ? 400 : window.innerWidth * 0.7;
+
   const handleLoginButtonClick = () => {
     close();
-    navigate;
+    navigate(ROUTE.LOGIN(), { replace: true });
   };
 
   return (
@@ -21,7 +30,7 @@ function LoginPromptModal() {
       height={modalContentHeight + 'px'}
       width={modalContentWidth + 'px'}
       isOpen={isOpen}
-      closeModal={close}
+      closeModal={closeModal || (() => {})}
     >
       <S.Wrapper>
         <S.Title>
