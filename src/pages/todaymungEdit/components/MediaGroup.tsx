@@ -79,16 +79,28 @@ function MediaGroup() {
       <S.AddMediaButton onClick={handleAddMediaButtonClick}>
         <CameraIcon width={24} height={24} />
       </S.AddMediaButton>
-      {medias?.map((media) => (
-        <S.MediaWrapper key={media.mediaId}>
-          <S.Media src={media.mediaUrl!} />
-          <S.IconWrapper
-            onClick={() => handleRemoveMediaButtonClick(media.mediaId!)}
-          >
-            <CancelIcon width={10} />
-          </S.IconWrapper>
-        </S.MediaWrapper>
-      ))}
+      {medias?.map((media) => {
+        const isMediaIdValid =
+          media.mediaUrl !== undefined && media.mediaUrl.startsWith('https://');
+        return (
+          <S.MediaWrapper key={media.mediaId}>
+            <S.Media
+              src={
+                isMediaIdValid
+                  ? media.mediaUrl
+                  : '/public/svgs/todayMungDefaultImage.svg'
+              }
+            />
+            {isMediaIdValid && (
+              <S.IconWrapper
+                onClick={() => handleRemoveMediaButtonClick(media.mediaId!)}
+              >
+                <CancelIcon width={10} />
+              </S.IconWrapper>
+            )}
+          </S.MediaWrapper>
+        );
+      })}
     </S.Wrapper>
   );
 }
