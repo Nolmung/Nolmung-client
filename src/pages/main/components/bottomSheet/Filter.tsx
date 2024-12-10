@@ -1,7 +1,13 @@
 import { useState, forwardRef } from 'react';
 import S from '../../styles/Filter.style';
-import { FilterState, FilterType, FilterValue } from '../../types/filter';
+import {
+  FilterState,
+  FilterType,
+  FilterValue,
+  RatingFitlerValue,
+} from '../../types/filter';
 import { FILTER_OPTIONS, FILTER_TYPES } from '../../constants/filter';
+import { DogSize } from '@/service/apis/user/index.types';
 
 function FilterButtonGroup({
   type,
@@ -11,8 +17,8 @@ function FilterButtonGroup({
 }: {
   type: FilterType;
   options: { value: string; label: string }[];
-  selectedValue: FilterValue;
-  onClick: (type: FilterType, value: string) => void;
+  selectedValue: DogSize | RatingFitlerValue | null;
+  onClick: (type: FilterType, value: string | number) => void;
 }) {
   return (
     <S.ButtonWrapper>
@@ -29,26 +35,13 @@ function FilterButtonGroup({
   );
 }
 
-const Filter = forwardRef<HTMLDivElement>(function (_, ref) {
-  const [selectedFilter, setSelectedFilter] = useState<FilterState>({
-    weight: null,
-    rating: null,
-  });
-
-  const handleFilterClick = (type: FilterType, value: string) => {
-    if (selectedFilter[type] === value) {
-      setSelectedFilter({
-        ...selectedFilter,
-        [type]: null,
-      });
-      return;
-    }
-    setSelectedFilter({
-      ...selectedFilter,
-      [type]: value,
-    });
-  };
-
+const Filter = forwardRef<
+  HTMLDivElement,
+  {
+    selectedFilter: FilterState;
+    onFilterChange: (type: FilterType, value: string | number) => void;
+  }
+>(function ({ selectedFilter, onFilterChange }, ref) {
   return (
     <S.FilterWrapper ref={ref}>
       {Object.entries(FILTER_OPTIONS).map(([type, options]) => (
@@ -60,7 +53,7 @@ const Filter = forwardRef<HTMLDivElement>(function (_, ref) {
             type={type as FilterType}
             options={options}
             selectedValue={selectedFilter[type as FilterType]}
-            onClick={handleFilterClick}
+            onClick={onFilterChange}
           />
         </S.FilterMenu>
       ))}
