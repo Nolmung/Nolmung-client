@@ -35,7 +35,13 @@ function Mypage() {
           <S.ProfileTextWrapper>
             <S.NameWrapper>
               <S.ProfileName>{userData.userNickname}</S.ProfileName>
-              <UserEditIcon width={15} height={15} />
+              <UserEditIcon
+                width={15}
+                height={15}
+                onClick={() =>
+                  navigate('/signup', { state: { userId: userData.userId } })
+                }
+              />
             </S.NameWrapper>
             <S.ProfileEmailWrapper>
               <S.KaKaoIconImg src={kakaoIcon} />
