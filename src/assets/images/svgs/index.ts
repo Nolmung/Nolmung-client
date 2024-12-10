@@ -83,5 +83,6 @@ export { default as TodayMungListIconActive } from './TodayMungListIconActive';
 export { default as TodayMungNoListIcon } from './TodayMungNoListIcon';
 export { default as TravelMarker } from './TravelMarker';
 export { default as UserEditIcon } from './UserEditIcon';
+export { default as VisitedMarker } from './VisitedMarker';
 export { default as VisitedTag } from './VisitedTag';
 export { default as Vite } from './Vite';
