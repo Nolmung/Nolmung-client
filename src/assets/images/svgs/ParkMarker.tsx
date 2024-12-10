@@ -6,7 +6,7 @@ const SvgParkMarker = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 24 24"
     {...props}
   >
-    <rect width={24} height={24} fill="#5E5E5E" rx={12} />
+    <rect width={24} height={24} fill="currentColor"  rx={12} />
     <circle cx={12} cy={12} r={4} stroke="#fff" strokeWidth={1.5} />
     <path
       stroke="#fff"

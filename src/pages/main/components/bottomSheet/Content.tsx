@@ -1,10 +1,12 @@
 import { S } from '../../styles/Content.style';
-import { IoHeartSharp } from 'react-icons/io5';
+// import { IoHeartSharp } from 'react-icons/io5';
 import { useState } from 'react';
 import { MapPlace } from '@/service/apis/place/index.type';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
-import { FilledStar } from '@/assets/images/svgs';
+import { BookmarksTag, FilledStar } from '@/assets/images/svgs';
+import { usePostBookmarks } from '../../queries';
+import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 
 interface ContentProps {
   place: MapPlace | null;
@@ -14,9 +16,11 @@ interface ContentProps {
 function Content({ place, isCard }: ContentProps) {
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = useState<Boolean>(false);
+  const { mutate } = usePostBookmarks();
 
-  const handleLikeClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleLikeClick = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
+    mutate(place!.placeId);
     setIsLiked(!isLiked);
   };
 
@@ -32,7 +36,13 @@ function Content({ place, isCard }: ContentProps) {
           <S.InfoTextWrapper>
             <S.PlaceNameCategoryWrapper>
               <S.PlaceName>{place!.placeName}</S.PlaceName>
-              <S.PlaceCategory>{place!.category}</S.PlaceCategory>
+              <S.PlaceCategory>
+                {
+                  CATEGORY_OPTIONS?.find((option) =>
+                    option.value === place?.category ? place?.category : 'ETC',
+                  )?.label
+                }
+              </S.PlaceCategory>
             </S.PlaceNameCategoryWrapper>
             <S.PlaceAddress>{place!.roadAddress}</S.PlaceAddress>
             <S.PlaceReviewWrapper>
@@ -49,17 +59,20 @@ function Content({ place, isCard }: ContentProps) {
         <S.ImageWrapper>
           <S.PlaceImage src={place!.placeImgUrl} alt={place!.placeName} />
           <S.Like>
-            {isLiked ? (
+            {/** @Todo 장소 데이터에 isBookmarked 속성 추가되면 해당 코드 삭제 */}
+            <S.IconWrapper onClick={handleLikeClick}>
+              <BookmarksTag width={26} height={26}/>
+            </S.IconWrapper>
+            {/** @Todo 장소 데이터에 isBookmarked 속성 추가되면 해당 코드 주석 해제 */}
+            {/* {isLiked ? (
               <S.IconWrapper onClick={handleLikeClick}>
                 <IoHeartSharp size={24} color="#FF4E3E" />
               </S.IconWrapper>
             ) : (
-              <S.IconWrapper
-                onClick={handleLikeClick}
-              >
+              <S.IconWrapper onClick={handleLikeClick}>
                 <IoHeartSharp size={24} color="#a0a0a0c6" />
               </S.IconWrapper>
-            )}
+            )} */}
           </S.Like>
         </S.ImageWrapper>
       </S.Container>

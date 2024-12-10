@@ -7,3 +7,17 @@ export interface PostReviewRequest {
   category: PlaceCategory;
   labels: ReviewKeyword[];
 }
+
+export interface GetReviewResponse {
+  reviewId: number;
+  placeId: number;
+  placeName: string;
+  address: string;
+  rating: number;
+  Labels: ReviewKeyword[];
+}
+
+export interface GetReviewsParams {
+  page: number;
+  size: number;
+}

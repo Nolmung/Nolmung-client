@@ -22,6 +22,7 @@ import { getPlacesFilter, getPlacesMap } from '@/service/apis/place';
 import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
+import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -53,6 +54,14 @@ function Main() {
   const [mapCenter, setMapCenter] = useMapCenter();
 
   const [markerData, setMarkerData] = useState<MarkerType[]>([]);
+
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
+
+  const { data: searchResponseData, isLoading } = useGetPlaceSearch(
+    searchKeyword || '',
+  );
+
+  const moveLatLng = { lat: -0.0007, lng: 0.0002 };
 
   useEffect(() => {
     const initializeMap = async () => {
@@ -89,7 +98,17 @@ function Main() {
           if (categoryFromUrl) {
             await getCategoryMarkers(categoryFromUrl);
           } else if (searchFromUrl) {
-            /** @Todo search api 호출 함수 넣기 */
+            setSearchKeyword(searchFromUrl);
+            if (isLoading) return;
+            if (searchResponseData?.length == 1) {
+              setBottomCardVisible(true);
+              setBottomSheetVisible(false);
+              setMarkerData(searchResponseData);
+              setMapCenter({
+                latitude: searchResponseData[0].latitude + moveLatLng.lat,
+                longitude: searchResponseData[0].longitude + moveLatLng.lng,
+              });
+            } 
           } else {
             await getAndInitMarkers();
           }
@@ -108,7 +127,24 @@ function Main() {
     initializeMap();
   }, [mapCenter]);
 
-  /** 지도 초기화 이후 카테고리 필터링 또는 검색어로 장소 검색 */ 
+  /** 센터 이동 필요시 */
+  useEffect(() => {
+    const lat = new URLSearchParams(location.search).get('lat');
+    const lng = new URLSearchParams(location.search).get('lng');
+    if (mapCenter) {
+      const newCenter = new naver.maps.LatLng(
+        (mapCenter.latitude = lat
+          ? parseFloat(lat) + moveLatLng.lat
+          : mapCenter.latitude),
+        (mapCenter.longitude = lng
+          ? parseFloat(lng) + moveLatLng.lng
+          : mapCenter.longitude),
+      );
+      mapRef.current?.setCenter(newCenter);
+    }
+  }, [location.search, mapCenter]);
+
+  /** 지도 초기화 이후 카테고리 필터링 또는 검색어로 장소 검색 */
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     const categoryFromUrl = query.get('category');
@@ -116,12 +152,29 @@ function Main() {
     if (categoryFromUrl) {
       getCategoryMarkers(categoryFromUrl);
     } else if (searchFromUrl) {
-      /** @Todo search api 호출 함수 넣기 */
+      setSearchKeyword(searchFromUrl);
+      if (searchResponseData) setMarkerData(searchResponseData);
+      if (searchResponseData) {
+        initMarkers(
+          mapRef?.current as naver.maps.Map,
+          searchResponseData,
+          markersRef,
+          handleMarkerClick,
+        );
+        if (searchResponseData.length === 1 && markersRef?.current?.[0]) {
+          // markersRef.current = searchResponseData[0];
+          setMarkerData(searchResponseData);
+          initMarkerActive(markersRef.current[0]);
+        } else {
+          mapRef.current?.setZoom(10);
+        }
+      }
     }
-  }, [location.search]);
+  }, [location.search, searchResponseData]);
 
   /** 바텀시트, 바텀카드 높이 조절 */
   useEffect(() => {
+    console.log('bottomSheetVisible:', bottomSheetVisible, bottomCardVisible);
     if (bottomSheetVisible && !bottomCardVisible) {
       setBottomHeight(BOTTOM_HEIGHT);
       setCurrentButtonHeight(BOTTOM_HEIGHT + CURRENT_BUTTON_HEIGHT);
@@ -180,15 +233,26 @@ function Main() {
         longitude: coordinate.longitude,
         maxLatitude: coordinate.maxLatitude,
         maxLongitude: coordinate.maxLongitude,
-        ...(categoryFromUrl === 'bookmarks' && { isBookmarked: true }),
+        ...(categoryFromUrl === 'bookmarked' && { isBookmarked: true }),
         ...(categoryFromUrl === 'visited' && { isVisited: true }),
-        ...(categoryFromUrl !== 'bookmarks' &&
+        ...(categoryFromUrl !== 'bookmarked' &&
           categoryFromUrl !== 'visited' && {
             category: categoryFromUrl as PlaceCategory,
           }),
       };
       const markerData = await getPlacesFilter(requestBody);
       setMarkerData(markerData);
+
+      // // 지도 중심 이동
+      // if (markerData.length > 0) {
+      //   const firstMarker = markerData[markerData.length-1]; // 마지막 마커가 가장 가까운 마커
+      //   setMapCenter({
+      //     latitude: firstMarker.latitude + moveCategoryLatLng.lat,
+      //     longitude: firstMarker.longitude + moveCategoryLatLng.lng,
+      //   });
+      //   // mapRef.current.setZoom(12);
+      // }
+
       initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
     } catch (error) {
       console.error('Error Get Filtering Data:', error);
@@ -197,12 +261,7 @@ function Main() {
 
   /** 현 지도에서 검색 버튼 클릭 이벤트 함수 */
   const handleSearchCurrentButtonClick = async () => {
-    const requestBody = getCurrentAndMaxCoordinate(mapRef.current!);
-
-    alert(
-      `현재 좌표는 (${requestBody.latitude}, ${requestBody.longitude}), \n지도 최대 좌표는 (${requestBody.latitude}, ${requestBody.longitude})입니다. \n해당 좌표를 중심으로 장소를 다시 조회합니다.`,
-    );
-
+    getCurrentAndMaxCoordinate(mapRef.current!);
     const newCenter = mapRef.current!.getCenter();
     setMapCenter({ latitude: newCenter.y, longitude: newCenter.x });
     const query = new URLSearchParams(window.location.search);
@@ -220,8 +279,8 @@ function Main() {
     setIsCurrentButtonActive(false);
   };
 
-  /** 마커 클릭 이벤트 함수 */
-  const handleMarkerClick = (marker: CustomMarker) => {
+  /** 기존 활성화된 마커 초기화 후 새 마커를 활성화 하는 함수 */
+  const initMarkerActive = (marker: CustomMarker) => {
     setBottomSheetVisible(false);
 
     if (selectedMarkerRef.current) {
@@ -238,9 +297,7 @@ function Main() {
     }
 
     selectedMarkerRef.current = marker;
-    const position = marker.getPosition();
 
-    setMapCenter({ latitude: position.y - 0.0005, longitude: position.x });
     marker.setIcon({
       content: ReactDOMServer.renderToString(
         <CustomMarkerComponent
@@ -252,9 +309,18 @@ function Main() {
       ),
     });
 
-    navigate(`/?search=${marker.data.placeName}`);
     setBottomCardVisible(true);
     mapRef.current!.setZoom(30);
+  };
+
+  /** 마커 클릭 이벤트 함수 */
+  const handleMarkerClick = (marker: CustomMarker) => {
+    navigate(
+      `/?search=${marker.data.placeName}&lat=${marker.data.latitude}&lng=${marker.data.longitude}`,
+    );
+    const position = marker.getPosition();
+    setMapCenter({ latitude: position.y - 0.0005, longitude: position.x });
+    initMarkerActive(marker);
   };
 
   /** 지도 클릭 시, 기존에 활성화된 컴포넌트들을 비활성화 하도록 변경하는 이벤트 함수 */
@@ -307,17 +373,22 @@ function Main() {
               </S.SearchCurrentButton>
             )}
             <S.BottomCardWrapper>
-              {bottomCardVisible && selectedMarkerRef.current && (
-                <S.Bottom
-                  bottomVisible={bottomCardVisible}
-                  bottomHeight={bottomHeight}
-                >
-                  <Content
-                    isCard={true}
-                    place={selectedMarkerRef.current.data}
-                  />
-                </S.Bottom>
-              )}
+              {bottomCardVisible &&
+                (selectedMarkerRef.current || markerData) && (
+                  <S.Bottom
+                    bottomVisible={bottomCardVisible}
+                    bottomHeight={bottomHeight}
+                  >
+                    <Content
+                      isCard={true}
+                      place={
+                        selectedMarkerRef.current
+                          ? selectedMarkerRef.current.data
+                          : markerData[0]
+                      }
+                    />
+                  </S.Bottom>
+                )}
             </S.BottomCardWrapper>
             <S.Bottom
               bottomVisible={bottomSheetVisible}

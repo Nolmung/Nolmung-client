@@ -41,6 +41,8 @@ export interface MapPlace {
   reviewCount: number;
   latitude: number;
   longitude: number;
+  placeImageUrl?: string;
+  Address?: string;
 }
 
 export interface PlaceRequestBody {
@@ -48,4 +50,16 @@ export interface PlaceRequestBody {
   longitude: number;
   maxLatitude: number;
   maxLongitude: number;
+}
+
+export interface PlaceSearchResponse {
+  placeId: number;
+  placeName: string;
+  category: PlaceCategory;
+  roadAddress: string;
+  placeImgUrl: string;
+  starRatingAvg: number;
+  reviewCount: number;
+  latitude: number;
+  longitude: number;
 }

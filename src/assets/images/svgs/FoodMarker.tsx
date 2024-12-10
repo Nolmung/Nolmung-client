@@ -6,7 +6,7 @@ const SvgFoodMarker = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 24 24"
     {...props}
   >
-    <circle cx={12} cy={12} r={12} fill="#5E5E5E" />
+    <circle cx={12} cy={12} r={12} fill="currentColor" />
     <path
       stroke="#fff"
       strokeLinecap="round"

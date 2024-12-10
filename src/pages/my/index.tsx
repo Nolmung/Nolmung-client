@@ -1,8 +1,5 @@
 import S from './index.styles';
-import { userData } from '@/mocks/data/userData';
-import { dogData } from '@/mocks/data/dogData';
 import kakaoIcon from '@/assets/images/pngs/kakao_icon_image.png';
-import PetProfile from './components/profile';
 import {
   HeartIcon,
   LogoutIcon,
@@ -14,6 +11,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
+import { useGetDogsList, useGetUser } from './hooks';
+import PetProfileCard from './components/profile';
 
 function Mypage() {
   useSetDocumentTitle('마이페이지');
@@ -23,33 +22,41 @@ function Mypage() {
   const navigateToMyReview = () => {
     navigate(ROUTE.MY_REVIEW());
   };
+
+  const { data: userData } = useGetUser();
+  const {data: dogData} = useGetDogsList();
+
   return (
     <S.Wrapper>
       <S.ProfileWrapper>
         <S.MyProfileCard>
-          <S.ProfileImg
-            width={50}
-            height={50}
-            src={userData.userProfileImage}
-          />
-          <S.ProfileTextWrapper>
-            <S.NameWrapper>
-              <S.ProfileName>{userData.userNickname}</S.ProfileName>
-              <UserEditIcon width={15} height={15} />
-            </S.NameWrapper>
-            <S.ProfileEmailWrapper>
-              <S.KaKaoIconImg src={kakaoIcon} />
-              <S.ProfileEmail>{userData.userEmail}</S.ProfileEmail>
-            </S.ProfileEmailWrapper>
-          </S.ProfileTextWrapper>
+          {userData && (
+            <>
+              <S.ProfileImg
+                width={50}
+                height={50}
+                src={userData.userProfileImage}
+              />
+              <S.ProfileTextWrapper>
+                <S.NameWrapper>
+                  <S.ProfileName>{userData.userNickname}</S.ProfileName>
+                  <UserEditIcon width={15} height={15} />
+                </S.NameWrapper>
+                <S.ProfileEmailWrapper>
+                  <S.KaKaoIconImg src={kakaoIcon} />
+                  <S.ProfileEmail>{userData.userEmail}</S.ProfileEmail>
+                </S.ProfileEmailWrapper>
+              </S.ProfileTextWrapper>
+            </>
+          )}
         </S.MyProfileCard>
         <S.PetProfileWrapper>
-          {dogData.length > 0 ? (
+          {dogData && dogData.length > 0 ? (
             dogData.map((data) => (
-              <PetProfile data={data} editId={editId} setEditId={setEditId} />
+              <PetProfileCard data={data} editId={editId} setEditId={setEditId} key={data.dogId} />
             ))
           ) : (
-            <PetProfile editId={editId} setEditId={setEditId} />
+            <PetProfileCard editId={editId} setEditId={setEditId} />
           )}
         </S.PetProfileWrapper>
       </S.ProfileWrapper>

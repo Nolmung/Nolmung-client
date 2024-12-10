@@ -26,6 +26,7 @@ const TodayMungDetail = () => {
       : '오늘멍 상세보기',
   );
   const [editToggle, setEditToggle] = useState(false);
+  useSetDocumentTitle(`오늘멍 상세보기 - ${todaymungDetailData?.data.title}`);
   if (isLoading) {
     return <div>로딩중</div>;
   }
