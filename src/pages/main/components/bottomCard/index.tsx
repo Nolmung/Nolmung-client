@@ -1,7 +1,11 @@
 import { MapPlace } from '@/service/apis/place/index.type';
 import Content from '../bottomSheet/Content';
 
-function BottomCard({ markerInfo }: { markerInfo: MapPlace }) {
+interface BottomCardProps {
+  markerInfo: MapPlace;
+}
+
+function BottomCard({ markerInfo }:BottomCardProps) {
   return (
     <div
       style={{
@@ -13,7 +17,7 @@ function BottomCard({ markerInfo }: { markerInfo: MapPlace }) {
         height: '100px',
       }}
     >
-      <Content isCard={true} place={markerInfo} />
+      <Content isCard={true} place={markerInfo}/>
     </div>
   );
 }

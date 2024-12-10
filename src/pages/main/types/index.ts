@@ -31,6 +31,7 @@ export interface MarkerType {
   latitude: number;
   longitude: number;
   acceptSize?: DogSize;
+  isBookmarked?: boolean;
 }
 
 export const MarkerIconMapping: Record<

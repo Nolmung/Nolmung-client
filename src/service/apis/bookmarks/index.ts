@@ -15,6 +15,6 @@ export const getBookmarks = async (category: BookmarkCategory): Promise<Bookmark
 }
 
 export const deleteBookmarks = async (placeId: number): Promise<DeleteBookmarksResponse> => {
-  const response = await instance.delete<DeleteBookmarksResponse>(`/bookmarks?bookmarkId=${placeId}`);
+  const response = await instance.delete<DeleteBookmarksResponse>(`/bookmarks?placeId=${placeId}`);
   return response.data;
 }

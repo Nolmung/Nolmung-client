@@ -40,4 +40,5 @@ export interface Bookmark {
   name: string;
   ratingAvg: number;
   ratingCount: number;
+  placeId: number;
 }

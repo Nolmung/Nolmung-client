@@ -65,4 +65,5 @@ export interface PlaceSearchResponse {
   latitude: number;
   longitude: number;
   acceptSize?: DogSize;
+  isBookmarked: boolean; 
 }
