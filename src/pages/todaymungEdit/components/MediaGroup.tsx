@@ -65,6 +65,7 @@ function MediaGroup() {
     };
   };
 
+  /** @Todo 오늘멍 수정, 삭제 API 성공 후 실행되도록 수정*/
   const handleRemoveMediaButtonClick = async (mediaId: number) => {
     const result = await deleteFileFromS3(
       medias.find((media) => media.mediaId === mediaId)!.mediaUrl!,
