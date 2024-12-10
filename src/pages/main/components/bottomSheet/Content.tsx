@@ -1,10 +1,9 @@
 import { S } from '../../styles/Content.style';
 import { IoHeartSharp } from 'react-icons/io5';
-import { useEffect, useState } from 'react';
 import { MapPlace } from '@/service/apis/place/index.type';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
-import { BookmarksTag, FilledStar } from '@/assets/images/svgs';
+import { FilledStar } from '@/assets/images/svgs';
 import { usePostBookmarks } from '../../queries';
 import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 import { useDeleteBookmarks } from '@/pages/myFavorite/hooks';

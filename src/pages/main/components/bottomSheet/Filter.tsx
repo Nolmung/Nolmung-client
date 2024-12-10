@@ -1,9 +1,8 @@
-import { useState, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import S from '../../styles/Filter.style';
 import {
   FilterState,
   FilterType,
-  FilterValue,
   RatingFitlerValue,
 } from '../../types/filter';
 import { FILTER_OPTIONS, FILTER_TYPES } from '../../constants/filter';
