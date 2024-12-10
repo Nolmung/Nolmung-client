@@ -10,8 +10,8 @@ const S = {
   `,
   IconWrapper: styled.div`
     border-radius: 10px;
-    border: 1px solid #a7a7a7;
-    background: #f0f0f0;
+    border: 1px solid #17AA1A;
+    background: #D3FBD4;
     display: flex;
     justify-content: center;
     align-items: center;

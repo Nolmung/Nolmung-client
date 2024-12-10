@@ -34,7 +34,7 @@ function CustomMarkerComponent({
         </S.ClickIconWrapper>
       ) : (
         <S.IconWrapper>
-          <IconComponent width={100} />
+          <IconComponent width={100}/>
         </S.IconWrapper>
       )}
     </S.Wrapper>
