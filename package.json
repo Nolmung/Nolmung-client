@@ -18,6 +18,7 @@
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
     "@jridgewell/gen-mapping": "^0.3.6",
+    "@jridgewell/source-map": "^0.3.6",
     "@mui/icons-material": "^6.1.8",
     "@mui/material": "^6.1.10",
     "@mui/x-date-pickers": "^7.23.0",
