@@ -28,7 +28,6 @@ import LoginPromptModal from '@/common/components/loginPromptModal';
 function Main() {
   useSetDocumentTitle('놀멍');
   const { naver } = window;
-  console.log('test');
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -63,7 +62,6 @@ function Main() {
   );
 
   const moveLatLng = { lat: -0.0007, lng: 0.0002 };
-
   useEffect(() => {
     const initializeMap = async () => {
       if (!mapContainerRef.current || !naver || !mapCenter) return;
@@ -209,6 +207,7 @@ function Main() {
               name={selectedMarkerRef.current.data.placeName}
               category={selectedMarkerRef.current.data.category}
               isActive={false}
+              zoom={mapRef.current!.getZoom()}
             />,
           ),
         });
@@ -302,6 +301,7 @@ function Main() {
             name={selectedMarkerRef.current.data.placeName}
             category={selectedMarkerRef.current.data.category}
             isActive={false}
+            zoom={mapRef.current!.getZoom()}
           />,
         ),
       });
@@ -316,6 +316,7 @@ function Main() {
           name={marker.data.placeName}
           category={marker.data.category}
           isActive={true}
+          zoom={mapRef.current!.getZoom()}
         />,
       ),
     });
