@@ -1,6 +1,6 @@
 import S from './index.styles';
 
-export const PlaceSkeletonUI = () => {
+export const ContentSkeletonUI = () => {
   return (
     <S.Wrapper>
       <S.Container>

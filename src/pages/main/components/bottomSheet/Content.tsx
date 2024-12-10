@@ -9,6 +9,7 @@ import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 import { useDeleteBookmarks } from '@/pages/myFavorite/hooks';
 // import { LoadingSkeletonLottie } from '@/common/components/lottie';
 import { useEffect, useState } from 'react';
+import { ContentSkeletonUI } from '@/common/skeleton';
 
 interface ContentProps {
   place: MapPlace | null;
@@ -62,6 +63,10 @@ function Content({ place, isCard }: ContentProps) {
     e.stopPropagation();
     navigate(ROUTE.DETAIL(place!.placeId));
   };
+
+  if (!place) {
+    return <ContentSkeletonUI />;
+  }
 
   return (
     place?.isBookmarked !== undefined && (
