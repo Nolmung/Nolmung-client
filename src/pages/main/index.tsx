@@ -23,6 +23,9 @@ import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
+import LoginPromptModal from '@/common/components/loginPromptModal';
+import useModal from '@/common/hooks/useModal';
+import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -108,7 +111,7 @@ function Main() {
                 latitude: searchResponseData[0].latitude + moveLatLng.lat,
                 longitude: searchResponseData[0].longitude + moveLatLng.lng,
               });
-            } 
+            }
           } else {
             await getAndInitMarkers();
           }
@@ -174,7 +177,6 @@ function Main() {
 
   /** 바텀시트, 바텀카드 높이 조절 */
   useEffect(() => {
-    console.log('bottomSheetVisible:', bottomSheetVisible, bottomCardVisible);
     if (bottomSheetVisible && !bottomCardVisible) {
       setBottomHeight(BOTTOM_HEIGHT);
       setCurrentButtonHeight(BOTTOM_HEIGHT + CURRENT_BUTTON_HEIGHT);
@@ -344,6 +346,7 @@ function Main() {
 
   return (
     <S.Wrapper>
+      <LoginPromptModal />
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
         {!(category || location.search) && (
           <CategoryBar

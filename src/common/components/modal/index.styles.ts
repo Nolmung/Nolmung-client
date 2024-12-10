@@ -22,12 +22,12 @@ export const S = {
     background-color: rgba(0, 0, 0, 0.5);
   `,
 
-  ModalContent: styled.div`
+  ModalContent: styled.div<{ width: string; height: string }>`
     position: relative;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 330px;
-    height: 160px;
+    width: ${({ width }) => (width ? width : '330px')};
+    height: ${({ height }) => (height ? height : '160px')};
   `,
 };
