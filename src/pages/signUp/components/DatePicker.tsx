@@ -1,7 +1,7 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DesktopDatePicker as MUIDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { S } from './styles/signUp.styles';
+import { S } from '../styles/signUp.styles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ko';
@@ -16,7 +16,7 @@ interface DatePickerProps {
 const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
   const theme = createTheme({
     typography: {
-      fontFamily: 'Pretendard, Arial, sans-serif',
+      fontFamily: 'Pretendard',
     },
   });
   return (
@@ -46,13 +46,17 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
               },
               textField: {
                 sx: {
+                  width: '70%',
                   fontSize: '16px',
                   marginTop: '8px',
                   '& .MuiOutlinedInput-root': {
                     height: '50px',
                     borderRadius: '10px',
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#d9d9d9',
+                    '& fieldset': {
+                      borderColor: '#d9d9d9', // 기본 보더 색상
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#A7A7A7', // 호버 시 보더 색상
                     },
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                       borderColor: '#d9d9d9',
@@ -69,38 +73,35 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
                 sx: {
                   '& .MuiPaper-root': {
                     borderRadius: '10px',
-                    padding: '16px',
+                    padding: '20px',
                     boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                   },
                   '& .MuiPickersDay-root': {
                     fontWeight: 'bold',
                     '&:hover': {
-                      backgroundColor: '#d3fbd4 !important',
+                      backgroundColor: '#F0F0F0 !important',
                     },
                     '&.Mui-selected': {
-                      backgroundColor: '#17aa1a !important',
-                      color: '#ffffff !important',
+                      backgroundColor: '#d3fbd4 !important',
+                      border: '1px solid #17AA1A',
+                      color: '#17AA1A !important',
                     },
                   },
                   '& .MuiPickersYear-root': {
                     borderRadius: '30px',
                     '& .Mui-selected': {
-                      backgroundColor: '#17aa1a !important',
-                      color: '#ffffff !important',
-                    },
-                    '&:hover': {
-                      backgroundColor: '#17aa1a !important',
+                      backgroundColor: '#d3fbd4 !important',
+                      border: '1px solid #17AA1A',
+                      color: '#17AA1A !important',
                     },
                   },
                   '& .MuiPickersMonth-root': {
                     fontWeight: 'bold',
                     borderRadius: '30px',
                     '& .Mui-selected': {
-                      backgroundColor: '#17aa1a !important',
-                      color: '#ffffff !important',
-                    },
-                    '&:hover': {
-                      backgroundColor: '#17aa1a !important',
+                      backgroundColor: '#d3fbd4 !important',
+                      border: '1px solid #17AA1A',
+                      color: '#17AA1A !important',
                     },
                   },
                 },

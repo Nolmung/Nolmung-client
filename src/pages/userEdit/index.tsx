@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import { S } from '../signUp/styles/signUp.styles';
-import DatePicker from '../signUp/DatePicker';
+import DatePicker from '../signUp/components/DatePicker';
+import DaumPost from '../signUp/components/DaumPost';
 import { instance } from '@/service/apis';
+import convertAddressToLatlng from '../signUp/utils/convertAddressToLatlng';
 
 function UserEdit() {
   const [nickname, setNickname] = useState('');
@@ -11,6 +13,10 @@ function UserEdit() {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
   const [gender, setGender] = useState<string | null>(null);
   const [NextButtonActive, setNextButtonActive] = useState(false);
+  const [address, setAddress] = useState<string>('');
+  const [latitude, setLatitude] = useState<number | null>(null);
+  const [longitude, setLongitude] = useState<number | null>(null);
+
   const navigate = useNavigate();
   const location = useLocation();
   const userId = location.state?.userId;
@@ -34,6 +40,7 @@ function UserEdit() {
         setAddressProvince(userData.userAddressProvince || '');
         setSelectedDate(dayjs(userData.userBirth));
         setGender(userData.userGender);
+        setAddress(userData.userAddressProvince || '');
       } catch (error) {
         console.error('유저 정보 조회 실패:', error);
         alert('회원정보를 불러오는 데 실패했습니다.');
@@ -51,6 +58,25 @@ function UserEdit() {
     }
   }, [nickname, addressProvince, selectedDate, gender]);
 
+  useEffect(() => {
+    const fetchLatLng = async () => {
+      if (address) {
+        try {
+          const { latitude, longitude } = await convertAddressToLatlng(address);
+          setLatitude(latitude);
+          setLongitude(longitude);
+          console.log('위도:', latitude, '경도:', longitude);
+        } catch (error) {
+          console.error('주소 변환 실패:', error);
+          setLatitude(null);
+          setLongitude(null);
+        }
+      }
+    };
+
+    fetchLatLng();
+  }, [address]);
+
   const handleDateChange = (newValue: Dayjs | null) => {
     setSelectedDate(newValue);
   };
@@ -67,8 +93,8 @@ function UserEdit() {
       const requestBody = {
         userNickname: nickname,
         userAddressProvince: addressProvince,
-        userLat: 0,
-        userLong: 0,
+        userLat: latitude,
+        userLong: longitude,
         userBirth: userBirth,
         userGender: gender,
       };
@@ -99,10 +125,11 @@ function UserEdit() {
       />
       <S.ContentTitleText>주소</S.ContentTitleText>
       <S.UserInfoInput
-        value={addressProvince}
-        onChange={(e) => setAddressProvince(e.target.value)}
+        value={address} // 선택한 주소를 표시
+        onChange={(e) => setAddress(e.target.value)} // 사용자가 입력을 수정할 수 있도록 설정
         placeholder="주소를 입력해주세요"
       />
+      <DaumPost setAddress={setAddress} />
       <S.ContentTitleText>생년월일</S.ContentTitleText>
       <DatePicker value={selectedDate} onChange={handleDateChange} />
       <S.ContentTitleText>성별</S.ContentTitleText>

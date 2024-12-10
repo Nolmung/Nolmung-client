@@ -41,7 +41,7 @@ export const S = {
     box-sizing: border-box;
     margin-top: 8px;
     color: #080808;
-    width: 100%;
+    width: 70%;
     height: 50px;
     border: 1px solid #d9d9d9;
     padding-left: 18px;
@@ -51,6 +51,12 @@ export const S = {
     &::placeholder {
       color: #a7a7a7;
       font-size: 14px;
+    }
+    &:hover {
+      border-color: #a7a7a7;
+    }
+    &:focus {
+      border-color: #a7a7a7;
     }
   `,
   AgeLabel: styled.label`

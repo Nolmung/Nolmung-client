@@ -1,7 +1,8 @@
 import { S } from './styles/signUp.styles';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import DatePicker from './DatePicker';
+import DatePicker from './components/DatePicker';
+import DaumPost from './components/DaumPost';
 import dayjs, { Dayjs } from 'dayjs';
 import axios from 'axios';
 import 'dayjs/locale/ko';
@@ -17,6 +18,7 @@ function SignUp() {
   const [NextButtonActive, setNextButtonActive] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
   const [gender, setGender] = useState<string | null>(null); // 'MALE' 또는 'FEMALE'
+  const [address, setAddress] = useState<string>('');
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -80,6 +82,9 @@ function SignUp() {
       // 주소를 위도/경도로 변환
       const { latitude, longitude } =
         await convertAddressToLatlng(addressProvince);
+      console.log('위도: ', latitude, '경도: ', longitude);
+
+      // requestBody 생성
       const requestBody = {
         userNickname: nickname,
         userAddressProvince: addressProvince,
@@ -123,24 +128,6 @@ function SignUp() {
     setAddressValid(true);
   };
 
-  // 팝업 열기
-  const openPopup = () => {
-    const popupUrl = '/addressPopup.html'; // 팝업 HTML 파일 경로
-    const popupOptions = 'width=570,height=420,scrollbars=yes,resizable=yes';
-
-    // 팝업 창 열기
-    window.open(popupUrl, '주소 검색', popupOptions);
-  };
-
-  // 팝업에서 데이터를 받아오는 함수
-  window.jusoCallBack = (
-    zipNo: string,
-    roadFullAddr: string,
-    jibunAddr: string,
-  ) => {
-    setAddressProvince(roadFullAddr); // 도로명 주소를 입력 필드에 설정
-  };
-
   return (
     <>
       <S.ContainerWrapper>
@@ -166,13 +153,11 @@ function SignUp() {
         </S.ContentTitleText>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <S.UserInfoInput
-            value={addressProvince}
+            value={address} // 선택한 주소를 표시
             onChange={handleInputChange}
-            placeholder="주소를 시,도 단위로 입력해주세요 ex)서울특별시"
+            placeholder="주소를 입력해주세요"
           />
-          <button onClick={openPopup} style={{ marginLeft: '8px' }}>
-            주소 검색
-          </button>
+          <DaumPost setAddress={setAddress} />
         </div>
         {isDropdownVisible && filteredLocations.length > 0 && (
           <S.Dropdown>

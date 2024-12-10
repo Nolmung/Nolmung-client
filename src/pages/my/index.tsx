@@ -45,8 +45,9 @@ function Mypage() {
                 <S.NameWrapper>
                   <S.ProfileName>{userData.userNickname}</S.ProfileName>
                   <UserEditIcon
-                    width={15}
-                    height={15}
+                    width={20}
+                    height={20}
+                    style={{ cursor: 'pointer' }}
                     onClick={navigateToEditPage}
                   />
                 </S.NameWrapper>
