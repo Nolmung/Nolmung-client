@@ -29,6 +29,7 @@ export interface PlaceDetailResponse {
   labels: PlaceResponseLabel[]; // 라벨 배열
   diaries: Diary[]; // 다이어리 배열
   starRatingAvg: number; // 별점 평균
+  isBookmarked: boolean; // 북마크 여부
 }
 
 export interface MapPlace {
@@ -43,7 +44,7 @@ export interface MapPlace {
   longitude: number;
   placeImageUrl?: string;
   Address?: string;
-  isBookmarked?: boolean; 
+  isBookmarked?: boolean;
   acceptSize?: DogSize;
 }
 
@@ -65,5 +66,5 @@ export interface PlaceSearchResponse {
   latitude: number;
   longitude: number;
   acceptSize?: DogSize;
-  isBookmarked: boolean; 
+  isBookmarked: boolean;
 }
