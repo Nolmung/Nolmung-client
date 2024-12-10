@@ -7,14 +7,15 @@ import Content from './Content';
 import Filter from './Filter';
 import checkUserDevice from '../../utils/checkUserDevice';
 import useMouseBottomSheet from '../../hooks/useMouseBottomSheet';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { MarkerType } from '../../types';
+import { FilterState, FilterType } from '../../types/filter';
 
 type BottomSheetProps = {
   placeMap: MarkerType[];
 };
 
-function BottomSheet({placeMap}: BottomSheetProps) {
+function BottomSheet({ placeMap }: BottomSheetProps) {
   const device = checkUserDevice();
 
   let bottomSheetRef = useRef<HTMLDivElement>(null);
@@ -34,13 +35,50 @@ function BottomSheet({placeMap}: BottomSheetProps) {
     bottomSheetRef = sheet;
     contentRef = content;
   }
+
+  const [selectedFilter, setSelectedFilter] = useState<FilterState>({
+    weight: 'ALL',
+    rating: null,
+  });
+
+  const handleFilterChange = (type: FilterType, value: string | number) => {
+    if (selectedFilter[type] === value) {
+      setSelectedFilter({
+        ...selectedFilter,
+        [type]: null,
+      });
+      return;
+    }
+    setSelectedFilter((prev) => ({
+      ...prev,
+      [type]: prev[type] === value ? null : value, // 선택 토글
+    }));
+  };
+
+  const filteredPlaceMap = placeMap.filter((place) => {
+    // 필터링 로직
+    const weightFilter =
+    place.acceptSize === 'ALL' || // 'ALL'인 경우 모든 데이터를 포함
+    (selectedFilter.weight ? place.acceptSize === selectedFilter.weight : true);
+
+    const ratingFilter = selectedFilter.rating
+      ? place.starRatingAvg >= selectedFilter.rating
+      : true;
+
+    return weightFilter && ratingFilter;
+  });
+
   return (
     <S.Wrapper ref={bottomSheetRef}>
       <S.BottomSheetBody>
         <BottomSheetHandle />
-        <Filter ref={filterRef} />
+        <Filter
+          ref={filterRef}
+          selectedFilter={selectedFilter}
+          onFilterChange={handleFilterChange}
+        />
         <S.BottomSheetContentWrapper ref={contentRef} refheight={REF_HEIGHT}>
-          {placeMap.map((place) => (
+          {filteredPlaceMap.map((place) => (
             <Content isCard={false} key={place.placeId} place={place} />
           ))}
         </S.BottomSheetContentWrapper>

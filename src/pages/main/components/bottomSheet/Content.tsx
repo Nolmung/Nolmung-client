@@ -1,12 +1,12 @@
 import { S } from '../../styles/Content.style';
-// import { IoHeartSharp } from 'react-icons/io5';
-import { useState } from 'react';
+import { IoHeartSharp } from 'react-icons/io5';
 import { MapPlace } from '@/service/apis/place/index.type';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
-import { BookmarksTag, FilledStar } from '@/assets/images/svgs';
+import { FilledStar } from '@/assets/images/svgs';
 import { usePostBookmarks } from '../../queries';
 import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
+import { useDeleteBookmarks } from '@/pages/myFavorite/hooks';
 
 interface ContentProps {
   place: MapPlace | null;
@@ -15,13 +15,35 @@ interface ContentProps {
 
 function Content({ place, isCard }: ContentProps) {
   const navigate = useNavigate();
-  const [isLiked, setIsLiked] = useState<Boolean>(false);
-  const { mutate } = usePostBookmarks();
+  const { mutate: addBookmarks } = usePostBookmarks();
+  const { mutate: deleteBookmarks } = useDeleteBookmarks();
 
-  const handleLikeClick = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleLikeClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
-    mutate(place!.placeId);
-    setIsLiked(!isLiked);
+
+    if (place?.isBookmarked) {
+      deleteBookmarks(place!.placeId, {
+        onSuccess: (data) => {
+          if (data.status === 'SUCCESS') {
+            if (place) place.isBookmarked = false;
+          }
+        },
+        onError: (error) => {
+          console.error('Failed to delete bookmark:', error);
+        },
+      });
+    } else {
+      addBookmarks(place!.placeId, {
+        onSuccess: (data) => {
+          if (data.status === 'SUCCESS') {
+            if (place) place.isBookmarked = true;
+          }
+        },
+        onError: (error) => {
+          console.error('Failed to add bookmark:', error);
+        },
+      });
+    }
   };
 
   const navigateToDetail = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -59,20 +81,12 @@ function Content({ place, isCard }: ContentProps) {
         <S.ImageWrapper>
           <S.PlaceImage src={place!.placeImgUrl} alt={place!.placeName} />
           <S.Like>
-            {/** @Todo 장소 데이터에 isBookmarked 속성 추가되면 해당 코드 삭제 */}
             <S.IconWrapper onClick={handleLikeClick}>
-              <BookmarksTag width={26} height={26}/>
+              <IoHeartSharp
+                size={24}
+                color={place!.isBookmarked ? '#FF4E3E' : '#a0a0a0c6'}
+              />
             </S.IconWrapper>
-            {/** @Todo 장소 데이터에 isBookmarked 속성 추가되면 해당 코드 주석 해제 */}
-            {/* {isLiked ? (
-              <S.IconWrapper onClick={handleLikeClick}>
-                <IoHeartSharp size={24} color="#FF4E3E" />
-              </S.IconWrapper>
-            ) : (
-              <S.IconWrapper onClick={handleLikeClick}>
-                <IoHeartSharp size={24} color="#a0a0a0c6" />
-              </S.IconWrapper>
-            )} */}
           </S.Like>
         </S.ImageWrapper>
       </S.Container>
