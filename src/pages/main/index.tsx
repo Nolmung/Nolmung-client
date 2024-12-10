@@ -23,11 +23,12 @@ import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
+import LoginPromptModal from '@/common/components/loginPromptModal';
 
 function Main() {
   useSetDocumentTitle('놀멍');
   const { naver } = window;
-
+  console.log('test');
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -103,7 +104,7 @@ function Main() {
             if (searchResponseData?.length == 1) {
               setBottomCardVisible(true);
               setBottomSheetVisible(false);
-              
+
               setMapCenter({
                 latitude: searchResponseData[0].latitude + moveLatLng.lat,
                 longitude: searchResponseData[0].longitude + moveLatLng.lng,
@@ -181,7 +182,6 @@ function Main() {
 
   /** 바텀시트, 바텀카드 높이 조절 */
   useEffect(() => {
-    console.log('bottomSheetVisible:', bottomSheetVisible, bottomCardVisible);
     if (bottomSheetVisible && !bottomCardVisible) {
       setBottomHeight(BOTTOM_HEIGHT);
       setCurrentButtonHeight(BOTTOM_HEIGHT + CURRENT_BUTTON_HEIGHT);
@@ -317,10 +317,9 @@ function Main() {
     });
 
     setBottomCardVisible(true);
-    if (mapRef.current){
+    if (mapRef.current) {
       mapRef.current!.setZoom(30);
     }
-    
   };
 
   /** 마커 클릭 이벤트 함수 */
@@ -352,8 +351,13 @@ function Main() {
     navigate('/');
   };
 
+  // if (true) {
+  //   return <LoadingNolmungLottie />;
+  // }
+
   return (
     <S.Wrapper>
+      <LoginPromptModal />
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
         {!(category || location.search) && (
           <CategoryBar
@@ -404,7 +408,7 @@ function Main() {
               bottomVisible={bottomSheetVisible}
               bottomHeight={bottomHeight}
             >
-              <BottomSheet placeMap={markerData}/>
+              <BottomSheet placeMap={markerData} />
             </S.Bottom>
           </S.BottomSheetWrapper>
         </S.Wrapper>

@@ -30,6 +30,7 @@ export { default as PlaygroundClickMarker } from './PlaygroundClickMarker';
 export { default as Price } from './Price';
 export { default as RestaurantClickMarker } from './RestaurantClickMarker';
 export { default as RestaurantTag } from './RestaurantTag';
+export { default as StandBrownDog } from './StandBrownDog';
 export { default as SmallDog } from './SmallDog';
 export { default as Time } from './Time';
 export { default as TimeRecord } from './TimeRecord';
