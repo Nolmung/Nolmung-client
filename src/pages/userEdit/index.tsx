@@ -120,6 +120,7 @@ function UserEdit() {
       <S.UserTitle>프로필 수정</S.UserTitle>
       <S.ContentTitleText>닉네임</S.ContentTitleText>
       <S.UserInfoInput
+        style={{ width: '100%' }}
         value={nickname}
         onChange={(e) => setNickname(e.target.value)}
         placeholder="닉네임을 입력해주세요"
