@@ -39,10 +39,6 @@ function TodayMungEdit() {
   } = useTodaymungDetailData(numericDiaryId);
 
   useEffect(() => {
-    console.log(todaymungEditData);
-  }, [todaymungEditData]);
-
-  useEffect(() => {
     if (todaymungEditData) {
       deleteTodaymungAll();
       const { title, content, medias, publicYn } = todaymungEditData.data;
@@ -50,7 +46,6 @@ function TodayMungEdit() {
       setContent(content);
       medias.forEach((media: any) => addMedia(media));
       setPublicYn(publicYn);
-      console.log('--------', todaymungEditData.data.dogs);
       todaymungEditData.data.dogs.map((dog: any) => addDogs(dog.dogId));
     }
   }, [todaymungEditData]);

@@ -13,7 +13,6 @@ import { useTodaymungDetailData } from './queries';
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
   const numericDiaryId = Number(diaryId);
-  console.log('numericDiaryId', numericDiaryId);
   const {
     data: todaymungDetailData,
     isLoading,

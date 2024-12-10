@@ -5,7 +5,6 @@ import { match } from 'ts-pattern';
 import { NoImage } from '@/assets/images/svgs';
 
 const ImageCard = ({ data }: { data: MediasType }) => {
-  console.log('data', data);
   const isValidImage = data.mediaUrl.includes('https://');
   return (
     <S.Wrapper>
