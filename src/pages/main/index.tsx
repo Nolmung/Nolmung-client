@@ -28,7 +28,6 @@ import LoginPromptModal from '@/common/components/loginPromptModal';
 function Main() {
   useSetDocumentTitle('놀멍');
   const { naver } = window;
-  console.log('test');
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -233,8 +232,8 @@ function Main() {
     let userCategory = null;
 
     if (categoryFromUrl === 'bookmarked' || categoryFromUrl === 'visited') {
-      /** 
-       * @Todo access Token 있는지 확인하기 
+      /**
+       * @Todo access Token 있는지 확인하기
        * 없으면 return + 로그인 페이지로 유도하는 모달창 띄우기
        * 있으면 밑의 코드 실행
        * */
@@ -261,7 +260,13 @@ function Main() {
       const markerData = await getPlacesFilter(requestBody);
       setMarkerData(markerData);
       if (userCategory) {
-        initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick, userCategory);
+        initMarkers(
+          mapRef.current,
+          markerData,
+          markersRef,
+          handleMarkerClick,
+          userCategory,
+        );
       } else {
         initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
       }

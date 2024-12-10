@@ -8,7 +8,7 @@ export const S = {
     height: 100% auto;
     text-align: center;
   `,
-  ViewModeArea: styled.div<{ CalendarView: boolean }>`
+  ViewModeArea: styled.div<{ $CalendarView: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,7 +18,7 @@ export const S = {
     overflow: scroll;
     margin-top: 5px;
     @media (min-height: 850px) {
-      margin-top: ${(props) => (props.CalendarView ? '-30px' : '5px')};
+      margin-top: ${(props) => (props.$CalendarView ? '-30px' : '5px')};
     }
   `,
 

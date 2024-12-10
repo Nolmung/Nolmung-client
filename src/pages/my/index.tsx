@@ -24,7 +24,7 @@ function Mypage() {
   };
 
   const { data: userData } = useGetUser();
-  const {data: dogData} = useGetDogsList();
+  const { data: dogData } = useGetDogsList();
 
   return (
     <S.Wrapper>
@@ -53,7 +53,12 @@ function Mypage() {
         <S.PetProfileWrapper>
           {dogData && dogData.length > 0 ? (
             dogData.map((data) => (
-              <PetProfileCard data={data} editId={editId} setEditId={setEditId} key={data.dogId} />
+              <PetProfileCard
+                data={data}
+                editId={editId}
+                setEditId={setEditId}
+                key={data.dogId}
+              />
             ))
           ) : (
             <PetProfileCard editId={editId} setEditId={setEditId} />

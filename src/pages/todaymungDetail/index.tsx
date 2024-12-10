@@ -9,6 +9,7 @@ import ImageCard from './components/imageCard';
 import EditButton from './components/editButton';
 import { useState } from 'react';
 import { useTodaymungDetailData } from './queries';
+import { LoadingSpinnerLottie } from '@/common/components/lottie';
 
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
@@ -21,10 +22,10 @@ const TodayMungDetail = () => {
 
   const [editToggle, setEditToggle] = useState(false);
   if (isLoading) {
-    return <div>로딩중</div>;
+    return <LoadingSpinnerLottie />;
   }
   if (isError) {
-    return <div>에러중</div>;
+    return <LoadingSpinnerLottie />;
   }
 
   const diaryData: DiaryType = todaymungDetailData.data;

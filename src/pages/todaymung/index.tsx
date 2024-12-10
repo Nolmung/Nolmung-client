@@ -4,6 +4,7 @@ import UserInfo from './components/userInfo';
 import { S } from './styles/index.style';
 import { getTodaymungList } from '@/service/apis/diary';
 import { useQuery } from '@tanstack/react-query';
+import { LoadingSpinnerLottie } from '@/common/components/lottie';
 
 interface Diary {
   diaryId: number;
@@ -42,10 +43,10 @@ function Todaymung() {
   useSetDocumentTitle('오늘멍 모아보기');
 
   if (isLoading) {
-    return <div>로딩중</div>;
+    return <LoadingSpinnerLottie />;
   }
   if (isError) {
-    return <div>에러중</div>;
+    return <LoadingSpinnerLottie />;
   }
   return (
     <S.Wrapper>
