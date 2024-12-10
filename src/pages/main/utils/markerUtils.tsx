@@ -45,6 +45,7 @@ export const addMarker = (
       reviewCount: data.reviewCount,
       latitude: data.latitude,
       longitude: data.longitude,
+      isBookmarked: data.isBookmarked,
     }),
       naver.maps.Event.addListener(newMarker, 'click', (e) => {
         if (e.domEvent) {

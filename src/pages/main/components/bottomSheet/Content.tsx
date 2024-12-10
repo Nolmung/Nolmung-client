@@ -7,6 +7,7 @@ import { FilledStar } from '@/assets/images/svgs';
 import { usePostBookmarks } from '../../queries';
 import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 import { useDeleteBookmarks } from '@/pages/myFavorite/hooks';
+import { useEffect, useState } from 'react';
 
 interface ContentProps {
   place: MapPlace | null;
@@ -17,15 +18,23 @@ function Content({ place, isCard }: ContentProps) {
   const navigate = useNavigate();
   const { mutate: addBookmarks } = usePostBookmarks();
   const { mutate: deleteBookmarks } = useDeleteBookmarks();
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(place!.isBookmarked ?? false);
+
+  // place 변경 시 isBookmarked 상태 동기화
+  useEffect(() => {
+    if (place) {
+      setIsBookmarked(place!.isBookmarked!);
+    }
+  }, [place]);
 
   const handleLikeClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
 
-    if (place?.isBookmarked) {
+    if (isBookmarked) {
       deleteBookmarks(place!.placeId, {
         onSuccess: (data) => {
           if (data.status === 'SUCCESS') {
-            if (place) place.isBookmarked = false;
+            setIsBookmarked(false);
           }
         },
         onError: (error) => {
@@ -36,7 +45,7 @@ function Content({ place, isCard }: ContentProps) {
       addBookmarks(place!.placeId, {
         onSuccess: (data) => {
           if (data.status === 'SUCCESS') {
-            if (place) place.isBookmarked = true;
+            setIsBookmarked(true);
           }
         },
         onError: (error) => {
@@ -52,6 +61,7 @@ function Content({ place, isCard }: ContentProps) {
   };
 
   return (
+    place?.isBookmarked !== undefined && (
     <S.Wrapper isCard={isCard} onClick={navigateToDetail}>
       <S.Container>
         <S.PlaceInfoWrapper>
@@ -84,13 +94,14 @@ function Content({ place, isCard }: ContentProps) {
             <S.IconWrapper onClick={handleLikeClick}>
               <IoHeartSharp
                 size={24}
-                color={place!.isBookmarked ? '#FF4E3E' : '#a0a0a0c6'}
+                color={isBookmarked ? '#FF4E3E' : '#a0a0a0c6'}
               />
             </S.IconWrapper>
           </S.Like>
         </S.ImageWrapper>
       </S.Container>
     </S.Wrapper>
+    )
   );
 }
 

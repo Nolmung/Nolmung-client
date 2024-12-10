@@ -79,7 +79,7 @@ function BottomSheet({ placeMap }: BottomSheetProps) {
         />
         <S.BottomSheetContentWrapper ref={contentRef} refheight={REF_HEIGHT}>
           {filteredPlaceMap.map((place) => (
-            <Content isCard={false} key={place.placeId} place={place} />
+            <Content isCard={false} key={place.placeId} place={place}/>
           ))}
         </S.BottomSheetContentWrapper>
       </S.BottomSheetBody>

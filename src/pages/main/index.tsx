@@ -394,7 +394,7 @@ function Main() {
               bottomVisible={bottomSheetVisible}
               bottomHeight={bottomHeight}
             >
-              <BottomSheet placeMap={markerData} />
+              <BottomSheet placeMap={markerData}/>
             </S.Bottom>
           </S.BottomSheetWrapper>
         </S.Wrapper>
