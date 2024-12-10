@@ -1,5 +1,6 @@
 import { HEADER_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
+import { DatepickerCalendar } from '@/assets/images/svgs';
 
 export const S = {
   ContainerWrapper: styled.div`
@@ -9,6 +10,11 @@ export const S = {
     width: 100%;
     height: calc(100vh - ${HEADER_HEIGHT}px);
     overflow-y: auto;
+  `,
+  DatepickerCalendarIcon: styled(DatepickerCalendar)`
+    width: 24px;
+    height: 24px;
+    padding: 1px;
   `,
   UserTitle: styled.h1`
     font-size: 18px;
@@ -29,7 +35,7 @@ export const S = {
     font-weight: 600;
     line-height: 1.2;
     font-size: 14px;
-    margin-top: 30px;
+    margin-top: 40px;
   `,
   UserInfoInput: styled.input<{ isDropdownVisible?: boolean }>`
     box-sizing: border-box;
@@ -47,47 +53,60 @@ export const S = {
       font-size: 14px;
     }
   `,
-
-  AgeChoiceContainer: styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-    align-items: center;
+  AgeLabel: styled.label`
+    font-size: 14px;
+    font-weight: bold;
+    color: #080808;
   `,
-  AgeChoice: styled.div<{ isSelected: boolean }>`
-    cursor: pointer;
-    margin-top: 10px;
-    width: 93px;
-    height: 93px;
+
+  AgeInput: styled.input`
+    width: 100%;
+    height: 46px;
+    padding: 8px 12px;
+    font-size: 16px;
+    color: #080808;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: #17aa1a;
+      outline: none;
+    }
+  `,
+  GenderSelect: styled.div<{ isSelected: boolean }>`
+    margin-top: 8px;
+    width: 176px;
+    height: 50px;
     background-color: ${({ isSelected }) =>
-      isSelected ? '#d3fbd4' : '#fdfdfd'};
+      isSelected ? '#d3fbd4' : '#f0f0f0'};
     border: 1px solid
-      ${({ isSelected }) => (isSelected ? '#17aa1a' : '#d9d9d9')};
-    border-radius: 50%;
-    color: ${({ isSelected }) => (isSelected ? '#17aa1a' : '#a7a7a7')};
-    border-radius: 50%;
+      ${({ isSelected }) => (isSelected ? '#17aa1a' : 'transparent')};
+    color: ${({ isSelected }) => (isSelected ? '#17aa1a' : '#000')};
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      border 0.3s ease,
+      color 0.3s ease;
+
     &:hover {
-      transition: 0.5s ease;
       background-color: #d3fbd4;
       border: 1px solid #17aa1a;
       color: #17aa1a; // 호버 시 색상 변경
     }
   `,
-  AgeChoiceText: styled.h4`
-    color: #a7a7a7;
-    line-height: 1.2;
-    font-size: 13px;
-    margin-top: 8px;
-  `,
-  AgeFlex: styled.div`
+
+  GenderWrapper: styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 10px; /* 요소 간 간격 */
+  `,
+  GenderContainer: styled.div`
+    display: flex;
   `,
   NextButton: styled.button<{ isActive: boolean }>`
     margin-top: 50px;

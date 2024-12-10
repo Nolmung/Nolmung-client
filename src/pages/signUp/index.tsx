@@ -1,7 +1,11 @@
 import { S } from './styles/signUp.styles';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// import convertAddressToLatlng from './utils/convertAddressToLatlng';
+import { useLocation, useNavigate } from 'react-router-dom';
+import DatePicker from './DatePicker';
+import dayjs, { Dayjs } from 'dayjs';
+import axios from 'axios';
+import 'dayjs/locale/ko';
+dayjs.locale('ko');
 
 const locations = [
   '서울특별시',
@@ -24,38 +28,80 @@ const locations = [
 ];
 
 function SignUp() {
-  const navigate = useNavigate();
   const [nickname, setNickname] = useState('');
   const [addressProvince, setAddressProvince] = useState('');
-  const [selectedAge, setSelectedAge] = useState<number | null>(20);
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isAddressValid, setAddressValid] = useState(true);
-
   const [NextButtonActive, setNextButtonActive] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+  const [gender, setGender] = useState<string | null>(null); // 성별 상태
 
-  const handleCircleClick = (age: number) => {
-    setSelectedAge((prev) => (prev === age ? null : age)); // 같은 값 클릭 시 선택 해제
-  };
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // 카카오 로그인 데이터 가져오기
+  // const loginStatus = location.state?.loginStatus || '';
+  // const email = location.state?.email || '';
+  // const role = location.state?.role || '';
+  const userId = location.state?.userId || '';
 
   useEffect(() => {
     document.title = '회원가입';
   }, []);
 
   useEffect(() => {
-    if (nickname && addressProvince && selectedAge) {
+    // 버튼 활성화 조건: 닉네임, 주소, 생년월일 모두 입력
+    if (nickname && addressProvince && selectedDate) {
       setNextButtonActive(true);
+    } else {
+      setNextButtonActive(false);
     }
-  }, [nickname, addressProvince, selectedAge]);
+  }, [nickname, addressProvince, selectedDate]);
 
-  const handleNext = () => {
-    if (!nickname || !addressProvince || !selectedAge) {
+  const handleDateChange = (newValue: Dayjs | null) => {
+    setSelectedDate(newValue);
+  };
+
+  const handleNext = async () => {
+    if (!nickname || !addressProvince || !selectedDate) {
       alert('모든 정보를 입력해주세요!');
       return;
     }
-    navigate('/dogs', {
-      state: { nickname, addressProvince, selectedAge },
-    });
+
+    const userBirth = selectedDate.format('YYYY-MM-DD');
+
+    if (!userId) {
+      alert('유효하지 않은 사용자 ID입니다.');
+      return;
+    }
+
+    const requestBody = {
+      userNickname: nickname,
+      userAddressProvince: addressProvince,
+      userLat: 0, // Swagger에서 정의된 필드 (현재는 하드코딩)
+      userLong: 0, // Swagger에서 정의된 필드 (현재는 하드코딩)
+      userBirth: userBirth,
+      userGender: 'FEMALE', // 'MALE' 또는 'FEMALE'로 설정
+    };
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_SERVER_URL}/users/signup/${userId}`,
+        requestBody,
+      );
+      if (response.status === 200 || response.status === 201) {
+        navigate('/dogs', {
+          state: { nickname, addressProvince, userBirth },
+        });
+      }
+    } catch (error: any) {
+      if (error.response) {
+      } else if (error.request) {
+        console.error('요청이 서버에 도달하지 못했습니다:', error.request);
+        alert('요청이 서버에 도달하지 못했습니다.');
+      }
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,6 +138,7 @@ function SignUp() {
       <S.ContainerWrapper>
         <S.UserTitle>
           안녕하세요,
+          {/* 로그인 상태: {loginStatus}, 이메일: {email}, 역할: {role} */}
           <br />
           견주님에 대해 알려주세요
         </S.UserTitle>
@@ -103,7 +150,7 @@ function SignUp() {
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           placeholder="닉네임을 입력해주세요"
-        ></S.UserInfoInput>
+        />
         <S.ContentTitleText>
           주소
           {!isAddressValid && (
@@ -114,9 +161,7 @@ function SignUp() {
           value={addressProvince}
           onChange={handleInputChange}
           placeholder="주소를 시,도 단위로 입력해주세요 ex)서울특별시"
-          isDropdownVisible={isDropdownVisible}
         />
-
         {isDropdownVisible && filteredLocations.length > 0 && (
           <S.Dropdown>
             {filteredLocations.map((location) => (
@@ -129,56 +174,27 @@ function SignUp() {
             ))}
           </S.Dropdown>
         )}
-        <S.ContentTitleText>연령</S.ContentTitleText>
-        <S.AgeChoiceContainer>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={selectedAge === 10}
-              onClick={() => handleCircleClick(10)}
-            >
-              10
-            </S.AgeChoice>
-            <S.AgeChoiceText>10대</S.AgeChoiceText>
-          </S.AgeFlex>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={selectedAge === 20}
-              onClick={() => handleCircleClick(20)}
-            >
-              20
-            </S.AgeChoice>
-            <S.AgeChoiceText>20대</S.AgeChoiceText>
-          </S.AgeFlex>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={selectedAge === 30}
-              onClick={() => handleCircleClick(30)}
-            >
-              30
-            </S.AgeChoice>
-            <S.AgeChoiceText>30대</S.AgeChoiceText>
-          </S.AgeFlex>
-        </S.AgeChoiceContainer>
-        <S.AgeChoiceContainer>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={selectedAge === 40}
-              onClick={() => handleCircleClick(40)}
-            >
-              40
-            </S.AgeChoice>
-            <S.AgeChoiceText>40대</S.AgeChoiceText>
-          </S.AgeFlex>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={selectedAge === 50}
-              onClick={() => handleCircleClick(50)}
-            >
-              50
-            </S.AgeChoice>
-            <S.AgeChoiceText>50대 이상</S.AgeChoiceText>
-          </S.AgeFlex>
-        </S.AgeChoiceContainer>
+        <S.ContentTitleText>생년월일</S.ContentTitleText>
+        <DatePicker value={selectedDate} onChange={handleDateChange} />
+        <S.GenderContainer>
+          <div>
+            <S.ContentTitleText>성별</S.ContentTitleText>
+            <S.GenderWrapper>
+              <S.GenderSelect
+                isSelected={gender === '수컷'}
+                onClick={() => setGender('수컷')}
+              >
+                남성
+              </S.GenderSelect>
+              <S.GenderSelect
+                isSelected={gender === '암컷'}
+                onClick={() => setGender('암컷')}
+              >
+                여성
+              </S.GenderSelect>
+            </S.GenderWrapper>
+          </div>
+        </S.GenderContainer>
         <S.NextButton
           disabled={!NextButtonActive}
           isActive={NextButtonActive}

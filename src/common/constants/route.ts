@@ -4,9 +4,11 @@ export const ROUTE = {
   TODAYMUNG: () => '/todaymung',
   DETAIL: (placeId: string | number) => `/detail/${placeId}`,
   LOGIN: () => '/login',
+  KAKAOCALLBACKHANDLER: () => '/oauth/kakao/callback',
   SIGNUP: () => `/signUp`,
   SEARCH: () => '/search',
   DOGS: () => '/dogs',
+  DOGSEDIT: (dogId: string | number) => `/dogs/edit/${dogId}`,
   MY_REVIEW: () => '/my/review',
   TODAYMUNG_DETAIL: (diaryId: string | number) =>
     `/todaymung/detail/${diaryId}`,

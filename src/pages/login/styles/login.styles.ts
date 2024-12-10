@@ -10,22 +10,23 @@ export const S = {
   `,
 
   StyledLogo: styled(NolmungLogo)`
-    width: 126px;
-    height: 90px;
+    width: 90px;
+    height: 64px;
     align-items: center;
-    margin-top: 24px;
+    margin-top: 20px;
   `,
 
   NolmungText: styled.h1`
     text-align: center;
     margin: auto;
     font-size: 14px;
-    margin-top: 292px;
+    margin-top: 260px;
+    line-height: 1.3;
   `,
 
   KaKaoButton: styled.button`
     all: unset;
-    margin-top: 236px;
+    margin-top: 296px;
     width: 90%;
     height: 60px;
     font-size: 16px;
@@ -39,7 +40,7 @@ export const S = {
   BackgroundImg: styled.div`
     width: 100%;
     height: 100%;
-    background-image: url('/svgs/LoginBackgroundimg.png');
+    background-image: url('/pngs/LoginBackgroundimg.png');
     background-repeat: no-repeat;
     background-size: 100%;
   `,
