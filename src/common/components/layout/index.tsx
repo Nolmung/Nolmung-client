@@ -246,10 +246,12 @@ function Layout({ children }: LayoutProps) {
     }
   }, [location.pathname, location.search]);
 
-  const { isOpen } = useLoginPromptModalStore();
+  const { isOpen, close } = useLoginPromptModalStore();
+
+  console.log('close', close);
   return (
     <S.Wrapper>
-      {isOpen && <LoginPromptModal />}
+      {isOpen && <LoginPromptModal closeModal={close} />}
       {!hideHeader && (
         <Header
           handleBackButtonClick={handleBackButtonClick}

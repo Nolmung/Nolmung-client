@@ -9,6 +9,7 @@ export const S = {
     flex-direction: column;
     box-sizing: border-box;
     gap: 10px;
+    z-index: 10000;
   `,
 
   Title: styled.div`

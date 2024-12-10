@@ -356,7 +356,7 @@ function Main() {
 
   return (
     <S.Wrapper>
-      <LoginPromptModal />
+      {/* <LoginPromptModal closeModal={() => {}} /> */}
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
         {!(category || location.search) && (
           <CategoryBar

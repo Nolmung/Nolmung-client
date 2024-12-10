@@ -10,7 +10,7 @@ export const S = {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1005;
+    z-index: 1500;
   `,
 
   ModalBackground: styled.div`
@@ -20,6 +20,7 @@ export const S = {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1500;
   `,
 
   ModalContent: styled.div<{ width?: string; height?: string }>`
@@ -29,5 +30,6 @@ export const S = {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: ${({ width }) => (width ? width : '330px')};
     height: ${({ height }) => (height ? height : '160px')};
+    z-index: 1500;
   `,
 };
