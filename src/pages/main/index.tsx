@@ -24,8 +24,6 @@ import { MarkerType } from './types';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import LoginPromptModal from '@/common/components/loginPromptModal';
-import useModal from '@/common/hooks/useModal';
-import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -343,6 +341,10 @@ function Main() {
     });
     navigate('/');
   };
+
+  // if (true) {
+  //   return <LoadingNolmungLottie />;
+  // }
 
   return (
     <S.Wrapper>

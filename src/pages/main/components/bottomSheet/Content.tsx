@@ -7,6 +7,7 @@ import { FilledStar } from '@/assets/images/svgs';
 import { usePostBookmarks } from '../../queries';
 import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 import { useDeleteBookmarks } from '@/pages/myFavorite/hooks';
+// import { LoadingSkeletonLottie } from '@/common/components/lottie';
 
 interface ContentProps {
   place: MapPlace | null;

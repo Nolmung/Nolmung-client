@@ -22,7 +22,7 @@ export const S = {
     background-color: rgba(0, 0, 0, 0.5);
   `,
 
-  ModalContent: styled.div<{ width: string; height: string }>`
+  ModalContent: styled.div<{ width?: string; height?: string }>`
     position: relative;
     background-color: white;
     border-radius: 8px;

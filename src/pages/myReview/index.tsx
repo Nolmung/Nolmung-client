@@ -5,6 +5,8 @@ import useModal from '@/common/hooks/useModal';
 import Modal from '@/common/components/modal';
 import Button from '@/common/components/button/Button';
 import { useDeleteReviews, useGetReviews } from './queries';
+import { LoadingSkeletonLottie } from '@/common/components/lottie';
+import { NoResulLiedownUI } from '@/common/components/noResultUI';
 
 function MyReview() {
   const { openModal, isOpen, closeModal } = useModal();
@@ -16,6 +18,8 @@ function MyReview() {
     hasNextPage,
     isFetchingNextPage,
   } = useGetReviews();
+
+  console.log('data', data);
 
   const observerRef = useRef<HTMLDivElement | null>(null);
   const [deleteReviewId, setDeleteReviewId] = useState<number | null>(null);
@@ -50,7 +54,7 @@ function MyReview() {
     return data?.pages.flatMap((page) => page.data) || [];
   }, [data]);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSkeletonLottie />;
 
   if (isError) {
     return (
@@ -87,6 +91,9 @@ function MyReview() {
           </S.ModalContent>
         </Modal>
       )}
+      {!allReviews.length && (
+        <NoResulLiedownUI content={'아직 리뷰가 없다 멍 !'} />
+      )}
       {allReviews.map((review) => (
         <ReviewCard
           key={review.id}
@@ -99,7 +106,7 @@ function MyReview() {
         ref={observerRef}
         style={{ height: '10px', backgroundColor: 'transparent' }}
       >
-        {isFetchingNextPage && <p>Loading more...</p>}
+        {isFetchingNextPage && <p></p>}
       </div>
     </S.Wrapper>
   );
