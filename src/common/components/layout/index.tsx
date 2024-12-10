@@ -156,6 +156,19 @@ function Layout({ children }: LayoutProps) {
           });
         }
         break;
+      
+      case pathName === '/dogs':
+        {
+          setHeaderTitle({
+            title: '반려견 등록',
+            showIcon:true,
+            type: 'TitleCenter',
+          });
+          setHandleBackButtonClick(() => () => {
+            window.history.back();
+          });
+        }
+        break;
 
       case pathName.startsWith('/todaymung/detail'):
         setHandleBackButtonClick(() => () => {

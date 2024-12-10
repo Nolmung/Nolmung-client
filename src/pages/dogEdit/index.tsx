@@ -141,24 +141,26 @@ function DogsEdit() {
     setDropdownVisible(false);
   };
 
-
   const handleEditClick = async () => {
-    patchDogMutate({ dogId:numDogId, dogInfo: dogData }, {
-      onSuccess: () => {
-        navigate(ROUTE.MY());
+    patchDogMutate(
+      { dogId: numDogId, dogInfo: dogData },
+      {
+        onSuccess: () => {
+          navigate(ROUTE.MY());
         },
-      onError: (error) => console.error('수정 실패:', error),
-    })
-  }
+        onError: (error) => console.error('수정 실패:', error),
+      },
+    );
+  };
 
   const handleDeleteClick = async () => {
-     deleteDogMutate(numDogId, {
-       onSuccess: () => {
-         navigate(ROUTE.MY());
-        },
+    deleteDogMutate(numDogId, {
+      onSuccess: () => {
+        navigate(ROUTE.MY());
+      },
       onError: (error) => console.error('삭제 실패:', error),
-    })
-  }
+    });
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -174,7 +176,6 @@ function DogsEdit() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
 
   return (
     <S.ContainerWrapper>
@@ -308,12 +309,14 @@ function DogsEdit() {
         </div>
       </S.GenderContainer>
       <S.ButtonArea>
-        <S.EditButton isActive={NextButtonActive} onClick={handleEditClick}>
+        <S.EditButton
+          disabled={!NextButtonActive}
+          $isActive={NextButtonActive}
+          onClick={handleEditClick}
+        >
           수정하기
         </S.EditButton>
-        <S.DeleteButton onClick={handleDeleteClick}>
-          삭제하기
-        </S.DeleteButton>
+        <S.DeleteButton onClick={handleDeleteClick}>삭제하기</S.DeleteButton>
       </S.ButtonArea>
     </S.ContainerWrapper>
   );
