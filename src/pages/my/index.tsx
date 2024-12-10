@@ -24,7 +24,11 @@ function Mypage() {
   };
 
   const { data: userData } = useGetUser();
-  const {data: dogData} = useGetDogsList();
+  const { data: dogData } = useGetDogsList();
+
+  const navigateToEditPage = () => {
+    navigate('/useredit', { state: { userId: userData?.userId } });
+  };
 
   return (
     <S.Wrapper>
@@ -40,7 +44,11 @@ function Mypage() {
               <S.ProfileTextWrapper>
                 <S.NameWrapper>
                   <S.ProfileName>{userData.userNickname}</S.ProfileName>
-                  <UserEditIcon width={15} height={15} />
+                  <UserEditIcon
+                    width={15}
+                    height={15}
+                    onClick={navigateToEditPage}
+                  />
                 </S.NameWrapper>
                 <S.ProfileEmailWrapper>
                   <S.KaKaoIconImg src={kakaoIcon} />
@@ -53,7 +61,12 @@ function Mypage() {
         <S.PetProfileWrapper>
           {dogData && dogData.length > 0 ? (
             dogData.map((data) => (
-              <PetProfileCard data={data} editId={editId} setEditId={setEditId} key={data.dogId} />
+              <PetProfileCard
+                data={data}
+                editId={editId}
+                setEditId={setEditId}
+                key={data.dogId}
+              />
             ))
           ) : (
             <PetProfileCard editId={editId} setEditId={setEditId} />

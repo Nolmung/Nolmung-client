@@ -20,6 +20,7 @@ import TodayMungDetail from './pages/todaymungDetail';
 import Mypage from './pages/my';
 import TodayMungEdit from './pages/todaymungEdit';
 import DogsEdit from './pages/dogEdit';
+import UserEdit from './pages/userEdit';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -32,6 +33,24 @@ console.warn = (...args) => {
   }
   originalWarn(...args);
 };
+
+// 팝업 컴포넌트 정의
+function AddressPopup() {
+  return (
+    <div style={{ width: '100%', height: '100vh' }}>
+      <iframe
+        src="/addressPopup.html"
+        style={{
+          width: '100%',
+          height: '100%',
+          border: 'none',
+        }}
+        title="주소 검색"
+        allowFullScreen
+      />
+    </div>
+  );
+}
 
 function Router() {
   return (
@@ -67,6 +86,8 @@ function Router() {
             element={<TodayMungEdit />}
           />
           <Route path={ROUTE.DOGSEDIT(':dogId')} element={<DogsEdit />} />
+          <Route path={ROUTE.ADDRESS_POPUP()} element={<AddressPopup />} />
+          <Route path={ROUTE.USER_EDIT()} element={<UserEdit />} />
         </Routes>
       </Layout>
     </Suspense>

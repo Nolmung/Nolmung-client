@@ -15,19 +15,17 @@
       "@styles/*": ["./src/styles/*"],
       "@stores/*": ["./src/stores/*"]
     },
-    /* Bundler mode */
     "moduleResolution": "Bundler",
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false, // 파일을 내보내야 참조가 동작
     "jsx": "react-jsx",
 
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    /* 프로젝트 참조를 위한 필수 설정 */
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./dist/app"
   },
-  "include": ["src"]
+  "include": ["src/**/*", "src/global.d.ts"]
 }

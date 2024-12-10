@@ -8,26 +8,6 @@ import 'dayjs/locale/ko';
 dayjs.locale('ko');
 import convertAddressToLatlng from './utils/convertAddressToLatlng';
 
-const locations = [
-  '서울특별시',
-  '부산시',
-  '대구시',
-  '인천광역시',
-  '광주시',
-  '대전시',
-  '울산시',
-  '세종시',
-  '경기도',
-  '충청북도',
-  '충청남도',
-  '전라남도',
-  '경상북도',
-  '경상남도',
-  '강원특별자치도',
-  '전북특별자치도',
-  '제주특별자치도',
-];
-
 function SignUp() {
   const [nickname, setNickname] = useState('');
   const [addressProvince, setAddressProvince] = useState('');
@@ -96,31 +76,42 @@ function SignUp() {
       return;
     }
 
-    const requestBody = {
-      userNickname: nickname,
-      userAddressProvince: addressProvince,
-      userLat: 0,
-      userLong: 0,
-      userBirth: userBirth,
-      userGender: gender, // 'MALE' 또는 'FEMALE'
-    };
-
     try {
+      // 주소를 위도/경도로 변환
+      const { latitude, longitude } =
+        await convertAddressToLatlng(addressProvince);
+      console.log('변환된 위도:', latitude, '경도:', longitude);
+
+      const requestBody = {
+        userNickname: nickname,
+        userAddressProvince: addressProvince,
+        userLat: latitude, // 변환된 위도
+        userLong: longitude, // 변환된 경도
+        userBirth: userBirth,
+        userGender: gender, // 'MALE' 또는 'FEMALE'
+      };
+
+      console.log('전송 데이터:', requestBody);
+
       const response = await axios.post(
         `${import.meta.env.VITE_API_SERVER_URL}/users/signup/${userId}`,
         requestBody,
       );
+
       if (response.status === 200 || response.status === 201) {
+        console.log('성공적으로 전송되었습니다:', response.data);
         navigate('/dogs', {
           state: { nickname, addressProvince, userBirth },
         });
       }
     } catch (error: any) {
       if (error.response) {
-        // 에러 처리 로직 추가
+        console.error('서버 에러:', error.response.data);
       } else if (error.request) {
         console.error('요청이 서버에 도달하지 못했습니다:', error.request);
         alert('요청이 서버에 도달하지 못했습니다.');
+      } else {
+        console.error('에러:', error.message);
       }
     }
   };
@@ -128,17 +119,6 @@ function SignUp() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setAddressProvince(value);
-
-    if (value) {
-      const filtered = locations.filter((location) => location.includes(value));
-      setFilteredLocations(filtered);
-      setDropdownVisible(filtered.length > 0); // 드롭다운 보이기 조건
-    } else {
-      setFilteredLocations([]);
-      setDropdownVisible(false);
-    }
-
-    setAddressValid(locations.some((location) => location.includes(value)));
   };
 
   const handleSuggestionClick = (suggestion: string) => {
@@ -148,10 +128,23 @@ function SignUp() {
     setAddressValid(true);
   };
 
-  // 주소를 위도, 경도로 변환하는 함수 (테스트용)
-  const getLatlng = async (address: string) => {
-    const res = await convertAddressToLatlng(address);
-    console.log('위도: ', res.latitude, '경도: ', res.longitude);
+  // 팝업 열기
+  const openPopup = () => {
+    const popupUrl = '/addressPopup.html'; // 팝업 HTML 파일 경로
+    const popupOptions = 'width=570,height=420,scrollbars=yes,resizable=yes';
+
+    // 팝업 창 열기
+    window.open(popupUrl, '주소 검색', popupOptions);
+  };
+
+  // 팝업에서 데이터를 받아오는 함수
+  window.jusoCallBack = (
+    zipNo: string,
+    roadFullAddr: string,
+    jibunAddr: string,
+  ) => {
+    console.log('팝업에서 받은 데이터:', zipNo, roadFullAddr, jibunAddr);
+    setAddressProvince(roadFullAddr); // 도로명 주소를 입력 필드에 설정
   };
 
   return (
@@ -177,11 +170,16 @@ function SignUp() {
             <S.ErrorMessage>*유효한 주소를 입력해주세요</S.ErrorMessage>
           )}
         </S.ContentTitleText>
-        <S.UserInfoInput
-          value={addressProvince}
-          onChange={handleInputChange}
-          placeholder="주소를 시,도 단위로 입력해주세요 ex)서울특별시"
-        />
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <S.UserInfoInput
+            value={addressProvince}
+            onChange={handleInputChange}
+            placeholder="주소를 시,도 단위로 입력해주세요 ex)서울특별시"
+          />
+          <button onClick={openPopup} style={{ marginLeft: '8px' }}>
+            주소 검색
+          </button>
+        </div>
         {isDropdownVisible && filteredLocations.length > 0 && (
           <S.Dropdown>
             {filteredLocations.map((location) => (

@@ -14,7 +14,7 @@ function KakaoCallbackHandler() {
 
         if (!id) {
           alert('카카오 로그인 실패: 인증 코드가 없습니다.');
-          navigate('/login'); // 로그인 페이지로 리다이렉트
+          // navigate('/login'); // 로그인 페이지로 리다이렉트
           return;
         }
 
@@ -27,6 +27,13 @@ function KakaoCallbackHandler() {
             },
           },
         );
+        if (response.data.data) {
+          localStorage.setItem(
+            'accessToken',
+            'Bearer ' + response.data.data.accessToken,
+          );
+        }
+        console.log(response);
         // 서버 응답 데이터
         const { loginStatus, id: userId, email, role } = response.data.data;
 

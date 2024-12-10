@@ -18,4 +18,6 @@ export const ROUTE = {
   MYFAVORITE: () => '/my/favorite',
   PLACE_RECOMMEND: () => '/recommend',
   TODAYMUNG_EDIT: (diaryId: string | number) => `/todaymung/edit/${diaryId}`,
+  ADDRESS_POPUP: () => '/addressPopup',
+  USER_EDIT: () => '/userEdit',
 } as const;
