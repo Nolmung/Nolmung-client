@@ -116,7 +116,7 @@ function UserEdit() {
 
   return (
     <S.ContainerWrapper>
-      <S.UserTitle>회원정보 수정</S.UserTitle>
+      <S.UserTitle>프로필 수정</S.UserTitle>
       <S.ContentTitleText>닉네임</S.ContentTitleText>
       <S.UserInfoInput
         value={nickname}
