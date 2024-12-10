@@ -17,6 +17,7 @@ import {
   GalleryClickMarker,
 } from '@/assets/images/svgs';
 import { PlaceCategory, SVGComponent } from '@/common/types';
+import { DogSize } from '@/service/apis/user/index.types';
 
 /** @Todo MarkerType 과 MapPlace 타입 둘 중 하나만 사용 @ongheong */
 export interface MarkerType {
@@ -29,6 +30,8 @@ export interface MarkerType {
   reviewCount: number;
   latitude: number;
   longitude: number;
+  acceptSize?: DogSize;
+  isBookmarked?: boolean;
 }
 
 export const MarkerIconMapping: Record<

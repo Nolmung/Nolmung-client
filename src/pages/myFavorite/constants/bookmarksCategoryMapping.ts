@@ -1,6 +1,11 @@
-import { PlaceCategoryMappingType } from "../types/placeCategoryMappingType";
+import { BookmarksCategoryMappingType } from "../types/bookmarksCategoryMappingType";
 
-export const PlaceCategoryMapping: PlaceCategoryMappingType = [
+
+export const BookmarkCategoryMapping: BookmarksCategoryMappingType = [
+  {
+    value: 'ALL',
+    label: '전체',
+  },
   {
     value: 'RESTAURANT',
     label: '식당',

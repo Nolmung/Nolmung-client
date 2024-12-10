@@ -49,7 +49,6 @@ function MyReview() {
   const allReviews = useMemo(() => {
     return data?.pages.flatMap((page) => page.data) || [];
   }, [data]);
-  console.log('allReviews', allReviews);
 
   if (isLoading) return <p>Loading...</p>;
 

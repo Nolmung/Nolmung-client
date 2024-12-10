@@ -10,11 +10,10 @@ const TodayMungListCard = ({ listData, data }: ListCardProps) => {
   const handleListClick = () => {
     navigate(`/todaymung/detail/${data.diaryId}`);
   };
-
   return (
     <S.Wrap onClick={handleListClick}>
       <S.UserInfoArea>
-        <S.ProfileImg src="/public/pngs/TodayMungLogo.png" />
+        <S.ProfileImg src={user.profileImageUrl} />
         <S.UserInfoTextArea>
           <S.UserName>{user.nickname}</S.UserName>
           <S.PostDate>{data.createdAt}</S.PostDate>

@@ -31,10 +31,13 @@ const S = {
     width: 100%;
     overflow: auto;
     margin-top: 25px;
+    padding-bottom: 40px;
   `,
-  PlaceWrapper: styled.div`
+  PlaceWrapper: styled.div<{ isBlurred: boolean }>`
     display: flex;
     flex-direction: column;
+    filter: ${({ isBlurred }) => (isBlurred ? 'blur(5px)' : 'none')};
+    -webkit-filter: ${({ isBlurred }) => (isBlurred ? 'blur(5px)' : 'none')};
   `,
   PlaceImage: styled.img`
     width: 80vw;

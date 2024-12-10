@@ -141,6 +141,7 @@ export const S = {
     align-items: center;
     justify-content: center;
     font-size: 24px;
+    cursor: pointer;
 
     &:active {
       transition: 0.5s ease;

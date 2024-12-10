@@ -41,6 +41,10 @@ export interface MapPlace {
   reviewCount: number;
   latitude: number;
   longitude: number;
+  placeImageUrl?: string;
+  Address?: string;
+  isBookmarked?: boolean; 
+  acceptSize?: DogSize;
 }
 
 export interface PlaceRequestBody {
@@ -60,4 +64,6 @@ export interface PlaceSearchResponse {
   reviewCount: number;
   latitude: number;
   longitude: number;
+  acceptSize?: DogSize;
+  isBookmarked: boolean; 
 }

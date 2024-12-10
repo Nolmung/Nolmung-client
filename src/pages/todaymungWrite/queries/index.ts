@@ -22,35 +22,23 @@ export const useGetDogs = () => {
 
 export const usePostReviews = () => {
   const { deleteReviewAll } = useReviewStore();
-  const mutation = useMutation<number, Error, PostReviewRequest>({
+  return useMutation<number, Error, PostReviewRequest[]>({
     mutationFn: (review) => postReviews(review),
     onSuccess: () => {
+      alert('리뷰 등록이 완료되었습니다.');
       deleteReviewAll();
     },
     onError: () => {
       alert('리뷰 등록에 실패했습니다.');
+      deleteReviewAll();
     },
   });
-
-  const postReviewsSequentially = async (reviews: PostReviewRequest[]) => {
-    Promise.all(
-      reviews.map(async (review) => {
-        try {
-          await mutation.mutateAsync(review);
-        } catch (error) {
-          console.error('리뷰 등록 실패:', review, error);
-        }
-      }),
-    ).then(() => {
-      alert('리뷰 등록이 완료되었습니다.');
-    });
-  };
-
-  return { postReviewsSequentially, mutation };
 };
 
 export const usePostDiary = () => {
   const { deleteTodaymungAll } = useTodayMungStore();
+  const { deleteReviewAll } = useReviewStore();
+
   const navigate = useNavigate();
   const { title, content, places, medias, publicYn, dogs } =
     useTodayMungStore();
@@ -69,14 +57,17 @@ export const usePostDiary = () => {
     },
     onSuccess: () => {
       alert('오늘멍 등록이 완료되었습니다.');
-      navigate(ROUTE.TODAYMUNG());
       deleteTodaymungAll();
+      deleteReviewAll();
+      navigate(ROUTE.TODAYMUNG());
     },
     onError: () => {
       alert('오늘멍 등록에 실패했습니다.');
       for (let file of diaryRequest.medias) {
         deleteFileFromS3(file.mediaUrl);
       }
+      deleteTodaymungAll();
+      deleteReviewAll();
     },
   });
 };

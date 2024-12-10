@@ -54,6 +54,12 @@ export const S = {
     font-size: 16px;
     font-weight: 600;
   `,
+  DogTagList: styled.div`
+    width: 100%;
+    gap: 8px;
+    display: flex;
+    flex-direction: row;
+  `,
   TextContentArea: styled.div``,
   MediaFileArea: styled.div`
     height: 130px;

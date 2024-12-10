@@ -8,6 +8,7 @@ export const ROUTE = {
   SIGNUP: () => `/signUp`,
   SEARCH: () => '/search',
   DOGS: () => '/dogs',
+  DOGSEDIT: (dogId: string | number) => `/dogs/edit/${dogId}`,
   MY_REVIEW: () => '/my/review',
   TODAYMUNG_DETAIL: (diaryId: string | number) =>
     `/todaymung/detail/${diaryId}`,
@@ -16,5 +17,5 @@ export const ROUTE = {
   MY: () => '/my',
   MYFAVORITE: () => '/my/favorite',
   PLACE_RECOMMEND: () => '/recommend',
-  A: () => 'https://nolmung.org/v1/oauth/kakao/callback/',
+  TODAYMUNG_EDIT: (diaryId: string | number) => `/todaymung/edit/${diaryId}`,
 } as const;
