@@ -230,6 +230,17 @@ function Main() {
   const getCategoryMarkers = async (categoryFromUrl: string) => {
     if (!mapRef.current) return;
 
+    let userCategory = null;
+
+    if (categoryFromUrl === 'bookmarked' || categoryFromUrl === 'visited') {
+      /** 
+       * @Todo access Token 있는지 확인하기 
+       * 없으면 return + 로그인 페이지로 유도하는 모달창 띄우기
+       * 있으면 밑의 코드 실행
+       * */
+      userCategory = categoryFromUrl;
+    }
+
     setCategory(categoryFromUrl);
     setBottomHeight(BOTTOM_HEIGHT);
 
@@ -249,18 +260,11 @@ function Main() {
       };
       const markerData = await getPlacesFilter(requestBody);
       setMarkerData(markerData);
-
-      // // 지도 중심 이동
-      // if (markerData.length > 0) {
-      //   const firstMarker = markerData[markerData.length-1]; // 마지막 마커가 가장 가까운 마커
-      //   setMapCenter({
-      //     latitude: firstMarker.latitude + moveCategoryLatLng.lat,
-      //     longitude: firstMarker.longitude + moveCategoryLatLng.lng,
-      //   });
-      //   // mapRef.current.setZoom(12);
-      // }
-
-      initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
+      if (userCategory) {
+        initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick, userCategory);
+      } else {
+        initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
+      }
     } catch (error) {
       console.error('Error Get Filtering Data:', error);
     }
