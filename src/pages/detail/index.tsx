@@ -29,7 +29,10 @@ import findLabelNameById from '@/common/utils/findLabelNameById';
 import { match } from 'ts-pattern';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
-import { NoResultStandUI } from '@/common/components/noResultUI';
+import {
+  NoResulLiedownUI,
+  NoResultStandUI,
+} from '@/common/components/noResultUI';
 
 function Detail() {
   const navigate = useNavigate();
@@ -165,7 +168,9 @@ function Detail() {
         {data.diaries
           ?.slice(0, visibleTodayMungCard)
           .map((card) => <TodayMungCard key={card.diaryId} card={card} />)}
-
+        {!data.diaries?.length && (
+          <NoResulLiedownUI content={'아직 오늘멍이 없다 멍 !'} />
+        )}
         {visibleTodayMungCard < data.diaries?.length && (
           <S.ViewMoreButtonWrapper>
             <S.ViewMoreButton onClick={handleViewMoreButtonClick}>

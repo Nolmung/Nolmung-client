@@ -19,8 +19,6 @@ function MyReview() {
     isFetchingNextPage,
   } = useGetReviews();
 
-  console.log('data', data);
-
   const observerRef = useRef<HTMLDivElement | null>(null);
   const [deleteReviewId, setDeleteReviewId] = useState<number | null>(null);
   const { mutate: deleteMutation } = useDeleteReviews();
