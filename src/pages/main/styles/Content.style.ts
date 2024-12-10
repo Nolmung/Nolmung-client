@@ -10,7 +10,6 @@ export const S = {
     border-radius: ${({ isCard }) => (isCard ? '20px 20px 0 0' : '0')};
     align-items: center;
     border-bottom: ${({ isCard }) => (isCard ? 'none' : '1.5px solid #f0f0f0')};
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
   `,
