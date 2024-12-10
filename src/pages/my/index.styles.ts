@@ -76,13 +76,24 @@ const S = {
     height: auto;
     gap: 8px;
   `,
+  PetProfilePlusButton: styled.button`
+    all: unset;
+    cursor: pointer;
+    margin-bottom: 13px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #898989;
+    margin-left: auto;
+    &:hover {
+      opacity: 0.8;
+    }
+  `,
   ListWrapper: styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
     height: auto;
 
-    /* background: #fdfdfd; */
     padding: 22px 0px;
   `,
   ListContainer: styled.div`

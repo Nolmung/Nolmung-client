@@ -51,15 +51,20 @@ function Mypage() {
           )}
         </S.MyProfileCard>
         <S.PetProfileWrapper>
+          <S.PetProfilePlusButton
+            onClick={() => {
+              navigate(ROUTE.MY_DOGS(), { state: dogData });
+            }}
+          >
+            반려견 전체보기
+          </S.PetProfilePlusButton>
           {dogData && dogData.length > 0 ? (
-            dogData.map((data) => (
-              <PetProfileCard
-                data={data}
-                editId={editId}
-                setEditId={setEditId}
-                key={data.dogId}
-              />
-            ))
+            <PetProfileCard
+              data={dogData[0]}
+              editId={editId}
+              setEditId={setEditId}
+              key={dogData[0].dogId}
+            />
           ) : (
             <PetProfileCard editId={editId} setEditId={setEditId} />
           )}

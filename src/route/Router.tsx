@@ -21,6 +21,7 @@ import Mypage from '../pages/my';
 import TodayMungEdit from '../pages/todaymungEdit';
 import DogsEdit from '../pages/dogEdit';
 import PrivateRoute from './PrivateRoute';
+import MyDogs from '@/pages/my/components/myDogs';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -78,6 +79,7 @@ function Router() {
             path={ROUTE.DOGSEDIT(':dogId')}
             element={<PrivateRoute outlet={<DogsEdit />} />}
           />
+          <Route path={ROUTE.MY_DOGS()} element={<MyDogs />} />
           <Route
             path={ROUTE.TODAYMUNG()}
             element={<PrivateRoute outlet={<TodayMung />} />}
