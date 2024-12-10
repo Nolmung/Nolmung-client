@@ -1,4 +1,6 @@
 import { CATEGORY_OPTIONS } from '@/pages/main/constants/categoryBar';
+import { useReviewStore } from '@/pages/todaymungPlaceRegist/stores/reviewStore';
+import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
 import Header from '@common/components/header';
 import { Flex as MainLayout } from '@common/components/layout/flex';
 import { S } from '@common/components/layout/index.styles';
@@ -8,7 +10,7 @@ import {
 } from '@common/components/layout/index.type';
 import TabBar from '@common/components/tabBar';
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type PathRule = string | RegExp;
 type PathRules = {
@@ -47,25 +49,43 @@ const shouldHide = (key: keyof PathRules, pathname: string): boolean => {
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
+
   const hideHeader = shouldHide(
     'hideHeader',
     location.pathname + location.search,
   );
+
   const hideTabBar = shouldHide(
     'hideTabBar',
     location.pathname + location.search,
   );
+
   const [HeaderTitle, setHeaderTitle] = useState<HeaderTitleType>({
     title: '',
     showIcon: false,
     type: 'TitleLeft',
   });
+
+  const [handleBackButtonClick, setHandleBackButtonClick] = useState(
+    () => () => {
+      window.history.back();
+    },
+  );
+
+  const navigate = useNavigate();
+  const { reviewlist, deleteReviewAll } = useReviewStore();
+  const { title, content, places, dogs, medias, deleteTodaymungAll } =
+    useTodayMungStore();
+
   useEffect(() => {
     if (location.pathname.startsWith('/todaymung/detail')) {
       setHeaderTitle({
         title: '오늘멍 상세보기',
         showIcon: true,
         type: 'TitleCenter',
+      });
+      setHandleBackButtonClick(() => () => {
+        navigate('/todaymung');
       });
       return;
     }
@@ -94,12 +114,32 @@ function Layout({ children }: LayoutProps) {
           showIcon: true,
           type: 'TitleCenter',
         });
+        setHandleBackButtonClick(() => () => {
+          console.log('hi');
+          window.history.back();
+        });
+
         break;
+
       case pathName === '/' && !!search:
         setHeaderTitle({
           title: `${search}`,
           showIcon: true,
           type: 'TitleCenter',
+        });
+        setHandleBackButtonClick(() => () => {
+          window.history.back();
+        });
+        break;
+
+      case pathName === '/' && !!search:
+        setHeaderTitle({
+          title: `${search}`,
+          showIcon: true,
+          type: 'TitleCenter',
+        });
+        setHandleBackButtonClick(() => () => {
+          window.history.back();
         });
         break;
 
@@ -110,7 +150,16 @@ function Layout({ children }: LayoutProps) {
             showIcon: false,
             type: 'TitleCenter',
           });
+          setHandleBackButtonClick(() => () => {
+            window.history.back();
+          });
         }
+        break;
+
+      case pathName.startsWith('/todaymung/detail'):
+        setHandleBackButtonClick(() => () => {
+          navigate(-1);
+        });
         break;
 
       case pathName == '/todaymung/write':
@@ -118,6 +167,35 @@ function Layout({ children }: LayoutProps) {
           title: '오늘멍 작성하기',
           showIcon: true,
           type: 'TitleCenter',
+        });
+        setHandleBackButtonClick(() => () => {
+          if (
+            title ||
+            content ||
+            dogs.length > 0 ||
+            medias.length > 0 ||
+            reviewlist.length > 0 ||
+            places.length > 0
+          ) {
+            if (
+              window.confirm('작성중인 내용이 있습니다. 정말로 나가시겠습니까?')
+            ) {
+              deleteReviewAll();
+              deleteTodaymungAll();
+              navigate('/todaymung');
+            }
+          }
+        });
+        break;
+
+      case pathName == '/todaymung/placeregist' && !!search:
+        setHeaderTitle({
+          title: '오늘멍 장소등록',
+          showIcon: true,
+          type: 'TitleCenter',
+        });
+        setHandleBackButtonClick(() => () => {
+          navigate('/todaymung/write');
         });
         break;
 
@@ -127,6 +205,17 @@ function Layout({ children }: LayoutProps) {
           showIcon: true,
           type: 'TitleCenter',
         });
+        setHandleBackButtonClick(() => () => {
+          navigate('/todaymung');
+        });
+        break;
+
+      case pathName == '/my':
+        setHeaderTitle({
+          title: '마이페이지',
+          showIcon: false,
+          type: 'TitleLeft',
+        });
         break;
 
       case pathName == '/my/review':
@@ -135,13 +224,8 @@ function Layout({ children }: LayoutProps) {
           showIcon: true,
           type: 'TitleLeft',
         });
-        break;
-
-      case pathName == '/my':
-        setHeaderTitle({
-          title: '마이페이지',
-          showIcon: true,
-          type: 'TitleLeft',
+        setHandleBackButtonClick(() => () => {
+          navigate('/my');
         });
         break;
 
@@ -150,6 +234,9 @@ function Layout({ children }: LayoutProps) {
           title: '즐겨찾기',
           showIcon: true,
           type: 'TitleLeft',
+        });
+        setHandleBackButtonClick(() => () => {
+          navigate('/my');
         });
         break;
 
@@ -160,7 +247,12 @@ function Layout({ children }: LayoutProps) {
 
   return (
     <S.Wrapper>
-      {!hideHeader && <Header {...HeaderTitle} />}
+      {!hideHeader && (
+        <Header
+          handleBackButtonClick={handleBackButtonClick}
+          {...HeaderTitle}
+        />
+      )}
       <MainLayout $direction="column" $justify="flex-start" $align="flex-start">
         {children}
       </MainLayout>

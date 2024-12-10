@@ -1,6 +1,7 @@
 /** @Todo axios 인스턴스 만들기, interceptor 설정 */
 
 import axios from 'axios';
+import { ROUTE } from '@common/constants/route';
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_API_SERVER_URL,
@@ -16,9 +17,10 @@ instance.interceptors.response.use(
     return response;
   },
   async function (error) {
-    if (error.response.status === 403) {
+    if (error.response && error.response.status === 403) {
       alert('세션이 만료되었습니다. 재로그인해주세요');
-      window.location.href = '/login';
+      window.location.href = ROUTE.LOGIN();
+      localStorage.removeItem('accessToken');
     }
     return Promise.reject(error);
   },

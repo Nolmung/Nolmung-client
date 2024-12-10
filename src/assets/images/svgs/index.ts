@@ -19,6 +19,7 @@ export { default as LiedownDog } from './LiedownDog';
 export { default as LocationButtonIcon } from './LocationButtonIcon';
 export { default as MeduimDog } from './MeduimDog';
 export { default as MuseumClickMarker } from './MuseumClickMarker';
+export { default as NoImage } from './NoImage';
 export { default as NoStrokeStar } from './NoStrokeStar';
 export { default as NolmungLogo } from './NolmungLogo';
 export { default as OutsideIcon } from './OutsideIcon';

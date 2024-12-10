@@ -1,8 +1,8 @@
 import { instance } from '..';
 import { GetReviewsParams, PostReviewRequest } from './index.type';
 
-export const postReviews = async (review: PostReviewRequest) => {
-  const response = await instance.post('/reviews', review);
+export const postReviews = async (reviews: PostReviewRequest[]) => {
+  const response = await instance.post('/reviews', { reviews: reviews });
   return response.status;
 };
 

@@ -3,25 +3,30 @@ import { S } from '@common/components/header/index.styles';
 import { HeaderType } from '@common/components/header/index.type';
 import { match } from 'ts-pattern';
 
-function Header({ title, showIcon, type }: HeaderType) {
-  const handleBackButtonClick = () => {
-    window.history.back();
-  };
+function Header({ title, showIcon, type, handleBackButtonClick }: HeaderType) {
   return (
     <>
       {match(type)
         .with('TitleLeft', () => (
           <S.LeftHeaderArea>
-            <S.IconWrapper onClick={handleBackButtonClick}>
-              {showIcon ? <GoBackIcon /> : <S.DummyIcon />}
+            <S.IconWrapper>
+              {showIcon ? (
+                <GoBackIcon onClick={handleBackButtonClick} />
+              ) : (
+                <S.DummyIcon />
+              )}
             </S.IconWrapper>
             <S.LeftTitleArea>{title}</S.LeftTitleArea>
           </S.LeftHeaderArea>
         ))
         .with('TitleCenter', () => (
           <S.CenterHeaderArea>
-            <S.IconWrapper onClick={handleBackButtonClick}>
-              {showIcon ? <GoBackIcon /> : <S.DummyIcon />}
+            <S.IconWrapper>
+              {showIcon ? (
+                <GoBackIcon onClick={handleBackButtonClick} />
+              ) : (
+                <S.DummyIcon />
+              )}
             </S.IconWrapper>
             <S.CenterTitleArea>{title}</S.CenterTitleArea>
           </S.CenterHeaderArea>

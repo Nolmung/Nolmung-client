@@ -17,5 +17,5 @@ export const ROUTE = {
   MY: () => '/my',
   MYFAVORITE: () => '/my/favorite',
   PLACE_RECOMMEND: () => '/recommend',
-  A: () => 'https://nolmung.org/v1/oauth/kakao/callback/',
+  TODAYMUNG_EDIT: (diaryId: string | number) => `/todaymung/edit/${diaryId}`,
 } as const;

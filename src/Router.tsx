@@ -18,6 +18,7 @@ import MyReview from './pages/myReview';
 import MyFavorite from './pages/myFavorite';
 import TodayMungDetail from './pages/todaymungDetail';
 import Mypage from './pages/my';
+import TodayMungEdit from './pages/todaymungEdit';
 import DogsEdit from './pages/dogEdit';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
@@ -60,6 +61,10 @@ function Router() {
           <Route
             path={ROUTE.TODAYMUNG_DETAIL(':diaryId')}
             element={<TodayMungDetail />}
+          />
+          <Route
+            path={ROUTE.TODAYMUNG_EDIT(':diaryId')}
+            element={<TodayMungEdit />}
           />
           <Route path={ROUTE.DOGSEDIT(':dogId')} element={<DogsEdit />} />
         </Routes>
