@@ -22,7 +22,7 @@ function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
 
   const handleLoginButtonClick = () => {
     close();
-    navigate(ROUTE.LOGIN());
+    navigate(ROUTE.LOGIN(), { replace: true });
   };
 
   return (

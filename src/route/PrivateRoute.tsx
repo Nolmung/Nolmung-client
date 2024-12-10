@@ -13,10 +13,12 @@ const PrivateRoute = ({ outlet }: PrivateRouteProps) => {
   const isLogin = getIsLogin();
   const { open, close } = useLoginPromptModalStore();
   const navigate = useNavigate();
+
   const closeModal = () => {
-    navigate(ROUTE.LOGIN());
+    navigate(ROUTE.LOGIN(), { replace: true });
     close();
   };
+
   useEffect(() => {
     if (!isLogin) {
       open();
