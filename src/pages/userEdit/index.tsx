@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
-import axios from 'axios';
 import { S } from '../signUp/styles/signUp.styles';
 import DatePicker from '../signUp/DatePicker';
 import { instance } from '@/service/apis';
@@ -10,20 +9,17 @@ function UserEdit() {
   const [nickname, setNickname] = useState('');
   const [addressProvince, setAddressProvince] = useState('');
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
-  const [gender, setGender] = useState<string | null>(null); // 'MALE' 또는 'FEMALE'
+  const [gender, setGender] = useState<string | null>(null);
   const [NextButtonActive, setNextButtonActive] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const userId = location.state?.userId;
 
-  // 디버깅용: userId 확인
-  console.log('Received userId:', userId);
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (!userId) {
         alert('유효하지 않은 사용자 ID입니다.');
-        navigate('/login'); // 로그인 페이지로 이동
+        navigate('/login');
         return;
       }
 
@@ -32,13 +28,12 @@ function UserEdit() {
           `${import.meta.env.VITE_API_SERVER_URL}/users`,
         );
 
-        console.log('API Response:', response.data); // 디버깅용
         const userData = response.data.data;
 
         setNickname(userData.userNickname || '');
         setAddressProvince(userData.userAddressProvince || '');
         setSelectedDate(dayjs(userData.userBirth));
-        setGender(userData.userGender); // 'FEMALE' 또는 'MALE'
+        setGender(userData.userGender);
       } catch (error) {
         console.error('유저 정보 조회 실패:', error);
         alert('회원정보를 불러오는 데 실패했습니다.');

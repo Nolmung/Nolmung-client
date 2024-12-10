@@ -96,14 +96,14 @@ export const S = {
     &:hover {
       background-color: #d3fbd4;
       border: 1px solid #17aa1a;
-      color: #17aa1a; // 호버 시 색상 변경
+      color: #17aa1a;
     }
   `,
 
   GenderWrapper: styled.div`
     display: flex;
-    align-items: center; /* 세로 중앙 정렬 */
-    gap: 10px; /* 요소 간 간격 */
+    align-items: center;
+    gap: 10px;
   `,
   GenderContainer: styled.div`
     display: flex;
@@ -122,8 +122,8 @@ export const S = {
   Dropdown: styled.ul`
     box-sizing: border-box;
     width: 100%;
-    height: auto; /* 높이를 자동으로 조절하여 모든 항목이 보이도록 설정 */
-    max-height: none; /* 최대 높이 제한 제거 */
+    height: auto;
+    max-height: none;
     border: 1px solid #d9d9d9;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;

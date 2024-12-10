@@ -80,8 +80,6 @@ function SignUp() {
       // 주소를 위도/경도로 변환
       const { latitude, longitude } =
         await convertAddressToLatlng(addressProvince);
-      console.log('변환된 위도:', latitude, '경도:', longitude);
-
       const requestBody = {
         userNickname: nickname,
         userAddressProvince: addressProvince,
@@ -91,15 +89,12 @@ function SignUp() {
         userGender: gender, // 'MALE' 또는 'FEMALE'
       };
 
-      console.log('전송 데이터:', requestBody);
-
       const response = await axios.post(
         `${import.meta.env.VITE_API_SERVER_URL}/users/signup/${userId}`,
         requestBody,
       );
 
       if (response.status === 200 || response.status === 201) {
-        console.log('성공적으로 전송되었습니다:', response.data);
         navigate('/dogs', {
           state: { nickname, addressProvince, userBirth },
         });
@@ -143,7 +138,6 @@ function SignUp() {
     roadFullAddr: string,
     jibunAddr: string,
   ) => {
-    console.log('팝업에서 받은 데이터:', zipNo, roadFullAddr, jibunAddr);
     setAddressProvince(roadFullAddr); // 도로명 주소를 입력 필드에 설정
   };
 

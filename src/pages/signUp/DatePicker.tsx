@@ -8,10 +8,9 @@ import 'dayjs/locale/ko';
 dayjs.locale('ko');
 import { koKR } from '@mui/x-date-pickers/locales';
 
-// Props 타입 정의
 interface DatePickerProps {
-  value: Dayjs | null; // 선택된 날짜
-  onChange: (newValue: Dayjs | null) => void; // 날짜 변경 핸들러
+  value: Dayjs | null;
+  onChange: (newValue: Dayjs | null) => void;
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
@@ -37,12 +36,12 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
             openTo="year"
             format="YYYY-MM-DD"
             slots={{
-              openPickerIcon: S.DatepickerCalendarIcon, // 아이콘 변경
+              openPickerIcon: S.DatepickerCalendarIcon,
             }}
             slotProps={{
               openPickerButton: {
                 sx: {
-                  marginRight: '1px', // 아이콘 버튼의 오른쪽 여백
+                  marginRight: '1px',
                 },
               },
               textField: {
@@ -51,57 +50,57 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
                   marginTop: '8px',
                   '& .MuiOutlinedInput-root': {
                     height: '50px',
-                    borderRadius: '10px', // 둥근 모서리 설정
+                    borderRadius: '10px',
                     '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#d9d9d9', // 호버 시 테두리 색상
+                      borderColor: '#d9d9d9',
                     },
                     '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#d9d9d9', // 포커스 시 테두리 색상
-                      borderWidth: '1px', // 테두리 두께
-                      borderStyle: 'solid', // 테두리 스타일
+                      borderColor: '#d9d9d9',
+                      borderWidth: '1px',
+                      borderStyle: 'solid',
                     },
                   },
                 },
-                  inputProps: {
-                  placeholder: 'YYYY-MM-DD', // 기본값으로 표시할 placeholder 추가
+                inputProps: {
+                  placeholder: 'YYYY-MM-DD',
                 },
               },
               popper: {
                 sx: {
                   '& .MuiPaper-root': {
-                    borderRadius: '10px', // 팝업 테두리 둥글게
-                    padding: '16px', // 내부 여백
-                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // 그림자 효과
+                    borderRadius: '10px',
+                    padding: '16px',
+                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                   },
                   '& .MuiPickersDay-root': {
-                    fontWeight: 'bold', // 날짜 텍스트 강조
+                    fontWeight: 'bold',
                     '&:hover': {
-                      backgroundColor: '#d3fbd4 !important', // 날짜 호버 시 배경색
+                      backgroundColor: '#d3fbd4 !important',
                     },
                     '&.Mui-selected': {
-                      backgroundColor: '#17aa1a !important', // 선택된 날짜 배경색
-                      color: '#ffffff !important', // 선택된 날짜 텍스트 색상
+                      backgroundColor: '#17aa1a !important',
+                      color: '#ffffff !important',
                     },
                   },
                   '& .MuiPickersYear-root': {
-                    borderRadius: '30px', // 둥근 모서리 크기 수정
-                    '& .Mui-selected': {
-                      backgroundColor: '#17aa1a !important', // 선택된 연도 배경색
-                      color: '#ffffff !important',
-                    },
-                    '&:hover': {
-                      backgroundColor: '#17aa1a !important', // 선택된 연도에 호버 시 배경색
-                    },
-                  },
-                  '& .MuiPickersMonth-root': {
-                    fontWeight: 'bold',
-                    borderRadius: '30px', // 둥근 모서리 크기 수정
+                    borderRadius: '30px',
                     '& .Mui-selected': {
                       backgroundColor: '#17aa1a !important',
                       color: '#ffffff !important',
                     },
                     '&:hover': {
-                      backgroundColor: '#17aa1a !important', // 선택된 연도에 호버 시 배경색
+                      backgroundColor: '#17aa1a !important',
+                    },
+                  },
+                  '& .MuiPickersMonth-root': {
+                    fontWeight: 'bold',
+                    borderRadius: '30px',
+                    '& .Mui-selected': {
+                      backgroundColor: '#17aa1a !important',
+                      color: '#ffffff !important',
+                    },
+                    '&:hover': {
+                      backgroundColor: '#17aa1a !important',
                     },
                   },
                 },
