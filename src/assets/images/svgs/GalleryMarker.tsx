@@ -6,7 +6,7 @@ const SvgGalleryMarker = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 24 24"
     {...props}
   >
-    <rect width={24} height={24} fill="#5E5E5E" rx={12} />
+    <rect width={24} height={24} fill="currentColor"  rx={12} />
     <g clipPath="url(#galleryMarker_svg__a)">
       <path
         fill="#fff"

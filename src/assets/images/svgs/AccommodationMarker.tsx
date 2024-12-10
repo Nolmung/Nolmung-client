@@ -6,7 +6,7 @@ const SvgAccommodationMarker = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 24 24"
     {...props}
   >
-    <rect width={24} height={24} fill="#5E5E5E" rx={12} />
+    <rect width={24} height={24} fill="currentColor"  rx={12} />
     <path
       fill="#fff"
       d="m12.275 10.276-3.61-3.61h5.418c.614 0 .921 0 1.19.127.269.125.465.361.859.833l2.533 3.04h-5.447c-.273 0-.41 0-.532-.05s-.219-.147-.411-.34"
