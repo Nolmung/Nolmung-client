@@ -43,6 +43,7 @@ export interface MapPlace {
   longitude: number;
   placeImageUrl?: string;
   Address?: string;
+  isBookmarked?: boolean; 
 }
 
 export interface PlaceRequestBody {
