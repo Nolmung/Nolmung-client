@@ -161,9 +161,10 @@ function Main() {
           markersRef,
           handleMarkerClick,
         );
-        if (searchResponseData.length === 1 && markersRef) {
+        if (searchResponseData.length === 1 && markersRef?.current?.[0]) {
           // markersRef.current = searchResponseData[0];
-          initMarkerActive(markersRef!.current[0]);
+          setMarkerData(searchResponseData);
+          initMarkerActive(markersRef.current[0]);
         } else {
           mapRef.current?.setZoom(10);
         }
