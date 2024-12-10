@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import { FilledStar } from '@/assets/images/svgs';
 import { useGetBookmarks, useDeleteBookmarks } from './hooks';
+import { NoResultStandUI } from '@/common/components/noResultUI';
 
 function MyFavorite() {
   const [currentCategory, setCurrentCategory] =
@@ -55,6 +56,13 @@ function MyFavorite() {
         ))}
       </S.CategoryWrapper>
       <S.PlaceWrapper>
+        {!placeMap?.length && (
+          <NoResultStandUI
+            content="즐겨찾기한 장소가 없습니다
+            "
+          />
+        )}
+
         {placeMap &&
           placeMap.map((place: Bookmark) => (
             <S.PlaceCard

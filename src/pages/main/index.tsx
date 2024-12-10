@@ -27,7 +27,6 @@ import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 function Main() {
   useSetDocumentTitle('놀멍');
   const { naver } = window;
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -103,7 +102,7 @@ function Main() {
             if (searchResponseData?.length == 1) {
               setBottomCardVisible(true);
               setBottomSheetVisible(false);
-              
+
               setMapCenter({
                 latitude: searchResponseData[0].latitude + moveLatLng.lat,
                 longitude: searchResponseData[0].longitude + moveLatLng.lng,
@@ -181,7 +180,6 @@ function Main() {
 
   /** 바텀시트, 바텀카드 높이 조절 */
   useEffect(() => {
-    console.log('bottomSheetVisible:', bottomSheetVisible, bottomCardVisible);
     if (bottomSheetVisible && !bottomCardVisible) {
       setBottomHeight(BOTTOM_HEIGHT);
       setCurrentButtonHeight(BOTTOM_HEIGHT + CURRENT_BUTTON_HEIGHT);
@@ -230,6 +228,17 @@ function Main() {
   const getCategoryMarkers = async (categoryFromUrl: string) => {
     if (!mapRef.current) return;
 
+    let userCategory = null;
+
+    if (categoryFromUrl === 'bookmarked' || categoryFromUrl === 'visited') {
+      /** 
+       * @Todo access Token 있는지 확인하기 
+       * 없으면 return + 로그인 페이지로 유도하는 모달창 띄우기
+       * 있으면 밑의 코드 실행
+       * */
+      userCategory = categoryFromUrl;
+    }
+
     setCategory(categoryFromUrl);
     setBottomHeight(BOTTOM_HEIGHT);
 
@@ -249,18 +258,11 @@ function Main() {
       };
       const markerData = await getPlacesFilter(requestBody);
       setMarkerData(markerData);
-
-      // // 지도 중심 이동
-      // if (markerData.length > 0) {
-      //   const firstMarker = markerData[markerData.length-1]; // 마지막 마커가 가장 가까운 마커
-      //   setMapCenter({
-      //     latitude: firstMarker.latitude + moveCategoryLatLng.lat,
-      //     longitude: firstMarker.longitude + moveCategoryLatLng.lng,
-      //   });
-      //   // mapRef.current.setZoom(12);
-      // }
-
-      initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
+      if (userCategory) {
+        initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick, userCategory);
+      } else {
+        initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
+      }
     } catch (error) {
       console.error('Error Get Filtering Data:', error);
     }
@@ -317,10 +319,9 @@ function Main() {
     });
 
     setBottomCardVisible(true);
-    if (mapRef.current){
+    if (mapRef.current) {
       mapRef.current!.setZoom(30);
     }
-    
   };
 
   /** 마커 클릭 이벤트 함수 */
@@ -351,6 +352,10 @@ function Main() {
     });
     navigate('/');
   };
+
+  // if (true) {
+  //   return <LoadingNolmungLottie />;
+  // }
 
   return (
     <S.Wrapper>
@@ -404,7 +409,7 @@ function Main() {
               bottomVisible={bottomSheetVisible}
               bottomHeight={bottomHeight}
             >
-              <BottomSheet placeMap={markerData}/>
+              <BottomSheet placeMap={markerData} />
             </S.Bottom>
           </S.BottomSheetWrapper>
         </S.Wrapper>

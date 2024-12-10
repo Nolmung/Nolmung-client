@@ -14,6 +14,16 @@ import { CategoryOptionType } from '../types/category';
 
 export const CATEGORY_OPTIONS: CategoryOptionType = [
   {
+    value: 'bookmarked',
+    label: '찜한 장소',
+    icon: BookmarksTag,
+  },
+  {
+    value: 'visited',
+    label: '방문한 장소',
+    icon: VisitedTag,
+  },
+  {
     value: 'RESTAURANT',
     label: '식당',
     icon: RestaurantTag,
@@ -53,14 +63,5 @@ export const CATEGORY_OPTIONS: CategoryOptionType = [
     label: '미술관',
     icon: GalleryTag,
   },
-  {
-    value: 'bookmarked',
-    label: '찜한 장소',
-    icon: BookmarksTag,
-  },
-  {
-    value: 'visited',
-    label: '방문한 장소',
-    icon: VisitedTag,
-  },
+
 ];

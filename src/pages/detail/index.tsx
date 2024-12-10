@@ -28,6 +28,11 @@ import { PlacePrice } from '@/common/types';
 import findLabelNameById from '@/common/utils/findLabelNameById';
 import { match } from 'ts-pattern';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
+import { LoadingSpinnerLottie } from '@/common/components/lottie';
+import {
+  NoResulLiedownUI,
+  NoResultStandUI,
+} from '@/common/components/noResultUI';
 
 function Detail() {
   const navigate = useNavigate();
@@ -45,7 +50,7 @@ function Detail() {
     setVisibleTodayMungCard((prev) => prev + 3);
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinnerLottie />;
   if (isError || !data) return <p>Error loading post detail</p>;
 
   const reviewCount = data.labels?.reduce((acc, cur) => {
@@ -57,6 +62,7 @@ function Detail() {
   const isPriceAvailable = (price: PlacePrice) => {
     return price == '변동' || price == '없음';
   };
+
 
   return (
     <S.Wrapper ref={scrollRef} onScroll={handleScroll}>
@@ -140,6 +146,9 @@ function Detail() {
           <S.ReviewCount>{reviewCount}</S.ReviewCount>
         </S.ReviewTitle>
         <S.KeywordReviews>
+          {!data?.labels.length && (
+            <NoResultStandUI content={'아직 리뷰가 없다 멍 !'} />
+          )}
           {data.labels?.map((item) => (
             <KeywordReview
               key={item.labelId}
@@ -158,7 +167,9 @@ function Detail() {
         {data.diaries
           ?.slice(0, visibleTodayMungCard)
           .map((card) => <TodayMungCard key={card.diaryId} card={card} />)}
-
+        {!data.diaries?.length && (
+          <NoResulLiedownUI content={'아직 오늘멍이 없다 멍 !'} />
+        )}
         {visibleTodayMungCard < data.diaries?.length && (
           <S.ViewMoreButtonWrapper>
             <S.ViewMoreButton onClick={handleViewMoreButtonClick}>
