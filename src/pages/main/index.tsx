@@ -28,7 +28,6 @@ import LoginPromptModal from '@/common/components/loginPromptModal';
 function Main() {
   useSetDocumentTitle('놀멍');
   const { naver } = window;
-  console.log('test');
   const location = useLocation();
   const navigate = useNavigate();
 

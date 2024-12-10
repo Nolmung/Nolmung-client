@@ -63,7 +63,6 @@ function Detail() {
     return price == '변동' || price == '없음';
   };
 
-  console.log(data);
 
   return (
     <S.Wrapper ref={scrollRef} onScroll={handleScroll}>
