@@ -14,10 +14,12 @@ export const instance = axios.create({
 
 instance.interceptors.response.use(
   function (response) {
+    console.log('res', response);
     return response;
   },
   async function (error) {
-    if (error.response && error.response.status === 403) {
+    console.log(error.response);
+    if (error.response && error.response.status === 401) {
       alert('세션이 만료되었습니다. 재로그인해주세요');
       window.location.href = ROUTE.LOGIN();
       localStorage.removeItem('accessToken');
