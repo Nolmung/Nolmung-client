@@ -14,7 +14,7 @@ const DaumPost: React.FC<DaumPostProps> = ({ setAddress }) => {
     let fullAddress = data.address;
     let extraAddress = '';
     const localAddress = `${data.sido} ${data.sigungu}`;
-
+    console.log('complete');
     if (data.addressType === 'R') {
       if (data.bname) {
         extraAddress += data.bname;
@@ -27,6 +27,7 @@ const DaumPost: React.FC<DaumPostProps> = ({ setAddress }) => {
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
 
+    console.log('full', fullAddress);
     setAddress(fullAddress); // 부모 컴포넌트의 주소 상태 업데이트
   };
 
