@@ -61,6 +61,8 @@ function Main() {
     searchKeyword || '',
   );
 
+  const moveLatLng = { lat: -0.0007, lng: 0.0002 };
+
   useEffect(() => {
     const initializeMap = async () => {
       if (!mapContainerRef.current || !naver || !mapCenter) return;
@@ -102,12 +104,11 @@ function Main() {
               setBottomCardVisible(true);
               setBottomSheetVisible(false);
               setMarkerData(searchResponseData);
-
               setMapCenter({
-                latitude: searchResponseData[0].latitude - 0.0005,
-                longitude: searchResponseData[0].longitude,
+                latitude: searchResponseData[0].latitude + moveLatLng.lat,
+                longitude: searchResponseData[0].longitude + moveLatLng.lng,
               });
-            }
+            } 
           } else {
             await getAndInitMarkers();
           }
@@ -116,7 +117,7 @@ function Main() {
         }
       } else {
         const newCenter = new naver.maps.LatLng(
-          mapCenter.latitude - 0.0005,
+          mapCenter.latitude,
           mapCenter.longitude,
         );
         mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
@@ -132,8 +133,12 @@ function Main() {
     const lng = new URLSearchParams(location.search).get('lng');
     if (mapCenter) {
       const newCenter = new naver.maps.LatLng(
-        (mapCenter.latitude = lat ? parseFloat(lat) : mapCenter.latitude),
-        (mapCenter.longitude = lng ? parseFloat(lng) : mapCenter.longitude),
+        (mapCenter.latitude = lat
+          ? parseFloat(lat) + moveLatLng.lat
+          : mapCenter.latitude),
+        (mapCenter.longitude = lng
+          ? parseFloat(lng) + moveLatLng.lng
+          : mapCenter.longitude),
       );
       mapRef.current?.setCenter(newCenter);
     }
@@ -156,15 +161,11 @@ function Main() {
           markersRef,
           handleMarkerClick,
         );
-        if (searchResponseData.length === 1) {
-          setBottomCardVisible(true);
-          setBottomSheetVisible(false);
-
-          const newCenter = searchResponseData[0];
-          setMapCenter({
-            latitude: newCenter.latitude,
-            longitude: newCenter.longitude,
-          });
+        if (searchResponseData.length === 1 && markersRef) {
+          // markersRef.current = searchResponseData[0];
+          initMarkerActive(markersRef!.current[0]);
+        } else {
+          mapRef.current?.setZoom(10);
         }
       }
     }
@@ -240,6 +241,17 @@ function Main() {
       };
       const markerData = await getPlacesFilter(requestBody);
       setMarkerData(markerData);
+
+      // // 지도 중심 이동
+      // if (markerData.length > 0) {
+      //   const firstMarker = markerData[markerData.length-1]; // 마지막 마커가 가장 가까운 마커
+      //   setMapCenter({
+      //     latitude: firstMarker.latitude + moveCategoryLatLng.lat,
+      //     longitude: firstMarker.longitude + moveCategoryLatLng.lng,
+      //   });
+      //   // mapRef.current.setZoom(12);
+      // }
+
       initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
     } catch (error) {
       console.error('Error Get Filtering Data:', error);
@@ -266,8 +278,8 @@ function Main() {
     setIsCurrentButtonActive(false);
   };
 
-  /** 마커 클릭 이벤트 함수 */
-  const handleMarkerClick = (marker: CustomMarker) => {
+  /** 기존 활성화된 마커 초기화 후 새 마커를 활성화 하는 함수 */
+  const initMarkerActive = (marker: CustomMarker) => {
     setBottomSheetVisible(false);
 
     if (selectedMarkerRef.current) {
@@ -284,9 +296,7 @@ function Main() {
     }
 
     selectedMarkerRef.current = marker;
-    const position = marker.getPosition();
 
-    setMapCenter({ latitude: position.y - 0.0005, longitude: position.x });
     marker.setIcon({
       content: ReactDOMServer.renderToString(
         <CustomMarkerComponent
@@ -298,9 +308,18 @@ function Main() {
       ),
     });
 
-    navigate(`/?search=${marker.data.placeName}`);
     setBottomCardVisible(true);
     mapRef.current!.setZoom(30);
+  };
+
+  /** 마커 클릭 이벤트 함수 */
+  const handleMarkerClick = (marker: CustomMarker) => {
+    navigate(
+      `/?search=${marker.data.placeName}&lat=${marker.data.latitude}&lng=${marker.data.longitude}`,
+    );
+    const position = marker.getPosition();
+    setMapCenter({ latitude: position.y - 0.0005, longitude: position.x });
+    initMarkerActive(marker);
   };
 
   /** 지도 클릭 시, 기존에 활성화된 컴포넌트들을 비활성화 하도록 변경하는 이벤트 함수 */
