@@ -15,6 +15,7 @@ interface CustomMarkerComponentProps {
   category: PlaceCategory;
   isActive?: boolean;
   userCategory?: string | null;
+  zoom: number;
 }
 
 function CustomMarkerComponent({
@@ -23,8 +24,9 @@ function CustomMarkerComponent({
   category,
   isActive = false,
   userCategory = null,
+  zoom,
 }: CustomMarkerComponentProps) {
-  let IconComponent : SVGComponent;
+  let IconComponent: SVGComponent;
 
   if (userCategory) {
     IconComponent = match(userCategory)
@@ -40,15 +42,32 @@ function CustomMarkerComponent({
       .otherwise(() => DefaultMarker);
   }
 
+  let zoomSize: number;
+
+  switch (true) {
+    case zoom < 12:
+      zoomSize = 30;
+      break;
+    case zoom >= 12 && zoom < 14:
+      zoomSize = 34;
+      break;
+    case zoom >= 14 && zoom < 16:
+      zoomSize = 38;
+      break;
+    default:
+      zoomSize = 44;
+      break;
+  }
+
   return (
     <S.Wrapper key={placeId}>
-      <S.Name>{name}</S.Name>
-      { isActive ? (
+      {zoom > 12 && <S.Name>{name}</S.Name>}
+      {isActive ? (
         <S.ClickIconWrapper>
           <IconComponent width={56} height={70} />
         </S.ClickIconWrapper>
       ) : (
-        <S.IconWrapper>
+        <S.IconWrapper zoomSize={zoomSize}>
           <IconComponent width={100} />
         </S.IconWrapper>
       )}
