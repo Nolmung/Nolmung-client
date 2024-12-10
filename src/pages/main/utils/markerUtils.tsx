@@ -17,6 +17,7 @@ export const addMarker = (
   map: naver.maps.Map,
   data: MarkerType,
   handleMarkerClick: (marker: CustomMarker) => void,
+  userCategory?: string | null,
 ) => {
   try {
     let newMarker = new naver.maps.Marker({
@@ -30,6 +31,8 @@ export const addMarker = (
             placeId={data.placeId}
             name={data.placeName}
             category={data.category}
+            userCategory={userCategory ? userCategory : null}
+            zoom={map.getZoom()}
           />,
         ),
       },
@@ -47,13 +50,28 @@ export const addMarker = (
       longitude: data.longitude,
       isBookmarked: data.isBookmarked,
     }),
-      naver.maps.Event.addListener(newMarker, 'click', (e) => {
-        if (e.domEvent) {
-          e.domEvent.stopPropagation();
-        }
-        handleMarkerClick(newMarker);
+      naver.maps.Event.addListener(map, 'zoom_changed', () => {
+        const currentZoom = map.getZoom();
+        newMarker.setIcon({
+          content: ReactDOMServer.renderToString(
+            <CustomMarkerComponent
+              placeId={data.placeId}
+              name={data.placeName}
+              category={data.category}
+              userCategory={userCategory ? userCategory : null}
+              zoom={currentZoom}
+            />,
+          ),
+        });
       });
-      return newMarker;
+
+    naver.maps.Event.addListener(newMarker, 'click', (e) => {
+      if (e.domEvent) {
+        e.domEvent.stopPropagation();
+      }
+      handleMarkerClick(newMarker);
+    });
+    return newMarker;
   } catch (e) {
     console.error('Error creating marker:', e);
     return null;
@@ -69,6 +87,7 @@ export const initMarkers = (
   markerData: MarkerType[],
   markersRef: React.MutableRefObject<CustomMarker[]>,
   handleMarkerClick: (marker: CustomMarker) => void,
+  userCategory?: string | null,
 ) => {
   // 기존 마커 삭제
   markersRef.current.forEach((marker) => marker.setMap(null));
@@ -76,7 +95,12 @@ export const initMarkers = (
 
   // 새로운 마커 생성
   markerData.forEach((data) => {
-    const newMarker = addMarker(map, data, handleMarkerClick);
+    const newMarker = addMarker(
+      map,
+      data,
+      handleMarkerClick,
+      userCategory ? userCategory : null,
+    );
     if (newMarker) {
       markersRef.current.push(newMarker);
     } else {

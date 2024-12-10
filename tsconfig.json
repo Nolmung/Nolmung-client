@@ -1,24 +1,20 @@
 {
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.app.json" }
   ],
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["src/*"],
-      "@assets/*": ["src/assets/*"],
-      "@common/*": ["src/common/*"],
-      "@mocks/*": ["src/mocks/*"],
-      "@pages/*": ["src/pages/*"],
-      "@service/*": ["src/service/*"],
-      "@styles/*": ["src/styles/*"],
-      "@stores/*": ["src/stores/*"]
+      "@/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@common/*": ["./src/common/*"],
+      "@mocks/*": ["./src/mocks/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@service/*": ["./src/service/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@stores/*": ["./src/stores/*"]
     }
-  },
-  "include": [
-    "src/**/*",
-    "src/global.d.ts" // 글로벌 타입 선언 파일 포함
-  ]
+  }
 }

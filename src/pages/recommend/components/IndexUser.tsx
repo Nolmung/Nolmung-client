@@ -1,4 +1,3 @@
-import RecommendCard from './RecommendCard';
 import S from '../styles/index.style';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import {
@@ -8,6 +7,8 @@ import {
   useRecommendWeight,
 } from '../queries';
 import { useGetUser } from '../../my/hooks';
+import RecommendCard from './RecommendCard';
+import { LoadingSkeletonLottie } from '@/common/components/lottie';
 
 function UserRecommend() {
   useSetDocumentTitle('추천');
@@ -44,7 +45,7 @@ function UserRecommend() {
     similarLoading ||
     nearbyLoading
   ) {
-    return <div>Loading...</div>;
+    return <LoadingSkeletonLottie />;
   }
 
   if (

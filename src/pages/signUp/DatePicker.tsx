@@ -20,7 +20,6 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
       fontFamily: 'Pretendard, Arial, sans-serif',
     },
   });
-
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -63,7 +62,9 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
                     },
                   },
                 },
-                
+                  inputProps: {
+                  placeholder: 'YYYY-MM-DD', // 기본값으로 표시할 placeholder 추가
+                },
               },
               popper: {
                 sx: {

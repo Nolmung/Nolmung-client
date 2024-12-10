@@ -20,4 +20,5 @@ export const ROUTE = {
   TODAYMUNG_EDIT: (diaryId: string | number) => `/todaymung/edit/${diaryId}`,
   ADDRESS_POPUP: () => '/addressPopup',
   USER_EDIT: () => '/userEdit',
+  MY_DOGS: () => '/my/dogs',
 } as const;

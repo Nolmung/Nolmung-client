@@ -1,26 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020"],
-    "module": "CommonJS", // Node.js 환경에 적합한 모듈 시스템
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
     "skipLibCheck": true,
-    "moduleResolution": "Node", // Node.js 모듈 해석
-    "paths": {
-      "@/*": ["./src/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@common/*": ["./src/common/*"],
-      "@mocks/*": ["./src/mocks/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@service/*": ["./src/service/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@stores/*": ["./src/stores/*"]
-    },
+
+    /* Bundler mode */
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
     "strict": true,
-    "composite": true,
-    "outDir": "./dist/node", // Node.js 빌드 결과물 디렉토리
-    "declaration": true, // TypeScript 타입 정의 파일 생성
-    "declarationMap": true // 선언 파일 맵 생성
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*"]
+  "include": ["vite.config.ts"]
 }

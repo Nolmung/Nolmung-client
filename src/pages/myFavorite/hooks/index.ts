@@ -1,8 +1,8 @@
-import { Bookmark, BookmarkCategory } from "@/common/types";
-import { deleteBookmarks, getBookmarks } from "@/service/apis/bookmarks";
-import { DeleteBookmarksResponse } from "@/service/apis/bookmarks/index.type";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import { Bookmark, BookmarkCategory } from '@/common/types';
+import { deleteBookmarks, getBookmarks } from '@/service/apis/bookmarks';
+import { DeleteBookmarksResponse } from '@/service/apis/bookmarks/index.type';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
 export const useGetBookmarks = (currentCategory: BookmarkCategory) => {
   return useQuery<Bookmark[]>({
@@ -18,7 +18,9 @@ export const useDeleteBookmarks = () => {
     onSuccess: (data) => {
       if (data.status === 'SUCCESS') {
         console.log('즐겨찾기 삭제 성공');
-        queryClient.invalidateQueries({ queryKey: ['bookmarks'] }); // 쿼리를 무효화하고 다시 조회
+        queryClient.invalidateQueries({
+          queryKey: ['bookmarks', 'postDetail'],
+        }); // 쿼리를 무효화하고 다시 조회
       } else if (data.status === 'NOT_FOUND') {
         console.log('즐겨찾기 삭제 실패');
       } else {

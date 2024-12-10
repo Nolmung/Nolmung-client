@@ -37,6 +37,15 @@ export const S = {
     max-width: 425px;
   `,
 
+  TitleWrapper: styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 22px;
+  `,
+
   PlaceImage: styled.img`
     width: 100%;
     height: 60%;
@@ -57,7 +66,7 @@ export const S = {
     );
     max-width: 425px;
   `,
-
+  IconWrapper: styled.div``,
   PlaceInfo: styled.div`
     width: 100%;
     border-bottom: 1px solid #f0f0f0;

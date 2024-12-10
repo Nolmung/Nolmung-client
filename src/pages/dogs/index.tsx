@@ -23,7 +23,7 @@ function Dogs() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [gender, setGender] = useState<string | null>(null);
   const [neutered, setNeutered] = useState<string | null>(null);
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
   const { mutate: postDogMutate } = usePostDogs();
 
   const handleDateChange = (newValue: Dayjs | null) => {
