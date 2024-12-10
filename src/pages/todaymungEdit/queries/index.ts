@@ -2,6 +2,7 @@ import { getDogs } from '@/service/apis/dog';
 import { DogsResponse } from '@/service/apis/dog/index.type';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { patchTodaymung } from '@/service/apis/diary';
+import { useTodayMungStore } from '../stores/todayMungStore';
 
 export const useGetDogs = () => {
   return useQuery<DogsResponse>({
@@ -14,6 +15,8 @@ export const useGetDogs = () => {
 };
 
 export const useEditDiary = () => {
+  const { deleteTodaymungAll } = useTodayMungStore();
+
   return useMutation({
     mutationFn: ({
       diaryRequest,
@@ -25,11 +28,12 @@ export const useEditDiary = () => {
 
     onSuccess: () => {
       alert('오늘멍 수정이 완료되었습니다.');
+      deleteTodaymungAll();
       window.location.href = '/todaymung';
     },
-    onError: (error) => {
-      console.error(error);
+    onError: () => {
       alert('오늘멍 수정에 실패했습니다.');
+      deleteTodaymungAll();
     },
   });
 };

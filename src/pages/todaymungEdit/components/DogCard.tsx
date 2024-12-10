@@ -8,7 +8,10 @@ interface DogCardProps {
 
 function DogCard({ data }: DogCardProps) {
   const { addDogs, dogs, deleteDogs } = useTodayMungStore();
+  console.log('dogs', dogs);
   const isDogSelected = dogs.includes(data.dogId);
+  console.log('data', data.dogId);
+  console.log('isDogSelected', isDogSelected);
   const handlePetButtonClick = () => {
     if (isDogSelected) {
       deleteDogs(data.dogId);

@@ -1,4 +1,4 @@
-import { CameraIcon, CancelIcon } from '@/assets/images/svgs';
+import { CameraIcon, CancelIcon, NoImage } from '@/assets/images/svgs';
 import S from '../styles/MediaGroup.style';
 import { useTodayMungStore } from '../stores/todayMungStore';
 import {
@@ -84,13 +84,11 @@ function MediaGroup() {
           media.mediaUrl !== undefined && media.mediaUrl.startsWith('https://');
         return (
           <S.MediaWrapper key={media.mediaId}>
-            <S.Media
-              src={
-                isMediaIdValid
-                  ? media.mediaUrl
-                  : '/public/svgs/todayMungDefaultImage.svg'
-              }
-            />
+            {isMediaIdValid ? (
+              <S.Media src={media.mediaUrl} />
+            ) : (
+              <NoImage width={86} />
+            )}
             {isMediaIdValid && (
               <S.IconWrapper
                 onClick={() => handleRemoveMediaButtonClick(media.mediaId!)}

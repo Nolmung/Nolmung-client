@@ -6,6 +6,7 @@ interface DogTagCardProps {
 }
 
 const DogTagCard = (data: DogTagCardProps) => {
+  console.log('data', data);
   return (
     <S.Wrapper>
       <S.DogImage

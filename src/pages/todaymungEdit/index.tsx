@@ -29,12 +29,18 @@ function TodayMungEdit() {
   const numericDiaryId = Number(diaryId);
 
   const { data: dogsData } = useGetDogs();
+  const { addDogs } = useTodayMungStore();
+
   const { mutate: diaryMutate } = useEditDiary();
   const {
     data: todaymungEditData,
     isLoading,
     isError,
   } = useTodaymungDetailData(numericDiaryId);
+
+  useEffect(() => {
+    console.log(todaymungEditData);
+  }, [todaymungEditData]);
 
   useEffect(() => {
     if (todaymungEditData) {
@@ -44,15 +50,10 @@ function TodayMungEdit() {
       setContent(content);
       medias.forEach((media: any) => addMedia(media));
       setPublicYn(publicYn);
+      console.log('--------', todaymungEditData.data.dogs);
+      todaymungEditData.data.dogs.map((dog: any) => addDogs(dog.dogId));
     }
-  }, []);
-
-  if (isLoading || !todaymungEditData) {
-    return <div>로딩중</div>;
-  }
-  if (isError) {
-    return <div>에러중</div>;
-  }
+  }, [todaymungEditData]);
 
   const handleCompleteButtonClick = () => {
     const diaryRequest = {
@@ -84,6 +85,13 @@ function TodayMungEdit() {
       }
     }
   };
+
+  if (isLoading || !todaymungEditData) {
+    return <div>로딩중</div>;
+  }
+  if (isError) {
+    return <div>에러중</div>;
+  }
 
   return (
     <S.Wrapper>

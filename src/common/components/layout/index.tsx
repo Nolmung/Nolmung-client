@@ -1,4 +1,6 @@
 import { CATEGORY_OPTIONS } from '@/pages/main/constants/categoryBar';
+import { useReviewStore } from '@/pages/todaymungPlaceRegist/stores/reviewStore';
+import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
 import Header from '@common/components/header';
 import { Flex as MainLayout } from '@common/components/layout/flex';
 import { S } from '@common/components/layout/index.styles';
@@ -70,6 +72,9 @@ function Layout({ children }: LayoutProps) {
   );
 
   const navigate = useNavigate();
+  const { reviewlist, deleteReviewAll } = useReviewStore();
+  const { title, content, places, dogs, medias, deleteTodaymungAll } =
+    useTodayMungStore();
 
   useEffect(() => {
     if (location.pathname.startsWith('/todaymung/detail')) {
@@ -92,11 +97,8 @@ function Layout({ children }: LayoutProps) {
     const search = searchParams.get('search');
     const pathName = location.pathname;
 
-    console.log('location', location);
-
     switch (true) {
       case pathName === '/' && !!category:
-        console.log('1');
         setHeaderTitle({
           title: `${categoryLabel}`,
           showIcon: true,
@@ -110,41 +112,35 @@ function Layout({ children }: LayoutProps) {
         break;
 
       case pathName === '/' && !!search:
-        console.log('2');
         setHeaderTitle({
           title: `${search}`,
           showIcon: true,
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          console.log('sdf');
           window.history.back();
         });
         break;
 
       case pathName === '/' && !!search:
-        console.log('2');
         setHeaderTitle({
           title: `${search}`,
           showIcon: true,
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          console.log('sdf');
           window.history.back();
         });
         break;
 
       case pathName === '/todaymung':
         {
-          console.log('3');
           setHeaderTitle({
             title: '오늘멍 모아보기',
             showIcon: false,
             type: 'TitleCenter',
           });
           setHandleBackButtonClick(() => () => {
-            console.log('sdf');
             window.history.back();
           });
         }
@@ -157,27 +153,38 @@ function Layout({ children }: LayoutProps) {
         break;
 
       case pathName == '/todaymung/write':
-        console.log('4');
         setHeaderTitle({
           title: '오늘멍 작성하기',
           showIcon: true,
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          console.log('hi');
-          navigate('/todaymung');
+          if (
+            title ||
+            content ||
+            dogs.length > 0 ||
+            medias.length > 0 ||
+            reviewlist.length > 0 ||
+            places.length > 0
+          ) {
+            if (
+              window.confirm('작성중인 내용이 있습니다. 정말로 나가시겠습니까?')
+            ) {
+              deleteReviewAll();
+              deleteTodaymungAll();
+              navigate('/todaymung');
+            }
+          }
         });
         break;
 
       case pathName == '/todaymung/placeregist' && !!search:
-        console.log('10');
         setHeaderTitle({
           title: '오늘멍 장소등록',
           showIcon: true,
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          console.log('bi');
           navigate('/todaymung/write');
         });
         break;
@@ -194,7 +201,6 @@ function Layout({ children }: LayoutProps) {
         break;
 
       case pathName == '/my':
-        console.log('7');
         setHeaderTitle({
           title: '마이페이지',
           showIcon: false,
@@ -203,7 +209,6 @@ function Layout({ children }: LayoutProps) {
         break;
 
       case pathName == '/my/review':
-        console.log('6');
         setHeaderTitle({
           title: '내가 쓴 리뷰',
           showIcon: true,
@@ -215,7 +220,6 @@ function Layout({ children }: LayoutProps) {
         break;
 
       case pathName == '/my/favorite':
-        console.log('8');
         setHeaderTitle({
           title: '즐겨찾기',
           showIcon: true,

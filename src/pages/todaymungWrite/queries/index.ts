@@ -22,9 +22,10 @@ export const useGetDogs = () => {
 
 export const usePostReviews = () => {
   const { deleteReviewAll } = useReviewStore();
-  const mutation = useMutation<number, Error, PostReviewRequest>({
+  return useMutation<number, Error, PostReviewRequest[]>({
     mutationFn: (review) => postReviews(review),
     onSuccess: () => {
+      alert('리뷰 등록이 완료되었습니다.');
       deleteReviewAll();
     },
     onError: () => {
@@ -32,22 +33,6 @@ export const usePostReviews = () => {
       deleteReviewAll();
     },
   });
-
-  const postReviewsSequentially = async (reviews: PostReviewRequest[]) => {
-    Promise.all(
-      reviews.map(async (review) => {
-        try {
-          await mutation.mutateAsync(review);
-        } catch (error) {
-          console.error('리뷰 등록 실패:', review, error);
-        }
-      }),
-    ).then(() => {
-      alert('리뷰 등록이 완료되었습니다.');
-    });
-  };
-
-  return { postReviewsSequentially, mutation };
 };
 
 export const usePostDiary = () => {
