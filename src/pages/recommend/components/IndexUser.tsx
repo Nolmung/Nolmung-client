@@ -1,4 +1,3 @@
-import RecommendCard from './RecommendCard';
 import S from '../styles/index.style';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import {
@@ -8,6 +7,9 @@ import {
   useRecommendWeight,
 } from '../queries';
 import { useGetUser } from '../../my/hooks';
+import Lottie from 'lottie-react';
+import SkeletonLottie from '@/assets/lottie/SkeletonLottie.json';
+import RecommendCard from './RecommendCard';
 
 function UserRecommend() {
   useSetDocumentTitle('추천');
@@ -44,7 +46,7 @@ function UserRecommend() {
     similarLoading ||
     nearbyLoading
   ) {
-    return <div>Loading...</div>;
+    return <Lottie animationData={SkeletonLottie} height={200} width={200} />;
   }
 
   if (

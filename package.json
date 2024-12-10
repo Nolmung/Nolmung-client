@@ -24,6 +24,7 @@
     "@tanstack/react-query-devtools": "^5.61.3",
     "axios": "^1.7.8",
     "dayjs": "^1.11.13",
+    "lottie-react": "^2.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0",
