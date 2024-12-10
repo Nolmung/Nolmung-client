@@ -29,6 +29,7 @@ import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import LoginPromptModal from '@/common/components/loginPromptModal';
+import getIsLogin from '@/common/utils/getIsLogin';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -71,6 +72,8 @@ function Main() {
   const currentLocationMarker = useRef<naver.maps.Marker | null>(null);
 
   const { isOpen, open, close } = useLoginPromptModalStore();
+
+  const isLoggedIn = getIsLogin();
 
   useEffect(() => {
     const initializeMap = async () => {
@@ -261,14 +264,10 @@ function Main() {
     let userCategory = null;
 
     if (categoryFromUrl === 'bookmarked' || categoryFromUrl === 'visited') {
-      /**
-       * @Todo access Token 있는지 확인하기
-       * 없으면 return + 로그인 페이지로 유도하는 모달창 띄우기
-       * 있으면 밑의 코드 실행
-       * */
-      if (!localStorage.getItem('accessToken')) {
+      
+      if (!isLoggedIn) {
         open();
-        return <>{isOpen && <LoginPromptModal closeModal={close} />}</>;
+        return;
       }
       userCategory = categoryFromUrl;
     }
