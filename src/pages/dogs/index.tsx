@@ -9,6 +9,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { uploadFileToS3 } from '@/common/utils/uploadImageToS3';
 import { usePostDogs } from './queries';
 import { DogInfoType } from '@/service/apis/dog/index.type';
+import { UPLOADPATH } from '@/common/constants/uploadPath';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
 
@@ -73,7 +74,6 @@ function Dogs() {
       fileInputRef.current.click();
     }
   };
-
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -81,8 +81,7 @@ function Dogs() {
     if (file) {
       try {
         // S3 업로드
-        const folderPath = 'dogs';
-        const uploadedFiles = await uploadFileToS3([file], folderPath);
+        const uploadedFiles = await uploadFileToS3([file], UPLOADPATH.DOGS());
 
         // undefined 체크 및 URL 업데이트
         if (uploadedFiles && uploadedFiles.length > 0) {
@@ -166,7 +165,6 @@ function Dogs() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-  console.log(preview);
   return (
     <S.ContainerWrapper>
       <S.UserTitle>
