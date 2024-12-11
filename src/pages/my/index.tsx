@@ -17,7 +17,6 @@ import PetProfileCard from './components/profile';
 function Mypage() {
   useSetDocumentTitle('마이페이지');
 
-  const [editId, setEditId] = useState<number>(0);
   const navigate = useNavigate();
   const navigateToMyReview = () => {
     navigate(ROUTE.MY_REVIEW());
