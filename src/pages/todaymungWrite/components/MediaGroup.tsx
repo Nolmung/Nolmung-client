@@ -6,6 +6,7 @@ import {
   uploadFileToS3,
 } from '@/common/utils/uploadImageToS3';
 import { Media } from '@/service/apis/diary/index.type';
+import { toast } from 'react-toastify';
 
 function MediaGroup() {
   const MAX_IMAGE_COUNT = 5; // 최대 이미지 개수
@@ -41,12 +42,12 @@ function MediaGroup() {
       );
 
       if (currentImages + newImages.length > MAX_IMAGE_COUNT) {
-        alert(`최대 ${MAX_IMAGE_COUNT}개의 이미지만 등록할 수 있습니다.`);
+        toast.error(`최대 ${MAX_IMAGE_COUNT}개의 이미지만 등록할 수 있습니다.`);
         return;
       }
 
       if (currentVideos + newVideos.length > MAX_VIDEO_COUNT) {
-        alert(`최대 ${MAX_VIDEO_COUNT}개의 비디오만 등록할 수 있습니다.`);
+        toast.error(`최대 ${MAX_VIDEO_COUNT}개의 비디오만 등록할 수 있습니다.`);
         return;
       }
 

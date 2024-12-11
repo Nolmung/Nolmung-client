@@ -8,6 +8,7 @@ import axios from 'axios';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
 import convertAddressToLatlng from './utils/convertAddressToLatlng';
+import { toast } from 'react-toastify';
 
 function SignUp() {
   const [nickname, setNickname] = useState('');
@@ -67,14 +68,14 @@ function SignUp() {
 
   const handleNext = async () => {
     if (!nickname || !addressProvince || !selectedDate || !gender) {
-      alert('모든 정보를 입력해주세요!');
+      toast.error('모든 정보를 입력해주세요!');
       return;
     }
 
     const userBirth = selectedDate.format('YYYY-MM-DD');
 
     if (!userId) {
-      alert('유효하지 않은 사용자 ID입니다.');
+      toast.error('유효하지 않은 사용자 ID입니다.');
       return;
     }
 
@@ -109,7 +110,7 @@ function SignUp() {
         console.error('서버 에러:', error.response.data);
       } else if (error.request) {
         console.error('요청이 서버에 도달하지 못했습니다:', error.request);
-        alert('요청이 서버에 도달하지 못했습니다.');
+        toast.error('요청이 서버에 도달하지 못했습니다.');
       } else {
         console.error('에러:', error.message);
       }

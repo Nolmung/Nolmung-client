@@ -6,6 +6,7 @@ import DatePicker from '../signUp/components/DatePicker';
 import DaumPost from '../signUp/components/DaumPost';
 import { instance } from '@/service/apis';
 import convertAddressToLatlng from '../signUp/utils/convertAddressToLatlng';
+import { toast } from 'react-toastify';
 
 function UserEdit() {
   const [nickname, setNickname] = useState('');
@@ -24,7 +25,7 @@ function UserEdit() {
   useEffect(() => {
     const fetchUserData = async () => {
       if (!userId) {
-        alert('유효하지 않은 사용자 ID입니다.');
+        toast.error('유효하지 않은 사용자 ID입니다.');
         navigate('/login');
         return;
       }
@@ -43,7 +44,7 @@ function UserEdit() {
         setAddress(userData.userAddressProvince || '');
       } catch (error) {
         console.error('유저 정보 조회 실패:', error);
-        alert('회원정보를 불러오는 데 실패했습니다.');
+        toast.error('회원정보를 불러오는 데 실패했습니다.');
       }
     };
 
@@ -83,7 +84,7 @@ function UserEdit() {
 
   const handleSave = async () => {
     if (!nickname || !addressProvince || !selectedDate || !gender) {
-      alert('모든 정보를 입력해주세요!');
+      toast.error('모든 정보를 입력해주세요!');
       return;
     }
 
@@ -105,12 +106,12 @@ function UserEdit() {
       );
 
       if (response.status === 200) {
-        alert('회원정보가 성공적으로 수정되었습니다.');
+        toast.success('회원정보가 성공적으로 수정되었습니다.');
         navigate('/my');
       }
     } catch (error) {
       console.error('저장 실패:', error);
-      alert('저장 중 문제가 발생했습니다. 다시 시도해주세요.');
+      toast.error('저장 중 문제가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
