@@ -16,7 +16,7 @@ const S = {
     color: #080808;
     font-size: 16px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 700;
     line-height: normal;
 
     border-radius: 0%;
@@ -44,9 +44,9 @@ const S = {
     padding-top: 15px;
 
     color: #080808;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
     resize: none;
     touch-action: manipulation; /* 확대 방지 */

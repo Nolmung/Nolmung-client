@@ -49,7 +49,7 @@ const S = {
     font-weight: 500;
     line-height: normal;
     resize: none;
-
+    touch-action: manipulation; /* 확대 방지 */
     &::placeholder {
       color: rgba(167, 167, 167, 0.5);
       font-size: 16px;
