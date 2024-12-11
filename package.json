@@ -84,5 +84,8 @@
     "workerDirectory": [
       "public"
     ]
+  },
+  "resolutions": {
+    "@mui/core-downloads-tracker": "6.1.0"
   }
 }

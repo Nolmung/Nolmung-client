@@ -1393,7 +1393,7 @@
     outvariant "^1.4.3"
     strict-event-emitter "^0.5.1"
 
-"@mui/core-downloads-tracker@^6.2.0":
+"@mui/core-downloads-tracker@6.1.0", "@mui/core-downloads-tracker@^6.2.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-6.1.0.tgz#35e37713a4240c09db92c082502fa0c90f6e37be"
   integrity sha512-covEnIn/2er5YdtuukDRA52kmARhKrHjOvPsyTFMQApZdrTBI4h8jbEy2mxZqwMwcAFS9coonQXnEZKL1rUNdQ==
