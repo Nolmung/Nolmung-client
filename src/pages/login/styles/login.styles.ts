@@ -4,7 +4,7 @@ import { NolmungLogo } from '@/assets/images/svgs';
 export const S = {
   Wrapper: styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,6 +15,8 @@ export const S = {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    height: 100%;
   `,
 
   StyledLogo: styled(NolmungLogo)`
@@ -28,7 +30,6 @@ export const S = {
     text-align: center;
     margin: auto;
     font-size: 14px;
-    margin-top: 260px;
     line-height: 1.3;
   `,
 
@@ -48,6 +49,10 @@ export const S = {
   BackgroundImg: styled.div`
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
     background-image: url('/pngs/LoginBackgroundimg.png');
     background-repeat: no-repeat;
     background-size: 100%;
