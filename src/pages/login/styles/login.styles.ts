@@ -37,7 +37,7 @@ export const S = {
     width: 100%;
     max-width: 423px;
     position: fixed;
-    bottom: 6%;
+    bottom: 5%;
   `,
   KaKaoButton: styled.button`
     all: unset;
@@ -60,7 +60,7 @@ export const S = {
     background-repeat: no-repeat;
     background-size: cover;
     @media (max-width: 400px) { /* 화면 너비가 400px 이하일 때 */
-    background-position: center -80px;
+    background-position: center -70px;
   }
   `,
 
