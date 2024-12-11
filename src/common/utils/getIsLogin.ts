@@ -1,5 +1,4 @@
 const getIsLogin = () => {
-  // return !!localStorage.getItem('accessToken');
-  return true;
+  return !!localStorage.getItem('accessToken');
 };
 export default getIsLogin;

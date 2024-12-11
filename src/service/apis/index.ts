@@ -8,16 +8,14 @@ export const instance = axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZW1haWwiOiJoeW9yaXNoMjAwMUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczMzkwNTYwNCwiZXhwIjoxNzM0NTEwNDA0fQ.4iTPZMrwvokOt38uJWQ8NAKMX5a6u-AVk7o1VSe-8xs',
+    Authorization: `${localStorage.getItem('accessToken')}`,
   },
 });
 
 // Axios 요청 인터셉터 설정
 instance.interceptors.request.use(
   (config) => {
-    const accessToken =
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NSwiZW1haWwiOiJoeW9yaXNoMjAwMUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczMzkwNTYwNCwiZXhwIjoxNzM0NTEwNDA0fQ.4iTPZMrwvokOt38uJWQ8NAKMX5a6u-AVk7o1VSe-8xs';
+    const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       config.headers['Authorization'] = accessToken;
     }
