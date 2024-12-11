@@ -4,7 +4,7 @@ import TodayMung from '@pages/todaymung';
 import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import KakaoCallbackHandler from '../pages/login/components/KakaoCallbackHandler';
-
+import MyDogs from '@/pages/my/components/myDogs';
 import Layout from '../common/components/layout';
 import Detail from '../pages/detail';
 import Login from '../pages/login';
@@ -23,7 +23,6 @@ import DogsEdit from '../pages/dogEdit';
 import PrivateRoute from './PrivateRoute';
 import NotFound from '@/pages/404';
 import UserEdit from '@/pages/userEdit';
-import MyDogs from '@/pages/my/components/myDogs';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -85,6 +84,7 @@ function Router() {
             path={ROUTE.DOGSEDIT(':dogId')}
             element={<PrivateRoute outlet={<DogsEdit />} />}
           />
+          <Route path={ROUTE.MY_DOGS()} element={<MyDogs />} />
           <Route
             path={ROUTE.TODAYMUNG()}
             element={<PrivateRoute outlet={<TodayMung />} />}

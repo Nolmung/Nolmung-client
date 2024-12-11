@@ -46,7 +46,7 @@ function Todaymung() {
     return <LoadingSpinnerLottie />;
   }
   if (isError) {
-    return <div>에러중</div>;
+    return <LoadingSpinnerLottie />;
   }
   return (
     <S.Wrapper>

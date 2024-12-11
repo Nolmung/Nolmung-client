@@ -18,9 +18,10 @@
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
     "@jridgewell/gen-mapping": "0.3.5",
-    "@mui/icons-material": "^6.1.8",
-    "@mui/material": "^6.1.10",
-    "@mui/x-date-pickers": "^7.23.0",
+    "@mui/icons-material": "^6.2.0",
+    "@mui/material": "^6.2.0",
+    "@mui/x-date-pickers": "^7.23.1",
+    "@mui/system": "^6.2.0",
     "@tanstack/react-query": "^5.61.3",
     "@tanstack/react-query-devtools": "^5.61.3",
     "axios": "^1.7.8",
@@ -83,5 +84,8 @@
     "workerDirectory": [
       "public"
     ]
+  },
+  "resolutions": {
+    "@mui/core-downloads-tracker": "6.1.0"
   }
 }

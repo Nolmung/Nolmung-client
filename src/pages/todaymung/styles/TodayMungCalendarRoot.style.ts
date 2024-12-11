@@ -21,7 +21,7 @@ export const S = {
     margin-top: 10px;
   `,
 
-  TodaymungInsertButton: styled.button`
+  TodaymungInsertButton: styled.button<{ $status: boolean }>`
     display: flex;
     bottom: 0;
     align-items: center;

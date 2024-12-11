@@ -21,7 +21,7 @@ function TodayMungWrite() {
   const navigate = useNavigate();
 
   const { reviewlist } = useReviewStore();
-  const { title, content, dogs, medias } = useTodayMungStore();
+  const { title, content, dogs } = useTodayMungStore();
 
   const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary();
@@ -29,10 +29,19 @@ function TodayMungWrite() {
 
   useSetDocumentTitle('오늘멍 작성하기');
 
-  const handleCompleteButtonClick = () => {
-    if (title || content || dogs.length > 0 || medias.length > 0) {
-      const missingFields = [];
+  const handleCompleteButtonClick = async () => {
+    const reviewRequestList: PostReviewRequest[] = reviewlist.map((review) => ({
+      placeId: review.placeId,
+      rating: review.rating,
+      category: review.category,
+      labels: review.labels.map((label) => ({
+        labelId: label.labelId,
+        labelName: label.labelName,
+      })),
+    }));
 
+    if (!title || !content || dogs.length === 0) {
+      const missingFields = [];
       if (!title) missingFields.push('제목');
       if (!content) missingFields.push('내용');
       if (dogs.length === 0) missingFields.push('반려견');
@@ -47,29 +56,25 @@ function TodayMungWrite() {
         }`;
 
         toast.error(alertMessage);
-      } else {
-        diaryMutate();
+        return;
       }
     }
-    const reviewRequestList: PostReviewRequest[] = [];
 
     if (reviewlist.length === 0) {
       return;
     }
 
-    for (let review of reviewlist) {
-      const reviewRequest = {
-        placeId: review.placeId,
-        rating: review.rating,
-        category: review.category,
-        labels: review.labels.map((label) => ({
-          labelId: label.labelId,
-          labelName: label.labelName,
-        })),
-      };
-      reviewRequestList.push(reviewRequest);
+    try {
+      if (reviewRequestList.length > 0) {
+        await reviewMutate(reviewRequestList);
+      }
+
+      await diaryMutate();
+      toast.success('오늘멍과 리뷰 등록이 완료되었습니다!');
+    } catch (error) {
+      console.error('등록 실패:', error);
+      toast.error('등록 중 문제가 발생했습니다.');
     }
-    reviewMutate(reviewRequestList);
   };
 
   const navigateToTodaymungPlaceRegist = () => {
