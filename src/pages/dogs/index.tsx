@@ -81,7 +81,8 @@ function Dogs() {
     if (file) {
       try {
         // S3 업로드
-        const uploadedFiles = await uploadFileToS3([file]);
+        const folderPath = 'dogs';
+        const uploadedFiles = await uploadFileToS3([file], folderPath);
 
         // undefined 체크 및 URL 업데이트
         if (uploadedFiles && uploadedFiles.length > 0) {
@@ -165,7 +166,7 @@ function Dogs() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
+  console.log(preview);
   return (
     <S.ContainerWrapper>
       <S.UserTitle>
