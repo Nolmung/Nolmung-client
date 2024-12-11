@@ -61,13 +61,13 @@ function TodayMungPlaceRegist() {
 
   const handleSearch = (searchKeyword?: string) => {
     const searchValue = searchKeyword || inputRef?.current?.value.trim();
+    console.log(searchValue, searchKeyword, inputRef?.current?.value.trim());
     if (!searchValue) return;
     const newSearchItem: SearchHistoryItem = {
       id: Date.now(),
       keyword: searchValue,
       createdAt: formatDate(new Date()),
     };
-
     setSearchHistory(updateSearchHistory(searchHistory, newSearchItem));
 
     setSearchKeyword(searchValue);
