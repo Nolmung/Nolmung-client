@@ -28,6 +28,7 @@ const S = {
     padding: 0 16px;
     width: calc(100% - 32px);
     overflow-x: auto;
+    max-width: 423px;
   `,
   IconWrapper: styled.div`
     position: absolute;
