@@ -9,7 +9,7 @@ function Login() {
     navigate(-1);
   };
   return (
-    <>
+    <S.Wrapper>
       <S.BackgroundImg>
         <S.ObjectContainer>
           <S.NolmungText>
@@ -22,7 +22,7 @@ function Login() {
           <S.LoginText onClick={handleBack}>나중에 가입할래요</S.LoginText>
         </S.ObjectContainer>
       </S.BackgroundImg>
-    </>
+    </S.Wrapper>
   );
 }
 

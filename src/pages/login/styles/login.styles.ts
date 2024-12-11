@@ -2,6 +2,13 @@ import styled from 'styled-components';
 import { NolmungLogo } from '@/assets/images/svgs';
 
 export const S = {
+  Wrapper: styled.div`
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `,
   ObjectContainer: styled.div`
     display: flex;
     justify-content: center;
