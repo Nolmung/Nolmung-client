@@ -16,13 +16,14 @@ const s3 = new S3Client({
 });
 
 /** input에서 받은 file을 그대로 넣으면 S3 url과 fileType을 리턴합니다 */
-export const uploadFileToS3 = async (files: File[]) => {
+export const uploadFileToS3 = async (files: File[], folder: string) => {
   const uploadedFiles = [];
   try {
     for (const file of files) {
+      const fileKey = `${folder}/${Date.now()}_${file.name}`;
       const command = new PutObjectCommand({
         Bucket: bucketName,
-        Key: file.name,
+        Key: fileKey,
         Body: file,
         ContentType: file.type,
         ACL: 'public-read',
@@ -30,8 +31,8 @@ export const uploadFileToS3 = async (files: File[]) => {
 
       await s3.send(command);
 
-      const encodedFileName = encodeURI(file.name);
-      const s3Url = `https://${bucketName}.s3.${region}.amazonaws.com/${encodedFileName}`;
+      const encodedFileKey = encodeURI(fileKey);
+      const s3Url = `https://${bucketName}.s3.${region}.amazonaws.com/${encodedFileKey}`;
 
       const fileType = file.type.split('/')[0].toUpperCase();
 
@@ -50,6 +51,7 @@ export const deleteFileFromS3 = async (fileUrl: string) => {
     /\+/g,
     ' ',
   );
+
   try {
     const command = new DeleteObjectCommand({
       Bucket: bucketName,

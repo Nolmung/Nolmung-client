@@ -39,7 +39,15 @@ function PetProfileCard({ data, editId, setEditId }: PetProfileProps) {
           <S.Container>
             <S.ProfileWrapper>
               <S.ProfileContainer>
-                <S.ProfileImg width={68} height={68} src={data.profileUrl} />
+                <S.ProfileImg
+                  width={68}
+                  height={68}
+                  src={data.profileUrl}
+                  onError={(e) => {
+                    e.currentTarget.src = '/svgs/todayMungNoListIcon.svg';
+                    e.currentTarget.style.borderRadius = '0';
+                  }}
+                />
               </S.ProfileContainer>
               <S.ProfileTextWrapper>
                 <S.ProfileNameText>{data.dogName}</S.ProfileNameText>

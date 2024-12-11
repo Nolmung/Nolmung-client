@@ -71,7 +71,7 @@ export const S = {
     font-weight: 500;
     line-height: normal;
     background-color: #fff;
-
+    white-space: nowrap;
     &:active {
       background-color: #f0f0f0;
       color: #333;
