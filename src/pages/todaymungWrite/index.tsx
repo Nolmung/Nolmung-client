@@ -56,8 +56,7 @@ function TodayMungWrite() {
         }`;
 
         toast.error(alertMessage);
-      } else {
-        diaryMutate();
+        return;
       }
     }
 

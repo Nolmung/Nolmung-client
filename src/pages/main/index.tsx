@@ -278,6 +278,7 @@ function Main() {
     let userCategory = null;
 
     if (categoryFromUrl === 'bookmarked' || categoryFromUrl === 'visited') {
+      
       if (!isLoggedIn) {
         open();
         return;
