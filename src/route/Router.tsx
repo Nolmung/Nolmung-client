@@ -4,7 +4,7 @@ import TodayMung from '@pages/todaymung';
 import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import KakaoCallbackHandler from '../pages/login/components/KakaoCallbackHandler';
-
+import MyDogs from '@/pages/my/components/myDogs';
 import Layout from '../common/components/layout';
 import Detail from '../pages/detail';
 import Login from '../pages/login';
