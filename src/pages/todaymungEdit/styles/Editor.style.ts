@@ -16,7 +16,7 @@ const S = {
     color: #080808;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
 
     border-radius: 0%;
@@ -44,20 +44,18 @@ const S = {
     padding-top: 15px;
 
     color: #080808;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     resize: none;
-    word-spacing: -5px;
-
+    touch-action: manipulation; /* 확대 방지 */
     &::placeholder {
       color: rgba(167, 167, 167, 0.5);
-      font-size: 14px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: normal;
-      word-spacing: -5px;
     }
     &:focus {
       outline: none;
