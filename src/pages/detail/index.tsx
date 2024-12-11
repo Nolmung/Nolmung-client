@@ -38,6 +38,7 @@ import { useDeleteBookmarks } from '../myFavorite/hooks';
 import { usePostBookmarks } from '../main/queries';
 import getIsLogin from '@/common/utils/getIsLogin';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
+import checkUserDevice from '../main/utils/checkUserDevice';
 
 function Detail() {
   const navigate = useNavigate();
@@ -115,8 +116,13 @@ function Detail() {
     }
   };
 
+  const device = checkUserDevice();
   return (
-    <S.Wrapper ref={scrollRef} onScroll={handleScroll}>
+    <S.Wrapper
+      isMobile={device == 'Mobile'}
+      ref={scrollRef}
+      onScroll={handleScroll}
+    >
       <S.Header isScrolled={scrollTop >= 70}>
         {scrollTop >= 70 ? (
           <>

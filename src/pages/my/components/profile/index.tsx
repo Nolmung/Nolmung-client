@@ -8,11 +8,9 @@ import { ROUTE } from '@common/constants/route';
 
 interface PetProfileProps {
   data?: DogType;
-  editId: number;
-  setEditId: (dogId: number) => void;
 }
 
-function PetProfileCard({ data, editId, setEditId }: PetProfileProps) {
+function PetProfileCard({ data }: PetProfileProps) {
   const navigate = useNavigate();
   /** @Todo 반려견 정보 등록 후에 타입 수정하기 */
   const dogSize = data ? DogSizeMapping[data.size as DogSize] : '';
@@ -20,12 +18,7 @@ function PetProfileCard({ data, editId, setEditId }: PetProfileProps) {
   const age = calculateAge(data?.birth);
 
   const handleCardClick = (dogId: number) => {
-    if (editId === dogId) {
-      setEditId(0);
-      navigate(ROUTE.DOGSEDIT(dogId));
-    } else {
-      setEditId(dogId);
-    }
+    navigate(ROUTE.DOGSEDIT(dogId));
   };
 
   const handleDogRegisterClick = () => {
@@ -39,7 +32,15 @@ function PetProfileCard({ data, editId, setEditId }: PetProfileProps) {
           <S.Container>
             <S.ProfileWrapper>
               <S.ProfileContainer>
-                <S.ProfileImg width={68} height={68} src={data.profileUrl} />
+                <S.ProfileImg
+                  width={68}
+                  height={68}
+                  src={data.profileUrl}
+                  onError={(e) => {
+                    e.currentTarget.src = '/svgs/todayMungNoListIcon.svg';
+                    e.currentTarget.style.borderRadius = '0';
+                  }}
+                />
               </S.ProfileContainer>
               <S.ProfileTextWrapper>
                 <S.ProfileNameText>{data.dogName}</S.ProfileNameText>
@@ -55,10 +56,8 @@ function PetProfileCard({ data, editId, setEditId }: PetProfileProps) {
           </S.Container>
         </S.Wrapper>
       ) : (
-        <S.Wrapper>
-          <S.NoDataText onClick={handleDogRegisterClick}>
-            반려견을 등록해보세요!
-          </S.NoDataText>
+        <S.Wrapper onClick={handleDogRegisterClick}>
+          <S.NoDataText>반려견을 등록해보세요!</S.NoDataText>
         </S.Wrapper>
       )}
     </>

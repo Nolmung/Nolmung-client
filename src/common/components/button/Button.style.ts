@@ -17,5 +17,6 @@ export const S = {
     border-radius: ${({ borderRadius }) =>
       borderRadius ? borderRadius : '12px'};
     border: ${({ border }) => (border ? border : 'none')};
+    white-space: nowrap;
   `,
 };

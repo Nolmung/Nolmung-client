@@ -8,7 +8,8 @@ const S = {
     width: 100%;
     height: calc(100vh - ${HEADER_HEIGHT}px - ${BOTTOM_NAV_HEIGHT}px);
     padding: 22px 0 100px 0;
-    padding: ${({ addPadding }) => (addPadding ? '22px 0 100px 0' : '22px 0')};
+    padding: ${({ addPadding }) =>
+      addPadding ? '22px 0 190px 0' : '22px 0 90px 0'};
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -79,6 +80,7 @@ const S = {
     font-weight: 500;
     line-height: normal;
     background-color: #fff;
+    white-space: nowrap;
 
     &:active {
       background-color: #f0f0f0;

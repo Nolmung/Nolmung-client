@@ -11,6 +11,7 @@ import { uploadFileToS3 } from '@/common/utils/uploadImageToS3';
 import { usePatchDogs, useDeleteDogs } from './queries';
 import { DogInfoType } from '@/service/apis/dog/index.type';
 import 'dayjs/locale/ko';
+import { UPLOADPATH } from '@/common/constants/uploadPath';
 dayjs.locale('ko');
 
 function DogsEdit() {
@@ -83,7 +84,7 @@ function DogsEdit() {
     const file = event.target.files?.[0];
     if (file) {
       try {
-        const uploadedFiles = await uploadFileToS3([file]);
+        const uploadedFiles = await uploadFileToS3([file], UPLOADPATH.DOGS());
 
         if (uploadedFiles && uploadedFiles.length > 0) {
           const s3Url = uploadedFiles[0].s3Url;

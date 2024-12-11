@@ -7,7 +7,6 @@ import {
   ReviewListIcon,
   UserEditIcon,
 } from '@/assets/images/svgs';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
@@ -17,7 +16,6 @@ import PetProfileCard from './components/profile';
 function Mypage() {
   useSetDocumentTitle('마이페이지');
 
-  const [editId, setEditId] = useState<number>(0);
   const navigate = useNavigate();
   const navigateToMyReview = () => {
     navigate(ROUTE.MY_REVIEW());
@@ -78,14 +76,9 @@ function Mypage() {
             반려견 전체보기
           </S.PetProfilePlusButton>
           {dogData && dogData.length > 0 ? (
-            <PetProfileCard
-              data={dogData[0]}
-              editId={editId}
-              setEditId={setEditId}
-              key={dogData[0].dogId}
-            />
+            <PetProfileCard data={dogData[0]} key={dogData[0].dogId} />
           ) : (
-            <PetProfileCard editId={editId} setEditId={setEditId} />
+            <PetProfileCard />
           )}
         </S.PetProfileWrapper>
       </S.ProfileWrapper>
