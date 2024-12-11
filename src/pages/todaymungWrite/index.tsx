@@ -71,7 +71,6 @@ function TodayMungWrite() {
       }
 
       await diaryMutate();
-      toast.success('오늘멍과 리뷰 등록이 완료되었습니다!');
     } catch (error) {
       console.error('등록 실패:', error);
       toast.error('등록 중 문제가 발생했습니다.');

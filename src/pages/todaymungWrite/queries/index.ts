@@ -11,12 +11,6 @@ import { useReviewStore } from '@/pages/todaymungPlaceRegist/stores/reviewStore'
 import { deleteFileFromS3 } from '@/common/utils/uploadImageToS3';
 import { toast } from 'react-toastify';
 
-type Media = {
-  mediaUrl: string;
-  mediaType: string;
-  [key: string]: any;
-};
-
 export const useGetDogs = () => {
   return useQuery<DogsResponse>({
     queryKey: ['dogs'],
@@ -50,28 +44,15 @@ export const usePostDiary = () => {
   const { title, content, places, medias, publicYn, dogs } =
     useTodayMungStore();
 
-  const defaultImg =
-    'https://nolmung.s3.ap-northeast-2.amazonaws.com/todaymungs/defaultImage.svg';
-
-  const updatedMedias: Media[] =
-    medias.length === 0
-      ? [
-          {
-            mediaUrl: defaultImg,
-            mediaType: 'IMAGE',
-          },
-        ]
-      : medias;
-
   const diaryRequest = {
     title,
     content,
     places,
-    medias: updatedMedias,
+    medias,
     publicYn,
     dogs,
   };
-  console.log(diaryRequest);
+
   return useMutation<number, Error>({
     mutationFn: () => {
       return postTodaymung(diaryRequest);
