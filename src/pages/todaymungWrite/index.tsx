@@ -14,7 +14,6 @@ import { PostReviewRequest } from '@/service/apis/review/index.type';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { toast } from 'react-toastify';
 import Modal from '@/common/components/modal';
-import { useEffect } from 'react';
 import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
 
 function TodayMungWrite() {
