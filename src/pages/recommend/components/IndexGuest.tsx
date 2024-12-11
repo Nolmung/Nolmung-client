@@ -32,7 +32,14 @@ function GuestRecommend() {
   };
 
   return (
-    <S.Wrapper>
+    <S.Wrapper
+      onClickCapture={(e) => {
+        e.stopPropagation();
+      }}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
       <S.BlurWrapper>
         {bookmarks.length > 0 && (
           <RecommendCard
