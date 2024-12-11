@@ -18,6 +18,7 @@ import {
 import Modal from '@/common/components/modal';
 import Button from '@/common/components/button/Button';
 import useModal from '@/common/hooks/useModal';
+import { LoadingSpinnerLottie } from '@/common/components/lottie';
 
 export interface SearchHistoryItem {
   id: number;
@@ -85,7 +86,7 @@ function TodayMungPlaceRegist() {
     setSearchHistory(clearSearchHistory());
     closeModal();
   };
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) return <LoadingSpinnerLottie />;
   if (error) return <div>에러 발생</div>;
 
   return (
