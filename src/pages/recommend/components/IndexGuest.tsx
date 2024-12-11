@@ -10,10 +10,12 @@ import {
 import { MapPlace } from '@/service/apis/place/index.type';
 import Button from '@/common/components/button/Button';
 import { LoadingSkeletonLottie } from '@/common/components/lottie';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@/common/constants/route';
 
 function GuestRecommend() {
   useSetDocumentTitle('추천');
-
+  const naviagte = useNavigate();
   const {
     data: bookmarks,
     isLoading: bookmarksLoading,
@@ -29,18 +31,11 @@ function GuestRecommend() {
   }
 
   const handleKakaoLoginButtonClick = () => {
-    window.location.href = import.meta.env.VITE_KAKAO_API_URL;
+    naviagte(ROUTE.LOGIN());
   };
 
   return (
-    <S.Wrapper
-      onClickCapture={(e) => {
-        e.stopPropagation();
-      }}
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-    >
+    <S.Wrapper>
       <S.BlurWrapper>
         {bookmarks.length > 0 && (
           <RecommendCard
