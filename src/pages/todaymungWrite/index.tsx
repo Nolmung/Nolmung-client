@@ -56,11 +56,9 @@ function TodayMungWrite() {
         }`;
 
         toast.error(alertMessage);
-      } else {
-        diaryMutate();
+        return;
       }
     }
-    const reviewRequestList: PostReviewRequest[] = [];
 
     if (reviewlist.length === 0) {
       return;
