@@ -8,10 +8,10 @@ import axios from 'axios';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
 import convertAddressToLatlng from './utils/convertAddressToLatlng';
+import { toast } from 'react-toastify';
 
 function SignUp() {
   const [nickname, setNickname] = useState('');
-  const [addressProvince, setAddressProvince] = useState('');
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isAddressValid, setAddressValid] = useState(true);
@@ -29,44 +29,20 @@ function SignUp() {
     document.title = '회원가입';
   }, []);
 
-  // userId가 있을 경우 GET 요청을 통해 회원정보 불러오기
   useEffect(() => {
-    const fetchUserData = async () => {
-      if (!userId) return;
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_SERVER_URL}/v1/users/${userId}`,
-        );
-        const userData = response.data.data;
-
-        // 받아온 회원정보를 폼에 반영
-        setNickname(userData.userNickname || '');
-        setAddressProvince(userData.userAddressProvince || '');
-        setSelectedDate(dayjs(userData.userBirth));
-        setGender(userData.userGender); // 응답이 'FEMALE' 또는 'MALE' 형태라고 가정
-      } catch (error) {
-        console.error('유저 정보 조회 실패:', error);
-      }
-    };
-
-    fetchUserData();
-  }, [userId]);
-
-  useEffect(() => {
-    // 버튼 활성화 조건: 닉네임, 주소, 생년월일, 성별 모두 입력
-    if (nickname && addressProvince && selectedDate && gender) {
+    if (nickname && address && selectedDate && gender) {
       setNextButtonActive(true);
     } else {
       setNextButtonActive(false);
     }
-  }, [nickname, addressProvince, selectedDate, gender]);
+  }, [nickname, address, selectedDate, gender]);
 
   const handleDateChange = (newValue: Dayjs | null) => {
     setSelectedDate(newValue);
   };
 
   const handleNext = async () => {
-    if (!nickname || !addressProvince || !selectedDate || !gender) {
+    if (!nickname || !address || !selectedDate || !gender) {
       alert('모든 정보를 입력해주세요!');
       return;
     }
@@ -74,24 +50,21 @@ function SignUp() {
     const userBirth = selectedDate.format('YYYY-MM-DD');
 
     if (!userId) {
-      alert('유효하지 않은 사용자 ID입니다.');
+      toast.error('유효하지 않은 사용자 ID입니다.');
       return;
     }
 
     try {
-      // 주소를 위도/경도로 변환
-      const { latitude, longitude } =
-        await convertAddressToLatlng(addressProvince);
+      const { latitude, longitude } = await convertAddressToLatlng(address);
       console.log('위도: ', latitude, '경도: ', longitude);
 
-      // requestBody 생성
       const requestBody = {
         userNickname: nickname,
-        userAddressProvince: addressProvince,
-        userLat: latitude, // 변환된 위도
-        userLong: longitude, // 변환된 경도
+        userAddressProvince: address,
+        userLat: latitude,
+        userLong: longitude,
         userBirth: userBirth,
-        userGender: gender, // 'MALE' 또는 'FEMALE'
+        userGender: gender,
       };
 
       const response = await axios.post(
@@ -100,8 +73,12 @@ function SignUp() {
       );
 
       if (response.status === 200 || response.status === 201) {
+        localStorage.setItem(
+          'accessToken',
+          'Bearer ' + response.data.data.accessToken,
+        );
         navigate('/dogs', {
-          state: { nickname, addressProvince, userBirth },
+          state: { nickname, address, userBirth },
         });
       }
     } catch (error: any) {
@@ -109,7 +86,7 @@ function SignUp() {
         console.error('서버 에러:', error.response.data);
       } else if (error.request) {
         console.error('요청이 서버에 도달하지 못했습니다:', error.request);
-        alert('요청이 서버에 도달하지 못했습니다.');
+        toast.error('요청이 서버에 도달하지 못했습니다.');
       } else {
         console.error('에러:', error.message);
       }
@@ -118,13 +95,13 @@ function SignUp() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setAddressProvince(value);
+    setAddress(value);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    setAddressProvince(suggestion); // 선택한 값으로 입력 필드 업데이트
+    setAddress(suggestion);
     setFilteredLocations([]);
-    setDropdownVisible(false); // 드롭다운 숨기기
+    setDropdownVisible(false);
     setAddressValid(true);
   };
 
@@ -153,7 +130,7 @@ function SignUp() {
         </S.ContentTitleText>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <S.UserInfoInput
-            value={address} // 선택한 주소를 표시
+            value={address}
             onChange={handleInputChange}
             placeholder="주소를 입력해주세요"
           />

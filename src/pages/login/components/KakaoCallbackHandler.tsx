@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 function KakaoCallbackHandler() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function KakaoCallbackHandler() {
         const id = urlParams.get('id');
 
         if (!id) {
-          alert('카카오 로그인 실패: 인증 코드가 없습니다.');
+          toast.error('카카오 로그인 실패: 인증 코드가 없습니다.');
           return;
         }
 
@@ -38,12 +39,12 @@ function KakaoCallbackHandler() {
         } else if (loginStatus === 'SIGN_UP_REQUIRED' && role === 'GUEST') {
           navigate('/signUp', { state: { userId, email, loginStatus, role } });
         } else {
-          alert('알 수 없는 상태입니다.');
+          toast.error('알 수 없는 상태입니다.');
           navigate('/login');
         }
       } catch (error) {
         console.error('카카오 로그인 처리 중 오류:', error);
-        alert('로그인 처리 중 문제가 발생했습니다.');
+        toast.error('로그인 처리 중 문제가 발생했습니다.');
         navigate('/login');
       }
     };

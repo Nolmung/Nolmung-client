@@ -6,10 +6,10 @@ import DatePicker from '../signUp/components/DatePicker';
 import DaumPost from '../signUp/components/DaumPost';
 import { instance } from '@/service/apis';
 import convertAddressToLatlng from '../signUp/utils/convertAddressToLatlng';
+import { toast } from 'react-toastify';
 
 function UserEdit() {
   const [nickname, setNickname] = useState('');
-  const [addressProvince, setAddressProvince] = useState('');
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
   const [gender, setGender] = useState<string | null>(null);
   const [NextButtonActive, setNextButtonActive] = useState(false);
@@ -24,7 +24,7 @@ function UserEdit() {
   useEffect(() => {
     const fetchUserData = async () => {
       if (!userId) {
-        alert('유효하지 않은 사용자 ID입니다.');
+        toast.error('유효하지 않은 사용자 ID입니다.');
         navigate('/login');
         return;
       }
@@ -37,13 +37,14 @@ function UserEdit() {
         const userData = response.data.data;
 
         setNickname(userData.userNickname || '');
-        setAddressProvince(userData.userAddressProvince || '');
         setSelectedDate(dayjs(userData.userBirth));
         setGender(userData.userGender);
         setAddress(userData.userAddressProvince || '');
+        setLatitude(userData.userLat || null);
+        setLongitude(userData.userLong || null);
       } catch (error) {
         console.error('유저 정보 조회 실패:', error);
-        alert('회원정보를 불러오는 데 실패했습니다.');
+        toast.error('회원정보를 불러오는 데 실패했습니다.');
       }
     };
 
@@ -51,12 +52,12 @@ function UserEdit() {
   }, [userId, navigate]);
 
   useEffect(() => {
-    if (nickname && addressProvince && selectedDate && gender) {
+    if (nickname && address && selectedDate && gender) {
       setNextButtonActive(true);
     } else {
       setNextButtonActive(false);
     }
-  }, [nickname, addressProvince, selectedDate, gender]);
+  }, [nickname, address, selectedDate, gender]);
 
   useEffect(() => {
     const fetchLatLng = async () => {
@@ -82,7 +83,7 @@ function UserEdit() {
   };
 
   const handleSave = async () => {
-    if (!nickname || !addressProvince || !selectedDate || !gender) {
+    if (!nickname || !address || !selectedDate || !gender) {
       alert('모든 정보를 입력해주세요!');
       return;
     }
@@ -92,7 +93,7 @@ function UserEdit() {
     try {
       const requestBody = {
         userNickname: nickname,
-        userAddressProvince: addressProvince,
+        userAddressProvince: address,
         userLat: latitude,
         userLong: longitude,
         userBirth: userBirth,
@@ -105,18 +106,18 @@ function UserEdit() {
       );
 
       if (response.status === 200) {
-        alert('회원정보가 성공적으로 수정되었습니다.');
+        toast.success('회원정보가 성공적으로 수정되었습니다.');
         navigate('/my');
       }
     } catch (error) {
       console.error('저장 실패:', error);
-      alert('저장 중 문제가 발생했습니다. 다시 시도해주세요.');
+      toast.error('저장 중 문제가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
   return (
     <S.ContainerWrapper>
-      <S.UserTitle>프로필 수정</S.UserTitle>
+      <S.UserTitle>회원정보 수정</S.UserTitle>
       <S.ContentTitleText>닉네임</S.ContentTitleText>
       <S.UserInfoInput
         value={nickname}
@@ -125,8 +126,8 @@ function UserEdit() {
       />
       <S.ContentTitleText>주소</S.ContentTitleText>
       <S.UserInfoInput
-        value={address} // 선택한 주소를 표시
-        onChange={(e) => setAddress(e.target.value)} // 사용자가 입력을 수정할 수 있도록 설정
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
         placeholder="주소를 입력해주세요"
       />
       <DaumPost setAddress={setAddress} />
