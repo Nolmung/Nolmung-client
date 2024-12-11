@@ -8,6 +8,7 @@ export const S = {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: auto;
   `,
   ObjectContainer: styled.div`
     display: flex;
