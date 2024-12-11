@@ -14,6 +14,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import LoginPromptModal from '../loginPromptModal';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
+import { ROUTE } from '@/common/constants/route';
 
 type PathRule = string | RegExp;
 type PathRules = {
@@ -129,18 +130,7 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          window.history.back();
-        });
-        break;
-
-      case pathName === '/' && !!search:
-        setHeaderTitle({
-          title: `${search}`,
-          showIcon: true,
-          type: 'TitleCenter',
-        });
-        setHandleBackButtonClick(() => () => {
-          window.history.back();
+          navigate(ROUTE.MAIN());
         });
         break;
 
