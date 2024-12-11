@@ -32,7 +32,7 @@ const TodayMungDetail = () => {
   const handleToggleClick = () => {
     setEditToggle(!editToggle);
   };
-
+  console.log(diaryData);
   return (
     <S.Wrapper>
       <S.Container>

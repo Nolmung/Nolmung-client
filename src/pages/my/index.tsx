@@ -78,14 +78,9 @@ function Mypage() {
             반려견 전체보기
           </S.PetProfilePlusButton>
           {dogData && dogData.length > 0 ? (
-            <PetProfileCard
-              data={dogData[0]}
-              editId={editId}
-              setEditId={setEditId}
-              key={dogData[0].dogId}
-            />
+            <PetProfileCard data={dogData[0]} key={dogData[0].dogId} />
           ) : (
-            <PetProfileCard editId={editId} setEditId={setEditId} />
+            <PetProfileCard />
           )}
         </S.PetProfileWrapper>
       </S.ProfileWrapper>
