@@ -7,7 +7,6 @@ import {
   ReviewListIcon,
   UserEditIcon,
 } from '@/assets/images/svgs';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
