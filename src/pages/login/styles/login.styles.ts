@@ -56,7 +56,6 @@ export const S = {
     height: 100%;
     display: flex;
     align-items: flex-start;
-    background-color: red;
     background-image: url('/pngs/LoginBackgroundimg.png');
     background-repeat: no-repeat;
     background-size: cover;
