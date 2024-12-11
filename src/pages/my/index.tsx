@@ -29,7 +29,17 @@ function Mypage() {
   const navigateToEditPage = () => {
     navigate('/useredit', { state: { userId: userData?.userId } });
   };
+  const handleResearchClick = () => {
+    window.open(
+      'https://docs.google.com/forms/d/e/1FAIpQLSc1KVR_ZgzuEIcGN6OffKmN4OeQqkMH5Iq91fzvyB-F9R_yFQ/viewform?usp=sharing',
+      '_blank',
+    );
+  };
 
+  const handleLoginClick = () => {
+    localStorage.removeItem('accessToken');
+    navigate(ROUTE.LOGIN());
+  };
   return (
     <S.Wrapper>
       <S.ProfileWrapper>
@@ -80,18 +90,18 @@ function Mypage() {
         </S.PetProfileWrapper>
       </S.ProfileWrapper>
       <S.ListWrapper>
+        <S.ListContainer onClick={handleResearchClick}>
+          <NoticeIcon width={20} height={20} />
+          설문
+        </S.ListContainer>
         <S.ListContainer onClick={() => navigate('/my/favorite')}>
           <HeartIcon width={19} height={19} />
           즐겨찾기 목록
         </S.ListContainer>
-        <S.ListContainer>
-          <NoticeIcon width={20} height={20} />
-          공지사항
-        </S.ListContainer>
         <S.ListContainer onClick={navigateToMyReview}>
           <ReviewListIcon width={19} height={19} />내 리뷰 모아보기
         </S.ListContainer>
-        <S.ListContainer>
+        <S.ListContainer onClick={handleLoginClick}>
           <LogoutIcon width={19} height={19} />
           로그아웃
         </S.ListContainer>
