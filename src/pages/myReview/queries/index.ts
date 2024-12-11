@@ -9,8 +9,8 @@ import { toast } from 'react-toastify';
 export const useGetReviews = () => {
   return useInfiniteQuery({
     queryKey: ['reviews'],
-    initialPageParam: 1,
-    queryFn: ({ pageParam = 1 }) => getReviews({ page: pageParam, size: 10 }),
+    initialPageParam: 0,
+    queryFn: ({ pageParam = 0 }) => getReviews({ page: pageParam, size: 10 }),
     getNextPageParam: (lastPage) => {
       return lastPage.hasNext ? lastPage.page + 1 : undefined;
     },
