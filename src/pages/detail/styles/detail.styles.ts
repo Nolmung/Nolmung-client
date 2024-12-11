@@ -4,6 +4,7 @@ export const S = {
   Wrapper: styled.div`
     width: 100%;
     height: 100vh;
+    padding-bottom: 90px;
     overflow-y: scroll;
   `,
   Header: styled.header<{ isScrolled: boolean }>`
