@@ -10,6 +10,7 @@ import useMouseBottomSheet from '../../hooks/useMouseBottomSheet';
 import { useRef, useState } from 'react';
 import { MarkerType } from '../../types';
 import { FilterState, FilterType } from '../../types/filter';
+import { NoResulLiedownUI } from '@/common/components/noResultUI';
 
 type BottomSheetProps = {
   placeMap: MarkerType[];
@@ -58,8 +59,10 @@ function BottomSheet({ placeMap }: BottomSheetProps) {
   const filteredPlaceMap = placeMap.filter((place) => {
     // 필터링 로직
     const weightFilter =
-    place.acceptSize === 'ALL' || // 'ALL'인 경우 모든 데이터를 포함
-    (selectedFilter.weight ? place.acceptSize === selectedFilter.weight : true);
+      place.acceptSize === 'ALL' || // 'ALL'인 경우 모든 데이터를 포함
+      (selectedFilter.weight
+        ? place.acceptSize === selectedFilter.weight
+        : true);
 
     const ratingFilter = selectedFilter.rating
       ? place.starRatingAvg >= selectedFilter.rating
@@ -77,11 +80,19 @@ function BottomSheet({ placeMap }: BottomSheetProps) {
           selectedFilter={selectedFilter}
           onFilterChange={handleFilterChange}
         />
-        <S.BottomSheetContentWrapper ref={contentRef} refheight={REF_HEIGHT}>
-          {filteredPlaceMap.map((place) => (
-            <Content isCard={false} key={place.placeId} place={place}/>
-          ))}
-        </S.BottomSheetContentWrapper>
+        {filteredPlaceMap.length !== 0 ? (
+          <S.BottomSheetContentWrapper ref={contentRef} refheight={REF_HEIGHT}>
+            {filteredPlaceMap.map((place) => (
+              <Content isCard={false} key={place.placeId} place={place} />
+            ))}
+          </S.BottomSheetContentWrapper>
+        ) : (
+          <S.BottomSheetContentWrapper ref={contentRef} refheight={REF_HEIGHT}>
+            <div>
+              <NoResulLiedownUI content="결과가 없습니다." />
+            </div>
+          </S.BottomSheetContentWrapper>
+        )}
       </S.BottomSheetBody>
     </S.Wrapper>
   );
