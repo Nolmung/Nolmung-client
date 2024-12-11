@@ -12,6 +12,20 @@ export const instance = axios.create({
   },
 });
 
+// Axios 요청 인터셉터 설정
+instance.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      config.headers['Authorization'] = accessToken;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
 instance.interceptors.response.use(
   function (response) {
     return response;
