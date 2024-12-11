@@ -30,7 +30,7 @@ import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import LoginPromptModal from '@/common/components/loginPromptModal';
 import getIsLogin from '@/common/utils/getIsLogin';
-import { LoadingNolmungLottie } from '@/common/components/lottie';
+// import { LoadingNolmungLottie } from '@/common/components/lottie';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -76,7 +76,7 @@ function Main() {
 
   const isLoggedIn = getIsLogin();
 
-  const [isMapLoading, setIsMapLoading] = useState(true);
+  // const [isMapLoading, setIsMapLoading] = useState(true);
 
   /** 컴포넌트가 마운트될 때 10초동안 로티 화면 보여주기 */
   // useEffect(() => {
@@ -164,7 +164,7 @@ function Main() {
             });
           }
         } catch (error) {
-          setIsMapLoading(false);
+          // setIsMapLoading(false);
           console.error('Error during API call:', error);
         }
       } else {
