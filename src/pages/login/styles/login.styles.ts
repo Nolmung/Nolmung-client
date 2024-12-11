@@ -7,12 +7,10 @@ export const S = {
     height: 100dvh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow-y: auto;
+    overflow-y: hidden;
   `,
   ObjectContainer: styled.div`
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
     width: 100%;
@@ -23,19 +21,26 @@ export const S = {
     width: 90px;
     height: 64px;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 26px;
   `,
 
   NolmungText: styled.h1`
     text-align: center;
-    margin: auto;
+    margin: 52% auto 0;  
     font-size: 14px;
     line-height: 1.3;
   `,
-
+  ButtonWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 423px;
+    position: fixed;
+    bottom: 6%;
+  `,
   KaKaoButton: styled.button`
     all: unset;
-    margin-top: 296px;
     width: 90%;
     height: 60px;
     font-size: 16px;
@@ -50,12 +55,14 @@ export const S = {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: red;
     background-image: url('/pngs/LoginBackgroundimg.png');
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
+    @media (max-width: 400px) { /* 화면 너비가 400px 이하일 때 */
+    background-position: center -80px;
+  }
   `,
 
   LoginText: styled.h2`
