@@ -9,6 +9,7 @@ import {
 } from '@/mocks/data/recommend';
 import { MapPlace } from '@/service/apis/place/index.type';
 import Button from '@/common/components/button/Button';
+import { LoadingSkeletonLottie } from '@/common/components/lottie';
 
 function GuestRecommend() {
   useSetDocumentTitle('추천');
@@ -20,7 +21,7 @@ function GuestRecommend() {
   } = useRecommendBookmarks();
 
   if (bookmarksLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSkeletonLottie />;
   }
 
   if (bookmarkError) {
