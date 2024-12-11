@@ -19,6 +19,7 @@ const TodayMungDetail = () => {
     isLoading,
     isError,
   } = useTodaymungDetailData(numericDiaryId);
+  console.log(todaymungDetailData);
 
   const [editToggle, setEditToggle] = useState(false);
   if (isLoading) {
@@ -32,7 +33,6 @@ const TodayMungDetail = () => {
   const handleToggleClick = () => {
     setEditToggle(!editToggle);
   };
-  console.log(diaryData);
   return (
     <S.Wrapper>
       <S.Container>
@@ -61,7 +61,7 @@ const TodayMungDetail = () => {
             <S.DogsAreaTitle>오늘을 함께한 반려견</S.DogsAreaTitle>
             <S.DogTagList>
               {diaryData.dogs.map((dogData) => (
-                <DogTagCard data={dogData} />
+                <DogTagCard data={dogData} key={dogData.dogId} />
               ))}
             </S.DogTagList>
           </S.DogsArea>
