@@ -84,9 +84,7 @@ function TodayMungWrite() {
   const { isConfirmModalOpen, closeConfirmModal } = useConfirmModalStore();
   const { deleteReviewAll } = useReviewStore();
   const { deleteTodaymungAll } = useTodayMungStore();
-  useEffect(() => {
-    console.log('confirm', isConfirmModalOpen);
-  }, [isConfirmModalOpen]);
+
   return (
     <>
       {isConfirmModalOpen && (
