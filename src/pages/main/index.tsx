@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { CurrentLocationMarker, LocationButtonIcon, Refresh } from '@/assets/images/svgs';
+import {
+  CurrentLocationMarker,
+  LocationButtonIcon,
+  Refresh,
+} from '@/assets/images/svgs';
 import { useMapCenter } from './hooks/useMapCenter';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
 import { CustomMarker, initMarkers } from './utils/markerUtils';
@@ -23,6 +27,9 @@ import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
+import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
+import LoginPromptModal from '@/common/components/loginPromptModal';
+import getIsLogin from '@/common/utils/getIsLogin';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -63,6 +70,10 @@ function Main() {
   const moveLatLng = { lat: -0.0007, lng: 0.0002 };
 
   const currentLocationMarker = useRef<naver.maps.Marker | null>(null);
+
+  const { isOpen, open, close } = useLoginPromptModalStore();
+
+  const isLoggedIn = getIsLogin();
 
   useEffect(() => {
     const initializeMap = async () => {
@@ -131,7 +142,7 @@ function Main() {
         mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
       }
 
-    // 사용자 현재 위치 마커 업데이트
+      // 사용자 현재 위치 마커 업데이트
       const currentPosition = new naver.maps.LatLng(
         mapCenter.latitude,
         mapCenter.longitude,
@@ -143,7 +154,9 @@ function Main() {
           position: currentPosition,
           map: mapRef.current,
           icon: {
-            content: ReactDOMServer.renderToString(<CurrentLocationMarker width={30} height={30}/>),
+            content: ReactDOMServer.renderToString(
+              <CurrentLocationMarker width={30} height={30} />,
+            ),
           },
         });
       }
@@ -251,11 +264,11 @@ function Main() {
     let userCategory = null;
 
     if (categoryFromUrl === 'bookmarked' || categoryFromUrl === 'visited') {
-      /** 
-       * @Todo access Token 있는지 확인하기 
-       * 없으면 return + 로그인 페이지로 유도하는 모달창 띄우기
-       * 있으면 밑의 코드 실행
-       * */
+      
+      if (!isLoggedIn) {
+        open();
+        return;
+      }
       userCategory = categoryFromUrl;
     }
 
@@ -279,7 +292,13 @@ function Main() {
       const markerData = await getPlacesFilter(requestBody);
       setMarkerData(markerData);
       if (userCategory) {
-        initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick, userCategory);
+        initMarkers(
+          mapRef.current,
+          markerData,
+          markersRef,
+          handleMarkerClick,
+          userCategory,
+        );
       } else {
         initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
       }
@@ -386,6 +405,7 @@ function Main() {
 
   return (
     <S.Wrapper>
+      {isOpen && <LoginPromptModal closeModal={close} />}
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
         {!(category || location.search) && (
           <CategoryBar
