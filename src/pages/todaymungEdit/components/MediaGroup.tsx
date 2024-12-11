@@ -7,6 +7,7 @@ import {
 } from '@/common/utils/uploadImageToS3';
 import { Media } from '@/service/apis/diary/index.type';
 import { toast } from 'react-toastify';
+import { UPLOADPATH } from '@/common/constants/uploadPath';
 
 function MediaGroup() {
   const MAX_IMAGE_COUNT = 5; // 최대 이미지 개수
@@ -53,7 +54,7 @@ function MediaGroup() {
 
       const validFiles = [...newImages, ...newVideos];
 
-      const result = await uploadFileToS3(validFiles);
+      const result = await uploadFileToS3(validFiles, UPLOADPATH.TODAYMUNGS());
 
       result?.forEach((item) => {
         const media: Media = {
