@@ -6,9 +6,8 @@ import { isTabActive } from './utils/tabUtils';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import useIsReviewEmpty from '@/common/utils/useIsReviewEmpty';
 import useIsTodaymungEmpty from '@/common/utils/useIsTodaymungEmpty';
-import { useReviewStore } from '@/pages/todaymungPlaceRegist/stores/reviewStore';
-import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
 import getIsLogin from '@/common/utils/getIsLogin';
+import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
 
 function TabBar() {
   const location = useLocation();
@@ -17,23 +16,19 @@ function TabBar() {
   const isReviewEmpty = useIsReviewEmpty();
   const isTodaymungEmpty = useIsTodaymungEmpty();
 
-  const { deleteReviewAll } = useReviewStore();
-  const { deleteTodaymungAll } = useTodayMungStore();
-
+  const { openConfirmModal } = useConfirmModalStore();
   const handleTabIconClick = (path: string) => {
     if (!getIsLogin()) {
       if (path === '/todaymung' || path === '/my') {
         open();
       } else {
-        console.log('path', path);
         navigate(path);
       }
     } else {
       if (location.pathname === '/todaymung/write') {
         if (!isReviewEmpty || !isTodaymungEmpty) {
-          window.confirm('작성중인 글이 있습니다. 이동하시겠습니까?');
-          deleteReviewAll();
-          deleteTodaymungAll();
+          openConfirmModal();
+        } else {
           navigate(path);
         }
       } else {
