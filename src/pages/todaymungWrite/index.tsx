@@ -55,12 +55,13 @@ function TodayMungWrite() {
             : '을 작성해주세요.'
         }`;
 
-        toast.error(alertMessage);
+        alert(alertMessage);
         return;
       }
     }
 
     if (reviewlist.length === 0) {
+      await diaryMutate();
       return;
     }
 

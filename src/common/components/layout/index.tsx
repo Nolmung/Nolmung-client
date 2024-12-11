@@ -182,10 +182,8 @@ function Layout({ children }: LayoutProps) {
             places.length > 0
           ) {
             openConfirmModal();
-            console.log('foward');
           } else {
             navigate('/todaymung');
-            console.log('back');
           }
         });
         break;
