@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const S = {
   Wrapper: styled.div`
     width: 100%;
-    height: calc(100vh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
+    height: calc(100dvh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
     overflow: auto;
   `,
   BannerWrapper: styled.div`
