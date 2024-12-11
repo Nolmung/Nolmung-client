@@ -46,7 +46,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
               },
               textField: {
                 sx: {
-                  width: '70%',
+                  width: '48%',
                   fontSize: '16px',
                   marginTop: '8px',
                   '& .MuiOutlinedInput-root': {
