@@ -7,7 +7,7 @@ const NoDiaryList = () => {
     <S.Wrapper>
       <TodayMungNoListIcon />
       <S.SubText>아직 작성한 오늘멍이 없습니다</S.SubText>
-      <RegistButton />
+      <RegistButton active={true} />
     </S.Wrapper>
   );
 };

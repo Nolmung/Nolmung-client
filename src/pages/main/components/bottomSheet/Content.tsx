@@ -44,7 +44,6 @@ function Content({ place, isCard }: ContentProps) {
       deleteBookmarks(place!.placeId, {
         onSuccess: (data) => {
           if (data.status === 'SUCCESS') {
-            place.isBookmarked = false;
             setIsBookmarked(false);
           }
         },
@@ -56,7 +55,6 @@ function Content({ place, isCard }: ContentProps) {
       addBookmarks(place!.placeId, {
         onSuccess: (data) => {
           if (data.status === 'SUCCESS') {
-            place.isBookmarked = true;
             setIsBookmarked(true);
           }
         },

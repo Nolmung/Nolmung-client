@@ -30,6 +30,7 @@ import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import LoginPromptModal from '@/common/components/loginPromptModal';
 import getIsLogin from '@/common/utils/getIsLogin';
+// import { LoadingNolmungLottie } from '@/common/components/lottie';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -75,6 +76,16 @@ function Main() {
 
   const isLoggedIn = getIsLogin();
 
+  // const [isMapLoading, setIsMapLoading] = useState(true);
+
+  /** 컴포넌트가 마운트될 때 10초동안 로티 화면 보여주기 */
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsMapLoading(false);
+  //   }, 10000);
+  //   return () => clearTimeout(timer);
+  // }, [])
+
   useEffect(() => {
     const initializeMap = async () => {
       if (!mapContainerRef.current || !naver || !mapCenter) return;
@@ -84,6 +95,7 @@ function Main() {
           mapCenter.latitude,
           mapCenter.longitude,
         );
+
         const mapOptions: naver.maps.MapOptions = {
           center: center,
           zoom: 14,
@@ -91,15 +103,16 @@ function Main() {
           maxZoom: 18,
           baseTileOpacity: 0.8, //지도 투명도 조절
         };
+
         mapRef.current = new naver.maps.Map(
           mapContainerRef.current,
           mapOptions,
         );
 
         naver.maps.Event.addListener(mapRef.current, 'idle', () => {
-          if (mapRef.current) {
-            setIsCurrentButtonActive(true);
-          }
+          
+          setIsCurrentButtonActive(true);
+          console.log('map idle');
         });
 
         const query = new URLSearchParams(window.location.search);
@@ -131,7 +144,27 @@ function Main() {
           } else {
             await getAndInitMarkers();
           }
+
+          // 사용자 현재 위치 마커 생성 및 초기화
+          const currentPosition = new naver.maps.LatLng(
+            mapCenter.latitude,
+            mapCenter.longitude,
+          );
+
+          if (!currentLocationMarker.current) {
+            // 마커가 없으면 새로 생성
+            currentLocationMarker.current = new naver.maps.Marker({
+              position: currentPosition,
+              map: mapRef.current,
+              icon: {
+                content: ReactDOMServer.renderToString(
+                  <CurrentLocationMarker width={30} height={30} />,
+                ),
+              },
+            });
+          }
         } catch (error) {
+          // setIsMapLoading(false);
           console.error('Error during API call:', error);
         }
       } else {
@@ -140,25 +173,6 @@ function Main() {
           mapCenter.longitude,
         );
         mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
-      }
-
-      // 사용자 현재 위치 마커 업데이트
-      const currentPosition = new naver.maps.LatLng(
-        mapCenter.latitude,
-        mapCenter.longitude,
-      );
-
-      if (!currentLocationMarker.current) {
-        // 마커가 없으면 새로 생성
-        currentLocationMarker.current = new naver.maps.Marker({
-          position: currentPosition,
-          map: mapRef.current,
-          icon: {
-            content: ReactDOMServer.renderToString(
-              <CurrentLocationMarker width={30} height={30} />,
-            ),
-          },
-        });
       }
     };
     // 지도 초기화 함수 호출
@@ -264,6 +278,7 @@ function Main() {
     let userCategory = null;
 
     if (categoryFromUrl === 'bookmarked' || categoryFromUrl === 'visited') {
+      
       if (!isLoggedIn) {
         open();
         return;
@@ -397,6 +412,10 @@ function Main() {
     });
     navigate('/');
   };
+
+  // if (isMapLoading) {
+  //   return <LoadingNolmungLottie />;
+  // }
 
   return (
     <S.Wrapper>

@@ -25,7 +25,7 @@ const TodayMungDetail = () => {
     return <LoadingSpinnerLottie />;
   }
   if (isError) {
-    return <div>에러중</div>;
+    return <LoadingSpinnerLottie />;
   }
 
   const diaryData: DiaryType = todaymungDetailData.data;
