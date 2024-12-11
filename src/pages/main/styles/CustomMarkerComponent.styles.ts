@@ -24,9 +24,9 @@ const S = {
     height: fit-content;
   `,
 
-  Name: styled.span`
+  Name: styled.span<{fontSize: number}>`
     text-align: center;
-    font-size: 12px;
+    font-size: ${({fontSize}) => fontSize}px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;

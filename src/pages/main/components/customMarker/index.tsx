@@ -43,25 +43,34 @@ function CustomMarkerComponent({
   }
 
   let zoomSize: number;
+  let fontSize: number;
 
   switch (true) {
-    case zoom < 12:
+    case zoom <= 10:
+      zoomSize = 28;
+      fontSize = 0;
+      break;
+    case zoom > 10 && zoom < 12:
       zoomSize = 30;
+      fontSize = 10;
       break;
     case zoom >= 12 && zoom < 14:
       zoomSize = 34;
+      fontSize = 10;
       break;
     case zoom >= 14 && zoom < 16:
       zoomSize = 38;
+      fontSize = 12;
       break;
     default:
       zoomSize = 44;
+      fontSize = 12;
       break;
   }
 
   return (
     <S.Wrapper key={placeId}>
-      {zoom > 12 && <S.Name>{name}</S.Name>}
+      <S.Name fontSize={fontSize}>{name}</S.Name>
       {isActive ? (
         <S.ClickIconWrapper>
           <IconComponent width={56} height={70} />
