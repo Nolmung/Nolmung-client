@@ -8,7 +8,7 @@ const S = {
     gap: 2px;
     z-index: 100;
   `,
-  IconWrapper: styled.div`
+  IconWrapper: styled.div<{zoomSize: number}>`
     border-radius: 10px;
     border: 1px solid #17AA1A;
     background: #D3FBD4;
@@ -16,7 +16,7 @@ const S = {
     justify-content: center;
     align-items: center;
     padding: 7px;
-    width: 40px;
+    width: ${({zoomSize}) => zoomSize}px;
   `,
   
   ClickIconWrapper: styled.div`

@@ -44,7 +44,7 @@ const S = {
   `,
   NameWrapper: styled.div`
     display: flex;
-    gap: 6px;
+    gap: 8px;
     align-items: center;
   `,
   ProfileName: styled.span`
@@ -55,19 +55,19 @@ const S = {
   ProfileEmailWrapper: styled.div`
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
   `,
   ProfileEmail: styled.span`
-    color: #000;
+    color: #080808;
     font-family: Pretendard;
-    font-size: 10px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
   `,
   KaKaoIconImg: styled.img`
-    width: 10px;
-    height: 10px;
+    width: 16px;
+    height: 16px;
   `,
   PetProfileWrapper: styled.div`
     display: flex;
@@ -76,13 +76,24 @@ const S = {
     height: auto;
     gap: 8px;
   `,
+  PetProfilePlusButton: styled.button`
+    all: unset;
+    cursor: pointer;
+    margin-bottom: 13px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #898989;
+    margin-left: auto;
+    &:hover {
+      opacity: 0.8;
+    }
+  `,
   ListWrapper: styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
     height: auto;
 
-    /* background: #fdfdfd; */
     padding: 22px 0px;
   `,
   ListContainer: styled.div`

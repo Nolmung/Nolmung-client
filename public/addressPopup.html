@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Address Search</title>
+    <script>
+      function init() {
+        const url = location.href;
+
+        const confmKey = 'devU01TX0FVVEgyMDI0MTIxMDE3MTYxODExNTMxNDA=';
+        const resultType = '4';
+
+        const inputYn = getParameterByName('inputYn');
+        if (inputYn !== 'Y') {
+          document.getElementById('confmKey').value = confmKey;
+          document.getElementById('returnUrl').value = url;
+          document.getElementById('resultType').value = resultType;
+
+          document.forms['form'].action =
+            'https://www.juso.go.kr/addrlink/addrLinkUrl.do';
+          document.forms['form'].submit();
+        } else {
+          const zipNo = getParameterByName('zipNo');
+          const roadFullAddr = getParameterByName('roadFullAddr');
+          const jibunAddr = getParameterByName('jibunAddr');
+
+          if (
+            window.opener &&
+            typeof window.opener.jusoCallBack === 'function'
+          ) {
+            window.opener.jusoCallBack(zipNo, roadFullAddr, jibunAddr);
+            window.close();
+          }
+        }
+      }
+
+      function getParameterByName(name) {
+        const regex = new RegExp(`[?&]${name}=([^&#]*)`, 'i');
+        const results = regex.exec(window.location.search);
+        return results
+          ? decodeURIComponent(results[1].replace(/\+/g, ' '))
+          : null;
+      }
+
+      window.onload = init;
+    </script>
+  </head>
+  <body>
+    <form id="form" name="form" method="post">
+      <input type="hidden" id="confmKey" name="confmKey" value="" />
+      <input type="hidden" id="returnUrl" name="returnUrl" value="" />
+      <input type="hidden" id="resultType" name="resultType" value="" />
+    </form>
+  </body>
+</html>

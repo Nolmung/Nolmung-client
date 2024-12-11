@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { LocationButtonIcon, Refresh } from '@/assets/images/svgs';
+import {
+  CurrentLocationMarker,
+  LocationButtonIcon,
+  Refresh,
+} from '@/assets/images/svgs';
 import { useMapCenter } from './hooks/useMapCenter';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
 import { CustomMarker, initMarkers } from './utils/markerUtils';
@@ -23,6 +27,9 @@ import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
+import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
+import LoginPromptModal from '@/common/components/loginPromptModal';
+import getIsLogin from '@/common/utils/getIsLogin';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -61,6 +68,12 @@ function Main() {
   );
 
   const moveLatLng = { lat: -0.0007, lng: 0.0002 };
+
+  const currentLocationMarker = useRef<naver.maps.Marker | null>(null);
+
+  const { isOpen, open, close } = useLoginPromptModalStore();
+
+  const isLoggedIn = getIsLogin();
 
   useEffect(() => {
     const initializeMap = async () => {
@@ -127,6 +140,25 @@ function Main() {
           mapCenter.longitude,
         );
         mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
+      }
+
+      // 사용자 현재 위치 마커 업데이트
+      const currentPosition = new naver.maps.LatLng(
+        mapCenter.latitude,
+        mapCenter.longitude,
+      );
+
+      if (!currentLocationMarker.current) {
+        // 마커가 없으면 새로 생성
+        currentLocationMarker.current = new naver.maps.Marker({
+          position: currentPosition,
+          map: mapRef.current,
+          icon: {
+            content: ReactDOMServer.renderToString(
+              <CurrentLocationMarker width={30} height={30} />,
+            ),
+          },
+        });
       }
     };
     // 지도 초기화 함수 호출
@@ -207,6 +239,7 @@ function Main() {
               name={selectedMarkerRef.current.data.placeName}
               category={selectedMarkerRef.current.data.category}
               isActive={false}
+              zoom={mapRef.current!.getZoom()}
             />,
           ),
         });
@@ -228,6 +261,17 @@ function Main() {
   const getCategoryMarkers = async (categoryFromUrl: string) => {
     if (!mapRef.current) return;
 
+    let userCategory = null;
+
+    if (categoryFromUrl === 'bookmarked' || categoryFromUrl === 'visited') {
+      
+      if (!isLoggedIn) {
+        open();
+        return;
+      }
+      userCategory = categoryFromUrl;
+    }
+
     setCategory(categoryFromUrl);
     setBottomHeight(BOTTOM_HEIGHT);
 
@@ -247,18 +291,17 @@ function Main() {
       };
       const markerData = await getPlacesFilter(requestBody);
       setMarkerData(markerData);
-
-      // // 지도 중심 이동
-      // if (markerData.length > 0) {
-      //   const firstMarker = markerData[markerData.length-1]; // 마지막 마커가 가장 가까운 마커
-      //   setMapCenter({
-      //     latitude: firstMarker.latitude + moveCategoryLatLng.lat,
-      //     longitude: firstMarker.longitude + moveCategoryLatLng.lng,
-      //   });
-      //   // mapRef.current.setZoom(12);
-      // }
-
-      initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
+      if (userCategory) {
+        initMarkers(
+          mapRef.current,
+          markerData,
+          markersRef,
+          handleMarkerClick,
+          userCategory,
+        );
+      } else {
+        initMarkers(mapRef.current, markerData, markersRef, handleMarkerClick);
+      }
     } catch (error) {
       console.error('Error Get Filtering Data:', error);
     }
@@ -296,6 +339,7 @@ function Main() {
             name={selectedMarkerRef.current.data.placeName}
             category={selectedMarkerRef.current.data.category}
             isActive={false}
+            zoom={mapRef.current!.getZoom()}
           />,
         ),
       });
@@ -310,6 +354,7 @@ function Main() {
           name={marker.data.placeName}
           category={marker.data.category}
           isActive={true}
+          zoom={mapRef.current!.getZoom()}
         />,
       ),
     });
@@ -345,6 +390,11 @@ function Main() {
     getUserLocation((coords) => {
       setMapCenter(coords);
       mapRef.current!.setZoom(17);
+      const currentPosition = new naver.maps.LatLng(
+        mapCenter.latitude,
+        mapCenter.longitude,
+      );
+      currentLocationMarker.current?.setPosition(currentPosition);
     });
     navigate('/');
   };
@@ -355,6 +405,7 @@ function Main() {
 
   return (
     <S.Wrapper>
+      {isOpen && <LoginPromptModal closeModal={close} />}
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
         {!(category || location.search) && (
           <CategoryBar
