@@ -12,6 +12,7 @@ import { useReviewStore } from '../todaymungPlaceRegist/stores/reviewStore';
 import { useTodayMungStore } from './stores/todayMungStore';
 import { PostReviewRequest } from '@/service/apis/review/index.type';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
+import { toast } from 'react-toastify';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function TodayMungWrite() {
             : '을 작성해주세요.'
         }`;
 
-        alert(alertMessage);
+        toast.error(alertMessage);
       } else {
         diaryMutate();
       }

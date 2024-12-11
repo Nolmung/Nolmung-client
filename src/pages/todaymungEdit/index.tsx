@@ -10,6 +10,7 @@ import { useTodaymungDetailData } from '@pages/todaymungDetail/queries';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
+import { toast } from 'react-toastify';
 
 function TodayMungEdit() {
   useSetDocumentTitle('오늘멍 작성하기');
@@ -75,7 +76,7 @@ function TodayMungEdit() {
             : '을 작성해주세요.'
         }`;
 
-        alert(alertMessage);
+        toast.error(alertMessage);
       } else {
         diaryMutate({ diaryRequest, diaryId: numericDiaryId });
       }

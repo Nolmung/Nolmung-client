@@ -3,6 +3,7 @@ import {
   getTodaymungDetail,
   deleteTodaymung,
 } from '@/service/apis/diaryDetail';
+import { toast } from 'react-toastify';
 
 export const useTodaymungDetailData = (diaryId: number) => {
   return useQuery({
@@ -20,7 +21,7 @@ export const useTodaymungDelete = (diaryId: number) => {
   return useMutation({
     mutationFn: (diaryId: number) => deleteTodaymung(diaryId),
     onSuccess: () => {
-      alert('오늘멍 삭제가 완료되었습니다.');
+      toast.success('오늘멍 삭제가 완료되었습니다.');
 
       queryClient.invalidateQueries({
         queryKey: ['TodaymungDetailData', diaryId],
@@ -28,7 +29,7 @@ export const useTodaymungDelete = (diaryId: number) => {
     },
     onError: (error) => {
       console.error('오늘멍 삭제 중 에러 발생:', error);
-      alert('오늘멍 삭제에 실패했습니다.');
+      toast.error('오늘멍 삭제에 실패했습니다.');
     },
   });
 };
