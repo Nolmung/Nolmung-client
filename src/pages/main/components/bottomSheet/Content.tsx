@@ -8,10 +8,11 @@ import { usePostBookmarks } from '../../queries';
 import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 import { useDeleteBookmarks } from '@/pages/myFavorite/hooks';
 import { useEffect, useState } from 'react';
-import { ContentSkeletonUI } from '@/common/skeleton';
+import getIsLogin from '@/common/utils/getIsLogin';
+import { ContentSkeletonUI } from '@/common/components/skeleton';
 
 interface ContentProps {
-  place: MapPlace | null;
+  place: MapPlace;
   isCard: boolean;
 }
 
@@ -20,17 +21,24 @@ function Content({ place, isCard }: ContentProps) {
   const { mutate: addBookmarks } = usePostBookmarks();
   const { mutate: deleteBookmarks } = useDeleteBookmarks();
   const [isBookmarked, setIsBookmarked] = useState<boolean>(
-    place!.isBookmarked ?? false,
+    place?.isBookmarked ?? false,
   );
-  
+
   useEffect(() => {
     if (place) {
-      setIsBookmarked(place!.isBookmarked!);
+      setIsBookmarked(place.isBookmarked!);
     }
   }, [place]);
 
+  const isLoggedIn = getIsLogin();
+
   const handleLikeClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
+
+    if (!isLoggedIn) {
+      open();
+      return;
+    }
 
     if (isBookmarked) {
       deleteBookmarks(place!.placeId, {
@@ -62,7 +70,7 @@ function Content({ place, isCard }: ContentProps) {
     navigate(ROUTE.DETAIL(place!.placeId));
   };
 
-  if (!place?.isBookmarked||!place) {
+  if (place?.isBookmarked === undefined || !place) {
     return <ContentSkeletonUI />;
   }
 

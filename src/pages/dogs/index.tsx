@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
-import DatePicker from '../signUp/DatePicker';
+import DatePicker from '../signUp/components/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { uploadFileToS3 } from '@/common/utils/uploadImageToS3';
 import { usePostDogs } from './queries';
@@ -139,7 +139,6 @@ function Dogs() {
     setFilteredLocations([]);
     setDropdownVisible(false);
   };
-  
 
   const handleSubmitClick = async () => {
     postDogMutate(dogData, {

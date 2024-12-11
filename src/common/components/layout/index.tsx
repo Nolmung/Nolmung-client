@@ -13,6 +13,8 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoginPromptModal from '../loginPromptModal';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
+import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
+import { ROUTE } from '@/common/constants/route';
 
 type PathRule = string | RegExp;
 type PathRules = {
@@ -51,7 +53,7 @@ const shouldHide = (key: keyof PathRules, pathname: string): boolean => {
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
-
+  const { openConfirmModal } = useConfirmModalStore();
   const hideHeader = shouldHide(
     'hideHeader',
     location.pathname + location.search,
@@ -75,9 +77,8 @@ function Layout({ children }: LayoutProps) {
   );
 
   const navigate = useNavigate();
-  const { reviewlist, deleteReviewAll } = useReviewStore();
-  const { title, content, places, dogs, medias, deleteTodaymungAll } =
-    useTodayMungStore();
+  const { reviewlist } = useReviewStore();
+  const { title, content, places, dogs, medias } = useTodayMungStore();
 
   useEffect(() => {
     if (location.pathname.startsWith('/todaymung/detail')) {
@@ -129,18 +130,7 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          window.history.back();
-        });
-        break;
-
-      case pathName === '/' && !!search:
-        setHeaderTitle({
-          title: `${search}`,
-          showIcon: true,
-          type: 'TitleCenter',
-        });
-        setHandleBackButtonClick(() => () => {
-          window.history.back();
+          navigate(ROUTE.MAIN());
         });
         break;
 
@@ -156,12 +146,12 @@ function Layout({ children }: LayoutProps) {
           });
         }
         break;
-      
+
       case pathName === '/dogs':
         {
           setHeaderTitle({
             title: '반려견 등록',
-            showIcon:true,
+            showIcon: true,
             type: 'TitleCenter',
           });
           setHandleBackButtonClick(() => () => {
@@ -191,13 +181,11 @@ function Layout({ children }: LayoutProps) {
             reviewlist.length > 0 ||
             places.length > 0
           ) {
-            if (
-              window.confirm('작성중인 내용이 있습니다. 정말로 나가시겠습니까?')
-            ) {
-              deleteReviewAll();
-              deleteTodaymungAll();
-              navigate('/todaymung');
-            }
+            openConfirmModal();
+            console.log('foward');
+          } else {
+            navigate('/todaymung');
+            console.log('back');
           }
         });
         break;

@@ -18,7 +18,9 @@ export const useDeleteBookmarks = () => {
     onSuccess: (data) => {
       if (data.status === 'SUCCESS') {
         console.log('즐겨찾기 삭제 성공');
-        queryClient.invalidateQueries({ queryKey: ['bookmarks'] }); // 쿼리를 무효화하고 다시 조회
+        queryClient.invalidateQueries({
+          queryKey: ['bookmarks', 'postDetail'],
+        }); // 쿼리를 무효화하고 다시 조회
       } else if (data.status === 'NOT_FOUND') {
         console.log('즐겨찾기 삭제 실패');
       } else {

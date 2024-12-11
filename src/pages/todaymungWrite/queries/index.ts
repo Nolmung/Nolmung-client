@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTodayMungStore } from '../stores/todayMungStore';
 import { useReviewStore } from '@/pages/todaymungPlaceRegist/stores/reviewStore';
 import { deleteFileFromS3 } from '@/common/utils/uploadImageToS3';
+import { toast } from 'react-toastify';
 
 export const useGetDogs = () => {
   return useQuery<DogsResponse>({
@@ -25,11 +26,11 @@ export const usePostReviews = () => {
   return useMutation<number, Error, PostReviewRequest[]>({
     mutationFn: (review) => postReviews(review),
     onSuccess: () => {
-      alert('리뷰 등록이 완료되었습니다.');
+      toast.success('리뷰 등록이 완료되었습니다.');
       deleteReviewAll();
     },
     onError: () => {
-      alert('리뷰 등록에 실패했습니다.');
+      toast.error('리뷰 등록에 실패했습니다.');
       deleteReviewAll();
     },
   });
@@ -56,13 +57,13 @@ export const usePostDiary = () => {
       return postTodaymung(diaryRequest);
     },
     onSuccess: () => {
-      alert('오늘멍 등록이 완료되었습니다.');
+      toast.success('오늘멍 등록이 완료되었습니다.');
       deleteTodaymungAll();
       deleteReviewAll();
       navigate(ROUTE.TODAYMUNG());
     },
     onError: () => {
-      alert('오늘멍 등록에 실패했습니다.');
+      toast.error('오늘멍 등록에 실패했습니다.');
       for (let file of diaryRequest.medias) {
         deleteFileFromS3(file.mediaUrl);
       }

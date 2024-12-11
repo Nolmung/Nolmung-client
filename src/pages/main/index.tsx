@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { LocationButtonIcon, Refresh } from '@/assets/images/svgs';
+import {
+  CurrentLocationMarker,
+  LocationButtonIcon,
+  Refresh,
+} from '@/assets/images/svgs';
 import { useMapCenter } from './hooks/useMapCenter';
 import { getCurrentAndMaxCoordinate } from './utils/coordinateUtils';
 import { CustomMarker, initMarkers } from './utils/markerUtils';
@@ -23,6 +27,10 @@ import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
+import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
+import LoginPromptModal from '@/common/components/loginPromptModal';
+import getIsLogin from '@/common/utils/getIsLogin';
+// import { LoadingNolmungLottie } from '@/common/components/lottie';
 
 function Main() {
   useSetDocumentTitle('놀멍');
@@ -62,6 +70,22 @@ function Main() {
 
   const moveLatLng = { lat: -0.0007, lng: 0.0002 };
 
+  const currentLocationMarker = useRef<naver.maps.Marker | null>(null);
+
+  const { isOpen, open, close } = useLoginPromptModalStore();
+
+  const isLoggedIn = getIsLogin();
+
+  // const [isMapLoading, setIsMapLoading] = useState(true);
+
+  /** 컴포넌트가 마운트될 때 10초동안 로티 화면 보여주기 */
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsMapLoading(false);
+  //   }, 10000);
+  //   return () => clearTimeout(timer);
+  // }, [])
+
   useEffect(() => {
     const initializeMap = async () => {
       if (!mapContainerRef.current || !naver || !mapCenter) return;
@@ -71,6 +95,7 @@ function Main() {
           mapCenter.latitude,
           mapCenter.longitude,
         );
+
         const mapOptions: naver.maps.MapOptions = {
           center: center,
           zoom: 14,
@@ -78,15 +103,16 @@ function Main() {
           maxZoom: 18,
           baseTileOpacity: 0.8, //지도 투명도 조절
         };
+
         mapRef.current = new naver.maps.Map(
           mapContainerRef.current,
           mapOptions,
         );
 
         naver.maps.Event.addListener(mapRef.current, 'idle', () => {
-          if (mapRef.current) {
-            setIsCurrentButtonActive(true);
-          }
+          
+          setIsCurrentButtonActive(true);
+          console.log('map idle');
         });
 
         const query = new URLSearchParams(window.location.search);
@@ -118,7 +144,27 @@ function Main() {
           } else {
             await getAndInitMarkers();
           }
+
+          // 사용자 현재 위치 마커 생성 및 초기화
+          const currentPosition = new naver.maps.LatLng(
+            mapCenter.latitude,
+            mapCenter.longitude,
+          );
+
+          if (!currentLocationMarker.current) {
+            // 마커가 없으면 새로 생성
+            currentLocationMarker.current = new naver.maps.Marker({
+              position: currentPosition,
+              map: mapRef.current,
+              icon: {
+                content: ReactDOMServer.renderToString(
+                  <CurrentLocationMarker width={30} height={30} />,
+                ),
+              },
+            });
+          }
         } catch (error) {
+          // setIsMapLoading(false);
           console.error('Error during API call:', error);
         }
       } else {
@@ -207,6 +253,7 @@ function Main() {
               name={selectedMarkerRef.current.data.placeName}
               category={selectedMarkerRef.current.data.category}
               isActive={false}
+              zoom={mapRef.current!.getZoom()}
             />,
           ),
         });
@@ -231,11 +278,10 @@ function Main() {
     let userCategory = null;
 
     if (categoryFromUrl === 'bookmarked' || categoryFromUrl === 'visited') {
-      /**
-       * @Todo access Token 있는지 확인하기
-       * 없으면 return + 로그인 페이지로 유도하는 모달창 띄우기
-       * 있으면 밑의 코드 실행
-       * */
+      if (!isLoggedIn) {
+        open();
+        return;
+      }
       userCategory = categoryFromUrl;
     }
 
@@ -306,6 +352,7 @@ function Main() {
             name={selectedMarkerRef.current.data.placeName}
             category={selectedMarkerRef.current.data.category}
             isActive={false}
+            zoom={mapRef.current!.getZoom()}
           />,
         ),
       });
@@ -320,6 +367,7 @@ function Main() {
           name={marker.data.placeName}
           category={marker.data.category}
           isActive={true}
+          zoom={mapRef.current!.getZoom()}
         />,
       ),
     });
@@ -355,16 +403,22 @@ function Main() {
     getUserLocation((coords) => {
       setMapCenter(coords);
       mapRef.current!.setZoom(17);
+      const currentPosition = new naver.maps.LatLng(
+        mapCenter.latitude,
+        mapCenter.longitude,
+      );
+      currentLocationMarker.current?.setPosition(currentPosition);
     });
     navigate('/');
   };
 
-  // if (true) {
+  // if (isMapLoading) {
   //   return <LoadingNolmungLottie />;
   // }
 
   return (
     <S.Wrapper>
+      {isOpen && <LoginPromptModal closeModal={close} />}
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
         {!(category || location.search) && (
           <CategoryBar

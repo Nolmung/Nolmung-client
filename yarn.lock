@@ -7534,29 +7534,25 @@ __metadata:
   version: 7.5.0
   resolution: "react-datepicker@npm:7.5.0"
   dependencies:
-    "@floating-ui/react": "npm:^0.26.23"
-    clsx: "npm:^2.1.1"
-    date-fns: "npm:^3.6.0"
-    prop-types: "npm:^15.8.1"
-  peerDependencies:
-    react: ^16.9.0 || ^17 || ^18
-    react-dom: ^16.9.0 || ^17 || ^18
-  checksum: 10c0/6e94a609654b8a0eaa9b2e8c4fab803aa954e78df9729f05337ae97c4e910b1488129ee8d4b11dea575dbe0992242c078cb692ed0cba4e5d98414d8ba393972d
-  languageName: node
-  linkType: hard
+    "@floating-ui/react" "^0.26.23"
+    clsx "^2.1.1"
+    date-fns "^3.6.0"
+    prop-types "^15.8.1"
 
-"react-docgen-typescript@npm:^2.2.2":
-  version: 2.2.2
-  resolution: "react-docgen-typescript@npm:2.2.2"
-  peerDependencies:
-    typescript: ">= 4.3.x"
-  checksum: 10c0/d31a061a21b5d4b67d4af7bc742541fd9e16254bd32861cd29c52565bc2175f40421a3550d52b6a6b0d0478e7cc408558eb0060a0bdd2957b02cfceeb0ee1e88
-  languageName: node
-  linkType: hard
+react-daum-postcode@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/react-daum-postcode/-/react-daum-postcode-3.1.3.tgz#008a0815a08fb9356fe7845d4376dcc9363f495d"
+  integrity sha512-qTyzUb1BeszPFO4FXSj6p83Wrn5Zpo6YqI2EZ46XSVRZT+du9CrKg9p3KshBRFKYxXmFE1Mv7wEynzXdRFNlmQ==
 
-"react-docgen@npm:^7.0.0":
-  version: 7.1.0
-  resolution: "react-docgen@npm:7.1.0"
+react-docgen-typescript@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-2.2.2.tgz#4611055e569edc071204aadb20e1c93e1ab1659c"
+  integrity sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==
+
+react-docgen@^7.0.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/react-docgen/-/react-docgen-7.1.0.tgz#4b41e557dab939a5157be09ee532fd09c07d99fc"
+  integrity sha512-APPU8HB2uZnpl6Vt/+0AFoVYgSRtfiP6FLrZgPPTDmqSb2R4qZRbgd0A3VzIFxDt5e+Fozjx79WjLWnF69DK8g==
   dependencies:
     "@babel/core": "npm:^7.18.9"
     "@babel/traverse": "npm:^7.18.9"

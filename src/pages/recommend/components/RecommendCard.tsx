@@ -19,6 +19,7 @@ function RecommendCard({
   const navigate = useNavigate();
 
   const navigateToDetail = (placeId: number) => {
+    console.log('placeId', placeId);
     navigate(ROUTE.DETAIL(placeId));
   };
 

@@ -4,6 +4,7 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 export const useGetReviews = () => {
   return useInfiniteQuery({
@@ -27,11 +28,11 @@ export const useDeleteReviews = () => {
       return response;
     },
     onSuccess: () => {
-      alert('리뷰 삭제가 완료되었습니다.');
+      toast.success('리뷰 삭제가 완료되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['reviews'] });
     },
     onError: () => {
-      alert('리뷰 삭제에 실패했습니다.');
+      toast.error('리뷰 삭제에 실패했습니다.');
     },
   });
 };
