@@ -20,6 +20,7 @@ import {
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import NoSearchResponse from './components/NoSearchResponse';
+import { LoadingSpinnerLottie } from '@/common/components/lottie';
 
 export interface SearchHistoryItem {
   id: number;
@@ -140,8 +141,9 @@ function Search() {
           width={90}
         />
       </S.Header>
-      {isLoading && <div>로딩중...</div>}
-      {searchResponseData?.length === 0 || isError || isLoading ? (
+      {isLoading ? (
+        <LoadingSpinnerLottie />
+      ) : searchResponseData?.length === 0 || isError ? (
         <NoSearchResponse />
       ) : (
         <>
