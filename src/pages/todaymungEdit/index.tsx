@@ -9,6 +9,7 @@ import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useTodaymungDetailData } from '@pages/todaymungDetail/queries';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { LoadingSpinnerLottie } from '@/common/components/lottie';
 
 function TodayMungEdit() {
   useSetDocumentTitle('오늘멍 작성하기');
@@ -82,7 +83,7 @@ function TodayMungEdit() {
   };
 
   if (isLoading || !todaymungEditData) {
-    return <div>로딩중</div>;
+    return <LoadingSpinnerLottie />;
   }
   if (isError) {
     return <div>에러중</div>;
