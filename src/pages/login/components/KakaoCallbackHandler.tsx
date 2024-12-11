@@ -8,17 +8,14 @@ function KakaoCallbackHandler() {
   useEffect(() => {
     const handleKakaoCallback = async () => {
       try {
-        // 현재 URL에서 `id` 파라미터 추출
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('id');
 
         if (!id) {
           alert('카카오 로그인 실패: 인증 코드가 없습니다.');
-          navigate('/login'); // 로그인 페이지로 리다이렉트
           return;
         }
 
-        // 서버에 인증 코드 전달 및 응답 받기
         const response = await axios.get(
           `https://dev.nolmung.org/v1/oauth/kakao/login?id=${id}`,
           {
@@ -27,10 +24,15 @@ function KakaoCallbackHandler() {
             },
           },
         );
-        // 서버 응답 데이터
+        if (response.data.data) {
+          localStorage.setItem(
+            'accessToken',
+            'Bearer ' + response.data.data.accessToken,
+          );
+        }
+
         const { loginStatus, id: userId, email, role } = response.data.data;
 
-        // 상태에 따라 이동
         if (loginStatus === 'LOGIN_SUCCESS' && role === 'USER') {
           navigate('/');
         } else if (loginStatus === 'SIGN_UP_REQUIRED' && role === 'GUEST') {

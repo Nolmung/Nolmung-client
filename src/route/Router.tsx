@@ -21,7 +21,8 @@ import Mypage from '../pages/my';
 import TodayMungEdit from '../pages/todaymungEdit';
 import DogsEdit from '../pages/dogEdit';
 import PrivateRoute from './PrivateRoute';
-import MyDogs from '@/pages/my/components/myDogs';
+import NotFound from '@/pages/404';
+import UserEdit from '@/pages/userEdit';
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;
@@ -72,6 +73,10 @@ function Router() {
             element={<PrivateRoute outlet={<TodayMungWrite />} />}
           />
           <Route
+            path={ROUTE.USER_EDIT()}
+            element={<PrivateRoute outlet={<UserEdit />} />}
+          />
+          <Route
             path={ROUTE.TODAYMUNG_PLACE_REGIST()}
             element={<PrivateRoute outlet={<TodayMungPlaceRegist />} />}
           />
@@ -92,6 +97,7 @@ function Router() {
             path={ROUTE.MYFAVORITE()}
             element={<PrivateRoute outlet={<MyFavorite />} />}
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </Suspense>

@@ -62,7 +62,7 @@ function Content({ place, isCard }: ContentProps) {
     navigate(ROUTE.DETAIL(place!.placeId));
   };
 
-  if (!place?.isBookmarked||!place) {
+  if (place?.isBookmarked === undefined || !place) {
     return <ContentSkeletonUI />;
   }
 
