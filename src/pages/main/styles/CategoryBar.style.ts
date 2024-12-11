@@ -19,6 +19,7 @@ const S = {
     padding: 10px 42px 10px 0;
     gap: 8px;
     overflow-x: auto;
+    max-width: 423px;
   `,
 
   StyledButtonWrapper: styled.div<{ isActive?: boolean }>`
