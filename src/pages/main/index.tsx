@@ -110,7 +110,6 @@ function Main() {
         );
 
         naver.maps.Event.addListener(mapRef.current, 'idle', () => {
-          
           setIsCurrentButtonActive(true);
           console.log('map idle');
         });
@@ -278,7 +277,6 @@ function Main() {
     let userCategory = null;
 
     if (categoryFromUrl === 'bookmarked' || categoryFromUrl === 'visited') {
-      
       if (!isLoggedIn) {
         open();
         return;
