@@ -19,7 +19,7 @@ const St = {
   `,
   ReviewButton: styled.div<{ isActive: boolean }>`
     width: 100%;
-    height: 40px;
+    height: 44px;
     border-radius: 10px;
     background-color: ${({ isActive }) => (isActive ? '#D3FBD4' : '#f0f0f0')};
     border: ${({ isActive }) => (isActive ? '1px solid #17AA1A' : 'none')};
