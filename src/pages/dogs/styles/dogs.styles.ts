@@ -10,7 +10,7 @@ export const S = {
     padding-right: 30px;
     padding-bottom: 40px;
     width: 100%;
-    height: calc(100vh - ${HEADER_HEIGHT}px);
+    height: calc(100dvh - ${HEADER_HEIGHT}px);
     overflow-y: auto;
     overflow-x: hidden;
   `,

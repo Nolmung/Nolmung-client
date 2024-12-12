@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 export const S = {
   Wrapper: styled.div<{ isMobile: boolean }>`
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     padding-bottom: ${({ isMobile }) => (isMobile ? '90px' : '0')};
     overflow-y: scroll;
   `,

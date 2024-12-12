@@ -1,4 +1,7 @@
-import { BOTTOM_NAV_HEIGHT, HEADER_HEIGHT } from './../../../common/constants/ui';
+import {
+  BOTTOM_NAV_HEIGHT,
+  HEADER_HEIGHT,
+} from './../../../common/constants/ui';
 import styled from 'styled-components';
 
 export const S = {
@@ -9,7 +12,7 @@ export const S = {
     padding: 23px 22px;
     width: 100%;
     gap: 22px;
-    height: calc(100vh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
+    height: calc(100dvh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
     overflow-y: auto;
     padding-bottom: 30px;
   `,

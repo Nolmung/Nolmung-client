@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const S = {
   Wrapper: styled.div`
     width: 100%;
-    min-height: calc(100vh - 162px);
+    min-height: calc(100dvh - 162px);
   `,
   ProfileArea: styled.div`
     display: flex;
