@@ -8,7 +8,6 @@ const S = {
     justify-content: flex-start;
     align-items: flex-start;
     padding: 20px;
-    flex: 1;
     min-width: 276px;
     border: 1.5px solid rgba(217, 217, 217, 0.63);
     background-color: #fdfdfd;
@@ -20,7 +19,7 @@ const S = {
   `,
   Container: styled.div`
     width: 100%;
-    height: 100%;
+    height: fit-content;
   `,
   ProfileContainer: styled.div`
     width: fit-content;
