@@ -13,7 +13,9 @@ export const S = {
     overflow-y: auto;
     overflow-x: hidden;
   `,
-  DatepickerCalendarIcon: styled(DatepickerCalendar)`
+  DatepickerCalendarIcon: styled(DatepickerCalendar).withConfig({
+    shouldForwardProp: (prop) => prop !== 'ownerState',
+  })`
     width: 24px;
     height: 24px;
     padding: 1px;

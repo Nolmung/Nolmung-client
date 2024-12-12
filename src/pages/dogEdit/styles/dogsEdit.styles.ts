@@ -18,28 +18,28 @@ export const S = {
     width: 24px;
     height: 24px;
   `,
-  SmallDogIcon: styled(SmallDog)<{ isSelected: boolean }>`
+  SmallDogIcon: styled(SmallDog)<{ $isSelected: boolean }>`
     width: 58px;
     height: 32px;
     & path {
-      fill: ${({ isSelected }) =>
-        isSelected ? '#17aa1a' : '#A7A7A7'} !important;
+      fill: ${({ $isSelected }) =>
+        $isSelected ? '#17aa1a' : '#A7A7A7'} !important;
     }
   `,
-  MeduimDogIcon: styled(MeduimDog)<{ isSelected: boolean }>`
+  MeduimDogIcon: styled(MeduimDog)<{ $isSelected: boolean }>`
     width: 50px;
     height: 41px;
     & path {
-      fill: ${({ isSelected }) =>
-        isSelected ? '#17aa1a' : '#A7A7A7'} !important;
+      fill: ${({ $isSelected }) =>
+        $isSelected ? '#17aa1a' : '#A7A7A7'} !important;
     }
   `,
-  LargeDogIcon: styled(LargeDog)<{ isSelected: boolean }>`
+  LargeDogIcon: styled(LargeDog)<{ $isSelected: boolean }>`
     width: 57px;
     height: 54px;
     & path {
-      fill: ${({ isSelected }) =>
-        isSelected ? '#17aa1a' : '#A7A7A7'} !important;
+      fill: ${({ $isSelected }) =>
+        $isSelected ? '#17aa1a' : '#A7A7A7'} !important;
     }
   `,
   UserTitle: styled.h1`
@@ -91,7 +91,7 @@ export const S = {
     font-size: 14px;
     margin-top: 50px;
   `,
-  UserInfoInput: styled.input<{ isDropdownVisible?: boolean }>`
+  UserInfoInput: styled.input<{ $isDropdownVisible?: boolean }>`
     box-sizing: border-box;
     margin-top: 8px;
     color: #080808;
@@ -100,8 +100,8 @@ export const S = {
     border: 1px solid #d9d9d9;
     padding-left: 18px;
     font-size: 16px;
-    border-radius: ${({ isDropdownVisible }) =>
-      isDropdownVisible ? '10px 10px 0 0' : '10px'};
+    border-radius: ${({ $isDropdownVisible }) =>
+      $isDropdownVisible ? '10px 10px 0 0' : '10px'};
     width: ${({ name }) => (name === 'birth' ? '47%' : '100%')};
     &::placeholder {
       color: #a7a7a7;
@@ -129,16 +129,16 @@ export const S = {
     gap: 20px;
     overflow-x: scroll;
   `,
-  AgeChoice: styled.div<{ isSelected: boolean }>`
+  AgeChoice: styled.div<{ $isSelected: boolean }>`
     margin-top: 10px;
     width: 106px;
     height: 106px;
-    background-color: ${({ isSelected }) =>
-      isSelected ? '#d3fbd4' : '#fdfdfd'};
+    background-color: ${({ $isSelected }) =>
+      $isSelected ? '#d3fbd4' : '#fdfdfd'};
     border: 1px solid
-      ${({ isSelected }) => (isSelected ? '#17aa1a' : '#d9d9d9')};
+      ${({ $isSelected }) => ($isSelected ? '#17aa1a' : '#d9d9d9')};
     border-radius: 15px;
-    color: ${({ isSelected }) => (isSelected ? '#17aa1a' : '#a7a7a7')};
+    color: ${({ $isSelected }) => ($isSelected ? '#17aa1a' : '#a7a7a7')};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -166,15 +166,15 @@ export const S = {
     align-items: center;
     justify-content: center;
   `,
-  GenderSelect: styled.div<{ isSelected: boolean }>`
+  GenderSelect: styled.div<{ $isSelected: boolean }>`
     margin-top: 8px;
     width: 80px;
     height: 46px;
-    background-color: ${({ isSelected }) =>
-      isSelected ? '#d3fbd4' : '#f0f0f0'};
+    background-color: ${({ $isSelected }) =>
+      $isSelected ? '#d3fbd4' : '#f0f0f0'};
     border: 1px solid
-      ${({ isSelected }) => (isSelected ? '#17aa1a' : 'transparent')};
-    color: ${({ isSelected }) => (isSelected ? '#17aa1a' : '#000')};
+      ${({ $isSelected }) => ($isSelected ? '#17aa1a' : 'transparent')};
+    color: ${({ $isSelected }) => ($isSelected ? '#17aa1a' : '#000')};
     display: flex;
     align-items: center;
     justify-content: center;

@@ -41,7 +41,7 @@ const TodayMungDetail = () => {
   const handleToggleClick = () => {
     setEditToggle(!editToggle);
   };
-  console.log(editActive);
+
   return (
     <S.Wrapper>
       <S.Container>

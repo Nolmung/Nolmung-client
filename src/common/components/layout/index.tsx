@@ -239,7 +239,7 @@ function Layout({ children }: LayoutProps) {
         setHeaderTitle({
           title: '마이페이지',
           showIcon: false,
-          type: 'TitleLeft',
+          type: 'TitleCenter',
         });
         break;
 
@@ -256,9 +256,9 @@ function Layout({ children }: LayoutProps) {
 
       case pathName == '/my/favorite':
         setHeaderTitle({
-          title: '즐겨찾기',
+          title: '즐겨찾기 목록',
           showIcon: true,
-          type: 'TitleLeft',
+          type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
           navigate('/my');

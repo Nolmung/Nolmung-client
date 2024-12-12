@@ -2,6 +2,7 @@ import S from './index.styles';
 import kakaoIcon from '@/assets/images/pngs/kakao_icon_image.png';
 import {
   HeartIcon,
+  KakaoChannelIcon,
   LogoutIcon,
   NoticeIcon,
   ReviewListIcon,
@@ -12,7 +13,7 @@ import { ROUTE } from '@/common/constants/route';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetDogsList, useGetUser } from './hooks';
 import PetProfileCard from './components/profile';
-
+ 
 function Mypage() {
   useSetDocumentTitle('마이페이지');
 
@@ -21,9 +22,11 @@ function Mypage() {
     navigate(ROUTE.MY_REVIEW());
   };
 
-  const { data: userData } = useGetUser();
+  const { data: userData, isLoading: userLoading } = useGetUser();
   const { data: dogData } = useGetDogsList();
-
+  if (userLoading) {
+    return <div>유저 정보 불러오는 중</div>;
+  }
   const navigateToEditPage = () => {
     navigate('/useredit', { state: { userId: userData?.userId } });
   };
@@ -38,6 +41,11 @@ function Mypage() {
     localStorage.removeItem('accessToken');
     navigate(ROUTE.LOGIN());
   };
+
+  const handleChannelClick = () => {
+    window.open('http://pf.kakao.com/_iMxbdn');
+  }
+
   return (
     <S.Wrapper>
       <S.ProfileWrapper>
@@ -70,29 +78,40 @@ function Mypage() {
         <S.PetProfileWrapper>
           <S.PetProfilePlusButton
             onClick={() => {
-              navigate(ROUTE.MY_DOGS(), { state: { dogData:dogData, nickname: userData!.userNickname} });
+              navigate(ROUTE.MY_DOGS(), {
+                state: { dogData: dogData, nickname: userData!.userNickname },
+              });
             }}
           >
             반려견 전체보기
           </S.PetProfilePlusButton>
           {dogData && dogData.length > 0 ? (
-            <PetProfileCard data={dogData[0]} key={dogData[0].dogId} userNickname={userData!.userNickname}/>
+            <PetProfileCard
+              data={dogData[0]}
+              key={dogData[0].dogId}
+              userNickname={userData!.userNickname}
+            />
           ) : (
             <PetProfileCard />
           )}
         </S.PetProfileWrapper>
       </S.ProfileWrapper>
       <S.ListWrapper>
-        <S.ListContainer onClick={handleResearchClick}>
-          <NoticeIcon width={20} height={20} />
-          설문
-        </S.ListContainer>
         <S.ListContainer onClick={() => navigate('/my/favorite')}>
           <HeartIcon width={19} height={19} />
           즐겨찾기 목록
         </S.ListContainer>
         <S.ListContainer onClick={navigateToMyReview}>
-          <ReviewListIcon width={19} height={19} />내 리뷰 모아보기
+          <ReviewListIcon width={19} height={19} />
+          내 리뷰 모아보기
+        </S.ListContainer>
+        <S.ListContainer onClick={handleResearchClick}>
+          <NoticeIcon width={20} height={20} />
+          설문
+        </S.ListContainer>
+        <S.ListContainer onClick={handleChannelClick}>
+          <KakaoChannelIcon width={19} height={19} />
+          카카오톡 채널
         </S.ListContainer>
         <S.ListContainer onClick={handleLoginClick}>
           <LogoutIcon width={19} height={19} />

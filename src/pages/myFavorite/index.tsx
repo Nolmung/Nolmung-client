@@ -19,7 +19,7 @@ function MyFavorite() {
   const { mutate } = useDeleteBookmarks();
 
   const handleCategoryClick = (value: BookmarkCategory) => {
-    navigate(ROUTE.MYFAVORITE() + `?category=${value}`);
+    navigate(ROUTE.MYFAVORITE() + `?mycategory=${value}`);
   };
 
   const handleLikeClick = async (
@@ -36,7 +36,7 @@ function MyFavorite() {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const category = searchParams.get('category');
+    const category = searchParams.get('mycategory');
     if (category) {
       setCurrentCategory(category as BookmarkCategory);
     }

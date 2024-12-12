@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { CameraIcon } from '@/assets/images/svgs';
 import { HEADER_HEIGHT } from '@/common/constants/ui';
+import { BOTTOM_NAV_HEIGHT } from '@/common/constants/ui';
 import { SmallDog } from '@assets/images/svgs';
 import { MeduimDog } from '@assets/images/svgs';
 import { LargeDog } from '@/assets/images/svgs';
@@ -10,7 +11,7 @@ export const S = {
     padding-right: 30px;
     padding-bottom: 40px;
     width: 100%;
-    height: calc(100dvh - ${HEADER_HEIGHT}px);
+    height: calc(100dvh - ${HEADER_HEIGHT}px - ${BOTTOM_NAV_HEIGHT}px);
     overflow-y: auto;
     overflow-x: hidden;
   `,

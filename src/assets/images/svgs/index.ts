@@ -55,6 +55,7 @@ export { default as GalleryMarker } from './GalleryMarker';
 export { default as GalleryTag } from './GalleryTag';
 export { default as GoBackIcon } from './GoBackIcon';
 export { default as HeartIcon } from './HeartIcon';
+export { default as KakaoChannelIcon } from './KakaoChannelIcon';
 export { default as LocationPinIcon } from './LocationPinIcon';
 export { default as LogoutIcon } from './LogoutIcon';
 export { default as MuseumMarker } from './MuseumMarker';
