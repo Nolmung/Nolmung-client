@@ -24,6 +24,8 @@ function Content({ place, isCard }: ContentProps) {
     place?.isBookmarked ?? false,
   );
 
+  
+
   useEffect(() => {
     if (place) {
       setIsBookmarked(place.isBookmarked!);
