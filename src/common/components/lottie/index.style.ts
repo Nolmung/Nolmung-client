@@ -7,7 +7,7 @@ export const S = {
     height?: string;
   }>`
     width: 100%;
-    height: ${({ height }) => (height ? height : '100vh')};
+    height: ${({ height }) => (height ? height : '100dvh')};
     display: flex;
     justify-content: center;
     align-items: center;
