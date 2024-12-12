@@ -86,6 +86,18 @@ function Main() {
   //   return () => clearTimeout(timer);
   // }, [])
 
+  const query = new URLSearchParams(window.location.search);
+  const categoryFromUrl = query.get('category');
+  const searchFromUrl = query.get('search');
+
+  useEffect(() => {
+    if (!searchFromUrl) {
+      setBottomCardVisible(false);
+      setBottomSheetVisible(true);
+      getCategoryMarkers(categoryFromUrl as string);
+    }
+  }, [categoryFromUrl, searchFromUrl]);
+
   useEffect(() => {
     const initializeMap = async () => {
       if (!mapContainerRef.current || !naver || !mapCenter) return;
@@ -111,12 +123,7 @@ function Main() {
 
         naver.maps.Event.addListener(mapRef.current, 'idle', () => {
           setIsCurrentButtonActive(true);
-          console.log('map idle');
         });
-
-        const query = new URLSearchParams(window.location.search);
-        const categoryFromUrl = query.get('category');
-        const searchFromUrl = query.get('search');
 
         try {
           if (categoryFromUrl) {
@@ -133,6 +140,7 @@ function Main() {
                 longitude: searchResponseData[0].longitude + moveLatLng.lng,
               });
             }
+
             setMarkerData(searchResponseData as MarkerType[]);
             initMarkers(
               mapRef.current as naver.maps.Map,
@@ -379,6 +387,7 @@ function Main() {
 
   /** 마커 클릭 이벤트 함수 */
   const handleMarkerClick = (marker: CustomMarker) => {
+    window.history.pushState(null, '', '/');
     navigate(
       `/?search=${marker.data.placeName}&lat=${marker.data.latitude}&lng=${marker.data.longitude}`,
     );
