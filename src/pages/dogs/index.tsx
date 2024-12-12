@@ -177,6 +177,7 @@ function Dogs() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
   return (
     <S.ContainerWrapper>
       <S.UserTitle>

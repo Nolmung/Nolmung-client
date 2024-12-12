@@ -49,6 +49,7 @@ export const usePostDiary = () => {
     publicYn,
     dogs,
   };
+
   return useMutation<number, Error>({
     mutationFn: () => {
       return postTodaymung(diaryRequest);
