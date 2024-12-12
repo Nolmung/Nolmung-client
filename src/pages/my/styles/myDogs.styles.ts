@@ -1,4 +1,7 @@
-import { BOTTOM_NAV_HEIGHT, HEADER_HEIGHT } from './../../../common/constants/ui';
+import {
+  BOTTOM_NAV_HEIGHT,
+  HEADER_HEIGHT,
+} from './../../../common/constants/ui';
 import styled from 'styled-components';
 
 export const S = {
@@ -30,7 +33,6 @@ export const S = {
     border: 1px solid #d9d9d9;
     border-radius: 10px;
     background-color: #f0f0f0;
-    margin-top: auto;
   `,
   NoDataText: styled.span`
     color: #080808;

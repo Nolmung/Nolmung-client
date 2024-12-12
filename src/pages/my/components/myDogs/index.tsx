@@ -3,23 +3,31 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import PetProfileCard from '../profile/index';
 import { ROUTE } from '@common/constants/route';
 import { PlusIcon } from '@/assets/images/svgs';
-import { useGetDogs } from '@/pages/todaymungWrite/queries';
+import { useGetDogsList } from '../../hooks';
+import { LoadingSpinnerLottie } from '@/common/components/lottie';
+import { toast } from 'react-toastify';
 
 const MyDogs = () => {
-  const a = useGetDogs();
-  console.log(a);
+  const { data: dogListData, isLoading } = useGetDogsList();
   const { state } = useLocation();
   const { dogData, nickname } = state || {};
   const navigate = useNavigate();
   const handleDogRegisterClick = () => {
-    navigate(ROUTE.MY_DOGS_ADD(), {
-      state: { dogData: dogData, nickname: nickname! },
-    });
+    if ((dogListData?.length ?? 0) >= 5) {
+      toast.error('반려견 목록이 5개 이상입니다!');
+    } else {
+      navigate(ROUTE.MY_DOGS_ADD(), {
+        state: { dogData: dogData, nickname: nickname! },
+      });
+    }
   };
+  if (isLoading) {
+    return LoadingSpinnerLottie();
+  }
   return (
     <S.Wrapper>
-      {dogData && dogData.length > 0 ? (
-        dogData.map((data: any) => {
+      {dogListData && dogListData.length > 0 ? (
+        dogListData.map((data: any) => {
           return (
             <PetProfileCard
               data={data}
