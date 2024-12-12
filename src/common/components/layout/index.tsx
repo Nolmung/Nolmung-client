@@ -55,12 +55,8 @@ const shouldHide = (key: keyof PathRules, pathname: string): boolean => {
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
   const { reviewlist } = useReviewStore();
-
-  useEffect(() => {
-    console.log('reviewlist', reviewlist);
-  }, [reviewlist]);
-
   const { openConfirmModal } = useConfirmModalStore();
+
   const hideHeader = shouldHide(
     'hideHeader',
     location.pathname + location.search,
@@ -113,6 +109,15 @@ function Layout({ children }: LayoutProps) {
   }, []);
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const category = searchParams.get('category');
+    const categoryLabel = category
+      ? CATEGORY_OPTIONS.find((options) => options.value === category)?.label
+      : null;
+
+    const search = searchParams.get('search');
+    const pathName = location.pathname;
+
     if (location.pathname.startsWith('/todaymung/detail')) {
       setHeaderTitle({
         title: '오늘멍 상세보기',
@@ -132,15 +137,6 @@ function Layout({ children }: LayoutProps) {
       });
       return;
     }
-
-    const searchParams = new URLSearchParams(location.search);
-    const category = searchParams.get('category');
-    const categoryLabel = category
-      ? CATEGORY_OPTIONS.find((options) => options.value === category)?.label
-      : null;
-
-    const search = searchParams.get('search');
-    const pathName = location.pathname;
 
     switch (true) {
       case pathName === '/' && !!category:
