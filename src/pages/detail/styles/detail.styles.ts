@@ -4,7 +4,6 @@ export const S = {
   Wrapper: styled.div<{ isMobile: boolean }>`
     width: 100%;
     height: 100dvh;
-    padding-bottom: ${({ isMobile }) => (isMobile ? '90px' : '0')};
     overflow-y: scroll;
   `,
   Header: styled.header<{ isScrolled: boolean }>`
