@@ -111,10 +111,10 @@ function Content({ place, isCard }: ContentProps) {
               <S.PlaceReviewWrapper>
                 <S.TextWrapper>
                   <FilledStar width={14} height={14} />
-                  {place!.starRatingAvg}
+                  {postDetail?.starRatingAvg}
                 </S.TextWrapper>
                 <S.PlaceReviewCount>
-                  리뷰 {place!.reviewCount}개
+                  리뷰 {postDetail?.reviewCount}개
                 </S.PlaceReviewCount>
               </S.PlaceReviewWrapper>
             </S.InfoTextWrapper>

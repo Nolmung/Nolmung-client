@@ -79,13 +79,20 @@ function Main() {
 
   // const [isMapLoading, setIsMapLoading] = useState(true);
 
-  /** 컴포넌트가 마운트될 때 10초동안 로티 화면 보여주기 */
+  /** 마운트 될 때 3초간 실행 -> @Todo 로딩 로직 생각하여 적용하기 */
   // useEffect(() => {
-  //   const timer = setTimeout(() => {
+  //   const isFirstLoad = sessionStorage.getItem('isFirstLoad');
+  //   if (!isFirstLoad) {
+  //     sessionStorage.setItem('isFirstLoad', 'true');
+  //     const timer = setTimeout(() => {
+  //       setIsMapLoading(false);
+  //     }, 2500);
+
+  //     return () => clearTimeout(timer);
+  //   } else {
   //     setIsMapLoading(false);
-  //   }, 10000);
-  //   return () => clearTimeout(timer);
-  // }, [])
+  //   }
+  // }, []);
 
   const query = new URLSearchParams(window.location.search);
   const categoryFromUrl = query.get('category');
@@ -205,13 +212,13 @@ function Main() {
   }, [location.search, mapCenter]);
 
   const [selectedFilter, setSelectedFilter] = useState<FilterState>({
-    weight: 'ALL',
+    weight: null,
     rating: null,
   });
 
   /** 지도 초기화 이후 카테고리 필터링 또는 검색어로 장소 검색 */
   useEffect(() => {
-    setSelectedFilter({ weight: 'ALL', rating: null });
+    setSelectedFilter({ weight: null, rating: null });
     const query = new URLSearchParams(window.location.search);
     const categoryFromUrl = query.get('category');
     const searchFromUrl = query.get('search');
@@ -300,7 +307,6 @@ function Main() {
     }
 
     setCategory(categoryFromUrl);
-    setBottomHeight(BOTTOM_HEIGHT);
 
     try {
       const coordinate = getCurrentAndMaxCoordinate(mapRef.current);
@@ -332,6 +338,7 @@ function Main() {
     } catch (error) {
       console.error('Error Get Filtering Data:', error);
     }
+    setBottomHeight(BOTTOM_HEIGHT);
   };
 
   /** 현 지도에서 검색 버튼 클릭 이벤트 함수 */
@@ -429,6 +436,7 @@ function Main() {
 
   return (
     <S.Wrapper>
+      {/* {isMapLoading && <LoadingNolmungLottie />} */}
       {isOpen && <LoginPromptModal closeModal={close} />}
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
         {!(category || location.search) && (

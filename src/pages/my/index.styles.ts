@@ -83,6 +83,7 @@ const S = {
     font-weight: 500;
     color: #898989;
     margin-left: auto;
+    margin-bottom: 8px;
     &:hover {
       opacity: 0.8;
     }
