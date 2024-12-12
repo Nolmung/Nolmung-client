@@ -16,6 +16,7 @@ import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
 import { ROUTE } from '@/common/constants/route';
 import { useReviewConfirmModalStore } from '@/stores/useReviewConfirmModalStore';
+import { IoEllipseSharp } from 'react-icons/io5';
 
 type PathRule = string | RegExp;
 type PathRules = {
@@ -97,6 +98,8 @@ function Layout({ children }: LayoutProps) {
       ) {
         if (reviewlist.length > 0) {
           openReviewConfirmModal();
+        } else {
+          navigate('/todaymung/write');
         }
       }
     };
@@ -227,6 +230,8 @@ function Layout({ children }: LayoutProps) {
         setHandleBackButtonClick(() => () => {
           if (reviewlist.length > 0) {
             openReviewConfirmModal();
+          } else {
+            navigate('/todaymung/write');
           }
         });
         break;
