@@ -79,7 +79,6 @@ const S = {
   PetProfilePlusButton: styled.button`
     all: unset;
     cursor: pointer;
-    margin-bottom: 13px;
     font-size: 12px;
     font-weight: 500;
     color: #898989;
