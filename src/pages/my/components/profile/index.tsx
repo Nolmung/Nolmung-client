@@ -8,9 +8,10 @@ import { ROUTE } from '@common/constants/route';
 
 interface PetProfileProps {
   data?: DogType;
+  userNickname?: string;
 }
 
-function PetProfileCard({ data }: PetProfileProps) {
+function PetProfileCard({ data, userNickname }: PetProfileProps) {
   const navigate = useNavigate();
   /** @Todo 반려견 정보 등록 후에 타입 수정하기 */
   const dogSize = data ? DogSizeMapping[data.size as DogSize] : '';
@@ -18,11 +19,11 @@ function PetProfileCard({ data }: PetProfileProps) {
   const age = calculateAge(data?.birth);
 
   const handleCardClick = (dogId: number) => {
-    navigate(ROUTE.DOGSEDIT(dogId));
+    navigate(ROUTE.DOGSEDIT(dogId), { state: { dogData: data, nickname: userNickname! } });
   };
 
   const handleDogRegisterClick = () => {
-    navigate(ROUTE.DOGS());
+    navigate(ROUTE.MY_DOGS_ADD(), { state: { dogData:data, nickname: userNickname!} });
   };
 
   return (
