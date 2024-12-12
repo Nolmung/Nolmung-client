@@ -10,16 +10,24 @@ import EditButton from './components/editButton';
 import { useState } from 'react';
 import { useTodaymungDetailData } from './queries';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
+import { decodeToken } from '@/common/utils/configToken';
+import getIsLogin from '@/common/utils/getIsLogin';
 
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
   const numericDiaryId = Number(diaryId);
+  let editActive = null;
   const {
     data: todaymungDetailData,
     isLoading,
     isError,
   } = useTodaymungDetailData(numericDiaryId);
-  console.log(todaymungDetailData);
+
+  if (getIsLogin()) {
+    const token = localStorage.getItem('accessToken');
+    const { id: postUserId } = decodeToken(token);
+    editActive = postUserId;
+  }
 
   const [editToggle, setEditToggle] = useState(false);
   if (isLoading) {
@@ -33,6 +41,7 @@ const TodayMungDetail = () => {
   const handleToggleClick = () => {
     setEditToggle(!editToggle);
   };
+  console.log(editActive);
   return (
     <S.Wrapper>
       <S.Container>
@@ -41,10 +50,12 @@ const TodayMungDetail = () => {
           {editToggle && (
             <EditButton diaryId={diaryData.diaryId} medias={diaryData.medias} />
           )}
-          <DotdotdotIcon
-            onClick={handleToggleClick}
-            fill={editToggle ? '#d9d9d9' : '#080808'}
-          />
+          {diaryData.userId === editActive && (
+            <DotdotdotIcon
+              onClick={handleToggleClick}
+              fill={editToggle ? '#d9d9d9' : '#080808'}
+            />
+          )}
         </S.DateArea>
         {diaryData.places.length > 0 && (
           <S.PlaceArea>

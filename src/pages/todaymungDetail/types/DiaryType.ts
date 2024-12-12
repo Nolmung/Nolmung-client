@@ -21,6 +21,7 @@ export interface PlacesType {
 }
 
 export interface DiaryType {
+  userId: number;
   diaryId: number;
   title: string;
   content: string;

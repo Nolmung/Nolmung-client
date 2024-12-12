@@ -39,7 +39,7 @@ function Todaymung() {
     queryKey: ['todaymungData'],
     queryFn: getTodaymungList,
   });
-  console.log(todaymungData);
+
   useSetDocumentTitle('오늘멍 모아보기');
 
   if (isLoading) {
@@ -48,6 +48,7 @@ function Todaymung() {
   if (isError) {
     return <LoadingSpinnerLottie />;
   }
+  console.log(todaymungData);
   return (
     <S.Wrapper>
       {todaymungData && (
