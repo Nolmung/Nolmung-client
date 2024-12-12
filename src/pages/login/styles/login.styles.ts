@@ -26,9 +26,13 @@ export const S = {
 
   NolmungText: styled.h1`
     text-align: center;
-    margin: 52% auto 0;  
+    margin: 52% auto 0;
     font-size: 14px;
     line-height: 1.3;
+    @media (max-width: 320px) {
+      /* 화면 너비가 320px 이하일 때 */
+      font-size: 12px;
+    }
   `,
   ButtonWrapper: styled.div`
     display: flex;
@@ -59,9 +63,7 @@ export const S = {
     background-image: url('/pngs/LoginBackgroundimg.png');
     background-repeat: no-repeat;
     background-size: cover;
-    @media (max-width: 400px) { /* 화면 너비가 400px 이하일 때 */
-    background-position: center -70px;
-  }
+    background-position: center 50%;
   `,
 
   LoginText: styled.h2`

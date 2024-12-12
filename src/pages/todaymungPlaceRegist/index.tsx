@@ -61,14 +61,15 @@ function TodayMungPlaceRegist() {
 
   const handleSearch = (searchKeyword?: string) => {
     const searchValue = searchKeyword || inputRef?.current?.value.trim();
+    console.log(searchValue, searchKeyword, inputRef?.current?.value.trim());
     if (!searchValue) return;
     const newSearchItem: SearchHistoryItem = {
       id: Date.now(),
       keyword: searchValue,
       createdAt: formatDate(new Date()),
     };
-
     setSearchHistory(updateSearchHistory(searchHistory, newSearchItem));
+
     setSearchKeyword(searchValue);
     navigate(ROUTE.TODAYMUNG_PLACE_REGIST() + '?search=' + searchValue);
   };
@@ -86,6 +87,7 @@ function TodayMungPlaceRegist() {
     setSearchHistory(clearSearchHistory());
     closeModal();
   };
+
   if (isLoading) return <LoadingSpinnerLottie />;
   if (error) return <div>에러 발생</div>;
 
@@ -125,7 +127,7 @@ function TodayMungPlaceRegist() {
           onChange={(e) => setSearchKeyword(e.target.value)}
           inputRef={inputRef}
           autofocus={true}
-          onClick={handleSearch}
+          onClick={() => handleSearch()}
         />
       </S.SearchInputWrapper>
 
