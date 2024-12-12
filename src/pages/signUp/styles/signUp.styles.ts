@@ -84,7 +84,7 @@ export const S = {
   `,
   GenderSelect: styled.div<{ isSelected: boolean }>`
     margin-top: 8px;
-    width: 176px;
+    width: 23vw;
     height: 50px;
     background-color: ${({ isSelected }) =>
       isSelected ? '#d3fbd4' : '#f0f0f0'};

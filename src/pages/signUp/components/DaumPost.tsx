@@ -40,12 +40,15 @@ const DaumPost: React.FC<DaumPostProps> = ({ setAddress }) => {
       onClick={handleClick}
       role="button"
       style={{
+        marginTop: '8px',
         marginLeft: '10px',
         height: '44px',
-        width: '32%',
+        width: '26%',
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         display: 'flex',
         flexWrap: 'nowrap',
-        padding: '10px 22px',
         backgroundColor: '#5E5E5E', // 버튼 배경색
         color: '#ffffff', // 텍스트 색상
         borderRadius: '10px', // 버튼 모서리를 둥글게
