@@ -22,7 +22,6 @@ export const useGetDogs = () => {
 };
 
 export const usePostReviews = () => {
-  const { deleteReviewAll } = useReviewStore();
   return useMutation<number, Error, PostReviewRequest[]>({
     mutationFn: (review) => postReviews(review),
     onSuccess: () => {

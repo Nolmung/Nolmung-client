@@ -6,7 +6,7 @@ const S = {
     className: 'scroll-container',
   }))`
     width: 100%;
-    height: calc(100dvh - ${HEADER_HEIGHT}px - 90px);
+    height: calc(100dvh - ${HEADER_HEIGHT}px -${BOTTOM_NAV_HEIGHT}px);
     padding: ${({ addPadding }) => (addPadding ? '22px 0 170px 0' : '22px 0 ')};
     overflow-y: auto;
     display: flex;
