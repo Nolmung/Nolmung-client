@@ -100,9 +100,7 @@ function Content({ place, isCard }: ContentProps) {
                 <S.PlaceCategory>
                   {
                     CATEGORY_OPTIONS?.find((option) =>
-                      option.value === place?.category
-                        ? place?.category
-                        : 'ETC',
+                      option.value === (place?.category || 'ETC'),
                     )?.label
                   }
                 </S.PlaceCategory>
