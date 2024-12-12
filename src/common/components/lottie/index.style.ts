@@ -13,6 +13,6 @@ export const S = {
     align-items: center;
     background-color: ${({ backgroundcolor }) =>
       backgroundcolor ? backgroundcolor : 'none'};
-    z-index: 1010;
+    z-index: 1000;
   `,
 };

@@ -54,6 +54,8 @@ const DaumPost: React.FC<DaumPostProps> = ({ setAddress }) => {
         fontWeight: '500',
         fontFamily: 'pretendard',
         transition: 'background-color 0.5s ease',
+        whiteSpace: 'nowrap',
+        
       }}
       onMouseOver={
         (e) => (e.currentTarget.style.backgroundColor = '#080808') // 호버 시 배경색 변경

@@ -14,7 +14,7 @@ export const LoadingSpinnerLottie = () => {
 
 export const LoadingSkeletonLottie = () => {
   return (
-    <S.Wrapper>
+    <S.Wrapper >
       <Lottie animationData={SkeletonLottie} height={50} width={30} />
     </S.Wrapper>
   );

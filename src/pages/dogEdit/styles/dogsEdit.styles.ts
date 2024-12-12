@@ -12,6 +12,7 @@ export const S = {
     width: 100%;
     height: calc(100vh - ${HEADER_HEIGHT}px);
     overflow-y: auto;
+    overflow-x: hidden;
   `,
   StyledCameraIcon: styled(CameraIcon)`
     width: 24px;
@@ -123,9 +124,10 @@ export const S = {
   AgeChoiceContainer: styled.div`
     display: flex;
     width: 100%;
-    justify-content: center;
+    max-width: 423px;
     flex-direction: row;
     gap: 20px;
+    overflow-x: scroll;
   `,
   AgeChoice: styled.div<{ isSelected: boolean }>`
     margin-top: 10px;
@@ -198,6 +200,9 @@ export const S = {
   GenderContainer: styled.div`
     display: flex;
     gap: 24px; /* 요소 간 간격 */
+    width: 100%;
+    max-width: 423px;
+    flex-wrap: wrap;
   `,
   EditButton: styled.button<{ $isActive: boolean }>`
     width: 100%;

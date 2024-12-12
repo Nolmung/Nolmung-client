@@ -8,7 +8,6 @@ const S = {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    /* height: 100px; */
     height: calc(100vh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
     box-sizing: border-box;
     overflow-y: auto;
