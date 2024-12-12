@@ -4,6 +4,7 @@ const S = {
   Wrapper: styled.div`
     z-index: 1;
     width: 100%;
+    max-width: 423px;
     height: fit-content;
     position: absolute;
     top: 29px;
