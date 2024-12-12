@@ -1,4 +1,3 @@
-import { HEADER_HEIGHT, BOTTOM_NAV_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 
 const S = {
@@ -6,9 +5,9 @@ const S = {
     className: 'scroll-container',
   }))`
     width: 100%;
-    height: calc(100dvh - ${HEADER_HEIGHT}px -${BOTTOM_NAV_HEIGHT}px);
+    height: calc(80dvh);
     padding: ${({ addPadding }) => (addPadding ? '22px 0 170px 0' : '22px 0 ')};
-    overflow-y: auto;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
