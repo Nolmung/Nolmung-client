@@ -4,6 +4,7 @@ import {
   deleteTodaymung,
 } from '@/service/apis/diaryDetail';
 import { toast } from 'react-toastify';
+import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
 
 export const useTodaymungDetailData = (diaryId: number) => {
   return useQuery({
@@ -17,12 +18,12 @@ export const useTodaymungDetailData = (diaryId: number) => {
 
 export const useTodaymungDelete = (diaryId: number) => {
   const queryClient = useQueryClient();
-
+  const { deleteTodaymungAll } = useTodayMungStore();
   return useMutation({
     mutationFn: (diaryId: number) => deleteTodaymung(diaryId),
     onSuccess: () => {
       toast.success('오늘멍 삭제가 완료되었습니다.');
-
+      deleteTodaymungAll();
       queryClient.invalidateQueries({
         queryKey: ['TodaymungDetailData', diaryId],
       });

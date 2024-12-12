@@ -19,6 +19,8 @@ import Modal from '@/common/components/modal';
 import Button from '@/common/components/button/Button';
 import useModal from '@/common/hooks/useModal';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
+import { PostReviewRequest } from '@/service/apis/review/index.type';
+import { usePostReviews } from '../todaymungWrite/queries';
 
 export interface SearchHistoryItem {
   id: number;
@@ -31,7 +33,7 @@ function TodayMungPlaceRegist() {
   const { isOpen, openModal, closeModal } = useModal();
   const location = useLocation();
   const navigate = useNavigate();
-
+  const { mutate: reviewMutate } = usePostReviews();
   const searchParams = new URLSearchParams(location.search).get('search');
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -86,6 +88,22 @@ function TodayMungPlaceRegist() {
   const handleModalYesButtonClick = () => {
     setSearchHistory(clearSearchHistory());
     closeModal();
+  };
+
+  const handleCompleteButtonClick = () => {
+    const reviewRequestList: PostReviewRequest[] = reviewlist.map((review) => ({
+      placeId: review.placeId,
+      rating: review.rating,
+      category: review.category,
+      labels: review.labels.map((label) => ({
+        labelId: label.labelId,
+        labelName: label.labelName,
+      })),
+    }));
+
+    if (reviewRequestList.length > 0) {
+      reviewMutate(reviewRequestList);
+    }
   };
 
   if (isLoading) return <LoadingSpinnerLottie />;
@@ -196,6 +214,20 @@ function TodayMungPlaceRegist() {
           </S.CardWrapper>
         ))}
       </S.VisitedPlaceCard>
+      <S.ButtonWrapper>
+        <Button
+          width="110px"
+          height="44px"
+          backgroundColor="#080808"
+          color="#fff"
+          borderRadius="30px"
+          fontSize="16px"
+          fontWeight="500"
+          onClick={handleCompleteButtonClick}
+        >
+          리뷰 등록
+        </Button>
+      </S.ButtonWrapper>
     </S.Wrapper>
   );
 }
