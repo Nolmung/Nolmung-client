@@ -75,7 +75,7 @@ function Layout({ children }: LayoutProps) {
 
   const [handleBackButtonClick, setHandleBackButtonClick] = useState(
     () => () => {
-      window.history.back();
+      navigate(-1);
     },
   );
 
@@ -136,7 +136,7 @@ function Layout({ children }: LayoutProps) {
         type: 'TitleLeft',
       });
       setHandleBackButtonClick(() => () => {
-        window.history.back();
+        navigate(-1);
       });
       return;
     }
@@ -173,7 +173,7 @@ function Layout({ children }: LayoutProps) {
             type: 'TitleCenter',
           });
           setHandleBackButtonClick(() => () => {
-            window.history.back();
+            navigate(-1);
           });
         }
         break;
@@ -186,7 +186,7 @@ function Layout({ children }: LayoutProps) {
             type: 'TitleCenter',
           });
           setHandleBackButtonClick(() => () => {
-            window.history.back();
+            navigate(-1);
           });
         }
         break;

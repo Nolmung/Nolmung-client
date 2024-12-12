@@ -63,7 +63,7 @@ function Detail() {
   const { mutate: addBookmarks } = usePostBookmarks();
 
   const handleBackArrowClick = () => {
-    window.history.back();
+    navigate(-1);
   };
 
   const handleViewMoreButtonClick = () => {
@@ -73,7 +73,7 @@ function Detail() {
   if (isLoading) return <LoadingSpinnerLottie />;
   if (isError || !data) return <p>Error loading post detail</p>;
 
-  const reviewCount = data.labels?.reduce((acc, cur) => {
+  const labelTotalCount = data.labels?.reduce((acc, cur) => {
     return acc + cur.labelCount;
   }, 0);
 
@@ -150,7 +150,7 @@ function Detail() {
           <S.StarAverage>{data.starRatingAvg}</S.StarAverage>
           <S.PlaceReviewCount>
             리뷰
-            {reviewCount}
+            {data.reviewCount}
           </S.PlaceReviewCount>
         </S.PlaceBriefReview>
         <S.PlaceRoadAddress>{data.address}</S.PlaceRoadAddress>
@@ -208,7 +208,7 @@ function Detail() {
       <S.PlaceDetailWrapper>
         <S.ReviewTitle>
           방문자 리뷰
-          <S.ReviewCount>{reviewCount}</S.ReviewCount>
+          <S.ReviewCount>{data.reviewCount}</S.ReviewCount>
         </S.ReviewTitle>
         <S.KeywordReviews>
           {!data?.labels.length && (
@@ -219,7 +219,7 @@ function Detail() {
               key={item.labelId}
               Keyword={findLabelNameById(item.labelId)}
               KeywordCount={item.labelCount}
-              KeywordPercent={(item.labelCount / reviewCount) * 100}
+              KeywordPercent={(item.labelCount / labelTotalCount) * 100}
             />
           ))}
         </S.KeywordReviews>
