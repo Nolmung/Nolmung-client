@@ -152,7 +152,6 @@ function Main() {
             await getAndInitMarkers();
           }
 
-   
           // 사용자 현재 위치 마커 생성 및 초기화
           const currentPosition = new naver.maps.LatLng(
             mapCenter.latitude,
@@ -388,6 +387,7 @@ function Main() {
 
   /** 마커 클릭 이벤트 함수 */
   const handleMarkerClick = (marker: CustomMarker) => {
+    window.history.pushState(null, '', '/');
     navigate(
       `/?search=${marker.data.placeName}&lat=${marker.data.latitude}&lng=${marker.data.longitude}`,
     );
