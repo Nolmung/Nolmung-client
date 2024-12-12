@@ -112,6 +112,9 @@ export const S = {
     display: flex;
     align-items: center;
     gap: 10px;
+    width: 100%;
+    max-width: 423px;
+    flex-wrap: wrap;
   `,
   GenderContainer: styled.div`
     display: flex;
