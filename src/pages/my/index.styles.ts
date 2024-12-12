@@ -12,6 +12,7 @@ const S = {
     height: calc(100vh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
     box-sizing: border-box;
     overflow-y: auto;
+    padding-bottom: 30px;
   `,
   ProfileWrapper: styled.div`
     display: flex;
