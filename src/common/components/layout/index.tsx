@@ -94,7 +94,7 @@ function Layout({ children }: LayoutProps) {
     }
     if (location.pathname.startsWith('/dogs/edit')) {
       setHeaderTitle({
-        title: '수정',
+        title: '반려견 수정',
         showIcon: true,
         type: 'TitleLeft',
       });

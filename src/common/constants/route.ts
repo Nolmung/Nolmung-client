@@ -21,4 +21,5 @@ export const ROUTE = {
   ADDRESS_POPUP: () => '/addressPopup',
   USER_EDIT: () => '/userEdit',
   MY_DOGS: () => '/my/dogs',
+  MY_DOGS_ADD: () => '/my/dogs/add',
 } as const;

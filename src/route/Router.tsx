@@ -97,8 +97,7 @@ function Router() {
             path={ROUTE.MYFAVORITE()}
             element={<PrivateRoute outlet={<MyFavorite />} />}
           />
-          <Route path={ROUTE.MY_DOGS()} element={<PrivateRoute outlet={<MyDogs />} />}
-          />
+          <Route path={ROUTE.MY_DOGS_ADD()} element={<PrivateRoute outlet={<Dogs />} />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
