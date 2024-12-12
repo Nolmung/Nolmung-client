@@ -14,7 +14,7 @@ const MyDogs = () => {
   const navigate = useNavigate();
   const handleDogRegisterClick = () => {
     if ((dogListData?.length ?? 0) >= 5) {
-      toast.error('반려견 목록이 5개 이상입니다!');
+      toast.error('반려견은 최대 5마리까지만 등록할 수 있습니다.');
     } else {
       navigate(ROUTE.MY_DOGS_ADD(), {
         state: { dogData: dogData, nickname: nickname! },
