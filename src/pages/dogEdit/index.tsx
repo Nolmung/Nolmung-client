@@ -18,10 +18,10 @@ function DogsEdit() {
   const { state } = useLocation();
   const { dogId } = useParams<{ dogId: string }>();
   const numDogId = Number(dogId);
+  const { nickname, dogData: recentData } = state || {};
   const dropdownRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  const { nickname, dogData: recentData } = state || {};
+  const [preview, setPreview] = useState<string | null>(recentData.profileUrl);
   const [size, setSize] = useState<number | null | string>(null);
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -53,12 +53,10 @@ function DogsEdit() {
 
   useEffect(() => {
     if (
-      dogData.dogName &&
-      dogData.dogType &&
-      dogData.birth &&
-      size || dogData.size&&
-      neutered || dogData.neuterYn&&
-      gender || dogData.gender
+      (dogData.dogName && dogData.dogType && dogData.birth && size) ||
+      (dogData.size && neutered) ||
+      (dogData.neuterYn && gender) ||
+      dogData.gender
     ) {
       setNextButtonActive(true);
     }
@@ -204,35 +202,35 @@ function DogsEdit() {
       <S.ContentTitleText>생년월일</S.ContentTitleText>
       <DatePicker value={selectedDate} onChange={handleDateChange} />
       <S.ContentTitleText>몸무게</S.ContentTitleText>
-        <S.AgeChoiceContainer>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={size === 1 || dogData.size === 'S'}
-              onClick={() => handleCircleClick(1)}
-            >
-              <S.SmallDogIcon isSelected={size === 1 || dogData.size === 'S'} />
-            </S.AgeChoice>
-            <S.AgeChoiceText>10kg 미만</S.AgeChoiceText>
-          </S.AgeFlex>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={size === 2 || dogData.size === 'M'}
-              onClick={() => handleCircleClick(2)}
-            >
-              <S.MeduimDogIcon isSelected={size === 2 || dogData.size === 'M'} />
-            </S.AgeChoice>
-            <S.AgeChoiceText>10kg - 25kg 미만</S.AgeChoiceText>
-          </S.AgeFlex>
-          <S.AgeFlex>
-            <S.AgeChoice
-              isSelected={size === 3 || dogData.size === 'L'}
-              onClick={() => handleCircleClick(3)}
-            >
-              <S.LargeDogIcon isSelected={size === 3 || dogData.size === 'L'} />
-            </S.AgeChoice>
-            <S.AgeChoiceText>25kg 이상</S.AgeChoiceText>
-          </S.AgeFlex>
-        </S.AgeChoiceContainer>
+      <S.AgeChoiceContainer>
+        <S.AgeFlex>
+          <S.AgeChoice
+            isSelected={size === 1 || dogData.size === 'S'}
+            onClick={() => handleCircleClick(1)}
+          >
+            <S.SmallDogIcon isSelected={size === 1 || dogData.size === 'S'} />
+          </S.AgeChoice>
+          <S.AgeChoiceText>10kg 미만</S.AgeChoiceText>
+        </S.AgeFlex>
+        <S.AgeFlex>
+          <S.AgeChoice
+            isSelected={size === 2 || dogData.size === 'M'}
+            onClick={() => handleCircleClick(2)}
+          >
+            <S.MeduimDogIcon isSelected={size === 2 || dogData.size === 'M'} />
+          </S.AgeChoice>
+          <S.AgeChoiceText>10kg - 25kg 미만</S.AgeChoiceText>
+        </S.AgeFlex>
+        <S.AgeFlex>
+          <S.AgeChoice
+            isSelected={size === 3 || dogData.size === 'L'}
+            onClick={() => handleCircleClick(3)}
+          >
+            <S.LargeDogIcon isSelected={size === 3 || dogData.size === 'L'} />
+          </S.AgeChoice>
+          <S.AgeChoiceText>25kg 이상</S.AgeChoiceText>
+        </S.AgeFlex>
+      </S.AgeChoiceContainer>
       <S.ContentTitleText>견종</S.ContentTitleText>
       <S.UserInfoInput
         type="text"
