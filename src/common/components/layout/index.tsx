@@ -16,7 +16,6 @@ import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
 import { ROUTE } from '@/common/constants/route';
 import { useReviewConfirmModalStore } from '@/stores/useReviewConfirmModalStore';
-import { IoEllipseSharp } from 'react-icons/io5';
 
 type PathRule = string | RegExp;
 type PathRules = {
