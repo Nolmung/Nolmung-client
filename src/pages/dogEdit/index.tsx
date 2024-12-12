@@ -27,7 +27,7 @@ function DogsEdit() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [gender, setGender] = useState<string | null>(null);
   const [neutered, setNeutered] = useState<string | null>(null);
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs(recentData.birth));
   const { mutate: patchDogMutate } = usePatchDogs();
   const { mutate: deleteDogMutate } = useDeleteDogs();
   const handleDateChange = (newValue: Dayjs | null) => {
