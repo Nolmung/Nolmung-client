@@ -12,7 +12,7 @@ import { ROUTE } from '@/common/constants/route';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetDogsList, useGetUser } from './hooks';
 import PetProfileCard from './components/profile';
-
+ 
 function Mypage() {
   useSetDocumentTitle('마이페이지');
 
@@ -21,9 +21,11 @@ function Mypage() {
     navigate(ROUTE.MY_REVIEW());
   };
 
-  const { data: userData } = useGetUser();
+  const { data: userData, isLoading: userLoading } = useGetUser();
   const { data: dogData } = useGetDogsList();
-
+  if (userLoading) {
+    return <div>유저 정보 불러오는 중</div>;
+  }
   const navigateToEditPage = () => {
     navigate('/useredit', { state: { userId: userData?.userId } });
   };
@@ -70,13 +72,19 @@ function Mypage() {
         <S.PetProfileWrapper>
           <S.PetProfilePlusButton
             onClick={() => {
-              navigate(ROUTE.MY_DOGS(), { state: { dogData:dogData, nickname: userData!.userNickname} });
+              navigate(ROUTE.MY_DOGS(), {
+                state: { dogData: dogData, nickname: userData!.userNickname },
+              });
             }}
           >
             반려견 전체보기
           </S.PetProfilePlusButton>
           {dogData && dogData.length > 0 ? (
-            <PetProfileCard data={dogData[0]} key={dogData[0].dogId} userNickname={userData!.userNickname}/>
+            <PetProfileCard
+              data={dogData[0]}
+              key={dogData[0].dogId}
+              userNickname={userData!.userNickname}
+            />
           ) : (
             <PetProfileCard />
           )}

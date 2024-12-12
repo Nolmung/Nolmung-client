@@ -154,7 +154,7 @@ function Dogs() {
           ? navigate(ROUTE.MY_DOGS(), {
               state: { dogData, nickname },
               replace: true,
-          })
+            })
           : navigate(ROUTE.MAIN(), {
               state: { nickname, dogData },
               replace: true,
