@@ -1,4 +1,5 @@
 import { HEADER_HEIGHT } from '@/common/constants/ui';
+import { BOTTOM_NAV_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 import { DatepickerCalendar } from '@/assets/images/svgs';
 
@@ -8,8 +9,9 @@ export const S = {
     padding-right: 30px;
     padding-bottom: 40px;
     width: 100%;
-    height: calc(100vh - ${HEADER_HEIGHT}px);
+    height: calc(100dvh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
     overflow-y: auto;
+    overflow-x: hidden;
   `,
   DatepickerCalendarIcon: styled(DatepickerCalendar)`
     width: 24px;
@@ -50,7 +52,7 @@ export const S = {
       isDropdownVisible ? '10px 10px 0 0' : '10px'};
     &::placeholder {
       color: #a7a7a7;
-      font-size: 14px;
+      font-size: 16px;
     }
     &:hover {
       border-color: #a7a7a7;
