@@ -10,6 +10,8 @@ import { useDeleteBookmarks } from '@/pages/myFavorite/hooks';
 import { useEffect, useState } from 'react';
 import getIsLogin from '@/common/utils/getIsLogin';
 import { ContentSkeletonUI } from '@/common/components/skeleton';
+import { useGetPostDetail } from '@/pages/detail/querys';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface ContentProps {
   place: MapPlace;
@@ -17,6 +19,7 @@ interface ContentProps {
 }
 
 function Content({ place, isCard }: ContentProps) {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { mutate: addBookmarks } = usePostBookmarks();
   const { mutate: deleteBookmarks } = useDeleteBookmarks();
@@ -24,11 +27,13 @@ function Content({ place, isCard }: ContentProps) {
     place?.isBookmarked ?? false,
   );
 
+  const { data: postDetail, refetch: refetchPostDetail } = useGetPostDetail(place.placeId);
+
   useEffect(() => {
-    if (place) {
-      setIsBookmarked(place.isBookmarked!);
+    if (postDetail) {
+      setIsBookmarked(postDetail.isBookmarked!);
     }
-  }, [place]);
+  }, [postDetail]);
 
   const isLoggedIn = getIsLogin();
 
@@ -44,7 +49,8 @@ function Content({ place, isCard }: ContentProps) {
       deleteBookmarks(place!.placeId, {
         onSuccess: (data) => {
           if (data.status === 'SUCCESS') {
-            setIsBookmarked(false);
+            queryClient.invalidateQueries({queryKey: ['postDetail'], placeId: place.placeId});
+            refetchPostDetail();
           }
         },
         onError: (error) => {
@@ -55,7 +61,8 @@ function Content({ place, isCard }: ContentProps) {
       addBookmarks(place!.placeId, {
         onSuccess: (data) => {
           if (data.status === 'SUCCESS') {
-            setIsBookmarked(true);
+            queryClient.invalidateQueries({queryKey: ['postDetail'], placeId: place.placeId});
+            refetchPostDetail();
           }
         },
         onError: (error) => {
