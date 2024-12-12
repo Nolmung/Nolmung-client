@@ -32,7 +32,16 @@ function TodayMungCard({ card }: TodayMungCardProps) {
           <S.Title>{card.diaryName}</S.Title>
           <S.Content>{card.diaryContent}</S.Content>
         </S.TodayMungTitleContentWrapper>
-        {card.imageUrl && <S.Image src={card.imageUrl} alt="오늘멍 프리뷰" />}
+        {card.imageUrl && (
+          <S.Image
+            src={card.imageUrl}
+            alt="오늘멍 프리뷰"
+            onError={(e) => {
+              e.currentTarget.src =
+                'https://nolmung.s3.ap-northeast-2.amazonaws.com/todaymungs/defaultImage.svg';
+            }}
+          />
+        )}
       </S.TodayMungTitleContentImageWrapper>
     </S.TodayMungWrapper>
   );

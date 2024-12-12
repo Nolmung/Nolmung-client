@@ -48,6 +48,7 @@ function Todaymung() {
   if (isError) {
     return <LoadingSpinnerLottie />;
   }
+  console.log(todaymungData);
   return (
     <S.Wrapper>
       {todaymungData && (
