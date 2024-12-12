@@ -33,9 +33,13 @@ function GuestRecommend() {
   const handleKakaoLoginButtonClick = () => {
     naviagte(ROUTE.LOGIN());
   };
-
+  const handleClick = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
   return (
     <S.Wrapper>
+      <div onClick={handleClick}>로컬스토리지 초기화</div>
       <S.BlurWrapper>
         {bookmarks.length > 0 && (
           <RecommendCard
