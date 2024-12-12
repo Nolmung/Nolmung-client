@@ -27,7 +27,9 @@ function Content({ place, isCard }: ContentProps) {
     place?.isBookmarked ?? false,
   );
 
-  const { data: postDetail, refetch: refetchPostDetail } = useGetPostDetail(place.placeId);
+  const { data: postDetail, refetch: refetchPostDetail } = useGetPostDetail(
+    place.placeId,
+  );
 
   useEffect(() => {
     if (postDetail) {
@@ -49,7 +51,10 @@ function Content({ place, isCard }: ContentProps) {
       deleteBookmarks(place!.placeId, {
         onSuccess: (data) => {
           if (data.status === 'SUCCESS') {
-            queryClient.invalidateQueries({queryKey: ['postDetail'], placeId: place.placeId});
+            queryClient.invalidateQueries({
+              queryKey: ['postDetail'],
+              placeId: place.placeId,
+            });
             refetchPostDetail();
           }
         },
@@ -61,7 +66,10 @@ function Content({ place, isCard }: ContentProps) {
       addBookmarks(place!.placeId, {
         onSuccess: (data) => {
           if (data.status === 'SUCCESS') {
-            queryClient.invalidateQueries({queryKey: ['postDetail'], placeId: place.placeId});
+            queryClient.invalidateQueries({
+              queryKey: ['postDetail'],
+              placeId: place.placeId,
+            });
             refetchPostDetail();
           }
         },
