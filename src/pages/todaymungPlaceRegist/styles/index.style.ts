@@ -6,13 +6,19 @@ const S = {
     className: 'scroll-container',
   }))`
     width: 100%;
-    height: calc(100dvh - ${HEADER_HEIGHT}px - ${BOTTOM_NAV_HEIGHT}px);
-    padding: 22px 0 100px 0;
-    padding: ${({ addPadding }) => (addPadding ? '22px 0 100px 0' : '22px 0 ')};
+    height: calc(100dvh - ${HEADER_HEIGHT}px - 90px);
+    padding: ${({ addPadding }) => (addPadding ? '22px 0 170px 0' : '22px 0 ')};
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+  `,
+  ButtonWrapper: styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 90px;
   `,
   SearchInputWrapper: styled.div`
     width: 100%;
@@ -21,7 +27,7 @@ const S = {
   `,
   VisitedPlaceCard: styled.div`
     position: absolute;
-    bottom: 90px;
+    bottom: 150px;
     display: flex;
     flex-direction: row;
     gap: 10px;

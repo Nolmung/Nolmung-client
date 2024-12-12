@@ -27,11 +27,9 @@ export const usePostReviews = () => {
     mutationFn: (review) => postReviews(review),
     onSuccess: () => {
       toast.success('리뷰 등록이 완료되었습니다.');
-      deleteReviewAll();
     },
     onError: () => {
       toast.error('리뷰 등록에 실패했습니다.');
-      deleteReviewAll();
     },
   });
 };
