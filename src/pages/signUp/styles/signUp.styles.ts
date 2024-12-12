@@ -84,7 +84,7 @@ export const S = {
   `,
   GenderSelect: styled.div<{ isSelected: boolean }>`
     margin-top: 8px;
-    width: 23vw;
+    width: 100%;
     height: 50px;
     background-color: ${({ isSelected }) =>
       isSelected ? '#d3fbd4' : '#f0f0f0'};
@@ -114,10 +114,12 @@ export const S = {
     gap: 10px;
     width: 100%;
     max-width: 423px;
-    flex-wrap: wrap;
+    justify-content: space-between;
   `,
   GenderContainer: styled.div`
     display: flex;
+    
+    width: 100%;
   `,
   NextButton: styled.button<{ isActive: boolean }>`
     margin-top: 50px;
