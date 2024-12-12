@@ -135,6 +135,9 @@ function Layout({ children }: LayoutProps) {
         showIcon: true,
         type: 'TitleLeft',
       });
+      setHandleBackButtonClick(() => () => {
+        window.history.back();
+      });
       return;
     }
 
@@ -258,6 +261,16 @@ function Layout({ children }: LayoutProps) {
         });
         setHandleBackButtonClick(() => () => {
           navigate('/my');
+        });
+        break;
+      case pathName == '/my/dogs/add':
+        setHeaderTitle({
+          title: '',
+          showIcon: true,
+          type: 'TitleCenter',
+        });
+        setHandleBackButtonClick(() => () => {
+          navigate('/my/dogs');
         });
         break;
 
