@@ -22,7 +22,6 @@ import {
   Price,
   Time,
 } from '@/assets/images/svgs';
-import { ROUTE } from '@/common/constants/route';
 import { useGetPostDetail } from './querys';
 import { PlacePrice } from '@/common/types';
 import findLabelNameById from '@/common/utils/findLabelNameById';
