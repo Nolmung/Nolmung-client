@@ -43,9 +43,6 @@ function RecommendCard({
                     mock.Address?.split(' ')[1]}
                 </S.PlaceAddress>
               </S.NameAddressWrapper>
-              <S.PlaceExplanation>
-                MZ 강아지만 출입 가능한 애견 카페
-              </S.PlaceExplanation>
             </S.PlaceWrapper>
           );
         })}

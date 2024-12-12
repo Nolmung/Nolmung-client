@@ -35,7 +35,7 @@ const S = {
     height: 86px;
     border-radius: 10px;
     border: 1px solid #d9d9d9;
-    object-fit: contain;
+    object-fit: cover;
   `,
   IconWrapper: styled.div`
     position: absolute;
