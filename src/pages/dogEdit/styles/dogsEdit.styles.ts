@@ -60,7 +60,7 @@ export const S = {
     left: 50%; /* 부모의 왼쪽 기준으로 50% 이동 */
     transform: translateX(-50%); /* 자신의 너비의 절반만큼 왼쪽으로 이동 */
     cursor: pointer;
-    margin-top: 60px;
+    margin-top: 30px;
     width: 86px;
     height: 86px;
     background-color: #f0f0f0;

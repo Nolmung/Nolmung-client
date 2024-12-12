@@ -94,7 +94,7 @@ function Layout({ children }: LayoutProps) {
     }
     if (location.pathname.startsWith('/dogs/edit')) {
       setHeaderTitle({
-        title: '수정',
+        title: '반려견 수정',
         showIcon: true,
         type: 'TitleLeft',
       });
@@ -188,17 +188,6 @@ function Layout({ children }: LayoutProps) {
         });
         break;
 
-      case pathName == '/todaymung/placeregist' && !!search:
-        setHeaderTitle({
-          title: '오늘멍 장소등록',
-          showIcon: true,
-          type: 'TitleCenter',
-        });
-        setHandleBackButtonClick(() => () => {
-          navigate('/todaymung/write');
-        });
-        break;
-
       case pathName == '/todaymung/placeregist':
         setHeaderTitle({
           title: '오늘멍 장소등록',
@@ -206,7 +195,7 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          navigate('/todaymung');
+          navigate('/todaymung/write');
         });
         break;
 

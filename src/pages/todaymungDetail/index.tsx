@@ -67,7 +67,7 @@ const TodayMungDetail = () => {
             </S.PlaceTagCardArea>
           </S.PlaceArea>
         )}
-        {diaryData.dogs && (
+        {diaryData.dogs && diaryData.dogs.length > 0 && (
           <S.DogsArea>
             <S.DogsAreaTitle>오늘을 함께한 반려견</S.DogsAreaTitle>
             <S.DogTagList>

@@ -70,13 +70,13 @@ function Mypage() {
         <S.PetProfileWrapper>
           <S.PetProfilePlusButton
             onClick={() => {
-              navigate(ROUTE.MY_DOGS(), { state: dogData });
+              navigate(ROUTE.MY_DOGS(), { state: { dogData:dogData, nickname: userData!.userNickname} });
             }}
           >
             반려견 전체보기
           </S.PetProfilePlusButton>
           {dogData && dogData.length > 0 ? (
-            <PetProfileCard data={dogData[0]} key={dogData[0].dogId} />
+            <PetProfileCard data={dogData[0]} key={dogData[0].dogId} userNickname={userData!.userNickname}/>
           ) : (
             <PetProfileCard />
           )}

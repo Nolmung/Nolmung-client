@@ -26,7 +26,7 @@ function Editor() {
         value={content}
         maxLength={500}
         onChange={handleContentChange}
-        placeholder={`오늘멍은 하루에 한 번만 작성 가능해요 \n오늘멍을 공개로 설정하면 리뷰에 등록됩니다`}
+        placeholder={`오늘멍은 하루에 한 번만 작성 가능해요`}
       />
       <S.InFormPublicCheckBoxWrapper>
         <S.InformPublic>

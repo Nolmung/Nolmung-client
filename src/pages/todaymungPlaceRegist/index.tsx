@@ -19,6 +19,8 @@ import Modal from '@/common/components/modal';
 import Button from '@/common/components/button/Button';
 import useModal from '@/common/hooks/useModal';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
+import { PostReviewRequest } from '@/service/apis/review/index.type';
+import { usePostReviews } from '../todaymungWrite/queries';
 
 export interface SearchHistoryItem {
   id: number;
@@ -31,7 +33,7 @@ function TodayMungPlaceRegist() {
   const { isOpen, openModal, closeModal } = useModal();
   const location = useLocation();
   const navigate = useNavigate();
-
+  const { mutate: reviewMutate } = usePostReviews();
   const searchParams = new URLSearchParams(location.search).get('search');
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -61,14 +63,15 @@ function TodayMungPlaceRegist() {
 
   const handleSearch = (searchKeyword?: string) => {
     const searchValue = searchKeyword || inputRef?.current?.value.trim();
+    console.log(searchValue, searchKeyword, inputRef?.current?.value.trim());
     if (!searchValue) return;
     const newSearchItem: SearchHistoryItem = {
       id: Date.now(),
       keyword: searchValue,
       createdAt: formatDate(new Date()),
     };
-
     setSearchHistory(updateSearchHistory(searchHistory, newSearchItem));
+
     setSearchKeyword(searchValue);
     navigate(ROUTE.TODAYMUNG_PLACE_REGIST() + '?search=' + searchValue);
   };
@@ -86,6 +89,23 @@ function TodayMungPlaceRegist() {
     setSearchHistory(clearSearchHistory());
     closeModal();
   };
+
+  const handleCompleteButtonClick = () => {
+    const reviewRequestList: PostReviewRequest[] = reviewlist.map((review) => ({
+      placeId: review.placeId,
+      rating: review.rating,
+      category: review.category,
+      labels: review.labels.map((label) => ({
+        labelId: label.labelId,
+        labelName: label.labelName,
+      })),
+    }));
+
+    if (reviewRequestList.length > 0) {
+      reviewMutate(reviewRequestList);
+    }
+  };
+
   if (isLoading) return <LoadingSpinnerLottie />;
   if (error) return <div>에러 발생</div>;
 
@@ -125,7 +145,7 @@ function TodayMungPlaceRegist() {
           onChange={(e) => setSearchKeyword(e.target.value)}
           inputRef={inputRef}
           autofocus={true}
-          onClick={handleSearch}
+          onClick={() => handleSearch()}
         />
       </S.SearchInputWrapper>
 
@@ -194,6 +214,20 @@ function TodayMungPlaceRegist() {
           </S.CardWrapper>
         ))}
       </S.VisitedPlaceCard>
+      <S.ButtonWrapper>
+        <Button
+          width="110px"
+          height="44px"
+          backgroundColor="#080808"
+          color="#fff"
+          borderRadius="30px"
+          fontSize="16px"
+          fontWeight="500"
+          onClick={handleCompleteButtonClick}
+        >
+          리뷰 등록
+        </Button>
+      </S.ButtonWrapper>
     </S.Wrapper>
   );
 }

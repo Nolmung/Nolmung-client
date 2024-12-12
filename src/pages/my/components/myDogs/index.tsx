@@ -5,17 +5,18 @@ import { ROUTE } from '@common/constants/route';
 import { PlusIcon } from '@/assets/images/svgs';
 
 const MyDogs = () => {
-  const location = useLocation();
-  const { state } = location || {};
+  
+  const { state } = useLocation();
+  const { dogData, nickname } = state || {};
   const navigate = useNavigate();
   const handleDogRegisterClick = () => {
-    navigate(ROUTE.DOGS());
+    navigate(ROUTE.MY_DOGS_ADD(), { state: { dogData: dogData, nickname: nickname!} });
   };
   return (
     <S.Wrapper>
-      {state && state.length > 0 ? (
-        state.map((data: any) => {
-          return <PetProfileCard data={data} key={data.dogId} />;
+      {dogData && dogData.length > 0 ? (
+        dogData.map((data: any) => {
+          return <PetProfileCard data={data} key={data.dogId} userNickname={nickname}/>;
         })
       ) : (
         <div>존재하지 않아용</div>
