@@ -116,11 +116,7 @@ export const S = {
     max-width: 423px;
     justify-content: space-between;
   `,
-  GenderContainer: styled.div`
-    display: flex;
-    
-    width: 100%;
-  `,
+  
   NextButton: styled.button<{ isActive: boolean }>`
     margin-top: 50px;
     width: 100%;

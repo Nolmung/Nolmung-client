@@ -135,40 +135,38 @@ function SignUp() {
             placeholder="주소를 입력해주세요"
           />
           <DaumPost setAddress={setAddress} />
+
+          {isDropdownVisible && filteredLocations.length > 0 && (
+            <S.Dropdown>
+              {filteredLocations.map((location) => (
+                <S.Suggestion
+                  key={location}
+                  onClick={() => handleSuggestionClick(location)}
+                >
+                  {location}
+                </S.Suggestion>
+              ))}
+            </S.Dropdown>
+          )}
         </div>
-        {isDropdownVisible && filteredLocations.length > 0 && (
-          <S.Dropdown>
-            {filteredLocations.map((location) => (
-              <S.Suggestion
-                key={location}
-                onClick={() => handleSuggestionClick(location)}
-              >
-                {location}
-              </S.Suggestion>
-            ))}
-          </S.Dropdown>
-        )}
         <S.ContentTitleText>생년월일</S.ContentTitleText>
         <DatePicker value={selectedDate} onChange={handleDateChange} />
-        <S.GenderContainer>
-          <div>
-            <S.ContentTitleText>성별</S.ContentTitleText>
-            <S.GenderWrapper>
-              <S.GenderSelect
-                isSelected={gender === 'MALE'}
-                onClick={() => setGender('MALE')}
-              >
-                남성
-              </S.GenderSelect>
-              <S.GenderSelect
-                isSelected={gender === 'FEMALE'}
-                onClick={() => setGender('FEMALE')}
-              >
-                여성
-              </S.GenderSelect>
-            </S.GenderWrapper>
-          </div>
-        </S.GenderContainer>
+        <S.ContentTitleText>성별</S.ContentTitleText>
+        <S.GenderWrapper>
+          
+          <S.GenderSelect
+            isSelected={gender === 'MALE'}
+            onClick={() => setGender('MALE')}
+          >
+            남성
+          </S.GenderSelect>
+          <S.GenderSelect
+            isSelected={gender === 'FEMALE'}
+            onClick={() => setGender('FEMALE')}
+          >
+            여성
+          </S.GenderSelect>
+        </S.GenderWrapper>
         <S.NextButton
           disabled={!NextButtonActive}
           isActive={NextButtonActive}
