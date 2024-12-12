@@ -55,12 +55,8 @@ const shouldHide = (key: keyof PathRules, pathname: string): boolean => {
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
   const { reviewlist } = useReviewStore();
-
-  useEffect(() => {
-    console.log('reviewlist', reviewlist);
-  }, [reviewlist]);
-
   const { openConfirmModal } = useConfirmModalStore();
+
   const hideHeader = shouldHide(
     'hideHeader',
     location.pathname + location.search,
@@ -79,13 +75,13 @@ function Layout({ children }: LayoutProps) {
 
   const [handleBackButtonClick, setHandleBackButtonClick] = useState(
     () => () => {
-      window.history.back();
+      navigate(-1);
     },
   );
 
   const navigate = useNavigate();
   const { deleteReviewAll } = useReviewStore();
-  const { title, content, places, dogs, medias } = useTodayMungStore();
+  const { title, content, dogs, medias } = useTodayMungStore();
   const { openReviewConfirmModal } = useReviewConfirmModalStore();
 
   useEffect(() => {
@@ -113,6 +109,15 @@ function Layout({ children }: LayoutProps) {
   }, []);
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const category = searchParams.get('category');
+    const categoryLabel = category
+      ? CATEGORY_OPTIONS.find((options) => options.value === category)?.label
+      : null;
+
+    const search = searchParams.get('search');
+    const pathName = location.pathname;
+
     if (location.pathname.startsWith('/todaymung/detail')) {
       setHeaderTitle({
         title: '오늘멍 상세보기',
@@ -130,17 +135,11 @@ function Layout({ children }: LayoutProps) {
         showIcon: true,
         type: 'TitleLeft',
       });
+      setHandleBackButtonClick(() => () => {
+        navigate(-1);
+      });
       return;
     }
-
-    const searchParams = new URLSearchParams(location.search);
-    const category = searchParams.get('category');
-    const categoryLabel = category
-      ? CATEGORY_OPTIONS.find((options) => options.value === category)?.label
-      : null;
-
-    const search = searchParams.get('search');
-    const pathName = location.pathname;
 
     switch (true) {
       case pathName === '/' && !!category:
@@ -150,7 +149,7 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          window.history.back();
+          navigate(ROUTE.MAIN());
         });
 
         break;
@@ -174,7 +173,7 @@ function Layout({ children }: LayoutProps) {
             type: 'TitleCenter',
           });
           setHandleBackButtonClick(() => () => {
-            window.history.back();
+            navigate(-1);
           });
         }
         break;
@@ -187,7 +186,7 @@ function Layout({ children }: LayoutProps) {
             type: 'TitleCenter',
           });
           setHandleBackButtonClick(() => () => {
-            window.history.back();
+            navigate(-1);
           });
         }
         break;
@@ -205,13 +204,7 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          if (
-            title ||
-            content ||
-            dogs.length > 0 ||
-            medias.length > 0 ||
-            places.length > 0
-          ) {
+          if (title || content || dogs.length > 0 || medias.length > 0) {
             openConfirmModal();
           } else {
             deleteReviewAll();
@@ -262,6 +255,16 @@ function Layout({ children }: LayoutProps) {
         });
         setHandleBackButtonClick(() => () => {
           navigate('/my');
+        });
+        break;
+      case pathName == '/my/dogs/add':
+        setHeaderTitle({
+          title: '',
+          showIcon: true,
+          type: 'TitleCenter',
+        });
+        setHandleBackButtonClick(() => () => {
+          navigate('/my/dogs');
         });
         break;
 

@@ -6,7 +6,7 @@ import { useGetDogs, useEditDiary } from './queries';
 import DogCard from './components/DogCard';
 import { useTodayMungStore } from './stores/todayMungStore';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
-import { useTodaymungDetailData } from '@pages/todaymungDetail/queries';
+import { useGetTodaymungDetailData } from '@pages/todaymungDetail/queries';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
@@ -38,7 +38,7 @@ function TodayMungEdit() {
     data: todaymungEditData,
     isLoading,
     isError,
-  } = useTodaymungDetailData(numericDiaryId);
+  } = useGetTodaymungDetailData(numericDiaryId);
 
   useEffect(() => {
     if (todaymungEditData) {

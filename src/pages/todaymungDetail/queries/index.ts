@@ -6,7 +6,7 @@ import {
 import { toast } from 'react-toastify';
 import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
 
-export const useTodaymungDetailData = (diaryId: number) => {
+export const useGetTodaymungDetailData = (diaryId: number) => {
   return useQuery({
     queryKey: ['TodaymungDetailData', diaryId],
     queryFn: () => getTodaymungDetail(diaryId),

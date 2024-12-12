@@ -2,7 +2,7 @@ import { getDogs } from '@/service/apis/dog';
 import { DogsResponse } from '@/service/apis/dog/index.type';
 import { postReviews } from '@/service/apis/review';
 import { PostReviewRequest } from '@/service/apis/review/index.type';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, QueryClient } from '@tanstack/react-query';
 import { postTodaymung } from '@/service/apis/diary';
 import { ROUTE } from '@/common/constants/route';
 import { useNavigate } from 'react-router-dom';
@@ -22,11 +22,17 @@ export const useGetDogs = () => {
 };
 
 export const usePostReviews = () => {
-  const { deleteReviewAll } = useReviewStore();
+  const queryClient = new QueryClient();
+  const { deleteReviewAll, reviewlist } = useReviewStore();
   return useMutation<number, Error, PostReviewRequest[]>({
     mutationFn: (review) => postReviews(review),
     onSuccess: () => {
       toast.success('리뷰 등록이 완료되었습니다.');
+      reviewlist.forEach((review) => {
+        queryClient.invalidateQueries({
+          queryKey: ['postDetail', review.placeId],
+        });
+      });
       deleteReviewAll();
     },
     onError: () => {

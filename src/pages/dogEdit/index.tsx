@@ -27,7 +27,9 @@ function DogsEdit() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [gender, setGender] = useState<string | null>(null);
   const [neutered, setNeutered] = useState<string | null>(null);
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs(recentData.birth));
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(
+    dayjs(recentData.birth),
+  );
   const { mutate: patchDogMutate } = usePatchDogs();
   const { mutate: deleteDogMutate } = useDeleteDogs();
   const handleDateChange = (newValue: Dayjs | null) => {
@@ -308,7 +310,7 @@ function DogsEdit() {
           $isActive={NextButtonActive}
           onClick={handleEditClick}
         >
-          수정하기
+          저장하기
         </S.EditButton>
         <S.DeleteButton onClick={handleDeleteClick}>삭제하기</S.DeleteButton>
       </S.ButtonArea>

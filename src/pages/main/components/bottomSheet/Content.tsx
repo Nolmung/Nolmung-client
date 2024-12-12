@@ -12,6 +12,7 @@ import getIsLogin from '@/common/utils/getIsLogin';
 import { ContentSkeletonUI } from '@/common/components/skeleton';
 import { useGetPostDetail } from '@/pages/detail/querys';
 import { useQueryClient } from '@tanstack/react-query';
+import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 
 interface ContentProps {
   place: MapPlace;
@@ -30,6 +31,7 @@ function Content({ place, isCard }: ContentProps) {
   const { data: postDetail, refetch: refetchPostDetail } = useGetPostDetail(
     place.placeId,
   );
+  const { open } = useLoginPromptModalStore();
 
   useEffect(() => {
     if (postDetail) {
@@ -99,8 +101,8 @@ function Content({ place, isCard }: ContentProps) {
                 <S.PlaceName>{place!.placeName}</S.PlaceName>
                 <S.PlaceCategory>
                   {
-                    CATEGORY_OPTIONS?.find((option) =>
-                      option.value === (place?.category || 'ETC'),
+                    CATEGORY_OPTIONS?.find(
+                      (option) => option.value === (place?.category || 'ETC'),
                     )?.label
                   }
                 </S.PlaceCategory>

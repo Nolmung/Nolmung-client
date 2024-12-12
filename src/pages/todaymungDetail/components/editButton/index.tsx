@@ -47,7 +47,7 @@ const EditButton = ({ diaryId, medias }: EditButtonProps) => {
     <S.Wrapper>
       <S.EditArea onClick={handleEditClick}>
         <EditIcon width={16.5} height={16.5} />
-        <S.EditText>저장하기</S.EditText>
+        <S.EditText>수정하기</S.EditText>
       </S.EditArea>
       <S.DeleteArea>
         <DeleteIcon width={18} height={18} />
