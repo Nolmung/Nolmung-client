@@ -7,16 +7,22 @@ import Content from './Content';
 import Filter from './Filter';
 import checkUserDevice from '../../utils/checkUserDevice';
 import useMouseBottomSheet from '../../hooks/useMouseBottomSheet';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { MarkerType } from '../../types';
 import { FilterState, FilterType } from '../../types/filter';
 import { NoResulLiedownUI } from '@/common/components/noResultUI';
 
 type BottomSheetProps = {
   placeMap: MarkerType[];
+  selectedFilter: FilterState;
+  setSelectedFilter: React.Dispatch<React.SetStateAction<FilterState>>;
 };
 
-function BottomSheet({ placeMap }: BottomSheetProps) {
+function BottomSheet({
+  placeMap,
+  selectedFilter,
+  setSelectedFilter,
+}: BottomSheetProps) {
   const device = checkUserDevice();
 
   let bottomSheetRef = useRef<HTMLDivElement>(null);
@@ -36,11 +42,6 @@ function BottomSheet({ placeMap }: BottomSheetProps) {
     bottomSheetRef = sheet;
     contentRef = content;
   }
-
-  const [selectedFilter, setSelectedFilter] = useState<FilterState>({
-    weight: 'ALL',
-    rating: null,
-  });
 
   const handleFilterChange = (type: FilterType, value: string | number) => {
     if (selectedFilter[type] === value) {
