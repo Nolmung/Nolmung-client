@@ -26,6 +26,13 @@ function Dogs() {
   const [neutered, setNeutered] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
   const { mutate: postDogMutate } = usePostDogs();
+  const [isMyDogsAddPage, setIsMyDogsAddPage] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname === ROUTE.MY_DOGS_ADD()) {
+      setIsMyDogsAddPage(true);
+    }
+  }, []);
 
   const handleDateChange = (newValue: Dayjs | null) => {
     setSelectedDate(newValue);
@@ -143,10 +150,15 @@ function Dogs() {
   const handleSubmitClick = async () => {
     postDogMutate(dogData, {
       onSuccess: () => {
-        navigate(ROUTE.MAIN(), {
-          state: { nickname, dogData },
-          replace: true,
-        });
+        isMyDogsAddPage
+          ? navigate(ROUTE.MY_DOGS(), {
+              state: { dogData, nickname },
+              replace: true,
+          })
+          : navigate(ROUTE.MAIN(), {
+              state: { nickname, dogData },
+              replace: true,
+            });
       },
     });
   };
@@ -297,7 +309,7 @@ function Dogs() {
         </div>
       </S.GenderContainer>
       <S.NextButton isActive={NextButtonActive} onClick={handleSubmitClick}>
-        놀멍 시작하기
+        {isMyDogsAddPage ? '반려견 등록하기' : '놀멍 시작하기'}
       </S.NextButton>
     </S.ContainerWrapper>
   );

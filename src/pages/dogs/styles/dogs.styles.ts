@@ -8,7 +8,7 @@ export const S = {
   ContainerWrapper: styled.div`
     padding-left: 30px;
     padding-right: 30px;
-    padding-bottom: 40px;
+    padding-bottom: 120px;
     width: 100%;
     height: calc(100vh - ${HEADER_HEIGHT}px);
     overflow-y: auto;
