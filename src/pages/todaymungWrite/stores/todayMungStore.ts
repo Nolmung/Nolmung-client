@@ -12,6 +12,7 @@ interface TodayMungStore extends PostDiaryRequest {
   deleteMedia: (mediaId: number) => void;
   setPublicYn: (publicYn: boolean) => void;
   deleteTodaymungAll: () => void;
+  deletePlacesAll: () => void;
 }
 
 export const useTodayMungStore = create(
@@ -26,7 +27,12 @@ export const useTodayMungStore = create(
       setTitle: (title: string) => set({ title }),
       setContent: (content: string) => set({ content }),
       addPlaces: (placeId: number) =>
-        set((store) => ({ places: [...(store.places || []), placeId] })),
+        set((store) => ({
+          places: store.places?.includes(placeId)
+            ? store.places // 이미 존재하면 그대로 반환
+            : [...(store.places || []), placeId], // 존재하지 않으면 추가
+        })),
+      deletePlacesAll: () => set({ places: [] }),
       addMedia: (media: Media) =>
         set((store) => ({
           medias: [...(store.medias || []), media].sort(

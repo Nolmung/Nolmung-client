@@ -15,6 +15,7 @@ import LoginPromptModal from '../loginPromptModal';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
 import { ROUTE } from '@/common/constants/route';
+import { useReviewConfirmModalStore } from '@/stores/useReviewConfirmModalStore';
 
 type PathRule = string | RegExp;
 type PathRules = {
@@ -53,6 +54,12 @@ const shouldHide = (key: keyof PathRules, pathname: string): boolean => {
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
+  const { reviewlist } = useReviewStore();
+
+  useEffect(() => {
+    console.log('reviewlist', reviewlist);
+  }, [reviewlist]);
+
   const { openConfirmModal } = useConfirmModalStore();
   const hideHeader = shouldHide(
     'hideHeader',
@@ -79,6 +86,30 @@ function Layout({ children }: LayoutProps) {
   const navigate = useNavigate();
   const { deleteReviewAll } = useReviewStore();
   const { title, content, places, dogs, medias } = useTodayMungStore();
+  const { openReviewConfirmModal } = useReviewConfirmModalStore();
+
+  useEffect(() => {
+    // 뒤로가기 감지 핸들러
+    const handlePopState = () => {
+      if (
+        location.search ||
+        location.pathname.startsWith('/todaymung/placeregist')
+      ) {
+        if (reviewlist.length > 0) {
+          openReviewConfirmModal();
+        }
+      }
+    };
+
+    // 이벤트 리스너 추가
+    window.addEventListener('popstate', handlePopState);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
   useEffect(() => {
     if (location.pathname.startsWith('/todaymung/detail')) {
       setHeaderTitle({
@@ -194,7 +225,9 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          navigate('/todaymung/write');
+          if (reviewlist.length > 0) {
+            openReviewConfirmModal();
+          }
         });
         break;
 
@@ -231,7 +264,7 @@ function Layout({ children }: LayoutProps) {
       default:
         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }
-  }, [location.pathname, location.search]);
+  }, [location.pathname, location.search, reviewlist]);
 
   const { isOpen, close } = useLoginPromptModalStore();
 

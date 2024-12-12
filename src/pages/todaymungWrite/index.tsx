@@ -20,7 +20,6 @@ import { GetTodayReviewResponse } from '@/service/apis/review/index.type';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
-
   const {
     data: todayReviewData,
     isLoading: todayReviewLoading,
