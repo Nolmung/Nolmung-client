@@ -30,6 +30,7 @@ import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import LoginPromptModal from '@/common/components/loginPromptModal';
 import getIsLogin from '@/common/utils/getIsLogin';
+import { FilterState } from './types/filter';
 // import { LoadingNolmungLottie } from '@/common/components/lottie';
 
 function Main() {
@@ -203,8 +204,14 @@ function Main() {
     }
   }, [location.search, mapCenter]);
 
+  const [selectedFilter, setSelectedFilter] = useState<FilterState>({
+    weight: 'ALL',
+    rating: null,
+  });
+
   /** 지도 초기화 이후 카테고리 필터링 또는 검색어로 장소 검색 */
   useEffect(() => {
+    setSelectedFilter({ weight: 'ALL', rating: null });
     const query = new URLSearchParams(window.location.search);
     const categoryFromUrl = query.get('category');
     const searchFromUrl = query.get('search');
@@ -420,10 +427,6 @@ function Main() {
     navigate('/');
   };
 
-  // if (isMapLoading) {
-  //   return <LoadingNolmungLottie />;
-  // }
-
   return (
     <S.Wrapper>
       {isOpen && <LoginPromptModal closeModal={close} />}
@@ -477,7 +480,11 @@ function Main() {
               bottomVisible={bottomSheetVisible}
               bottomHeight={bottomHeight}
             >
-              <BottomSheet placeMap={markerData} />
+              <BottomSheet
+                setSelectedFilter={setSelectedFilter}
+                selectedFilter={selectedFilter}
+                placeMap={markerData}
+              />
             </S.Bottom>
           </S.BottomSheetWrapper>
         </S.Wrapper>
