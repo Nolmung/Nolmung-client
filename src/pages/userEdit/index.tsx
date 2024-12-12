@@ -125,12 +125,14 @@ function UserEdit() {
         placeholder="닉네임을 입력해주세요"
       />
       <S.ContentTitleText>주소</S.ContentTitleText>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
       <S.UserInfoInput
         value={address}
         onChange={(e) => setAddress(e.target.value)}
         placeholder="주소를 입력해주세요"
       />
       <DaumPost setAddress={setAddress} />
+      </div>
       <S.ContentTitleText>생년월일</S.ContentTitleText>
       <DatePicker value={selectedDate} onChange={handleDateChange} />
       <S.ContentTitleText>성별</S.ContentTitleText>
