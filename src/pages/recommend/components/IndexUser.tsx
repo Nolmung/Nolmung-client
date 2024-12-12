@@ -58,14 +58,8 @@ function UserRecommend() {
     return <div>Error...</div>;
   }
 
-  const handleClick = () => {
-    localStorage.clear();
-    window.location.reload();
-  };
-  
   return (
     <S.Wrapper>
-      <div onClick={handleClick}>로컬스토리지 초기화</div>
       {similarBookmarks.length > 0 && (
         <RecommendCard
           title={`${userInfo?.userNickname} 님이 좋아할 만한 공간`}
