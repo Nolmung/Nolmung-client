@@ -97,6 +97,8 @@ function Layout({ children }: LayoutProps) {
       ) {
         if (reviewlist.length > 0) {
           openReviewConfirmModal();
+        } else {
+          navigate('/todaymung/write');
         }
       }
     };
@@ -227,6 +229,8 @@ function Layout({ children }: LayoutProps) {
         setHandleBackButtonClick(() => () => {
           if (reviewlist.length > 0) {
             openReviewConfirmModal();
+          } else {
+            navigate('/todaymung/write');
           }
         });
         break;
