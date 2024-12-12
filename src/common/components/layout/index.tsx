@@ -77,9 +77,8 @@ function Layout({ children }: LayoutProps) {
   );
 
   const navigate = useNavigate();
-  const { reviewlist } = useReviewStore();
+  const { deleteReviewAll } = useReviewStore();
   const { title, content, places, dogs, medias } = useTodayMungStore();
-
   useEffect(() => {
     if (location.pathname.startsWith('/todaymung/detail')) {
       setHeaderTitle({
@@ -178,11 +177,11 @@ function Layout({ children }: LayoutProps) {
             content ||
             dogs.length > 0 ||
             medias.length > 0 ||
-            reviewlist.length > 0 ||
             places.length > 0
           ) {
             openConfirmModal();
           } else {
+            deleteReviewAll();
             navigate('/todaymung');
           }
         });
