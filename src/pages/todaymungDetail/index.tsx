@@ -7,7 +7,7 @@ import DogTagCard from './components/dogTag';
 import TextContent from './components/textContent';
 import ImageCard from './components/imageCard';
 import EditButton from './components/editButton';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTodaymungDetailData } from './queries';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { decodeToken } from '@/common/utils/configToken';
@@ -30,6 +30,8 @@ const TodayMungDetail = () => {
   }
 
   const [editToggle, setEditToggle] = useState(false);
+  const dotRef = useRef<HTMLDivElement | null>(null);
+
   if (isLoading) {
     return <LoadingSpinnerLottie />;
   }
@@ -38,9 +40,24 @@ const TodayMungDetail = () => {
   }
 
   const diaryData: DiaryType = todaymungDetailData.data;
+
   const handleToggleClick = () => {
     setEditToggle(!editToggle);
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dotRef.current && !dotRef.current.contains(event.target as Node)) {
+      setEditToggle(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <S.Wrapper>
@@ -51,10 +68,12 @@ const TodayMungDetail = () => {
             <EditButton diaryId={diaryData.diaryId} medias={diaryData.medias} />
           )}
           {diaryData.userId === editActive && (
-            <DotdotdotIcon
-              onClick={handleToggleClick}
-              fill={editToggle ? '#d9d9d9' : '#080808'}
-            />
+            <div ref={dotRef}>
+              <DotdotdotIcon
+                onClick={handleToggleClick}
+                fill={editToggle ? '#d9d9d9' : '#080808'}
+              />
+            </div>
           )}
         </S.DateArea>
         {diaryData.places.length > 0 && (
