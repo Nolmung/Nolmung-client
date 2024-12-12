@@ -1,5 +1,9 @@
 import { instance } from '..';
-import { GetReviewsParams, PostReviewRequest } from './index.type';
+import {
+  GetReviewsParams,
+  GetTodayReviewResponse,
+  PostReviewRequest,
+} from './index.type';
 
 export const postReviews = async (reviews: PostReviewRequest[]) => {
   const response = await instance.post('/reviews', { reviews: reviews });
@@ -33,4 +37,9 @@ export const getReviews = async ({
 export const deleteReview = async (reviewId: number) => {
   const response = await instance.delete(`/reviews/${reviewId}`);
   return response.status;
+};
+
+export const getTodayReview = async (): Promise<GetTodayReviewResponse[]> => {
+  const response = await instance.get('/reviews/today');
+  return response.data.data;
 };

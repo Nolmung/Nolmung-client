@@ -27,7 +27,12 @@ export const useReviewStore = create(
       setSingleReview: () => set({}),
       addReviewList: (reviews: Review) =>
         set((store) => ({
-          reviewlist: [...store.reviewlist, reviews],
+          reviewlist: [
+            ...store.reviewlist.filter(
+              (review) => review.placeId !== reviews.placeId, // 중복 제거 조건
+            ),
+            reviews,
+          ],
         })),
       deleteReview: (placeId: number) =>
         set((store) => ({

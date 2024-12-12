@@ -171,6 +171,23 @@ const S = {
     flex-direction: row;
     gap: 10px;
   `,
+  ConfirmModalContent: styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+  `,
+  ConfirmModalTitle: styled.p`
+    color: #080808;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 16px;
+    text-align: center;
+  `,
 };
 
 export default S;

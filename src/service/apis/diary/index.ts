@@ -11,10 +11,10 @@ export const postTodaymung = async (todaymung: PostDiaryRequest) => {
   return response.status;
 };
 
-
-export const patchTodaymung = async (todaymung: EditDiaryRequest, diaryId: number) => {
+export const patchTodaymung = async (
+  todaymung: EditDiaryRequest,
+  diaryId: number,
+) => {
   const response = await instance.patch(`/diary/${diaryId}`, todaymung);
   return response.status;
 };
-
-

@@ -13,11 +13,18 @@ import { useTodayMungStore } from './stores/todayMungStore';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import Modal from '@/common/components/modal';
 import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
+import { useGetTodayReview } from '../todaymungPlaceRegist/queries';
+import { toast } from 'react-toastify';
+import { LoadingSpinnerLottie } from '@/common/components/lottie';
+import { GetTodayReviewResponse } from '@/service/apis/review/index.type';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
-
-  const { reviewlist } = useReviewStore();
+  const {
+    data: todayReviewData,
+    isLoading: todayReviewLoading,
+    isError: todayReviewError,
+  } = useGetTodayReview();
   const { title, content, dogs } = useTodayMungStore();
 
   const { data: dogsData } = useGetDogs();
@@ -41,7 +48,7 @@ function TodayMungWrite() {
             : '을 작성해주세요.'
         }`;
 
-        alert(alertMessage);
+        toast.error(alertMessage);
         return;
       }
     }
@@ -55,6 +62,9 @@ function TodayMungWrite() {
   const { isConfirmModalOpen, closeConfirmModal } = useConfirmModalStore();
   const { deleteReviewAll } = useReviewStore();
   const { deleteTodaymungAll } = useTodayMungStore();
+
+  if (todayReviewLoading) return <LoadingSpinnerLottie />;
+  if (todayReviewError) return <div>오늘의 리뷰를 불러오지 못했습니다.</div>;
 
   return (
     <>
@@ -107,16 +117,17 @@ function TodayMungWrite() {
             <S.Title>장소</S.Title>
             <S.PlaceWrapper>
               <S.PlaceCardWrapper>
-                {reviewlist &&
-                  reviewlist.map((mock, index) => (
+                {(todayReviewData as GetTodayReviewResponse[]).map(
+                  (data, index) => (
                     <VisitedPlaceCard
-                      key={index}
-                      category={mock.category}
-                      placeName={mock.placeName}
-                      roadAddress={mock.roadAddress}
-                      rating={mock.rating}
+                      key={`${data.placeId}-${index}`}
+                      category={data.category}
+                      placeName={data.placeName}
+                      roadAddress={data.address}
+                      rating={data.rating}
                     />
-                  ))}
+                  ),
+                )}
                 <S.PlaceAddButton onClick={navigateToTodaymungPlaceRegist}>
                   <PlusIcon width={20} height={20} />
                 </S.PlaceAddButton>

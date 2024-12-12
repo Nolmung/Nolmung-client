@@ -21,6 +21,8 @@ import useModal from '@/common/hooks/useModal';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { PostReviewRequest } from '@/service/apis/review/index.type';
 import { usePostReviews } from '../todaymungWrite/queries';
+import { useReviewConfirmModalStore } from '@/stores/useReviewConfirmModalStore';
+import { useTodayMungStore } from '../todaymungWrite/stores/todayMungStore';
 
 export interface SearchHistoryItem {
   id: number;
@@ -31,6 +33,7 @@ export interface SearchHistoryItem {
 function TodayMungPlaceRegist() {
   useSetDocumentTitle('오늘멍 장소 등록');
   const { isOpen, openModal, closeModal } = useModal();
+
   const location = useLocation();
   const navigate = useNavigate();
   const { mutate: reviewMutate } = usePostReviews();
@@ -105,130 +108,183 @@ function TodayMungPlaceRegist() {
       reviewMutate(reviewRequestList);
     }
   };
+  const { deleteTodaymungAll } = useTodayMungStore();
+  const { deleteReviewAll } = useReviewStore();
+  const { isReviewConfirmModalOpen, closeReviewConfirmModal } =
+    useReviewConfirmModalStore();
 
+  useEffect(() => {
+    console.log(isReviewConfirmModalOpen);
+  }, [isReviewConfirmModalOpen]);
   if (isLoading) return <LoadingSpinnerLottie />;
   if (error) return <div>에러 발생</div>;
 
   return (
-    <S.Wrapper
-      addPadding={reviewlist.length > 0}
-      ref={scrollRef}
-      className="scroll-container"
-    >
-      {isOpen && (
-        <Modal isOpen={isOpen} closeModal={closeModal}>
-          <S.ModalContent>
-            모두 지우시겠습니까?
-            <S.ModalButtonWrapper>
-              <Button
-                fontSize="18px"
-                fontWeight="500"
-                onClick={() => closeModal()}
-              >
-                아니오
-              </Button>
-              <Button
-                fontSize="18px"
-                fontWeight="700"
-                backgroundColor="#D3FBD4"
-                onClick={handleModalYesButtonClick}
-              >
-                예
-              </Button>
-            </S.ModalButtonWrapper>
-          </S.ModalContent>
-        </Modal>
-      )}
-      <S.SearchInputWrapper>
-        <SearchInput
-          value={searchKeyword}
-          onChange={(e) => setSearchKeyword(e.target.value)}
-          inputRef={inputRef}
-          autofocus={true}
-          onClick={() => handleSearch()}
-        />
-      </S.SearchInputWrapper>
+    <>
+      <S.Wrapper
+        addPadding={reviewlist.length > 0}
+        ref={scrollRef}
+        className="scroll-container"
+      >
+        {isReviewConfirmModalOpen && (
+          <Modal
+            isOpen={isReviewConfirmModalOpen}
+            closeModal={closeReviewConfirmModal}
+          >
+            <S.ConfirmModalContent>
+              <S.ConfirmModalTitle>
+                작성하신 리뷰는 등록되지 않습니다. <br />
+                정말로 나가시겠습니까?
+              </S.ConfirmModalTitle>
+              <S.ModalButtonWrapper>
+                <Button
+                  width="110px"
+                  height="44px"
+                  borderRadius="30px"
+                  fontSize="16px"
+                  fontWeight="500"
+                  onClick={closeReviewConfirmModal}
+                >
+                  취소
+                </Button>
+                <Button
+                  width="110px"
+                  height="44px"
+                  backgroundColor="#17AA1A"
+                  color="#fff"
+                  borderRadius="30px"
+                  fontSize="16px"
+                  fontWeight="500"
+                  onClick={() => {
+                    deleteReviewAll();
+                    deleteTodaymungAll();
+                    closeReviewConfirmModal();
+                    navigate(ROUTE.TODAYMUNG_WRITE());
+                  }}
+                >
+                  나가기
+                </Button>
+              </S.ModalButtonWrapper>
+            </S.ConfirmModalContent>
+          </Modal>
+        )}
+        {isOpen && (
+          <Modal isOpen={isOpen} closeModal={closeModal}>
+            <S.ModalContent>
+              모두 지우시겠습니까?
+              <S.ModalButtonWrapper>
+                <Button
+                  fontSize="18px"
+                  fontWeight="500"
+                  onClick={() => closeModal()}
+                >
+                  아니오
+                </Button>
+                <Button
+                  fontSize="18px"
+                  fontWeight="700"
+                  backgroundColor="#D3FBD4"
+                  onClick={handleModalYesButtonClick}
+                >
+                  예
+                </Button>
+              </S.ModalButtonWrapper>
+            </S.ModalContent>
+          </Modal>
+        )}
+        <S.SearchInputWrapper>
+          <SearchInput
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+            inputRef={inputRef}
+            autofocus={true}
+            onClick={() => handleSearch()}
+          />
+        </S.SearchInputWrapper>
 
-      {!searchParams && (
-        <>
-          <S.Menu>
-            최근 검색어
-            <S.ClearAllButton onClick={handleClearHistory}>
-              전체삭제
-            </S.ClearAllButton>
-          </S.Menu>
-          <S.SearchHistoryList>
-            {searchHistory.length > 0 ? (
-              <>
-                {searchHistory.map((item) => (
-                  <S.SearchHistory key={item.id}>
-                    <TimeRecord width={20} height={20} />
-                    <S.TimeIconTextWrapper
-                      onClick={() => handleSearch(item.keyword)}
-                    >
-                      {item.keyword}
-                    </S.TimeIconTextWrapper>
-                    <S.CancelIconDateWrapper>
-                      {item.createdAt}
-                      <CancelIcon
-                        width={18}
-                        height={18}
-                        onClick={() => handleDeleteKeyword(item.id)}
-                      />
-                    </S.CancelIconDateWrapper>
-                  </S.SearchHistory>
-                ))}
-              </>
-            ) : (
-              <S.NoResultWrapper>
-                <LiedownDog width={240} />
-                <S.NoResultSubText>최근 검색 기록이 없다 멍!</S.NoResultSubText>
-              </S.NoResultWrapper>
-            )}
-          </S.SearchHistoryList>
-        </>
-      )}
+        {!searchParams && (
+          <>
+            <S.Menu>
+              최근 검색어
+              <S.ClearAllButton onClick={handleClearHistory}>
+                전체삭제
+              </S.ClearAllButton>
+            </S.Menu>
+            <S.SearchHistoryList>
+              {searchHistory.length > 0 ? (
+                <>
+                  {searchHistory.map((item) => (
+                    <S.SearchHistory key={item.id}>
+                      <TimeRecord width={20} height={20} />
+                      <S.TimeIconTextWrapper
+                        onClick={() => handleSearch(item.keyword)}
+                      >
+                        {item.keyword}
+                      </S.TimeIconTextWrapper>
+                      <S.CancelIconDateWrapper>
+                        {item.createdAt}
+                        <CancelIcon
+                          width={18}
+                          height={18}
+                          onClick={() => handleDeleteKeyword(item.id)}
+                        />
+                      </S.CancelIconDateWrapper>
+                    </S.SearchHistory>
+                  ))}
+                </>
+              ) : (
+                <S.NoResultWrapper>
+                  <LiedownDog width={240} />
+                  <S.NoResultSubText>
+                    최근 검색 기록이 없다 멍!
+                  </S.NoResultSubText>
+                </S.NoResultWrapper>
+              )}
+            </S.SearchHistoryList>
+          </>
+        )}
 
-      {searchParams && (
-        <SearchList
-          searchParams={searchParams}
-          data={data || []}
-          scrollRef={scrollRef}
-          keywordReviewVisibleId={keywordReviewVisibleId}
-          setKeywordReviewVisibleId={setKeywordReviewVisibleId}
-        />
-      )}
+        {searchParams && (
+          <SearchList
+            searchParams={searchParams}
+            data={data || []}
+            scrollRef={scrollRef}
+            keywordReviewVisibleId={keywordReviewVisibleId}
+            setKeywordReviewVisibleId={setKeywordReviewVisibleId}
+          />
+        )}
 
-      <S.VisitedPlaceCard>
-        {reviewlist.map((review) => (
-          <S.CardWrapper key={review.placeId}>
-            <S.IconWrapper onClick={() => deleteReview(review.placeId)}>
-              <CancelIcon width={10} />
-            </S.IconWrapper>
-            <VisitedPlaceCard
-              category={review.category}
-              placeName={review.placeName}
-              roadAddress={review.roadAddress}
-              rating={review.rating}
-            />
-          </S.CardWrapper>
-        ))}
-      </S.VisitedPlaceCard>
-      <S.ButtonWrapper>
-        <Button
-          width="110px"
-          height="44px"
-          backgroundColor="#080808"
-          color="#fff"
-          borderRadius="30px"
-          fontSize="16px"
-          fontWeight="500"
-          onClick={handleCompleteButtonClick}
-        >
-          리뷰 등록
-        </Button>
-      </S.ButtonWrapper>
-    </S.Wrapper>
+        <S.VisitedPlaceCard>
+          {reviewlist.map((review) => (
+            <S.CardWrapper key={review.placeId}>
+              <S.IconWrapper onClick={() => deleteReview(review.placeId)}>
+                <CancelIcon width={10} />
+              </S.IconWrapper>
+              <VisitedPlaceCard
+                category={review.category}
+                placeName={review.placeName}
+                roadAddress={review.roadAddress}
+                rating={review.rating}
+              />
+            </S.CardWrapper>
+          ))}
+        </S.VisitedPlaceCard>
+        <S.ButtonWrapper>
+          <Button
+            width="110px"
+            height="44px"
+            backgroundColor="#080808"
+            color="#fff"
+            borderRadius="30px"
+            fontSize="16px"
+            fontWeight="500"
+            onClick={handleCompleteButtonClick}
+          >
+            리뷰 등록
+          </Button>
+        </S.ButtonWrapper>
+      </S.Wrapper>
+    </>
   );
 }
 
