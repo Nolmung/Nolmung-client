@@ -22,8 +22,8 @@ export const LoadingSkeletonLottie = () => {
 
 export const LoadingNolmungLottie = () => {
   return (
-    <S.Wrapper backgroundcolor={'#9EF99F'}>
+    <S.NolmungWrapper backgroundcolor={'#9EF99F'}>
       <Lottie animationData={NolmungLottie} height={50} width={30} />
-    </S.Wrapper>
+    </S.NolmungWrapper>
   );
 };
