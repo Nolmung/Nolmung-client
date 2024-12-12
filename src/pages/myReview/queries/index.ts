@@ -14,7 +14,6 @@ export const useGetReviews = () => {
     getNextPageParam: (lastPage) => {
       return lastPage.hasNext ? lastPage.page + 1 : undefined;
     },
-    staleTime: 1000 * 60 * 5,
     retry: 2,
   });
 };
