@@ -2,6 +2,7 @@ import S from './index.styles';
 import kakaoIcon from '@/assets/images/pngs/kakao_icon_image.png';
 import {
   HeartIcon,
+  KakaoChannelIcon,
   LogoutIcon,
   NoticeIcon,
   ReviewListIcon,
@@ -40,6 +41,11 @@ function Mypage() {
     localStorage.removeItem('accessToken');
     navigate(ROUTE.LOGIN());
   };
+
+  const handleChannelClick = () => {
+    window.open('http://pf.kakao.com/_iMxbdn');
+  }
+
   return (
     <S.Wrapper>
       <S.ProfileWrapper>
@@ -91,16 +97,21 @@ function Mypage() {
         </S.PetProfileWrapper>
       </S.ProfileWrapper>
       <S.ListWrapper>
-        <S.ListContainer onClick={handleResearchClick}>
-          <NoticeIcon width={20} height={20} />
-          설문
-        </S.ListContainer>
         <S.ListContainer onClick={() => navigate('/my/favorite')}>
           <HeartIcon width={19} height={19} />
           즐겨찾기 목록
         </S.ListContainer>
         <S.ListContainer onClick={navigateToMyReview}>
-          <ReviewListIcon width={19} height={19} />내 리뷰 모아보기
+          <ReviewListIcon width={19} height={19} />
+          내 리뷰 모아보기
+        </S.ListContainer>
+        <S.ListContainer onClick={handleResearchClick}>
+          <NoticeIcon width={20} height={20} />
+          설문
+        </S.ListContainer>
+        <S.ListContainer onClick={handleChannelClick}>
+          <KakaoChannelIcon width={19} height={19} />
+          카카오톡 채널
         </S.ListContainer>
         <S.ListContainer onClick={handleLoginClick}>
           <LogoutIcon width={19} height={19} />
