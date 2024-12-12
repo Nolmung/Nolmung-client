@@ -63,7 +63,7 @@ function Detail() {
   const { mutate: addBookmarks } = usePostBookmarks();
 
   const handleBackArrowClick = () => {
-    navigate(ROUTE.MAIN());
+    window.history.back();
   };
 
   const handleViewMoreButtonClick = () => {
