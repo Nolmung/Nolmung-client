@@ -81,7 +81,7 @@ function Layout({ children }: LayoutProps) {
 
   const navigate = useNavigate();
   const { deleteReviewAll } = useReviewStore();
-  const { title, content, places, dogs, medias } = useTodayMungStore();
+  const { title, content, dogs, medias } = useTodayMungStore();
   const { openReviewConfirmModal } = useReviewConfirmModalStore();
 
   useEffect(() => {
@@ -149,7 +149,7 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          window.history.back();
+          navigate(ROUTE.MAIN());
         });
 
         break;
@@ -204,13 +204,7 @@ function Layout({ children }: LayoutProps) {
           type: 'TitleCenter',
         });
         setHandleBackButtonClick(() => () => {
-          if (
-            title ||
-            content ||
-            dogs.length > 0 ||
-            medias.length > 0 ||
-            places.length > 0
-          ) {
+          if (title || content || dogs.length > 0 || medias.length > 0) {
             openConfirmModal();
           } else {
             deleteReviewAll();
