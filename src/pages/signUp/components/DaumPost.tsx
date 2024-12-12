@@ -42,6 +42,9 @@ const DaumPost: React.FC<DaumPostProps> = ({ setAddress }) => {
       style={{
         marginLeft: '10px',
         height: '44px',
+        width: '32%',
+        display: 'flex',
+        flexWrap: 'nowrap',
         padding: '10px 22px',
         backgroundColor: '#5E5E5E', // 버튼 배경색
         color: '#ffffff', // 텍스트 색상
