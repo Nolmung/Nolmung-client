@@ -16,7 +16,7 @@ function MyFavorite() {
   const navigate = useNavigate();
 
   const { data: placeMap } = useGetBookmarks(currentCategory);
-  const { mutate } = useDeleteBookmarks();
+  const { mutate: deleteBookmarks } = useDeleteBookmarks();
 
   const handleCategoryClick = (value: BookmarkCategory) => {
     navigate(ROUTE.MYFAVORITE() + `?mycategory=${value}`);
@@ -27,7 +27,7 @@ function MyFavorite() {
     id: number,
   ) => {
     e.stopPropagation();
-    mutate(id);
+    deleteBookmarks(id);
   };
 
   const navigateToDetail = (placeId: number) => {
@@ -67,7 +67,7 @@ function MyFavorite() {
           placeMap.map((place: Bookmark) => (
             <S.PlaceCard
               onClick={() => navigateToDetail(place.placeId)}
-              key={place.bookmarkId}
+              key={place.placeId}
             >
               <S.ImageWrapper>
                 <S.PlaceImage src={place.placeImageUrl} alt={place.name} />
