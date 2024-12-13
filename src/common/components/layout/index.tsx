@@ -31,6 +31,7 @@ const pathRules: PathRules = {
     '/login',
     '/recommend',
     /\?cur=main/,
+    // '/todaymung',
   ], // Header를 숨길 경로들
   hideTabBar: [
     /^\/detail\/\d+$/,

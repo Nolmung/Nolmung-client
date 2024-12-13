@@ -260,18 +260,22 @@ function DogsEdit() {
           <S.GenderWrapper>
             <S.GenderSelect
               $isSelected={gender === '수컷' || dogData.gender === 'MALE'}
-              onClick={() => {
-                setGender('수컷');
-                setDogData((prev) => ({ ...prev, gender: 'MALE' }));
+              onPointerDown={() => {
+                if (gender !== '수컷') {
+                  setGender('수컷');
+                  setDogData((prev) => ({ ...prev, gender: 'MALE' }));
+                }
               }}
             >
               수컷
             </S.GenderSelect>
             <S.GenderSelect
               $isSelected={gender === '암컷' || dogData.gender === 'FEMALE'}
-              onClick={() => {
-                setGender('암컷');
-                setDogData((prev) => ({ ...prev, gender: 'FEMALE' }));
+              onPointerDown={() => {
+                if (gender !== '암컷') {
+                  setGender('암컷');
+                  setDogData((prev) => ({ ...prev, gender: 'FEMALE' }));
+                }
               }}
             >
               암컷
@@ -283,7 +287,8 @@ function DogsEdit() {
           <S.GenderWrapper>
             <S.GenderSelect
               $isSelected={neutered === '예' || dogData.neuterYn === true}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setNeutered('예');
                 setDogData((prev) => ({ ...prev, neuterYn: true }));
               }}
@@ -292,7 +297,8 @@ function DogsEdit() {
             </S.GenderSelect>
             <S.GenderSelect
               $isSelected={neutered === '아니오' || dogData.neuterYn === false}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setNeutered('아니오');
                 setDogData((prev) => ({ ...prev, neuterYn: false }));
               }}

@@ -23,6 +23,20 @@ const TodayMungDetail = () => {
     isError,
   } = useTodaymungDetailData(numericDiaryId);
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dotRef.current && !dotRef.current.contains(event.target as Node)) {
+      setEditToggle(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   if (getIsLogin()) {
     const token = localStorage.getItem('accessToken');
     const { id: postUserId } = decodeToken(token);
@@ -44,20 +58,6 @@ const TodayMungDetail = () => {
   const handleToggleClick = () => {
     setEditToggle(!editToggle);
   };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (dotRef.current && !dotRef.current.contains(event.target as Node)) {
-      setEditToggle(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
 
   return (
     <S.Wrapper>
