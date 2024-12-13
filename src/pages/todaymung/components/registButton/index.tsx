@@ -11,8 +11,8 @@ const RegistButton = ({ active }: RegistButtonProps) => {
   const navigate = useNavigate();
   const navigateToTodaymungWrite = () => {
     active
-      ? navigate(ROUTE.TODAYMUNG_WRITE())
-      : toast.error('이미 작성하신 오늘멍이 있습니다 !');
+      ? toast.error('이미 작성하신 오늘멍이 있습니다 !')
+      : navigate(ROUTE.TODAYMUNG_WRITE());
   };
   return (
     <S.TodaymungInsertButton
