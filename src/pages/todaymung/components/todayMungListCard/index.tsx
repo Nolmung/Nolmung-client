@@ -10,6 +10,11 @@ const TodayMungListCard = ({ listData, data }: ListCardProps) => {
   const handleListClick = () => {
     navigate(`/todaymung/detail/${data.diaryId}`);
   };
+
+  const imageUrl =
+    data.mediaList?.find((media) => media.mediaType === 'IMAGE')?.mediaUrl ||
+    '/svgs/todayMungDefaultImage.svg';
+
   return (
     <S.Wrap onClick={handleListClick}>
       <S.UserInfoArea>
@@ -24,10 +29,10 @@ const TodayMungListCard = ({ listData, data }: ListCardProps) => {
           <S.ContentTitle>{data.title}</S.ContentTitle>
           <S.ContentDescription>{data.content}</S.ContentDescription>
         </S.ContentTextArea>
-        {data.mediaUrl && (
+        {data && (
           <S.ContentImgArea>
             <S.ContentImg
-              src={data.mediaUrl}
+              src={imageUrl}
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
                   '/svgs/todayMungDefaultImage.svg';
