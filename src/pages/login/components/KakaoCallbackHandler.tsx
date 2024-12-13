@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { instance } from '@/service/apis';
 
 function KakaoCallbackHandler() {
   const navigate = useNavigate();
@@ -17,14 +17,12 @@ function KakaoCallbackHandler() {
           return;
         }
 
-        const response = await axios.get(
-          `https://dev.nolmung.org/v1/oauth/kakao/login?id=${id}`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
+        const response = await instance.get(`/oauth/kakao/login?id=${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
+        });
+
         if (response.data.data) {
           localStorage.setItem(
             'accessToken',
@@ -33,7 +31,6 @@ function KakaoCallbackHandler() {
         }
 
         const { loginStatus, id: userId, email, role } = response.data.data;
-
         if (loginStatus === 'LOGIN_SUCCESS' && role === 'USER') {
           navigate('/');
         } else if (loginStatus === 'SIGN_UP_REQUIRED' && role === 'GUEST') {
