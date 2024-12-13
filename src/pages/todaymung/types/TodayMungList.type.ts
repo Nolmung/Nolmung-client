@@ -1,18 +1,27 @@
-export interface ListDataType {
+export interface MediaType {
+  mediaId: number;
+  mediaType: string;
+  mediaUrl: string;
+}
 
-  user: {
-    userId: number;
-    profileImageUrl: string;
-    nickname: string;
-  };
-  diaries: Array<{
-    diaryId: number;
-    title: string;
-    content: string;
-    publicYn: boolean;
-    createdAt: string;
-    mediaUrl: string;
-  }>;
+export interface DiaryType {
+  diaryId: number;
+  title: string;
+  content: string;
+  publicYn: boolean;
+  createdAt: string;
+  mediaList?: MediaType[];
+}
+
+export interface UserType {
+  userId: number;
+  profileImageUrl: string;
+  nickname: string;
+}
+
+export interface ListDataType {
+  user: UserType;
+  diaries: DiaryType[];
 }
 
 export interface ListDataProps {
@@ -20,39 +29,14 @@ export interface ListDataProps {
 }
 
 export interface CalendarDataProps {
-  diaries: Array<{
-    diaryId: number;
-    title: string;
-    content: string;
-    publicYn: boolean;
-    createdAt: string;
-    mediaUrl: string;
-  }>;
+  diaries: DiaryType[];
 }
 
 export interface ListCardProps {
-  data: {
-    diaryId: number;
-    title: string;
-    content: string;
-    publicYn: boolean;
-    createdAt: string;
-    mediaUrl: string;
-  };
+  data: DiaryType;
   listData: {
-    user: {
-      userId: number;
-      profileImageUrl: string;
-      nickname: string;
-    };
+    user: UserType;
   };
 }
 
-export interface DetailProps {
-  diaryId: number;
-  title: string;
-  content: string;
-  publicYn: boolean;
-  createdAt: string;
-  mediaUrl: string;
-}
+export interface DetailProps extends DiaryType {}
