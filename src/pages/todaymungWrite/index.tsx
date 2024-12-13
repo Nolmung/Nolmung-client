@@ -26,8 +26,7 @@ function TodayMungWrite() {
     isLoading: todayReviewLoading,
     isError: todayReviewError,
   } = useGetTodayReview();
-  const { title, content, dogs, addPlaces, places, medias, publicYn } =
-    useTodayMungStore();
+  const { title, content, dogs, addPlaces } = useTodayMungStore();
   useEffect(() => {
     todayReviewData?.map((data) => addPlaces(data.placeId));
   }, [todayReviewData]);
