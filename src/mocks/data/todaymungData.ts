@@ -3,38 +3,47 @@ export const todaymungData = {
   message: '일기 조회에 성공하였습니다.',
   data: {
     user: {
-      userId: 1,
+      userId: 2,
       profileImageUrl:
         'http://k.kakaocdn.net/dn/p2aTu/btsKNuhIyc0/MpTPECq8epgPj3yTA2vHu1/img_640x640.jpg',
       nickname: '혜원짱',
     },
     diaries: [
       {
-        diaryId: 5,
-        title: '세번째 일기입니다',
-        content:
-          '예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요예삐랑 눈사람 만들었어요',
+        diaryId: 30,
+        title: '강쥐들이랑',
+        content: '재미난하루',
         publicYn: true,
-        createdAt: '2024.12.29',
-        mediaUrl:
-          'http://k.kakaocdn.net/dn/p2aTu/btsKNuhIyc0/MpTPECq8epgPj3yTA2vHu1/img_640x640.jpg',
+        createdAt: '2024.12.13',
+        mediaList: [
+          {
+            mediaId: 58,
+            mediaType: 'VIDEO',
+            mediaUrl:
+              'https://nolmung.s3.ap-northeast-2.amazonaws.com/todaymungs/1734049342605_IMG_8554.mov',
+          },
+          {
+            mediaId: 64,
+            mediaType: 'IMAGE',
+            mediaUrl:
+              'https://nolmung.s3.ap-northeast-2.amazonaws.com/todaymungs/1733990530725_IMG_3382.jpeg',
+          },
+        ],
       },
       {
-        diaryId: 4,
-        title: '집에서 놀기',
-        content: '오늘은 집에서 맛있는 것을 먹었어요.',
-        publicYn: false,
-        createdAt: '2024.12.28',
-        mediaUrl: '',
-      },
-      {
-        diaryId: 3,
-        title: '우리 강아지와의 행복한 하루',
-        content: '오늘은 강아지들과 공원에 갔어요.',
+        diaryId: 26,
+        title: '오늘은 칸쵸랑 다녀왔어요',
+        content: '나들이 갔다왔어용',
         publicYn: true,
-        createdAt: '2024.12.04',
-        mediaUrl:
-          'http://k.kakaocdn.net/dn/p2aTu/btsKNuhIyc0/MpTPECq8epgPj3yTA2vHu1/img_640x640.jpg',
+        createdAt: '2024.12.12',
+        mediaList: [
+          {
+            mediaId: 57,
+            mediaType: 'VIDEO',
+            mediaUrl:
+              'https://nolmung.s3.ap-northeast-2.amazonaws.com/todaymungs/1734009208437__talkv_wwJjMRgdpP_QTwPBlG0C9BcmZUeplKZK1_talkv_high.mp4',
+          },
+        ],
       },
     ],
   },
