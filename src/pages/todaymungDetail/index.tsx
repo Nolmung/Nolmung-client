@@ -64,17 +64,20 @@ const TodayMungDetail = () => {
       <S.Container>
         <S.DateArea>
           <S.DiaryCreatedAt>{diaryData.createdAt}</S.DiaryCreatedAt>
-          {editToggle && (
-            <EditButton diaryId={diaryData.diaryId} medias={diaryData.medias} />
-          )}
-          {diaryData.userId === editActive && (
-            <div ref={dotRef}>
+          <div ref={dotRef}>
+            {editToggle && (
+              <EditButton
+                diaryId={diaryData.diaryId}
+                medias={diaryData.medias}
+              />
+            )}
+            {diaryData.userId === editActive && (
               <DotdotdotIcon
                 onClick={handleToggleClick}
                 fill={editToggle ? '#d9d9d9' : '#080808'}
               />
-            </div>
-          )}
+            )}
+          </div>
         </S.DateArea>
         {diaryData.places.length > 0 && (
           <S.PlaceArea>
