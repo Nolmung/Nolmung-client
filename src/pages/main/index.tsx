@@ -119,7 +119,7 @@ function Main() {
         const mapOptions: naver.maps.MapOptions = {
           center: center,
           zoom: 14,
-          minZoom: 10,
+          minZoom: 8,
           maxZoom: 18,
           baseTileOpacity: 0.8, //지도 투명도 조절
         };
