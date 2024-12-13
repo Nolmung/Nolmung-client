@@ -36,8 +36,10 @@ function renderDayWithMarker(
 
   const dateKey = day.format('YYYY.MM.DD');
   const diary = diaries.find((entry) => entry.createdAt === dateKey);
-  const markerUrl = diary?.mediaUrl;
-  const isTruthy = markerUrl !== undefined || markerUrl === null;
+  const imageUrl =
+    diary?.mediaList?.find((media) => media.mediaType === 'IMAGE')?.mediaUrl ||
+    '/svgs/todayMungDefaultImage.svg';
+  const isTruthy = !!diary;
   const isToday = day.isSame(dayjs(), 'day');
   const navigate = useNavigate();
 
@@ -62,9 +64,9 @@ function renderDayWithMarker(
       {diary && (
         <S.MarkerWrapper>
           <S.MarkerOverlay />
-          {markerUrl ? (
+          {diary ? (
             <S.MarkerImage
-              src={markerUrl}
+              src={imageUrl}
               alt="Marker"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
