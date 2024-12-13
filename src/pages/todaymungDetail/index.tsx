@@ -8,7 +8,7 @@ import TextContent from './components/textContent';
 import ImageCard from './components/imageCard';
 import EditButton from './components/editButton';
 import { useState, useEffect, useRef } from 'react';
-import { useTodaymungDetailData } from './queries';
+import { useGetTodaymungDetailData } from './queries';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { decodeToken } from '@/common/utils/configToken';
 import getIsLogin from '@/common/utils/getIsLogin';
@@ -21,7 +21,7 @@ const TodayMungDetail = () => {
     data: todaymungDetailData,
     isLoading,
     isError,
-  } = useTodaymungDetailData(numericDiaryId);
+  } = useGetTodaymungDetailData(numericDiaryId);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (dotRef.current && !dotRef.current.contains(event.target as Node)) {

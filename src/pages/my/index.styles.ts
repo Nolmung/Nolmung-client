@@ -8,7 +8,7 @@ const S = {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: calc(100vh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
+    height: calc(100dvh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
     box-sizing: border-box;
     overflow-y: auto;
     padding-bottom: 30px;
@@ -79,11 +79,11 @@ const S = {
   PetProfilePlusButton: styled.button`
     all: unset;
     cursor: pointer;
-    margin-bottom: 13px;
     font-size: 12px;
     font-weight: 500;
     color: #898989;
     margin-left: auto;
+    margin-bottom: 8px;
     &:hover {
       opacity: 0.8;
     }

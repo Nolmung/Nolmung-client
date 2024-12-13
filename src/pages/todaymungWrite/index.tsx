@@ -17,6 +17,7 @@ import { useGetTodayReview } from '../todaymungPlaceRegist/queries';
 import { toast } from 'react-toastify';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { GetTodayReviewResponse } from '@/service/apis/review/index.type';
+import { useEffect } from 'react';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
@@ -25,8 +26,10 @@ function TodayMungWrite() {
     isLoading: todayReviewLoading,
     isError: todayReviewError,
   } = useGetTodayReview();
-  const { title, content, dogs } = useTodayMungStore();
-
+  const { title, content, dogs, addPlaces } = useTodayMungStore();
+  useEffect(() => {
+    todayReviewData?.map((data) => addPlaces(data.placeId));
+  }, [todayReviewData]);
   const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary();
 

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const S = {
   Wrapper: styled.div`
     width: 100%;
-    height: calc(100vh - ${BOTTOM_NAV_HEIGHT}px);
+    height: calc(100dvh - ${BOTTOM_NAV_HEIGHT}px);
     padding: 0 0 0 22px;
     display: flex;
     flex-direction: column;

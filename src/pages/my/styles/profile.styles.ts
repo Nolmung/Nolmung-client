@@ -37,7 +37,7 @@ const S = {
     width: ${({ width }) => `${width}px`};
     height: ${({ height }) => `${height}px`};
     border-radius: 50%;
-    object-fit: contain;
+    object-fit: cover;
   `,
   ProfileTextWrapper: styled.div`
     display: flex;
@@ -49,6 +49,7 @@ const S = {
     flex-shrink: 0;
     font-size: 16px;
     font-weight: 500;
+    color: black;
   `,
   ProfileLabelWrapper: styled.div`
     width: fit-content;
