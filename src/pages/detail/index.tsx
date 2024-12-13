@@ -168,14 +168,15 @@ function Detail() {
       <S.PlaceDetailWrapper>
         <S.PlaceDetail>
           <Time width={18} height={18} />
-          {openingHour?.length == 1 ? (
-            <>{openingHour[0]}</>
-          ) : (
-            <>
-              <S.PlaceDetailMenu>{openingHour[0]}</S.PlaceDetailMenu>
-              {openingHour[1]}
-            </>
-          )}
+          {openingHour &&
+            (openingHour?.length == 1 ? (
+              openingHour[0] && <>{openingHour[0]}</>
+            ) : (
+              <>
+                <S.PlaceDetailMenu>{openingHour[0]}</S.PlaceDetailMenu>
+                {openingHour[1]}
+              </>
+            ))}
         </S.PlaceDetail>
         <S.PlaceDetail style={{ marginBottom: '30px' }}>
           <Time width={18} height={18} />
