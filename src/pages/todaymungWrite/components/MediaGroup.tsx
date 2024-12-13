@@ -75,6 +75,7 @@ function MediaGroup() {
       deleteMedia(mediaId);
     }
   };
+  console.log(medias);
 
   return (
     <S.Wrapper>
@@ -83,7 +84,29 @@ function MediaGroup() {
       </S.AddMediaButton>
       {medias?.map((media) => (
         <S.MediaWrapper key={media.mediaId}>
-          <S.Media src={media.mediaUrl!} />
+          {media.mediaType === 'IMAGE' && (
+            <S.Media
+              // src={media.mediaUrl!}
+              src={media.mediaUrl!}
+              alt="Uploaded Image"
+              onError={(e) =>
+                (e.currentTarget.src = '/svgs/todayMungDefaultImage.svg')
+              }
+            />
+          )}
+          {media.mediaType === 'VIDEO' && (
+            <S.Media
+              as="video"
+              controls
+              onError={(e) => {
+                const videoElement = e.currentTarget;
+                videoElement.poster = '/svgs/todayMungDefaultImage.svg'; // 대체 이미지를 설정
+                videoElement.controls = false;
+              }}
+            >
+              <source src={media.mediaUrl!} type="video/mp4" />
+            </S.Media>
+          )}
           <S.IconWrapper
             onClick={() => handleRemoveMediaButtonClick(media.mediaId!)}
           >
