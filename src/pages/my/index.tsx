@@ -13,7 +13,8 @@ import { ROUTE } from '@/common/constants/route';
 import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetDogsList, useGetUser } from './hooks';
 import PetProfileCard from './components/profile';
- 
+import { LoadingSpinnerLottie } from '@/common/components/lottie';
+
 function Mypage() {
   useSetDocumentTitle('마이페이지');
 
@@ -25,7 +26,7 @@ function Mypage() {
   const { data: userData, isLoading: userLoading } = useGetUser();
   const { data: dogData } = useGetDogsList();
   if (userLoading) {
-    return <div>유저 정보 불러오는 중</div>;
+    return <LoadingSpinnerLottie />;
   }
   const navigateToEditPage = () => {
     navigate('/useredit', { state: { userId: userData?.userId } });
@@ -44,7 +45,7 @@ function Mypage() {
 
   const handleChannelClick = () => {
     window.open('http://pf.kakao.com/_iMxbdn');
-  }
+  };
 
   return (
     <S.Wrapper>
@@ -102,8 +103,7 @@ function Mypage() {
           즐겨찾기 목록
         </S.ListContainer>
         <S.ListContainer onClick={navigateToMyReview}>
-          <ReviewListIcon width={19} height={19} />
-          내 리뷰 모아보기
+          <ReviewListIcon width={19} height={19} />내 리뷰 모아보기
         </S.ListContainer>
         <S.ListContainer onClick={handleResearchClick}>
           <NoticeIcon width={20} height={20} />
