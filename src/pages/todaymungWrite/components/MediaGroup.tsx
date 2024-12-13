@@ -75,6 +75,7 @@ function MediaGroup() {
       deleteMedia(mediaId);
     }
   };
+  console.log(medias);
 
   return (
     <S.Wrapper>
@@ -83,7 +84,15 @@ function MediaGroup() {
       </S.AddMediaButton>
       {medias?.map((media) => (
         <S.MediaWrapper key={media.mediaId}>
-          <S.Media src={media.mediaUrl!} />
+          {media.mediaType === 'IMAGE' && (
+            <S.Media src={media.mediaUrl!} alt="Uploaded Image" />
+          )}
+          {media.mediaType === 'VIDEO' && (
+            <S.Media as="video" controls>
+              <source src={media.mediaUrl!} type="video/mp4" />
+              Your browser does not support the video tag.
+            </S.Media>
+          )}
           <S.IconWrapper
             onClick={() => handleRemoveMediaButtonClick(media.mediaId!)}
           >
