@@ -10,15 +10,15 @@ const S = {
     flex: 1;
   `,
 
-  LocationButtonWrapper: styled.div<{ bottomHeight: number }>`
+  LocationButtonWrapper: styled.div<{ $bottomHeight: number }>`
     position: absolute;
-    bottom: ${({ bottomHeight }) => bottomHeight}px;
+    bottom: ${({ $bottomHeight }) => $bottomHeight}px;
     right: 24px;
     z-index: 1;
   `,
 
   SearchCurrentButton: styled.div<{
-    bottomHeight: number;
+    $bottomHeight: number;
   }>`
     display: flex;
     height: 36px;
@@ -33,7 +33,7 @@ const S = {
     z-index: 1;
     position: absolute;
     // 조건부 스타일링으로 바꾸기
-    bottom: ${({ bottomHeight }) => bottomHeight}px;
+    bottom: ${({ $bottomHeight }) => $bottomHeight}px;
     left: 50%;
     transform: translateX(-50%);
     :active {
@@ -60,13 +60,13 @@ const S = {
   `,
 
   Bottom: styled.div<{
-    bottomHeight: number;
-    bottomVisible: boolean;
+    $bottomHeight: number;
+    $bottomVisible: boolean;
   }>`
-    visibility: ${({ bottomVisible }) =>
-      bottomVisible ? 'visible' : 'hidden'};
+    visibility: ${({ $bottomVisible }) =>
+      $bottomVisible ? 'visible' : 'hidden'};
     position: absolute;
-    bottom: ${({ bottomHeight }) => bottomHeight}px;
+    bottom: ${({ $bottomHeight }) => $bottomHeight}px;
     z-index: 1;
     width: 100%;
     margin-top: 10px;

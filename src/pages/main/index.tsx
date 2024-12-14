@@ -452,14 +452,14 @@ function Main() {
         <S.Wrapper onClick={(e) => e.stopPropagation()}>
           <S.BottomSheetWrapper onClick={(e) => e.stopPropagation()}>
             <S.LocationButtonWrapper
-              bottomHeight={currentButtonHeight}
+              $bottomHeight={currentButtonHeight}
               onClick={handleLocationButtonClick}
             >
               <LocationButtonIcon width={38} height={38} />
             </S.LocationButtonWrapper>
             {isCurrentButtonActive && (
               <S.SearchCurrentButton
-                bottomHeight={currentButtonHeight}
+                $bottomHeight={currentButtonHeight}
                 onClick={handleSearchCurrentButtonClick}
               >
                 <Refresh width={12} height={12} />
@@ -472,8 +472,8 @@ function Main() {
               {bottomCardVisible &&
                 (selectedMarkerRef.current || markerData) && (
                   <S.Bottom
-                    bottomVisible={bottomCardVisible}
-                    bottomHeight={bottomHeight}
+                    $bottomVisible={bottomCardVisible}
+                    $bottomHeight={bottomHeight}
                   >
                     <Content
                       isCard={true}
@@ -487,8 +487,8 @@ function Main() {
                 )}
             </S.BottomCardWrapper>
             <S.Bottom
-              bottomVisible={bottomSheetVisible}
-              bottomHeight={bottomHeight}
+              $bottomVisible={bottomSheetVisible}
+              $bottomHeight={bottomHeight}
             >
               <BottomSheet
                 setSelectedFilter={setSelectedFilter}
