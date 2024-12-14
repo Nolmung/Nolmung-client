@@ -2,8 +2,9 @@ import { S } from '../styles/login.styles';
 
 function KakaoLoginButton() {
   const handleKakaoLogin = () => {
-    window.location.href = 'https://api.nolmung.org/oauth2/authorization/kakao';
+    window.location.href = import.meta.env.VITE_KAKAO_API_URL;
   };
+
   return (
     <>
       <S.KaKaoButton onClick={handleKakaoLogin}>
