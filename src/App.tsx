@@ -4,8 +4,10 @@ import Router from './route/Router';
 import GlobalStyle from './styles/GlobalStyles';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import usePageTracking from './service/googleAnalytics/usePageTracking';
 
 function App() {
+  usePageTracking();
   const queryClient = new QueryClient();
 
   return (
