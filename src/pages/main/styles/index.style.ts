@@ -1,3 +1,4 @@
+import { BOTTOM_NAV_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 
 const S = {
@@ -7,7 +8,7 @@ const S = {
 
   MapWrapper: styled.div`
     width: 100%;
-    flex: 1;
+    height: calc(100dvh - ${BOTTOM_NAV_HEIGHT});
   `,
 
   LocationButtonWrapper: styled.div<{ $bottomHeight: number }>`
