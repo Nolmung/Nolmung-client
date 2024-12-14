@@ -31,6 +31,8 @@ import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import LoginPromptModal from '@/common/components/loginPromptModal';
 import getIsLogin from '@/common/utils/getIsLogin';
 import { FilterState } from './types/filter';
+import { withEvent } from '@/service/googleAnalytics/analytics';
+import { EVENTS } from '@/service/googleAnalytics/events';
 // import { LoadingNolmungLottie } from '@/common/components/lottie';
 
 function Main() {
@@ -107,7 +109,7 @@ function Main() {
   }, [categoryFromUrl, searchFromUrl]);
 
   useEffect(() => {
-    const initializeMap = async () => {
+    const initializeMap = withEvent(async () => {
       if (!mapContainerRef.current || !naver || !mapCenter) return;
 
       if (!mapRef.current) {
@@ -189,7 +191,7 @@ function Main() {
         );
         mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
       }
-    };
+    }, EVENTS.MAIN.MAP_MOVE);
     // 지도 초기화 함수 호출
     initializeMap();
   }, [mapCenter]);
@@ -342,7 +344,7 @@ function Main() {
   };
 
   /** 현 지도에서 검색 버튼 클릭 이벤트 함수 */
-  const handleSearchCurrentButtonClick = async () => {
+  const handleSearchCurrentButtonClick = withEvent(async () => {
     getCurrentAndMaxCoordinate(mapRef.current!);
     const newCenter = mapRef.current!.getCenter();
     setMapCenter({ latitude: newCenter.y, longitude: newCenter.x });
@@ -359,7 +361,7 @@ function Main() {
       console.error('Error during get and init markers', error);
     }
     setIsCurrentButtonActive(false);
-  };
+  }, EVENTS.MAIN.USER_LOCATION_BUTTON_CLICK);
 
   /** 기존 활성화된 마커 초기화 후 새 마커를 활성화 하는 함수 */
   const initMarkerActive = (marker: CustomMarker) => {
