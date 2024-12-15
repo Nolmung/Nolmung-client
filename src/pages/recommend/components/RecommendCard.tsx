@@ -2,7 +2,7 @@ import { MapPlace } from '@/service/apis/place/index.type';
 import S from '../styles/RecommendCard.style';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
-
+import ReactGA from 'react-ga4';
 interface RecommendCardProps {
   title: string;
   explanation: string;
@@ -19,6 +19,11 @@ function RecommendCard({
   const navigate = useNavigate();
 
   const navigateToDetail = (placeId: number) => {
+    ReactGA.event({
+      category: 'User',
+      action: 'Recommend Card Clicked',
+      label: `User clicked on ${title} card`,
+    });
     if (isBlurred) return;
     navigate(ROUTE.DETAIL(placeId));
   };

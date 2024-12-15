@@ -12,6 +12,7 @@ import Button from '@/common/components/button/Button';
 import { LoadingSkeletonLottie } from '@/common/components/lottie';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+import ReactGA from 'react-ga4';
 
 function GuestRecommend() {
   useSetDocumentTitle('추천');
@@ -31,6 +32,11 @@ function GuestRecommend() {
   }
 
   const handleKakaoLoginButtonClick = () => {
+    ReactGA.event({
+      category: 'User',
+      action: 'Kakao Login Clicked',
+      label: 'User clicked Kakao login on the GuestRecommend page',
+    });
     naviagte(ROUTE.LOGIN());
   };
 

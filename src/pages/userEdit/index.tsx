@@ -7,6 +7,7 @@ import DaumPost from '../signUp/components/DaumPost';
 import { instance } from '@/service/apis';
 import convertAddressToLatlng from '../signUp/utils/convertAddressToLatlng';
 import { toast } from 'react-toastify';
+import ReactGA from 'react-ga4';
 
 function UserEdit() {
   const [nickname, setNickname] = useState('');
@@ -22,6 +23,8 @@ function UserEdit() {
   const userId = location.state?.userId;
 
   useEffect(() => {
+    ReactGA.send({ hitType: 'pageview', page: '/user-edit' });
+
     const fetchUserData = async () => {
       if (!userId) {
         toast.error('유효하지 않은 사용자 ID입니다.');
@@ -108,6 +111,11 @@ function UserEdit() {
       if (response.status === 200) {
         toast.success('회원정보가 성공적으로 수정되었습니다.');
         navigate('/my');
+        ReactGA.event({
+          category: 'User Edit',
+          action: 'Save User Data',
+          label: 'User information saved successfully',
+        });
       }
     } catch (error) {
       console.error('저장 실패:', error);
@@ -126,12 +134,12 @@ function UserEdit() {
       />
       <S.ContentTitleText>주소</S.ContentTitleText>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-      <S.UserInfoInput
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        placeholder="주소를 입력해주세요"
-      />
-      <DaumPost setAddress={setAddress} />
+        <S.UserInfoInput
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          placeholder="주소를 입력해주세요"
+        />
+        <DaumPost setAddress={setAddress} />
       </div>
       <S.ContentTitleText>생년월일</S.ContentTitleText>
       <DatePicker value={selectedDate} onChange={handleDateChange} />

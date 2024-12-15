@@ -8,6 +8,7 @@ import {
 import { Media } from '@/service/apis/diary/index.type';
 import { toast } from 'react-toastify';
 import { UPLOADPATH } from '@/common/constants/uploadPath';
+import ReactGA from 'react-ga4';
 
 function MediaGroup() {
   const MAX_IMAGE_COUNT = 5; // 최대 이미지 개수
@@ -63,12 +64,22 @@ function MediaGroup() {
           mediaUrl: item.s3Url,
         };
         addMedia(media);
+        ReactGA.event({
+          category: 'User Interaction',
+          action: 'Uploaded Media',
+          label: 'TodayMungEdit',
+        });
       });
     };
   };
 
   /** @Todo 오늘멍 수정, 삭제 API 성공 후 실행되도록 수정*/
   const handleRemoveMediaButtonClick = async (mediaId: number) => {
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Clicked Remove Media Button',
+      label: 'TodayMungEdit',
+    });
     const result = await deleteFileFromS3(
       medias.find((media) => media.mediaId === mediaId)!.mediaUrl!,
     );

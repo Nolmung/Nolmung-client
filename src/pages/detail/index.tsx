@@ -38,6 +38,7 @@ import { usePostBookmarks } from '../main/queries';
 import getIsLogin from '@/common/utils/getIsLogin';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import checkUserDevice from '../main/utils/checkUserDevice';
+import ReactGA from 'react-ga4';
 
 function Detail() {
   const navigate = useNavigate();
@@ -67,6 +68,11 @@ function Detail() {
 
   const handleViewMoreButtonClick = () => {
     setVisibleTodayMungCard((prev) => prev + 3);
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Click View More Button',
+      label: 'Today Mung Cards',
+    });
   };
 
   if (isLoading) return <LoadingSpinnerLottie />;
@@ -101,6 +107,11 @@ function Detail() {
           console.error('Failed to delete bookmark:', error);
         },
       });
+      ReactGA.event({
+        category: 'Bookmark',
+        action: 'Remove Bookmark',
+        label: data!.placeName,
+      });
     } else {
       addBookmarks(data!.placeId, {
         onSuccess: (data) => {
@@ -112,8 +123,32 @@ function Detail() {
           console.error('Failed to add bookmark:', error);
         },
       });
+      ReactGA.event({
+        category: 'Bookmark',
+        action: 'Add Bookmark',
+        label: data!.placeName,
+      });
     }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // 페이지가 50% 이상 스크롤되었을 때 이벤트 발생
+      if (scrollPosition >= documentHeight * 0.5) {
+        ReactGA.event({
+          category: 'Scroll',
+          action: 'Scrolled 50% of the page',
+          label: data.placeName,
+        });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [data]);
 
   const device = checkUserDevice();
   return (

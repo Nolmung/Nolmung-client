@@ -18,6 +18,7 @@ import { toast } from 'react-toastify';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { GetTodayReviewResponse } from '@/service/apis/review/index.type';
 import { useEffect } from 'react';
+import ReactGA from 'react-ga4';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
@@ -60,6 +61,11 @@ function TodayMungWrite() {
   };
 
   const navigateToTodaymungPlaceRegist = () => {
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Click Add Place Button',
+      label: 'Add a new place during TodayMung write process',
+    });
     navigate(ROUTE.TODAYMUNG_PLACE_REGIST());
   };
   const { isConfirmModalOpen, closeConfirmModal } = useConfirmModalStore();
