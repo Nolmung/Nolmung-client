@@ -488,6 +488,17 @@ function Main() {
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ReactGA.event({
+        category: 'Engagement',
+        action: 'User has been on the page for 5 minutes',
+      });
+    }, 300000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <S.Wrapper>
       {/* {isMapLoading && <LoadingNolmungLottie />} */}

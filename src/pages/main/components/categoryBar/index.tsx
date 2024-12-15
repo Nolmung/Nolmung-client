@@ -3,7 +3,6 @@ import SearchInput from '@/common/components/searchInput';
 import S from '../../styles/CategoryBar.style';
 import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 import { useNavigate } from 'react-router-dom';
-import { withEvent } from '@/service/googleAnalytics/analytics';
 import { EVENTS } from '@/service/googleAnalytics/events';
 import ReactGA from 'react-ga4';
 
