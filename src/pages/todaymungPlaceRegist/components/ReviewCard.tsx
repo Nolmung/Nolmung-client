@@ -131,11 +131,13 @@ function ReviewCard({
           onClick={handleAddPlaceButtonClick}
           disabled={isAddPlaceButtonDisabled}
         >
+          <S.InnerButtonWrapper>
           <PlusIcon
             width={14}
             strokeColor={isAddPlaceButtonDisabled ? '#5E5E5E' : '#17AA1A'}
           />
           장소 추가
+          </S.InnerButtonWrapper>
         </Button>
       </S.RateAddPlaceButtonWrapper>
       <S.KeywordWrapper>
