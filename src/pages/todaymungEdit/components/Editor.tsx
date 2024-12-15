@@ -1,6 +1,7 @@
 import S from '../styles/Editor.style';
 import { useTodayMungStore } from '../stores/todayMungStore';
 import { CheckEmptyGreen, CheckFiiledDark } from '@/assets/images/svgs';
+import ReactGA from 'react-ga4';
 
 function Editor() {
   const { content, setContent, title, setTitle } = useTodayMungStore();
