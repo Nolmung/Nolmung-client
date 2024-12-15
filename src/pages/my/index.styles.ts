@@ -22,7 +22,7 @@ const S = {
     width: 100%;
   `,
   MyProfileCard: styled.div`
-    margin: 26px 0px;
+    margin: 26px 0 10px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -83,7 +83,7 @@ const S = {
     font-weight: 500;
     color: #898989;
     margin-left: auto;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     &:hover {
       opacity: 0.8;
     }
