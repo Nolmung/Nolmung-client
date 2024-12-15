@@ -12,6 +12,7 @@ import { usePatchDogs, useDeleteDogs } from './queries';
 import { DogInfoType } from '@/service/apis/dog/index.type';
 import 'dayjs/locale/ko';
 import { UPLOADPATH } from '@/common/constants/uploadPath';
+import ReactGA from 'react-ga4';
 dayjs.locale('ko');
 
 function DogsEdit() {
@@ -32,6 +33,7 @@ function DogsEdit() {
   );
   const { mutate: patchDogMutate } = usePatchDogs();
   const { mutate: deleteDogMutate } = useDeleteDogs();
+
   const handleDateChange = (newValue: Dayjs | null) => {
     setSelectedDate(newValue);
     if (newValue) {
@@ -76,6 +78,11 @@ function DogsEdit() {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+    ReactGA.event({
+      category: 'Profile',
+      action: 'Click Profile Picture',
+      label: 'Edit Profile Picture',
+    });
   };
 
   const handleFileChange = async (
@@ -140,6 +147,11 @@ function DogsEdit() {
     }));
     setFilteredLocations([]);
     setDropdownVisible(false);
+    ReactGA.event({
+      category: 'Dog Breed',
+      action: 'Select Dog Breed',
+      label: suggestion,
+    });
   };
 
   const handleEditClick = async () => {
@@ -148,6 +160,11 @@ function DogsEdit() {
       {
         onSuccess: () => {
           navigate(ROUTE.MY());
+          ReactGA.event({
+            category: 'Dog Profile',
+            action: 'Save Dog Information',
+            label: 'Save Dog Profile',
+          });
         },
         onError: (error) => console.error('수정 실패:', error),
       },
@@ -158,6 +175,11 @@ function DogsEdit() {
     deleteDogMutate(numDogId, {
       onSuccess: () => {
         navigate(ROUTE.MY());
+        ReactGA.event({
+          category: 'Dog Profile',
+          action: 'Delete Dog Profile',
+          label: 'Delete Dog',
+        });
       },
       onError: (error) => console.error('삭제 실패:', error),
     });
