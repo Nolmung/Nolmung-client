@@ -12,6 +12,7 @@ import { useGetTodaymungDetailData } from './queries';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { decodeToken } from '@/common/utils/configToken';
 import getIsLogin from '@/common/utils/getIsLogin';
+import ReactGA from 'react-ga4';
 
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
@@ -56,8 +57,23 @@ const TodayMungDetail = () => {
   const diaryData: DiaryType = todaymungDetailData.data;
 
   const handleToggleClick = () => {
+    ReactGA.event({
+      category: 'Diary',
+      action: 'Click Edit Button',
+      label: `Diary ID: ${numericDiaryId}`,
+    });
     setEditToggle(!editToggle);
   };
+
+  useEffect(() => {
+    if (todaymungDetailData) {
+      ReactGA.event({
+        category: 'Diary',
+        action: 'View Diary',
+        label: `Diary ID: ${numericDiaryId}`,
+      });
+    }
+  }, [todaymungDetailData]);
 
   return (
     <S.Wrapper>

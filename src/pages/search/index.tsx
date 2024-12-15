@@ -21,7 +21,7 @@ import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import NoSearchResponse from './components/NoSearchResponse';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
-
+import ReactGA from 'react-ga4';
 export interface SearchHistoryItem {
   id: number;
   keyword: string;
@@ -58,6 +58,11 @@ function Search() {
       createdAt: formatDate(new Date()),
     };
 
+    ReactGA.event({
+      category: 'Search',
+      action: 'Search Initiated',
+      label: searchInputValue.trim(),
+    });
     setSearchHistory(updateSearchHistory(searchHistory, newSearchItem));
 
     setSearchKeyword(searchInputValue);
@@ -78,20 +83,39 @@ function Search() {
             state: { searchResponseData },
           },
         );
+        ReactGA.event({
+          category: 'Search',
+          action: 'Search Result Clicked',
+          label: `Single result: ${searchResponseData[0].placeName}`,
+        });
       } else {
         navigate(ROUTE.MAIN() + '?search=' + searchKeyword, {
           state: { searchResponseData },
+        });
+        ReactGA.event({
+          category: 'Search',
+          action: 'Search Result Clicked',
+          label: `${searchResponseData.length} results found`,
         });
       }
     }
   }, [searchResponseData]);
 
   const handleModalYesButtonClick = () => {
+    ReactGA.event({
+      category: 'Search History',
+      action: 'Clear All Search History',
+    });
     setSearchHistory(clearSearchHistory());
     closeModal();
   };
 
   const handleDeleteKeyword = (id: number) => {
+    ReactGA.event({
+      category: 'Search History',
+      action: 'Delete Search History Item',
+      label: `Deleted keyword ID: ${id}`,
+    });
     setSearchHistory(deleteSearchKeyword(searchHistory, id));
   };
 

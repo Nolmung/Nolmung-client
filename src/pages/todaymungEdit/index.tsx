@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { toast } from 'react-toastify';
+import ReactGA from 'react-ga4';
 
 function TodayMungEdit() {
   useSetDocumentTitle('오늘멍 작성하기');
@@ -60,6 +61,11 @@ function TodayMungEdit() {
       publicYn,
       medias,
     };
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Clicked Edit Complete Button',
+      label: 'TodayMungEdit', // 어떤 화면에서 발생했는지
+    });
     if (title || content || dogs.length > 0 || medias.length > 0) {
       const missingFields = [];
 

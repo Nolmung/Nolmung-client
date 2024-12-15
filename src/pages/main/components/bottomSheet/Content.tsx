@@ -13,7 +13,7 @@ import { ContentSkeletonUI } from '@/common/components/skeleton';
 import { useGetPostDetail } from '@/pages/detail/querys';
 import { useQueryClient } from '@tanstack/react-query';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
-
+import ReactGA from 'react-ga4';
 interface ContentProps {
   place: MapPlace;
   isCard: boolean;
@@ -48,6 +48,13 @@ function Content({ place, isCard }: ContentProps) {
       open();
       return;
     }
+    const action = isBookmarked ? 'remove_bookmark' : 'add_bookmark';
+
+    ReactGA.event({
+      category: 'Bookmark',
+      action: action,
+      label: place.placeName,
+    });
 
     if (isBookmarked) {
       deleteBookmarks(place!.placeId, {
@@ -85,12 +92,35 @@ function Content({ place, isCard }: ContentProps) {
   const navigateToDetail = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
     navigate(ROUTE.DETAIL(place!.placeId));
+    ReactGA.event({
+      category: 'Navigation',
+      action: 'View Place Detail',
+      label: place.placeName,
+    });
   };
 
   if (place?.isBookmarked === undefined || !place) {
     return <ContentSkeletonUI />;
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // 페이지 80% 이상 스크롤 시 GA 이벤트 트리거
+      if (scrollPosition >= documentHeight * 0.8) {
+        ReactGA.event({
+          category: 'Scroll',
+          action: 'Scrolled 80% of the page',
+        });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
   return (
     place?.isBookmarked !== undefined && (
       <S.Wrapper isCard={isCard} onClick={navigateToDetail}>

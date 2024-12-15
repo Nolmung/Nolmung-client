@@ -7,6 +7,7 @@ import Button from '@/common/components/button/Button';
 import { useDeleteReviews, useGetReviews } from './queries';
 import { LoadingSkeletonLottie } from '@/common/components/lottie';
 import { NoResulLiedownUI } from '@/common/components/noResultUI';
+import ReactGA from 'react-ga4';
 
 function MyReview() {
   const { openModal, isOpen, closeModal } = useModal();
@@ -26,6 +27,11 @@ function MyReview() {
   const handleModalYesButtonClick = () => {
     if (!deleteReviewId) return;
     deleteMutation(deleteReviewId);
+    ReactGA.event({
+      category: 'MyReview',
+      action: 'Delete Review',
+      label: `User deleted review with ID: ${deleteReviewId}`,
+    });
     closeModal();
   };
 
@@ -36,6 +42,11 @@ function MyReview() {
       (entries) => {
         if (entries[0].isIntersecting) {
           fetchNextPage();
+          ReactGA.event({
+            category: 'MyReview',
+            action: 'Load More Reviews',
+            label: 'User scrolled to load more reviews',
+          });
         }
       },
       { threshold: 0.01 },

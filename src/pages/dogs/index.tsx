@@ -10,6 +10,7 @@ import { uploadFileToS3 } from '@/common/utils/uploadImageToS3';
 import { usePostDogs } from './queries';
 import { DogInfoType } from '@/service/apis/dog/index.type';
 import { UPLOADPATH } from '@/common/constants/uploadPath';
+import ReactGA from 'react-ga4';
 import 'dayjs/locale/ko';
 dayjs.locale('ko');
 
@@ -41,6 +42,11 @@ function Dogs() {
         ...prevData,
         birth: newValue.format('YYYY-MM-DD'), // 선택된 날짜를 YYYY-MM-DD 형식으로 저장
       }));
+      ReactGA.event({
+        category: 'Dog Registration',
+        action: 'Entered birth date',
+        label: newValue.format('YYYY-MM-DD'),
+      });
     }
   };
   const [dogData, setDogData] = useState<DogInfoType>({
@@ -80,6 +86,10 @@ function Dogs() {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+    ReactGA.event({
+      category: 'Dog Registration',
+      action: 'Clicked on profile picture',
+    });
   };
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -100,6 +110,11 @@ function Dogs() {
             profileUrl: s3Url,
           }));
           setPreview(s3Url);
+          ReactGA.event({
+            category: 'Dog Registration',
+            action: 'Uploaded profile image',
+            label: s3Url,
+          });
         } else {
           console.error('업로드된 파일이 없습니다.');
         }
@@ -136,6 +151,10 @@ function Dogs() {
       ...prev,
       size: size === 1 ? 'S' : size === 2 ? 'M' : 'L',
     }));
+    ReactGA.event({
+      category: 'Dog Registration',
+      action: `Selected size: ${size === 1 ? 'S' : size === 2 ? 'M' : 'L'}`,
+    });
   };
 
   const handleSuggestionClick = (suggestion: string) => {
@@ -145,6 +164,10 @@ function Dogs() {
     }));
     setFilteredLocations([]);
     setDropdownVisible(false);
+    ReactGA.event({
+      category: 'Dog Registration',
+      action: `Selected dog breed: ${suggestion}`,
+    });
   };
 
   const handleSubmitClick = async () => {
@@ -159,6 +182,10 @@ function Dogs() {
               state: { nickname, dogData },
               replace: true,
             });
+        ReactGA.event({
+          category: 'Dog Registration',
+          action: 'Submitted dog information',
+        });
       },
     });
   };

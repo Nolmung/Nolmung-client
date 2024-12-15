@@ -9,6 +9,7 @@ import 'dayjs/locale/ko';
 dayjs.locale('ko');
 import convertAddressToLatlng from './utils/convertAddressToLatlng';
 import { toast } from 'react-toastify';
+import ReactGA from 'react-ga4';
 
 function SignUp() {
   const [nickname, setNickname] = useState('');
@@ -39,6 +40,11 @@ function SignUp() {
 
   const handleDateChange = (newValue: Dayjs | null) => {
     setSelectedDate(newValue);
+    ReactGA.event({
+      category: 'SignUp',
+      action: 'Date of Birth Selected',
+      label: newValue ? newValue.format('YYYY-MM-DD') : '',
+    });
   };
 
   const handleNext = async () => {
@@ -73,6 +79,11 @@ function SignUp() {
       );
 
       if (response.status === 200 || response.status === 201) {
+        ReactGA.event({
+          category: 'SignUp',
+          action: 'Form Submitted',
+          label: 'User signed up successfully',
+        });
         localStorage.setItem(
           'accessToken',
           'Bearer ' + response.data.data.accessToken,
@@ -95,10 +106,20 @@ function SignUp() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    ReactGA.event({
+      category: 'SignUp',
+      action: 'Address Input Changed',
+      label: value,
+    });
     setAddress(value);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
+    ReactGA.event({
+      category: 'SignUp',
+      action: 'Address Suggestion Selected',
+      label: suggestion,
+    });
     setAddress(suggestion);
     setFilteredLocations([]);
     setDropdownVisible(false);
@@ -153,7 +174,6 @@ function SignUp() {
         <DatePicker value={selectedDate} onChange={handleDateChange} />
         <S.ContentTitleText>성별</S.ContentTitleText>
         <S.GenderWrapper>
-          
           <S.GenderSelect
             isSelected={gender === 'MALE'}
             onClick={() => setGender('MALE')}

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Button from '@common/components/button/Button';
 import { useReviewStore } from '@pages/todaymungPlaceRegist/stores/reviewStore';
 import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
+import ReactGA from 'react-ga4';
 
 interface ReviewCardProps {
   category: PlaceCategory;
@@ -33,6 +34,11 @@ function ReviewCard({
     useState(false);
 
   const handleStarClick = (rate: number) => {
+    ReactGA.event({
+      category: 'Review Interaction',
+      action: 'Rating Given',
+      label: `Rating: ${rate}`, // 별점 점수
+    });
     setStarRate(rate);
   };
   const handleAddPlaceButtonClick = () => {
@@ -48,6 +54,11 @@ function ReviewCard({
       labels: selectedLabels,
       placeName,
       roadAddress,
+    });
+    ReactGA.event({
+      category: 'Review Interaction',
+      action: 'Place Added',
+      label: `Place: ${placeName}`,
     });
     setKeywordReviewVisibleId(null);
   };
@@ -69,6 +80,11 @@ function ReviewCard({
     } else {
       setSelectedLabels((prev) => [...prev, { labelId, labelName }]);
     }
+    ReactGA.event({
+      category: 'Review Interaction',
+      action: 'Keyword Selected',
+      label: `Keyword: ${labelName}`,
+    });
   };
 
   useEffect(() => {

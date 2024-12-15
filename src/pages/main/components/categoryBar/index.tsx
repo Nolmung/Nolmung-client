@@ -3,6 +3,8 @@ import SearchInput from '@/common/components/searchInput';
 import S from '../../styles/CategoryBar.style';
 import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 import { useNavigate } from 'react-router-dom';
+import { EVENTS } from '@/service/googleAnalytics/events';
+import ReactGA from 'react-ga4';
 
 interface CategoryBarProps {
   category: string | null;
@@ -25,6 +27,11 @@ function CategoryBar({
     setCategory(value);
     setBottomSheetVisible(true);
     navigate(`/?category=${value}`);
+    ReactGA.event({
+      category: EVENTS.MAIN.SELECT_CATEGORY.category, // 이벤트 카테고리
+      action: 'click', // 이벤트 액션
+      label: value, // 이벤트 레이블로 value 전달
+    });
   };
 
   const navigateToSearchPage = () => {
@@ -42,7 +49,7 @@ function CategoryBar({
               onClick={() => handleCategoryClick(value)}
               width="fit-content"
               height="fit-content"
-              backgroundColor="#fff" 
+              backgroundColor="#fff"
               color="#000"
               fontWeight="500"
               fontSize="14px"
