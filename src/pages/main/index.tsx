@@ -33,6 +33,7 @@ import getIsLogin from '@/common/utils/getIsLogin';
 import { FilterState } from './types/filter';
 import { withEvent } from '@/service/googleAnalytics/analytics';
 import { EVENTS } from '@/service/googleAnalytics/events';
+import ReactGA from 'react-ga4';
 // import { LoadingNolmungLottie } from '@/common/components/lottie';
 
 function Main() {
@@ -99,6 +100,21 @@ function Main() {
   const query = new URLSearchParams(window.location.search);
   const categoryFromUrl = query.get('category');
   const searchFromUrl = query.get('search');
+
+  /**사용자가 지도를 얼마나 확대하거나 축소하는지 파악 */
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    naver.maps.Event.addListener(mapRef.current, 'zoom_changed', () => {
+      const zoomLevel = mapRef.current?.getZoom();
+      ReactGA.event({
+        category: EVENTS.MAIN.MAP_ZOOM.category,
+        action: 'zoom_changed',
+        label: `Zoom Level ${zoomLevel}`,
+        value: zoomLevel,
+      });
+    });
+  }, []);
 
   useEffect(() => {
     if (!searchFromUrl) {
@@ -361,6 +377,13 @@ function Main() {
       console.error('Error during get and init markers', error);
     }
     setIsCurrentButtonActive(false);
+
+    ReactGA.event({
+      category: EVENTS.MAIN.USER_LOCATION_BUTTON_CLICK.category,
+      action: 'click',
+      label: categoryFromUrl || 'no_category',
+      value: newCenter ? Math.floor(newCenter.y) : undefined,
+    });
   }, EVENTS.MAIN.USER_LOCATION_BUTTON_CLICK);
 
   /** 기존 활성화된 마커 초기화 후 새 마커를 활성화 하는 함수 */
@@ -410,6 +433,12 @@ function Main() {
     const position = marker.getPosition();
     setMapCenter({ latitude: position.y - 0.0005, longitude: position.x });
     initMarkerActive(marker);
+    ReactGA.event({
+      category: EVENTS.MAIN.MARKER_CLICK.category,
+      action: 'marker_clicked',
+      label: marker.data.placeName,
+      value: marker.data.placeId,
+    });
   };
 
   /** 지도 클릭 시, 기존에 활성화된 컴포넌트들을 비활성화 하도록 변경하는 이벤트 함수 */
@@ -419,6 +448,11 @@ function Main() {
       setBottomCardVisible(false);
       setCategory(null);
       navigate('/');
+    });
+    ReactGA.event({
+      category: EVENTS.MAIN.MAP_CLICK.category,
+      action: 'map_click',
+      label: 'unselect_markers',
     });
   };
 
@@ -433,8 +467,26 @@ function Main() {
       );
       currentLocationMarker.current?.setPosition(currentPosition);
     });
+    ReactGA.event({
+      category: EVENTS.MAIN.USER_LOCATION_BUTTON_CLICK.category,
+      action: 'move_to_user_location',
+      label: 'User Current Location',
+    });
     navigate('/');
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      ReactGA.event({
+        category: EVENTS.MAIN.PAGE_EXIT.category,
+        action: 'page_unload',
+        label: 'Main Page Exit',
+      });
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, []);
 
   return (
     <S.Wrapper>

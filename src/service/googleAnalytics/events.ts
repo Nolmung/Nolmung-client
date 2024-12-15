@@ -8,7 +8,7 @@ export const EVENTS = {
     // 지도 이동
     MAP_MOVE: { category: 'map_move', action: '' },
     // 마커 클릭
-    CLICK_MARKER: { category: 'click_marker', action: '' },
+    MARKER_CLICK: { category: 'click_marker', action: '' },
     // 검색 실행
     SEARCH: { category: 'search', action: '' },
     // 카테고리 선택
@@ -20,6 +20,8 @@ export const EVENTS = {
       category: 'user_location_button_click',
       action: '',
     },
+    PAGE_EXIT: { category: 'page_exit', action: '' },
+    MAP_CLICK: { category: 'map_click', action: '' },
     // 위치 정보 가져오기 성공
     USER_LOCATION_SUCCESS: { category: 'user_location_success', action: '' },
     // 위치 정보 가져오기 실패
