@@ -47,6 +47,16 @@ const TodayMungDetail = () => {
   const [editToggle, setEditToggle] = useState(false);
   const dotRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    if (todaymungDetailData) {
+      ReactGA.event({
+        category: 'Diary',
+        action: 'View Diary',
+        label: `Diary ID: ${numericDiaryId}`,
+      });
+    }
+  }, [todaymungDetailData]);
+
   if (isLoading) {
     return <LoadingSpinnerLottie />;
   }
@@ -64,16 +74,6 @@ const TodayMungDetail = () => {
     });
     setEditToggle(!editToggle);
   };
-
-  useEffect(() => {
-    if (todaymungDetailData) {
-      ReactGA.event({
-        category: 'Diary',
-        action: 'View Diary',
-        label: `Diary ID: ${numericDiaryId}`,
-      });
-    }
-  }, [todaymungDetailData]);
 
   return (
     <S.Wrapper>
