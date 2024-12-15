@@ -30,7 +30,6 @@ const S = {
   ContentWrapper: styled.div`
     width: 100%;
     padding: 0 22px 0px 22px;
-    height: 100%;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -120,7 +119,8 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 6px;
+    margin-top: 16px;
+    margin-bottom: 10px;
     gap: 12px;
   `,
   ConfirmModalContent: styled.div`

@@ -25,7 +25,7 @@ const S = {
     color: ${({ selected }) => (selected ? '#17AA1A' : '#5E5E5E')};
     font-size: 14px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: normal;
   `,
 };
