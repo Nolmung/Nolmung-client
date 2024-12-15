@@ -120,7 +120,6 @@ const S = {
     align-items: center;
     justify-content: center;
     margin-top: 16px;
-    margin-bottom: 10px;
     gap: 12px;
   `,
   ConfirmModalContent: styled.div`
@@ -128,7 +127,6 @@ const S = {
     height: 100%;
     display: flex;
     align-items: center;
-
     flex-direction: column;
     padding: 30px;
   `,
@@ -136,9 +134,9 @@ const S = {
     color: #080808;
     font-size: 18px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: normal;
-    margin-bottom: 16px;
+    margin: 16px 0;
     text-align: center;
   `,
 };
