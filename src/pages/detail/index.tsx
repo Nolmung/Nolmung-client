@@ -131,25 +131,6 @@ function Detail() {
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-
-      // 페이지가 50% 이상 스크롤되었을 때 이벤트 발생
-      if (scrollPosition >= documentHeight * 0.5) {
-        ReactGA.event({
-          category: 'Scroll',
-          action: 'Scrolled 50% of the page',
-          label: data.placeName,
-        });
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [data]);
-
   const device = checkUserDevice();
   return (
     <S.Wrapper
