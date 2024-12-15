@@ -27,10 +27,13 @@ function TodayMungWrite() {
     isLoading: todayReviewLoading,
     isError: todayReviewError,
   } = useGetTodayReview();
+
   const { title, content, dogs, addPlaces } = useTodayMungStore();
+  
   useEffect(() => {
     todayReviewData?.map((data) => addPlaces(data.placeId));
   }, [todayReviewData]);
+  
   const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary();
 

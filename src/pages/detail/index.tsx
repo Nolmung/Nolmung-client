@@ -75,15 +75,6 @@ function Detail() {
     });
   };
 
-  if (isLoading) return <LoadingSpinnerLottie />;
-  if (isError || !data) return <p>Error loading post detail</p>;
-
-  const labelTotalCount = data.labels?.reduce((acc, cur) => {
-    return acc + cur.labelCount;
-  }, 0);
-
-  const openingHour = data.openHour?.split(' ');
-
   const isPriceAvailable = (price: PlacePrice) => {
     return price == '변동' || price == '없음';
   };
@@ -130,6 +121,15 @@ function Detail() {
       });
     }
   };
+
+  if (isLoading) return <LoadingSpinnerLottie />;
+  if (isError || !data) return <p>Error loading post detail</p>;
+
+  const labelTotalCount = data.labels?.reduce((acc, cur) => {
+    return acc + cur.labelCount;
+  }, 0);
+
+  const openingHour = data.openHour?.split(' ');
 
   const device = checkUserDevice();
   return (

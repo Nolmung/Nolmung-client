@@ -135,9 +135,6 @@ function TodayMungPlaceRegist() {
   const { isReviewConfirmModalOpen, closeReviewConfirmModal } =
     useReviewConfirmModalStore();
 
-  useEffect(() => {
-    console.log(isReviewConfirmModalOpen);
-  }, [isReviewConfirmModalOpen]);
   if (isLoading) return <LoadingSpinnerLottie />;
   if (error) return <div>에러 발생</div>;
 

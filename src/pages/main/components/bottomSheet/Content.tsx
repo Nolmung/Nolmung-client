@@ -120,7 +120,7 @@ function Content({ place, isCard }: ContentProps) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   return (
     place?.isBookmarked !== undefined && (
       <S.Wrapper isCard={isCard} onClick={navigateToDetail}>
