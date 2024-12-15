@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import { useTodaymungDelete } from '../../queries';
 import { deleteFileFromS3 } from '@/common/utils/uploadImageToS3';
+import ReactGA from 'react-ga4';
 
 type Media = {
   mediaType: string;
@@ -19,6 +20,10 @@ const EditButton = ({ diaryId, medias }: EditButtonProps) => {
   const navigate = useNavigate();
   const { mutate: deleteDiary } = useTodaymungDelete(diaryId);
   const handleEditClick = () => {
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Edit Todaymung',
+    });
     navigate(ROUTE.TODAYMUNG_EDIT(diaryId));
   };
 

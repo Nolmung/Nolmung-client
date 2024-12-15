@@ -12,10 +12,16 @@ import {
   TodayMungListIconActive,
 } from '@/assets/images/svgs';
 import { ListDataProps } from '../../types/TodayMungList.type';
+import ReactGA from 'react-ga4';
 
 const Convert = ({ listData }: ListDataProps) => {
   const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Calendar);
   const handleViewChange = (mode: ViewMode) => {
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Change View Mode',
+      label: mode === ViewMode.Calendar ? 'Calendar View' : 'List View',
+    });
     setViewMode(mode);
   };
   return (
