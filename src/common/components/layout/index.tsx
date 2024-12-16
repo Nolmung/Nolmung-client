@@ -91,21 +91,14 @@ function Layout({ children }: LayoutProps) {
     /** 뒤로가기 감지 핸들러  */
     const handlePopState = () => {
       if (
-        location.search ||
-        location.pathname.startsWith('/todaymung/placeregist')
+        location.pathname.startsWith('/todaymung/placeregist') &&
+        reviewlist.length > 0
       ) {
-        if (reviewlist.length > 0) {
-          openReviewConfirmModal();
-        } else {
-          navigate('/todaymung/write');
-        }
+        openReviewConfirmModal();
       }
     };
-
-    // 이벤트 리스너 추가
     window.addEventListener('popstate', handlePopState);
 
-    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };

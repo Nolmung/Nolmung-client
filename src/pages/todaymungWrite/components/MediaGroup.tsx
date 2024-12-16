@@ -8,6 +8,7 @@ import {
 import { Media } from '@/service/apis/diary/index.type';
 import { toast } from 'react-toastify';
 import { UPLOADPATH } from '@/common/constants/uploadPath';
+import ReactGA from 'react-ga4';
 
 function MediaGroup() {
   const MAX_IMAGE_COUNT = 5; // 최대 이미지 개수
@@ -63,6 +64,11 @@ function MediaGroup() {
           mediaUrl: item.s3Url,
         };
         addMedia(media);
+        ReactGA.event({
+          category: 'Media Upload',
+          action: 'Upload Media',
+          label: `Uploaded ${item.fileType}`,
+        });
       });
     };
   };
@@ -73,9 +79,13 @@ function MediaGroup() {
     );
     if (result) {
       deleteMedia(mediaId);
+      ReactGA.event({
+        category: 'Media Upload',
+        action: 'Remove Media',
+        label: `Removed ${mediaId}`,
+      });
     }
   };
-  console.log(medias);
 
   return (
     <S.Wrapper>

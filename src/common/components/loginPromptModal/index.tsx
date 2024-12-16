@@ -4,7 +4,7 @@ import { S } from './index.style';
 import { useNavigate } from 'react-router-dom';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import { ROUTE } from '@/common/constants/route';
-
+import ReactGA from 'react-ga4';
 interface LoginPromptModalProps {
   closeModal: () => void;
 }
@@ -18,9 +18,15 @@ function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
     window.innerHeight * 0.4 < 400 ? 400 : window.innerHeight * 0.4;
 
   const modalContentWidth =
-    window.innerWidth * 0.7 > 400 ? 400 : window.innerWidth * 0.7;
+    window.innerWidth * 0.8 > 390 ? 390 : window.innerWidth * 0.8;
 
   const handleLoginButtonClick = () => {
+    ReactGA.event({
+      category: 'User',
+      action: 'Click Login Prompt Button',
+      label: 'User clicked on login/register button in prompt modal',
+    });
+
     close();
     navigate(ROUTE.LOGIN(), { replace: true });
   };

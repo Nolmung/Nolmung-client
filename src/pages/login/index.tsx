@@ -1,9 +1,15 @@
 import { S } from './styles/login.styles';
 import KakaoLoginButton from './components/KakaoLoginButton';
+import ReactGA from 'react-ga4';
 
 function Login() {
   const handleBack = () => {
     window.location.href = '/';
+    ReactGA.event({
+      category: 'User',
+      action: 'Click Later Sign Up',
+      label: 'User clicked on "나중에 가입할래요"',
+    });
   };
   return (
     <S.Wrapper>

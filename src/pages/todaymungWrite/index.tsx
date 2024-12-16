@@ -18,6 +18,7 @@ import { toast } from 'react-toastify';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { GetTodayReviewResponse } from '@/service/apis/review/index.type';
 import { useEffect } from 'react';
+import ReactGA from 'react-ga4';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
@@ -26,10 +27,13 @@ function TodayMungWrite() {
     isLoading: todayReviewLoading,
     isError: todayReviewError,
   } = useGetTodayReview();
+
   const { title, content, dogs, addPlaces } = useTodayMungStore();
+  
   useEffect(() => {
     todayReviewData?.map((data) => addPlaces(data.placeId));
   }, [todayReviewData]);
+  
   const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary();
 
@@ -60,6 +64,11 @@ function TodayMungWrite() {
   };
 
   const navigateToTodaymungPlaceRegist = () => {
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Click Add Place Button',
+      label: 'Add a new place during TodayMung write process',
+    });
     navigate(ROUTE.TODAYMUNG_PLACE_REGIST());
   };
   const { isConfirmModalOpen, closeConfirmModal } = useConfirmModalStore();
@@ -72,7 +81,7 @@ function TodayMungWrite() {
   return (
     <>
       {isConfirmModalOpen && (
-        <Modal isOpen={isConfirmModalOpen} closeModal={closeConfirmModal}>
+        <Modal isOpen={isConfirmModalOpen} closeModal={closeConfirmModal} height={'fit-content'}>
           <S.ConfirmModalContent>
             <S.ConfirmModalTitle>
               작성중인 내용이 사라집니다. <br />
@@ -81,9 +90,9 @@ function TodayMungWrite() {
 
             <S.ButtonWrapper>
               <Button
-                width="110px"
+                width="100%"
                 height="44px"
-                borderRadius="30px"
+                borderRadius="8px"
                 fontSize="16px"
                 fontWeight="500"
                 onClick={closeConfirmModal}
@@ -91,11 +100,11 @@ function TodayMungWrite() {
                 취소
               </Button>
               <Button
-                width="110px"
+                width="100%"
                 height="44px"
                 backgroundColor="#17AA1A"
                 color="#fff"
-                borderRadius="30px"
+                borderRadius="8px"
                 fontSize="16px"
                 fontWeight="500"
                 onClick={() => {
@@ -116,7 +125,7 @@ function TodayMungWrite() {
           <S.BannerImage src="/pngs/TodayMungLogo.png" alt="오늘멍 배너" />
         </S.BannerWrapper>
         <S.ContentWrapper>
-          <div style={{ marginTop: '23px' }}>
+          <div style={{ marginTop: '30px' }}>
             <S.Title>장소</S.Title>
             <S.PlaceWrapper>
               <S.PlaceCardWrapper>

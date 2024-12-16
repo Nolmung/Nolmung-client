@@ -2,12 +2,17 @@ import { convertFormatDate } from '@/common/utils/convertFormatDate';
 import { S } from '../../styles/TodayMungListCard.style';
 import { ListCardProps } from '../../types/TodayMungList.type';
 import { useNavigate } from 'react-router-dom';
-
+import ReactGA from 'react-ga4';
 const TodayMungListCard = ({ listData, data }: ListCardProps) => {
   const { user } = listData;
   const navigate = useNavigate();
 
   const handleListClick = () => {
+    ReactGA.event({
+      category: 'Diary',
+      action: 'View Diary',
+      label: `Diary ID: ${data.diaryId}`,
+    });
     navigate(`/todaymung/detail/${data.diaryId}`);
   };
 

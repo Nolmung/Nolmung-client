@@ -23,6 +23,7 @@ import { PostReviewRequest } from '@/service/apis/review/index.type';
 import { usePostReviews } from '../todaymungWrite/queries';
 import { useReviewConfirmModalStore } from '@/stores/useReviewConfirmModalStore';
 import { useTodayMungStore } from '../todaymungWrite/stores/todayMungStore';
+import ReactGA from 'react-ga4';
 
 export interface SearchHistoryItem {
   id: number;
@@ -66,7 +67,12 @@ function TodayMungPlaceRegist() {
 
   const handleSearch = (searchKeyword?: string) => {
     const searchValue = searchKeyword || inputRef?.current?.value.trim();
-    console.log(searchValue, searchKeyword, inputRef?.current?.value.trim());
+
+    ReactGA.event({
+      category: 'Search Interaction',
+      action: 'Search Keyword Entered',
+      label: searchValue, // 입력된 검색어
+    });
     if (!searchValue) return;
     const newSearchItem: SearchHistoryItem = {
       id: Date.now(),
@@ -80,10 +86,21 @@ function TodayMungPlaceRegist() {
   };
 
   const handleDeleteKeyword = (id: number) => {
+    ReactGA.event({
+      category: 'Search Interaction',
+      action: 'Search Keyword Deleted',
+      label: 'Keyword Deleted', // 삭제된 항목에 대한 레이블
+    });
+
     setSearchHistory(deleteSearchKeyword(searchHistory, id));
   };
 
   const handleClearHistory = () => {
+    ReactGA.event({
+      category: 'Search Interaction',
+      action: 'Search History Cleared',
+      label: 'All History Deleted',
+    });
     if (searchHistory.length === 0) return;
     openModal();
   };
@@ -105,6 +122,11 @@ function TodayMungPlaceRegist() {
     }));
 
     if (reviewRequestList.length > 0) {
+      ReactGA.event({
+        category: 'Review Interaction',
+        action: 'Submit Review',
+        label: 'Review Submitted', // 리뷰 등록 액션
+      });
       reviewMutate(reviewRequestList);
     }
   };
@@ -113,9 +135,6 @@ function TodayMungPlaceRegist() {
   const { isReviewConfirmModalOpen, closeReviewConfirmModal } =
     useReviewConfirmModalStore();
 
-  useEffect(() => {
-    console.log(isReviewConfirmModalOpen);
-  }, [isReviewConfirmModalOpen]);
   if (isLoading) return <LoadingSpinnerLottie />;
   if (error) return <div>에러 발생</div>;
 

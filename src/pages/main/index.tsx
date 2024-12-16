@@ -31,6 +31,9 @@ import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import LoginPromptModal from '@/common/components/loginPromptModal';
 import getIsLogin from '@/common/utils/getIsLogin';
 import { FilterState } from './types/filter';
+import { withEvent } from '@/service/googleAnalytics/analytics';
+import { EVENTS } from '@/service/googleAnalytics/events';
+import ReactGA from 'react-ga4';
 // import { LoadingNolmungLottie } from '@/common/components/lottie';
 
 function Main() {
@@ -77,6 +80,8 @@ function Main() {
 
   const isLoggedIn = getIsLogin();
 
+  const isInitialMountRef = useRef(true); // 첫 마운트인지 확인
+
   // const [isMapLoading, setIsMapLoading] = useState(true);
 
   /** 마운트 될 때 3초간 실행 -> @Todo 로딩 로직 생각하여 적용하기 */
@@ -98,6 +103,21 @@ function Main() {
   const categoryFromUrl = query.get('category');
   const searchFromUrl = query.get('search');
 
+  /**사용자가 지도를 얼마나 확대하거나 축소하는지 파악 */
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    naver.maps.Event.addListener(mapRef.current, 'zoom_changed', () => {
+      const zoomLevel = mapRef.current?.getZoom();
+      ReactGA.event({
+        category: EVENTS.MAIN.MAP_ZOOM.category,
+        action: 'zoom_changed',
+        label: `Zoom Level ${zoomLevel}`,
+        value: zoomLevel,
+      });
+    });
+  }, []);
+
   useEffect(() => {
     if (!searchFromUrl) {
       setBottomCardVisible(false);
@@ -107,7 +127,7 @@ function Main() {
   }, [categoryFromUrl, searchFromUrl]);
 
   useEffect(() => {
-    const initializeMap = async () => {
+    const initializeMap = withEvent(async () => {
       if (!mapContainerRef.current || !naver || !mapCenter) return;
 
       if (!mapRef.current) {
@@ -178,6 +198,7 @@ function Main() {
               },
             });
           }
+
         } catch (error) {
           // setIsMapLoading(false);
           console.error('Error during API call:', error);
@@ -189,7 +210,7 @@ function Main() {
         );
         mapRef.current.setCenter(newCenter); //중심 좌표 업데이트
       }
-    };
+    }, EVENTS.MAIN.MAP_MOVE);
     // 지도 초기화 함수 호출
     initializeMap();
   }, [mapCenter]);
@@ -261,6 +282,14 @@ function Main() {
 
   /** 지도로 돌아올 경우 기존에 활성화된 카테고리, 바텀시트, 바텀카드, 마커 비활성화 */
   useEffect(() => {
+
+    /** 첫 마운트일 경우 바텀시트 오픈 */
+    if (isInitialMountRef.current) {
+      setBottomSheetVisible(true);
+      isInitialMountRef.current = false;
+      return;
+    } 
+
     if (location.pathname === '/' && !location.search) {
       setCategory(null);
       setBottomSheetVisible(false);
@@ -282,6 +311,7 @@ function Main() {
       selectedMarkerRef.current = null;
     }
   }, [location, location.pathname, location.search]);
+
 
   /** 지도에서 장소 검색 get 함수 */
   const getAndInitMarkers = async () => {
@@ -342,7 +372,7 @@ function Main() {
   };
 
   /** 현 지도에서 검색 버튼 클릭 이벤트 함수 */
-  const handleSearchCurrentButtonClick = async () => {
+  const handleSearchCurrentButtonClick = withEvent(async () => {
     getCurrentAndMaxCoordinate(mapRef.current!);
     const newCenter = mapRef.current!.getCenter();
     setMapCenter({ latitude: newCenter.y, longitude: newCenter.x });
@@ -359,7 +389,14 @@ function Main() {
       console.error('Error during get and init markers', error);
     }
     setIsCurrentButtonActive(false);
-  };
+
+    ReactGA.event({
+      category: EVENTS.MAIN.USER_LOCATION_BUTTON_CLICK.category,
+      action: 'click',
+      label: categoryFromUrl || 'no_category',
+      value: newCenter ? Math.floor(newCenter.y) : undefined,
+    });
+  }, EVENTS.MAIN.USER_LOCATION_BUTTON_CLICK);
 
   /** 기존 활성화된 마커 초기화 후 새 마커를 활성화 하는 함수 */
   const initMarkerActive = (marker: CustomMarker) => {
@@ -408,6 +445,12 @@ function Main() {
     const position = marker.getPosition();
     setMapCenter({ latitude: position.y - 0.0005, longitude: position.x });
     initMarkerActive(marker);
+    ReactGA.event({
+      category: EVENTS.MAIN.MARKER_CLICK.category,
+      action: 'marker_clicked',
+      label: marker.data.placeName,
+      value: marker.data.placeId,
+    });
   };
 
   /** 지도 클릭 시, 기존에 활성화된 컴포넌트들을 비활성화 하도록 변경하는 이벤트 함수 */
@@ -417,6 +460,11 @@ function Main() {
       setBottomCardVisible(false);
       setCategory(null);
       navigate('/');
+    });
+    ReactGA.event({
+      category: EVENTS.MAIN.MAP_CLICK.category,
+      action: 'map_click',
+      label: 'unselect_markers',
     });
   };
 
@@ -431,8 +479,37 @@ function Main() {
       );
       currentLocationMarker.current?.setPosition(currentPosition);
     });
+    ReactGA.event({
+      category: EVENTS.MAIN.USER_LOCATION_BUTTON_CLICK.category,
+      action: 'move_to_user_location',
+      label: 'User Current Location',
+    });
     navigate('/');
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      ReactGA.event({
+        category: EVENTS.MAIN.PAGE_EXIT.category,
+        action: 'page_unload',
+        label: 'Main Page Exit',
+      });
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ReactGA.event({
+        category: 'Engagement',
+        action: 'User has been on the page for 5 minutes',
+      });
+    }, 300000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <S.Wrapper>
@@ -450,14 +527,14 @@ function Main() {
         <S.Wrapper onClick={(e) => e.stopPropagation()}>
           <S.BottomSheetWrapper onClick={(e) => e.stopPropagation()}>
             <S.LocationButtonWrapper
-              bottomHeight={currentButtonHeight}
+              $bottomHeight={currentButtonHeight}
               onClick={handleLocationButtonClick}
             >
               <LocationButtonIcon width={38} height={38} />
             </S.LocationButtonWrapper>
             {isCurrentButtonActive && (
               <S.SearchCurrentButton
-                bottomHeight={currentButtonHeight}
+                $bottomHeight={currentButtonHeight}
                 onClick={handleSearchCurrentButtonClick}
               >
                 <Refresh width={12} height={12} />
@@ -470,8 +547,8 @@ function Main() {
               {bottomCardVisible &&
                 (selectedMarkerRef.current || markerData) && (
                   <S.Bottom
-                    bottomVisible={bottomCardVisible}
-                    bottomHeight={bottomHeight}
+                    $bottomVisible={bottomCardVisible}
+                    $bottomHeight={bottomHeight}
                   >
                     <Content
                       isCard={true}
@@ -485,8 +562,8 @@ function Main() {
                 )}
             </S.BottomCardWrapper>
             <S.Bottom
-              bottomVisible={bottomSheetVisible}
-              bottomHeight={bottomHeight}
+              $bottomVisible={bottomSheetVisible}
+              $bottomHeight={bottomHeight}
             >
               <BottomSheet
                 setSelectedFilter={setSelectedFilter}

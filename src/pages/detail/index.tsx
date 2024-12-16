@@ -38,6 +38,7 @@ import { usePostBookmarks } from '../main/queries';
 import getIsLogin from '@/common/utils/getIsLogin';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import checkUserDevice from '../main/utils/checkUserDevice';
+import ReactGA from 'react-ga4';
 
 function Detail() {
   const navigate = useNavigate();
@@ -67,16 +68,12 @@ function Detail() {
 
   const handleViewMoreButtonClick = () => {
     setVisibleTodayMungCard((prev) => prev + 3);
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Click View More Button',
+      label: 'Today Mung Cards',
+    });
   };
-
-  if (isLoading) return <LoadingSpinnerLottie />;
-  if (isError || !data) return <p>Error loading post detail</p>;
-
-  const labelTotalCount = data.labels?.reduce((acc, cur) => {
-    return acc + cur.labelCount;
-  }, 0);
-
-  const openingHour = data.openHour?.split(' ');
 
   const isPriceAvailable = (price: PlacePrice) => {
     return price == '변동' || price == '없음';
@@ -101,6 +98,11 @@ function Detail() {
           console.error('Failed to delete bookmark:', error);
         },
       });
+      ReactGA.event({
+        category: 'Bookmark',
+        action: 'Remove Bookmark',
+        label: data!.placeName,
+      });
     } else {
       addBookmarks(data!.placeId, {
         onSuccess: (data) => {
@@ -112,8 +114,22 @@ function Detail() {
           console.error('Failed to add bookmark:', error);
         },
       });
+      ReactGA.event({
+        category: 'Bookmark',
+        action: 'Add Bookmark',
+        label: data!.placeName,
+      });
     }
   };
+
+  if (isLoading) return <LoadingSpinnerLottie />;
+  if (isError || !data) return <p>Error loading post detail</p>;
+
+  const labelTotalCount = data.labels?.reduce((acc, cur) => {
+    return acc + cur.labelCount;
+  }, 0);
+
+  const openingHour = data.openHour?.split(' ');
 
   const device = checkUserDevice();
   return (

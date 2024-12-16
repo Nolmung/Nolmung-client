@@ -14,6 +14,7 @@ import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetDogsList, useGetUser } from './hooks';
 import PetProfileCard from './components/profile';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
+import ReactGA from 'react-ga4';
 
 function Mypage() {
   useSetDocumentTitle('마이페이지');
@@ -29,9 +30,19 @@ function Mypage() {
     return <LoadingSpinnerLottie />;
   }
   const navigateToEditPage = () => {
+    ReactGA.event({
+      category: 'User',
+      action: 'Navigate to Edit Profile',
+      label: 'User clicked on Edit Profile button',
+    });
     navigate('/useredit', { state: { userId: userData?.userId } });
   };
   const handleResearchClick = () => {
+    ReactGA.event({
+      category: 'User',
+      action: 'Click Survey',
+      label: 'User clicked on Survey link',
+    });
     window.open(
       'https://docs.google.com/forms/d/e/1FAIpQLSc1KVR_ZgzuEIcGN6OffKmN4OeQqkMH5Iq91fzvyB-F9R_yFQ/viewform?usp=sharing',
       '_blank',
@@ -39,11 +50,21 @@ function Mypage() {
   };
 
   const handleLoginClick = () => {
+    ReactGA.event({
+      category: 'User',
+      action: 'Logout',
+      label: 'User clicked on Logout button',
+    });
     localStorage.removeItem('accessToken');
     navigate(ROUTE.LOGIN());
   };
 
   const handleChannelClick = () => {
+    ReactGA.event({
+      category: 'User',
+      action: 'Click Kakao Channel',
+      label: 'User clicked on Kakao Channel link',
+    });
     window.open('http://pf.kakao.com/_iMxbdn');
   };
 

@@ -23,6 +23,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import RegistButton from '../registButton';
+import ReactGA from 'react-ga4';
 import { convertFormatDate } from '@/common/utils/convertFormatDate';
 
 dayjs.locale('ko');
@@ -48,8 +49,19 @@ function renderDayWithMarker(
 
   const handleDayClick = () => {
     if (isTruthy) {
+      ReactGA.event({
+        category: 'Diary',
+        action: 'View Diary',
+        label: `Diary ID: ${diary?.diaryId}`,
+      });
+
       navigate(`/todaymung/detail/${diary?.diaryId}`);
     } else if (isToday) {
+      ReactGA.event({
+        category: 'Diary',
+        action: 'Create New Diary',
+        label: 'User navigated to create new diary',
+      });
       navigate(ROUTE.TODAYMUNG_WRITE());
     }
   };
