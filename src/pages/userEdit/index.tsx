@@ -69,7 +69,6 @@ function UserEdit() {
           const { latitude, longitude } = await convertAddressToLatlng(address);
           setLatitude(latitude);
           setLongitude(longitude);
-          console.log('위도:', latitude, '경도:', longitude);
         } catch (error) {
           console.error('주소 변환 실패:', error);
           setLatitude(null);

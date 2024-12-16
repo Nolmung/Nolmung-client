@@ -14,11 +14,7 @@ Sentry.init({
     Sentry.replayIntegration(),
   ],
   tracesSampleRate: 1.0,
-  tracePropagationTargets: [
-    'localhost',
-    /^https:\/\/nolmung\.netlify\.app/,
-    /^https:\/\/nolmung-official\.netlify\.app/,
-  ],
+  tracePropagationTargets: [/^https:\/\/nolmung-official\.netlify\.app/],
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0,
 });

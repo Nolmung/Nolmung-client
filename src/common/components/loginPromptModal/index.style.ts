@@ -10,6 +10,8 @@ export const S = {
     box-sizing: border-box;
     gap: 10px;
     z-index: 10000;
+    min-width: 400px;
+    min-height: 400px;
   `,
 
   Title: styled.div`
