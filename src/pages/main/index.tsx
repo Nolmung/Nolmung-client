@@ -80,6 +80,8 @@ function Main() {
 
   const isLoggedIn = getIsLogin();
 
+  const isInitialMountRef = useRef(true); // 첫 마운트인지 확인
+
   // const [isMapLoading, setIsMapLoading] = useState(true);
 
   /** 마운트 될 때 3초간 실행 -> @Todo 로딩 로직 생각하여 적용하기 */
@@ -196,6 +198,7 @@ function Main() {
               },
             });
           }
+
         } catch (error) {
           // setIsMapLoading(false);
           console.error('Error during API call:', error);
@@ -279,6 +282,14 @@ function Main() {
 
   /** 지도로 돌아올 경우 기존에 활성화된 카테고리, 바텀시트, 바텀카드, 마커 비활성화 */
   useEffect(() => {
+
+    /** 첫 마운트일 경우 바텀시트 오픈 */
+    if (isInitialMountRef.current) {
+      setBottomSheetVisible(true);
+      isInitialMountRef.current = false;
+      return;
+    } 
+
     if (location.pathname === '/' && !location.search) {
       setCategory(null);
       setBottomSheetVisible(false);
@@ -300,6 +311,7 @@ function Main() {
       selectedMarkerRef.current = null;
     }
   }, [location, location.pathname, location.search]);
+
 
   /** 지도에서 장소 검색 get 함수 */
   const getAndInitMarkers = async () => {

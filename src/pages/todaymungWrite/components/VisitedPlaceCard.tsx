@@ -20,16 +20,20 @@ function VisitedPlaceCard({
   return (
     <S.PlaceCard>
       <S.PlaceTitleRateWrapper>
-        <S.PlaceIconWrapper>
-          {CATEGORY_OPTIONS?.find((option) => option.value == category)?.icon &&
-            React.createElement(
-              CATEGORY_OPTIONS.find((option) => option.value === category)!
-                .icon,
-            )}
-        </S.PlaceIconWrapper>
-        <S.PlaceTitle>{placeName}</S.PlaceTitle>
+        <S.PlaceWrapper>
+          <S.PlaceIconWrapper>
+            {CATEGORY_OPTIONS?.find((option) => option.value == category)
+              ?.icon &&
+              React.createElement(
+                CATEGORY_OPTIONS.find((option) => option.value === category)!
+                  .icon,
+              )}
+            
+          </S.PlaceIconWrapper>
+          <S.PlaceTitle>{placeName}</S.PlaceTitle>
+        </S.PlaceWrapper>
         <S.PlaceAverageRate>
-          <FilledStar width={16} />
+          <FilledStar width={14} />
           {rating}
         </S.PlaceAverageRate>
       </S.PlaceTitleRateWrapper>

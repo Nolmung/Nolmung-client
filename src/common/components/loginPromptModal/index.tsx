@@ -18,7 +18,7 @@ function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
     window.innerHeight * 0.4 < 400 ? 400 : window.innerHeight * 0.4;
 
   const modalContentWidth =
-    window.innerWidth * 0.7 > 400 ? 400 : window.innerWidth * 0.7;
+    window.innerWidth * 0.8 > 390 ? 390 : window.innerWidth * 0.8;
 
   const handleLoginButtonClick = () => {
     ReactGA.event({

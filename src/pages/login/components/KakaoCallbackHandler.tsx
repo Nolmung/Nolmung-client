@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { instance } from '@/service/apis';
+import { LoadingNolmungLottie } from '@/common/components/lottie';
 
 function KakaoCallbackHandler() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const handleKakaoCallback = async () => {
@@ -32,7 +34,11 @@ function KakaoCallbackHandler() {
 
         const { loginStatus, id: userId, email, role } = response.data.data;
         if (loginStatus === 'LOGIN_SUCCESS' && role === 'USER') {
-          navigate('/');
+          setIsLoading(true);
+          setTimeout(() => {
+            setIsLoading(false);
+            navigate('/');
+          }, 2500); 
         } else if (loginStatus === 'SIGN_UP_REQUIRED' && role === 'GUEST') {
           navigate('/signUp', { state: { userId, email, loginStatus, role } });
         } else {
@@ -49,7 +55,15 @@ function KakaoCallbackHandler() {
     handleKakaoCallback();
   }, [navigate]);
 
-  return <div></div>;
+  return (
+    <div>
+      {isLoading ? (
+        <LoadingNolmungLottie /> // Lottie를 표시
+      ) : (
+        <div></div>
+      )}
+    </div>
+  );;
 }
 
 export default KakaoCallbackHandler;

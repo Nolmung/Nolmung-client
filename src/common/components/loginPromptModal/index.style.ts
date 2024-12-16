@@ -4,7 +4,7 @@ export const S = {
   Wrapper: styled.div`
     width: 100%;
     height: 100%;
-    padding: 36px 24px 0 24px;
+    padding: 36px 24px 6px 24px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -27,14 +27,14 @@ export const S = {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    white-space: nowrap;
   `,
   IconWrapper: styled.div`
     width: 100%;
     height: 50%;
-    padding-top: 20px;
     display: flex;
     justify-content: center;
-    justify-content: center;
+    align-items: center;
   `,
   LoginPromptButtonWrapper: styled.div`
     width: 100%;
@@ -43,9 +43,9 @@ export const S = {
     align-items: center;
   `,
   LoginPromptButton: styled.button`
-    width: 80%;
+    width: 100%;
     height: 48px;
-    border-radius: 24px;
+    border-radius: 8px;
     color: #fff;
     font-size: 16px;
     font-weight: 600;

@@ -65,7 +65,7 @@ export const S = {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    width: 80%;
+    width: 92%;
   `,
   PlaceReviewCount: styled.p`
     color: #5e5e5e;

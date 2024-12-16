@@ -32,8 +32,10 @@ const pathRules: PathRules = {
     '/login',
     '/recommend',
     /\?cur=main/,
+    /\/oauth\/kakao\/callback/,
     // '/todaymung',
-  ], // Header를 숨길 경로들
+  ],
+  /** TabBar를 숨길 경로들 */
   hideTabBar: [
     /^\/detail\/\d+$/,
     '/login',
@@ -43,6 +45,7 @@ const pathRules: PathRules = {
     '/signUp',
     '/dogs',
     /^\/dogs\/edit\/\d+$/,
+    /\/oauth\/kakao\/callback/,
   ], // TabBar를 숨길 경로들
 };
 
@@ -54,6 +57,7 @@ const shouldHide = (key: keyof PathRules, pathname: string): boolean => {
   );
 };
 
+/** 페이지 내의 공용 Container */
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
   const { reviewlist } = useReviewStore();
@@ -87,6 +91,7 @@ function Layout({ children }: LayoutProps) {
   const { openReviewConfirmModal } = useReviewConfirmModalStore();
 
   useEffect(() => {
+    /** 뒤로가기 감지 핸들러  */
     const handlePopState = () => {
       if (
         location.pathname.startsWith('/todaymung/placeregist') &&
@@ -321,7 +326,6 @@ function Layout({ children }: LayoutProps) {
           });
         });
         break;
-
       default:
         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }

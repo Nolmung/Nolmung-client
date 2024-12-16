@@ -1,50 +1,18 @@
-# Nolmung-client
+## 서비스 개요
 
-## 💡 서비스 개요
-> 강아지 동반 가능 시설 공유 플랫폼 ‘놀멍(Nolmung)’은 반려인들이 반려견과 함께 방문할 수 있는 장소를 쉽게 탐색하고, </br>
-> 방문 후 ‘오늘멍’이라는 일기를 통해 소중한 추억을 기록하고 회상함으로써 반려견과의 유대감을 더욱 강화한다. </br>
-> 또한, 다른 사용자들과 오늘멍을 공유하여 다양한 반려생활을 지원한다.
-
-<br/>
-
-## 🙌🏻 서비스 목적
-- 반려견 동반 가능한 장소 제공
-- 반려견과의 활동 활성화
-- 추억 기록
+![readme_1_edit](https://github.com/user-attachments/assets/6e080230-c4e0-4953-91cf-816ede37fd9e)
+![readme_2](https://github.com/user-attachments/assets/71df676c-e96a-49e3-9a6f-6febb9e4da08)
+![readme_3](https://github.com/user-attachments/assets/48df4c7d-4b37-4c7a-b351-b3e198881ed9)
+![readme_4](https://github.com/user-attachments/assets/fe9ed836-fdaf-45b6-bd6a-1f64b467d5d8)
+![readme_5](https://github.com/user-attachments/assets/1110ff65-eff5-485e-b89d-a9ea237a50c7)
+<div align="center">
+	
+### [오늘멍 바로가기](https://nolmung-official.netlify.app/)
+</div>
 
 <br/>
 
-## 🏛️ 디렉토리 구조
-```
-└─ src
- └─ components
-	├─ common
-	├─ mypage
-	├─ ...		
- ├─ assets 
- ├─ hooks
- ├─ pages
- ├─ constants
- ├─ mocks
- ├─ styles
- ├─ apis
- ├─ utils
- ├─ stores
- ├─ App.tsx
- └─ Main.tsx
-```
-
-<br/>
-
-## ⚙️ 서버 실행 방법
-```
-yarn install
-yarn dev
-```
-
-<br/>
-
-## 🔧 기능 소개 
+## 기능 소개 
 **1. 회원 등록 및 관리 시스템** : 소셜 로그인 및 회원가입
 
 **2. 반려견 정보 관리 시스템** : 프로필 등록, 조회, 수정 및 삭제
@@ -59,10 +27,94 @@ yarn dev
 
 **7. 추천 시스템** : 위치정보 기반 추천, 즐겨찾기 순 추천, 견종별 입장 가능 시설 추천, 개인 맞춤형 추천
 
+<br/>
+
+
+## 기술 스택
+<kbd>
+<img width="600" src="https://github.com/user-attachments/assets/02b9c8cf-fdc7-49f4-b21b-042d6ff32f8d" alt="nolmung_architecture" style="border:1px solid black;">
+</kbd>
+
+
+<br/>
+<br/>
+
+
+## 시스템 아키텍쳐
+<kbd>
+<img width="600" src="https://github.com/user-attachments/assets/e7824822-ce2b-4317-a3c6-5fbea85e32b9" alt="nolmung_architecture" style="border:1px solid black;">
+</kbd>
+
+
+<br/>
+<br/>
+
+## ERD
+<kbd>
+<img width="600" src="https://github.com/user-attachments/assets/530b465d-729f-4645-98fb-8a7906ece0cc" alt="nolmung_erd" style="border:1px solid black;">
+</kbd>
+<p>
+  🔗 <a href="https://www.erdcloud.com/d/i8uWGycunfcGahQYE" rel="nofollow">ERDCloud</a>  
+</p>
+
 
 <br/>
 
-## 📋 Git 브랜치 전략
+## 와이어프레임
+<kbd>
+<img width="600" src="https://github.com/user-attachments/assets/1156d190-5248-4332-892e-437865cb8d7c" alt="nolmung_wireframe" style="border:1px solid black;">
+</kbd>
+
+
+<br/>
+<br/>
+
+
+## 서버 실행 방법
+```
+yarn install
+yarn dev
+```
+
+
+<br/>
+<br/>
+
+
+## 디렉토리 구조
+```
+├── src
+│   ├── App.tsx
+│   ├── Router.tsx
+│   ├── assets (이미지, 폰트 등)
+│   ├── common (공통으로 사용하는 값들)
+│   │   ├── components
+│   │   ├── constants
+│   │   ├── hooks
+│   │   ├── styles
+│   │   ├── types
+│   │   └── utils
+│   ├── main.tsx
+│   ├── pages (페이지)
+│   │   ├── detail 
+│   │   │   ├── components (페이지 내에서 사용할 컴포넌트)
+│   │   │   ├── stores (페이지 내에서 사용할 스토어)
+│   │   │   ├── hooks (페이지 내에서 사용할 커스텀 훅)
+│   │   │   └── index.tsx
+│   │   ├── main
+│   ├── service (서버와 통신시 필요한 파일)
+│   │   ├── apis
+│   │   └── googleAnalytics
+│   ├── stores (공통으로 사용하는 스토어)
+...
+```
+
+
+<br/>
+<br/>
+
+
+## Git 브랜치 전략
 > **Github-Flow** <br>
 > 기본적으로 Github Flow를 따라 개발 프로세스를 진행한다. </br>
 > 이는 기능별 브랜치를 생성하고, 코드 리뷰 후 develop 브랜치에 병합하는 방식을 의미한다.
@@ -72,7 +124,7 @@ yarn dev
 **1. 깃 컨벤션**
 
   <kbd>
-    <img width="400" height="300" src="https://github.com/user-attachments/assets/f12fd40e-4dac-47c1-9347-4631c03c7ead" alt="nolmung_gitflow" style="border:1px solid black;">
+    <img width="600" src="https://github.com/user-attachments/assets/f12fd40e-4dac-47c1-9347-4631c03c7ead" alt="nolmung_gitflow" style="border:1px solid black;">
   </kbd>
 
 <br>
@@ -97,26 +149,23 @@ yarn dev
 
 <br/>
 
-## 🗓️ 추진 일정
+## 추진 일정
   <kbd>
-      <img width="600" height="200" src="https://github.com/user-attachments/assets/307aa836-668e-48bb-8a39-266ec626a6e1" alt="nolmung_schedule" style="border:1px solid black;">
+      <img width="600" src="https://github.com/user-attachments/assets/307aa836-668e-48bb-8a39-266ec626a6e1" alt="nolmung_schedule" style="border:1px solid black;">
   </kbd>
 
 <br/>
 <br/>
 
-- 현재 진행 사항 (2주차)
-  - 기능 설계 (완료)
-  - 데이터베이스 설계 (완료)
-  - API 설계 (완료)
-  - UI/UX 디자인 (진행중)
-  - 인프라 (진행 예정) : AWS RDS 구축
-  - API Server 개발 (진행 예정)
-  - 프론트 컴포넌트 개발 (진행중)
+- 현재 진행 사항 (5주차)
+  - 프론트 컴포넌트 (완료)
+  - API 연동 (완료)
+  - QA (진행 예정)
 
 <br/>
 
-## 👥 팀원 및 역할 소개
+
+## 팀원 및 역할 소개
 
 <table>
   <tr align="center">

@@ -1,10 +1,10 @@
+import { convertFormatDate } from '@/common/utils/convertFormatDate';
 import { S } from '../../styles/TodayMungListCard.style';
 import { ListCardProps } from '../../types/TodayMungList.type';
 import { useNavigate } from 'react-router-dom';
 import ReactGA from 'react-ga4';
 const TodayMungListCard = ({ listData, data }: ListCardProps) => {
   const { user } = listData;
-
   const navigate = useNavigate();
 
   const handleListClick = () => {
@@ -26,7 +26,7 @@ const TodayMungListCard = ({ listData, data }: ListCardProps) => {
         <S.ProfileImg src={user.profileImageUrl} />
         <S.UserInfoTextArea>
           <S.UserName>{user.nickname}</S.UserName>
-          <S.PostDate>{data.createdAt}</S.PostDate>
+          <S.PostDate>{convertFormatDate(data.createdAt)}</S.PostDate>
         </S.UserInfoTextArea>
       </S.UserInfoArea>
       <S.ContentArea>

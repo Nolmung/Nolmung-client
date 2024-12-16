@@ -1,9 +1,10 @@
+import { BOTTOM_NAV_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 
 export const S = {
   Wrapper: styled.div`
     width: 100%;
-    height: 90px;
+    height: ${BOTTOM_NAV_HEIGHT}px;
     min-width: 320px;
     position: sticky;
     bottom: 0;
@@ -22,7 +23,7 @@ export const S = {
     gap: 5px;
     text-align: center;
     color: #5e5e5e;
-    margin-bottom: 20px;
+    margin: 10px 0 20px;
   `,
   IconDescription: styled.div`
     font-size: 12px;
