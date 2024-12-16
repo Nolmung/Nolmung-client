@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { DogInfoType } from '@/service/apis/dog/index.type';
 import { toast } from 'react-toastify';
 
+/** 반려견 수정 쿼리문 */
 export const usePatchDogs = () => {
   return useMutation({
     mutationFn: ({ dogId, dogInfo }: { dogId: number; dogInfo: DogInfoType }) =>
@@ -16,7 +17,7 @@ export const usePatchDogs = () => {
     },
   });
 };
-
+/** 반려견 삭제 쿼리문 */
 export const useDeleteDogs = () => {
   return useMutation({
     mutationFn: (dogId: number) => deleteDogs(dogId),

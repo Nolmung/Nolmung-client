@@ -13,6 +13,7 @@ interface DatePickerProps {
   onChange: (newValue: Dayjs | null) => void;
 }
 
+/** 생년월일 입력할 때 사용하는 MUI */
 const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
   const theme = createTheme({
     typography: {
