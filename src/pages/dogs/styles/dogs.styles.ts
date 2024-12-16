@@ -20,16 +20,16 @@ export const S = {
     height: 24px;
   `,
   SmallDogIcon: styled(SmallDog)<{ isSelected: boolean }>`
-    width: 58px;
-    height: 32px;
+    width: 65px;
+    height: 36px;
     & path {
       fill: ${({ isSelected }) =>
         isSelected ? '#17aa1a' : '#A7A7A7'} !important;
     }
   `,
   MeduimDogIcon: styled(MeduimDog)<{ isSelected: boolean }>`
-    width: 50px;
-    height: 41px;
+    width: 52px;
+    height: 43px;
     & path {
       fill: ${({ isSelected }) =>
         isSelected ? '#17aa1a' : '#A7A7A7'} !important;
@@ -127,12 +127,12 @@ export const S = {
     width: 100%;
     max-width: 423px;
     flex-direction: row;
-    gap: 20px;
+    gap: 8px;
     overflow-x: scroll;
   `,
   AgeChoice: styled.div<{ isSelected: boolean }>`
     margin-top: 10px;
-    width: 106px;
+    width: 100%;
     height: 106px;
     background-color: ${({ isSelected }) =>
       isSelected ? '#d3fbd4' : '#fdfdfd'};
@@ -162,6 +162,7 @@ export const S = {
     white-space: nowrap;
   `,
   AgeFlex: styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
