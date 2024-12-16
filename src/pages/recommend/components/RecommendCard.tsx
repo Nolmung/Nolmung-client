@@ -3,6 +3,7 @@ import S from '../styles/RecommendCard.style';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import ReactGA from 'react-ga4';
+import { CATEGORY_OPTIONS } from '@/pages/main/constants/categoryBar';
 interface RecommendCardProps {
   title: string;
   explanation: string;
@@ -40,14 +41,23 @@ function RecommendCard({
               onClick={() => navigateToDetail(mock.placeId)}
             >
               <S.PlaceImage src={mock.placeImageUrl} alt="장소 이미지" />
-              <S.NameAddressWrapper>
+              <S.NameCategoryWrapper>
                 <S.PlaceName>{mock.placeName}</S.PlaceName>
                 <S.PlaceAddress>
-                  {mock.Address?.split(' ')[0] +
-                    ' ' +
-                    mock.Address?.split(' ')[1]}
+                  {
+                    CATEGORY_OPTIONS?.find(
+                      (option) => option.value === (mock?.category || 'ETC'),
+                    )?.label
+                  }
                 </S.PlaceAddress>
-              </S.NameAddressWrapper>
+              </S.NameCategoryWrapper>
+              <S.PlaceExplanation>
+                {mock.Address?.split(' ')[0] +
+                  ' ' +
+                  mock.Address?.split(' ')[1] +
+                  ' ' +
+                  mock.Address?.split(' ')[2]}
+              </S.PlaceExplanation>
             </S.PlaceWrapper>
           );
         })}
