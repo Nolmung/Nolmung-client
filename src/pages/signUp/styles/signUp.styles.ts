@@ -13,9 +13,7 @@ export const S = {
     overflow-y: auto;
     overflow-x: hidden;
   `,
-  DatepickerCalendarIcon: styled(DatepickerCalendar).withConfig({
-    shouldForwardProp: (prop) => prop !== 'ownerState',
-  })`
+  DatepickerCalendarIcon: styled(DatepickerCalendar)`
     width: 24px;
     height: 24px;
     padding: 1px;
@@ -86,7 +84,7 @@ export const S = {
   `,
   GenderSelect: styled.div<{ isSelected: boolean }>`
     margin-top: 8px;
-    width: 100%;
+    width: 23vw;
     height: 50px;
     background-color: ${({ isSelected }) =>
       isSelected ? '#d3fbd4' : '#f0f0f0'};
@@ -114,11 +112,10 @@ export const S = {
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 100%;
-    max-width: 423px;
-    justify-content: space-between;
   `,
-  
+  GenderContainer: styled.div`
+    display: flex;
+  `,
   NextButton: styled.button<{ isActive: boolean }>`
     margin-top: 50px;
     width: 100%;

@@ -2,6 +2,7 @@ import { GoBackIcon } from '@assets/images/svgs';
 import { S } from '@common/components/header/index.styles';
 import { HeaderType } from '@common/components/header/index.type';
 import { match } from 'ts-pattern';
+import { useLocation } from 'react-router-dom';
 
 /**
  * 공용으로 사용되는 헤더 컴포넌트입니다.
@@ -12,14 +13,24 @@ import { match } from 'ts-pattern';
  * @param {() => void} handleBackButtonClick - 뒤로 가기 버튼 클릭 이벤트 핸들러입니다.
  *
  * @example
- * <Header 
+ * <Header
  *   title="홈 화면"
  *   showIcon={true}
  *   type="TitleCenter"
- *   handleBackButtonClick={() => console.log('뒤로가기 클릭')} 
+ *   handleBackButtonClick={() => console.log('뒤로가기 클릭')}
  * />
  */
 function Header({ title, showIcon, type, handleBackButtonClick }: HeaderType) {
+  const location = useLocation();
+  // 페이지가 `/dogs`일 경우 토큰 제거 후 뒤로가기 처리
+  const handleClick = () => {
+    if (location.pathname === '/dogs') {
+      localStorage.removeItem('accessToken'); // 토큰 제거
+      console.log('Access token removed and navigating back');
+    }
+    handleBackButtonClick();
+  };
+
   return (
     <>
       s
@@ -28,7 +39,7 @@ function Header({ title, showIcon, type, handleBackButtonClick }: HeaderType) {
           <S.LeftHeaderArea>
             <S.IconWrapper>
               {showIcon ? (
-                <GoBackIcon onClick={handleBackButtonClick} />
+                <GoBackIcon onClick={handleClick} />
               ) : (
                 <S.DummyIcon />
               )}
@@ -40,7 +51,7 @@ function Header({ title, showIcon, type, handleBackButtonClick }: HeaderType) {
           <S.CenterHeaderArea>
             <S.IconWrapper>
               {showIcon ? (
-                <GoBackIcon onClick={handleBackButtonClick} />
+                <GoBackIcon onClick={handleClick} />
               ) : (
                 <S.DummyIcon />
               )}

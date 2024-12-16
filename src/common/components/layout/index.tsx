@@ -35,7 +35,6 @@ const pathRules: PathRules = {
     '/my',
     /\?cur=main/,
     /\/oauth\/kakao\/callback/,
-    // '/todaymung',
   ],
   /** TabBar를 숨길 경로들 */
   hideTabBar: [
