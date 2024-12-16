@@ -51,7 +51,6 @@ const S = {
     line-height: normal;
     resize: none;
     touch-action: manipulation; /* 확대 방지 */
-    word-spacing: -5px;
     padding: 13px 0 0;
 
     &::placeholder {
@@ -60,7 +59,6 @@ const S = {
       font-style: normal;
       font-weight: 400;
       line-height: normal;
-      word-spacing: -5px;
     }
     &:focus {
       outline: none;
