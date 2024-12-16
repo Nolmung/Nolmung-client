@@ -1,7 +1,6 @@
 import S from '../styles/VisitedPlaceCard.style';
 import { CATEGORY_OPTIONS } from '@/pages/main/constants/categoryBar';
 import { AllCategory } from '@/common/types';
-import React from 'react';
 import { FilledStar } from '@/assets/images/svgs';
 
 interface VisitedPlaceCardProps {
