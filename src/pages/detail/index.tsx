@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -64,6 +64,11 @@ function Detail() {
 
   const handleBackArrowClick = () => {
     navigate(-1);
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Click Back Arrow',
+      label: 'goback from Detail Page to history',
+    });
   };
 
   const handleViewMoreButtonClick = () => {

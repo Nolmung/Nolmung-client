@@ -58,5 +58,10 @@ const St = {
     gap: 15px;
     margin-top: 15px;
   `,
+  InnerButtonWrapper: styled.p`
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  `,
 };
 export default St;

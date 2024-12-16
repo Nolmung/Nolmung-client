@@ -16,6 +16,7 @@ import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
 import { ROUTE } from '@/common/constants/route';
 import { useReviewConfirmModalStore } from '@/stores/useReviewConfirmModalStore';
+import ReactGA from 'react-ga4';
 
 type PathRule = string | RegExp;
 type PathRules = {
@@ -31,8 +32,10 @@ const pathRules: PathRules = {
     '/login',
     '/recommend',
     /\?cur=main/,
+    /\/oauth\/kakao\/callback/,
     // '/todaymung',
-  ], // Header를 숨길 경로들
+  ],
+  /** TabBar를 숨길 경로들 */
   hideTabBar: [
     /^\/detail\/\d+$/,
     '/login',
@@ -42,6 +45,7 @@ const pathRules: PathRules = {
     '/signUp',
     '/dogs',
     /^\/dogs\/edit\/\d+$/,
+    /\/oauth\/kakao\/callback/,
   ], // TabBar를 숨길 경로들
 };
 
@@ -53,6 +57,7 @@ const shouldHide = (key: keyof PathRules, pathname: string): boolean => {
   );
 };
 
+/** 페이지 내의 공용 Container */
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
   const { reviewlist } = useReviewStore();
@@ -86,24 +91,17 @@ function Layout({ children }: LayoutProps) {
   const { openReviewConfirmModal } = useReviewConfirmModalStore();
 
   useEffect(() => {
-    // 뒤로가기 감지 핸들러
+    /** 뒤로가기 감지 핸들러  */
     const handlePopState = () => {
       if (
-        location.search ||
-        location.pathname.startsWith('/todaymung/placeregist')
+        location.pathname.startsWith('/todaymung/placeregist') &&
+        reviewlist.length > 0
       ) {
-        if (reviewlist.length > 0) {
-          openReviewConfirmModal();
-        } else {
-          navigate('/todaymung/write');
-        }
+        openReviewConfirmModal();
       }
     };
-
-    // 이벤트 리스너 추가
     window.addEventListener('popstate', handlePopState);
 
-    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
@@ -127,6 +125,11 @@ function Layout({ children }: LayoutProps) {
       });
       setHandleBackButtonClick(() => () => {
         navigate('/todaymung');
+        ReactGA.event({
+          category: 'goBack',
+          action: 'click goBack button',
+          label: 'goBack from todaymungDetail to todaymung',
+        });
       });
       return;
     }
@@ -138,8 +141,13 @@ function Layout({ children }: LayoutProps) {
       });
       setHandleBackButtonClick(() => () => {
         navigate(-1);
+        ReactGA.event({
+          category: 'goBack',
+          action: 'click goBack button',
+          label: 'goBack from dogsEdit to myDogs',
+        });
+        return;
       });
-      return;
     }
 
     switch (true) {
@@ -151,6 +159,11 @@ function Layout({ children }: LayoutProps) {
         });
         setHandleBackButtonClick(() => () => {
           navigate(ROUTE.MAIN());
+          ReactGA.event({
+            category: 'goBack',
+            action: 'click goBack button',
+            label: 'goBack from mainCategory to main',
+          });
         });
 
         break;
@@ -163,6 +176,11 @@ function Layout({ children }: LayoutProps) {
         });
         setHandleBackButtonClick(() => () => {
           navigate(ROUTE.MAIN());
+          ReactGA.event({
+            category: 'goBack',
+            action: 'click goBack button',
+            label: 'goBack from mainSearch to main',
+          });
         });
         break;
 
@@ -175,6 +193,11 @@ function Layout({ children }: LayoutProps) {
           });
           setHandleBackButtonClick(() => () => {
             navigate(-1);
+            ReactGA.event({
+              category: 'goBack',
+              action: 'click goBack button',
+              label: 'goBack from todaymung historyBack',
+            });
           });
         }
         break;
@@ -188,6 +211,11 @@ function Layout({ children }: LayoutProps) {
           });
           setHandleBackButtonClick(() => () => {
             navigate(-1);
+            ReactGA.event({
+              category: 'goBack',
+              action: 'click goBack button',
+              label: 'goBack from dogs historyBack',
+            });
           });
         }
         break;
@@ -195,6 +223,11 @@ function Layout({ children }: LayoutProps) {
       case pathName.startsWith('/todaymung/detail'):
         setHandleBackButtonClick(() => () => {
           navigate(-1);
+          ReactGA.event({
+            category: 'goBack',
+            action: 'click goBack button',
+            label: 'goBack from todaymungDetail historyBack',
+          });
         });
         break;
 
@@ -210,6 +243,11 @@ function Layout({ children }: LayoutProps) {
           } else {
             deleteReviewAll();
             navigate('/todaymung');
+            ReactGA.event({
+              category: 'goBack',
+              action: 'click goBack button',
+              label: 'goBack from todaymungWrite to todaymung',
+            });
           }
         });
         break;
@@ -225,6 +263,11 @@ function Layout({ children }: LayoutProps) {
             openReviewConfirmModal();
           } else {
             navigate('/todaymung/write');
+            ReactGA.event({
+              category: 'goBack',
+              action: 'click goBack button',
+              label: 'goBack from todaymungPlaceRegist to todaymungWrite',
+            });
           }
         });
         break;
@@ -245,6 +288,11 @@ function Layout({ children }: LayoutProps) {
         });
         setHandleBackButtonClick(() => () => {
           navigate('/my');
+          ReactGA.event({
+            category: 'goBack',
+            action: 'click goBack button',
+            label: 'goBack from myReview to my',
+          });
         });
         break;
 
@@ -256,6 +304,11 @@ function Layout({ children }: LayoutProps) {
         });
         setHandleBackButtonClick(() => () => {
           navigate('/my');
+          ReactGA.event({
+            category: 'goBack',
+            action: 'click goBack button',
+            label: 'goBack from myFavorite to my',
+          });
         });
         break;
       case pathName == '/my/dogs/add':
@@ -266,9 +319,13 @@ function Layout({ children }: LayoutProps) {
         });
         setHandleBackButtonClick(() => () => {
           navigate('/my/dogs');
+          ReactGA.event({
+            category: 'goBack',
+            action: 'click goBack button',
+            label: 'goBack from myDogsAdd to myDogs',
+          });
         });
         break;
-
       default:
         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }
