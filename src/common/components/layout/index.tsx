@@ -103,7 +103,8 @@ function Layout({ children }: LayoutProps) {
       window.removeEventListener('popstate', handlePopState);
     };
   }, []);
-
+  
+  /** 헤더가 보여질 path 경로 추가 */
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');

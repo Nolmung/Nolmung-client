@@ -9,6 +9,7 @@ import useIsTodaymungEmpty from '@/common/utils/useIsTodaymungEmpty';
 import getIsLogin from '@/common/utils/getIsLogin';
 import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
 
+/** @common_tabBar 공용으로 들어갈 TabBar */
 function TabBar() {
   const location = useLocation();
   const navigate = useNavigate();
