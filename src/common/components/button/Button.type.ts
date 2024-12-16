@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+/** @common_button 공용버튼 스타일 props*/
 export interface ButtonStyleProps {
   label?: string;
   width?: string;
