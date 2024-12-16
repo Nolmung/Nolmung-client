@@ -1,7 +1,7 @@
 export const WINDOW_HEIGHT = window.innerHeight;
 
-export const BOTTOM_NAV_HEIGHT = 90; // 공통 탭바 높이
-export const HEADER_HEIGHT = 70; // 공통 헤더 높이
+export const BOTTOM_NAV_HEIGHT = 80;
+export const HEADER_HEIGHT = 64;
 
 export const DEFAULT_BOTTOM_HEIGHT = BOTTOM_NAV_HEIGHT;
 export const BOTTOM_HEIGHT = WINDOW_HEIGHT / 2 - 16;

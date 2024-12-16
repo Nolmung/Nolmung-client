@@ -1,3 +1,4 @@
+import { HEADER_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 
 export const S = {
@@ -6,7 +7,7 @@ export const S = {
     width: 100%;
     min-width: 320px;
     height: 100%;
-    max-height: 70px;
+    max-height: ${HEADER_HEIGHT}px;
     align-items: center;
     position: sticky;
     background-color: #fdfdfd;
@@ -44,7 +45,7 @@ export const S = {
     width: 100%;
     min-width: 320px;
     height: 100%;
-    max-height: 70px;
+    max-height: ${HEADER_HEIGHT}px;
     background-color: #fdfdfd;
     top: 0;
     left: 0;

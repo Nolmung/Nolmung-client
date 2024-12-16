@@ -48,7 +48,7 @@ const S = {
     border-radius: 10px;
     object-fit: cover;
   `,
-  NameAddressWrapper: styled.div`
+  NameCategoryWrapper: styled.div`
     display: flex;
     gap: 6px;
     margin-top: 16px;

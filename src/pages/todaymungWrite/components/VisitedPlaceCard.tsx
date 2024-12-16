@@ -1,7 +1,6 @@
 import S from '../styles/VisitedPlaceCard.style';
 import { CATEGORY_OPTIONS } from '@/pages/main/constants/categoryBar';
 import { AllCategory } from '@/common/types';
-import React from 'react';
 import { FilledStar } from '@/assets/images/svgs';
 
 interface VisitedPlaceCardProps {
@@ -17,19 +16,23 @@ function VisitedPlaceCard({
   rating,
   category,
 }: VisitedPlaceCardProps) {
+  const selectedOption = CATEGORY_OPTIONS.find(
+    (option) => option.value === category,
+  );
+
   return (
     <S.PlaceCard>
       <S.PlaceTitleRateWrapper>
-        <S.PlaceIconWrapper>
-          {CATEGORY_OPTIONS?.find((option) => option.value == category)?.icon &&
-            React.createElement(
-              CATEGORY_OPTIONS.find((option) => option.value === category)!
-                .icon,
+        <S.PlaceWrapper>
+          <S.PlaceIconWrapper>
+            {selectedOption?.icon && (
+              <selectedOption.icon width={14} height={14} />
             )}
-        </S.PlaceIconWrapper>
-        <S.PlaceTitle>{placeName}</S.PlaceTitle>
+          </S.PlaceIconWrapper>
+          <S.PlaceTitle>{placeName}</S.PlaceTitle>
+        </S.PlaceWrapper>
         <S.PlaceAverageRate>
-          <FilledStar width={16} />
+          <FilledStar width={14} />
           {rating}
         </S.PlaceAverageRate>
       </S.PlaceTitleRateWrapper>

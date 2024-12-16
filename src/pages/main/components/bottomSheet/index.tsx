@@ -11,6 +11,7 @@ import { useRef } from 'react';
 import { MarkerType } from '../../types';
 import { FilterState, FilterType } from '../../types/filter';
 import { NoResulLiedownUI } from '@/common/components/noResultUI';
+import ReactGA from 'react-ga4';
 
 type BottomSheetProps = {
   placeMap: MarkerType[];
@@ -49,12 +50,25 @@ function BottomSheet({
         ...selectedFilter,
         [type]: null,
       });
+      ReactGA.event({
+        category: 'User',
+        action: 'Click Filter',
+        label:
+          'userClicked FilterType' + type + 'userClicked' + value.toString(),
+      });
       return;
     }
+
     setSelectedFilter((prev) => ({
       ...prev,
       [type]: prev[type] === value ? null : value, // 선택 토글
     }));
+    ReactGA.event({
+      category: 'User',
+      action: 'Click Filter',
+      label:
+        'userCanceled FilterType' + type + 'userClicked' + value.toString(),
+    });
   };
 
   const filteredPlaceMap = placeMap.filter((place) => {
