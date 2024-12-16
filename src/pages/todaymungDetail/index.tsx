@@ -12,6 +12,7 @@ import { useGetTodaymungDetailData } from './queries';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { decodeToken } from '@/common/utils/configToken';
 import getIsLogin from '@/common/utils/getIsLogin';
+import { convertFormatDate } from '@/common/utils/convertFormatDate';
 
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
@@ -63,7 +64,9 @@ const TodayMungDetail = () => {
     <S.Wrapper>
       <S.Container>
         <S.DateArea>
-          <S.DiaryCreatedAt>{diaryData.createdAt}</S.DiaryCreatedAt>
+          <S.DiaryCreatedAt>
+            {convertFormatDate(diaryData.createdAt)}
+          </S.DiaryCreatedAt>
           <div ref={dotRef}>
             {editToggle && (
               <EditButton
