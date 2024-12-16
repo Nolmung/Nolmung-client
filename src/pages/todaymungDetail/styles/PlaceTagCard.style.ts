@@ -11,6 +11,7 @@ export const S = {
     align-items: center;
     border-radius: 10px;
     gap: 2px;
+    cursor: pointer;
   `,
   LocationName: styled.div`
     font-size: 12px;

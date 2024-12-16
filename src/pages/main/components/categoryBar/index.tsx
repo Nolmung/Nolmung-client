@@ -5,6 +5,7 @@ import { CATEGORY_OPTIONS } from '../../constants/categoryBar';
 import { useNavigate } from 'react-router-dom';
 import { EVENTS } from '@/service/googleAnalytics/events';
 import ReactGA from 'react-ga4';
+import getIsLogin from '@/common/utils/getIsLogin';
 
 interface CategoryBarProps {
   category: string | null;
@@ -22,6 +23,7 @@ function CategoryBar({
 }: CategoryBarProps) {
   const navigate = useNavigate();
 
+  const isLoggedIn = getIsLogin();
   const handleCategoryClick = (value: string) => {
     setBottomCardVisible(false);
     setCategory(value);
@@ -30,7 +32,7 @@ function CategoryBar({
     ReactGA.event({
       category: EVENTS.MAIN.SELECT_CATEGORY.category, // 이벤트 카테고리
       action: 'click', // 이벤트 액션
-      label: value, // 이벤트 레이블로 value 전달
+      label: value + 'isLoggedIn' + isLoggedIn, // 이벤트 레이블로 value 전달
     });
   };
 
