@@ -27,6 +27,6 @@ export const S = {
     align-items: center;
     background-color: ${({ backgroundcolor }) =>
       backgroundcolor ? backgroundcolor : 'none'};
-    z-index: 1019;
+    z-index: 1501;
   `,
 };
