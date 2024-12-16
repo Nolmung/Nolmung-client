@@ -40,15 +40,25 @@
 <br/>
 
 
-## 시스템 아키텍쳐(프론트)
+## 시스템 아키텍쳐
 <kbd>
-<img width="600" src="https://github.com/user-attachments/assets/4b31015e-0bbf-41f4-a083-4e65546a8709" alt="nolmung_architecture" style="border:1px solid black;">
+<img width="600" src="https://github.com/user-attachments/assets/e7824822-ce2b-4317-a3c6-5fbea85e32b9" alt="nolmung_architecture" style="border:1px solid black;">
 </kbd>
 
 
 <br/>
 <br/>
 
+## ERD
+<kbd>
+<img width="600" src="https://github.com/user-attachments/assets/530b465d-729f-4645-98fb-8a7906ece0cc" alt="nolmung_erd" style="border:1px solid black;">
+</kbd>
+<p>
+  🔗 <a href="https://www.erdcloud.com/d/i8uWGycunfcGahQYE" rel="nofollow">ERDCloud</a>  
+</p>
+
+
+<br/>
 
 ## 와이어프레임
 <kbd>
