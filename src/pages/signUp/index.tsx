@@ -62,7 +62,6 @@ function SignUp() {
 
     try {
       const { latitude, longitude } = await convertAddressToLatlng(address);
-      console.log('위도: ', latitude, '경도: ', longitude);
 
       const requestBody = {
         userNickname: nickname,
