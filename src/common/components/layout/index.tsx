@@ -31,6 +31,8 @@ const pathRules: PathRules = {
     '/search',
     '/login',
     '/recommend',
+    '/todaymung',
+    '/my',
     /\?cur=main/,
     /\/oauth\/kakao\/callback/,
     // '/todaymung',
