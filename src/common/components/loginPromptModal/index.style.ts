@@ -10,7 +10,6 @@ export const S = {
     box-sizing: border-box;
     gap: 10px;
     z-index: 10000;
-    min-width: 400px;
     min-height: 400px;
   `,
 
@@ -27,7 +26,7 @@ export const S = {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    white-space: nowrap;
+    white-space: pre-wrap;
   `,
   IconWrapper: styled.div`
     width: 100%;
