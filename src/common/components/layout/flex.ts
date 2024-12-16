@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+/**  
+ * 공용으로 사용 할 FLEX 사실상 Container
+*/
 export const Flex = styled.div<{
   $direction?: 'row' | 'column';
   $justify?:
