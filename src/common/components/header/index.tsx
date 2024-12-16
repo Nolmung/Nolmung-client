@@ -2,7 +2,6 @@ import { GoBackIcon } from '@assets/images/svgs';
 import { S } from '@common/components/header/index.styles';
 import { HeaderType } from '@common/components/header/index.type';
 import { match } from 'ts-pattern';
-import { useLocation } from 'react-router-dom';
 
 /**
  * 공용으로 사용되는 헤더 컴포넌트입니다.
@@ -21,16 +20,6 @@ import { useLocation } from 'react-router-dom';
  * />
  */
 function Header({ title, showIcon, type, handleBackButtonClick }: HeaderType) {
-  const location = useLocation();
-  // 페이지가 `/dogs`일 경우 토큰 제거 후 뒤로가기 처리
-  const handleClick = () => {
-    if (location.pathname === '/dogs') {
-      localStorage.removeItem('accessToken'); // 토큰 제거
-      console.log('Access token removed and navigating back');
-    }
-    handleBackButtonClick();
-  };
-
   return (
     <>
       s
@@ -39,7 +28,7 @@ function Header({ title, showIcon, type, handleBackButtonClick }: HeaderType) {
           <S.LeftHeaderArea>
             <S.IconWrapper>
               {showIcon ? (
-                <GoBackIcon onClick={handleClick} />
+                <GoBackIcon onClick={handleBackButtonClick} />
               ) : (
                 <S.DummyIcon />
               )}
@@ -51,7 +40,7 @@ function Header({ title, showIcon, type, handleBackButtonClick }: HeaderType) {
           <S.CenterHeaderArea>
             <S.IconWrapper>
               {showIcon ? (
-                <GoBackIcon onClick={handleClick} />
+                <GoBackIcon onClick={handleBackButtonClick} />
               ) : (
                 <S.DummyIcon />
               )}

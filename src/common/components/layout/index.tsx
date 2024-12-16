@@ -134,6 +134,7 @@ function Layout({ children }: LayoutProps) {
       });
       return;
     }
+
     if (location.pathname.startsWith('/dogs/edit')) {
       setHeaderTitle({
         title: '반려견 수정',
@@ -212,6 +213,7 @@ function Layout({ children }: LayoutProps) {
           });
           setHandleBackButtonClick(() => () => {
             navigate(-1);
+            localStorage.removeItem('accessToken');
             ReactGA.event({
               category: 'goBack',
               action: 'click goBack button',
