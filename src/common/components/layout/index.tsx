@@ -32,6 +32,7 @@ const pathRules: PathRules = {
     '/login',
     '/recommend',
     /\?cur=main/,
+    /\/oauth\/kakao\/callback/,
     // '/todaymung',
   ],
   /** TabBar를 숨길 경로들 */
@@ -44,6 +45,7 @@ const pathRules: PathRules = {
     '/signUp',
     '/dogs',
     /^\/dogs\/edit\/\d+$/,
+    /\/oauth\/kakao\/callback/,
   ], // TabBar를 숨길 경로들
 };
 
@@ -324,7 +326,6 @@ function Layout({ children }: LayoutProps) {
           });
         });
         break;
-
       default:
         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }
