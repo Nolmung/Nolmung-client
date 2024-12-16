@@ -24,6 +24,9 @@ const S = {
     font-weight: 600;
     line-height: normal;
     white-space: nowrap;
+    max-width: 88px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   `,
   PlaceAddress: styled.div`
     color: #5e5e5e;
@@ -49,6 +52,10 @@ const S = {
     justify-content: center;
     width: 14px;
     height: 14px;
+  `,
+  PlaceWrapper: styled.div`
+    display: flex;
+    gap: 4px;
   `,
 };
 
