@@ -27,10 +27,11 @@ const S = {
     width: 100%;
     justify-content: center;
     align-items: center;
+    padding-right: 22px;
   `,
   LoginModal: styled.div`
     position: sticky;
-
+    padding-right: 22px;
     top: 50%;
     z-index: 100;
     width: 330px;
