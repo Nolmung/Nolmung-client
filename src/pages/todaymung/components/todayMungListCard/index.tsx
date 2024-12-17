@@ -15,7 +15,7 @@ const TodayMungListCard = ({ listData, data }: ListCardProps) => {
     });
     navigate(`/todaymung/detail/${data.diaryId}`);
   };
-  console.log(data);
+
   const imageUrl =
     data.mediaList?.find((media) => media.mediaType === 'IMAGE')?.mediaUrl ||
     '';
