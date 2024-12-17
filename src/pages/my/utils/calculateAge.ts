@@ -1,3 +1,4 @@
+/** 연도를 입력하면 나이로 바꿔주는 함수 */
 export const calculateAge = (birthdayString?: string) => {
   if (!birthdayString) return 0;
   const birthday = new Date(birthdayString);

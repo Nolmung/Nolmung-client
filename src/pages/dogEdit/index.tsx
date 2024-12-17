@@ -15,6 +15,7 @@ import { UPLOADPATH } from '@/common/constants/uploadPath';
 import ReactGA from 'react-ga4';
 dayjs.locale('ko');
 
+/** 강아지 수정 페이지 */
 function DogsEdit() {
   const { state } = useLocation();
   const { dogId } = useParams<{ dogId: string }>();

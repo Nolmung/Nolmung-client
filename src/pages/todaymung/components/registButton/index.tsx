@@ -8,6 +8,7 @@ import ReactGA from 'react-ga4';
 interface RegistButtonProps {
   active: boolean;
 }
+/** 오늘멍 등록 버튼 */
 const RegistButton = ({ active }: RegistButtonProps) => {
   const navigate = useNavigate();
   const navigateToTodaymungWrite = () => {

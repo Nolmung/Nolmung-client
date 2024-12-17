@@ -10,7 +10,7 @@ const S = {
     width: 100%;
     height: calc(100dvh - ${BOTTOM_NAV_HEIGHT});
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
   `,
 
   LocationButtonWrapper: styled.div<{ $bottomHeight: number }>`
