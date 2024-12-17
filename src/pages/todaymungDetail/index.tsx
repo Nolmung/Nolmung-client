@@ -105,12 +105,9 @@ const TodayMungDetail = () => {
           <S.PlaceArea>
             <S.PlaceAreaTitle>장소</S.PlaceAreaTitle>
             <S.PlaceTagCardArea>
-              {diaryData.places.map((data) => {
+              {todayReviewData.map((data: any) => {
                 return <PlaceTagCard key={data.placeId} data={data} />;
               })}
-              {/* {todayReviewData.map((data: any) => {
-                return <PlaceTagCard key={data.placeId} data={data} />;
-              })} */}
             </S.PlaceTagCardArea>
           </S.PlaceArea>
         )}
