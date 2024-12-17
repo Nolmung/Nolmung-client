@@ -14,7 +14,6 @@ import { decodeToken } from '@/common/utils/configToken';
 import getIsLogin from '@/common/utils/getIsLogin';
 import ReactGA from 'react-ga4';
 import { convertFormatDate } from '@/common/utils/convertFormatDate';
-import { useGetTodayReview } from '../todaymungPlaceRegist/queries';
 
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
@@ -26,9 +25,11 @@ const TodayMungDetail = () => {
     isError,
   } = useGetTodaymungDetailData(numericDiaryId);
 
-  const { data: todayReviewData } = useGetTodayReview();
-  const { data: a } = useTodaymungReview('2024-12-17');
-  console.log(a);
+  const diaryData: DiaryType | undefined = todaymungDetailData?.data;
+  const reviewDate = diaryData ? convertFormatDate(diaryData.createdAt) : '';
+
+  const { data: todayReviewData } = useTodaymungReview(reviewDate);
+
   const handleClickOutside = (event: MouseEvent) => {
     if (dotRef.current && !dotRef.current.contains(event.target as Node)) {
       setEditToggle(false);
@@ -69,8 +70,6 @@ const TodayMungDetail = () => {
     return <LoadingSpinnerLottie />;
   }
 
-  const diaryData: DiaryType = todaymungDetailData.data;
-
   const handleToggleClick = () => {
     ReactGA.event({
       category: 'Diary',
@@ -82,59 +81,61 @@ const TodayMungDetail = () => {
 
   return (
     <S.Wrapper>
-      <S.Container>
-        <S.DateArea>
-          <S.DiaryCreatedAt>
-            {convertFormatDate(diaryData.createdAt)}
-          </S.DiaryCreatedAt>
-          <div ref={dotRef}>
-            {editToggle && (
-              <EditButton
-                diaryId={diaryData.diaryId}
-                medias={diaryData.medias}
-              />
-            )}
-            {diaryData.userId === editActive && (
-              <DotdotdotIcon
-                onClick={handleToggleClick}
-                fill={editToggle ? '#d9d9d9' : '#080808'}
-              />
-            )}
-          </div>
-        </S.DateArea>
-        {todayReviewData && (
-          <S.PlaceArea>
-            <S.PlaceAreaTitle>장소</S.PlaceAreaTitle>
-            <S.PlaceTagCardArea>
-              {todayReviewData.map((data: any) => {
-                return <PlaceTagCard key={data.placeId} data={data} />;
-              })}
-            </S.PlaceTagCardArea>
-          </S.PlaceArea>
-        )}
-        {diaryData.dogs && diaryData.dogs.length > 0 && (
-          <S.DogsArea>
-            <S.DogsAreaTitle>오늘을 함께한 반려견</S.DogsAreaTitle>
-            <S.DogTagList>
-              {diaryData.dogs.map((dogData) => (
-                <DogTagCard data={dogData} key={dogData.dogId} />
-              ))}
-            </S.DogTagList>
-          </S.DogsArea>
-        )}
-        <S.TextContentArea>
-          <TextContent title={diaryData.title} content={diaryData.content} />
-        </S.TextContentArea>
-        <S.MediaFileArea>
-          {diaryData.medias.length > 0 && (
-            <>
-              {diaryData.medias.map((data) => (
-                <ImageCard data={data} key={data.mediaId} />
-              ))}
-            </>
+      {diaryData && (
+        <S.Container>
+          <S.DateArea>
+            <S.DiaryCreatedAt>
+              {convertFormatDate(diaryData.createdAt)}
+            </S.DiaryCreatedAt>
+            <div ref={dotRef}>
+              {editToggle && (
+                <EditButton
+                  diaryId={diaryData.diaryId}
+                  medias={diaryData.medias}
+                />
+              )}
+              {diaryData.userId === editActive && (
+                <DotdotdotIcon
+                  onClick={handleToggleClick}
+                  fill={editToggle ? '#d9d9d9' : '#080808'}
+                />
+              )}
+            </div>
+          </S.DateArea>
+          {todayReviewData && (
+            <S.PlaceArea>
+              <S.PlaceAreaTitle>장소</S.PlaceAreaTitle>
+              <S.PlaceTagCardArea>
+                {todayReviewData.map((data: any) => {
+                  return <PlaceTagCard key={data.placeId} data={data} />;
+                })}
+              </S.PlaceTagCardArea>
+            </S.PlaceArea>
           )}
-        </S.MediaFileArea>
-      </S.Container>
+          {diaryData.dogs && diaryData.dogs.length > 0 && (
+            <S.DogsArea>
+              <S.DogsAreaTitle>오늘을 함께한 반려견</S.DogsAreaTitle>
+              <S.DogTagList>
+                {diaryData.dogs.map((dogData) => (
+                  <DogTagCard data={dogData} key={dogData.dogId} />
+                ))}
+              </S.DogTagList>
+            </S.DogsArea>
+          )}
+          <S.TextContentArea>
+            <TextContent title={diaryData.title} content={diaryData.content} />
+          </S.TextContentArea>
+          <S.MediaFileArea>
+            {diaryData.medias.length > 0 && (
+              <>
+                {diaryData.medias.map((data) => (
+                  <ImageCard data={data} key={data.mediaId} />
+                ))}
+              </>
+            )}
+          </S.MediaFileArea>
+        </S.Container>
+      )}
     </S.Wrapper>
   );
 };
