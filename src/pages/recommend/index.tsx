@@ -1,4 +1,5 @@
 import GuestRecommend from './components/IndexGuest';
+// const GuestRecommend = React.lazy(() => import('@pages/login'));
 import UserRecommend from './components/IndexUser';
 
 function Recommend() {
@@ -7,4 +8,5 @@ function Recommend() {
     localStorage.getItem('accessToken') === undefined;
   return isGuest ? <GuestRecommend /> : <UserRecommend />;
 }
+
 export default Recommend;

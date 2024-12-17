@@ -14,6 +14,7 @@ import { decodeToken } from '@/common/utils/configToken';
 import getIsLogin from '@/common/utils/getIsLogin';
 import ReactGA from 'react-ga4';
 import { convertFormatDate } from '@/common/utils/convertFormatDate';
+import dayjs from 'dayjs';
 
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
@@ -26,8 +27,9 @@ const TodayMungDetail = () => {
   } = useGetTodaymungDetailData(numericDiaryId);
 
   const diaryData: DiaryType | undefined = todaymungDetailData?.data;
-  const reviewDate = diaryData ? convertFormatDate(diaryData.createdAt) : '';
-
+  const reviewDate = diaryData
+    ? dayjs(diaryData.createdAt).format('YYYY-MM-DD')
+    : '';
   const { data: todayReviewData } = useTodaymungReview(reviewDate);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -106,7 +108,7 @@ const TodayMungDetail = () => {
             <S.PlaceArea>
               <S.PlaceAreaTitle>장소</S.PlaceAreaTitle>
               <S.PlaceTagCardArea>
-                {todayReviewData.map((data: any) => {
+                {todayReviewData.data.map((data: any) => {
                   return <PlaceTagCard key={data.placeId} data={data} />;
                 })}
               </S.PlaceTagCardArea>
