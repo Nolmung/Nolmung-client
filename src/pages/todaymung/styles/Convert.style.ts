@@ -14,7 +14,7 @@ export const S = {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(100dvh - 350px);
+    height: calc(100dvh - 295px);
     overflow: scroll;
     margin-top: 5px;
     @media (min-height: 850px) {

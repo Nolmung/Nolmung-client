@@ -3,6 +3,7 @@ import { S } from './index.style';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
+/** 404 페이지 */
 function NotFound() {
   const [count, setCount] = useState(3);
 

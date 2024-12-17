@@ -9,6 +9,7 @@ interface PrivateRouteProps {
   outlet: JSX.Element;
 }
 
+/** 로그인을 했을 때만 접근 가능한 Route */
 const PrivateRoute = ({ outlet }: PrivateRouteProps) => {
   const isLogin = getIsLogin();
   const { open, close } = useLoginPromptModalStore();
