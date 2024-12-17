@@ -20,6 +20,13 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
   }
 
+  @font-face {
+    font-family: 'GoryeongStrawberry';
+    src: url('/assets/fonts/GoryeongStrawberry.woff2');
+    font-weight: 100 900;
+    font-style: normal;
+  }
+
   html, body {
     font-family: 'Pretendard', sans-serif;
     color: black;
@@ -28,6 +35,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     background: #FDFDFD;
     overflow: hidden;
+    /* background-color: #d3fbd4; */
   }
 
   body {
