@@ -14,6 +14,7 @@ import { decodeToken } from '@/common/utils/configToken';
 import getIsLogin from '@/common/utils/getIsLogin';
 import ReactGA from 'react-ga4';
 import { convertFormatDate } from '@/common/utils/convertFormatDate';
+import { useGetTodayReview } from '../todaymungPlaceRegist/queries';
 
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
@@ -24,6 +25,8 @@ const TodayMungDetail = () => {
     isLoading,
     isError,
   } = useGetTodaymungDetailData(numericDiaryId);
+
+  const { data: todayReviewData } = useGetTodayReview();
 
   const handleClickOutside = (event: MouseEvent) => {
     if (dotRef.current && !dotRef.current.contains(event.target as Node)) {
@@ -98,13 +101,16 @@ const TodayMungDetail = () => {
             )}
           </div>
         </S.DateArea>
-        {diaryData.places.length > 0 && (
+        {todayReviewData && (
           <S.PlaceArea>
             <S.PlaceAreaTitle>장소</S.PlaceAreaTitle>
             <S.PlaceTagCardArea>
               {diaryData.places.map((data) => {
                 return <PlaceTagCard key={data.placeId} data={data} />;
               })}
+              {/* {todayReviewData.map((data: any) => {
+                return <PlaceTagCard key={data.placeId} data={data} />;
+              })} */}
             </S.PlaceTagCardArea>
           </S.PlaceArea>
         )}

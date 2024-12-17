@@ -98,6 +98,7 @@ function TodayMungEdit() {
     }
   };
 
+
   const navigateToTodaymungPlaceRegist = () => {
     ReactGA.event({
       category: 'User Interaction',
