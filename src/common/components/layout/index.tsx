@@ -124,7 +124,7 @@ function Layout({ children }: LayoutProps) {
         type: 'TitleCenter',
       });
       setHandleBackButtonClick(() => () => {
-        navigate('/todaymung');
+        navigate(-1);
         ReactGA.event({
           category: 'goBack',
           action: 'click goBack button',
