@@ -38,15 +38,7 @@ function MyFavorite() {
       action: 'Remove Bookmark',
       label: `User removed bookmark for place ID: ${id}`,
     });
-    deleteBookmarks(id, {
-      onSuccess: () => {
-        toast.success('북마크가 삭제되었습니다!');
-      },
-      onError: (error) => {
-        console.error('Failed to delete bookmark:', error);
-        toast.error('북마크 삭제에 실패했습니다. 다시 시도해주세요.');
-      },
-    });
+    deleteBookmarks(id);
   };
 
   const navigateToDetail = (placeId: number) => {
