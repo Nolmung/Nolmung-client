@@ -29,11 +29,11 @@ function TodayMungWrite() {
   } = useGetTodayReview();
 
   const { title, content, dogs, addPlaces } = useTodayMungStore();
-  
+
   useEffect(() => {
     todayReviewData?.map((data) => addPlaces(data.placeId));
   }, [todayReviewData]);
-  
+
   const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary();
 
@@ -81,7 +81,11 @@ function TodayMungWrite() {
   return (
     <>
       {isConfirmModalOpen && (
-        <Modal isOpen={isConfirmModalOpen} closeModal={closeConfirmModal} height={'fit-content'}>
+        <Modal
+          isOpen={isConfirmModalOpen}
+          closeModal={closeConfirmModal}
+          height={'fit-content'}
+        >
           <S.ConfirmModalContent>
             <S.ConfirmModalTitle>
               작성중인 내용이 사라집니다. <br />

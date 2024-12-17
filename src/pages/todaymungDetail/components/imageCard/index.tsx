@@ -20,6 +20,9 @@ const ImageCard = ({ data }: { data: MediasType }) => {
             <S.MediaImage
               src={data.mediaUrl}
               alt="Media Content"
+              onError={(e) => {
+                e.currentTarget.src = '/svgs/NoImage.svg';
+              }}
             ></S.MediaImage>
           ))
           .otherwise(() => <div>UnKnow파일</div>)

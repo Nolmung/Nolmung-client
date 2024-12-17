@@ -13,6 +13,12 @@ import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { toast } from 'react-toastify';
 import ReactGA from 'react-ga4';
 import { convertFormatDate } from '@/common/utils/convertFormatDate';
+import { PlusIcon } from '@/assets/images/svgs';
+import VisitedPlaceCard from '../todaymungWrite/components/VisitedPlaceCard';
+import { useGetTodayReview } from '../todaymungPlaceRegist/queries';
+import { GetTodayReviewResponse } from '@/service/apis/review/index.type';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE } from '@/common/constants/route';
 
 function TodayMungEdit() {
   useSetDocumentTitle('오늘멍 작성하기');
@@ -28,11 +34,13 @@ function TodayMungEdit() {
     setPublicYn,
     deleteTodaymungAll,
   } = useTodayMungStore();
+  const navigate = useNavigate();
 
   const { diaryId } = useParams<{ diaryId: string }>();
   const numericDiaryId = Number(diaryId);
 
   const { data: dogsData } = useGetDogs();
+  const { data: todayReviewData } = useGetTodayReview();
   const { addDogs } = useTodayMungStore();
 
   const { mutate: diaryMutate } = useEditDiary();
@@ -90,6 +98,15 @@ function TodayMungEdit() {
     }
   };
 
+  const navigateToTodaymungPlaceRegist = () => {
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Click Add Place Button',
+      label: 'Add a new place during TodayMung write process',
+    });
+    navigate(ROUTE.TODAYMUNG_PLACE_REGIST());
+  };
+
   if (isLoading || !todaymungEditData) {
     return <LoadingSpinnerLottie />;
   }
@@ -106,6 +123,27 @@ function TodayMungEdit() {
         <S.DateText>
           {convertFormatDate(todaymungEditData.data.createdAt)}
         </S.DateText>
+        <div>
+          <S.Title>장소</S.Title>
+          <S.PlaceWrapper>
+            <S.PlaceCardWrapper>
+              {(todayReviewData as GetTodayReviewResponse[]).map(
+                (data, index) => (
+                  <VisitedPlaceCard
+                    key={`${data.placeId}-${index}`}
+                    category={data.category}
+                    placeName={data.placeName}
+                    roadAddress={data.address}
+                    rating={data.rating}
+                  />
+                ),
+              )}
+              <S.PlaceAddButton onClick={navigateToTodaymungPlaceRegist}>
+                <PlusIcon width={20} height={20} />
+              </S.PlaceAddButton>
+            </S.PlaceCardWrapper>
+          </S.PlaceWrapper>
+        </div>
         <div style={{ position: 'relative' }}>
           <S.Title>오늘을 함께한 반려견</S.Title>
           <S.PlaceWrapper>
