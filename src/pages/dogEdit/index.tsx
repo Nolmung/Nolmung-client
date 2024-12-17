@@ -13,6 +13,8 @@ import { DogInfoType } from '@/service/apis/dog/index.type';
 import 'dayjs/locale/ko';
 import { UPLOADPATH } from '@/common/constants/uploadPath';
 import ReactGA from 'react-ga4';
+import { useGetDogs } from '../todaymungWrite/queries';
+import { toast } from 'react-toastify';
 dayjs.locale('ko');
 
 /** 강아지 수정 페이지 */
@@ -32,8 +34,11 @@ function DogsEdit() {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(
     dayjs(recentData.birth),
   );
+  const { data: dogsData } = useGetDogs();
   const { mutate: patchDogMutate } = usePatchDogs();
   const { mutate: deleteDogMutate } = useDeleteDogs();
+
+  console.log(dogsData?.data);
 
   const handleDateChange = (newValue: Dayjs | null) => {
     setSelectedDate(newValue);
@@ -173,6 +178,10 @@ function DogsEdit() {
   };
 
   const handleDeleteClick = async () => {
+    if (!dogsData?.data || dogsData.data.length <= 1) {
+      toast.error('반려견이 최소 한마리는 등록되어있어야 합니다 !');
+      return;
+    }
     deleteDogMutate(numDogId, {
       onSuccess: () => {
         navigate(ROUTE.MY());
