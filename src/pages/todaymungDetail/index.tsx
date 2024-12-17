@@ -8,7 +8,7 @@ import TextContent from './components/textContent';
 import ImageCard from './components/imageCard';
 import EditButton from './components/editButton';
 import { useState, useEffect, useRef } from 'react';
-import { useGetTodaymungDetailData } from './queries';
+import { useGetTodaymungDetailData, useTodaymungReview } from './queries';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { decodeToken } from '@/common/utils/configToken';
 import getIsLogin from '@/common/utils/getIsLogin';
@@ -27,7 +27,8 @@ const TodayMungDetail = () => {
   } = useGetTodaymungDetailData(numericDiaryId);
 
   const { data: todayReviewData } = useGetTodayReview();
-
+  const { data: a } = useTodaymungReview('2024-12-17');
+  console.log(a);
   const handleClickOutside = (event: MouseEvent) => {
     if (dotRef.current && !dotRef.current.contains(event.target as Node)) {
       setEditToggle(false);

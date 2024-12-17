@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   getTodaymungDetail,
   deleteTodaymung,
+  getTodaymungDetailReview,
 } from '@/service/apis/diaryDetail';
 import { toast } from 'react-toastify';
 import { useTodayMungStore } from '@/pages/todaymungWrite/stores/todayMungStore';
@@ -32,5 +33,15 @@ export const useTodaymungDelete = (diaryId: number) => {
       console.error('오늘멍 삭제 중 에러 발생:', error);
       toast.error('오늘멍 삭제에 실패했습니다.');
     },
+  });
+};
+
+export const useTodaymungReview = (date: string) => {
+  return useQuery({
+    queryKey: ['TodaymungReview', date],
+    queryFn: () => getTodaymungDetailReview(date),
+    enabled: !!date,
+    staleTime: 1000 * 60 * 5,
+    retry: 3,
   });
 };
