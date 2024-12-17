@@ -326,6 +326,21 @@ function Layout({ children }: LayoutProps) {
           });
         });
         break;
+      case pathName == '/my/dogs':
+        setHeaderTitle({
+          title: '',
+          showIcon: true,
+          type: 'TitleCenter',
+        });
+        setHandleBackButtonClick(() => () => {
+          navigate('/my');
+          ReactGA.event({
+            category: 'goBack',
+            action: 'click goBack button',
+            label: 'goBack from myDogs to my',
+          });
+        });
+        break;
       default:
         setHeaderTitle({ title: '', showIcon: true, type: 'TitleCenter' });
     }
