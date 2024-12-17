@@ -8,7 +8,6 @@ import { ROUTE } from '@/common/constants/route';
 import { FilledStar } from '@/assets/images/svgs';
 import { useGetBookmarks, useDeleteBookmarks } from './hooks';
 import { NoResultStandUI } from '@/common/components/noResultUI';
-import { toast } from 'react-toastify';
 import ReactGA from 'react-ga4';
 
 function MyFavorite() {
