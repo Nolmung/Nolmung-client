@@ -5,6 +5,7 @@ interface NoResultUIProps {
   content: string;
 }
 
+/** 작성한 오늘멍이 없을 때 보여지는 컴포넌트 */
 function NoResulLiedownUI({ content }: NoResultUIProps) {
   return (
     <S.NoResultWrapper>
@@ -14,6 +15,7 @@ function NoResulLiedownUI({ content }: NoResultUIProps) {
   );
 }
 
+/** 작성한 리뷰가 없을 때 보여지는 컴포넌트 */
 function NoResultStandUI({ content }: NoResultUIProps) {
   return (
     <S.NoResultWrapper>

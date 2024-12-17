@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { toast } from 'react-toastify';
 import ReactGA from 'react-ga4';
+import { convertFormatDate } from '@/common/utils/convertFormatDate';
 
 function TodayMungEdit() {
   useSetDocumentTitle('오늘멍 작성하기');
@@ -102,7 +103,9 @@ function TodayMungEdit() {
         <S.BannerImage src="/pngs/TodayMungLogo.png" alt="오늘멍 배너" />
       </S.BannerWrapper>
       <S.ContentWrapper>
-        <S.DateText>{todaymungEditData.data.createdAt}</S.DateText>
+        <S.DateText>
+          {convertFormatDate(todaymungEditData.data.createdAt)}
+        </S.DateText>
         <div style={{ position: 'relative' }}>
           <S.Title>오늘을 함께한 반려견</S.Title>
           <S.PlaceWrapper>

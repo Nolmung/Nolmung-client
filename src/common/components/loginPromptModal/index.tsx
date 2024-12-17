@@ -9,6 +9,7 @@ interface LoginPromptModalProps {
   closeModal: () => void;
 }
 
+/** 비 로그인 상태로 로그인이 필요한 URL 접근 시 나오는 로그인 유도 모달창 */
 function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
   const navigate = useNavigate();
 

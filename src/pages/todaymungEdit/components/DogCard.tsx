@@ -19,7 +19,12 @@ function DogCard({ data }: DogCardProps) {
 
   return (
     <S.PetButton onClick={handlePetButtonClick} selected={isDogSelected}>
-      <S.PetImage src={data.profileUrl} />
+      <S.PetImage
+        src={data.profileUrl}
+        onError={(e) => {
+          e.currentTarget.src = '/svgs/todayMungNoListIcon.svg';
+        }}
+      />
       <S.PetName selected={isDogSelected}>{data.dogName}</S.PetName>
     </S.PetButton>
   );

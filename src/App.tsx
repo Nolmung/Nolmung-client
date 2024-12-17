@@ -5,9 +5,13 @@ import GlobalStyle from './styles/GlobalStyles';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import usePageTracking from './service/googleAnalytics/usePageTracking';
-
+import ReactGA from 'react-ga4';
 function App() {
   usePageTracking();
+  const generateUUID = () => crypto.randomUUID();
+  const uuid = generateUUID();
+  ReactGA.set({ userId: uuid });
+
   const queryClient = new QueryClient();
 
   return (

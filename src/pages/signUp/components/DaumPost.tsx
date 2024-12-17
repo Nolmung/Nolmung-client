@@ -5,6 +5,7 @@ interface DaumPostProps {
   setAddress: (address: string) => void; // 부모 컴포넌트에서 전달받은 setAddress 함수
 }
 
+/** 다음 우편번호 API */
 const DaumPost: React.FC<DaumPostProps> = ({ setAddress }) => {
   const postcodeScriptUrl =
     'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';

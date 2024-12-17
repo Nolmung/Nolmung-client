@@ -28,6 +28,7 @@ import { convertFormatDate } from '@/common/utils/convertFormatDate';
 
 dayjs.locale('ko');
 
+/** 달력에 마커 남기기 커스텀 */
 function renderDayWithMarker(
   props: PickersDayProps<Dayjs>,
   listData: CalendarDataProps,
@@ -97,6 +98,7 @@ function renderDayWithMarker(
   );
 }
 
+/** 달력의 Header 부분 커스텀 */
 function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
   const { currentMonth, onMonthChange } = props;
 
