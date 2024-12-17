@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-
+import { BOTTOM_NAV_HEIGHT, HEADER_HEIGHT } from '@/common/constants/ui';
 export const S = {
   Wrapper: styled.div`
     width: 100%;
-    height: calc(100dvh - 160px);
+    height: calc(100dvh - ${HEADER_HEIGHT}px - ${BOTTOM_NAV_HEIGHT}px);
     color: #080808;
     overflow: scroll;
   `,

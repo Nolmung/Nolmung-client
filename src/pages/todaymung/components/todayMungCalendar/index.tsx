@@ -24,8 +24,11 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import RegistButton from '../registButton';
 import ReactGA from 'react-ga4';
+import { convertFormatDate } from '@/common/utils/convertFormatDate';
+
 dayjs.locale('ko');
 
+/** 달력에 마커 남기기 커스텀 */
 function renderDayWithMarker(
   props: PickersDayProps<Dayjs>,
   listData: CalendarDataProps,
@@ -35,7 +38,9 @@ function renderDayWithMarker(
   const { diaries } = listData; //server Data
 
   const dateKey = day.format('YYYY.MM.DD');
-  const diary = diaries.find((entry) => entry.createdAt === dateKey);
+  const diary = diaries.find(
+    (entry) => convertFormatDate(entry.createdAt) === dateKey,
+  );
   const imageUrl =
     diary?.mediaList?.find((media) => media.mediaType === 'IMAGE')?.mediaUrl ||
     '/svgs/todayMungDefaultImage.svg';
@@ -93,6 +98,7 @@ function renderDayWithMarker(
   );
 }
 
+/** 달력의 Header 부분 커스텀 */
 function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
   const { currentMonth, onMonthChange } = props;
 
@@ -124,7 +130,7 @@ function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
 export default function TodayMungCalendar({ listData }: ListDataProps) {
   const today = dayjs().format('YYYY.MM.DD');
   const hasTodayMung = listData.diaries.some(
-    (entry) => entry.createdAt === today, // 오늘 날짜와 일치하는 데이터가 있는지 확인
+    (entry) => convertFormatDate(entry.createdAt) === today, // 오늘 날짜와 일치하는 데이터가 있는지 확인
   );
   return (
     <S.Wrap>

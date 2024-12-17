@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { DogInfoType } from '@/service/apis/dog/index.type';
 import { toast } from 'react-toastify';
 
+/** 강아지 등록 쿼리문 */
 export const usePostDogs = () => {
   return useMutation({
     mutationFn: (dogInfo: DogInfoType) => postDogs(dogInfo),

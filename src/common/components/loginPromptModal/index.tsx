@@ -9,6 +9,7 @@ interface LoginPromptModalProps {
   closeModal: () => void;
 }
 
+/** 비 로그인 상태로 로그인이 필요한 URL 접근 시 나오는 로그인 유도 모달창 */
 function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
   const navigate = useNavigate();
 
@@ -18,7 +19,7 @@ function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
     window.innerHeight * 0.4 < 400 ? 400 : window.innerHeight * 0.4;
 
   const modalContentWidth =
-    window.innerWidth * 0.7 > 400 ? 400 : window.innerWidth * 0.7;
+    window.innerWidth * 0.8 > 390 ? 390 : window.innerWidth * 0.8;
 
   const handleLoginButtonClick = () => {
     ReactGA.event({

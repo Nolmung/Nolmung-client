@@ -9,7 +9,7 @@ import {
   TabBarMyIconActive,
 } from '@assets/images/svgs';
 
-
+/** TabBar에 들어갈 목록들 */
 export const tabItems = [
   {
     path: '/',

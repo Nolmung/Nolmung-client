@@ -8,7 +8,8 @@ const S = {
     border-radius: 15px;
     border: 1px solid #d9d9d9;
     padding: 0 22px;
-    margin-top: 10px;
+    margin-top: 16px;
+    padding-bottom: 4px;
   `,
   TodayMungTitleInput: styled.input`
     width: 100%;
@@ -21,11 +22,12 @@ const S = {
 
     border-radius: 0%;
     border: none;
-    border-bottom: 1.5px solid #d9d9d9;
+    border-bottom: 1.5px solid #F0F0F0;
     margin-top: 16px;
+    padding-bottom: 4px;
 
     &::placeholder {
-      color: #a7a7a7;
+      color: #A7A7A7;
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
@@ -41,21 +43,21 @@ const S = {
     height: calc(100% - 48px - 40px);
     border: none;
     border-radius: 15px;
-    padding-top: 15px;
 
     color: #080808;
     font-size: 16px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     line-height: normal;
     resize: none;
     touch-action: manipulation; /* 확대 방지 */
+    padding: 13px 0 0;
 
     &::placeholder {
       color: rgba(167, 167, 167, 0.5);
       font-size: 16px;
       font-style: normal;
-      font-weight: 500;
+      font-weight: 400;
       line-height: normal;
     }
     &:focus {
@@ -73,12 +75,12 @@ const S = {
 
   InformPublic: styled.div`
     color: #5e5e5e;
-    font-size: 12px;
+    font-size: 13px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: normal;
     display: flex;
-    gap: 5px;
+    gap: 4px;
     justify-content: end;
     align-items: center;
   `,

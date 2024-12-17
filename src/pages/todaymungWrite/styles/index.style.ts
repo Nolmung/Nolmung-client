@@ -30,7 +30,6 @@ const S = {
   ContentWrapper: styled.div`
     width: 100%;
     padding: 0 22px 0px 22px;
-    height: 100%;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -120,7 +119,7 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 6px;
+    margin-top: 16px;
     gap: 12px;
   `,
   ConfirmModalContent: styled.div`
@@ -128,7 +127,6 @@ const S = {
     height: 100%;
     display: flex;
     align-items: center;
-
     flex-direction: column;
     padding: 30px;
   `,
@@ -136,9 +134,9 @@ const S = {
     color: #080808;
     font-size: 18px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: normal;
-    margin-bottom: 16px;
+    margin: 16px 0;
     text-align: center;
   `,
 };

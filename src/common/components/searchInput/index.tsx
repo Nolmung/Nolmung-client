@@ -16,6 +16,7 @@ interface SearchInputProps {
   inputRef?: React.RefObject<HTMLInputElement>;
 }
 
+/** 검색 */
 function SearchInput({
   value,
   width,

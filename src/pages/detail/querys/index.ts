@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getPostDetail } from '@/service/apis/place';
 import { PlaceDetailResponse } from '@/service/apis/place/index.type';
 
+/** 장소 상세 정보 쿼리문 */
 export const useGetPostDetail = (placeId: string | number) => {
   return useQuery<PlaceDetailResponse>({
     queryKey: ['postDetail', placeId],

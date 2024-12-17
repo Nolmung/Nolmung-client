@@ -5,6 +5,7 @@ interface DaumPostProps {
   setAddress: (address: string) => void; // 부모 컴포넌트에서 전달받은 setAddress 함수
 }
 
+/** 다음 우편번호 API */
 const DaumPost: React.FC<DaumPostProps> = ({ setAddress }) => {
   const postcodeScriptUrl =
     'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
@@ -14,7 +15,6 @@ const DaumPost: React.FC<DaumPostProps> = ({ setAddress }) => {
     let fullAddress = data.address;
     let extraAddress = '';
     const localAddress = `${data.sido} ${data.sigungu}`;
-    console.log('complete');
     if (data.addressType === 'R') {
       if (data.bname) {
         extraAddress += data.bname;
@@ -27,7 +27,6 @@ const DaumPost: React.FC<DaumPostProps> = ({ setAddress }) => {
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
 
-    console.log('full', fullAddress);
     setAddress(fullAddress); // 부모 컴포넌트의 주소 상태 업데이트
   };
 
@@ -58,7 +57,6 @@ const DaumPost: React.FC<DaumPostProps> = ({ setAddress }) => {
         fontFamily: 'pretendard',
         transition: 'background-color 0.5s ease',
         whiteSpace: 'nowrap',
-        
       }}
       onMouseOver={
         (e) => (e.currentTarget.style.backgroundColor = '#080808') // 호버 시 배경색 변경

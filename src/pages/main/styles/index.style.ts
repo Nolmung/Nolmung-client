@@ -9,6 +9,8 @@ const S = {
   MapWrapper: styled.div`
     width: 100%;
     height: calc(100dvh - ${BOTTOM_NAV_HEIGHT});
+    position: relative;
+    overflow-x: hidden;
   `,
 
   LocationButtonWrapper: styled.div<{ $bottomHeight: number }>`
