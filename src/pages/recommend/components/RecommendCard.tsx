@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@common/constants/route';
 import ReactGA from 'react-ga4';
 import { CATEGORY_OPTIONS } from '@pages/main/constants/categoryBar';
-import Imgix from 'react-imgix';
 
 interface RecommendCardProps {
   title: string;
@@ -35,7 +34,9 @@ function RecommendCard({
       <S.Title>{title}</S.Title>
       <S.TitleExplanation>{explanation}</S.TitleExplanation>
       <S.PlaceList>
-        {data.map((mock) => {
+        {data.map((mock, idx) => {
+          const shouldPreload = idx < 3;
+
           return (
             <S.PlaceWrapper
               isBlurred={isBlurred ?? false}
@@ -44,9 +45,12 @@ function RecommendCard({
             >
               <S.PlaceImage
                 src={mock.placeImageUrl}
-                loading="lazy"
+                loading={shouldPreload ? undefined : 'lazy'}
                 alt="장소 이미지"
               />
+              {shouldPreload && (
+                <link rel="preload" as="image" href={mock.placeImageUrl} />
+              )}
               <S.NameCategoryWrapper>
                 <S.PlaceName>{mock.placeName}</S.PlaceName>
                 <S.PlaceAddress>

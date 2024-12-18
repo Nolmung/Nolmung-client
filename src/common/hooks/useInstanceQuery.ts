@@ -22,7 +22,7 @@ export const useInstanceQuery = (
   return useQuery({
     queryKey: [key],
     queryFn,
-    staleTime: 1000 * 60 * 60 * 24,
-    gcTime: 1000 * 60 * 60 * 24,
+    staleTime: staleTime,
+    gcTime: gcTime,
   });
 };
