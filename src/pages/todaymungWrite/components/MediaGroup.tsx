@@ -96,7 +96,6 @@ function MediaGroup() {
         <S.MediaWrapper key={media.mediaId}>
           {media.mediaType === 'IMAGE' && (
             <S.Media
-              // src={media.mediaUrl!}
               src={media.mediaUrl!}
               alt="Uploaded Image"
               onError={(e) =>
