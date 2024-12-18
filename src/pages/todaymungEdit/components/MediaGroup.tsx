@@ -94,22 +94,35 @@ function MediaGroup() {
         <CameraIcon width={24} height={24} />
       </S.AddMediaButton>
       {medias?.map((media) => {
-        const isMediaIdValid =
-          media.mediaUrl !== undefined && media.mediaUrl.startsWith('https://');
         return (
           <S.MediaWrapper key={media.mediaId}>
-            {isMediaIdValid ? (
-              <S.Media src={media.mediaUrl} />
-            ) : (
-              <NoImage width={86} />
+            {media.mediaType === 'IMAGE' && (
+              <S.Media
+                src={media.mediaUrl!}
+                alt="Uploaded Image"
+                onError={(e) =>
+                  (e.currentTarget.src = '/svgs/todayMungDefaultImage.svg')
+                }
+              />
             )}
-            {isMediaIdValid && (
-              <S.IconWrapper
-                onClick={() => handleRemoveMediaButtonClick(media.mediaId!)}
+            {media.mediaType === 'VIDEO' && (
+              <S.Media
+                as="video"
+                controls
+                onError={(e) => {
+                  const videoElement = e.currentTarget;
+                  videoElement.poster = '/svgs/todayMungDefaultImage.svg'; // 대체 이미지를 설정
+                  videoElement.controls = false;
+                }}
               >
-                <CancelIcon width={10} />
-              </S.IconWrapper>
+                <source src={media.mediaUrl!} type="video/mp4" />
+              </S.Media>
             )}
+            <S.IconWrapper
+              onClick={() => handleRemoveMediaButtonClick(media.mediaId!)}
+            >
+              <CancelIcon width={10} />
+            </S.IconWrapper>
           </S.MediaWrapper>
         );
       })}

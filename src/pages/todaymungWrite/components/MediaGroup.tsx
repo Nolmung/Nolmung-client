@@ -96,14 +96,13 @@ function MediaGroup() {
         <S.MediaWrapper key={media.mediaId}>
           {media.mediaType === 'IMAGE' && (
             <S.Media
-              // src={media.mediaUrl!}
               src={media.mediaUrl!}
               alt="Uploaded Image"
               onError={(e) =>
                 (e.currentTarget.src = '/svgs/todayMungDefaultImage.svg')
               }
             />
-          )}
+          )}∑
           {media.mediaType === 'VIDEO' && (
             <S.Media
               as="video"
