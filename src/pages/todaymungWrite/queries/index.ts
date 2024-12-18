@@ -10,6 +10,7 @@ import { useTodayMungStore } from '../stores/todayMungStore';
 import { useReviewStore } from '@/pages/todaymungPlaceRegist/stores/reviewStore';
 import { deleteFileFromS3 } from '@/common/utils/uploadImageToS3';
 import { toast } from 'react-toastify';
+import { PostDiaryResponse } from '../types/index.type';
 
 export const useGetDogs = () => {
   return useQuery<DogsResponse>({
@@ -40,7 +41,7 @@ export const usePostReviews = () => {
   });
 };
 
-export const usePostDiary = () => {
+export const usePostDiary = (onSuccessCallback: (value: number) => void) => {
   const { deleteTodaymungAll } = useTodayMungStore();
   const { deleteReviewAll } = useReviewStore();
 
@@ -57,15 +58,21 @@ export const usePostDiary = () => {
     dogs,
   };
 
-  return useMutation<number, Error>({
+  return useMutation<PostDiaryResponse, Error>({
     mutationFn: () => {
       return postTodaymung(diaryRequest);
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
       toast.success('오늘멍 등록이 완료되었습니다.');
       deleteTodaymungAll();
       deleteReviewAll();
-      navigate(ROUTE.TODAYMUNG());
+      if (response.data?.firstBadgeAdded) {
+        onSuccessCallback(0);
+      } else if (response.data?.thirdBadgeAdded) {
+        onSuccessCallback(1);
+      } else {
+        navigate(ROUTE.TODAYMUNG());
+      }
     },
     onError: () => {
       toast.error('오늘멍 등록에 실패했습니다.');

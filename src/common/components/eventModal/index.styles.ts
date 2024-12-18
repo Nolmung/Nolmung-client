@@ -14,7 +14,7 @@ export const S = {
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      z-index: -1; /* 배경 이미지를 뒤로 배치 */
+      z-index: -1;
     }
   `,
   ModalContent: styled.div`
