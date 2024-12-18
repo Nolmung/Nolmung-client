@@ -1,5 +1,6 @@
 import { PlaceCategory } from '../types';
 
+/** 카테고리별로 들어갈 리뷰 목록들 */
 const KEYWORDS: Record<
   PlaceCategory | 'COMMON',
   { readonly labelId: number; readonly labelName: string }[]

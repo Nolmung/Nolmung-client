@@ -17,8 +17,12 @@ import { useGetTodayReview } from '../todaymungPlaceRegist/queries';
 import { toast } from 'react-toastify';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { GetTodayReviewResponse } from '@/service/apis/review/index.type';
-import { useEffect } from 'react';
+// import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
+import { useEffect } from 'react';
+// import { EventContents } from '@/common/components/eventModal/eventContents';
+// import EventModal from '@/common/components/eventModal';
+
 
 function TodayMungWrite() {
   const navigate = useNavigate();
@@ -38,6 +42,9 @@ function TodayMungWrite() {
   const { mutate: diaryMutate } = usePostDiary();
 
   useSetDocumentTitle('오늘멍 작성하기');
+
+  // const [isEventModalOpen, setIsEventModalOpen] = useState(true);
+  // const [eventContent, setEventContent] = useState({ title: '', content: '', imgUrl: '' });
 
   const handleCompleteButtonClick = async () => {
     if (!title || !content || dogs.length === 0) {
@@ -61,6 +68,11 @@ function TodayMungWrite() {
     }
 
     diaryMutate();
+    // 일기 목록 조회 api 호출하여, 일기 수가 1개일 경우 이벤트 모달 오픈
+    // setIsEventModalOpen(true);
+    // setEventContent(EventContents[0]);
+    // 일기 목록 조회 api 호출하여, 일기 수가 3개일 경우 이벤트 모달 오픈
+    // setEventContent(EventContent[1]);
   };
 
   const navigateToTodaymungPlaceRegist = () => {
@@ -179,6 +191,7 @@ function TodayMungWrite() {
           </div>
         </S.ContentWrapper>
       </S.Wrapper>
+      {/* {isEventModalOpen && <EventModal closeModal={() => setIsEventModalOpen(false)} eventContent={eventContent} />} */}
     </>
   );
 }

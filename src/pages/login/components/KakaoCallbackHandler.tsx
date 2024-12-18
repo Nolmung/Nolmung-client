@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { instance } from '@/service/apis';
 import { LoadingNolmungLottie } from '@/common/components/lottie';
 
+/** 카카오 로그인 버튼 시 이동하는 콜백 handler */
 function KakaoCallbackHandler() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);

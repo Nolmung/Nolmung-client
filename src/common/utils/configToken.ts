@@ -1,3 +1,4 @@
+/** localStorage에 있는 토큰을 가져와서 분해하는 유틸함수 */
 export const decodeToken = (token: any) => {
   try {
     const base64Url = token.split('.')[1];

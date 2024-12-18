@@ -44,3 +44,17 @@ export interface GetDogsListResponse {
   message: string;
   data?: DogType[] | [];
 }
+
+export interface GetUserBadgesResponse {
+  status: 'SUCCESS' | 'BAD_REQUEST';
+  message: string;
+  data?: BadgeType[];
+}
+
+export interface BadgeType {
+  userId: number;
+  badgeCodeId: number;
+  badgeName: string;
+  content: string;
+  imageUrl: string;
+}

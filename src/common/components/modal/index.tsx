@@ -1,10 +1,11 @@
 import { S } from './index.styles';
 import { ModalProps } from './index.type';
+import ReactDOM from 'react-dom';
 
 const Modal = ({ width, height, isOpen, closeModal, children }: ModalProps) => {
   if (!isOpen) return null;
 
-  return (
+  return ReactDOM.createPortal(
     <S.ModalWrapper>
       <S.ModalBackground
         onClick={() => {
@@ -14,7 +15,8 @@ const Modal = ({ width, height, isOpen, closeModal, children }: ModalProps) => {
       <S.ModalContent width={width} height={height}>
         {children}
       </S.ModalContent>
-    </S.ModalWrapper>
+    </S.ModalWrapper>,
+    document.getElementById('modal') as HTMLElement,
   );
 };
 

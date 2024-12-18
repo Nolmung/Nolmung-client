@@ -1,6 +1,7 @@
 import { S } from '../../styles/NoDiaryList.style';
 import RegistButton from '../registButton';
 
+/** 오늘멍이 없을 때 ListView */
 const NoDiaryList = () => {
   return (
     <S.Wrapper>
