@@ -62,7 +62,6 @@ export const S = {
     width: 100%;
     height: 300px;
 
-    background-color: aqua;
     border: 1px solid black;
   `,
 };
