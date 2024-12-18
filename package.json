@@ -64,6 +64,7 @@
     "@vheemstra/vite-plugin-imagemin": "^2.0.0",
     "@vitejs/plugin-react": "^4.3.3",
     "@vitejs/plugin-react-swc": "^3.7.1",
+    "depcheck": "^1.4.7",
     "env": "^0.0.2",
     "eslint": "^9.13.0",
     "eslint-plugin-import": "^2.31.0",
