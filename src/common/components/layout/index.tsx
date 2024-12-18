@@ -126,7 +126,7 @@ function Layout({ children }: LayoutProps) {
         type: 'TitleCenter',
       });
       setHandleBackButtonClick(() => () => {
-        navigate('/todaymung');
+        navigate(-1);
         ReactGA.event({
           category: 'goBack',
           action: 'click goBack button',
@@ -327,6 +327,21 @@ function Layout({ children }: LayoutProps) {
             category: 'goBack',
             action: 'click goBack button',
             label: 'goBack from myDogsAdd to myDogs',
+          });
+        });
+        break;
+      case pathName == '/my/dogs':
+        setHeaderTitle({
+          title: '',
+          showIcon: true,
+          type: 'TitleCenter',
+        });
+        setHandleBackButtonClick(() => () => {
+          navigate('/my');
+          ReactGA.event({
+            category: 'goBack',
+            action: 'click goBack button',
+            label: 'goBack from myDogs to my',
           });
         });
         break;

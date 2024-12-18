@@ -26,9 +26,30 @@ export const S = {
     margin-top: 5px;
     justify-content: center;
   `,
+  NameWrapper: styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px
+  `,
   ProfileName: styled.div`
     font-size: 18px;
     font-weight: 600;
+  `,
+  ImageWrapper: styled.div`
+    display: flex;
+    gap: 2px;
+  `,
+  Button: styled.button`
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  `,
+  Image: styled.img`
+    width: 19px;
+    height: 24px;
+    object-fit: contain;
+    border: none;
   `,
   ProfileSubTextArea: styled.div`
     display: flex;
@@ -46,5 +67,21 @@ export const S = {
   `,
   TodayMungLengthDescription: styled.div`
     color: #5e5e5e;
+  `,
+  ModalContent: styled.div`
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  `,
+  Title: styled.h2`
+    font-size: 18px;
+    font-weight: 600;
+    font-family: 'GoryeongStrawberry', sans-serif;
+  `,
+  Main: styled.p`
+    font-size: 14px;
+    font-weight: 400;
+    white-space: pre-wrap;
   `,
 };

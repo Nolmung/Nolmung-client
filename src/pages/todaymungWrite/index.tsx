@@ -17,8 +17,10 @@ import { useGetTodayReview } from '../todaymungPlaceRegist/queries';
 import { toast } from 'react-toastify';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { GetTodayReviewResponse } from '@/service/apis/review/index.type';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
+import { EventContents } from '@/common/components/eventModal/eventContents';
+import EventModal from '@/common/components/eventModal';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
@@ -35,10 +37,29 @@ function TodayMungWrite() {
     todayReviewData?.map((data) => addPlaces(data.placeId));
   }, [todayReviewData]);
 
+  /** 뱃지 이벤트 모달을 여는 함수 -> usePostDiary에 인자로 전달*/
+  const handleBadgeEventModalOpen = (value: number) => {
+    setEventContent(EventContents[value]);
+    setIsEventModalOpen(true);
+  };
+
+  /** 뱃지 이벤트 모달을 닫는 함수 -> 닫을 경우 오늘멍 모아보기 페이지로 이동*/
+  const handleBadgeEventModalClose = () => {
+    setIsEventModalOpen(false);
+    navigate(ROUTE.TODAYMUNG());
+  };
+
   const { data: dogsData } = useGetDogs();
-  const { mutate: diaryMutate } = usePostDiary();
+  const { mutate: diaryMutate } = usePostDiary(handleBadgeEventModalOpen);
 
   useSetDocumentTitle('오늘멍 작성하기');
+
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const [eventContent, setEventContent] = useState({
+    title: '',
+    content: '',
+    imgUrl: '',
+  });
 
   const handleCompleteButtonClick = async () => {
     if (!title || !content || dogs.length === 0) {
@@ -179,6 +200,13 @@ function TodayMungWrite() {
             </S.ButtonWrapper>
           </div>
         </S.ContentWrapper>
+        {isEventModalOpen && (
+          <EventModal
+            closeModal={handleBadgeEventModalClose}
+            eventContent={eventContent}
+            isNewEvent={true}
+          />
+        )}
       </S.Wrapper>
     </>
   );
