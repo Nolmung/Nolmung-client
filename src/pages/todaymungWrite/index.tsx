@@ -199,13 +199,14 @@ function TodayMungWrite() {
             </S.ButtonWrapper>
           </div>
         </S.ContentWrapper>
+        {isEventModalOpen && (
+          <EventModal
+            closeModal={handleBadgeEventModalClose}
+            eventContent={eventContent}
+            isNewEvent={true}
+          />
+        )}
       </S.Wrapper>
-      {isEventModalOpen && (
-        <EventModal
-          closeModal={handleBadgeEventModalClose}
-          eventContent={eventContent}
-        />
-      )}
     </>
   );
 }
