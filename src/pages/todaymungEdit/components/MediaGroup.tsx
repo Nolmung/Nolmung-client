@@ -1,4 +1,4 @@
-import { CameraIcon, CancelIcon, NoImage } from '@/assets/images/svgs';
+import { CameraIcon, CancelIcon } from '@/assets/images/svgs';
 import S from '../styles/MediaGroup.style';
 import { useTodayMungStore } from '../stores/todayMungStore';
 import {
