@@ -100,7 +100,7 @@ function TodayMungEdit() {
   return (
     <S.Wrapper>
       <S.BannerWrapper>
-        <S.BannerImage src="/pngs/TodayMungLogo.png" alt="오늘멍 배너" />
+        <S.BannerImage src="/webps/TodayMungLogo.webp" alt="오늘멍 배너" />
       </S.BannerWrapper>
       <S.ContentWrapper>
         <S.DateText>

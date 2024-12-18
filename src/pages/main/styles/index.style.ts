@@ -67,7 +67,7 @@ const S = {
     $bottomVisible: boolean;
   }>`
     visibility: ${({ $bottomVisible }) =>
-      $bottomVisible ? 'visible' : 'hidden'};
+      $bottomVisible ? 'visible' : 'none'};
     position: absolute;
     bottom: ${({ $bottomHeight }) => $bottomHeight}px;
     z-index: 1;
