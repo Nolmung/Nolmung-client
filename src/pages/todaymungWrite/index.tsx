@@ -17,12 +17,10 @@ import { useGetTodayReview } from '../todaymungPlaceRegist/queries';
 import { toast } from 'react-toastify';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import { GetTodayReviewResponse } from '@/service/apis/review/index.type';
-// import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
-import { useEffect } from 'react';
-// import { EventContents } from '@/common/components/eventModal/eventContents';
-// import EventModal from '@/common/components/eventModal';
-
+import { EventContents } from '@/common/components/eventModal/eventContents';
+import EventModal from '@/common/components/eventModal';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
@@ -38,13 +36,29 @@ function TodayMungWrite() {
     todayReviewData?.map((data) => addPlaces(data.placeId));
   }, [todayReviewData]);
 
+  /** 뱃지 이벤트 모달을 여는 함수 -> usePostDiary에 인자로 전달*/
+  const handleBadgeEventModalOpen = (value: number) => {
+    setEventContent(EventContents[value]);
+    setIsEventModalOpen(true);
+  };
+
+  /** 뱃지 이벤트 모달을 닫는 함수 -> 닫을 경우 오늘멍 모아보기 페이지로 이동*/
+  const handleBadgeEventModalClose = () => {
+    setIsEventModalOpen(false);
+    navigate(ROUTE.TODAYMUNG());
+  };
+
   const { data: dogsData } = useGetDogs();
-  const { mutate: diaryMutate } = usePostDiary();
+  const { mutate: diaryMutate } = usePostDiary(handleBadgeEventModalOpen);
 
   useSetDocumentTitle('오늘멍 작성하기');
 
-  // const [isEventModalOpen, setIsEventModalOpen] = useState(true);
-  // const [eventContent, setEventContent] = useState({ title: '', content: '', imgUrl: '' });
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const [eventContent, setEventContent] = useState({
+    title: '',
+    content: '',
+    imgUrl: '',
+  });
 
   const handleCompleteButtonClick = async () => {
     if (!title || !content || dogs.length === 0) {
@@ -68,11 +82,6 @@ function TodayMungWrite() {
     }
 
     diaryMutate();
-    // 일기 목록 조회 api 호출하여, 일기 수가 1개일 경우 이벤트 모달 오픈
-    // setIsEventModalOpen(true);
-    // setEventContent(EventContents[0]);
-    // 일기 목록 조회 api 호출하여, 일기 수가 3개일 경우 이벤트 모달 오픈
-    // setEventContent(EventContent[1]);
   };
 
   const navigateToTodaymungPlaceRegist = () => {
@@ -190,8 +199,14 @@ function TodayMungWrite() {
             </S.ButtonWrapper>
           </div>
         </S.ContentWrapper>
+        {isEventModalOpen && (
+          <EventModal
+            closeModal={handleBadgeEventModalClose}
+            eventContent={eventContent}
+            isNewEvent={true}
+          />
+        )}
       </S.Wrapper>
-      {/* {isEventModalOpen && <EventModal closeModal={() => setIsEventModalOpen(false)} eventContent={eventContent} />} */}
     </>
   );
 }

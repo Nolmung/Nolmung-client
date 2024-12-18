@@ -8,7 +8,7 @@ export const getTodaymungList = async () => {
 
 export const postTodaymung = async (todaymung: PostDiaryRequest) => {
   const response = await instance.post('/diary', todaymung);
-  return response.status;
+  return response.data;
 };
 
 export const patchTodaymung = async (
