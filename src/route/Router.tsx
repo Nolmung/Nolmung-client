@@ -1,28 +1,35 @@
-import { ROUTE } from '@common/constants/route';
-import Main from '@pages/main';
-import TodayMung from '@pages/todaymung';
+import React from 'react';
 import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import KakaoCallbackHandler from '../pages/login/components/KakaoCallbackHandler';
-import MyDogs from '@/pages/my/components/myDogs';
-import Layout from '../common/components/layout';
-import Detail from '../pages/detail';
-import Login from '../pages/login';
-import SignUp from '../pages/signUp';
-import Search from '../pages/search';
-import Dogs from '../pages/dogs';
-import Recommend from '../pages/recommend/index';
-import TodayMungWrite from '../pages/todaymungWrite';
-import TodayMungPlaceRegist from '../pages/todaymungPlaceRegist';
-import MyReview from '../pages/myReview';
-import MyFavorite from '../pages/myFavorite';
-import TodayMungDetail from '../pages/todaymungDetail';
-import Mypage from '../pages/my';
-import TodayMungEdit from '../pages/todaymungEdit';
-import DogsEdit from '../pages/dogEdit';
 import PrivateRoute from './PrivateRoute';
-import NotFound from '@/pages/404';
-import UserEdit from '@/pages/userEdit';
+
+import { ROUTE } from '@common/constants/route';
+const Layout = React.lazy(() => import('@common/components/layout'));
+
+const Main = React.lazy(() => import('@pages/main'));
+const Detail = React.lazy(() => import('@pages/detail'));
+const Search = React.lazy(() => import('@pages/search'));
+const Login = React.lazy(() => import('@pages/login'));
+const SignUp = React.lazy(() => import('@pages/signUp'));
+const Recommend = React.lazy(() => import('@pages/recommend'));
+const TodayMung = React.lazy(() => import('@pages/todaymung'));
+const TodayMungDetail = React.lazy(() => import('@pages/todaymungDetail'));
+const TodayMungWrite = React.lazy(() => import('@pages/todaymungWrite'));
+const TodayMungEdit = React.lazy(() => import('@pages/todaymungEdit'));
+const TodayMungPlaceRegist = React.lazy(
+  () => import('@pages/todaymungPlaceRegist'),
+);
+const Mypage = React.lazy(() => import('@pages/my'));
+const UserEdit = React.lazy(() => import('@pages/userEdit'));
+const Dogs = React.lazy(() => import('@pages/dogs'));
+const MyDogs = React.lazy(() => import('@pages/my/components/myDogs'));
+const DogsEdit = React.lazy(() => import('@pages/dogEdit'));
+const MyReview = React.lazy(() => import('@pages/myReview'));
+const MyFavorite = React.lazy(() => import('@pages/main'));
+const NotFound = React.lazy(() => import('@pages/404'));
+const KakaoCallbackHandler = React.lazy(
+  () => import('@pages/login/components/KakaoCallbackHandler'),
+);
 
 // react-router-dom v7에 관한 Future Flag 경고창 무시
 const originalWarn = console.warn;

@@ -8,7 +8,7 @@ const S = {
     border-radius: 15px;
     border: 1px solid #d9d9d9;
     padding: 0 22px;
-    margin-top: 10px;
+    margin-top: 16px;
   `,
   TodayMungTitleInput: styled.input`
     width: 100%;

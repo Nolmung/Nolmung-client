@@ -18,7 +18,7 @@ const TodayMungListCard = ({ listData, data }: ListCardProps) => {
 
   const imageUrl =
     data.mediaList?.find((media) => media.mediaType === 'IMAGE')?.mediaUrl ||
-    '/svgs/todayMungDefaultImage.svg';
+    '';
 
   return (
     <S.Wrap onClick={handleListClick}>
@@ -34,7 +34,7 @@ const TodayMungListCard = ({ listData, data }: ListCardProps) => {
           <S.ContentTitle>{data.title}</S.ContentTitle>
           <S.ContentDescription>{data.content}</S.ContentDescription>
         </S.ContentTextArea>
-        {data && (
+        {imageUrl && (
           <S.ContentImgArea>
             <S.ContentImg
               src={imageUrl}

@@ -57,7 +57,6 @@ function UserRecommend() {
   ) {
     return <div>Error...</div>;
   }
-
   return (
     <S.Wrapper>
       {similarBookmarks.length > 0 && (

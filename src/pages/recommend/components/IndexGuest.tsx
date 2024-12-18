@@ -1,17 +1,17 @@
 import RecommendCard from './RecommendCard';
 import S from '../styles/index.style';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
+import useSetDocumentTitle from '@common/hooks/useSetDocumentTitle';
 import { useRecommendBookmarks } from '../queries';
 import {
   DogSizeRecommend,
   NearBy,
   PersonalRecommend,
 } from '@/mocks/data/recommend';
-import { MapPlace } from '@/service/apis/place/index.type';
-import Button from '@/common/components/button/Button';
-import { LoadingSkeletonLottie } from '@/common/components/lottie';
+import { MapPlace } from '@service/apis/place/index.type';
+import Button from '@common/components/button/Button';
+import { LoadingSkeletonLottie } from '@common/components/lottie';
 import { useNavigate } from 'react-router-dom';
-import { ROUTE } from '@/common/constants/route';
+import { ROUTE } from '@common/constants/route';
 import ReactGA from 'react-ga4';
 
 function GuestRecommend() {

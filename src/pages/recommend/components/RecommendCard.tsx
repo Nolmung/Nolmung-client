@@ -1,9 +1,10 @@
 import { MapPlace } from '@/service/apis/place/index.type';
 import S from '../styles/RecommendCard.style';
 import { useNavigate } from 'react-router-dom';
-import { ROUTE } from '@/common/constants/route';
+import { ROUTE } from '@common/constants/route';
 import ReactGA from 'react-ga4';
-import { CATEGORY_OPTIONS } from '@/pages/main/constants/categoryBar';
+import { CATEGORY_OPTIONS } from '@pages/main/constants/categoryBar';
+
 interface RecommendCardProps {
   title: string;
   explanation: string;
@@ -18,7 +19,6 @@ function RecommendCard({
   isBlurred,
 }: RecommendCardProps) {
   const navigate = useNavigate();
-
   const navigateToDetail = (placeId: number) => {
     ReactGA.event({
       category: 'User',
@@ -34,13 +34,23 @@ function RecommendCard({
       <S.Title>{title}</S.Title>
       <S.TitleExplanation>{explanation}</S.TitleExplanation>
       <S.PlaceList>
-        {data.map((mock) => {
+        {data.map((mock, idx) => {
+          const shouldPreload = idx < 3;
+
           return (
             <S.PlaceWrapper
-              isBlurred={isBlurred ?? false}
+              $isBlurred={isBlurred ?? false}
               onClick={() => navigateToDetail(mock.placeId)}
+              key={mock.placeId}
             >
-              <S.PlaceImage src={mock.placeImageUrl} alt="장소 이미지" />
+              <S.PlaceImage
+                src={mock.placeImageUrl}
+                loading={shouldPreload ? undefined : 'lazy'}
+                alt="장소 이미지"
+              />
+              {shouldPreload && (
+                <link rel="preload" as="image" href={mock.placeImageUrl} />
+              )}
               <S.NameCategoryWrapper>
                 <S.PlaceName>{mock.placeName}</S.PlaceName>
                 <S.PlaceAddress>
