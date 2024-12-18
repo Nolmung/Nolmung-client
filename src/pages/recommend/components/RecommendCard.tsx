@@ -1,9 +1,11 @@
 import { MapPlace } from '@/service/apis/place/index.type';
 import S from '../styles/RecommendCard.style';
 import { useNavigate } from 'react-router-dom';
-import { ROUTE } from '@/common/constants/route';
+import { ROUTE } from '@common/constants/route';
 import ReactGA from 'react-ga4';
-import { CATEGORY_OPTIONS } from '@/pages/main/constants/categoryBar';
+import { CATEGORY_OPTIONS } from '@pages/main/constants/categoryBar';
+import Imgix from 'react-imgix';
+
 interface RecommendCardProps {
   title: string;
   explanation: string;
@@ -18,7 +20,6 @@ function RecommendCard({
   isBlurred,
 }: RecommendCardProps) {
   const navigate = useNavigate();
-
   const navigateToDetail = (placeId: number) => {
     ReactGA.event({
       category: 'User',
@@ -39,8 +40,13 @@ function RecommendCard({
             <S.PlaceWrapper
               isBlurred={isBlurred ?? false}
               onClick={() => navigateToDetail(mock.placeId)}
+              key={mock.placeId}
             >
-              <S.PlaceImage src={mock.placeImageUrl} alt="장소 이미지" />
+              <S.PlaceImage
+                src={mock.placeImageUrl}
+                loading="lazy"
+                alt="장소 이미지"
+              />
               <S.NameCategoryWrapper>
                 <S.PlaceName>{mock.placeName}</S.PlaceName>
                 <S.PlaceAddress>

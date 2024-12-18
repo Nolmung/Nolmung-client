@@ -1,6 +1,10 @@
-import GuestRecommend from './components/IndexGuest';
-// const GuestRecommend = React.lazy(() => import('@pages/login'));
-import UserRecommend from './components/IndexUser';
+import React from 'react';
+const GuestRecommend = React.lazy(
+  () => import('@pages/recommend/components/IndexGuest'),
+);
+const UserRecommend = React.lazy(
+  () => import('@pages/recommend/components/IndexUser'),
+);
 
 function Recommend() {
   const isGuest =

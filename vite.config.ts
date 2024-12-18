@@ -27,6 +27,7 @@ export default defineConfig(({ mode }) => {
           },
         },
       }),
+
       compression({
         algorithm: 'gzip',
         ext: '.gz',
