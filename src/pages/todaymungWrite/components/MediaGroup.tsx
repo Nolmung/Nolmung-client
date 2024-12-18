@@ -102,7 +102,7 @@ function MediaGroup() {
                 (e.currentTarget.src = '/svgs/todayMungDefaultImage.svg')
               }
             />
-          )}∑
+          )}
           {media.mediaType === 'VIDEO' && (
             <S.Media
               as="video"
