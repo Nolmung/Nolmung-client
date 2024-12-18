@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     src: url('/assets/fonts/PretendardVariable.woff2');
     font-weight: 100 900;
     font-style: normal;
+    font-display: swap;
   }
 
   @font-face {
