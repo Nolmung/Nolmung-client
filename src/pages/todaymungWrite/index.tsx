@@ -124,10 +124,9 @@ function TodayMungWrite() {
           </S.ConfirmModalContent>
         </Modal>
       )}
-      {/* /webps/TodayMungLogo.webp */}
       <S.Wrapper>
         <S.BannerWrapper>
-          <S.BannerImage src="/pngs/TodayMungLogo.png" alt="오늘멍 배너" />
+          <S.BannerImage src="/webps/TodayMungLogo.webp" alt="오늘멍 배너" />
         </S.BannerWrapper>
         <S.ContentWrapper>
           <div style={{ marginTop: '30px' }}>
