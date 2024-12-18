@@ -53,6 +53,7 @@ const UserInfo = ({ userData, diaryLength }: UserInfoTypes) => {
         <EventModal
           closeModal={() => setIsEventModalOpen(false)}
           eventContent={eventContent}
+          isNewEvent={false}
         />
       )}
     </S.ProfileArea>
