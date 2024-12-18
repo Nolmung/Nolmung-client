@@ -15,6 +15,7 @@ import getIsLogin from '@/common/utils/getIsLogin';
 import ReactGA from 'react-ga4';
 import { convertFormatDate } from '@/common/utils/convertFormatDate';
 import dayjs from 'dayjs';
+import SEO from '@/common/components/SEO';
 
 const TodayMungDetail = () => {
   const { diaryId } = useParams<{ diaryId: string }>();
@@ -83,6 +84,7 @@ const TodayMungDetail = () => {
 
   return (
     <S.Wrapper>
+      <SEO title={'오늘멍'} />
       {diaryData && (
         <S.Container>
           <S.DateArea>

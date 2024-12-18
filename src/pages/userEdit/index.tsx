@@ -8,6 +8,7 @@ import { instance } from '@/service/apis';
 import convertAddressToLatlng from '../signUp/utils/convertAddressToLatlng';
 import { toast } from 'react-toastify';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 function UserEdit() {
   const [nickname, setNickname] = useState('');
@@ -124,6 +125,7 @@ function UserEdit() {
 
   return (
     <S.ContainerWrapper>
+      <SEO title={'회원정보 수정 | 놀멍'} />
       <S.UserTitle>회원정보 수정</S.UserTitle>
       <S.ContentTitleText>닉네임</S.ContentTitleText>
       <S.UserInfoInput

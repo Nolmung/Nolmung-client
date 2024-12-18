@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { EventContents } from '@/common/components/eventModal/eventContents';
 import EventModal from '@/common/components/eventModal';
+import SEO from '@/common/components/SEO';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
@@ -29,7 +30,6 @@ function TodayMungWrite() {
     isLoading: todayReviewLoading,
     isError: todayReviewError,
   } = useGetTodayReview();
-  
 
   const { title, content, dogs, addPlaces } = useTodayMungStore();
 
@@ -102,6 +102,7 @@ function TodayMungWrite() {
 
   return (
     <>
+      <SEO title={'오늘멍 작성하기'} />
       {isConfirmModalOpen && (
         <Modal
           isOpen={isConfirmModalOpen}

@@ -24,6 +24,7 @@ import { usePostReviews } from '../todaymungWrite/queries';
 import { useReviewConfirmModalStore } from '@/stores/useReviewConfirmModalStore';
 import { useTodayMungStore } from '../todaymungWrite/stores/todayMungStore';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 export interface SearchHistoryItem {
   id: number;
@@ -140,6 +141,7 @@ function TodayMungPlaceRegist() {
 
   return (
     <>
+      <SEO title={'오늘멍 장소등록'} />
       <S.Wrapper
         addPadding={reviewlist.length > 0}
         ref={scrollRef}

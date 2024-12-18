@@ -9,6 +9,7 @@ import { FilledStar } from '@/assets/images/svgs';
 import { useGetBookmarks, useDeleteBookmarks } from './hooks';
 import { NoResultStandUI } from '@/common/components/noResultUI';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 function MyFavorite() {
   const [currentCategory, setCurrentCategory] =
@@ -59,6 +60,7 @@ function MyFavorite() {
 
   return (
     <S.Wrapper>
+      <SEO title={'즐겨찾기 | 놀멍'} />
       <S.CategoryWrapper>
         {BookmarkCategoryMapping.map((category) => (
           <S.CategoryContainer

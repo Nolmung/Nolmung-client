@@ -5,6 +5,7 @@ import { S } from './styles/index.style';
 import { getTodaymungList } from '@/service/apis/diary';
 import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
+import SEO from '@/common/components/SEO';
 
 interface Diary {
   diaryId: number;
@@ -40,8 +41,6 @@ function Todaymung() {
     queryFn: getTodaymungList,
   });
 
-  useSetDocumentTitle('오늘멍 모아보기');
-
   if (isLoading) {
     return <LoadingSpinnerLottie />;
   }
@@ -51,6 +50,7 @@ function Todaymung() {
 
   return (
     <S.Wrapper>
+      <SEO title={'오늘멍 모아보기'} />
       {todaymungData && (
         <>
           <UserInfo

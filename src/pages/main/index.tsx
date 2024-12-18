@@ -25,7 +25,6 @@ import CustomMarkerComponent from './components/customMarker';
 import { getPlacesFilter, getPlacesMap } from '@/service/apis/place';
 import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import LoginPromptModal from '@/common/components/loginPromptModal';
@@ -34,9 +33,9 @@ import { FilterState } from './types/filter';
 import { withEvent } from '@/service/googleAnalytics/analytics';
 import { EVENTS } from '@/service/googleAnalytics/events';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 function Main() {
-  useSetDocumentTitle('놀멍');
   const { naver } = window;
   const location = useLocation();
   const navigate = useNavigate();
@@ -492,7 +491,7 @@ function Main() {
 
   return (
     <S.Wrapper>
-      {/* {isMapLoading && <LoadingNolmungLottie />} */}
+      <SEO title={'놀멍'} />
       {isOpen && <LoginPromptModal closeModal={close} />}
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
         {!(category || location.search) && (

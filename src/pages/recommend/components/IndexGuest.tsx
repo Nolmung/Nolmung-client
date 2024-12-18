@@ -13,9 +13,9 @@ import { LoadingSkeletonLottie } from '@common/components/lottie';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@common/constants/route';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 function GuestRecommend() {
-  useSetDocumentTitle('추천');
   const naviagte = useNavigate();
   const {
     data: bookmarks,
@@ -42,6 +42,7 @@ function GuestRecommend() {
 
   return (
     <S.Wrapper>
+      <SEO title={'추천 | 놀멍'} />
       <S.BlurWrapper>
         {bookmarks.length > 0 && (
           <RecommendCard

@@ -15,6 +15,7 @@ import { UPLOADPATH } from '@/common/constants/uploadPath';
 import ReactGA from 'react-ga4';
 import { useGetDogs } from '../todaymungWrite/queries';
 import { toast } from 'react-toastify';
+import SEO from '@/common/components/SEO';
 dayjs.locale('ko');
 
 /** 강아지 수정 페이지 */
@@ -37,8 +38,6 @@ function DogsEdit() {
   const { data: dogsData } = useGetDogs();
   const { mutate: patchDogMutate } = usePatchDogs();
   const { mutate: deleteDogMutate } = useDeleteDogs();
-
-  console.log(dogsData?.data);
 
   const handleDateChange = (newValue: Dayjs | null) => {
     setSelectedDate(newValue);
@@ -212,6 +211,7 @@ function DogsEdit() {
 
   return (
     <S.ContainerWrapper>
+      <SEO title={'반려견 수정'} />
       <S.DogPicture onClick={handlePictureClick}>
         {preview ? (
           <S.PreviewImage src={preview} alt="Dog Profile Preview" />

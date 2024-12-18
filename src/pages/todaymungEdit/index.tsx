@@ -21,6 +21,7 @@ import VisitedPlaceCard from '../todaymungWrite/components/VisitedPlaceCard';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
 import dayjs from 'dayjs';
+import SEO from '@/common/components/SEO';
 
 function TodayMungEdit() {
   useSetDocumentTitle('오늘멍 작성하기');
@@ -123,6 +124,7 @@ function TodayMungEdit() {
 
   return (
     <S.Wrapper>
+      <SEO title={'오늘멍 수정'} />
       <S.BannerWrapper>
         <S.BannerImage src="/webps/TodayMungLogo.webp" alt="오늘멍 배너" />
       </S.BannerWrapper>
