@@ -190,7 +190,7 @@ function TodayMungWrite() {
           </div>
         </S.ContentWrapper>
       </S.Wrapper>
-      {isEventModalOpen && <EventModal closeModal={() => setIsEventModalOpen(false)} eventContent={eventContent} />}
+      {/* {isEventModalOpen && <EventModal closeModal={() => setIsEventModalOpen(false)} eventContent={eventContent} />} */}
     </>
   );
 }
