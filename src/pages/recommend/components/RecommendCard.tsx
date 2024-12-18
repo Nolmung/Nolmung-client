@@ -39,7 +39,7 @@ function RecommendCard({
 
           return (
             <S.PlaceWrapper
-              isBlurred={isBlurred ?? false}
+              $isBlurred={isBlurred ?? false}
               onClick={() => navigateToDetail(mock.placeId)}
               key={mock.placeId}
             >
