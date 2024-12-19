@@ -14,6 +14,13 @@ import {
 import { ListDataProps } from '../../types/TodayMungList.type';
 import ReactGA from 'react-ga4';
 
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+import RegistButton from '../registButton';
+import { convertFormatDate } from '@/common/utils/convertFormatDate';
+
+dayjs.locale('ko');
+
 const Convert = ({ listData }: ListDataProps) => {
   const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.Calendar);
   const handleViewChange = (mode: ViewMode) => {
@@ -24,8 +31,18 @@ const Convert = ({ listData }: ListDataProps) => {
     });
     setViewMode(mode);
   };
+
+  const today = dayjs().format('YYYY.MM.DD');
+  const hasTodayMung = listData.diaries.some(
+    (entry) => convertFormatDate(entry.createdAt) === today, // 오늘 날짜와 일치하는 데이터가 있는지 확인
+  );
+
   return (
     <>
+      <S.ButtonWrapper>
+        <RegistButton active={hasTodayMung} />
+      </S.ButtonWrapper>
+
       <S.ConvertArea>
         <S.CalendarMode
           mode={viewMode}
