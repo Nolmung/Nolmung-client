@@ -10,6 +10,7 @@ dayjs.locale('ko');
 import convertAddressToLatlng from './utils/convertAddressToLatlng';
 import { toast } from 'react-toastify';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 function SignUp() {
   const [nickname, setNickname] = useState('');
@@ -25,10 +26,6 @@ function SignUp() {
   const navigate = useNavigate();
 
   const userId = location.state?.userId || '';
-
-  useEffect(() => {
-    document.title = '회원가입';
-  }, []);
 
   useEffect(() => {
     if (nickname && address && selectedDate && gender) {
@@ -118,6 +115,7 @@ function SignUp() {
   return (
     <>
       <S.ContainerWrapper>
+        <SEO title={'회원가입 | 놀멍'} />
         <S.UserTitle>
           안녕하세요,
           <br />

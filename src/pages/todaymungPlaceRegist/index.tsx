@@ -4,7 +4,6 @@ import { useRef, useState, useEffect } from 'react';
 import { useReviewStore } from './stores/reviewStore';
 import VisitedPlaceCard from '../todaymungWrite/components/VisitedPlaceCard';
 import { CancelIcon, TimeRecord } from '@/assets/images/svgs';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from './queries';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
@@ -24,6 +23,7 @@ import { usePostReviews } from '../todaymungWrite/queries';
 import { useReviewConfirmModalStore } from '@/stores/useReviewConfirmModalStore';
 import { useTodayMungStore } from '../todaymungWrite/stores/todayMungStore';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 export interface SearchHistoryItem {
   id: number;
@@ -32,7 +32,6 @@ export interface SearchHistoryItem {
 }
 
 function TodayMungPlaceRegist() {
-  useSetDocumentTitle('오늘멍 장소 등록');
   const { isOpen, openModal, closeModal } = useModal();
 
   const location = useLocation();
@@ -140,6 +139,7 @@ function TodayMungPlaceRegist() {
 
   return (
     <>
+      <SEO title={'오늘멍 장소등록 | 놀멍'} />
       <S.Wrapper
         addPadding={reviewlist.length > 0}
         ref={scrollRef}

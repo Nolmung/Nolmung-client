@@ -25,6 +25,7 @@ function BottomSheet({
   selectedFilter,
   setSelectedFilter,
 }: BottomSheetProps) {
+  console.log(placeMap);
   const device = checkUserDevice();
 
   let bottomSheetRef = useRef<HTMLDivElement>(null);

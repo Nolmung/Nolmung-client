@@ -8,6 +8,7 @@ import { useDeleteReviews, useGetReviews } from './queries';
 import { LoadingSkeletonLottie } from '@/common/components/lottie';
 import { NoResulLiedownUI } from '@/common/components/noResultUI';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 function MyReview() {
   const { openModal, isOpen, closeModal } = useModal();
@@ -76,6 +77,7 @@ function MyReview() {
 
   return (
     <S.Wrapper>
+      <SEO title={'내 리뷰 | 놀멍'} />
       {isOpen && (
         <Modal isOpen={isOpen} closeModal={closeModal}>
           <S.ModalContent>

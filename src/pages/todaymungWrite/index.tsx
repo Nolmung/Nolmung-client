@@ -10,7 +10,6 @@ import { useGetDogs, usePostDiary } from './queries';
 import DogCard from './components/DogCard';
 import { useReviewStore } from '../todaymungPlaceRegist/stores/reviewStore';
 import { useTodayMungStore } from './stores/todayMungStore';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import Modal from '@/common/components/modal';
 import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
 import { useGetTodayReview } from '../todaymungPlaceRegist/queries';
@@ -21,6 +20,7 @@ import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { EventContents } from '@/common/components/eventModal/eventContents';
 import EventModal from '@/common/components/eventModal';
+import SEO from '@/common/components/SEO';
 
 function TodayMungWrite() {
   const navigate = useNavigate();
@@ -29,7 +29,6 @@ function TodayMungWrite() {
     isLoading: todayReviewLoading,
     isError: todayReviewError,
   } = useGetTodayReview();
-  
 
   const { title, content, dogs, addPlaces } = useTodayMungStore();
 
@@ -51,8 +50,6 @@ function TodayMungWrite() {
 
   const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary(handleBadgeEventModalOpen);
-
-  useSetDocumentTitle('오늘멍 작성하기');
 
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const [eventContent, setEventContent] = useState({
@@ -102,6 +99,7 @@ function TodayMungWrite() {
 
   return (
     <>
+      <SEO title={'오늘멍 작성하기 | 놀멍'} />
       {isConfirmModalOpen && (
         <Modal
           isOpen={isConfirmModalOpen}

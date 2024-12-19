@@ -28,7 +28,7 @@ export const S = {
     background-color: pink;
     border-radius: 50%;
   `,
-  WriterName: styled.div`
+  WriterName: styled.span`
     color: #080808;
     text-align: center;
 
@@ -39,7 +39,7 @@ export const S = {
     display: flex;
     align-items: center;
   `,
-  CreatedAt: styled.div`
+  CreatedAt: styled.span`
     color: #a7a7a7;
     text-align: center;
 
@@ -65,7 +65,7 @@ export const S = {
     flex-direction: column;
     width: ${({ isImageUrlNotNull }) => (isImageUrlNotNull ? '70%' : '100%')};
   `,
-  Title: styled.div`
+  Title: styled.h3`
     color: #080808;
 
     font-size: 16px;
@@ -82,7 +82,7 @@ export const S = {
       width: 100%;
     }
   `,
-  Content: styled.div`
+  Content: styled.p`
     color: #080808;
     font-size: 12px;
     font-style: normal;

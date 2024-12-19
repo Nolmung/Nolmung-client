@@ -35,9 +35,15 @@ const LazyImage = ({ src, alt, placeholder, ...props }: LazyImageProps) => {
   return (
     <div ref={ref}>
       {inView ? (
-        <img src={src} alt={alt} {...props} />
+        <img width={120} height={120} src={src} alt={alt} {...props} />
       ) : (
-        <img src={placeholder} alt="Loading..." {...props} />
+        <img
+          width={120}
+          height={120}
+          src={placeholder}
+          alt="Loading..."
+          {...props}
+        />
       )}
     </div>
   );
