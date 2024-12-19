@@ -4,7 +4,7 @@ function NoSearchHistory() {
   return (
     <S.NoResultWrapper>
       <img src="/webps/emptyImg.webp" width={200} />
-      <S.NoResultSubText>최근 검색 기록이 없다 멍!</S.NoResultSubText>
+      <S.NoResultSubText>최근 검색 기록이 없습니다</S.NoResultSubText>
     </S.NoResultWrapper>
   );
 }
