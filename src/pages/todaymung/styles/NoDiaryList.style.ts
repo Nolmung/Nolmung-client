@@ -5,10 +5,12 @@ export const S = {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: calc(100dvh - 440px);
+    align-items: center;
     gap: 30px;
     padding: 60px;
     max-width: 350px;
-    max-height: 350px;
+    /* max-height: 350px; */
   `,
   SubText: styled.div`
     color: #5e5e5e;
