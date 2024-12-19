@@ -1,4 +1,3 @@
-import { LiedownDog } from '@/assets/images/svgs';
 import { S } from './index.style';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +21,7 @@ function NotFound() {
       <S.Title>
         페이지가 도망갔어요! <br /> 우리도 열심히 찾아볼게요.
       </S.Title>
-      <LiedownDog />
+      <img src="/webps/emptyImg.webp" />
       <S.Description>
         <S.Emphasize>{count}</S.Emphasize>초 후에 메인페이지로 이동합니다.
       </S.Description>
