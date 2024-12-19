@@ -31,7 +31,7 @@ function DogCard({ data }: DogCardProps) {
       <S.PetImage
         src={data.profileUrl}
         onError={(e) => {
-          e.currentTarget.src = '/svgs/todayMungNoListIcon.svg';
+          e.currentTarget.src = '/webps/emptyImg.webp';
         }}
       />
       <S.PetName selected={isDogSelected}>{data.dogName}</S.PetName>

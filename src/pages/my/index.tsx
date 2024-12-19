@@ -10,15 +10,13 @@ import {
 } from '@/assets/images/svgs';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetDogsList, useGetUser } from './hooks';
 import PetProfileCard from './components/profile';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 function Mypage() {
-  useSetDocumentTitle('마이페이지');
-
   const navigate = useNavigate();
   const navigateToMyReview = () => {
     navigate(ROUTE.MY_REVIEW());
@@ -70,6 +68,7 @@ function Mypage() {
 
   return (
     <S.Wrapper>
+      <SEO title={'마이페이지 | 놀멍'} />
       <S.ProfileWrapper>
         <S.MyProfileCard>
           {userData && (
@@ -112,6 +111,7 @@ function Mypage() {
               data={dogData[0]}
               key={dogData[0].dogId}
               userNickname={userData!.userNickname}
+              isFirstDog={true}
             />
           ) : (
             <PetProfileCard />

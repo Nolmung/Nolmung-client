@@ -26,7 +26,6 @@ import { useGetPostDetail } from './querys';
 import { PlacePrice } from '@/common/types';
 import findLabelNameById from '@/common/utils/findLabelNameById';
 import { match } from 'ts-pattern';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import {
   NoResulLiedownUI,
@@ -39,6 +38,12 @@ import getIsLogin from '@/common/utils/getIsLogin';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import checkUserDevice from '../main/utils/checkUserDevice';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
+
+const preloadImage = (src: string) => {
+  const img = new Image();
+  img.src = src;
+};
 
 function Detail() {
   const navigate = useNavigate();
@@ -46,13 +51,18 @@ function Detail() {
   const [visibleTodayMungCard, setVisibleTodayMungCard] = useState(3);
   const { placeId } = useParams();
   const { data, isLoading, isError } = useGetPostDetail(placeId!);
-  useSetDocumentTitle(data?.placeName || '');
 
   const { mutate: deleteBookmarks } = useDeleteBookmarks();
   const { open } = useLoginPromptModalStore();
   const [isBookmarked, setIsBookmarked] = useState<boolean>(
     data?.isBookmarked ?? false,
   );
+
+  useEffect(() => {
+    if (data?.placeImgUrl) {
+      preloadImage(data.placeImgUrl);
+    }
+  }, [data?.placeImgUrl]);
 
   useEffect(() => {
     if (data) {
@@ -137,14 +147,20 @@ function Detail() {
   const openingHour = data.openHour?.split(' ');
 
   const device = checkUserDevice();
+
   return (
     <S.Wrapper
       isMobile={device == 'Mobile'}
       ref={scrollRef}
       onScroll={handleScroll}
     >
-      <S.Header isScrolled={scrollTop >= 70}>
-        {scrollTop >= 70 ? (
+      <SEO
+        title={data.placeName + ' | 놀멍'}
+        description={` 리뷰 + ${data.reviewCount}`}
+        image={data.placeImgUrl}
+      />
+      <S.Header isScrolled={scrollTop >= 64}>
+        {scrollTop >= 64 ? (
           <>
             <BackArrowBlack onClick={handleBackArrowClick} width={24} />
             {data.placeName}
@@ -154,6 +170,7 @@ function Detail() {
         )}
       </S.Header>
       <S.GradientImage />
+
       <S.PlaceImage src={data.placeImgUrl} alt="시설 이미지" />
       <S.PlaceInfo>
         <S.TitleWrapper>
@@ -233,7 +250,7 @@ function Detail() {
         </S.ReviewTitle>
         <S.KeywordReviews>
           {!data?.labels.length && (
-            <NoResultStandUI content={'아직 리뷰가 없다 멍 !'} />
+            <NoResultStandUI content={'아직 리뷰가 없습니다'} />
           )}
           {data.labels?.map((item) => (
             <KeywordReview
@@ -254,7 +271,7 @@ function Detail() {
           ?.slice(0, visibleTodayMungCard)
           .map((card) => <TodayMungCard key={card.diaryId} card={card} />)}
         {!data.diaries?.length && (
-          <NoResulLiedownUI content={'아직 오늘멍이 없다 멍 !'} />
+          <NoResulLiedownUI content={'아직 오늘멍이 없습니다'} />
         )}
         {visibleTodayMungCard < data.diaries?.length && (
           <S.ViewMoreButtonWrapper>

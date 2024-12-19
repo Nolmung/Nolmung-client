@@ -12,6 +12,7 @@ import { DogInfoType } from '@/service/apis/dog/index.type';
 import { UPLOADPATH } from '@/common/constants/uploadPath';
 import ReactGA from 'react-ga4';
 import 'dayjs/locale/ko';
+import SEO from '@/common/components/SEO';
 dayjs.locale('ko');
 
 function Dogs() {
@@ -207,6 +208,7 @@ function Dogs() {
 
   return (
     <S.ContainerWrapper>
+      <SEO title={'반려견 등록 | 놀멍'} />
       <S.UserTitle>
         반가워요,
         <br />

@@ -8,6 +8,7 @@ import { instance } from '@/service/apis';
 import convertAddressToLatlng from '../signUp/utils/convertAddressToLatlng';
 import { toast } from 'react-toastify';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 function UserEdit() {
   const [nickname, setNickname] = useState('');
@@ -124,6 +125,7 @@ function UserEdit() {
 
   return (
     <S.ContainerWrapper>
+      <SEO title={'회원정보 수정 | 놀멍'} />
       <S.UserTitle>회원정보 수정</S.UserTitle>
       <S.ContentTitleText>닉네임</S.ContentTitleText>
       <S.UserInfoInput
@@ -133,12 +135,7 @@ function UserEdit() {
       />
       <S.ContentTitleText>주소</S.ContentTitleText>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <S.UserInfoInput
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          placeholder="주소를 입력해주세요"
-        />
-        <DaumPost setAddress={setAddress} />
+        <DaumPost address={address} setAddress={setAddress}/>
       </div>
       <S.ContentTitleText>생년월일</S.ContentTitleText>
       <DatePicker value={selectedDate} onChange={handleDateChange} />

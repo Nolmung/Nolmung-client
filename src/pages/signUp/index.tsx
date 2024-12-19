@@ -10,6 +10,7 @@ dayjs.locale('ko');
 import convertAddressToLatlng from './utils/convertAddressToLatlng';
 import { toast } from 'react-toastify';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 function SignUp() {
   const [nickname, setNickname] = useState('');
@@ -25,10 +26,6 @@ function SignUp() {
   const navigate = useNavigate();
 
   const userId = location.state?.userId || '';
-
-  useEffect(() => {
-    document.title = '회원가입';
-  }, []);
 
   useEffect(() => {
     if (nickname && address && selectedDate && gender) {
@@ -103,16 +100,6 @@ function SignUp() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    ReactGA.event({
-      category: 'SignUp',
-      action: 'Address Input Changed',
-      label: value,
-    });
-    setAddress(value);
-  };
-
   const handleSuggestionClick = (suggestion: string) => {
     ReactGA.event({
       category: 'SignUp',
@@ -128,6 +115,7 @@ function SignUp() {
   return (
     <>
       <S.ContainerWrapper>
+        <SEO title={'회원가입 | 놀멍'} />
         <S.UserTitle>
           안녕하세요,
           <br />
@@ -149,13 +137,7 @@ function SignUp() {
           )}
         </S.ContentTitleText>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <S.UserInfoInput
-            value={address}
-            onChange={handleInputChange}
-            placeholder="주소를 입력해주세요"
-          />
-          <DaumPost setAddress={setAddress} />
-
+          <DaumPost address={address} setAddress={setAddress} />
           {isDropdownVisible && filteredLocations.length > 0 && (
             <S.Dropdown>
               {filteredLocations.map((location) => (

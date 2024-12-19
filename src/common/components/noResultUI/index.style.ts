@@ -6,15 +6,14 @@ export const S = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 20px;
     padding: 60px;
     width: 100%;
     height: 100%;
   `,
 
   NoResultText: styled.div`
-    color: #080808;
-    font-size: 18px;
-    font-weight: 500;
+    color: #5e5e5e;
+    font-size: 16px;
   `,
 };

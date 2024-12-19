@@ -20,6 +20,9 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
       fontFamily: 'Pretendard',
     },
   });
+
+  const today = dayjs();
+
   return (
     <div>
       <ThemeProvider theme={theme}>
@@ -36,6 +39,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ value, onChange }) => {
             views={['year', 'month', 'day']}
             openTo="year"
             format="YYYY-MM-DD"
+            maxDate={today}
             slots={{
               openPickerIcon: S.DatepickerCalendarIcon,
             }}

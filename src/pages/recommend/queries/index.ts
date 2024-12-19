@@ -3,41 +3,37 @@ import {
   getRecommendNearby,
   getRecommendSimilarBookmarks,
   getRecommendWeight,
-} from '@/service/apis/recommend';
-import { useQuery } from '@tanstack/react-query';
+} from '@service/apis/recommend';
+import { useInstanceQuery } from '@common/hooks/useInstanceQuery';
 
-export const useRecommendWeight = () => {
-  return useQuery({
-    queryKey: ['recommendWeight'],
-    queryFn: getRecommendWeight,
-    staleTime: 1000 * 60 * 60 * 24,
-    gcTime: 1000 * 60 * 60 * 24,
-  });
-};
+export const useRecommendWeight = () =>
+  useInstanceQuery(
+    'recommendWeight',
+    getRecommendWeight,
+    1000 * 60 * 60 * 24,
+    1000 * 60 * 60 * 24,
+  );
 
-export const useRecommendSimilarBookmarks = () => {
-  return useQuery({
-    queryKey: ['recommendSimilarBookmarks'],
-    queryFn: getRecommendSimilarBookmarks,
-    staleTime: 1000 * 60 * 60 * 24,
-    gcTime: 1000 * 60 * 60 * 24,
-  });
-};
+export const useRecommendSimilarBookmarks = () =>
+  useInstanceQuery(
+    'recommendSimilarBookmarks',
+    getRecommendSimilarBookmarks,
+    1000 * 60 * 60 * 24,
+    1000 * 60 * 60 * 24,
+  );
 
-export const useRecommendNearby = () => {
-  return useQuery({
-    queryKey: ['recommendNearby'],
-    queryFn: getRecommendNearby,
-    staleTime: 1000 * 60 * 60 * 24,
-    gcTime: 1000 * 60 * 60 * 24,
-  });
-};
+export const useRecommendNearby = () =>
+  useInstanceQuery(
+    'recommendNearby',
+    getRecommendNearby,
+    1000 * 60 * 60 * 24,
+    1000 * 60 * 60 * 24,
+  );
 
-export const useRecommendBookmarks = () => {
-  return useQuery({
-    queryKey: ['recommendBookmarks'],
-    queryFn: getRecommendBookmarks,
-    staleTime: 1000 * 60 * 60 * 24,
-    gcTime: 1000 * 60 * 60 * 24,
-  });
-};
+export const useRecommendBookmarks = () =>
+  useInstanceQuery(
+    'recommendBookmarks',
+    getRecommendBookmarks,
+    1000 * 60 * 60 * 24,
+    1000 * 60 * 60 * 24,
+  );

@@ -1,4 +1,3 @@
-import { TodayMungNoListIcon } from '@/assets/images/svgs';
 import SearchResultCard from './SearchResultCard';
 import { PlaceSearchResponse } from '@/service/apis/place/index.type';
 import S from '../styles/SearchList.style';
@@ -36,7 +35,7 @@ function SearchList({
         ))
       ) : (
         <S.NoResultWrapper>
-          <TodayMungNoListIcon />
+          <img src="/webps/emptyImg.webp" width={200} />
           <S.NoResultSubText>검색 결과가 없다 멍 !</S.NoResultSubText>
         </S.NoResultWrapper>
       )}

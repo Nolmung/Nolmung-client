@@ -1,4 +1,3 @@
-import { StandBrownDog } from '@/assets/images/svgs';
 import Modal from '../modal';
 import { S } from './index.style';
 import { useNavigate } from 'react-router-dom';
@@ -45,11 +44,15 @@ function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
           모든순간을 기록해보세요!
         </S.Title>
         <S.Explanation>
-          지금 바로 회원가입하고, <br /> 우리 아이와의 추억을 특별하게
-          기록해보세요.
+          지금 바로 회원가입하고, <br />
+          우리 아이와의 추억을 특별하게 기록해보세요.
         </S.Explanation>
         <S.IconWrapper>
-          <StandBrownDog height={'70%'} />
+          <img
+            src="/webps/loginUdoImg.webp"
+            height={100}
+            style={{ marginTop: '15px' }}
+          />
         </S.IconWrapper>
         <S.LoginPromptButtonWrapper>
           <S.LoginPromptButton onClick={handleLoginButtonClick}>

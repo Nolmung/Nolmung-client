@@ -6,7 +6,7 @@ export const S = {
     height: 100dvh;
     overflow-y: scroll;
   `,
-  Header: styled.header<{ isScrolled: boolean }>`
+  Header: styled.h1<{ isScrolled: boolean }>`
     width: 100%;
     height: 70px;
     align-items: center;
@@ -98,7 +98,7 @@ export const S = {
     padding: 10px 2px;
     box-sizing: border-box;
   `,
-  StarAverage: styled.div`
+  StarAverage: styled.span`
     color: #080808;
     text-align: center;
 
@@ -107,7 +107,7 @@ export const S = {
     font-weight: 600;
     line-height: 16px; /* 88.889% */
   `,
-  PlaceReviewCount: styled.div`
+  PlaceReviewCount: styled.span`
     color: #5e5e5e;
     text-align: center;
 
@@ -117,7 +117,7 @@ export const S = {
     line-height: 16px; /* 114.286% */
     margin-left: 6px;
   `,
-  PlaceRoadAddress: styled.div`
+  PlaceRoadAddress: styled.address`
     color: #5e5e5e;
 
     font-size: 14px;
@@ -134,7 +134,7 @@ export const S = {
     overflow-x: auto;
   `,
 
-  InfoIconWrapper: styled.div`
+  InfoIconWrapper: styled.figure`
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -170,7 +170,7 @@ export const S = {
     gap: 10px;
   `,
 
-  PlaceDetailMenu: styled.div`
+  PlaceDetailMenu: styled.span`
     color: #5e5e5e;
     text-align: center;
 
@@ -191,7 +191,7 @@ export const S = {
     line-height: 16px; /* 100% */
   `,
 
-  ReviewTitle: styled.div`
+  ReviewTitle: styled.h2`
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -206,7 +206,7 @@ export const S = {
     line-height: 16px; /* 100% */
   `,
 
-  ReviewCount: styled.div`
+  ReviewCount: styled.span`
     color: #a7a7a7;
     text-align: center;
 

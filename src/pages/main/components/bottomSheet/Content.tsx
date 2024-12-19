@@ -14,10 +14,40 @@ import { useGetPostDetail } from '@/pages/detail/querys';
 import { useQueryClient } from '@tanstack/react-query';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import ReactGA from 'react-ga4';
+import { useInView } from 'react-intersection-observer';
 interface ContentProps {
   place: MapPlace;
   isCard: boolean;
 }
+
+interface LazyImageProps {
+  src: string;
+  alt: string;
+  placeholder: string;
+}
+
+const LazyImage = ({ src, alt, placeholder, ...props }: LazyImageProps) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  return (
+    <div ref={ref}>
+      {inView ? (
+        <img width={120} height={120} src={src} alt={alt} {...props} />
+      ) : (
+        <img
+          width={120}
+          height={120}
+          src={placeholder}
+          alt="Loading..."
+          {...props}
+        />
+      )}
+    </div>
+  );
+};
 
 function Content({ place, isCard }: ContentProps) {
   const queryClient = useQueryClient();
@@ -150,7 +180,13 @@ function Content({ place, isCard }: ContentProps) {
             </S.InfoTextWrapper>
           </S.PlaceInfoWrapper>
           <S.ImageWrapper>
-            <S.PlaceImage src={place!.placeImgUrl} alt={place!.placeName} />
+            <S.PlaceImage
+              as={LazyImage}
+              src={place!.placeImgUrl}
+              alt={place!.placeName}
+              placeholder="/path/to/placeholder.jpg"
+            />
+
             <S.Like>
               <S.IconWrapper onClick={handleLikeClick}>
                 <IoHeartSharp

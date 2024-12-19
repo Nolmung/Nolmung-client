@@ -1,6 +1,7 @@
 import { S } from './styles/login.styles';
 import KakaoLoginButton from './components/KakaoLoginButton';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 function Login() {
   const handleBack = () => {
@@ -13,6 +14,7 @@ function Login() {
   };
   return (
     <S.Wrapper>
+      <SEO title={'로그인' + ' | 놀멍'} />
       <S.BackgroundImg>
         <S.ObjectContainer>
           <S.NolmungText>

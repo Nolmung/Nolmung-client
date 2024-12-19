@@ -5,7 +5,7 @@ const S = {
     width: 100%;
     margin-top: 53px;
   `,
-  Title: styled.p`
+  Title: styled.h1`
     color: #080808;
     font-size: 18px;
     font-style: normal;
@@ -14,7 +14,7 @@ const S = {
     white-space: nowrap;
     flex-shrink: 0;
   `,
-  TitleExplanation: styled.div`
+  TitleExplanation: styled.h2`
     color: #5e5e5e;
     font-size: 14px;
     font-style: normal;
@@ -33,11 +33,11 @@ const S = {
     margin-top: 25px;
     padding-bottom: 40px;
   `,
-  PlaceWrapper: styled.div<{ isBlurred: boolean }>`
+  PlaceWrapper: styled.div<{ $isBlurred: boolean }>`
     display: flex;
     flex-direction: column;
-    filter: ${({ isBlurred }) => (isBlurred ? 'blur(5px)' : 'none')};
-    -webkit-filter: ${({ isBlurred }) => (isBlurred ? 'blur(5px)' : 'none')};
+    filter: ${({ $isBlurred }) => ($isBlurred ? 'blur(5px)' : 'none')};
+    -webkit-filter: ${({ $isBlurred }) => ($isBlurred ? 'blur(5px)' : 'none')};
   `,
   PlaceImage: styled.img`
     width: 80vw;

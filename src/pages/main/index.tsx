@@ -25,7 +25,6 @@ import CustomMarkerComponent from './components/customMarker';
 import { getPlacesFilter, getPlacesMap } from '@/service/apis/place';
 import { PlaceCategory } from '@/common/types';
 import { MarkerType } from './types';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import LoginPromptModal from '@/common/components/loginPromptModal';
@@ -34,10 +33,9 @@ import { FilterState } from './types/filter';
 import { withEvent } from '@/service/googleAnalytics/analytics';
 import { EVENTS } from '@/service/googleAnalytics/events';
 import ReactGA from 'react-ga4';
-// import { LoadingNolmungLottie } from '@/common/components/lottie';
+import SEO from '@/common/components/SEO';
 
 function Main() {
-  useSetDocumentTitle('놀멍');
   const { naver } = window;
   const location = useLocation();
   const navigate = useNavigate();
@@ -81,23 +79,6 @@ function Main() {
   const isLoggedIn = getIsLogin();
 
   const isInitialMountRef = useRef(true); // 첫 마운트인지 확인
-
-  // const [isMapLoading, setIsMapLoading] = useState(true);
-
-  /** 마운트 될 때 3초간 실행 -> @Todo 로딩 로직 생각하여 적용하기 */
-  // useEffect(() => {
-  //   const isFirstLoad = sessionStorage.getItem('isFirstLoad');
-  //   if (!isFirstLoad) {
-  //     sessionStorage.setItem('isFirstLoad', 'true');
-  //     const timer = setTimeout(() => {
-  //       setIsMapLoading(false);
-  //     }, 2500);
-
-  //     return () => clearTimeout(timer);
-  //   } else {
-  //     setIsMapLoading(false);
-  //   }
-  // }, []);
 
   const query = new URLSearchParams(window.location.search);
   const categoryFromUrl = query.get('category');
@@ -198,7 +179,6 @@ function Main() {
               },
             });
           }
-
         } catch (error) {
           // setIsMapLoading(false);
           console.error('Error during API call:', error);
@@ -280,15 +260,18 @@ function Main() {
     }
   }, [bottomSheetVisible, bottomCardVisible]);
 
+  useEffect(() => {
+    console.log('bottomHeight', bottomHeight);
+  }, [bottomHeight]);
+
   /** 지도로 돌아올 경우 기존에 활성화된 카테고리, 바텀시트, 바텀카드, 마커 비활성화 */
   useEffect(() => {
-
     /** 첫 마운트일 경우 바텀시트 오픈 */
     if (isInitialMountRef.current) {
       setBottomSheetVisible(true);
       isInitialMountRef.current = false;
       return;
-    } 
+    }
 
     if (location.pathname === '/' && !location.search) {
       setCategory(null);
@@ -311,7 +294,6 @@ function Main() {
       selectedMarkerRef.current = null;
     }
   }, [location, location.pathname, location.search]);
-
 
   /** 지도에서 장소 검색 get 함수 */
   const getAndInitMarkers = async () => {
@@ -513,7 +495,7 @@ function Main() {
 
   return (
     <S.Wrapper>
-      {/* {isMapLoading && <LoadingNolmungLottie />} */}
+      <SEO title={'놀멍'} />
       {isOpen && <LoginPromptModal closeModal={close} />}
       <S.MapWrapper id="map" ref={mapContainerRef} onClick={handleMapClick}>
         {!(category || location.search) && (
