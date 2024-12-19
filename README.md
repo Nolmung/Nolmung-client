@@ -131,12 +131,23 @@ yarn dev
 <br>
 
 **2. 깃 컨벤션**
+<details>
+<summary><b>Types</b></summary>
+<div markdown="1">
 
-  <kbd>
-    <img width="600" src="https://github.com/user-attachments/assets/f12fd40e-4dac-47c1-9347-4631c03c7ead" alt="nolmung_gitflow" style="border:1px solid black;">
-  </kbd>
+  - `feat`: 새로운 기능  
+  - `fix`: 버그 수정  
+  - `refact`: 기능 변경 없이 코드 구조 개선  
+  - `docs`: 문서 수정 (README 등)  
+  - `test`: 테스트 코드 추가 또는 수정  
+  - `env`: 환경 설정 관련  
+  - `hotfix`: 긴급 수정  
+  - `chore`: 그 외의 작은 수정들  
+  - `deploy`: 운영 서버 배포  
 
-<br>
+</div>
+</details>
+
 <br>
 
 **3. 브랜치 명명 및 커밋 메시지 규칙**
@@ -215,7 +226,7 @@ yarn dev
   </tr>
   <tr>
      <td align="center">
-        <p> 테크리더 <br /> 오늘멍 구현</p>
+        <p> 테크리더 <br /> 오늘멍 관리 및 기능 구현</p>
      </td>
      <td align="center">
         <p>지도 장소 검색 및 <br /> 장소 필터링 구현</p>
