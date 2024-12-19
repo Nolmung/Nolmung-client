@@ -103,16 +103,6 @@ function SignUp() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    ReactGA.event({
-      category: 'SignUp',
-      action: 'Address Input Changed',
-      label: value,
-    });
-    setAddress(value);
-  };
-
   const handleSuggestionClick = (suggestion: string) => {
     ReactGA.event({
       category: 'SignUp',
