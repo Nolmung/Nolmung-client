@@ -28,10 +28,13 @@ const TodayMungDetail = () => {
   } = useGetTodaymungDetailData(numericDiaryId);
 
   const diaryData: DiaryType | undefined = todaymungDetailData?.data;
+
   const reviewDate = diaryData
     ? dayjs(diaryData.createdAt).format('YYYY-MM-DD')
     : '';
-  const { data: todayReviewData } = useTodaymungReview(reviewDate);
+  const { data: todayReviewData } = useTodaymungReview(
+    getIsLogin() ? reviewDate : '',
+  );
 
   const handleClickOutside = (event: MouseEvent) => {
     if (dotRef.current && !dotRef.current.contains(event.target as Node)) {
@@ -106,6 +109,7 @@ const TodayMungDetail = () => {
               )}
             </div>
           </S.DateArea>
+
           {todayReviewData && (
             <S.PlaceArea>
               <S.PlaceAreaTitle>장소</S.PlaceAreaTitle>
