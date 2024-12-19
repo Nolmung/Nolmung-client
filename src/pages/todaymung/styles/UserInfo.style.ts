@@ -7,43 +7,76 @@ export const S = {
   `,
   ProfileArea: styled.div`
     display: flex;
-    padding: 30px 22px;
+    flex-direction: column;
+    padding: 50px 22px 12px;
     width: 100%;
-    gap: 22px;
     @media (min-height: 800px) {
       padding: 45px 22px;
     }
   `,
-  ProfileImg: styled.img`
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-  `,
   ProfileDescription: styled.div`
     display: flex;
+    width: 100%;
     flex-direction: column;
-    gap: 12px;
     margin-top: 5px;
     justify-content: center;
   `,
   NameWrapper: styled.div`
     display: flex;
+    width: 100%;
+    padding: 10px 0;
     align-items: center;
-    gap: 8px
+    border-bottom: 1.5px solid #F0F0F0;
   `,
-  ProfileName: styled.div`
+  ProfileName: styled.h1`
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 1px;
+  `,
+  ProfileTitle: styled.h1`
     font-size: 18px;
     font-weight: 600;
+    letter-spacing: 0.5px;
   `,
   ImageWrapper: styled.div`
     display: flex;
     gap: 2px;
+  `,
+  ContentContainer: styled.div`
+    display: flex;
+    gap: 9px;
+    margin-top: 22px;
+  `,
+  ContentWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+    border-radius: 15px;
+    border: 1px solid #d9d9d9;
+    background: #f4f4f4;
+    width: 100%;
+    height: 81px;
+  `,
+  ContentTitle: styled.h2`
+    font-size: 13px;
+    font-weight: 400;
+    color: #5e5e5e;
+    display: flex;
+  `,
+  ContentNumber: styled.h3`
+    font-size: 17px;
+    font-weight: 500;
+    color: #17aa1a;
+    display: flex;
+    justify-content: flex-end;
   `,
   Button: styled.button`
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
+    height: 24px;
   `,
   Image: styled.img`
     width: 19px;
