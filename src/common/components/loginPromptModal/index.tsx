@@ -48,7 +48,11 @@ function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
           우리 아이와의 추억을 특별하게 기록해보세요.
         </S.Explanation>
         <S.IconWrapper>
-          <img src="/webps/loginUdoImg.webp" style={{ marginTop: '15px' }} />
+          <img
+            src="/webps/loginUdoImg.webp"
+            height={100}
+            style={{ marginTop: '15px' }}
+          />
         </S.IconWrapper>
         <S.LoginPromptButtonWrapper>
           <S.LoginPromptButton onClick={handleLoginButtonClick}>
