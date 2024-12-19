@@ -15,14 +15,14 @@ export const S = {
 
   Title: styled.div`
     color: #080808;
-    font-size: 20px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
   `,
   Explanation: styled.p`
     color: #a7a7a7;
-    font-size: 14px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;

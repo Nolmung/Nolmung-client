@@ -49,7 +49,7 @@ function LoginPromptModal({ closeModal }: LoginPromptModalProps) {
           우리 아이와의 추억을 특별하게 기록해보세요.
         </S.Explanation>
         <S.IconWrapper>
-          <StandBrownDog height={'70%'} />
+          <img src="webps/loginUdoImg.webp" style={{ marginTop: '25px' }} />
         </S.IconWrapper>
         <S.LoginPromptButtonWrapper>
           <S.LoginPromptButton onClick={handleLoginButtonClick}>
