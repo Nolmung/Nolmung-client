@@ -46,7 +46,7 @@ export const S = {
     width: 70%;
     height: 50px;
     border: 1px solid #d9d9d9;
-    padding-left: 18px;
+    padding-left: 14px;
     font-size: 16px;
     border-radius: ${({ isDropdownVisible }) =>
       isDropdownVisible ? '10px 10px 0 0' : '10px'};
