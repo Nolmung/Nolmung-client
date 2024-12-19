@@ -25,7 +25,7 @@ const Dogs = React.lazy(() => import('@pages/dogs'));
 const MyDogs = React.lazy(() => import('@pages/my/components/myDogs'));
 const DogsEdit = React.lazy(() => import('@pages/dogEdit'));
 const MyReview = React.lazy(() => import('@pages/myReview'));
-const MyFavorite = React.lazy(() => import('@pages/main'));
+const MyFavorite = React.lazy(() => import('@pages/myFavorite'));
 const NotFound = React.lazy(() => import('@pages/404'));
 const KakaoCallbackHandler = React.lazy(
   () => import('@pages/login/components/KakaoCallbackHandler'),
