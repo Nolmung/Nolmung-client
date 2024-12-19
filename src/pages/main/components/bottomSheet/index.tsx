@@ -12,6 +12,7 @@ import { MarkerType } from '../../types';
 import { FilterState, FilterType } from '../../types/filter';
 import { NoResulLiedownUI } from '@/common/components/noResultUI';
 import ReactGA from 'react-ga4';
+import { Flex } from '../../../../common/components/layout/flex';
 
 type BottomSheetProps = {
   placeMap: MarkerType[];
@@ -103,7 +104,7 @@ function BottomSheet({
           </S.BottomSheetContentWrapper>
         ) : (
           <S.BottomSheetContentWrapper ref={contentRef} refheight={REF_HEIGHT}>
-            <div>
+            <div style={{ display: Flex }}>
               <NoResulLiedownUI content="결과가 없습니다." />
             </div>
           </S.BottomSheetContentWrapper>
