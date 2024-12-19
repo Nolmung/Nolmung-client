@@ -5,7 +5,6 @@ import Button from '@/common/components/button/Button';
 import { useGetDogs, useEditDiary } from './queries';
 import DogCard from './components/DogCard';
 import { useTodayMungStore } from './stores/todayMungStore';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import {
   useGetTodaymungDetailData,
   useTodaymungReview,
@@ -24,7 +23,6 @@ import dayjs from 'dayjs';
 import SEO from '@/common/components/SEO';
 
 function TodayMungEdit() {
-  useSetDocumentTitle('오늘멍 작성하기');
   const {
     title,
     setTitle,

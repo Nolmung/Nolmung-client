@@ -260,6 +260,10 @@ function Main() {
     }
   }, [bottomSheetVisible, bottomCardVisible]);
 
+  useEffect(() => {
+    console.log('bottomHeight', bottomHeight);
+  }, [bottomHeight]);
+
   /** 지도로 돌아올 경우 기존에 활성화된 카테고리, 바텀시트, 바텀카드, 마커 비활성화 */
   useEffect(() => {
     /** 첫 마운트일 경우 바텀시트 오픈 */

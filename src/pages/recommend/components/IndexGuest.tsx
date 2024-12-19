@@ -1,6 +1,5 @@
 import RecommendCard from './RecommendCard';
 import S from '../styles/index.style';
-import useSetDocumentTitle from '@common/hooks/useSetDocumentTitle';
 import { useRecommendBookmarks } from '../queries';
 import {
   DogSizeRecommend,

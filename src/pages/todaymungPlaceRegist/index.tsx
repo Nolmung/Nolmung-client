@@ -4,7 +4,6 @@ import { useRef, useState, useEffect } from 'react';
 import { useReviewStore } from './stores/reviewStore';
 import VisitedPlaceCard from '../todaymungWrite/components/VisitedPlaceCard';
 import { CancelIcon, LiedownDog, TimeRecord } from '@/assets/images/svgs';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from './queries';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
@@ -33,7 +32,6 @@ export interface SearchHistoryItem {
 }
 
 function TodayMungPlaceRegist() {
-  useSetDocumentTitle('오늘멍 장소 등록');
   const { isOpen, openModal, closeModal } = useModal();
 
   const location = useLocation();

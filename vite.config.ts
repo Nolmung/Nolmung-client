@@ -13,6 +13,7 @@ import compression from 'vite-plugin-compression';
 import svgr from 'vite-plugin-svgr';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import Sitemap from 'vite-plugin-sitemap';
+import prerender from '@prerenderer/rollup-plugin';
 import Pages from 'vite-plugin-pages';
 // https://vite.dev/config/
 
@@ -46,11 +47,7 @@ const EXCLUDE_ROUTES = [
 const DYNAMIC_ROUTES = [
   {
     path: ROUTE.DETAIL(':placeId'),
-    ids: Array.from({ length: 500 }, (_, i) => i),
-  },
-  {
-    path: ROUTE.TODAYMUNG_DETAIL(':diaryId'),
-    ids: Array.from({ length: 100 }, (_, i) => i),
+    ids: Array.from({ length: 500 }, (_, i) => i + 1),
   },
 ];
 
@@ -70,6 +67,31 @@ export default defineConfig(({ mode }) => {
       svgr({
         svgrOptions: {
           icon: true,
+        },
+      }),
+      prerender({
+        routes: [
+          ...STATIC_ROUTES,
+          ...DYNAMIC_ROUTES.flatMap((route) =>
+            route.ids.map((id) => route.path.replace(/:\w+/g, String(id))),
+          ),
+        ],
+        renderer: '@prerenderer/renderer-puppeteer',
+        server: {
+          port: 3000,
+          host: 'localhost',
+        },
+        rendererOptions: {
+          maxConcurrentRoutes: 5,
+          renderAfterTime: 5000,
+        },
+        postProcess(renderedRoute) {
+          renderedRoute.html = renderedRoute.html
+            .replace(/http:/i, 'https:')
+            .replace(
+              /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
+              'https://nolmung-official.com/',
+            );
         },
       }),
       Sitemap({

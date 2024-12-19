@@ -17,7 +17,6 @@ import {
   formatDate,
   updateSearchHistory,
 } from './utils/searchUtils';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import NoSearchResponse from './components/NoSearchResponse';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';

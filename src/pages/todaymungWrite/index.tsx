@@ -10,7 +10,6 @@ import { useGetDogs, usePostDiary } from './queries';
 import DogCard from './components/DogCard';
 import { useReviewStore } from '../todaymungPlaceRegist/stores/reviewStore';
 import { useTodayMungStore } from './stores/todayMungStore';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import Modal from '@/common/components/modal';
 import { useConfirmModalStore } from '@/stores/useConfirmModalStore';
 import { useGetTodayReview } from '../todaymungPlaceRegist/queries';
@@ -52,7 +51,6 @@ function TodayMungWrite() {
   const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary(handleBadgeEventModalOpen);
 
-  useSetDocumentTitle('오늘멍 작성하기');
 
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const [eventContent, setEventContent] = useState({

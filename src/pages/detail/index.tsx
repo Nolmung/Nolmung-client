@@ -26,7 +26,6 @@ import { useGetPostDetail } from './querys';
 import { PlacePrice } from '@/common/types';
 import findLabelNameById from '@/common/utils/findLabelNameById';
 import { match } from 'ts-pattern';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import {
   NoResulLiedownUI,
