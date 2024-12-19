@@ -28,11 +28,15 @@ const pathRules: PathRules = {
   hideHeader: [
     '/',
     /^\/detail\/\d+$/,
-    '/search',
+    '/search/',
     '/login',
+    '/login/',
     '/recommend',
+    '/recommend/',
     '/todaymung',
+    '/todaymung/',
     '/my',
+    '/my/',
     /\?cur=main/,
     /\/oauth\/kakao\/callback/,
   ],
@@ -107,7 +111,7 @@ function Layout({ children }: LayoutProps) {
       window.removeEventListener('popstate', handlePopState);
     };
   }, []);
-  
+
   /** 헤더가 보여질 path 경로 추가 */
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
