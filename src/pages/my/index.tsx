@@ -68,7 +68,7 @@ function Mypage() {
 
   return (
     <S.Wrapper>
-      <SEO title={'마이페이지 | 놀멍'} />
+       title={'마이페이지 | 놀멍'} />
       <S.ProfileWrapper>
         <S.MyProfileCard>
           {userData && (

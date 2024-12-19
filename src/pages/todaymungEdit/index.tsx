@@ -122,7 +122,7 @@ function TodayMungEdit() {
 
   return (
     <S.Wrapper>
-      <SEO title={'오늘멍 수정'} />
+      <SEO title={'오늘멍 수정 | 놀멍'} />
       <S.BannerWrapper>
         <S.BannerImage src="/webps/TodayMungLogo.webp" alt="오늘멍 배너" />
       </S.BannerWrapper>

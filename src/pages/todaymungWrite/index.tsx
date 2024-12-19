@@ -51,7 +51,6 @@ function TodayMungWrite() {
   const { data: dogsData } = useGetDogs();
   const { mutate: diaryMutate } = usePostDiary(handleBadgeEventModalOpen);
 
-
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const [eventContent, setEventContent] = useState({
     title: '',
@@ -100,7 +99,7 @@ function TodayMungWrite() {
 
   return (
     <>
-      <SEO title={'오늘멍 작성하기'} />
+      <SEO title={'오늘멍 작성하기 | 놀멍'} />
       {isConfirmModalOpen && (
         <Modal
           isOpen={isConfirmModalOpen}

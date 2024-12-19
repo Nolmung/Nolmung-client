@@ -9,7 +9,11 @@ import { useGetBadgesData } from '../../queries';
 
 const UserInfo = ({ userData, diaryLength }: UserInfoTypes) => {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
-  const [eventContent, setEventContent] = useState({ title: '', content: '', imgUrl: '' });
+  const [eventContent, setEventContent] = useState({
+    title: '',
+    content: '',
+    imgUrl: '',
+  });
 
   const { data: badges } = useGetBadgesData();
 
@@ -24,30 +28,36 @@ const UserInfo = ({ userData, diaryLength }: UserInfoTypes) => {
 
   return (
     <S.ProfileArea>
-      <S.ProfileImg src={userData.profileImageUrl} />
       <S.ProfileDescription>
         <S.NameWrapper>
           <S.ProfileName>{userData.nickname}</S.ProfileName>
-          {badges && badges?.length > 0 && (
-            <S.ImageWrapper>
-              {badges.map((badge, index) => (
-                <S.Button onClick={() => handleBadgeClick(badge.badgeCodeId)}>
-                  <S.Image
-                    key={index}
-                    src={EventContents[badge.badgeCodeId - 1].imgUrl}
-                  />
-                </S.Button>
-              ))}
-            </S.ImageWrapper>
-          )}
-        </S.NameWrapper>
-
-        <S.ProfileSubTextArea>
-          <S.TodayMungLength>{diaryLength}번</S.TodayMungLength>
-          <S.TodayMungLengthDescription>
-            현재 작성한 오늘멍
-          </S.TodayMungLengthDescription>
-        </S.ProfileSubTextArea>
+          <S.ProfileTitle>님의 오늘멍</S.ProfileTitle>
+          </S.NameWrapper>
+          <S.ContentContainer>
+            <S.ContentWrapper>
+              <S.ContentTitle>현재 작성한 오늘멍</S.ContentTitle>
+              <S.ContentNumber>{diaryLength}번</S.ContentNumber>
+            </S.ContentWrapper>
+            <S.ContentWrapper>
+              <S.ContentTitle>획득한 뱃지</S.ContentTitle>
+              <S.ContentNumber>
+                {badges && badges?.length > 0 && (
+                  <S.ImageWrapper>
+                    {badges.map((badge, index) => (
+                      <S.Button
+                        onClick={() => handleBadgeClick(badge.badgeCodeId)}
+                      >
+                        <S.Image
+                          key={index}
+                          src={EventContents[badge.badgeCodeId - 1].imgUrl}
+                        />
+                      </S.Button>
+                    ))}
+                  </S.ImageWrapper>
+                )}
+              </S.ContentNumber>
+            </S.ContentWrapper>
+          </S.ContentContainer>
       </S.ProfileDescription>
       {isEventModalOpen && (
         <EventModal

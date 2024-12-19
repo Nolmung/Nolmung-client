@@ -211,7 +211,7 @@ function DogsEdit() {
 
   return (
     <S.ContainerWrapper>
-      <SEO title={'반려견 수정'} />
+      <SEO title={'반려견 수정 | 놀멍'} />
       <S.DogPicture onClick={handlePictureClick}>
         {preview ? (
           <S.PreviewImage src={preview} alt="Dog Profile Preview" />

@@ -139,7 +139,7 @@ function TodayMungPlaceRegist() {
 
   return (
     <>
-      <SEO title={'오늘멍 장소등록'} />
+      <SEO title={'오늘멍 장소등록 | 놀멍'} />
       <S.Wrapper
         addPadding={reviewlist.length > 0}
         ref={scrollRef}

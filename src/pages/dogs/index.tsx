@@ -208,7 +208,7 @@ function Dogs() {
 
   return (
     <S.ContainerWrapper>
-      <SEO title={'반려견 등록'} />
+      <SEO title={'반려견 등록 | 놀멍'} />
       <S.UserTitle>
         반가워요,
         <br />

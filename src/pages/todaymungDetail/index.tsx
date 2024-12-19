@@ -84,7 +84,7 @@ const TodayMungDetail = () => {
 
   return (
     <S.Wrapper>
-      <SEO title={'오늘멍'} />
+      <SEO title={'오늘멍 상세 | 놀멍'} />
       {diaryData && (
         <S.Container>
           <S.DateArea>
