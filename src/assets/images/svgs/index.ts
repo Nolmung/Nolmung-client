@@ -16,7 +16,6 @@ export { default as FilledStar } from './FilledStar';
 export { default as GalleryClickMarker } from './GalleryClickMarker';
 export { default as InsideIcon } from './InsideIcon';
 export { default as LargeDog } from './LargeDog';
-export { default as LiedownDog } from './LiedownDog';
 export { default as LocationButtonIcon } from './LocationButtonIcon';
 export { default as MeduimDog } from './MeduimDog';
 export { default as MuseumClickMarker } from './MuseumClickMarker';
