@@ -246,7 +246,7 @@ function Detail() {
         </S.ReviewTitle>
         <S.KeywordReviews>
           {!data?.labels.length && (
-            <NoResultStandUI content={'아직 리뷰가 없다 멍 !'} />
+            <NoResultStandUI content={'아직 리뷰가 없습니다'} />
           )}
           {data.labels?.map((item) => (
             <KeywordReview
@@ -267,7 +267,7 @@ function Detail() {
           ?.slice(0, visibleTodayMungCard)
           .map((card) => <TodayMungCard key={card.diaryId} card={card} />)}
         {!data.diaries?.length && (
-          <NoResulLiedownUI content={'아직 오늘멍이 없다 멍 !'} />
+          <NoResulLiedownUI content={'아직 오늘멍이 없습니다'} />
         )}
         {visibleTodayMungCard < data.diaries?.length && (
           <S.ViewMoreButtonWrapper>
