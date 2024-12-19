@@ -2,6 +2,11 @@ import styled from 'styled-components';
 
 export const S = {
   Wrapper: styled.div``,
+
+  ButtonWrapper: styled.div`
+    padding: 0 22px 40px;
+  `,
+
   ConvertArea: styled.div`
     display: flex;
     width: 100%;
@@ -11,15 +16,11 @@ export const S = {
   ViewModeArea: styled.div<{ $CalendarView: boolean }>`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100%;
     height: calc(100dvh - 295px);
     overflow: scroll;
-    margin-top: 5px;
-    @media (min-height: 850px) {
-      margin-top: ${(props) => (props.$CalendarView ? '-30px' : '5px')};
-    }
+    margin-top: 10px;
   `,
 
   CalendarMode: styled.div<{ mode: string }>`

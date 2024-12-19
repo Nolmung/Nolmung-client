@@ -25,7 +25,8 @@ const RegistButton = ({ active }: RegistButtonProps) => {
       onClick={navigateToTodaymungWrite}
       $status={active}
     >
-      <PlusIcon /> <S.ButtonText>오늘멍 작성하기</S.ButtonText>
+      <S.ButtonText>오늘멍 작성하기</S.ButtonText>
+      <PlusIcon />
     </S.TodaymungInsertButton>
   );
 };
