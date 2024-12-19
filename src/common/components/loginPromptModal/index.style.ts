@@ -22,7 +22,7 @@ export const S = {
   `,
   Explanation: styled.p`
     color: #a7a7a7;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -44,10 +44,12 @@ export const S = {
   LoginPromptButton: styled.button`
     width: 100%;
     height: 48px;
-    border-radius: 8px;
-    color: #fff;
+    border-radius: 12px;
+    color: #17aa1a;
+    font-family: 'Pretendard', sans-serif;
     font-size: 16px;
-    font-weight: 600;
-    background-color: #17aa1a;
+    font-weight: 500;
+    border: 1px solid #17aa1a;
+    background-color: #d3fbd4;
   `,
 };
