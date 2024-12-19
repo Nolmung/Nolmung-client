@@ -3,7 +3,7 @@ import S from './styles/index.style';
 import { useRef, useState, useEffect } from 'react';
 import { useReviewStore } from './stores/reviewStore';
 import VisitedPlaceCard from '../todaymungWrite/components/VisitedPlaceCard';
-import { CancelIcon, LiedownDog, TimeRecord } from '@/assets/images/svgs';
+import { CancelIcon, TimeRecord } from '@/assets/images/svgs';
 import { useGetPlaceSearch } from './queries';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE } from '@/common/constants/route';
@@ -253,9 +253,9 @@ function TodayMungPlaceRegist() {
                 </>
               ) : (
                 <S.NoResultWrapper>
-                  <LiedownDog width={240} />
+                  <img src="/webps/emptyImg.webp" width={200} />
                   <S.NoResultSubText>
-                    최근 검색 기록이 없다 멍!
+                    최근 검색 기록이 없습니다
                   </S.NoResultSubText>
                 </S.NoResultWrapper>
               )}
