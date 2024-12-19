@@ -28,7 +28,6 @@ const UserInfo = ({ userData, diaryLength }: UserInfoTypes) => {
 
   return (
     <S.ProfileArea>
-      {/* <S.ProfileImg src={userData.profileImageUrl} /> */}
       <S.ProfileDescription>
         <S.NameWrapper>
           <S.ProfileName>{userData.nickname}</S.ProfileName>
