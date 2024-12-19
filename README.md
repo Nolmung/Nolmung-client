@@ -1,4 +1,4 @@
-<img width="720" alt="image" src="https://github.com/user-attachments/assets/773fe368-06fd-4387-a3d6-fc77a5f3385f" /># Nolmung-client
+# Nolmung-client
 
 ## 💡 개요
 > 강아지 동반 가능 시설 공유 플랫폼 ‘놀멍(Nolmung)’은 반려인들이 반려견과 함께 방문할 수 있는 장소를 편리하게 찾아볼 수 있도록 돕습니다. </br>
