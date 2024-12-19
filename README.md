@@ -1,4 +1,4 @@
-# Nolmung-client
+<img width="720" alt="image" src="https://github.com/user-attachments/assets/773fe368-06fd-4387-a3d6-fc77a5f3385f" /># Nolmung-client
 
 ## 💡 개요
 > 강아지 동반 가능 시설 공유 플랫폼 ‘놀멍(Nolmung)’은 반려인들이 반려견과 함께 방문할 수 있는 장소를 편리하게 찾아볼 수 있도록 돕습니다. </br>
@@ -164,21 +164,23 @@ yarn dev
 <br/>
 <br/>
 
-## 🗂️ 산출물
+## 🗂️ 최종 산출물
 <p>
-  🔗 <a href="https://docs.google.com/spreadsheets/d/1gMqM7RShegYMpOJgnLBVFK00hbhpSXT2/edit?gid=965066708#gid=965066708" rel="nofollow">요구사항 명세서</a>  
+  🔗 <a href="https://drive.google.com/file/d/1cBW-VoGA-f9fJF0o-UTys3I1bYAIayuv/view?usp=drive_link" rel="nofollow">기획안</a>  
 </p>
 <p>
-  🔗 <a href="https://docs.google.com/spreadsheets/d/1WBgP8ddhtZ4FpwaMSBfbj2j2OMT9PBkz/edit?gid=24648020#gid=24648020" rel="nofollow">테이블 정의서</a>  
+  🔗 <a href="https://docs.google.com/spreadsheets/d/1hXpnE_wmo2KGW5uxmJ7RMQ8YVLunX73K/edit?gid=965066708#gid=965066708" rel="nofollow">요구사항 정의서</a>  
 </p>
 <p>
-  🔗 <a href="https://docs.google.com/spreadsheets/d/1lPncS8BsyVdFOsJxUT-aXWuH5KTG0Shz/edit?gid=41944336#gid=41944336" rel="nofollow">API 명세서</a>  
+  🔗 <a href="https://docs.google.com/spreadsheets/d/1uxIxU9jdLQmCJ0fDzqik5ey6tGnAfIg1/edit?gid=24648020#gid=24648020" rel="nofollow">테이블 정의서</a>  
 </p>
 <p>
-  🔗 <a href="https://docs.google.com/spreadsheets/d/11Fo8JespYtxbPJlsFSPIHOsGlviqmc2kPSXhVMMutSA/edit?gid=113761061#gid=113761061" rel="nofollow">WBS</a>  
+  🔗 <a href="https://docs.google.com/spreadsheets/d/1327Zj17dGWZG511GWrY7uQ4Dtb3TVmBA/edit?gid=41944336#gid=41944336" rel="nofollow">API 명세서</a>  
 </p>
+<p>
+  🔗 <a href="https://drive.google.com/file/d/1L7RKpdLvweRE0fctmd8e3DIA3cQ9HkWs/view?usp=drive_link" rel="nofollow">WBS</a> 
 <br />
-<br/>
+
 
 ## 👥 팀원 및 역할 소개
 
