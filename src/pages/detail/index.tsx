@@ -40,6 +40,11 @@ import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import checkUserDevice from '../main/utils/checkUserDevice';
 import ReactGA from 'react-ga4';
 
+const preloadImage = (src: string) => {
+  const img = new Image();
+  img.src = src;
+};
+
 function Detail() {
   const navigate = useNavigate();
   const { scrollTop, scrollRef, handleScroll } = useScrollTop();
@@ -53,6 +58,12 @@ function Detail() {
   const [isBookmarked, setIsBookmarked] = useState<boolean>(
     data?.isBookmarked ?? false,
   );
+
+  useEffect(() => {
+    if (data?.placeImgUrl) {
+      preloadImage(data.placeImgUrl);
+    }
+  }, [data?.placeImgUrl]);
 
   useEffect(() => {
     if (data) {
@@ -137,14 +148,15 @@ function Detail() {
   const openingHour = data.openHour?.split(' ');
 
   const device = checkUserDevice();
+
   return (
     <S.Wrapper
       isMobile={device == 'Mobile'}
       ref={scrollRef}
       onScroll={handleScroll}
     >
-      <S.Header isScrolled={scrollTop >= 70}>
-        {scrollTop >= 70 ? (
+      <S.Header isScrolled={scrollTop >= 64}>
+        {scrollTop >= 64 ? (
           <>
             <BackArrowBlack onClick={handleBackArrowClick} width={24} />
             {data.placeName}
@@ -154,6 +166,7 @@ function Detail() {
         )}
       </S.Header>
       <S.GradientImage />
+
       <S.PlaceImage src={data.placeImgUrl} alt="시설 이미지" />
       <S.PlaceInfo>
         <S.TitleWrapper>

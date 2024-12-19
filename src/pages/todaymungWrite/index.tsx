@@ -29,6 +29,7 @@ function TodayMungWrite() {
     isLoading: todayReviewLoading,
     isError: todayReviewError,
   } = useGetTodayReview();
+  
 
   const { title, content, dogs, addPlaces } = useTodayMungStore();
 
@@ -147,7 +148,7 @@ function TodayMungWrite() {
       )}
       <S.Wrapper>
         <S.BannerWrapper>
-          <S.BannerImage src="/pngs/TodayMungLogo.png" alt="오늘멍 배너" />
+          <S.BannerImage src="/webps/TodayMungLogo.webp" alt="오늘멍 배너" />
         </S.BannerWrapper>
         <S.ContentWrapper>
           <div style={{ marginTop: '30px' }}>

@@ -1,4 +1,3 @@
-import { LiedownDog, StandBrownDog } from '@/assets/images/svgs';
 import { S } from './index.style';
 
 interface NoResultUIProps {
@@ -9,7 +8,7 @@ interface NoResultUIProps {
 function NoResulLiedownUI({ content }: NoResultUIProps) {
   return (
     <S.NoResultWrapper>
-      <LiedownDog width={240} />
+      <img src="/webps/LiedownDog.webp" width={240} />
       <S.NoResultText>{content}</S.NoResultText>
     </S.NoResultWrapper>
   );
@@ -19,7 +18,7 @@ function NoResulLiedownUI({ content }: NoResultUIProps) {
 function NoResultStandUI({ content }: NoResultUIProps) {
   return (
     <S.NoResultWrapper>
-      <StandBrownDog width={240} />
+      <img src="/webps/StandBrownDog.webp" width={240} />
       <S.NoResultText>{content}</S.NoResultText>
     </S.NoResultWrapper>
   );
