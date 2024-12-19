@@ -11,9 +11,9 @@ export const S = {
     max-height: 350px;
   `,
   SubText: styled.div`
-    color: #080808;
+    color: #5e5e5e;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 400;
   `,
   Button: styled.div``,
 };
