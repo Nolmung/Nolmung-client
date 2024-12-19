@@ -1,3 +1,4 @@
+import { ROUTE } from './src/common/constants/route';
 import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv } from 'vite';
 import viteImagemin from '@vheemstra/vite-plugin-imagemin';
@@ -11,7 +12,45 @@ import imageminWebp from 'imagemin-webp';
 import compression from 'vite-plugin-compression';
 import svgr from 'vite-plugin-svgr';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import Sitemap from 'vite-plugin-sitemap';
+import prerender from '@prerenderer/rollup-plugin';
+import Pages from 'vite-plugin-pages';
 // https://vite.dev/config/
+
+const STATIC_ROUTES = [
+  ROUTE.MAIN(),
+  ROUTE.TODAYMUNG(),
+  ROUTE.LOGIN(),
+  ROUTE.SIGNUP(),
+  ROUTE.SEARCH(),
+
+  ROUTE.TODAYMUNG_WRITE(),
+  ROUTE.TODAYMUNG_PLACE_REGIST(),
+
+  ROUTE.MYFAVORITE(),
+  ROUTE.PLACE_RECOMMEND(),
+
+  ROUTE.ADDRESS_POPUP(),
+  ROUTE.USER_EDIT(),
+];
+
+const EXCLUDE_ROUTES = [
+  ROUTE.KAKAOCALLBACKHANDLER(),
+  ROUTE.DOGSEDIT(':dogId'),
+  ROUTE.TODAYMUNG_EDIT(':diaryId'),
+  ROUTE.MY(),
+  ROUTE.DOGS(),
+  ROUTE.MY_REVIEW(),
+  ROUTE.MY_DOGS(),
+  ROUTE.MY_DOGS_ADD(),
+];
+const DYNAMIC_ROUTES = [
+  {
+    path: ROUTE.DETAIL(':placeId'),
+    ids: Array.from({ length: 500 }, (_, i) => i + 1),
+  },
+];
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
 
@@ -30,7 +69,41 @@ export default defineConfig(({ mode }) => {
           icon: true,
         },
       }),
-
+      prerender({
+        routes: [
+          ...STATIC_ROUTES,
+          ...DYNAMIC_ROUTES.flatMap((route) =>
+            route.ids.map((id) => route.path.replace(/:\w+/g, String(id))),
+          ),
+        ],
+        renderer: '@prerenderer/renderer-puppeteer',
+        server: {
+          port: 3000,
+          host: 'localhost',
+        },
+        rendererOptions: {
+          maxConcurrentRoutes: 5,
+          renderAfterTime: 5000,
+        },
+        postProcess(renderedRoute) {
+          renderedRoute.html = renderedRoute.html
+            .replace(/http:/i, 'https:')
+            .replace(
+              /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
+              'https://nolmung-official.com/',
+            );
+        },
+      }),
+      Sitemap({
+        hostname: 'https://nolmung-official.com',
+        outDir: './dist',
+        exclude: EXCLUDE_ROUTES,
+        dynamicRoutes: DYNAMIC_ROUTES.flatMap((route) =>
+          route.ids.map((id) => route.path.replace(/:\w+/, String(id))),
+        ),
+        ...STATIC_ROUTES,
+      }),
+      Pages(),
       createHtmlPlugin({
         minify: true,
         inject: {

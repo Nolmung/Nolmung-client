@@ -27,12 +27,13 @@ const MyDogs = () => {
   return (
     <S.Wrapper>
       {dogListData && dogListData.length > 0 ? (
-        dogListData.map((data: any) => {
+        dogListData.map((data: any, index: number) => {
           return (
             <PetProfileCard
               data={data}
               key={data.dogId}
               userNickname={nickname}
+              isFirstDog={index===0} 
             />
           );
         })

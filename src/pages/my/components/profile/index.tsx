@@ -9,9 +9,14 @@ import { ROUTE } from '@common/constants/route';
 interface PetProfileProps {
   data?: DogType;
   userNickname?: string;
+  isFirstDog?: boolean;
 }
 
-function PetProfileCard({ data, userNickname }: PetProfileProps) {
+function PetProfileCard({
+  data,
+  userNickname,
+  isFirstDog = false,
+}: PetProfileProps) {
   const navigate = useNavigate();
   /** @Todo 반려견 정보 등록 후에 타입 수정하기 */
   const dogSize = data ? DogSizeMapping[data.size as DogSize] : '';
@@ -19,11 +24,15 @@ function PetProfileCard({ data, userNickname }: PetProfileProps) {
   const age = calculateAge(data?.birth);
 
   const handleCardClick = (dogId: number) => {
-    navigate(ROUTE.DOGSEDIT(dogId), { state: { dogData: data, nickname: userNickname! } });
+    navigate(ROUTE.DOGSEDIT(dogId), {
+      state: { dogData: data, nickname: userNickname! },
+    });
   };
 
   const handleDogRegisterClick = () => {
-    navigate(ROUTE.MY_DOGS_ADD(), { state: { dogData:data, nickname: userNickname!} });
+    navigate(ROUTE.MY_DOGS_ADD(), {
+      state: { dogData: data, nickname: userNickname! },
+    });
   };
 
   return (
@@ -44,7 +53,10 @@ function PetProfileCard({ data, userNickname }: PetProfileProps) {
                 />
               </S.ProfileContainer>
               <S.ProfileTextWrapper>
-                <S.ProfileNameText>{data.dogName}</S.ProfileNameText>
+                <S.FirstDogWrapper>
+                  <S.ProfileNameText>{data.dogName}</S.ProfileNameText>
+                  {isFirstDog && <S.FirstDogLabel>대표반려견</S.FirstDogLabel>}
+                </S.FirstDogWrapper>
                 <S.ProfileLabelWrapper>
                   <S.ProfileLabel>{data.dogType}</S.ProfileLabel>
                   <S.LabelSeparate />

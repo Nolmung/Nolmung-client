@@ -26,7 +26,6 @@ import { useGetPostDetail } from './querys';
 import { PlacePrice } from '@/common/types';
 import findLabelNameById from '@/common/utils/findLabelNameById';
 import { match } from 'ts-pattern';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import {
   NoResulLiedownUI,
@@ -39,6 +38,7 @@ import getIsLogin from '@/common/utils/getIsLogin';
 import { useLoginPromptModalStore } from '@/stores/useLoginPromptModalStore';
 import checkUserDevice from '../main/utils/checkUserDevice';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 
 const preloadImage = (src: string) => {
   const img = new Image();
@@ -51,7 +51,6 @@ function Detail() {
   const [visibleTodayMungCard, setVisibleTodayMungCard] = useState(3);
   const { placeId } = useParams();
   const { data, isLoading, isError } = useGetPostDetail(placeId!);
-  useSetDocumentTitle(data?.placeName || '');
 
   const { mutate: deleteBookmarks } = useDeleteBookmarks();
   const { open } = useLoginPromptModalStore();
@@ -155,6 +154,11 @@ function Detail() {
       ref={scrollRef}
       onScroll={handleScroll}
     >
+      <SEO
+        title={data.placeName + ' | 놀멍'}
+        description={` 리뷰 + ${data.reviewCount}`}
+        image={data.placeImgUrl}
+      />
       <S.Header isScrolled={scrollTop >= 64}>
         {scrollTop >= 64 ? (
           <>

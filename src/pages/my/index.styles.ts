@@ -1,4 +1,4 @@
-import { BOTTOM_NAV_HEIGHT, HEADER_HEIGHT } from '@/common/constants/ui';
+import { BOTTOM_NAV_HEIGHT } from '@/common/constants/ui';
 import styled from 'styled-components';
 
 const S = {
@@ -8,9 +8,10 @@ const S = {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: calc(100dvh - ${HEADER_HEIGHT + BOTTOM_NAV_HEIGHT}px);
+    height: calc(100dvh - ${BOTTOM_NAV_HEIGHT}px);
     box-sizing: border-box;
     overflow-y: auto;
+    padding-top: 40px;
     padding-bottom: 30px;
   `,
   ProfileWrapper: styled.div`

@@ -1,5 +1,4 @@
 import S from '../styles/index.style';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import {
   useRecommendBookmarks,
   useRecommendNearby,
@@ -9,9 +8,9 @@ import {
 import { useGetUser } from '../../my/hooks';
 import RecommendCard from './RecommendCard';
 import { LoadingSkeletonLottie } from '@/common/components/lottie';
+import SEO from '@/common/components/SEO';
 
 function UserRecommend() {
-  useSetDocumentTitle('추천');
   const {
     data: weightData,
     isLoading: weightLoading,
@@ -59,6 +58,7 @@ function UserRecommend() {
   }
   return (
     <S.Wrapper>
+      <SEO title={'추천 | 놀멍'} />
       {similarBookmarks.length > 0 && (
         <RecommendCard
           title={`${userInfo?.userNickname} 님이 좋아할 만한 공간`}

@@ -10,9 +10,6 @@ export const S = {
     flex-direction: column;
     padding: 40px 22px 12px;
     width: 100%;
-    /* @media (min-height: 800px) {
-      padding: 45px 22px;
-    } */
   `,
   ProfileDescription: styled.div`
     display: flex;

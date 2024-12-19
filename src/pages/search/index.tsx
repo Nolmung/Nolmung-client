@@ -17,11 +17,11 @@ import {
   formatDate,
   updateSearchHistory,
 } from './utils/searchUtils';
-import useSetDocumentTitle from '@/common/hooks/useSetDocumentTitle';
 import { useGetPlaceSearch } from '../todaymungPlaceRegist/queries';
 import NoSearchResponse from './components/NoSearchResponse';
 import { LoadingSpinnerLottie } from '@/common/components/lottie';
 import ReactGA from 'react-ga4';
+import SEO from '@/common/components/SEO';
 export interface SearchHistoryItem {
   id: number;
   keyword: string;
@@ -29,7 +29,6 @@ export interface SearchHistoryItem {
 }
 
 function Search() {
-  useSetDocumentTitle('놀멍');
   const navigate = useNavigate();
   const { isOpen, openModal, closeModal } = useModal();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -130,6 +129,7 @@ function Search() {
 
   return (
     <S.Wrapper>
+      <SEO title={'검색 | 놀멍'} />
       {isOpen && (
         <Modal isOpen={isOpen} closeModal={closeModal}>
           <S.ModalContent>
