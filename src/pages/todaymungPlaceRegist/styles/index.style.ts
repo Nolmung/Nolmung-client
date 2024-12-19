@@ -115,9 +115,8 @@ const S = {
     padding: 60px;
   `,
   NoResultSubText: styled.div`
-    color: #080808;
-    font-size: 18px;
-    font-weight: 500;
+    color: #5e5e5e;
+    font-size: 16px;
   `,
 
   TimeIconTextWrapper: styled.div`

@@ -11,7 +11,7 @@ export const S = {
     height: calc(100dvh - 305px);
   `,
   NoResultSubText: styled.p`
-    color: #5a636e;
+    color: #5e5e5e;
     font-size: 16px;
   `,
   NoResultDescription: styled.p`
