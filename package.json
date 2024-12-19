@@ -21,8 +21,6 @@
     "@mui/material": "^6.2.0",
     "@mui/system": "^6.2.0",
     "@mui/x-date-pickers": "^7.23.1",
-    "@prerenderer/renderer-puppeteer": "^1.2.4",
-    "@prerenderer/rollup-plugin": "^0.3.12",
     "@sentry/react": "^8.44.0",
     "@tanstack/react-query": "^5.61.3",
     "@types/lodash": "^4.17.13",
