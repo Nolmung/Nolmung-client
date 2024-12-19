@@ -1,4 +1,3 @@
-import { StandBrownDog } from '@/assets/images/svgs';
 import Modal from '../modal';
 import { S } from './index.style';
 import { useNavigate } from 'react-router-dom';

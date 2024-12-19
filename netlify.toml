@@ -2,9 +2,3 @@
 from = "/*"
 to = "/index.html"
 status = 200
-
-[[redirects]]
-  from = "https://nolmung-official.netlify.app/*"
-  to = "https://nolmung-official.com/:splat"
-  status = 301
-  force = true
