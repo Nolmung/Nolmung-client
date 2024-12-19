@@ -111,6 +111,7 @@ function Mypage() {
               data={dogData[0]}
               key={dogData[0].dogId}
               userNickname={userData!.userNickname}
+              isFirstDog={true}
             />
           ) : (
             <PetProfileCard />

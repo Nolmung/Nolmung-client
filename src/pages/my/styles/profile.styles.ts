@@ -79,6 +79,22 @@ const S = {
     font-size: medium;
     white-space: nowrap;
   `,
+  FirstDogWrapper: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  `,
+  FirstDogLabel: styled.span`
+    font-size: 11px;
+    font-weight: 500;
+    background-color: #d3fbd4;
+    border: 1.5px solid #17aa1a;
+    padding: 7px 9px;
+    border-radius: 15px;
+    letter-spacing: 0.3px;
+    color: #17aa1a;
+  `,
 };
 
 export default S;

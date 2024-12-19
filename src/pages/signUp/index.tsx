@@ -100,16 +100,6 @@ function SignUp() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    ReactGA.event({
-      category: 'SignUp',
-      action: 'Address Input Changed',
-      label: value,
-    });
-    setAddress(value);
-  };
-
   const handleSuggestionClick = (suggestion: string) => {
     ReactGA.event({
       category: 'SignUp',
@@ -147,13 +137,7 @@ function SignUp() {
           )}
         </S.ContentTitleText>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <S.UserInfoInput
-            value={address}
-            onChange={handleInputChange}
-            placeholder="주소를 입력해주세요"
-          />
-          <DaumPost setAddress={setAddress} />
-
+          <DaumPost address={address} setAddress={setAddress} />
           {isDropdownVisible && filteredLocations.length > 0 && (
             <S.Dropdown>
               {filteredLocations.map((location) => (
