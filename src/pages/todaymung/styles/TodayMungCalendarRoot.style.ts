@@ -11,6 +11,7 @@ export const S = {
     padding: 0px 30px;
     color: #080808;
     overflow-y: scroll;
+    margin-bottom: 100px;
   `,
 
   CalendarArea: styled.div`
@@ -25,7 +26,7 @@ export const S = {
     display: flex;
     bottom: 0;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     font-size: 16px;
     color: #080808;
@@ -34,7 +35,7 @@ export const S = {
     }
     gap: 6px;
     font-weight: 500;
-    padding: 14px 0px;
+    padding: 15px 21px;
     border: 1px solid #17aa1a;
     border-radius: 10px;
     background-color: #d3fbd4;

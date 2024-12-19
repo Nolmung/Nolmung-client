@@ -8,7 +8,7 @@ export const S = {
   ProfileArea: styled.div`
     display: flex;
     flex-direction: column;
-    padding: 50px 22px 12px;
+    padding: 30px 22px 12px;
     width: 100%;
     @media (min-height: 800px) {
       padding: 45px 22px;
