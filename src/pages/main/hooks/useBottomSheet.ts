@@ -56,7 +56,7 @@ export default function useBottomSheet({
       // 바텀시트가 최소 위치보다 위에 있을 때는 기본적으로 이동 허용
       if (
         sheet.current!.getBoundingClientRect().y > BOTTOM_SHEET_MAX_Y ||
-        sheet.current!.getBoundingClientRect().y === 41
+        sheet.current!.getBoundingClientRect().y === 35
       ) {
         return true;
       }
@@ -106,7 +106,7 @@ export default function useBottomSheet({
       const sheetTop = sheet.current!.getBoundingClientRect().top;
       const isScrollingUp = touchMove.movingDirection === 'up';
       if (
-        (sheetTop > 0 && sheetTop < 41) ||
+        (sheetTop > 0 && sheetTop < 35) ||
         (BOTTOM_SHEET_MAX_Y <= sheetTop &&
           sheetTop <= BOTTOM_SHEET_MIN_Y &&
           isScrollingUp)
