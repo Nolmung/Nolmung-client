@@ -8,7 +8,7 @@ interface NoResultUIProps {
 function NoResulLiedownUI({ content }: NoResultUIProps) {
   return (
     <S.NoResultWrapper>
-      <img src="/webps/emptyImg.webp" width={240} />
+      <img src="/webps/emptyImg.webp" width={200} />
       <S.NoResultText>{content}</S.NoResultText>
     </S.NoResultWrapper>
   );
@@ -18,7 +18,7 @@ function NoResulLiedownUI({ content }: NoResultUIProps) {
 function NoResultStandUI({ content }: NoResultUIProps) {
   return (
     <S.NoResultWrapper>
-      <img src="/webps/emptyImg.webp" width={240} />
+      <img src="/webps/emptyImg.webp" width={200} />
       <S.NoResultText>{content}</S.NoResultText>
     </S.NoResultWrapper>
   );
