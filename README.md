@@ -12,7 +12,9 @@
 ![readme_5](https://github.com/user-attachments/assets/1110ff65-eff5-485e-b89d-a9ea237a50c7)
 <div align="center">
 	
-### 🔗 [오늘멍 바로가기](https://nolmung-official.netlify.app/)
+### 🔗 [오늘멍 바로가기](https://nolmung-official.com/)
+
+
 </div>
 
 <br/>
