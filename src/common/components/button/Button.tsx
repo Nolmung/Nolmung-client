@@ -39,6 +39,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <S.Wrapper
+      aria-label={children + '버튼'}
       display={display}
       justifyContent={justifyContent}
       alignItems={alignItems}
