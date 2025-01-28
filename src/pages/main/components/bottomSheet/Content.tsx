@@ -41,7 +41,8 @@ const LazyImage = ({ src, alt, placeholder, ...props }: LazyImageProps) => {
           width={120}
           height={120}
           src={placeholder}
-          alt="Loading..."
+          alt="로딩 중"
+          aria-label="콘텐츠가 로드되는 동안 보여지는 플레이스홀더 이미지"
           {...props}
         />
       )}
@@ -153,13 +154,28 @@ function Content({ place, isCard }: ContentProps) {
 
   return (
     place?.isBookmarked !== undefined && (
-      <S.Wrapper isCard={isCard} onClick={navigateToDetail}>
+      <S.Wrapper
+        aria-label={`${place?.placeName}의 상세 페이지로 이동`}
+        isCard={isCard}
+        onClick={navigateToDetail}
+      >
         <S.Container>
           <S.PlaceInfoWrapper>
             <S.InfoTextWrapper>
               <S.PlaceNameCategoryWrapper>
-                <S.PlaceName>{place!.placeName}</S.PlaceName>
-                <S.PlaceCategory>
+                <S.PlaceName
+                  aria-label={`장소명: ${place!.placeName}`}
+                  title={place!.placeName}
+                >
+                  {place!.placeName}
+                </S.PlaceName>
+                <S.PlaceCategory
+                  aria-label={`카테고리: ${
+                    CATEGORY_OPTIONS?.find(
+                      (option) => option.value === (place?.category || 'ETC'),
+                    )?.label || '기타'
+                  }`}
+                >
                   {
                     CATEGORY_OPTIONS?.find(
                       (option) => option.value === (place?.category || 'ETC'),
@@ -167,13 +183,22 @@ function Content({ place, isCard }: ContentProps) {
                   }
                 </S.PlaceCategory>
               </S.PlaceNameCategoryWrapper>
-              <S.PlaceAddress>{place!.roadAddress}</S.PlaceAddress>
+              <S.PlaceAddress
+                aria-label={`주소: ${place!.roadAddress}`}
+                title={place!.roadAddress}
+              >
+                {place!.roadAddress}
+              </S.PlaceAddress>
               <S.PlaceReviewWrapper>
-                <S.TextWrapper>
+                <S.TextWrapper
+                  aria-label={`평점 ${postDetail?.starRatingAvg}점`}
+                >
                   <FilledStar width={14} height={14} />
                   {postDetail?.starRatingAvg}
                 </S.TextWrapper>
-                <S.PlaceReviewCount>
+                <S.PlaceReviewCount
+                  aria-label={`리뷰 ${postDetail?.reviewCount}개`}
+                >
                   리뷰 {postDetail?.reviewCount}개
                 </S.PlaceReviewCount>
               </S.PlaceReviewWrapper>
@@ -185,10 +210,14 @@ function Content({ place, isCard }: ContentProps) {
               src={place!.placeImgUrl}
               alt={place!.placeName}
               placeholder="/path/to/placeholder.jpg"
+              aria-label="장소 이미지"
             />
 
             <S.Like>
-              <S.IconWrapper onClick={handleLikeClick}>
+              <S.IconWrapper
+                aria-label={isBookmarked ? '북마크에서 제거' : '북마크에 추가'}
+                onClick={handleLikeClick}
+              >
                 <IoHeartSharp
                   size={24}
                   color={isBookmarked ? '#FF4E3E' : '#a0a0a0c6'}
