@@ -21,9 +21,21 @@ function VisitedPlaceCard({
   );
 
   return (
-    <S.PlaceCard>
+    <S.PlaceCard aria-label={placeName + ' 방문한 장소'}>
       <S.PlaceTitleRateWrapper>
-        <S.PlaceWrapper>
+        <S.PlaceWrapper
+          aria-label={
+            '장소명: ' +
+            placeName +
+            ' 별점: ' +
+            rating +
+            '점' +
+            ' 카테고리: ' +
+            category +
+            ' 주소: ' +
+            roadAddress
+          }
+        >
           <S.PlaceIconWrapper>
             {selectedOption?.icon && (
               <selectedOption.icon width={14} height={14} />

@@ -141,6 +141,7 @@ function TodayMungPlaceRegist() {
     <>
       <SEO title={'오늘멍 장소등록 | 놀멍'} />
       <S.Wrapper
+        aria-label="오늘멍 장소등록 페이지"
         addPadding={reviewlist.length > 0}
         ref={scrollRef}
         className="scroll-container"
@@ -151,7 +152,7 @@ function TodayMungPlaceRegist() {
             closeModal={closeReviewConfirmModal}
           >
             <S.ConfirmModalContent>
-              <S.ConfirmModalTitle>
+              <S.ConfirmModalTitle aria-label="리뷰 작성 중인 내용이 삭제됩니다. 정말로 나가시겠습니까?">
                 작성하신 리뷰는 등록되지 않습니다. <br />
                 정말로 나가시겠습니까?
               </S.ConfirmModalTitle>
@@ -189,7 +190,7 @@ function TodayMungPlaceRegist() {
         )}
         {isOpen && (
           <Modal isOpen={isOpen} closeModal={closeModal}>
-            <S.ModalContent>
+            <S.ModalContent aria-label="검색 기록을 전부 삭제하시겠습니까?">
               모두 지우시겠습니까?
               <S.ModalButtonWrapper>
                 <Button
@@ -223,9 +224,12 @@ function TodayMungPlaceRegist() {
 
         {!searchParams && (
           <>
-            <S.Menu>
+            <S.Menu aria-label="최근 검색어">
               최근 검색어
-              <S.ClearAllButton onClick={handleClearHistory}>
+              <S.ClearAllButton
+                aria-label="전체삭제 버튼"
+                onClick={handleClearHistory}
+              >
                 전체삭제
               </S.ClearAllButton>
             </S.Menu>
@@ -276,7 +280,11 @@ function TodayMungPlaceRegist() {
         <S.VisitedPlaceCard>
           {reviewlist.map((review) => (
             <S.CardWrapper key={review.placeId}>
-              <S.IconWrapper onClick={() => deleteReview(review.placeId)}>
+              <S.IconWrapper
+                aria-label="리뷰 삭제 버튼"
+                role="button"
+                onClick={() => deleteReview(review.placeId)}
+              >
                 <CancelIcon width={10} />
               </S.IconWrapper>
               <VisitedPlaceCard

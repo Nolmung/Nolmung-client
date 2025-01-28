@@ -23,6 +23,7 @@ function SearchList({
       {data && data.length > 0 ? (
         data.map((place) => (
           <SearchResultCard
+            aria-label={place.placeName + ' 검색 결과'}
             scrollRef={scrollRef}
             keywordReviewVisibleId={keywordReviewVisibleId}
             setKeywordReviewVisibleId={setKeywordReviewVisibleId}
