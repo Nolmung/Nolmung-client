@@ -29,16 +29,28 @@ function RecommendCard({
     navigate(ROUTE.DETAIL(placeId));
   };
 
+  const placeExplanation = (address: string) => {
+    return (
+      address.split(' ')[0] +
+      ' ' +
+      address.split(' ')[1] +
+      ' ' +
+      address.split(' ')[2]
+    );
+  };
   return (
-    <S.Wrapper>
+    <S.Wrapper aria-label={title}>
       <S.Title>{title}</S.Title>
-      <S.TitleExplanation>{explanation}</S.TitleExplanation>
+      <S.TitleExplanation aria-label={explanation} title={explanation}>
+        {explanation}
+      </S.TitleExplanation>
       <S.PlaceList>
         {data.map((mock, idx) => {
           const shouldPreload = idx < 3;
 
           return (
             <S.PlaceWrapper
+              aria-label={mock.placeName}
               $isBlurred={isBlurred ?? false}
               onClick={() => navigateToDetail(mock.placeId)}
               key={mock.placeId}
@@ -52,8 +64,19 @@ function RecommendCard({
                 <link rel="preload" as="image" href={mock.placeImageUrl} />
               )}
               <S.NameCategoryWrapper>
-                <S.PlaceName>{mock.placeName}</S.PlaceName>
-                <S.PlaceAddress>
+                <S.PlaceName
+                  aria-label={`장소 이름: ${mock.placeName}`}
+                  title={mock.placeName}
+                >
+                  {mock.placeName}
+                </S.PlaceName>
+                <S.PlaceAddress
+                  aria-label={`장소 카테고리: ${
+                    CATEGORY_OPTIONS?.find(
+                      (option) => option.value === (mock?.category || 'ETC'),
+                    )?.label
+                  }`}
+                >
                   {
                     CATEGORY_OPTIONS?.find(
                       (option) => option.value === (mock?.category || 'ETC'),
@@ -61,12 +84,13 @@ function RecommendCard({
                   }
                 </S.PlaceAddress>
               </S.NameCategoryWrapper>
-              <S.PlaceExplanation>
-                {mock.Address?.split(' ')[0] +
-                  ' ' +
-                  mock.Address?.split(' ')[1] +
-                  ' ' +
-                  mock.Address?.split(' ')[2]}
+              <S.PlaceExplanation
+                aria-label={`장소 설명: ${placeExplanation(
+                  mock.Address || '',
+                )}`}
+                title={placeExplanation(mock.Address || '')}
+              >
+                {placeExplanation(mock.Address || '')}
               </S.PlaceExplanation>
             </S.PlaceWrapper>
           );

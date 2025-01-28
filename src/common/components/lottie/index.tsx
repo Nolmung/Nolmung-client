@@ -6,7 +6,7 @@ import { S } from './index.style';
 
 export const LoadingSpinnerLottie = () => {
   return (
-    <S.Wrapper>
+    <S.Wrapper aria-label="로딩중">
       <Lottie animationData={LoadingLottie} height={50} width={30} />
     </S.Wrapper>
   );
@@ -14,7 +14,7 @@ export const LoadingSpinnerLottie = () => {
 
 export const LoadingSkeletonLottie = () => {
   return (
-    <S.Wrapper >
+    <S.Wrapper aria-label="로딩중">
       <Lottie animationData={SkeletonLottie} height={50} width={30} />
     </S.Wrapper>
   );
@@ -22,7 +22,7 @@ export const LoadingSkeletonLottie = () => {
 
 export const LoadingNolmungLottie = () => {
   return (
-    <S.NolmungWrapper backgroundcolor={'#9EF99F'}>
+    <S.NolmungWrapper aria-label="메인페이지로 가는 중" backgroundcolor={'#9EF99F'}>
       <Lottie animationData={NolmungLottie} height={50} width={30} />
     </S.NolmungWrapper>
   );

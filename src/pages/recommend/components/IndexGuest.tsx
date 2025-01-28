@@ -54,7 +54,7 @@ function GuestRecommend() {
         <S.PositionRelative>
           <S.LoginModalWrapper>
             <S.LoginModal>
-              <S.LoginModalText>
+              <S.LoginModalText aria-label="지금 가입하고 우리 아이만을 위한 추천을 받아보세요!">
                 지금 가입하고
                 <br />
                 <S.LoginTextWrapper>
