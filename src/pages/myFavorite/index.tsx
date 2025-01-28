@@ -61,9 +61,14 @@ function MyFavorite() {
   return (
     <S.Wrapper>
       <SEO title={'즐겨찾기 | 놀멍'} />
-      <S.CategoryWrapper>
+      <S.CategoryWrapper
+        data-testid="category-wrapper"
+        role="tablist"
+        aria-label="즐겨찾기 카테고리"
+      >
         {BookmarkCategoryMapping.map((category) => (
           <S.CategoryContainer
+            aria-label={category.label}
             key={category.value}
             isActive={currentCategory === category.value}
             onClick={() => handleCategoryClick(category.value)}
@@ -75,6 +80,7 @@ function MyFavorite() {
       <S.PlaceWrapper>
         {!placeMap?.length && (
           <NoResultStandUI
+            aria-label="즐겨찾기한 장소가 없습니다"
             content="즐겨찾기한 장소가 없습니다
             "
           />
@@ -83,22 +89,43 @@ function MyFavorite() {
         {placeMap &&
           placeMap.map((place: Bookmark) => (
             <S.PlaceCard
+              aria-label="즐겨찾기한 장소"
               onClick={() => navigateToDetail(place.placeId)}
               key={place.placeId}
             >
-              <S.ImageWrapper>
+              <S.ImageWrapper aria-label="장소 이미지">
                 <S.PlaceImage src={place.placeImageUrl} alt={place.name} />
-                <S.Like onClick={(e) => handleLikeClick(e, place.placeId)}>
+                <S.Like
+                  aria-label="즐겨찾기 취소 버튼"
+                  onClick={(e) => handleLikeClick(e, place.placeId)}
+                >
                   <IoHeartSharp size={24} color="#FF4E3E" />
                 </S.Like>
               </S.ImageWrapper>
               <S.PlaceInfo>
-                <S.PlaceLocation>{place.roadAddress}</S.PlaceLocation>
-                <S.PlaceName>{place.name}</S.PlaceName>
-                <S.ReviewWrapper>
+                <S.PlaceLocation
+                  aria-label="장소 주소"
+                  title={place.roadAddress}
+                >
+                  {place.roadAddress}
+                </S.PlaceLocation>
+                <S.PlaceName aria-label="장소 이름" title={place.name}>
+                  {place.name}
+                </S.PlaceName>
+                <S.ReviewWrapper aria-label="장소 평점 및 리뷰 수">
                   <FilledStar width={14} height={14} />
-                  <S.StarRating>{place.ratingAvg}</S.StarRating>
-                  <S.ReviewCount>리뷰 {place.ratingCount}</S.ReviewCount>
+                  <S.StarRating
+                    aria-label={`평점 ${place.ratingAvg}점`}
+                    title={`평점 ${place.ratingAvg}점`}
+                  >
+                    {place.ratingAvg}
+                  </S.StarRating>
+                  <S.ReviewCount
+                    aria-label={`리뷰 ${place.ratingCount}개`}
+                    title={`리뷰 ${place.ratingCount}개`}
+                  >
+                    리뷰 {place.ratingCount}
+                  </S.ReviewCount>
                 </S.ReviewWrapper>
               </S.PlaceInfo>
             </S.PlaceCard>
