@@ -46,7 +46,7 @@ function CategoryBar({
       <SearchInput onClick={navigateToSearchPage} width={90} />
       <S.CategoryWrapper>
         {CATEGORY_OPTIONS.map(({ value, label, icon: Icon }) => (
-          <S.StyledButtonWrapper key={value}>
+          <S.StyledButtonWrapper aria-label={`${label} 카테고리 버튼`} key={value}>
             <Button
               onClick={() => handleCategoryClick(value)}
               width="fit-content"
