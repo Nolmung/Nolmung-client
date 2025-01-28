@@ -126,11 +126,12 @@ function SignUp() {
         </S.DescriptionText>
         <S.ContentTitleText>닉네임</S.ContentTitleText>
         <S.UserInfoInput
+          aria-label="닉네임 입력"
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
           placeholder="닉네임을 입력해주세요"
         />
-        <S.ContentTitleText>
+        <S.ContentTitleText aria-label="주소 입력">
           주소
           {!isAddressValid && (
             <S.ErrorMessage>*유효한 주소를 입력해주세요</S.ErrorMessage>
@@ -151,17 +152,21 @@ function SignUp() {
             </S.Dropdown>
           )}
         </div>
-        <S.ContentTitleText>생년월일</S.ContentTitleText>
+        <S.ContentTitleText aria-label="생년월일 입력">
+          생년월일
+        </S.ContentTitleText>
         <DatePicker value={selectedDate} onChange={handleDateChange} />
-        <S.ContentTitleText>성별</S.ContentTitleText>
+        <S.ContentTitleText aria-label="성별 선택">성별</S.ContentTitleText>
         <S.GenderWrapper>
           <S.GenderSelect
+            aria-label="남성 선택"
             isSelected={gender === 'MALE'}
             onClick={() => setGender('MALE')}
           >
             남성
           </S.GenderSelect>
           <S.GenderSelect
+            aria-label="여성 선택"
             isSelected={gender === 'FEMALE'}
             onClick={() => setGender('FEMALE')}
           >
@@ -169,6 +174,7 @@ function SignUp() {
           </S.GenderSelect>
         </S.GenderWrapper>
         <S.NextButton
+          aria-label="반려견 등록으로 넘어가기"
           disabled={!NextButtonActive}
           isActive={NextButtonActive}
           onClick={handleNext}
