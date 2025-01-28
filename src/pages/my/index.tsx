@@ -1,4 +1,4 @@
-import S from './index.styles';
+import S from './styles/index.styles';
 import kakaoIcon from '@/assets/images/pngs/kakao_icon_image.png';
 import {
   HeartIcon,
@@ -69,26 +69,34 @@ function Mypage() {
   return (
     <S.Wrapper>
       <SEO title={'마이페이지 | 놀멍'} />
-      <S.ProfileWrapper>
+      <S.ProfileWrapper aria-label="프로필 정보">
         <S.MyProfileCard>
           {userData && (
             <>
               <S.ProfileImg
+                alt="프로필 이미지"
                 width={50}
                 height={50}
                 src={userData.userProfileImage}
               />
               <S.ProfileTextWrapper>
                 <S.NameWrapper>
-                  <S.ProfileName>{userData.userNickname}</S.ProfileName>
+                  <S.ProfileName
+                    aria-label={'유저 닉네임:' + userData.userNickname}
+                  >
+                    {userData.userNickname}
+                  </S.ProfileName>
                   <UserEditIcon
+                    aria-label="프로필 수정하기 버튼"
                     width={20}
                     height={20}
                     style={{ cursor: 'pointer' }}
                     onClick={navigateToEditPage}
                   />
                 </S.NameWrapper>
-                <S.ProfileEmailWrapper>
+                <S.ProfileEmailWrapper
+                  aria-label={'유저 이메일:' + userData.userEmail}
+                >
                   <S.KaKaoIconImg src={kakaoIcon} />
                   <S.ProfileEmail>{userData.userEmail}</S.ProfileEmail>
                 </S.ProfileEmailWrapper>
@@ -98,6 +106,8 @@ function Mypage() {
         </S.MyProfileCard>
         <S.PetProfileWrapper>
           <S.PetProfilePlusButton
+            role="button"
+            aria-label="반려견 전체보기 버튼"
             onClick={() => {
               navigate(ROUTE.MY_DOGS(), {
                 state: { dogData: dogData, nickname: userData!.userNickname },
@@ -119,22 +129,34 @@ function Mypage() {
         </S.PetProfileWrapper>
       </S.ProfileWrapper>
       <S.ListWrapper>
-        <S.ListContainer onClick={() => navigate('/my/favorite')}>
+        <S.ListContainer
+          aria-label="즐겨찾기 목록 보기 버튼"
+          onClick={() => navigate('/my/favorite')}
+        >
           <HeartIcon width={19} height={19} />
           즐겨찾기 목록
         </S.ListContainer>
-        <S.ListContainer onClick={navigateToMyReview}>
+        <S.ListContainer
+          aria-label="내 리뷰 모아보기 버튼"
+          onClick={navigateToMyReview}
+        >
           <ReviewListIcon width={19} height={19} />내 리뷰 모아보기
         </S.ListContainer>
-        <S.ListContainer onClick={handleResearchClick}>
+        <S.ListContainer
+          aria-label="설문조사 버튼"
+          onClick={handleResearchClick}
+        >
           <NoticeIcon width={20} height={20} />
           설문
         </S.ListContainer>
-        <S.ListContainer onClick={handleChannelClick}>
+        <S.ListContainer
+          aria-label="카카오톡 채널 버튼"
+          onClick={handleChannelClick}
+        >
           <KakaoChannelIcon width={19} height={19} />
           카카오톡 채널
         </S.ListContainer>
-        <S.ListContainer onClick={handleLoginClick}>
+        <S.ListContainer aria-label="로그아웃 버튼" onClick={handleLoginClick}>
           <LogoutIcon width={19} height={19} />
           로그아웃
         </S.ListContainer>

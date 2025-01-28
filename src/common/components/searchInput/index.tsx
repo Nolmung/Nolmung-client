@@ -33,7 +33,9 @@ function SearchInput({
   };
 
   return (
-    <S.InputWrapper onClick={onClick} width={width ? width : 100}>
+    <S.InputWrapper 
+    aria-label='검색창'
+     onClick={onClick} width={width ? width : 100}>
       <S.Input
         ref={inputRef}
         autoFocus={autofocus}

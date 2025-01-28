@@ -124,30 +124,33 @@ function UserEdit() {
   };
 
   return (
-    <S.ContainerWrapper>
+    <S.ContainerWrapper aria-label="회원정보 수정 페이지" role="main">
       <SEO title={'회원정보 수정 | 놀멍'} />
       <S.UserTitle>회원정보 수정</S.UserTitle>
       <S.ContentTitleText>닉네임</S.ContentTitleText>
       <S.UserInfoInput
+        aria-label="닉네임 입력"
         value={nickname}
         onChange={(e) => setNickname(e.target.value)}
         placeholder="닉네임을 입력해주세요"
       />
-      <S.ContentTitleText>주소</S.ContentTitleText>
+      <S.ContentTitleText aria-label="주소 입력">주소</S.ContentTitleText>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <DaumPost address={address} setAddress={setAddress}/>
+        <DaumPost address={address} setAddress={setAddress} />
       </div>
       <S.ContentTitleText>생년월일</S.ContentTitleText>
       <DatePicker value={selectedDate} onChange={handleDateChange} />
       <S.ContentTitleText>성별</S.ContentTitleText>
       <S.GenderWrapper>
         <S.GenderSelect
+          aria-label="남성 선택"
           isSelected={gender === 'MALE'}
           onClick={() => setGender('MALE')}
         >
           남성
         </S.GenderSelect>
         <S.GenderSelect
+          aria-label="여성 선택"
           isSelected={gender === 'FEMALE'}
           onClick={() => setGender('FEMALE')}
         >

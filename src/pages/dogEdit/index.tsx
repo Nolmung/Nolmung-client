@@ -214,7 +214,7 @@ function DogsEdit() {
       <SEO title={'반려견 수정 | 놀멍'} />
       <S.DogPicture onClick={handlePictureClick}>
         {preview ? (
-          <S.PreviewImage src={preview} alt="Dog Profile Preview" />
+          <S.PreviewImage src={preview} alt="강아지 프로필 이미지" />
         ) : (
           <S.StyledCameraIcon />
         )}
@@ -227,6 +227,7 @@ function DogsEdit() {
       </S.DogPicture>
       <S.ContentTitleText>이름</S.ContentTitleText>
       <S.UserInfoInput
+        aria-label="반려견 이름 입력"
         type="text"
         name="dogName"
         value={dogData.dogName}
@@ -234,11 +235,16 @@ function DogsEdit() {
         placeholder="반려견 이름을 입력해주세요"
       />
       <S.ContentTitleText>생년월일</S.ContentTitleText>
-      <DatePicker value={selectedDate} onChange={handleDateChange} />
+      <DatePicker
+        aria-label="생년월일 선택"
+        value={selectedDate}
+        onChange={handleDateChange}
+      />
       <S.ContentTitleText>몸무게</S.ContentTitleText>
-      <S.AgeChoiceContainer>
+      <S.AgeChoiceContainer aria-label="몸무게 선택">
         <S.AgeFlex>
           <S.AgeChoice
+            aria-label="10kg 미만"
             $isSelected={size === 1 || dogData.size === 'S'}
             onClick={() => handleCircleClick(1)}
           >
@@ -248,6 +254,7 @@ function DogsEdit() {
         </S.AgeFlex>
         <S.AgeFlex>
           <S.AgeChoice
+            aria-label="10kg - 25kg 미만"
             $isSelected={size === 2 || dogData.size === 'M'}
             onClick={() => handleCircleClick(2)}
           >
@@ -257,6 +264,7 @@ function DogsEdit() {
         </S.AgeFlex>
         <S.AgeFlex>
           <S.AgeChoice
+            aria-label="25kg 이상"
             $isSelected={size === 3 || dogData.size === 'L'}
             onClick={() => handleCircleClick(3)}
           >
@@ -265,7 +273,9 @@ function DogsEdit() {
           <S.AgeChoiceText>25kg 이상</S.AgeChoiceText>
         </S.AgeFlex>
       </S.AgeChoiceContainer>
-      <S.ContentTitleText>견종</S.ContentTitleText>
+      <S.ContentTitleText aria-label="견종 입력" title="견종을 입력해주세요">
+        견종
+      </S.ContentTitleText>
       <S.UserInfoInput
         type="text"
         name="dogType"
@@ -279,6 +289,7 @@ function DogsEdit() {
           <S.Dropdown>
             {filteredLocations.map((breed) => (
               <S.Suggestion
+                aria-label={breed}
                 key={breed}
                 onClick={() => handleSuggestionClick(breed)}
               >
@@ -291,8 +302,9 @@ function DogsEdit() {
       <S.GenderContainer>
         <div>
           <S.ContentTitleText>성별</S.ContentTitleText>
-          <S.GenderWrapper>
+          <S.GenderWrapper aria-label="성별 선택">
             <S.GenderSelect
+              aria-label={'선택된 성별: 수컷'}
               $isSelected={gender === '수컷' || dogData.gender === 'MALE'}
               onPointerDown={() => {
                 if (gender !== '수컷') {
@@ -304,6 +316,7 @@ function DogsEdit() {
               수컷
             </S.GenderSelect>
             <S.GenderSelect
+              aria-label={'선택된 성별: 암컷'}
               $isSelected={gender === '암컷' || dogData.gender === 'FEMALE'}
               onPointerDown={() => {
                 if (gender !== '암컷') {
@@ -317,9 +330,15 @@ function DogsEdit() {
           </S.GenderWrapper>
         </div>
         <div>
-          <S.ContentTitleText>중성화 여부</S.ContentTitleText>
+          <S.ContentTitleText
+            aria-label="중성화 여부 선택"
+            title="중성화 여부를 선택해주세요"
+          >
+            중성화 여부
+          </S.ContentTitleText>
           <S.GenderWrapper>
             <S.GenderSelect
+              aria-label={'중성화 여부: 예'}
               $isSelected={neutered === '예' || dogData.neuterYn === true}
               onClick={(e) => {
                 e.stopPropagation();
@@ -330,6 +349,7 @@ function DogsEdit() {
               예
             </S.GenderSelect>
             <S.GenderSelect
+              aria-label={'중성화 여부: 아니오'}
               $isSelected={neutered === '아니오' || dogData.neuterYn === false}
               onClick={(e) => {
                 e.stopPropagation();
@@ -344,13 +364,21 @@ function DogsEdit() {
       </S.GenderContainer>
       <S.ButtonArea>
         <S.EditButton
+          aria-label="저장하기 버튼"
+          role="button"
           disabled={!NextButtonActive}
           $isActive={NextButtonActive}
           onClick={handleEditClick}
         >
           저장하기
         </S.EditButton>
-        <S.DeleteButton onClick={handleDeleteClick}>삭제하기</S.DeleteButton>
+        <S.DeleteButton
+          aria-label="삭제하기 버튼"
+          role="button"
+          onClick={handleDeleteClick}
+        >
+          삭제하기
+        </S.DeleteButton>
       </S.ButtonArea>
     </S.ContainerWrapper>
   );

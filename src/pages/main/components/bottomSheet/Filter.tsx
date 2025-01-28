@@ -1,10 +1,6 @@
 import { forwardRef } from 'react';
 import S from '../../styles/Filter.style';
-import {
-  FilterState,
-  FilterType,
-  RatingFitlerValue,
-} from '../../types/filter';
+import { FilterState, FilterType, RatingFitlerValue } from '../../types/filter';
 import { FILTER_OPTIONS, FILTER_TYPES } from '../../constants/filter';
 import { DogSize } from '@/service/apis/user/index.types';
 
@@ -20,7 +16,10 @@ function FilterButtonGroup({
   onClick: (type: FilterType, value: string | number) => void;
 }) {
   return (
-    <S.ButtonWrapper>
+    <S.ButtonWrapper
+      role="group"
+      aria-label={type === FILTER_TYPES.WEIGHT ? '몸무게' : '평점'}
+    >
       {options.map(({ value, label }) => (
         <S.StyledButton
           key={value}
@@ -42,7 +41,7 @@ const Filter = forwardRef<
   }
 >(function ({ selectedFilter, onFilterChange }, ref) {
   return (
-    <S.FilterWrapper ref={ref}>
+    <S.FilterWrapper aria-label="필터" ref={ref}>
       {Object.entries(FILTER_OPTIONS).map(([type, options]) => (
         <S.FilterMenu key={type}>
           <S.FilterText>

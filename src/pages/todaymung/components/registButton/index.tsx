@@ -22,6 +22,7 @@ const RegistButton = ({ active }: RegistButtonProps) => {
   };
   return (
     <S.TodaymungInsertButton
+      aria-label="오늘멍 작성하기 버튼"
       onClick={navigateToTodaymungWrite}
       $status={active}
     >

@@ -7,7 +7,11 @@ import { NoImage } from '@/assets/images/svgs';
 const ImageCard = ({ data }: { data: MediasType }) => {
   const isValidImage = data.mediaUrl.includes('https://');
   return (
-    <S.Wrapper>
+    <S.Wrapper
+      aria-label={
+        data.mediaType === MediaType.IMAGE ? '이미지 카드' : '비디오 카드'
+      }
+    >
       {isValidImage ? (
         match(data.mediaType)
           .with(MediaType.VIDEO, () => (

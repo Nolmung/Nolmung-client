@@ -18,8 +18,13 @@ function DogCard({ data }: DogCardProps) {
   };
 
   return (
-    <S.PetButton onClick={handlePetButtonClick} selected={isDogSelected}>
+    <S.PetButton
+      aria-label={data.dogName + ' 강아지 선택'}
+      onClick={handlePetButtonClick}
+      selected={isDogSelected}
+    >
       <S.PetImage
+        alt="반려견 프로필 이미지"
         src={data.profileUrl}
         onError={(e) => {
           e.currentTarget.src = '/svgs/todayMungNoListIcon.svg';

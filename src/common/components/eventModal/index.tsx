@@ -31,6 +31,7 @@ function EventModal({ closeModal, eventContent, isNewEvent }: EventModalProps) {
   return (
     <>
       <Modal
+        aria-label="오늘멍 작성 이벤트 모달"
         width={modalContentWidth + 'px'}
         height="fit-content"
         isOpen={true}
@@ -47,11 +48,18 @@ function EventModal({ closeModal, eventContent, isNewEvent }: EventModalProps) {
           </S.ConfettiWrapper>
         )}
         <S.ModalBackground>
-          <S.ModalContent>
+          <S.ModalContent
+            aria-label={eventContent.title + eventContent.content}
+          >
             <S.Title>{eventContent.title}</S.Title>
             <S.Main>{eventContent.content}</S.Main>
             <S.ImageWrapper>
-              <img width="92px" height="122px" src={eventContent.imgUrl} alt="이벤트 이미지" />
+              <img
+                width="92px"
+                height="122px"
+                src={eventContent.imgUrl}
+                alt="이벤트 이미지"
+              />
             </S.ImageWrapper>
           </S.ModalContent>
         </S.ModalBackground>

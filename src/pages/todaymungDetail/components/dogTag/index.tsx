@@ -7,7 +7,7 @@ interface DogTagCardProps {
 
 const DogTagCard = (data: DogTagCardProps) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper aria-label={data.data.dogName + ' 강아지 태그'}>
       <S.DogImage
         src={`${data.data.dogProfileImageUrl}`}
         onError={(e) => {

@@ -17,15 +17,20 @@ function Login() {
       <SEO title={'로그인' + ' | 놀멍'} />
       <S.BackgroundImg>
         <S.ObjectContainer>
-          <S.NolmungText>
+          <S.NolmungText aria-label="놀멍 로그인 슬로건: 내 반려견과의 즐거운 오늘을 기록하다">
             내 반려견과의
             <br />
             즐거운 오늘을 기록하다
           </S.NolmungText>
           <S.StyledLogo />
-          <S.ButtonWrapper>
+          <S.ButtonWrapper aria-label="카카오 로그인 버튼">
             <KakaoLoginButton />
-            <S.LoginText onClick={handleBack}>나중에 가입할래요</S.LoginText>
+            <S.LoginText
+              aria-label="나중에 가입할래요 버튼"
+              onClick={handleBack}
+            >
+              나중에 가입할래요
+            </S.LoginText>
           </S.ButtonWrapper>
         </S.ObjectContainer>
       </S.BackgroundImg>

@@ -14,7 +14,10 @@ const PlaceTagCard = ({ data }: PlaceCardProps) => {
     navigate(ROUTE.DETAIL(data.placeId));
   };
   return (
-    <S.Wrapper onClick={handleLocationClick}>
+    <S.Wrapper
+      aria-label={data.placeName + ' 위치 태그'}
+      onClick={handleLocationClick}
+    >
       <LocationPinIcon width={20} height={20} />
       <S.LocationName>{data.placeName}</S.LocationName>
     </S.Wrapper>

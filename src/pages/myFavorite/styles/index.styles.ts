@@ -71,7 +71,7 @@ const S = {
     height: fit-content;
     margin-top: 6px;
   `,
-  PlaceLocation: styled.span`
+  PlaceLocation: styled.address`
     font-size: 12px;
     font-weight: 300;
     color: #000;

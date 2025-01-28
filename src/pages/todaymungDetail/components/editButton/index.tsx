@@ -49,12 +49,14 @@ const EditButton = ({ diaryId, medias }: EditButtonProps) => {
   };
 
   return (
-    <S.Wrapper>
-      <S.EditArea onClick={handleEditClick}>
+    <S.Wrapper aria-label="수정 및 삭제 버튼">
+      <S.EditArea aria-label="수정하기 버튼" onClick={handleEditClick}>
         <EditIcon width={16.5} height={16.5} />
         <S.EditText>수정하기</S.EditText>
       </S.EditArea>
-      <S.DeleteArea>
+      <S.DeleteArea
+        aria-label="삭제하기 버튼"
+      >
         <DeleteIcon width={18} height={18} />
         <S.DeleteText onClick={handleDeleteClick}>삭제하기</S.DeleteText>
       </S.DeleteArea>

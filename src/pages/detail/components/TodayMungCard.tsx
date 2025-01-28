@@ -18,19 +18,27 @@ function TodayMungCard({ card }: TodayMungCardProps) {
     .slice(2);
   return (
     <S.TodayMungWrapper onClick={navigateToTodaymungDetail}>
-      <S.TodayMungInfo>
-        <S.ProfileWrapper>
+      <S.TodayMungInfo aria-label="오늘멍 정보">
+        <S.ProfileWrapper aria-label="유저 프로필">
           <S.ProfileImage src={card.writerUrlImage} alt="오늘멍 유저 프로필" />
-          <S.WriterName>{card.diaryWriter}</S.WriterName>
+          <S.WriterName aria-label={'유저 이름' + card.diaryWriter}>
+            {card.diaryWriter}
+          </S.WriterName>
         </S.ProfileWrapper>
-        <S.CreatedAt>{formattedDate}</S.CreatedAt>
+        <S.CreatedAt aria-label={`작성일: ${formattedDate}`}>
+          {formattedDate}
+        </S.CreatedAt>
       </S.TodayMungInfo>
       <S.TodayMungTitleContentImageWrapper>
         <S.TodayMungTitleContentWrapper
           isImageUrlNotNull={card.imageUrl?.length > 0}
         >
-          <S.Title>{card.diaryName}</S.Title>
-          <S.Content>{card.diaryContent}</S.Content>
+          <S.Title aria-label={`오늘멍 제목: ${card.diaryName}`}>
+            {card.diaryName}
+          </S.Title>
+          <S.Content aria-label={`오늘멍 내용: ${card.diaryContent}`}>
+            {card.diaryContent}
+          </S.Content>
         </S.TodayMungTitleContentWrapper>
         {card.imageUrl && (
           <S.Image

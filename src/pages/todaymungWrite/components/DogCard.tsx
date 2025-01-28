@@ -29,12 +29,18 @@ function DogCard({ data }: DogCardProps) {
   return (
     <S.PetButton onClick={handlePetButtonClick} selected={isDogSelected}>
       <S.PetImage
+        alt="반려견 프로필 이미지"
         src={data.profileUrl}
         onError={(e) => {
           e.currentTarget.src = '/webps/emptyImg.webp';
         }}
       />
-      <S.PetName selected={isDogSelected}>{data.dogName}</S.PetName>
+      <S.PetName
+        aria-label={`반려견 이름: ${data.dogName}`}
+        selected={isDogSelected}
+      >
+        {data.dogName}
+      </S.PetName>
     </S.PetButton>
   );
 }

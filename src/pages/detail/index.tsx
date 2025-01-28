@@ -173,7 +173,16 @@ function Detail() {
 
       <S.PlaceImage src={data.placeImgUrl} alt="시설 이미지" />
       <S.PlaceInfo>
-        <S.TitleWrapper>
+        <S.TitleWrapper
+          aria-label={
+            '장소 명:' +
+            data.placeName +
+            '평점:' +
+            data.starRatingAvg +
+            '점 리뷰 갯수:' +
+            data.reviewCount
+          }
+        >
           <S.PlaceName> {data.placeName}</S.PlaceName>
           <S.IconWrapper onClick={handleLikeClick}>
             <IoHeartSharp
@@ -190,8 +199,19 @@ function Detail() {
             {data.reviewCount}
           </S.PlaceReviewCount>
         </S.PlaceBriefReview>
-        <S.PlaceRoadAddress>{data.address}</S.PlaceRoadAddress>
-        <S.PlaceInfoIcons>
+        <S.PlaceRoadAddress
+          aria-label={`도로명 주소: ${data.roadAddress}`}
+          title={data.roadAddress}
+        >
+          {data.address}
+        </S.PlaceRoadAddress>
+        <S.PlaceInfoIcons
+          aria-label={`장소 정보: 수용 가능 크기 ${data.acceptSize} 주차 가능 여부 ${
+            data.parkingYn
+          } 실내 동반 가능 여부 ${
+            data.inPossibleYn
+          } 실외 동반 가능 여부 ${data.outPossibleYn}`}
+        >
           {match(data.acceptSize)
             .with('S', () => <Under15KgInfoIcon />)
             .with('M', () => <Under25KgInfoIcon />)
@@ -204,7 +224,7 @@ function Detail() {
         </S.PlaceInfoIcons>
       </S.PlaceInfo>
       <S.PlaceDetailWrapper>
-        <S.PlaceDetail>
+        <S.PlaceDetail aria-label={`영업시간: ${data.openHour}`}>
           <Time width={18} height={18} />
           {openingHour &&
             (openingHour?.length == 1 ? (
@@ -216,26 +236,29 @@ function Detail() {
               </>
             ))}
         </S.PlaceDetail>
-        <S.PlaceDetail style={{ marginBottom: '30px' }}>
+        <S.PlaceDetail
+          aria-label={`휴일: ${data.holiday}`}
+          style={{ marginBottom: '30px' }}
+        >
           <Time width={18} height={18} />
           <S.PlaceDetailMenu> 휴일</S.PlaceDetailMenu>
           {data.holiday}
         </S.PlaceDetail>
         {!isPriceAvailable(data.price) && (
-          <S.PlaceDetail>
+          <S.PlaceDetail aria-label={`이용 가격: ${data.price}`}>
             <Price width={18} height={18} />
             <S.PlaceDetailMenu>이용 가격</S.PlaceDetailMenu>
             {data.price}
           </S.PlaceDetail>
         )}
         {!isPriceAvailable(data.extraPrice) && (
-          <S.PlaceDetail>
+          <S.PlaceDetail aria-label={`추가 금액: ${data.extraPrice}`}>
             <Price width={18} height={18} />
             <S.PlaceDetailMenu>추가 금액</S.PlaceDetailMenu>
             {data.extraPrice}
           </S.PlaceDetail>
         )}
-        <S.PlaceDetail>
+        <S.PlaceDetail aria-label={`전화번호: ${data.phone}`}>
           <Phone width={18} height={18} />
           <S.PlaceDetailMenu>전화</S.PlaceDetailMenu>
           <S.PhoneNumberLink href={`tel:${data.phone}`}>
@@ -243,7 +266,7 @@ function Detail() {
           </S.PhoneNumberLink>
         </S.PlaceDetail>
       </S.PlaceDetailWrapper>
-      <S.PlaceDetailWrapper>
+      <S.PlaceDetailWrapper aria-label={`방문자 리뷰: ${data.reviewCount}개`}>
         <S.ReviewTitle>
           방문자 리뷰
           <S.ReviewCount>{data.reviewCount}</S.ReviewCount>
@@ -263,7 +286,7 @@ function Detail() {
         </S.KeywordReviews>
       </S.PlaceDetailWrapper>
       <S.PlaceDetailWrapper>
-        <S.ReviewTitle>
+        <S.ReviewTitle aria-label={`오늘멍: ${data.diaries?.length}개`}>
           오늘멍
           <S.ReviewCount>{data.diaries?.length}</S.ReviewCount>
         </S.ReviewTitle>
@@ -271,11 +294,17 @@ function Detail() {
           ?.slice(0, visibleTodayMungCard)
           .map((card) => <TodayMungCard key={card.diaryId} card={card} />)}
         {!data.diaries?.length && (
-          <NoResulLiedownUI content={'아직 오늘멍이 없습니다'} />
+          <NoResulLiedownUI
+            aria-label={'아직 작성된 오늘멍이 없습니다'}
+            content={'아직 오늘멍이 없습니다'}
+          />
         )}
         {visibleTodayMungCard < data.diaries?.length && (
           <S.ViewMoreButtonWrapper>
-            <S.ViewMoreButton onClick={handleViewMoreButtonClick}>
+            <S.ViewMoreButton
+              aria-label="더보기 버튼"
+              onClick={handleViewMoreButtonClick}
+            >
               더보기
             </S.ViewMoreButton>
           </S.ViewMoreButtonWrapper>

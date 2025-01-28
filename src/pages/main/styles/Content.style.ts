@@ -59,7 +59,7 @@ export const S = {
     font-weight: 500;
     line-height: normal;
   `,
-  PlaceAddress: styled.p`
+  PlaceAddress: styled.address`
     color: #5e5e5e;
     font-size: 13px;
     font-style: normal;
