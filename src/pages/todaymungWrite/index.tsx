@@ -171,8 +171,10 @@ function TodayMungWrite() {
             </S.PlaceWrapper>
           </div>
           <div style={{ position: 'relative' }}>
-            <S.Title>오늘을 함께한 반려견</S.Title>
-            <S.PlaceWrapper>
+            <S.Title aria-label="오늘을 함께한 반려견">
+              오늘을 함께한 반려견
+            </S.Title>
+            <S.PlaceWrapper aria-label="오늘을 함께한 반려견 리스트">
               <S.PlaceCardWrapper>
                 {dogsData?.data?.map((dog) => (
                   <DogCard key={dog.dogId} data={dog} />

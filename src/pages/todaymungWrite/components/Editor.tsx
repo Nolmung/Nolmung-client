@@ -18,24 +18,26 @@ function Editor() {
   return (
     <S.Wrapper>
       <S.TodayMungTitleInput
+        aria-label="오늘멍 제목 입력"
         value={title}
         onChange={handleTitleChange}
         placeholder="제목"
       />
       <S.TodayMungContentInput
+        aria-label="오늘멍 내용 입력"
         value={content}
         maxLength={500}
         onChange={handleContentChange}
         placeholder={`오늘멍은 하루에 한 번만 작성 가능해요`}
       />
       <S.InFormPublicCheckBoxWrapper>
-        <S.InformPublic>
+        <S.InformPublic aria-label="오늘멍 공개 여부 체크박스">
           {publicYn ? (
-            <S.IconWrapper>
+            <S.IconWrapper aria-label="오늘멍 공개">
               <CheckFiiledDark onClick={handleCheckBoxClick} width={18} />
             </S.IconWrapper>
           ) : (
-            <S.IconWrapper>
+            <S.IconWrapper aria-label="오늘멍 비공개">
               <CheckEmptyGreen onClick={handleCheckBoxClick} width={18} />
             </S.IconWrapper>
           )}
