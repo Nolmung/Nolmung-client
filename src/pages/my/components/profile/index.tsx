@@ -43,6 +43,7 @@ function PetProfileCard({
             <S.ProfileWrapper>
               <S.ProfileContainer>
                 <S.ProfileImg
+                  alt="반려견 프로필 이미지"
                   width={68}
                   height={68}
                   src={data.profileUrl}
@@ -54,23 +55,39 @@ function PetProfileCard({
               </S.ProfileContainer>
               <S.ProfileTextWrapper>
                 <S.FirstDogWrapper>
-                  <S.ProfileNameText>{data.dogName}</S.ProfileNameText>
-                  {isFirstDog && <S.FirstDogLabel>대표반려견</S.FirstDogLabel>}
+                  <S.ProfileNameText
+                    aria-label={`반려견 이름: ${data.dogName}`}
+                  >
+                    {data.dogName}
+                  </S.ProfileNameText>
+                  {isFirstDog && (
+                    <S.FirstDogLabel aria-label={`대표반려견 표시`}>
+                      대표반려견
+                    </S.FirstDogLabel>
+                  )}
                 </S.FirstDogWrapper>
                 <S.ProfileLabelWrapper>
-                  <S.ProfileLabel>{data.dogType}</S.ProfileLabel>
+                  <S.ProfileLabel aria-label={`반려견 종: ${data.dogType}`}>
+                    {data.dogType}
+                  </S.ProfileLabel>
                   <S.LabelSeparate />
-                  <S.ProfileLabel>{age}살</S.ProfileLabel>
+                  <S.ProfileLabel aria-label={`반려견 나이: ${age}살`}>
+                    {age}살
+                  </S.ProfileLabel>
                   <S.LabelSeparate />
-                  <S.ProfileLabel>{dogSize}</S.ProfileLabel>
+                  <S.ProfileLabel aria-label={`반려견 크기: ${dogSize}`}>
+                    {dogSize}
+                  </S.ProfileLabel>
                 </S.ProfileLabelWrapper>
               </S.ProfileTextWrapper>
             </S.ProfileWrapper>
           </S.Container>
         </S.Wrapper>
       ) : (
-        <S.Wrapper onClick={handleDogRegisterClick}>
-          <S.NoDataText>반려견을 등록해보세요!</S.NoDataText>
+        <S.Wrapper role="button" onClick={handleDogRegisterClick}>
+          <S.NoDataText aria-label="반려견을 등록해보세요!">
+            반려견을 등록해보세요!
+          </S.NoDataText>
         </S.Wrapper>
       )}
     </>

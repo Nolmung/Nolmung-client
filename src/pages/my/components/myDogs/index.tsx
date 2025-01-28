@@ -33,7 +33,7 @@ const MyDogs = () => {
               data={data}
               key={data.dogId}
               userNickname={nickname}
-              isFirstDog={index===0} 
+              isFirstDog={index === 0}
             />
           );
         })
@@ -42,7 +42,7 @@ const MyDogs = () => {
       )}
       <S.ButtonArea onClick={handleDogRegisterClick}>
         <PlusIcon fill="#a7a7a7" />
-        <S.NoDataText>반려견 추가하기</S.NoDataText>
+        <S.NoDataText aria-label="반려견 추가히기 버튼">반려견 추가하기</S.NoDataText>
       </S.ButtonArea>
     </S.Wrapper>
   );
