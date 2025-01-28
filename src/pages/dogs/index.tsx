@@ -209,12 +209,12 @@ function Dogs() {
   return (
     <S.ContainerWrapper>
       <SEO title={'반려견 등록 | 놀멍'} />
-      <S.UserTitle>
+      <S.UserTitle aria-label={`${nickname}님의 반려견을 등록해주세요`}>
         반가워요,
         <br />
         {nickname}님의 반려견을 등록해주세요
       </S.UserTitle>
-      <S.DogPicture onClick={handlePictureClick}>
+      <S.DogPicture aria-label="반려견 사진 선택" onClick={handlePictureClick}>
         {preview ? (
           <S.PreviewImage src={preview} alt="Dog Profile Preview" />
         ) : (
@@ -227,7 +227,9 @@ function Dogs() {
           onChange={handleFileChange}
         />
       </S.DogPicture>
-      <S.ContentTitleText>이름</S.ContentTitleText>
+      <S.ContentTitleText aria-label="반려견 이름을 입력해주세요">
+        이름
+      </S.ContentTitleText>
       <S.UserInfoInput
         type="text"
         name="dogName"
@@ -235,12 +237,17 @@ function Dogs() {
         onChange={handleChange}
         placeholder="반려견 이름을 입력해주세요"
       />
-      <S.ContentTitleText>생년월일</S.ContentTitleText>
+      <S.ContentTitleText aria-label="반려견의 생년월일을 입력해주세요">
+        생년월일
+      </S.ContentTitleText>
       <DatePicker value={selectedDate} onChange={handleDateChange} />
-      <S.ContentTitleText>몸무게</S.ContentTitleText>
+      <S.ContentTitleText aria-label="반려견의 몸무게를 선택해주세요">
+        몸무게
+      </S.ContentTitleText>
       <S.AgeChoiceContainer>
         <S.AgeFlex>
           <S.AgeChoice
+            aria-label="10kg 미만"
             isSelected={size === 1}
             onClick={() => handleCircleClick(1)}
           >
@@ -250,6 +257,7 @@ function Dogs() {
         </S.AgeFlex>
         <S.AgeFlex>
           <S.AgeChoice
+            aria-label="10kg - 25kg 미만"
             isSelected={size === 2}
             onClick={() => handleCircleClick(2)}
           >
@@ -259,6 +267,7 @@ function Dogs() {
         </S.AgeFlex>
         <S.AgeFlex>
           <S.AgeChoice
+            aria-label="25kg 이상"
             isSelected={size === 3}
             onClick={() => handleCircleClick(3)}
           >
@@ -267,7 +276,9 @@ function Dogs() {
           <S.AgeChoiceText>25kg 이상</S.AgeChoiceText>
         </S.AgeFlex>
       </S.AgeChoiceContainer>
-      <S.ContentTitleText>견종</S.ContentTitleText>
+      <S.ContentTitleText aria-label="견종 입력" title="견종을 입력해주세요">
+        견종
+      </S.ContentTitleText>
       <S.UserInfoInput
         type="text"
         name="dogType"
@@ -293,8 +304,9 @@ function Dogs() {
       <S.GenderContainer>
         <div>
           <S.ContentTitleText>성별</S.ContentTitleText>
-          <S.GenderWrapper>
+          <S.GenderWrapper aria-label="성별 선택">
             <S.GenderSelect
+              aria-label={'선택된 성별: 수컷'}
               isSelected={gender === '수컷'}
               onClick={() => {
                 setGender('수컷');
@@ -304,6 +316,7 @@ function Dogs() {
               수컷
             </S.GenderSelect>
             <S.GenderSelect
+              aria-label={'선택된 성별: 암컷'}
               isSelected={gender === '암컷'}
               onClick={() => {
                 setGender('암컷');
@@ -315,9 +328,15 @@ function Dogs() {
           </S.GenderWrapper>
         </div>
         <div>
-          <S.ContentTitleText>중성화 여부</S.ContentTitleText>
+          <S.ContentTitleText
+            aria-label="중성화 여부 선택"
+            title="중성화 여부를 선택해주세요"
+          >
+            중성화 여부
+          </S.ContentTitleText>
           <S.GenderWrapper>
             <S.GenderSelect
+              aria-label={'중성화 여부: 예'}
               isSelected={neutered === '예'}
               onClick={() => {
                 setNeutered('예');
@@ -327,6 +346,7 @@ function Dogs() {
               예
             </S.GenderSelect>
             <S.GenderSelect
+              aria-label={'중성화 여부: 아니오'}
               isSelected={neutered === '아니오'}
               onClick={() => {
                 setNeutered('아니오');
@@ -338,7 +358,13 @@ function Dogs() {
           </S.GenderWrapper>
         </div>
       </S.GenderContainer>
-      <S.NextButton isActive={NextButtonActive} onClick={handleSubmitClick}>
+      <S.NextButton
+        aria-label={
+          isMyDogsAddPage ? '반려견 등록하기' : '놀멍 시작하기' + '버튼'
+        }
+        isActive={NextButtonActive}
+        onClick={handleSubmitClick}
+      >
         {isMyDogsAddPage ? '반려견 등록하기' : '놀멍 시작하기'}
       </S.NextButton>
     </S.ContainerWrapper>
