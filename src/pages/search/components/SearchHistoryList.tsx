@@ -16,7 +16,7 @@ function SearchHistoryList({
   return (
     <div>
       {searchHistory.map((item) => (
-        <S.SearchHistory key={item.id}>
+        <S.SearchHistory aria-label={`${item.keyword}`} key={item.id}>
           <TimeRecord width={20} height={20} />
           <S.TimeIconTextWrapper
             onClick={() => handleSearchIconClick(item.keyword)}
@@ -26,6 +26,7 @@ function SearchHistoryList({
           <S.CancelIconDateWrapper>
             {item.createdAt}
             <CancelIcon
+              aria-label="삭제버튼"
               width={18}
               height={18}
               onClick={() => handleDeleteKeyword(item.id)}

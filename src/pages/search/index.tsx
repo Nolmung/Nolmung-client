@@ -132,7 +132,7 @@ function Search() {
       <SEO title={'검색 | 놀멍'} />
       {isOpen && (
         <Modal isOpen={isOpen} closeModal={closeModal}>
-          <S.ModalContent>
+          <S.ModalContent aria-label="검색 기록을 전부 삭제하시겠습니까?">
             모두 지우시겠습니까?
             <S.ModalButtonWrapper>
               <Button
@@ -155,7 +155,11 @@ function Search() {
         </Modal>
       )}
       <S.Header>
-        <S.IconWrapper onClick={handleGoBackIconClick}>
+        <S.IconWrapper
+          aria-label="뒤로가기버튼"
+          role="button"
+          onClick={handleGoBackIconClick}
+        >
           <GoBackIcon />
         </S.IconWrapper>
         <SearchInput
@@ -171,9 +175,11 @@ function Search() {
         <NoSearchResponse />
       ) : (
         <>
-          <S.Menu>
+          <S.Menu aria-label="최근 검색어">
             최근 검색어
-            <S.ClearAllButton onClick={openModal}>전체삭제</S.ClearAllButton>
+            <S.ClearAllButton aria-label="전체삭제 버튼" onClick={openModal}>
+              전체삭제
+            </S.ClearAllButton>
           </S.Menu>
           <S.SearchHistoryList>
             {searchHistory.length > 0 ? (

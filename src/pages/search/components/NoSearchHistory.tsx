@@ -2,7 +2,7 @@ import { S } from '../styles/NoSearchHistory.style';
 function NoSearchHistory() {
   /** @Todo 검색 결과 없을떄 UI 디자인 필요 */
   return (
-    <S.NoResultWrapper>
+    <S.NoResultWrapper role="alert" aria-label="최근 검색 기록이 없습니다">
       <img src="/webps/emptyImg.webp" width={200} />
       <S.NoResultSubText>최근 검색 기록이 없습니다</S.NoResultSubText>
     </S.NoResultWrapper>
