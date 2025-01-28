@@ -8,7 +8,7 @@ interface LabelCardProps {
 function LabelCard({ id }: LabelCardProps) {
   const labelName = findLabelNameById(id);
   return (
-    <S.Wrapper>
+    <S.Wrapper aria-label={`라벨: ${labelName}`}>
       <DogPaw width={14} height={14} />
       <S.Label>{labelName}</S.Label>
     </S.Wrapper>

@@ -103,7 +103,10 @@ function MyReview() {
         </Modal>
       )}
       {!allReviews.length && (
-        <NoResulLiedownUI content={'아직 리뷰가 없다 멍 !'} />
+        <NoResulLiedownUI
+          aria-label={'아직 리뷰가 없습니다'}
+          content={'아직 리뷰가 없다 멍 !'}
+        />
       )}
       {allReviews.map((review) => (
         <ReviewCard

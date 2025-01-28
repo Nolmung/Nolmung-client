@@ -27,17 +27,29 @@ function ReviewCard({ data, openModal, setDeleteReviewId }: ReviewCardProps) {
       <S.PlaceInfoWrapper>
         <S.PlaceNameAddressTrashCanWrapper>
           <S.PlaceNameAddressWrapper>
-            <S.PlaceName>{placeName}</S.PlaceName>
-            <S.StarIconRateWrapper>
+            <S.PlaceName
+              aria-label={`장소 이름: ${placeName}`}
+              title={placeName}
+            >
+              {placeName}
+            </S.PlaceName>
+            <S.StarIconRateWrapper aria-label={`평점: ${rating}`}>
               <FilledStar width={13} />
               <S.Rate>{rating}</S.Rate>
             </S.StarIconRateWrapper>
           </S.PlaceNameAddressWrapper>
-          <TrashcanIcon onClick={handleTrashcanIconClick} width={15} />
+          <TrashcanIcon
+            role="button"
+            aria-label={`리뷰 삭제 버튼`}
+            onClick={handleTrashcanIconClick}
+            width={15}
+          />
         </S.PlaceNameAddressTrashCanWrapper>
-        <S.Address>{address}</S.Address>
+        <S.Address aria-label={`장소 주소: ${address}`} title={address}>
+          {address}
+        </S.Address>
       </S.PlaceInfoWrapper>
-      <S.LabelList>
+      <S.LabelList aria-label={`리뷰 라벨 리스트`}>
         {Labels?.map((label) => <LabelCard id={label.labelId} />)}
       </S.LabelList>
     </S.Wrapper>
