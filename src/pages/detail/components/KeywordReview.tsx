@@ -13,7 +13,9 @@ function KeywordReview({
   KeywordPercent,
 }: KeywordReviewProps) {
   return (
-    <S.KeywordReviewWrapper>
+    <S.KeywordReviewWrapper
+      aria-label={`${Keyword} 키워드 리뷰 ${KeywordCount}개`}
+    >
       <S.KeywordContentBarWrapper>
         <S.KeywordReviewStatusBar width={KeywordPercent} />
         <S.KeywordContent>

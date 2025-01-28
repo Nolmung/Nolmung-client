@@ -11,7 +11,7 @@ import {
 
 export const AllKindDogAvailableInfoIcon = () => {
   return (
-    <S.InfoIconWrapper>
+    <S.InfoIconWrapper aria-label="모든 견종 출입 가능">
       <AllKindDogAvailable width={48} height={48} />
       모든 견종
     </S.InfoIconWrapper>
@@ -20,7 +20,7 @@ export const AllKindDogAvailableInfoIcon = () => {
 
 export const ParkAvailableInfoIcon = () => {
   return (
-    <S.InfoIconWrapper>
+    <S.InfoIconWrapper aria-label="주차 가능">
       <ParkAvailable width={48} height={48} />
       주차 가능
     </S.InfoIconWrapper>
@@ -29,7 +29,7 @@ export const ParkAvailableInfoIcon = () => {
 
 export const Under15KgInfoIcon = () => {
   return (
-    <S.InfoIconWrapper>
+    <S.InfoIconWrapper aria-label="15kg 이하 가능">
       <Under15Kilos width={48} height={48} />
       15kg 이하 가능
     </S.InfoIconWrapper>
@@ -38,7 +38,7 @@ export const Under15KgInfoIcon = () => {
 
 export const Under25KgInfoIcon = () => {
   return (
-    <S.InfoIconWrapper>
+    <S.InfoIconWrapper aria-label="25kg 이하 가능">
       <Under25Kilos width={48} height={48} />
       25kg 이하 가능
     </S.InfoIconWrapper>
@@ -47,7 +47,7 @@ export const Under25KgInfoIcon = () => {
 
 export const InsideInfoIcon = () => {
   return (
-    <S.InfoIconWrapper>
+    <S.InfoIconWrapper aria-label="실내 출입 가능">
       <InsideIcon width={48} height={48} />
       실내 출입 가능
     </S.InfoIconWrapper>
@@ -56,7 +56,7 @@ export const InsideInfoIcon = () => {
 
 export const OutsideInfoIcon = () => {
   return (
-    <S.InfoIconWrapper>
+    <S.InfoIconWrapper aria-label="실외 출입 가능">
       <OutsideIcon width={48} height={48} />
       실외 출입 가능
     </S.InfoIconWrapper>
