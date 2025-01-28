@@ -30,34 +30,49 @@ const UserInfo = ({ userData, diaryLength }: UserInfoTypes) => {
     <S.ProfileArea>
       <S.ProfileDescription>
         <S.NameWrapper>
-          <S.ProfileName>{userData.nickname}</S.ProfileName>
+          <S.ProfileName
+            aria-label={
+              `${userData.nickname.length} > 10 ? ${userData.nickname.slice(0, 10)} : ${userData.nickname}` +
+              '님의 오늘멍'
+            }
+          >
+            {userData.nickname}
+          </S.ProfileName>
           <S.ProfileTitle>님의 오늘멍</S.ProfileTitle>
-          </S.NameWrapper>
-          <S.ContentContainer>
-            <S.ContentWrapper>
-              <S.ContentTitle>현재 작성한 오늘멍</S.ContentTitle>
-              <S.ContentNumber>{diaryLength}번</S.ContentNumber>
-            </S.ContentWrapper>
-            <S.ContentWrapper>
-              <S.ContentTitle>획득한 뱃지</S.ContentTitle>
-              <S.ContentNumber>
-                {badges && badges?.length > 0 && (
-                  <S.ImageWrapper>
-                    {badges.map((badge, index) => (
-                      <S.Button
-                        onClick={() => handleBadgeClick(badge.badgeCodeId)}
-                      >
-                        <S.Image
-                          key={index}
-                          src={EventContents[badge.badgeCodeId - 1].imgUrl}
-                        />
-                      </S.Button>
-                    ))}
-                  </S.ImageWrapper>
-                )}
-              </S.ContentNumber>
-            </S.ContentWrapper>
-          </S.ContentContainer>
+        </S.NameWrapper>
+        <S.ContentContainer>
+          <S.ContentWrapper
+            aria-label={
+              '현재 작성한 오늘멍' +
+              `${diaryLength}번` +
+              '획득한 뱃지' +
+              `${badges && badges?.length > 0 ? badges.map((badge) => badge.badgeCodeId) : ''}`
+            }
+          >
+            <S.ContentTitle>현재 작성한 오늘멍</S.ContentTitle>
+            <S.ContentNumber>{diaryLength}번</S.ContentNumber>
+          </S.ContentWrapper>
+          <S.ContentWrapper>
+            <S.ContentTitle>획득한 뱃지</S.ContentTitle>
+            <S.ContentNumber>
+              {badges && badges?.length > 0 && (
+                <S.ImageWrapper>
+                  {badges.map((badge, index) => (
+                    <S.Button
+                      onClick={() => handleBadgeClick(badge.badgeCodeId)}
+                    >
+                      <S.Image
+                        alt="뱃지 이미지"
+                        key={index}
+                        src={EventContents[badge.badgeCodeId - 1].imgUrl}
+                      />
+                    </S.Button>
+                  ))}
+                </S.ImageWrapper>
+              )}
+            </S.ContentNumber>
+          </S.ContentWrapper>
+        </S.ContentContainer>
       </S.ProfileDescription>
       {isEventModalOpen && (
         <EventModal

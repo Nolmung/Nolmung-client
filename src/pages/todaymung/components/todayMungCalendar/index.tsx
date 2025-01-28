@@ -129,7 +129,9 @@ function CustomCalendarHeader(props: PickersCalendarHeaderProps<Dayjs>) {
 export default function TodayMungCalendar({ listData }: ListDataProps) {
 
   return (
-    <S.Wrap>
+    <S.Wrap
+      aria-label="오늘멍 캘린더 뷰"
+    >
       <S.CalendarArea>
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ko">
           <StyledDateCalendar

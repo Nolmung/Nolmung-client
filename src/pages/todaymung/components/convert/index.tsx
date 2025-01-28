@@ -39,12 +39,13 @@ const Convert = ({ listData }: ListDataProps) => {
 
   return (
     <>
-      <S.ButtonWrapper>
+      <S.ButtonWrapper aria-label="오늘의 멍 등록하기">
         <RegistButton active={hasTodayMung} />
       </S.ButtonWrapper>
 
       <S.ConvertArea>
         <S.CalendarMode
+          aria-label="캘린더 모드로 보기"
           mode={viewMode}
           onClick={() => handleViewChange(ViewMode.Calendar)}
         >
@@ -55,6 +56,7 @@ const Convert = ({ listData }: ListDataProps) => {
             ))}
         </S.CalendarMode>
         <S.ListMode
+          aria-label="리스트 모드로 보기"
           mode={viewMode}
           onClick={() => handleViewChange(ViewMode.List)}
         >
