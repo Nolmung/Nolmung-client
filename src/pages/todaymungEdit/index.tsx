@@ -126,13 +126,15 @@ function TodayMungEdit() {
       <S.BannerWrapper>
         <S.BannerImage src="/webps/TodayMungLogo.webp" alt="오늘멍 배너" />
       </S.BannerWrapper>
-      <S.ContentWrapper>
+      <S.ContentWrapper aria-label="오늘멍 수정 페이지">
         <S.DateText>
           {convertFormatDate(todaymungEditData.data.createdAt)}
         </S.DateText>
         <div>
           <S.Title>장소</S.Title>
-          <S.PlaceWrapper>
+          <S.PlaceWrapper
+            aria-label={`오늘 방문한 장소 리스트 ${todayReviewData?.data.length}개`}
+          >
             <S.PlaceCardWrapper>
               {todayReviewData &&
                 todayReviewData.data.map((data: any, index: number) => (
@@ -144,14 +146,21 @@ function TodayMungEdit() {
                     rating={data.rating}
                   />
                 ))}
-              <S.PlaceAddButton onClick={navigateToTodaymungPlaceRegist}>
+              <S.PlaceAddButton
+                aria-label="장소 추가 버튼"
+                onClick={navigateToTodaymungPlaceRegist}
+              >
                 <PlusIcon width={20} height={20} />
               </S.PlaceAddButton>
             </S.PlaceCardWrapper>
           </S.PlaceWrapper>
         </div>
         <div style={{ position: 'relative' }}>
-          <S.Title>오늘을 함께한 반려견</S.Title>
+          <S.Title
+            aria-label={`오늘을 함께한 반려견 리스트 ${dogsData?.data.length}개`}
+          >
+            오늘을 함께한 반려견
+          </S.Title>
           <S.PlaceWrapper>
             <S.PlaceCardWrapper>
               {dogsData?.data?.map((dog) => (
