@@ -86,12 +86,14 @@ const TodayMungDetail = () => {
   };
 
   return (
-    <S.Wrapper>
+    <S.Wrapper aria-label="오늘멍 상세 페이지" role="main">
       <SEO title={'오늘멍 상세 | 놀멍'} />
       {diaryData && (
         <S.Container>
           <S.DateArea>
-            <S.DiaryCreatedAt>
+            <S.DiaryCreatedAt
+              aria-label={`작성일: ${convertFormatDate(diaryData.createdAt)}`}
+            >
               {convertFormatDate(diaryData.createdAt)}
             </S.DiaryCreatedAt>
             <div ref={dotRef}>
@@ -111,9 +113,9 @@ const TodayMungDetail = () => {
           </S.DateArea>
 
           {todayReviewData && (
-            <S.PlaceArea>
+            <S.PlaceArea aria-label="장소 태그">
               <S.PlaceAreaTitle>장소</S.PlaceAreaTitle>
-              <S.PlaceTagCardArea>
+              <S.PlaceTagCardArea aria-label="장소 태그 리스트" role="list">
                 {todayReviewData.data.map((data: any) => {
                   return <PlaceTagCard key={data.placeId} data={data} />;
                 })}
@@ -121,19 +123,22 @@ const TodayMungDetail = () => {
             </S.PlaceArea>
           )}
           {diaryData.dogs && diaryData.dogs.length > 0 && (
-            <S.DogsArea>
+            <S.DogsArea aria-label="오늘을 함께한 반려견">
               <S.DogsAreaTitle>오늘을 함께한 반려견</S.DogsAreaTitle>
-              <S.DogTagList>
+              <S.DogTagList
+                aria-label="오늘을 함께한 반려견 리스트"
+                role="list"
+              >
                 {diaryData.dogs.map((dogData) => (
                   <DogTagCard data={dogData} key={dogData.dogId} />
                 ))}
               </S.DogTagList>
             </S.DogsArea>
           )}
-          <S.TextContentArea>
+          <S.TextContentArea aria-label="오늘의 일기 내용" role="article">
             <TextContent title={diaryData.title} content={diaryData.content} />
           </S.TextContentArea>
-          <S.MediaFileArea>
+          <S.MediaFileArea aria-label="오늘의 일기 이미지 리스트" role="list">
             {diaryData.medias.length > 0 && (
               <>
                 {diaryData.medias.map((data) => (
