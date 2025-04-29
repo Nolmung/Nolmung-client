@@ -13,7 +13,7 @@ LG 유플러스 유레카 SW 교육과정 1기 최종 융합 프로젝트 우수
 ![readme_5](https://github.com/user-attachments/assets/1110ff65-eff5-485e-b89d-a9ea237a50c7)
 <div align="center">
 	
-### 🔗 [놀멍 바로가기](https://nolmung-official.com/)
+### 🔗 [놀멍 바로가기 (서비스 종료) ](https://nolmung-official.com/)
 
 
 </div>
