@@ -48,31 +48,21 @@
 <br/>
 <br/>
 
-## 🛠️ 시스템 아키텍쳐
-<kbd>
-<img width="600" src="https://github.com/user-attachments/assets/ac91aba3-e660-4323-bd6a-118395b666a0" alt="nolmung_architecture" style="border:1px solid black;">
-</kbd>
-
-
-<br/>
-<br/>
-<br/>
-
-## 📌 ERD
-<kbd>
-<img width="600" src="https://github.com/user-attachments/assets/530b465d-729f-4645-98fb-8a7906ece0cc" alt="nolmung_erd" style="border:1px solid black;">
-</kbd>
-<p>
-  🔗 <a href="https://www.erdcloud.com/d/i8uWGycunfcGahQYE" rel="nofollow">ERDCloud</a>  
-</p>
-
-<br/>
-<br/>
 
 ## 🖼️ 와이어프레임
 <kbd>
 <img width="600" src="https://github.com/user-attachments/assets/1156d190-5248-4332-892e-437865cb8d7c" alt="nolmung_wireframe" style="border:1px solid black;">
 </kbd>
+
+<br/>
+<br/>
+<br/>
+
+## 🛠️ 시스템 아키텍쳐
+<kbd>
+<img width="600" src="https://github.com/user-attachments/assets/ac91aba3-e660-4323-bd6a-118395b666a0" alt="nolmung_architecture" style="border:1px solid black;">
+</kbd>
+
 
 <br/>
 <br/>
@@ -118,6 +108,17 @@ yarn dev
 ...
 ```
 
+
+<br/>
+<br/>
+
+## 📌 ERD
+<kbd>
+<img width="600" src="https://github.com/user-attachments/assets/530b465d-729f-4645-98fb-8a7906ece0cc" alt="nolmung_erd" style="border:1px solid black;">
+</kbd>
+<p>
+  🔗 <a href="https://www.erdcloud.com/d/i8uWGycunfcGahQYE" rel="nofollow">ERDCloud</a>  
+</p>
 
 <br/>
 <br/>
